@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="ptms.mvc.tpj.Customer_Main_DAO.MainDAO">
+
+	<!-- 로그인 : 아이디확인 / 회원가입 아이디 중복확인 -->
+	<select id="idCheck" resultType = "int">
+		SELECT count(*) cnt FROM customer_tb WHERE cust_id = #{strid}
+	</select>
+	
+	<!-- 로그인 - 회원정보 조회 -->
+	<select id="custInfo" resultType = "ptms.mvc.tpj.CustVO.CustomerVO">
+		SELECT * FROM customer_tb WHERE cust_id = #{id}
+	</select>
+	
+	<!-- 회원가입 처리 -->
+	<insert id = "insertCust" parameterType="ptms.mvc.tpj.CustVO.CustomerVO">
+		INSERT INTO customer_tb (CUST_ID, CUST_PWD, CUST_NM, CUST_EM, CUST_PH, CUST_GEN, JUMIN1, JUMIN2, CUST_AGE, ZIPCODE, ENABLE_NO, AUTHOR, CUST_DT) 
+		VALUES (#{CUST_ID}, #{CUST_PWD}, #{CUST_NM}, #{CUST_EM}, #{CUST_PH}, #{CUST_GEN}, #{JUMIN1}, #{JUMIN2}, #{CUST_AGE}, #{ZIPCODE}, default, default, sysdate)
+	</insert>
+	
+	<!-- 이메일 인증 여부 -->
+	<select id="emailChk" resultType="int">
+		SELECT ENABLE_NO FROM customer_tb WHERE cust_id = #{id}
+	</select>
+
+	<!-- 이메일 인증 성공 처리 -->
+	<update id="emailSuccess">
+		UPDATE customer_tb SET ENABLE_NO = 1 WHERE cust_id = #{id}
+	</update>
+
+	<!-- 로그인 - 비밀번호 확인 / 비밀번호 찾기 -->
+	<select id="pwdSearch" resultType = "String">
+		SELECT CUST_PWD FROM customer_tb WHERE cust_id = #{id}
+	</select>
+	
+	<!-- 사용자 권한 조회 -->
+	<select id="gradeCheck" resultType = "String">
+		SELECT AUTHOR FROM customer_tb WHERE cust_id = #{id}
+	</select>
+	
+	<!-- 우편번호 등록 -->
+	<insert id="insertzipcode" parameterType="java.util.Map">
+		INSERT INTO zipcodes_tb VALUES(#{zipcode}, #{address1}, #{address2}, #{subaddress})
+	</insert>
+	
+	<!-- 우편번호 조회 -->	
+	<select id="zipcodeChk" resultType="int">
+		SELECT COUNT(*) FROM zipcodes_tb WHERE ZIP_CD = #{ZIPCODE}
+	</select>
+	
+</mapper>

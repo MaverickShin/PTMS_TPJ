@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+		
+
+		<!-- 관리자 -->
+		<security:authentication-manager id="adminAuthManager">
+			<security:authentication-provider user-service-ref ="adminService"/>
+		</security:authentication-manager>
+		
+		<bean id="AdminLoginSuccessHandler" class="ptms.mvc.tpj.Admin_Service.AdminLoginSuccessHandler">
+			<constructor-arg name = "sqlSessions" ref = "sqlSession" />
+		</bean>
+		
+		<bean id="AdminLoginFailureHandler" class="ptms.mvc.tpj.Admin_Service.AdminLoginFailureHandler">
+			<constructor-arg name = "sqlSessions" ref = "sqlSession" />
+			<constructor-arg name = "passwordEncoder" ref = "bCryptPasswordEncoder" />
+		</bean>
+		
+		
+		<bean id="AdminDeniedHandler" class="ptms.mvc.tpj.Admin_Service.AdminDeniedHandler" />
+	
+		<!-- 로그인 인증을 처리하는 빈 -->
+		<!-- 주의 : 에러 => sqlSession을  UserAuthenticationService 클래스의 매개변수 생성자에 주입하면 에러가 사라짐-->
+		<bean id="adminService" class="ptms.mvc.tpj.Admin_Service.AdminAuthenticationService" >
+			<constructor-arg name="sqlSessions" ref="sqlSession" />
+		</bean>
+		<!-- 관리자 -->
+		
+		
+		
+		<!-- 일반회원 -->
+		<security:authentication-manager id="uesrAuthManager">
+			<security:authentication-provider user-service-ref ="userService"/>
+		</security:authentication-manager>
+		
+		<bean id="userLoginSuccessHandler" class="ptms.mvc.tpj.Customer_Main_Service.UserLoginSuccessHandler">
+			<constructor-arg name = "sqlSession" ref = "sqlSession" />
+		</bean>
+		
+		<bean id="userLoginFailureHandler" class="ptms.mvc.tpj.Customer_Main_Service.UserLoginFailureHandler">
+			<constructor-arg name = "sqlSession" ref = "sqlSession" />
+			<constructor-arg name = "passwordEncoder" ref = "bCryptPasswordEncoder" />
+		</bean>
+		
+		<bean id="userDeniedHandler" class="ptms.mvc.tpj.Customer_Main_Service.UserDeniedHandler" />
+	
+		<!-- 로그인 인증을 처리하는 빈 -->
+		<!-- 주의 : 에러 => sqlSession을  UserAuthenticationService 클래스의 매개변수 생성자에 주입하면 에러가 사라짐-->
+		<bean id="userService" class="ptms.mvc.tpj.Customer_Main_Service.UserAuthenticationService" >
+			<constructor-arg name="sqlSession" ref="sqlSession" />
+		</bean>
+		<!-- 일반회원 끝 -->
+		
+		
+		
+		<security:http pattern = "/admin/**" auto-config="true"  use-expressions="true" create-session="never" 
+			authentication-manager-ref="adminAuthManager">
+		
+		<!-- 권한에 관계없이 접속 가능한 영역(guest도 접속 가능) -->
+		<security:intercept-url pattern="/admin/adminlogin"  access="permitAll" />
+		<security:intercept-url pattern="/admin/adminadd"  access="permitAll" />
+		<security:intercept-url pattern="/admin/adminloginaction"  access="permitAll" />
+		<security:intercept-url pattern="/admin/**" access="permitAll" />
+		
+		<!-- 관리자 영역 설정 -->
+		<!--  <security:intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_ADMIN')" />-->
+		
+		<!-- iframe -->
+      	<security:headers>
+           <security:frame-options policy="SAMEORIGIN"/>
+     	</security:headers>
+		
+		
+		<security:logout 
+			logout-url="/admin/logout" 
+			logout-success-url="/admin/adminlogin"
+			invalidate-session="true" 
+			delete-cookies ="true"/>
+			
+		<security:form-login login-page="/admin/adminlogin" 
+				login-processing-url="/admin/loginaction"
+				authentication-success-handler-ref="AdminLoginSuccessHandler"
+				authentication-failure-handler-ref="AdminLoginFailureHandler"
+				username-parameter="mg_id" password-parameter="mg_pwd" />		
+				
+				
+		<security:session-management>
+		
+			<!-- 
+				max-sessions="1" ==> 같은 브라우저의 여러창에서 동ㅅ시 접속 막기
+				expired-url="/user/login.do" ==> 세션 만료시 이동할 주소
+				error-if-maximum-exceeded="true" ==> 최대 세션 초과시 에러 옵션
+			 -->
+			<security:concurrency-control max-sessions="2"
+				expired-url="/admin/amdinlogin"
+				error-if-maximum-exceeded="false" />
+				
+		</security:session-management>
+		
+		<!-- 접근 권한이 없는 경우의 코드 -->
+		<security:access-denied-handler ref="AdminDeniedHandler" />
+		
+		</security:http>
+		
+		
+		<!-- 유저 -->
+		<security:http pattern = "/cust/**" use-expressions="true" create-session="never"
+			authentication-manager-ref="uesrAuthManager">
+		
+		<security:intercept-url pattern="/cust/login" access="permitAll" />
+		<security:intercept-url pattern="/cust/main" access="permitAll" />
+		<security:intercept-url pattern="/cust/join" access="permitAll" />
+		<security:intercept-url pattern="/cust/confirmid" access="permitAll" />
+		<security:intercept-url pattern="/cust/joinaction" access="permitAll" />
+		<security:intercept-url pattern="/cust/mailAction" access="permitAll" />
+		<security:intercept-url pattern="/cust/mailChkAction" access="permitAll" />
+		<security:intercept-url pattern="/cust/emailSuccess" access="permitAll" />
+		<security:intercept-url pattern="/buy/**" access="permitAll" />
+		<security:intercept-url pattern="/product/**" access="permitAll" />
+		<security:intercept-url pattern="/**" access="permitAll" />
+		
+		<!-- 로그인한 사용자 영역 -->
+		<security:intercept-url pattern="/cust/**" access="hasAnyRole('ROLE_FREE')"/> 
+		
+		<!-- iframe -->
+      	<security:headers>
+           <security:frame-options policy="SAMEORIGIN"/>
+      	</security:headers>
+		
+		
+		<!-- 로그인폼 -->
+		<security:form-login login-page="/cust/login"  
+				login-processing-url="/cust/loginaction"
+				authentication-success-handler-ref="userLoginSuccessHandler"
+				authentication-failure-handler-ref="userLoginFailureHandler"
+				username-parameter="cust_id" password-parameter="cust_pwd" /> 
+		
+		
+		<security:logout
+			logout-url="/cust/logout" 
+			logout-success-url="/cust/main"
+			invalidate-session="true" 
+			delete-cookies ="true"/>
+			
+		<security:session-management>
+		
+			<!-- 중복 세션관리 
+			max-sessions : 중복 로그인 가능한 세션 수
+			error-if-maximum-exceeded : true-첫번째 로그인을 남기고 이루 세션을 삭제한다.false-마지막 세션을 살리고 이전 세션을 삭제한다. 
+			expired-url : 중복 로그인 발생시 이동할 경로 -->
+		
+			<security:concurrency-control 
+				max-sessions="2"
+				expired-url="/cust/login"
+				error-if-maximum-exceeded="false" />
+				
+		</security:session-management>
+		
+		<!-- 접근 권한이 없는 경우의 코드 -->
+		<security:access-denied-handler ref="userDeniedHandler" />
+		
+		</security:http>
+		
+	
+		<!-- 비밀번호 암호화 빈 -->
+		<!-- BCryptPasswordEncoder : 스프링에서 제공하는 클래스 -->
+		<bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+		
+</beans>
+
