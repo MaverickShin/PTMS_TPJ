@@ -93,6 +93,7 @@
 					<li class="nav-item"><a href="/tpj/admin/promotion" class="nav-link">홍보물 관리</a></li>
 					<li class="nav-item"><a href="/tpj/admin/total" class="nav-link">질병통계</a></li>
 					<li class="nav-item"><a href="/tpj/admin/subscriber" class="nav-link">구독자 현황</a></li>
+					<li class="nav-item"><a href="/tpj/admin/enroll" class="nav-link">등록</a></li>
 				</ul>
 			</div>
 		</div>

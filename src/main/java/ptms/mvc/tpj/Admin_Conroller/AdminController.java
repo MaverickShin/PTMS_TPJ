@@ -141,6 +141,10 @@ public class AdminController {
 	public String subscriber() {
 		return "admin/subscriber/subscriber";
 	}
-	
+
+	@RequestMapping("enroll")
+	public String enroll() {
+		return "admin/enroll/enroll";
+	}
 	
 }

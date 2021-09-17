@@ -40,4 +40,11 @@ public class SitterController {
       
 		 return "customer/sitter/sitterMatching";
 	 } 
+	 
+	 @RequestMapping("feeInfo")
+	 public String feeInfo(HttpServletRequest req, Model model) {
+		 log.info("url ==> feeInfo");
+      
+		 return "customer/sitter/feeInfo";
+	 } 	 
 }
