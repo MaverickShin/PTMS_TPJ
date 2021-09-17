@@ -30,7 +30,7 @@ public class AdminController {
 	@RequestMapping("user_managerment")
 	public String user_managerment() {
 		
-		return "amdin/user/userlist";
+		return "admin/user/userlist";
 	}
 	
 	@RequestMapping("user_modify")

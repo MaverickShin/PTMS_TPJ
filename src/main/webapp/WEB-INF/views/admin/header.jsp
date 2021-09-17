@@ -82,17 +82,17 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item" id = "mypages"><a class="nav-link">게시판 관리</a>
 						<div class = "hide">
-			    			<a href="community_list">커뮤니티 게시판</a>
-				    		<a href="qnalist">Q&A</a>
-				    		<a href="faqlist">FAQ</a>
-				    		<a href="noticelist">공지사항</a>
+			    			<a href="/tpj/admin/community_list">커뮤니티 게시판</a>
+				    		<a href="/tpj/admin/qnalist">Q&A</a>
+				    		<a href="/tpj/admin/faqlist">FAQ</a>
+				    		<a href="/tpj/admin/noticelist">공지사항</a>
 						</div>
 					</li>
 					<li class="nav-item"><a href="/tpj/admin/user_managerment" class="nav-link">회원관리</a></li>
-					<li class="nav-item"><a href="sattle" class="nav-link">결산</a></li>
-					<li class="nav-item"><a href="promotion" class="nav-link">홍보물 관리</a></li>
-					<li class="nav-item"><a href="total" class="nav-link">질병통계</a></li>
-					<li class="nav-item"><a href="subscriber" class="nav-link">구독자 현황</a></li>
+					<li class="nav-item"><a href="/tpj/admin/sattle" class="nav-link">결산</a></li>
+					<li class="nav-item"><a href="/tpj/admin/promotion" class="nav-link">홍보물 관리</a></li>
+					<li class="nav-item"><a href="/tpj/admin/total" class="nav-link">질병통계</a></li>
+					<li class="nav-item"><a href="/tpj/admin/subscriber" class="nav-link">구독자 현황</a></li>
 				</ul>
 			</div>
 		</div>

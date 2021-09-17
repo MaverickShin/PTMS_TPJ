@@ -8,9 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@ include file="../../main/header.jsp" %>
+	<%@ include file="../header.jsp" %>
 	
-	<img src="${path}img/board/board.jpg" style="display:block; margin:auto;" />
+	<img src="${path}img/admin/회원관리.png" style="display:block; margin:auto;" />
 	
 	<!-- <table style=align:center;>
 		<tr>
@@ -24,6 +24,6 @@
 		</tr>
 	</table> -->
 	
-	<%@ include file="../../main/footer.jsp" %>
+	<%@ include file="../footer.jsp" %>
 </body>
 </html>
