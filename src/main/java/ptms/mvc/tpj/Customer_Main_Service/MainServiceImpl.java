@@ -25,13 +25,16 @@ public class MainServiceImpl implements MainService{
 	
 	// 중복확인 처리 - 아이디확인
 	@Override
-	public void confirmId(HttpServletRequest req, Model model) {
+	public int confirmId(HttpServletRequest req, Model model) {
 		
 		String strid = req.getParameter("cust_id");
 		
 		int cnt = dao.idCheck(strid);
 		
 		model.addAttribute("select", cnt);
+		model.addAttribute("id", strid);
+		
+		return cnt;
 		
 	}
 

@@ -25,7 +25,7 @@
 	         </ul>
 	</nav>
 
-  <div class="sitter">
+  <div class="sitter" style = "display:flex;">
 	<div>
 		<p class="label">어디에 사시나요?</p><br>
 		<input type="text" class="iptags" name="SQ_LOC" placeholder="어디에 사시나요?">
