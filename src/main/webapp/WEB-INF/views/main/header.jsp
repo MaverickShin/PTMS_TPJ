@@ -40,6 +40,7 @@
 	#mypages:hover .hide {
 		display: block;
 	}
+	
 </style>
 
 </head>
@@ -57,22 +58,20 @@
 					</p>
 				</div>
 				<div class="col-md-6 d-flex justify-content-md-end">
-					<div class="social-media">
-						<p class="mb-0 d-flex">
-							<a href="${cu}login" style="color:white; font-size:14px;  font-weight: bold; width:50px; padding-top:8px;">로그인</a>
-							<a href="${cu}join" style="color:white; font-size:14px; font-weight: bold; width:60px; padding-top:8px;">회원가입</a>
-							<a href="#"
-								class="d-flex align-items-center justify-content-center"><span
-								class="fa fa-facebook"><i class="sr-only">facebook</i></span></a> <a
-								href="#"
-								class="d-flex align-items-center justify-content-center"><span
-								class="fa fa-twitter"><i class="sr-only">twitter</i></span></a> <a
-								href="#"
-								class="d-flex align-items-center justify-content-center"><span
-								class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
-							<a href="#"
-								class="d-flex align-items-center justify-content-center"><span
-								class="fa fa-dribbble"><i class="sr-only">Dribbble</i></span></a>
+					<div class="social-media" style = "display:flex;">
+						<p class="mb-0 d-flex" align="center">
+							<c:if test = "${sessionScope.cust_id == null}">
+								<a href="${cu}login" style="color:white; font-size:14px;  font-weight: bold; width:70px; padding-top:8px;">로그인</a>
+								<a href="${cu}join" style="color:white; font-size:14px; font-weight: bold; width:70px; padding-top:8px;">회원가입</a>
+							</c:if>
+							
+							<c:if test = "${sessionScope.cust_id != null}">
+								<a style="color:white; font-size:14px;  font-weight: bold; width:80px; padding-top:8px;">${sessionScope.cust_nm} 님</a>
+								<form action = "${cu}logout" name = "logoutform" method = "post" style = "margin:0; padding:0;">
+									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+									<a href = "javascript:logoutform.submit();" style="color:white; font-size:14px; font-weight: bold; width:60px; line-height:40px; cursor:pointer;">로그아웃</a>
+								</form>
+							</c:if>
 						</p>
 					</div>
 				</div>

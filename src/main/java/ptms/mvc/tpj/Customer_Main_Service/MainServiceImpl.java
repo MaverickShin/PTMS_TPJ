@@ -53,9 +53,9 @@ public class MainServiceImpl implements MainService{
 		System.out.println(" 암호화 비번 : " + encryptPassword);
 		vo.setCUST_NM(req.getParameter("cust_nm"));
 		
-		String h1 = req.getParameter("ph1");
-		String h2 = req.getParameter("ph2");
-		String h3 = req.getParameter("ph3");
+		String h1 = req.getParameter("hp1");
+		String h2 = req.getParameter("hp2");
+		String h3 = req.getParameter("hp3");
 		
 		String hp = h1+"-"+h2+"-"+h3;
 		
@@ -78,14 +78,13 @@ public class MainServiceImpl implements MainService{
 		vo.setZIPCODE(Integer.parseInt(req.getParameter("zipcode")));
 		String address1 = req.getParameter("address1");
 		String address2 = req.getParameter("address2");
-		String subaddress = req.getParameter("subaddress");
+		vo.setSUBADDRESS(req.getParameter("subaddress"));
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("zipcode", vo.getZIPCODE());
 		map.put("address1", address1);
 		map.put("address2", address2);
-		map.put("subaddress", subaddress);
 		
 		int select = dao.zipcodeChk(vo.getZIPCODE());
 		
@@ -98,11 +97,5 @@ public class MainServiceImpl implements MainService{
 		
 	}
 
-	// 이메일 인증 성공 처리
-	@Override
-	public void emailSuccess(HttpServletRequest req, Model model) {
-		String id = req.getParameter("cust_id");
-		dao.emailSuccess(id);
-	}
 
 }

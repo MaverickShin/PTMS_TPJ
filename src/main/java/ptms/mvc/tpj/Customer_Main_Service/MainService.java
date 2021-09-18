@@ -12,7 +12,4 @@ public interface MainService {
 	// 회원가입 처리
 	public void signInAction(HttpServletRequest req, Model model);
 		
-	// 이메일 인증 성공 처리
-	public void emailSuccess(HttpServletRequest req, Model model);
-	
 }

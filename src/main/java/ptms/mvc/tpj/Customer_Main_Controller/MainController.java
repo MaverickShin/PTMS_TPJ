@@ -3,19 +3,18 @@ package ptms.mvc.tpj.Customer_Main_Controller;
 
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;  
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ptms.mvc.tpj.Customer_Main_Service.MainServiceImpl;
+import ptms.mvc.tpj.emailHandler.emailSender;
 
 @RequestMapping("/cust")
 @Controller
@@ -25,6 +24,9 @@ public class MainController {
 	
 	@Autowired
 	MainServiceImpl service;
+	
+	@Autowired
+	emailSender emailsender;
 	
 	// 메인페이지 이동
 	@RequestMapping({"", "main"})
@@ -57,47 +59,39 @@ public class MainController {
 	}
 	
 	// 이메일 인증 전송
-	@RequestMapping("mailAction")
-	public String mainAction(HttpServletRequest req, Model model) {
+	@RequestMapping(value = "mailAction", method = RequestMethod.GET)
+	@ResponseBody
+	public int mainAction(HttpServletRequest req) {
 		
 		log.info("컨트롤러 - 이메일 인증 전송");
 		
-		String code = req.getParameter("code");
-		String id = req.getParameter("cust_id");
+		String userEmail = req.getParameter("cust_em");
+		int authCode = 0;
+		String authCodes = "";
+		int cnt = 0;
+		int result = 0;
 		
-		model.addAttribute("code", code);
-		model.addAttribute("cust_id", id);
-		
-		return "main/join/emailAction";
+		if(userEmail != null && !userEmail.isEmpty()) {
+			for (int i = 0; i < 6; i++) {
+				authCode = (int) (Math.random()*9+1);
+				authCodes += Integer.toString(authCode);
+			}
+		}
+		try {
+			cnt = emailsender.sender(userEmail, authCodes);
+			
+			if(cnt == 1) {
+				result = Integer.parseInt(authCodes);
+			} else {
+				result = 0;
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 	
-	// 이메일 인증 확인
-	@RequestMapping("mailChkAction")
-	public String mailChkAction(HttpServletRequest req, Model model) {
-		
-		log.info("컨트롤러 - 이메일 인증 확인");
-		
-		String code = req.getParameter("code");
-		String id = req.getParameter("cust_id");
-		
-		model.addAttribute("code", code);
-		model.addAttribute("cust_id", id);
-		
-		return "main/join/emailChkAction";
-		
-	}
-	
-	// 이메일 인증 성공 처리
-	@RequestMapping("emailSuccess")
-	public String emailSuccess(HttpServletRequest req, Model model) {
-		
-		log.info("컨트롤러 - 이메일 인증 성공 처리");
-		
-		service.emailSuccess(req, model);
-		
-		return "main/login/login";
-		
-	}
 	
 	// 로그인 페이지 이동
 	@RequestMapping("login")

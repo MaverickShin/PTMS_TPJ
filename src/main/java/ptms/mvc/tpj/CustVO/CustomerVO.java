@@ -22,6 +22,7 @@ public class CustomerVO extends User{
    private int ENABLE_NO;      // 이메일 인증 여부
    private String AUTHOR;       // 기본 사용자 권한
    private Date CUST_DT;       // 고객 가입일
+   private String SUBADDRESS;	// 상세주소
    
 	public String getCUST_ID() {
 		return CUST_ID;
@@ -113,7 +114,11 @@ public class CustomerVO extends User{
 	public void setCUST_DT(Date cUST_DT) {
 		CUST_DT = cUST_DT;
 	}
-
-   
+	public String getSUBADDRESS() {
+		return SUBADDRESS;
+	}
+	public void setSUBADDRESS(String sUBADDRESS) {
+		SUBADDRESS = sUBADDRESS;
+	}
 	
 }

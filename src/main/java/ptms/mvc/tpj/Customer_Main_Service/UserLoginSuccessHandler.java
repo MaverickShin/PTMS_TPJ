@@ -44,7 +44,8 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler{
 		}
 		
 		request.setAttribute("msg", msg);
-		request.getSession().setAttribute("custid", authentication.getName());
+		request.getSession().setAttribute("cust_id", authentication.getName());
+		request.getSession().setAttribute("cust_nm", vo.getName());
 		request.getSession().setAttribute("grade", gradeCnt);
 		
 		// 메인화면으로 이동
