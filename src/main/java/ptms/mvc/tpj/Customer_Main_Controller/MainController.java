@@ -36,6 +36,7 @@ public class MainController {
 	// 메인페이지 이동
 	@RequestMapping({"", "main"})
 	public String main() {
+		
 		return "main/index";
 	}
 	
