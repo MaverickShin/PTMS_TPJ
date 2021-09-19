@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ptms.mvc.tpj.NoticeBoardService.userInfo_NoticeBoard_service;
-
+@RequestMapping("/qna")
 @Controller
 public class BoardController {
 	
@@ -20,6 +20,7 @@ public class BoardController {
 	// private Logger log = Logger.getLogger(this.getClass());
 	private static final Logger log = LoggerFactory.getLogger(BoardController.class);
 	
+	/*
 	@RequestMapping("qnaList")
 	public String qnaList(HttpServletRequest req, Model model) {
 		log.info("url => qnaList");
@@ -27,7 +28,7 @@ public class BoardController {
 		service.QNA_Notice_Board_ListUp(req, model);
 		
 		return "customer/board/qnaList";
-	}
+	}*/
 	
 	@RequestMapping("qnaWrite")
 	public String qnaWrite(HttpServletRequest req, Model model) {

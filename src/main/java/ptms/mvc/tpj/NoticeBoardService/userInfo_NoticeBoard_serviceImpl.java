@@ -106,11 +106,12 @@ public class userInfo_NoticeBoard_serviceImpl implements userInfo_NoticeBoard_se
 		model.addAttribute("deleteCnt", deleteCnt);
 		model.addAttribute("pageNum", pageNum);
 	}
+	
 	// Q&A 게시글 출력
 	@Override
 	public void QNA_Notice_Board_ListUp(HttpServletRequest req, Model model) {
 		//페이징
-		int pageSize = 5;	//한 페이지당 출력할 글 갯수
+		int pageSize = 10;	//한 페이지당 출력할 글 갯수
 		int pageBlock = 3;  //한 블럭당 페이지 갯수
 		
 		int cnt = 0;		//글갯수
@@ -185,9 +186,13 @@ public class userInfo_NoticeBoard_serviceImpl implements userInfo_NoticeBoard_se
 			map.put("start", start);
 			map.put("end", end);
 			
+			System.out.println("start" + start);
+			System.out.println("end" + end);
+			
 			dtos = dao.QNA_Notice_Board_ListUp(map);
 		}
 		model.addAttribute("dtos", dtos);
+		System.out.println(dtos.get(0).getQNA_DT());
 		model.addAttribute("cnt", cnt);
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("number", number);
@@ -196,7 +201,8 @@ public class userInfo_NoticeBoard_serviceImpl implements userInfo_NoticeBoard_se
 	// Q&A 게시글 상세 출력
 	@Override
 	public void QNA_Notice_Board_ListUp_Detail(HttpServletRequest req, Model model) {
-		int qna_cd = Integer.parseInt(req.getParameter("QNA_CD"));
+		int qna_cd = Integer.parseInt(req.getParameter("num"));
+		System.out.println(qna_cd);
 		int pageNum = Integer.parseInt(req.getParameter("pageNum"));
 		int number = Integer.parseInt(req.getParameter("number"));
 		
