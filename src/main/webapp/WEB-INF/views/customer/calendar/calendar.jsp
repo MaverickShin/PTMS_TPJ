@@ -24,7 +24,7 @@
       selectable: true,
       selectMirror: true,
       select: function(arg) {
-        var title = prompt('Event Title:');
+        var title = prompt('일정 제목:');
         if (title) {
           calendar.addEvent({
             title: title,
