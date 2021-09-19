@@ -2,6 +2,8 @@ package ptms.mvc.tpj.TrainerDAO;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ptms.mvc.tpj.CustVO.PetVO;
@@ -9,6 +11,9 @@ import ptms.mvc.tpj.CustVO.TrainerVO;
 
 @Repository
 public class TrainerDAOImpl implements TrainerDAO {
+	
+	@Autowired
+	private SqlSession sqlSession;
 
 	@Override
 	public List<TrainerVO> trainerList() {
@@ -24,8 +29,16 @@ public class TrainerDAOImpl implements TrainerDAO {
 
 	@Override
 	public int insertTrainer(TrainerVO tVo) {
-		// TODO Auto-generated method stub
-		return 0;
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		int insertCnttr = dao.insertTrainer(tVo);
+		return insertCnttr;
+	}
+	
+	@Override
+	public int insertTrainerDetail(TrainerVO vo) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		int insertCntdt = dao.insertTrainerDetail(vo);
+		return insertCntdt;
 	}
 
 	@Override

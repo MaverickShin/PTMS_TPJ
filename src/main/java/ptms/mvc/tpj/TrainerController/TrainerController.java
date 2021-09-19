@@ -60,4 +60,12 @@ public class TrainerController {
       
       return "customer/trainer/applyTrainerAction";
    }
+   
+   // 훈련사 - 나에게 온 의뢰
+   @RequestMapping("requestTrainer")
+   public String requestTrainer(HttpServletRequest req, Model model) {
+      log.info("url ==> requestTrainer");
+      
+      return "customer/trainer/requestTrainer";
+   }
 }

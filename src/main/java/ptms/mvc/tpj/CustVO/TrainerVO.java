@@ -24,9 +24,10 @@ public class TrainerVO {
 	private int TS3_FEE;		// 기본훈련해결 요금
 	private int TS4_NO;			// 짖음해결
 	private int TS4_FEE;		// 짖음해결 요금
-	private TIMESTAMP START_DAY;// 훈련가능 시작일 
-	private TIMESTAMP END_DAY;	// 훈련가능 마지막일
+	private String START_DAY;// 훈련가능 시작일 
+	private String END_DAY;	// 훈련가능 마지막일
 	private int ADJUSTABLE;		// 일정조정 여부 0:일정조정불가, 1:일정조정가능
+	//private String RESERVATION;	// 예약 가능일 (평일, 주말 등)
 	
 	public int getTA_CD() {
 		return TA_CD;
@@ -149,23 +150,32 @@ public class TrainerVO {
 	public void setTS4_FEE(int tS4_FEE) {
 		TS4_FEE = tS4_FEE;
 	}
-	public TIMESTAMP getSTART_DAY() {
-		return START_DAY;
+	
+	public String getSTART_DAY() { 
+		return START_DAY; 
+	} 
+	
+	public void setSTART_DAY(String sTART_DAY) { 
+		START_DAY = sTART_DAY; 
 	}
-	public void setSTART_DAY(TIMESTAMP sTART_DAY) {
-		START_DAY = sTART_DAY;
+	
+	public String getEND_DAY() { 
+		return END_DAY; 
 	}
-	public TIMESTAMP getEND_DAY() {
-		return END_DAY;
+	
+	public void setEND_DAY(String eND_DAY) {
+		END_DAY = eND_DAY; 
+	} 
+	
+	public int getADJUSTABLE() { 
+		return ADJUSTABLE; 
+	} 
+	
+	public void setADJUSTABLE(int aDJUSTABLE) { 
+		ADJUSTABLE = aDJUSTABLE; 
 	}
-	public void setEND_DAY(TIMESTAMP eND_DAY) {
-		END_DAY = eND_DAY;
-	}
-	public int getADJUSTABLE() {
-		return ADJUSTABLE;
-	}
-	public void setADJUSTABLE(int aDJUSTABLE) {
-		ADJUSTABLE = aDJUSTABLE;
-	}
+	
+
+	
 
 }

@@ -11,10 +11,10 @@
 	
 	function check() {
 		
-		var chk1 = document.applyform.tr_kind1.checked;
-		var chk2 = document.applyform.tr_kind2.checked;
-		var chk3 = document.applyform.tr_kind3.checked;
-		var chk4 = document.applyform.tr_kind4.checked;
+		var chk1 = document.applyform.TS1_NO.checked;
+		var chk2 = document.applyform.TS2_NO.checked;
+		var chk3 = document.applyform.TS3_NO.checked;
+		var chk4 = document.applyform.TS4_NO.checked;
 		
 		var result1 = document.getElementById("tr_kind1_fee");
 		var result2 = document.getElementById("tr_kind2_fee");
@@ -45,7 +45,14 @@
 			result4.style.display = "none";
 		}
 		
-	}		
+		/* if(document.getElementById("tr_kind1").checked) {
+			document.getElementById("input_check_hidden1").disabled = true;
+		} */
+		
+	}
+	
+	
+	
 </script>
 <title>Insert title here</title>
 </head>
@@ -77,28 +84,36 @@
 											<div class="col-md-12">
 												<div class="form-group">
 			   										<div class="form-field">
-			       										<div class="select-wrap">
-			       											<label class="label" for="tr_kind">훈련가능 유형</label>
-								                      		<label><input type="checkbox" value="1" name="tr_kind1" id="tr_kind1" class="form-control" onchange = "check();">배변훈련</label>
-								                      		<label><input type="checkbox" value="2" name="tr_kind2" id="tr_kind2" class="form-control" onchange = "check();">분리불안</label>
-								                      		<label><input type="checkbox" value="3" name="tr_kind3" id="tr_kind3" class="form-control" onchange = "check();">기본훈련</label>
-								                      		<label><input type="checkbox" value="4" name="tr_kind4" id="tr_kind4" class="form-control" onchange = "check();">짖음해결</label>
+			   										
+			   										<div class="col-md-12">
+						                                <div class="form-group">
+						                                	<label class="label" for="service_loc">고객 아이디</label>
+						                                	<input type="text" class="form-control" name="CUST_ID" id="CUST_ID" value="${sessionScope.cust_id}" readonly>
+						                                </div>
+						                            </div>
+			   										
+			       										<div class="col-md-12">
+			       										<label class="label" for="tr_kind">훈련가능 유형</label>
+								                      		<label><input type="checkbox" value="1" name="TS1_NO" id="TS1_NO" class="form-group" onchange = "check();">배변훈련</label>
+								                      		<label><input type="checkbox" value="1" name="TS2_NO" id="TS2_NO" class="form-group" onchange = "check();">분리불안</label>
+								                      		<label><input type="checkbox" value="1" name="TS3_NO" id="TS3_NO" class="form-group" onchange = "check();">기본훈련</label>
+								                      		<label><input type="checkbox" value="1" name="TS4_NO" id="TS4_NO" class="form-group" onchange = "check();">짖음해결</label>
 	                        								
 	                        								<div id="tr_kind1_fee" style = "display:none">
 								                      			<label>한 회차당 배변훈련 요금</label>
-	                           									<input type="number" id="tr_kind1_fee" class="form-control">
+	                           									<input type="number" id="tr_kind1_fee" name="tr_kind1_fee" class="form-control">
 	                        								</div>
 	                        								<div id="tr_kind2_fee" style = "display:none">
 								                      			<label>한 회차당 분리불안 요금</label>
-	                           									<input type="number" id="tr_kind1_fee" class="form-control">
+	                           									<input type="number" id="tr_kind2_fee" name="tr_kind2_fee" class="form-control">
 	                        								</div>
 	                        								<div id="tr_kind3_fee" style = "display:none">
 								                      			<label>한 회차당 기본훈련 요금</label>
-	                           									<input type="number" id="tr_kind1_fee" class="form-control">
+	                           									<input type="number" id="tr_kind3_fee" name="tr_kind3_fee" class="form-control">
 	                        								</div>
 	                        								<div id="tr_kind4_fee" style = "display:none">
 								                      			<label>한 회차당 짖음해결 요금</label>
-	                           									<input type="number" id="tr_kind1_fee" class="form-control">
+	                           									<input type="number" id="tr_kind4_fee" name="tr_kind4_fee" class="form-control">
 	                        								</div>
 			                 							</div>
 			             							</div>
@@ -111,6 +126,13 @@
 													<input type="button" value="주소찾기" class="btn btn-primary" onclick = "addressSerch();" style = "margin-top:25px;">
 												</div>
 											</div>
+											
+											<div class="col-md-6" style ="display:none">
+				                                 <div class="form-group">
+				                                    <label class="label" for="postcode">우편번호</label>
+				                                    <input type="text" class="form-control" name="address1" id="postcode" placeholder="우편번호" readonly>
+				                                 </div>
+				                              </div>
 											
 											
 											<div class="col-md-6">
@@ -128,33 +150,45 @@
 											</div>
 											
 											<div class="col-md-12">
+				                            	<div class="form-group">
+				                                    <label class="label" for="RESERVATION">서비스 가능일 </label>
+				                                    <select size="1" id="iptags" name="RESERVATION">
+				                                  		<option value="평일">평일</option>
+				                                  		<option value="주말">주말</option>
+				                                  		<option value="모두가능">모두가능 </option>
+				                               		</select><br>
+				                               </div>
+				                            </div>
+				                            
+				                            <div class="col-md-12">
+                                 				<div class="form-group">
+                                    				<label class="label" for="trainingDay">훈련가능일</label><br>
+                                    					<input type="date" class="iptags" name="START_DAY" >~
+                                    					<input type="date" class="iptags" name="END_DAY" >
+                                    					조정가능<input type="checkbox" class="iptags" name="ADJUSTABLE" value="1">
+                                 				</div>
+                              				</div>
+				                            
+											
+											<div class="col-md-12">
 												<div class="form-group">
-													<label class="label" for="trainingDay">훈련가능일</label><br>
-													<input type="date" class="iptags" name="START_DAY" >~
-													<input type="date" class="iptags" name="END_DAY" >
-													조정가능<input type="checkbox" class="iptags" name="ADJUSTABLE" value="1">
+													<label class="label" for="TA_TITLE">소개글 제목</label>
+													<input type="text" class="form-control" name="TA_TITLE" id="TA_TITLE">
 												</div>
 											</div>
 											
 											<div class="col-md-12">
 												<div class="form-group">
-													<label class="label" for="intro_title">소개글 제목</label>
-													<input type="text" class="form-control" name="intro_title" id="intro_title">
+													<label class="label" for="TA_APPEAL">소개글 본문</label>
+													<input type="text" class="form-control" name="TA_APPEAL" id="TA_APPEAL">
 												</div>
 											</div>
 											
 											<div class="col-md-12">
 												<div class="form-group">
-													<label class="label" for="intro_content">소개글 본문</label>
-													<input type="text" class="form-control" name="intro_content" id="intro_content">
-												</div>
-											</div>
-											
-											<div class="col-md-12">
-												<div class="form-group">
-													<label class="label" for="trainerImg">프로필 사진</label>
-													<label class="btn btn-primary" for="trainerImg">업로드</label> 
-													<input type="file" id="trainerImg" name="trainerImg" accept="image/*" class="btn btn-primary" style="display:none">
+													<label class="label" for="TA_IMG">프로필 사진</label>
+													<label class="btn btn-primary" for="TA_IMG">업로드</label> 
+													<input type="file" id="TA_IMG" name="TA_IMG" accept="image/*" class="btn btn-primary" style="display:none">
 												</div>
 											</div>
 											
