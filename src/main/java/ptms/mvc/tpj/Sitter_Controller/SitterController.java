@@ -19,14 +19,8 @@ public class SitterController {
 
 	 @Autowired
 	 SitterServiceImpl sitterSer;
-	 /*
-	 @RequestMapping("index")
-	  public String main(HttpServletRequest req, Model model) {
-	     log.info("url ==> index");
-	       
-	     return "main/index";
-	  }	 
-	  */ 
+	 
+	 //(찾기 버튼 누르기 전 조건 입력)시터 찾기 페이지
 	 @RequestMapping("sitter")
 	   public String sitter(HttpServletRequest req, Model model) {
 	      log.info("url ==> sitter");
@@ -34,6 +28,7 @@ public class SitterController {
 	      return "customer/sitter/sitter";
 	   }   
 	   
+	// (찾기 버튼 누른 후)시터 목록 페이지
 	 @RequestMapping("sitterMatching")
 	 public String sitterMatching(HttpServletRequest req, Model model) {
 		 log.info("url ==> sitterMatching");
@@ -41,10 +36,29 @@ public class SitterController {
 		 return "customer/sitter/sitterMatching";
 	 } 
 	 
+	 //이용후기
+	 
+	 //요금 안내
 	 @RequestMapping("feeInfo")
 	 public String feeInfo(HttpServletRequest req, Model model) {
 		 log.info("url ==> feeInfo");
       
+		 sitterSer.priceInfo(req, model);
 		 return "customer/sitter/feeInfo";
 	 } 	 
+	 
+	 //펫시터 지원
+	 @RequestMapping("applySitter")
+	 public String applySitter(HttpServletRequest req, Model model) {
+		 log.info("url ==> applySitter");
+      
+		 return "customer/sitter/applySitter";
+	 } 		 
+	 
+	 //활동 등록
+	 
+	 
+	 //나에게 온 의뢰
+	 
+	 
 }

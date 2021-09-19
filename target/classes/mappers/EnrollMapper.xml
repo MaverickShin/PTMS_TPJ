@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="ptms.mvc.tpj.AdminEnroll_DAO.EnrollDAO">  
+
+	<!-- 펫 코드 및 요금 등록 -->
+	<insert id="petCodeFee" parameterType="ptms.mvc.tpj.CustVO.PetVO">
+		INSERT ALL 
+   		INTO PET_KIND_TB VALUES (PK_CDSQE.nextval, #{PK_KIND}, #{PK_DETAIL})
+   		INTO SITTER_FEE_TB VALUES(SF_CD_SEQ.nextval , PK_CDSQE.nextval , #{SF_FEE})
+		SELECT * FROM DUAL  
+	</insert>
+	
+	<!-- 펫 코드 수 구하기 -->
+	<select id="petCodeCount" resultType="int">
+		SELECT COUNT(*)cnt
+		FROM PET_KIND_TB
+	</select>
+	
+	<!-- 펫 코드 및 요금 목록 -->
+	<select id="getpetCodeFee" resultType="ptms.mvc.tpj.CustVO.PetVO">
+		SELECT p.PK_CD, p.PK_KIND, p.PK_DETAIL, s.SF_FEE
+		FROM PET_KIND_TB p , SITTER_FEE_TB s
+		WHERE p.PK_CD = s.PK_CD
+		ORDER BY p.PK_CD
+	</select>
+	
+	<!-- 수정 펫 코드 및 요금 목록 조회 -->
+	<select id="UpdatePetCodeFeeList" parameterType="int" resultType="ptms.mvc.tpj.CustVO.PetVO">
+		SELECT p.PK_CD, p.PK_KIND, p.PK_DETAIL, s.SF_FEE
+		FROM PET_KIND_TB p , SITTER_FEE_TB s
+		WHERE p.PK_CD = s.PK_CD
+		AND p.PK_CD = #{PK_CD}
+	</select>
+	
+	<!-- 펫 코드 및 요금 목록 수정처리 -->
+	<update id="UpdatePetCodeFee" parameterType="ptms.mvc.tpj.CustVO.PetVO">
+		UPDATE PET_KIND_TB p , SITTER_FEE_TB s
+		SET p.PK_KIND=#{PK_KIND}, p.PK_DETAIL=#{PK_DETAIL}, s.SF_FEE=#{SF_FEE}
+		WHERE p.PK_CD = s.PK_CD
+		AND p.PK_CD = #{PK_CD}
+	</update>
+	
+	
+</mapper>

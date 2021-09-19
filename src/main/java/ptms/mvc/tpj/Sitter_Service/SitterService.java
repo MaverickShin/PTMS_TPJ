@@ -45,4 +45,7 @@ public interface SitterService {
 	// 시터 의뢰 수락 - 의뢰 확정
 	public void payUpdate(HttpServletRequest req, Model model);
 	
+	//요금표 리스트
+	public void priceInfo(HttpServletRequest req, Model model);
+	
 }
