@@ -9,26 +9,43 @@ import org.springframework.security.core.userdetails.User;
 // User 클래스는 추상 클래스이므로 상속받아 추상메서드를 오버라이드해서 구현한다.
 public class UserVO extends User{
 	
-	private String userId;
-
+	private String username;
+	private String password;
+	private String name;
+	
 	// super는 부모클래스
 	public UserVO(String username, String password, boolean enabled, boolean accountNonExpired,
 			boolean credentialsNonExpired, boolean accountNonLocked,
-			Collection<? extends GrantedAuthority> authorities) {
+			Collection<? extends GrantedAuthority> authorities, String name) {
 		super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
-	}
-	
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-	
-	public String getUserId() {
-		return userId;
-	}
-	
-	@Override
-	public String toString() {
 		
-		return "";
+		this.username = username;
+		this.password = password;
+		this.name = name;
 	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 }

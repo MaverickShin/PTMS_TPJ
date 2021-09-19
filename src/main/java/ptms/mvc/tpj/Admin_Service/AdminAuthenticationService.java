@@ -56,7 +56,7 @@ public class AdminAuthenticationService implements UserDetailsService {
 		
 		// 3) 테이블의 암호화된 비밀번호와 사용자가 입력한 비밀번호를 내부적으로 비교처리
 		
-		return new UserVO(vo.getMg_id(),"{bcrypt}"+vo.getMg_pwd(), true, true, true, true, authority);
+		return new UserVO(vo.getMg_id(),"{bcrypt}"+vo.getMg_pwd(), true, true, true, true, authority, vo.getMg_kind());
 		
 	}
 	

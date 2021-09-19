@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file = "../../setting.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,39 +16,107 @@ $(document).ready(function(){
 	$("#cust_id").blur(function() {
 		var cust_id = $("input[name='cust_id']").val();
 		// 새로운 일정 저장
-		$.ajax({
-			type: "get",
-			url: "/tpj/cust/confirmid="+cust_id,
-			cache: false,
-			dataType: "json",
-			data: "cust_id=" + cust_id,
-			contentType: "application/json; charset=utf-8",
-			beforeSend : function(jqXHR, settings)
-			{
-				var token = $("meta[name='_csrf_header']").attr("content");
-				var header = $("meta[name='_csrf']").attr("content");
-				jqXHR.setRequestHeader(header, token);
-		},
-		success: function(cnt) {
-		if(cnt.result == 0){
-		alert("사용가능");
+		
+		if(cust_id != "") {
+			
+			$.ajax({
+				type: "get",
+				url: "/tpj/cust/confirmid",
+				cache: false,
+				dataType: "json",
+				data: "cust_id=" + cust_id,
+				contentType: "application/json; charset=utf-8",
+				beforeSend : function(jqXHR, settings)
+				{
+					var token = $("meta[name='_csrf_header']").attr("content");
+					var header = $("meta[name='_csrf']").attr("content");
+					jqXHR.setRequestHeader(header, token);
+			},
+			success: function(cnt) {
+				console.log(cnt);
+				if (cnt == 1) {
+					// 1 : 아이디가 중복되는 문구
+					$("#result_id_div").css("display", "block");
+					$("#result_id").text("이미 사용중인 아이디입니다 ");
+					$("#result_id").css("color", "red");
+				} else {
+					$("#result_id_div").css("display", "block");
+					$('#result_id').text("사용 가능한 아이디 입니다.");
+					$('#result_id').css('color', 'blue');
+				}
+			},
+			error : function(request, status, error) {
+				alert("에러!");
+			}
+			});
 		}
-		},
-		error : function(request, status, error) {
-			alert("에러!")
+	});
+	
+	$("#emailchk").click(function() {
+		
+		var cust_em = $("input[name='cust_em']").val();
+		var key;
+		var bool = false;
+		
+		if(cust_em != "") {
+		
+			$.ajax({
+				type: "get",
+				url: "/tpj/cust/mailAction",
+				cache: false,
+				dataType: "json",
+				data: "cust_em=" + cust_em,
+				contentType: "application/json; charset=utf-8",
+				beforeSend : function(jqXHR, settings)
+				{
+					var token = $("meta[name='_csrf_header']").attr("content");
+					var header = $("meta[name='_csrf']").attr("content");
+					jqXHR.setRequestHeader(header, token);
+			},
+			success: function(result) {
+				if (result != 0) {
+					// 1 : 아이디가 중복되는 문구
+					alert("이메일 인증번호를 전송하였습니다!. \n 인증을 완료해주세요!");
+					key = result;
+					bool = true;
+				} else {
+					alert("이메일 전송 실패!");
+				}
+			},
+			error : function(request, status, error) {
+				alert("이메일 전송 에러!");
+			}
+			});
 		}
+		$("#result_em_div").show();
+		$("#emailchk").val("전송완료");
+		$("#emailchk").attr("disabled", true);
+		
+		$("#result_em").keyup(function() {
+			if($("#result_em").val() >= 6) {
+				var content = $("#result_em").val();
+				
+				if(content == key) {
+					alert("인증성공");
+					$("#emailchk").val("인증완료");
+					$("#result_em").attr("disabled", true);
+					$("#emailchk").attr("disabled", true);
+					} else {
+						alert("인증실패");
+						$("#emailchk").val("재 전송하기");
+						$("#emailchk").attr("disabled", false);
+					}
+			}
 		});
+		
 	});
 	
 });
+	
 
 </script>    
 <script type="text/javascript">
 
-//회원가입 페이지
-function joinInFocus(){
-	document.joinInform.cust_id.focus();
-}
 function joinCheck() {
 	// 아이디 입력 확인
 	if (!document.joinInform.cust_id.value) {
@@ -127,21 +195,12 @@ function nextJumin2(){
 	}
 }
 
-function confirmid() {
-	
- var id = document.joinInform.cust_id.value;
-   
-   if(id != "") {
-      window.location.href = "/tpj/cust/confirmid?cust_id=" + id;
- }
-	
-}
-
 </script>
 <title>회원가입 페이지</title>
 </head>
-<body onload="joinInFocus();">
+<body>
 
+<%@ include file = "../header.jsp" %>
 
 <!-- session -->
 <section style = "width:700px; margin-left:auto; margin-right:auto; margin-top:30px;">
@@ -155,7 +214,13 @@ function confirmid() {
 								<div class="col-md-12">
 									<div class="form-group">
 										<label class="label" for="cust_id">아이디</label>
-										<input type="text" class="form-control" name="cust_id" id="cust_id" placeholder="아이디" >
+										<input type="text" class="form-control" name="cust_id" id="cust_id" placeholder="아이디" autofocus>
+									</div>
+								</div>
+								
+								<div class="col-md-12" id = "result_id_div" style = "display:none;">
+									<div class="form-group">
+										<div id = "result_id" style = "dispaly:none;"></div>
 									</div>
 								</div>
 								
@@ -173,7 +238,7 @@ function confirmid() {
 									</div>
 								</div>
 								
-							    <div class="col-md-12">
+							    <div class="col-md-2">
 									<div class="form-group">
    										<div class="form-field">
        										<div class="select-wrap">
@@ -185,6 +250,27 @@ function confirmid() {
                  							</div>
              							</div>
    									</div>
+								</div>
+								
+								<div class="col-md-3">
+									<div class="form-group">
+										<label class="label" for="hp1">휴대폰 번호</label>
+										<input type="text" class="form-control" name="hp1" id="hp1" maxlength= "3">
+									</div>
+								</div>
+								
+								<div class="col-md-3">
+									<div class="form-group">
+										<label class="label" for="hp2">&nbsp;</label>
+										<input type="text" class="form-control" name="hp2" id="hp2" maxlength= "4" >
+									</div>
+								</div>
+								
+								<div class="col-md-3">
+									<div class="form-group">
+										<label class="label" for="hp3">&nbsp;</label>
+										<input type="text" class="form-control" name="hp3" id="hp3" maxlength= "4">
+									</div>
 								</div>
 								
 								<div class="col-md-6">
@@ -222,11 +308,18 @@ function confirmid() {
 									</div>
 								</div>
 								
+								
 								<div class="col-md-5">
 									<div class="form-group" style = "margin-top: 10px;">
-										<input type="button" value="이메일 인증" class="btn btn-primary" onclick = "" style = "margin-top:25px;">
+										<input type="button" value="이메일 인증" class="btn btn-primary" id = "emailchk" style = "margin-top:25px;">
 										<div class="submitting"></div>
-										<input type = "hidden" value = "${enable}" id = "email_sub">
+									</div>
+								</div>
+								
+								<div class="col-md-7" id = "result_em_div" style = "display: none;">
+									<div class="form-group">
+										<label class="label" for="result_em">이메일 인증번호</label>
+										<input type="text" class="form-control" name="resultem" id="result_em" placeholder="인증번호">
 									</div>
 								</div>
 								
@@ -279,6 +372,6 @@ function confirmid() {
 			</div>
 	</form>
 </section>
-
+<%@ include file = "../footer.jsp" %>
 </body>
 </html>

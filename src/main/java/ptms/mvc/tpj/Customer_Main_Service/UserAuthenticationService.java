@@ -58,10 +58,7 @@ public class UserAuthenticationService implements UserDetailsService {
 		
 		// 3) 테이블의 암호화된 비밀번호와 사용자가 입력한 비밀번호를 내부적으로 비교처리
 		
-		System.out.println("id : " + vo.getCUST_ID());
-		System.out.println("pwd : " + vo.getCUST_PWD());
-		
-		return new UserVO(vo.getCUST_ID(),"{bcrypt}"+vo.getCUST_PWD(),vo.getENABLE_NO() == 1, true, true, true, authority);
+		return new UserVO(vo.getCUST_ID(),"{bcrypt}"+vo.getCUST_PWD(),vo.getENABLE_NO() == 1, true, true, true, authority, vo.getCUST_NM());
 		
 	}
 	
