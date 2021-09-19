@@ -122,9 +122,7 @@ public class CustomerVO extends User{
 	public void setSUBADDRESS(String sUBADDRESS) {
 		SUBADDRESS = sUBADDRESS;
 	}
-<<<<<<< HEAD
 	
-=======
 	public String getADDRESS1() {
 		return ADDRESS1;
 	}
@@ -137,5 +135,4 @@ public class CustomerVO extends User{
 	public void setADDRESS2(String aDDRESS2) {
 		ADDRESS2 = aDDRESS2;
 	}
->>>>>>> cebc6258f82bd0b588445a5f32642136355bc625
 }

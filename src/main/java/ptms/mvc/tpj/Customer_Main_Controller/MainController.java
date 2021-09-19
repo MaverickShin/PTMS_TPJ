@@ -6,10 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-<<<<<<< HEAD
-=======
 import javax.servlet.http.HttpSession;
->>>>>>> cebc6258f82bd0b588445a5f32642136355bc625
 
 import org.slf4j.Logger;  
 import org.slf4j.LoggerFactory;
@@ -21,10 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ptms.mvc.tpj.Customer_Main_Service.MainServiceImpl;
-<<<<<<< HEAD
 import ptms.mvc.tpj.NoticeBoardService.userInfo_NoticeBoard_service;
-=======
->>>>>>> cebc6258f82bd0b588445a5f32642136355bc625
 import ptms.mvc.tpj.emailHandler.emailSender;
 
 @RequestMapping("/cust")
@@ -37,11 +31,10 @@ public class MainController {
 	MainServiceImpl service;
 	
 	@Autowired
-<<<<<<< HEAD
-	userInfo_NoticeBoard_service qnaservice;
-=======
->>>>>>> cebc6258f82bd0b588445a5f32642136355bc625
 	emailSender emailsender;
+	
+	@Autowired
+	
 	
 	// 메인페이지 이동
 	@RequestMapping({"", "main"})
@@ -234,7 +227,7 @@ public class MainController {
 	public String board(HttpServletRequest req, Model model) {
 		log.info("qnaList => qnaList");
 		
-		qnaservice.QNA_Notice_Board_ListUp(req, model);
+		service.QNA_Notice_Board_ListUp(req, model);
 		
 		return "customer/board/qnaList";
 	}

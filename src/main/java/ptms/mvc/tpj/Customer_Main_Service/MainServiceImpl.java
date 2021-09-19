@@ -82,11 +82,8 @@ public class MainServiceImpl implements MainService{
 		vo.setZIPCODE(Integer.parseInt(req.getParameter("zipcode")));
 		String address1 = req.getParameter("address1");
 		String address2 = req.getParameter("address2");
-<<<<<<< HEAD
-=======
 		vo.setADDRESS1(address1);
 		vo.setADDRESS2(address2);
->>>>>>> cebc6258f82bd0b588445a5f32642136355bc625
 		vo.setSUBADDRESS(req.getParameter("subaddress"));
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -106,8 +103,6 @@ public class MainServiceImpl implements MainService{
 		
 	}
 
-<<<<<<< HEAD
-=======
 	// 회원정보 인증 및 상세 페이지
 	@Override
 	public void custDetail(HttpServletRequest req, Model model) {
@@ -134,7 +129,6 @@ public class MainServiceImpl implements MainService{
 		System.out.println("회원정보 encoderpwd : " + encoderpwd);
 		
 	}
->>>>>>> cebc6258f82bd0b588445a5f32642136355bc625
 
 	// 회원정보 수정 처리
 	@Override
