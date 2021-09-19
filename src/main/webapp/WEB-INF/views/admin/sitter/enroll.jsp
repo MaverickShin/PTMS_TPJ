@@ -13,7 +13,7 @@
 	<nav id="listdiv_id1" style="width:400px; padding:100px;">
 			<ul>
 	           <li>- 정보 수정/등록 -</li>
-	           <li><a href="">펫코드 및 요금 등록</a></li>
+	           <li><a href="sitterFee">펫코드 및 요금 등록</a></li>
 	           <li><a href="2">1</a></li>
 	           <li><a href="2">2</a></li>
 	           <li><a href="3">3</a></li>

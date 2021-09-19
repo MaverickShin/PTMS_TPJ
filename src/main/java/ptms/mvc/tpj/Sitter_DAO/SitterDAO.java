@@ -1,5 +1,6 @@
 package ptms.mvc.tpj.Sitter_DAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ptms.mvc.tpj.CustVO.PetVO;
@@ -75,5 +76,8 @@ public interface SitterDAO {
 	
 	// 의뢰수락 - 의뢰 상태(의뢰 확정으로)업데이트
 	public int requestConfirmState(int sq_cd);
+	
+	//요금표 리스트
+	public ArrayList<PetVO> getPriceList();
 	
 }

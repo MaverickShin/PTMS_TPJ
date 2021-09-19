@@ -4,14 +4,22 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import ptms.mvc.tpj.AdminEnroll_Service.EnrollServiceImpl;
 
 @RequestMapping("/admin")
 @Controller
 public class AdminController {
 
 	private static final Logger log = LoggerFactory.getLogger(AdminController.class);
+	
+	@Autowired
+	EnrollServiceImpl enrollService;
+	
 	
 	@RequestMapping({"", "main", "adminlogin"})
 	public String login() {
@@ -116,7 +124,7 @@ public class AdminController {
 	@RequestMapping("sattle")
 	public String sattle(HttpServletRequest req) {
 		
-		int dtos = 10000;
+		  int dtos = 10000;
 	      int dtos2 = 20000;
 	      int dtos3 = 30000;
 	      
@@ -141,6 +149,68 @@ public class AdminController {
 	public String subscriber() {
 		return "admin/subscriber/subscriber";
 	}
+<<<<<<< HEAD
+
+	@RequestMapping("enroll")
+	public String enroll() {
+		return "admin/sitter/enroll";
+	}
+	
+	//펫 코드 및 요금 등록 페이지
+	@RequestMapping("sitterFee")
+	public String sitterFee(HttpServletRequest req, Model model) {
+		log.info("url ==> sitterFee");
+		
+		return "admin/sitter/sitterFee";
+	}	
+	
+	//펫 코드 및 요금 등록
+	@RequestMapping("sitterFeeAction")
+	public String sitterFeeAction(HttpServletRequest req, Model model) {
+		log.info("url ==> sitterFeeAction");
+		
+		enrollService.petCodeFee(req, model);
+		return "admin/sitter/sitterFeeAction";
+	}
+=======
+	
+>>>>>>> 0fb694a88e2685a464d7aa138a44f835642e1457
+	
+	//펫 코드 및 요금 목록
+	@RequestMapping("sitterFeeList")
+	public String sitterFeeList(HttpServletRequest req, Model model) {
+		log.info("url ==> sitterFeeList");
+		
+		enrollService.petCodeFeeList(req, model);
+		return "admin/sitter/sitterFeeList";
+	}	 
+	
+	//펫 코드 및 요금 수정 페이지
+	@RequestMapping("sitterFeeUpdate")
+	public String petCodeFeeUpdate(HttpServletRequest req, Model model) {
+		log.info("url ==> sitterFeeUpdate");
+		
+		enrollService.petCodeFeeUpdate(req, model);
+		return "admin/sitter/sitterFeeUpdate";
+	}	
+	
+	//펫 코드 및 요금 수정 처리
+	@RequestMapping("sitterFeeUpdateAction")
+	public String petCodeFeeUpdateAction(HttpServletRequest req, Model model) {
+		log.info("url ==> sitterFeeUpdateAction");
+		
+		enrollService.petCodeFeeUpdateAction(req, model);
+		return "admin/sitter/sitterFeeUpdateAction";
+	}
+	
+	//펫 코드 및 요금 삭제
+	@RequestMapping("sitterFeeDelete")
+	public String sitterFeeDelete(HttpServletRequest req, Model model) {
+		log.info("url ==> sitterFeeDelete");
+		
+		enrollService.petCodeFeeDeleteAction(req, model);
+		return "admin/sitter/sitterFeeDelete";
+	}	
 	
 	
 }
