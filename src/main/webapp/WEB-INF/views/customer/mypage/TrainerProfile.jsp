@@ -82,34 +82,75 @@
 														id="CUST_ID" value="${dto.CUST_ID}" placeholder="아이디">
 												</div>
 											</div>
-											<div class="col-md-6">
-												<label class="label" for="TS_AREA">서비스 가능지역</label><br>
-													<input class="form-group" type="checkbox" id="TS_AREA1" name="TS_AREA" value="인천">인천&nbsp;
-													<input class="form-group" type="checkbox" id="TS_AREA2" name="TS_AREA" value="강남">강남&nbsp;
-													<input class="form-group" type="checkbox" id="TS_AREA3" name="TS_AREA" value="강남">홍대&nbsp;
-													<input class="form-group" type="checkbox" id="TS_AREA4" name="TS_AREA" value="잠실">잠실&nbsp;
-													<input class="form-group" type="checkbox" id="TS_AREA5" name="TS_AREA" value="마포">마포
-												<br>
-												<label class="label" for="TS1_NO">서비스</label><br>
-													<input class="form-group" type="checkbox" id="TS1_NO" name="TS1_NO" value="${dto.SV1_NO}">배변훈련&nbsp;
-													<input class="form-group" type="checkbox" id="TS2_NO" name="TS2_NO" value="${dto.SV2_NO}">짖음훈련&nbsp;
-													<input class="form-group" type="checkbox" id="TS3_NO" name="TS3_NO" value="${dto.SV3_NO}">기본훈련&nbsp;
-													<input class="form-group" type="checkbox" id="TS4_NO" name="TS4_NO" value="${dto.SV4_NO}">공격성해결훈련
-												<br>
-												<label class="label" for="RESERVATION">예약 가능일</label>
-													<input type="checkbox" id="RESERVATION1" name="RESERVATION" value="${dto.RESERVATION}">평일
-													<input type="checkbox" id="RESERVATION2" name="RESERVATION" value="${dto.RESERVATION}">주말
-												<br>
-												<label class="label" for="START_TM">방문가능시간</label>
-													<input type="time" id="START_TM" name="START_TM">
-												<label class="label" for="END_TM">마감시간</label>
-													<input type="time" id="END_TM" name="END_TM">
-												<br><br>
+											
+											<div class="select-wrap">
+       											<label class="label" for="tr_kind">훈련가능 유형</label>
+					                      		<label><input type="checkbox" value="1" name="tr_kind1" id="tr_kind1" class="form-control" onchange = "check();">배변훈련</label>
+					                      		<div id="tr_kind1_fee" style = "display:none">
+					                      			<label>한 회차당 배변훈련 요금</label>
+                         									<input type="number" id="tr_kind1_fee" class="form-control">
+                      								</div>
+					                      		<label><input type="checkbox" value="2" name="tr_kind2" id="tr_kind2" class="form-control" onchange = "check();">분리불안</label>
+					                      		<div id="tr_kind2_fee" style = "display:none">
+					                      			<label>한 회차당 분리불안 요금</label>
+                         									<input type="number" id="tr_kind1_fee" class="form-control">
+                      								</div>
+					                      		<label><input type="checkbox" value="3" name="tr_kind3" id="tr_kind3" class="form-control" onchange = "check();">기본훈련</label>
+					                      		<div id="tr_kind3_fee" style = "display:none">
+					                      			<label>한 회차당 기본훈련 요금</label>
+                         									<input type="number" id="tr_kind1_fee" class="form-control">
+                      								</div>
+					                      		<label><input type="checkbox" value="4" name="tr_kind4" id="tr_kind4" class="form-control" onchange = "check();">짖음해결</label>
+					                      		<div id="tr_kind4_fee" style = "display:none">
+					                      			<label>한 회차당 짖음해결 요금</label>
+                         									<input type="number" id="tr_kind1_fee" class="form-control">
+                      								</div>
+                 							</div>
+											
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="label" for="service_loc">훈련 가능 지역</label>
+													<input type="button" value="주소찾기" class="btn btn-primary" onclick = "addressSerch();" style = "margin-top:25px;">
+												</div>
 											</div>
-											<div class="col-md-12" style="text-align:center;">
-												<label class="label" for="TA_TITLE">소개글</label>
-												<input type="text" class="form-control" name="TA_TITLE" id="TA_TITLE" placeholder="소개글 제목">
-												<textarea rows="5px" cols="100%" name="TA_APPEAL" id="TA_APPEAL"></textarea>
+											
+											
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="label" for="address1">도로명 주소</label>
+													<input type="text" class="form-control" name="address1" id="address1" placeholder="도로명 주소" readonly>
+												</div>
+											</div>
+											
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="label" for="address2">지번 주소</label>
+													<input type="text" class="form-control" name="address2" id="address2" placeholder="지번 주소" readonly>
+												</div>
+											</div>
+											
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="label" for="trainingDay">훈련가능일</label><br>
+													<input type="date" class="iptags" name="START_DAY" >~
+													<input type="date" class="iptags" name="END_DAY" >
+													조정가능<input type="checkbox" class="iptags" name="ADJUSTABLE" value="1">
+												</div>
+											</div>
+											
+											
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="label" for="intro_title">소개글 제목</label>
+													<input type="text" class="form-control" name="intro_title" id="intro_title">
+												</div>
+											</div>
+											
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="label" for="intro_content">소개글 본문</label>
+													<input type="text" class="form-control" name="intro_content" id="intro_content">
+												</div>
 											</div>
 											
 											<div class="col-md-12" style="text-align:center;">

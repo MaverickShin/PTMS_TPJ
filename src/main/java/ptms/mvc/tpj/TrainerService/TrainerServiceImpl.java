@@ -2,12 +2,18 @@ package ptms.mvc.tpj.TrainerService;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+
+import ptms.mvc.tpj.TrainerDAO.TrainerDAOImpl;
 
 @Service
 public class TrainerServiceImpl implements TrainerService{
 
+	@Autowired
+	TrainerDAOImpl dao;
+	
 	@Override
 	public void insertTrainer(HttpServletRequest req, Model model) {
 		// TODO Auto-generated method stub
