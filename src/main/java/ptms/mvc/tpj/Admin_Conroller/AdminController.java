@@ -172,7 +172,6 @@ public class AdminController {
 		return "admin/sitter/sitterFeeAction";
 	}
 	
-	
 	//펫 코드 및 요금 목록
 	@RequestMapping("sitterFeeList")
 	public String sitterFeeList(HttpServletRequest req, Model model) {

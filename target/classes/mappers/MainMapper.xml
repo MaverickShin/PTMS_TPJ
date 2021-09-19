@@ -11,26 +11,16 @@
 	</select>
 	
 	<!-- 로그인 - 회원정보 조회 -->
-	<select id="custInfo" resultType = "ptms.mvc.tpj.CustVO.CustomerVO">
+	<select id="custInfo" parameterType="String" resultType = "ptms.mvc.tpj.CustVO.CustomerVO">
 		SELECT * FROM customer_tb WHERE cust_id = #{id}
 	</select>
 	
 	<!-- 회원가입 처리 -->
 	<insert id = "insertCust" parameterType="ptms.mvc.tpj.CustVO.CustomerVO">
-		INSERT INTO customer_tb (CUST_ID, CUST_PWD, CUST_NM, CUST_EM, CUST_PH, CUST_GEN, JUMIN1, JUMIN2, CUST_AGE, ZIPCODE, ENABLE_NO, AUTHOR, CUST_DT) 
-		VALUES (#{CUST_ID}, #{CUST_PWD}, #{CUST_NM}, #{CUST_EM}, #{CUST_PH}, #{CUST_GEN}, #{JUMIN1}, #{JUMIN2}, #{CUST_AGE}, #{ZIPCODE}, default, default, sysdate)
+		INSERT INTO customer_tb (CUST_ID, CUST_PWD, CUST_NM, CUST_EM, CUST_PH, CUST_GEN, JUMIN1, JUMIN2, CUST_AGE, ZIPCODE, ENABLE_NO, AUTHOR, CUST_DT, SUBADDRESS) 
+		VALUES (#{CUST_ID}, #{CUST_PWD}, #{CUST_NM}, #{CUST_EM}, #{CUST_PH}, #{CUST_GEN}, #{JUMIN1}, #{JUMIN2}, #{CUST_AGE}, #{ZIPCODE}, 1, default, sysdate, #{SUBADDRESS})
 	</insert>
 	
-	<!-- 이메일 인증 여부 -->
-	<select id="emailChk" resultType="int">
-		SELECT ENABLE_NO FROM customer_tb WHERE cust_id = #{id}
-	</select>
-
-	<!-- 이메일 인증 성공 처리 -->
-	<update id="emailSuccess">
-		UPDATE customer_tb SET ENABLE_NO = 1 WHERE cust_id = #{id}
-	</update>
-
 	<!-- 로그인 - 비밀번호 확인 / 비밀번호 찾기 -->
 	<select id="pwdSearch" resultType = "String">
 		SELECT CUST_PWD FROM customer_tb WHERE cust_id = #{id}
@@ -43,12 +33,28 @@
 	
 	<!-- 우편번호 등록 -->
 	<insert id="insertzipcode" parameterType="java.util.Map">
-		INSERT INTO zipcodes_tb VALUES(#{zipcode}, #{address1}, #{address2}, #{subaddress})
+		INSERT INTO zipcodes_tb VALUES(#{zipcode}, #{address1}, #{address2})
 	</insert>
 	
 	<!-- 우편번호 조회 -->	
 	<select id="zipcodeChk" resultType="int">
 		SELECT COUNT(*) FROM zipcodes_tb WHERE ZIP_CD = #{ZIPCODE}
 	</select>
+	
+	<!-- 회원정보 조회(회원,우편) -->	
+	<select id="selectCustomer" resultType="ptms.mvc.tpj.CustVO.CustomerVO">
+	select c.*, z.ADDRESS1, z.ADDRESS2 from customer_tb c, zipcodes_tb z where c.zipcode = z.zip_cd and cust_id = #{id}
+	</select>
+	
+	<!-- 1.회원정보 수정처리 -->
+	<update id="updateCustomer" parameterType="ptms.mvc.tpj.CustVO.CustomerVO">
+		update CUSTOMER_TB set CUST_PWD=#{CUST_PWD}, CUST_EM=#{CUST_EM}, CUST_PH=#{CUST_PH}, SUBADDRESS=#{SUBADDRESS}, ZIPCODE = #{ZIPCODE}
+		where CUST_ID=#{CUST_ID}
+	</update>
+	<!-- 2. 우편번호가 같을시 update -->
+	<update id="updateCustomer2" parameterType="ptms.mvc.tpj.CustVO.CustomerVO">
+		update ZIPCODES_TB set ADDRESS1=#{ADDRESS1}, ADDRESS2=#{ADDRESS2} where ZIP_CD=#{ZIPCODE}
+	</update>
+	<!-- 3. 우편번호가 다를시 우편번호등록 사용 -->
 	
 </mapper>
