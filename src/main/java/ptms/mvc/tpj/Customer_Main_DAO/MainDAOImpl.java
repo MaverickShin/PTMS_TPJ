@@ -18,7 +18,6 @@ public class MainDAOImpl implements MainDAO {
 	public int idCheck(String strid) {
 		
 		MainDAO dao = data.getMapper(MainDAO.class);
-		
 		return dao.idCheck(strid);
 	}
 	
