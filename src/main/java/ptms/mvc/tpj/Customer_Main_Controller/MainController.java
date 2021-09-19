@@ -32,12 +32,13 @@ public class MainController {
 		return "main/index";
 	}
 	
-	@RequestMapping("confirmid")
-	public String confirmid(HttpServletRequest req, Model model) {
+	@RequestMapping(value = "confirmid", method = RequestMethod.GET)
+	@ResponseBody
+	public int confirmid(HttpServletRequest req, Model model) {
 		
-		service.confirmId(req, model);
+		int cnt = service.confirmId(req, model);
 		
-		return "main/join/join";
+		return cnt;
 	}
 	
 	// 회원가입 페이지 이동

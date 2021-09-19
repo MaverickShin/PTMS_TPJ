@@ -23,6 +23,36 @@
            <li><a href="">나에게 온 의뢰</a></li>
         </ul>
 	</nav>
+
+  <div class="sitter" style = "display:flex;">
+	<div>
+		<p class="label">어디에 사시나요?</p><br>
+		<input type="text" class="iptags" name="SQ_LOC" placeholder="어디에 사시나요?">
+	</div>	
+	
+	<!-- <div>
+		<p class="label">언제 맡기시나요?</p>
+		<input type="datetime-local" class="iptags" name="START_DAY" > ~
+		<input type="datetime-local" class="iptags" name="END_DAY" >
+	</div> -->
+	
+	<div>
+		<p class="label">언제 맡기시나요?</p><br>
+		<input type="date" class="iptags" name="START_DAY" > ~
+		<input type="date" class="iptags" name="END_DAY" >
+	</div>	
+	
+	<div>
+		<p class="label">몇시에 맡기시나요?</p><br>
+		<input type="time" class="iptags" name="START_TM" > ~
+		<input type="time" class="iptags" name="END_TM" >
+	</div>		
+	
+	<div>
+		<p class="label">나의 반려동물</p>
+		
+	</div>
+
 	
 	<form action="sitterMatching" method="post">
 	  <div class="sitter">

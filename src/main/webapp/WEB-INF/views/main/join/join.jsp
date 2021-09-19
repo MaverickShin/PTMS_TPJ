@@ -1,24 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file = "../../setting.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name = "_csrf_header" content="${_csrf.headerName}">
 <meta name = "_csrf" content = "${_csrf.token}">
-<script src = "${jsPath}script.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 //아이디 유효성 검사(1 = 중복 / 0 != 중복)
 $(document).ready(function(){
 	
-	$("#cust_id").focusout(function() {
+	$("#cust_id").blur(function() {
 		var cust_id = $("input[name='cust_id']").val();
 		// 새로운 일정 저장
 		$.ajax({
-			type: "POST",
-			url: "/tpj/cust/confirmid",
+			type: "get",
+			url: "/tpj/cust/confirmid="+cust_id,
 			cache: false,
 			dataType: "json",
 			data: "cust_id=" + cust_id,
@@ -43,7 +43,6 @@ $(document).ready(function(){
 });
 
 </script>    
-
 <script type="text/javascript">
 
 //회원가입 페이지
@@ -143,7 +142,6 @@ function confirmid() {
 </head>
 <body onload="joinInFocus();">
 
-<%@ include file = "../header.jsp" %>
 
 <!-- session -->
 <section style = "width:700px; margin-left:auto; margin-right:auto; margin-top:30px;">
@@ -157,13 +155,8 @@ function confirmid() {
 								<div class="col-md-12">
 									<div class="form-group">
 										<label class="label" for="cust_id">아이디</label>
-										<input type="text" class="form-control" name="cust_id" id="cust_id" placeholder="아이디" onblur="confirmid();">
+										<input type="text" class="form-control" name="cust_id" id="cust_id" placeholder="아이디" >
 									</div>
-								</div>
-								
-								<div class="col-md-12">
-									<div class = "id_ok" style = "display:none;">사용가능한 아이디</div>
-									<div class = "id_already" style = "display:none;">사용 불 가능한 아이디</div>
 								</div>
 								
 								<div class="col-md-6">
@@ -286,7 +279,6 @@ function confirmid() {
 			</div>
 	</form>
 </section>
-<%@ include file = "../footer.jsp" %>	
 
 </body>
 </html>
