@@ -31,7 +31,6 @@
  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
  <script src="${path}js/google-map.js"></script>
  <script src="${path}js/main.js"></script>
-  <script src="${path}js/script.js"></script>
  
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
  

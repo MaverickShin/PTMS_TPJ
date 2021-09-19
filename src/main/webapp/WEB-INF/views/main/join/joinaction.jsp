@@ -12,15 +12,14 @@
 
 <c:if test = "${insert == 1}"> 
 	<script type="text/javascript">
-		alert("회원가입 성공!");
-		window.location = "/tpj/cust/login";
+		window.location = "mailAction?cust_id=${cust_id}";
 	</script>
 </c:if>
 20+5
 
 <c:if test = "${insert == 0}">
 	<script type="text/javascript">
-		alert("회원가입 실패! ");
+		alert("회원가입 실패 ");
 		window.history.back();
 	</script>
 </c:if>

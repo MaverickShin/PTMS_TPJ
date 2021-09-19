@@ -59,14 +59,8 @@
 				<div class="col-md-6 d-flex justify-content-md-end">
 					<div class="social-media">
 						<p class="mb-0 d-flex">
-						<c:if test="${sessionScope.custid == null }">
 							<a href="${cu}login" style="color:white; font-size:14px;  font-weight: bold; width:50px; padding-top:8px;">로그인</a>
 							<a href="${cu}join" style="color:white; font-size:14px; font-weight: bold; width:60px; padding-top:8px;">회원가입</a>
-						</c:if>
-						<c:if test="${sessionScope.custid != null }">
-							<span style="color:white; font-size:14px; font-weight: bold; width:60px; padding-top:8px;">${sessionScope.custid}님, 환영합니다.</span>
-							<a href="${cu}logout" style="color:white; font-size:14px; font-weight: bold; width:60px; padding-top:8px;">로그아웃</a>
-						</c:if>
 							<a href="#"
 								class="d-flex align-items-center justify-content-center"><span
 								class="fa fa-facebook"><i class="sr-only">facebook</i></span></a> <a
@@ -101,7 +95,7 @@
 					<li class="nav-item" id = "mypages"><a class="nav-link">반려인/펫 관리</a>
 						<div class = "hide">
 			    			<a href="/tpj/cust/calendar">캘린더</a>
-				    		<a href="/tpj/cust/MyInfoUser">내정보관리</a>
+				    		<a href="/tpj/cust/MyInfo">내정보관리</a>
 				    		<a href="/tpj/cust/contact">건강관리</a>
 						</div>
 					</li>

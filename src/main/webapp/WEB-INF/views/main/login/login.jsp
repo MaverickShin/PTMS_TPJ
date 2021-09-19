@@ -29,7 +29,7 @@
 								<div class="col-md-12">
 									<div class="form-group">
 										<label class="label" for="cust_pwd">비밀번호</label>
-										<input type="password" class="form-control" name="cust_pwd" id="cust_pwd" placeholder="비밀번호" >
+										<input type="text" class="form-control" name="cust_pwd" id="cust_pwd" placeholder="비밀번호" >
 									</div>
 								</div>
 								

@@ -33,14 +33,4 @@ public interface MainDAO {
 	// 우편번호 조회
 	public int zipcodeChk(int zipcode);
 	
-	// 회원정보 조회(회원,우편)
-	public CustomerVO selectCustomer(String id);
-	
-	// 1.회원정보 수정처리(회원정보)
-	public int updateCustomer(CustomerVO vo);
-	
-	// 2.우편번호가 같을때 (update)
-	public int updateCustomer2(CustomerVO vo);
-	
-	// 3.우편번호가 다를때 (insert)
 }
