@@ -55,6 +55,9 @@
 </head>
 <body>
 	<%@ include file="../../main/header.jsp"%>
+	
+	<%@ include file = "../../news/test1.jsp" %>
+	
 	<section class="">
 		<form action="" id="">
 			<div class="container-fluid">
@@ -68,7 +71,7 @@
 					</table>
 				</div>
 
-				<div class="container-fluid" style="">
+				<div class="container-fluid" style="display: inline;">
 
 					<div style="display: flex; justify-content: center">
 						<table style="margin: 10px; padding: 0;">
@@ -132,17 +135,6 @@
 					</div>
 				</div>
 			</div>
-
-			<section class="ftco-counter" id="section-counter" style = "margin-bottom:50px;">
-				<div class="container">
-					<div class="row">
-						<div
-							class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
-							<div class="block-18 text-center"></div>
-						</div>
-					</div>
-				</div>
-			</section>
 		</form>
 	</section>
 
