@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+<<<<<<< HEAD
+=======
+import javax.servlet.http.HttpSession;
+>>>>>>> cebc6258f82bd0b588445a5f32642136355bc625
 
 import org.slf4j.Logger;  
 import org.slf4j.LoggerFactory;
@@ -17,7 +21,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ptms.mvc.tpj.Customer_Main_Service.MainServiceImpl;
+<<<<<<< HEAD
 import ptms.mvc.tpj.NoticeBoardService.userInfo_NoticeBoard_service;
+=======
+>>>>>>> cebc6258f82bd0b588445a5f32642136355bc625
 import ptms.mvc.tpj.emailHandler.emailSender;
 
 @RequestMapping("/cust")
@@ -30,7 +37,10 @@ public class MainController {
 	MainServiceImpl service;
 	
 	@Autowired
+<<<<<<< HEAD
 	userInfo_NoticeBoard_service qnaservice;
+=======
+>>>>>>> cebc6258f82bd0b588445a5f32642136355bc625
 	emailSender emailsender;
 	
 	// 메인페이지 이동
@@ -108,20 +118,46 @@ public class MainController {
 		return "main/login/login";
 	}
 	
+	//로그아웃
+	@RequestMapping("logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		
+		return "main/index";
+	}
+	
+	// 반려인/펫 관리 - 내정보관리 인증화면
+	@RequestMapping("MyInfoUser")
+	public String MyInfoUser(HttpServletRequest req, Model model) {
+		log.info("컨트롤러 - 반려인/펫 관리 - 내정보 관리 인증화면");
+		
+		return "customer/mypage/MyInfoUser";
+	}
+	
 	// 반려인/펫 관리 - 내정보관리
 	@RequestMapping("MyInfo")
-	public String MyInfo() {
+	public String MyInfo(HttpServletRequest req, Model model) {
 		log.info("컨트롤러 - 반려인/펫 관리 - 내정보 관리");
-		// 서비스에서 로그인한 정보 가져오기
+		service.custDetail(req, model);
 		
 		return "customer/mypage/MyInfo";
 	}
 	
+	//회원수정 처리페이지
+	@RequestMapping("MyInfoAction")
+	public String MyInfoAction(HttpServletRequest req, Model model) {
+		log.info("url ==> MyInfoAction");
+		
+		service.custUpdate(req, model);
+		
+		return "customer/mypage/MyInfoAction";
+	}
+	
 	// 반려인/펫 관리 - 내정보관리
 	@RequestMapping("MyPet")
-	public String MyPet() {
+	public String MyPet(HttpServletRequest req, Model model) {
 		log.info("컨트롤러 - 반려인/펫 관리 - MyPet");
-		// 서비스에서 펫 정보 가져오기
+		service.custUpdate(req, model);
 		
 		return "customer/mypage/MyPet";
 	}
