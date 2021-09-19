@@ -106,7 +106,7 @@ public class MainServiceImpl implements MainService{
 	// 회원정보 인증 및 상세 페이지
 	@Override
 	public void custDetail(HttpServletRequest req, Model model) {
-		String id = (String)req.getSession().getAttribute("custid");
+		String id = (String)req.getSession().getAttribute("cust_id");
 		String cust_pwd = req.getParameter("CUST_PWD");
 		
 		System.out.println("회원id : "+id);
@@ -136,7 +136,7 @@ public class MainServiceImpl implements MainService{
 		
 		CustomerVO vo =new CustomerVO();
 		
-		vo.setCUST_ID((String)req.getSession().getAttribute("custid"));
+		vo.setCUST_ID((String)req.getSession().getAttribute("cust_id"));
 		
 		String CUST_PWD = req.getParameter("CUST_PWD");
 		
