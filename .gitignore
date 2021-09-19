@@ -81,7 +81,10 @@ local.properties
 .mtj.tmp/
 
 # Package Files #
+<<<<<<< HEAD
 *.jar
+=======
+>>>>>>> 932f7f520f3b7c7b34a0d15176facc36fbba6575
 *.war
 *.nar
 *.ear
