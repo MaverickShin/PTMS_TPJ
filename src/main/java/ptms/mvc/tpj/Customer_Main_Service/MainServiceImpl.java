@@ -181,7 +181,7 @@ public class MainServiceImpl implements MainService{
 		
 		int updatecnt = dao.updateCustomer(vo);
 		
-	// 추가 끝	
+		// 추가 끝	
 		//int updateCnt = dao.updateCustomer(vo);
 		System.out.println("updatecnt : " + updatecnt);
 		
