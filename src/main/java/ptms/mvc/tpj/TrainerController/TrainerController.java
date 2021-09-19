@@ -45,21 +45,5 @@ public class TrainerController {
       return "customer/trainer/trainerMatchingList";
    }
    
-   @RequestMapping("applyTrainer")
-   public String applyTrainer(HttpServletRequest req, Model model) {
-      log.info("url ==> applyTrainer");
-      
-      return "customer/trainer/applyTrainer";
-   }
-   
-   @RequestMapping("applyTrainerAction")
-   public String applyTrainerAction(HttpServletRequest req, Model model) {
-      log.info("url ==> applyTrainerAction");
-      
-      trainerservice.insertTrainer(req, model);
-      
-      return "customer/trainer/applyTrainerAction";
-   }
-   
    
 }
