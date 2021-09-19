@@ -2,6 +2,9 @@ package ptms.mvc.tpj.Customer_Main_Controller;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;  
@@ -139,7 +142,15 @@ public class MainController {
    }
 	   
    @RequestMapping("contact")
-   public String contact() {
+   public String contact(Model model) {
+	   
+	   List<String> news = new ArrayList<>();
+	   
+	   blog1 blogs = new blog1();
+	   
+	   news = blogs.blogInfo();
+	   
+	   model.addAttribute("list", news);
 	   
 	   return "customer/health/contact";
    }
