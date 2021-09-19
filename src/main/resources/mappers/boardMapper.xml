@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="ptms.mvc.tpj.NoticeBoardDAO.userInfo_NoticeBoard_DAO">
+	
+	<select id="QNA_Notice_Board_Count" resultType="int">
+		SELECT COUNT(*) as cnt FROM QNA_TB
+	</select>
+	
+	<select id="QNA_Notice_Board_ListUp" parameterType="java.util.Map" resultType="ptms.mvc.tpj.CustVO.BoardVO">
+		<![CDATA[
+		SELECT * 
+		  FROM 
+		    (SELECT QNA_CD, CUST_ID, QK_CD, MG_ID, QNA_TITLE, QNA_CONTENT, 
+            		QNA_ANSWER, QNA_DT, ROWNUM rNum 
+		     FROM ( SELECT * FROM QNA_TB 
+		             ORDER BY QNA_DT DESC
+		          )
+		   )
+		WHERE rNum >= #{start} AND rNum <= #{end}
+		]]>
+	</select>
+	
+	<insert id="QNA_Notice_Board_Write_Detail" parameterType="ptms.mvc.tpj.CustVO.BoardVO">
+		insert into QNA_TB(QNA_CD, CUST_ID, QK_CD, QNA_TITLE, QNA_CONTENT, QNA_DT)
+		values(QNA_CD_seq.nextval, #{CUST_ID}, #{QK_CD}, #{QNA_TITLE}, #{QNA_CONTENT}, sysdate)
+	</insert>
+	
+	<select id="QNA_Notice_Board_ListUp_Detail" parameterType="int" resultType="ptms.mvc.tpj.CustVO.BoardVO">
+		SELECT * FROM QNA_TB WHERE QNA_CD = #{qna_cd}
+	</select>
+	
+	<delete id="QNA_Notice_Board_Delete_Detail" parameterType="int">
+		DELETE FROM QNA_TB WHERE QNA_CD = #{qna_cd}
+	</delete>
+</mapper>

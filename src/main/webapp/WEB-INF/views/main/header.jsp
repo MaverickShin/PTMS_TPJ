@@ -98,7 +98,7 @@
 				    		<a href="/tpj/cust/contact">건강관리</a>
 						</div>
 					</li>
-					<li class="nav-item"><a href="/tpj/cust/board" class="nav-link">게시판</a></li>
+					<li class="nav-item"><a href="/tpj/cust/qnaList" class="nav-link">게시판</a></li>
 					<li class="nav-item"><a href="/tpj/cust/gps" class="nav-link">마이 펫 찾기</a></li>
 					<li class="nav-item"><a href="/tpj/cust/matchingMain" class="nav-link">매칭서비스</a></li>
 					<li class="nav-item"><a href="/tpj/cust/location" class="nav-link">위치안내</a></li>

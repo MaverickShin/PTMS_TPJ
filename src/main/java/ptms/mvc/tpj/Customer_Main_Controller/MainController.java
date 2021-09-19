@@ -17,7 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ptms.mvc.tpj.Customer_Main_Service.MainServiceImpl;
+<<<<<<< HEAD
+import ptms.mvc.tpj.NoticeBoardService.userInfo_NoticeBoard_service;
+=======
 import ptms.mvc.tpj.emailHandler.emailSender;
+>>>>>>> 23d2693f68fb0d65f2c011b20f1e643cbf4e429e
 
 @RequestMapping("/cust")
 @Controller
@@ -29,7 +33,11 @@ public class MainController {
 	MainServiceImpl service;
 	
 	@Autowired
+<<<<<<< HEAD
+	userInfo_NoticeBoard_service qnaservice;
+=======
 	emailSender emailsender;
+>>>>>>> 23d2693f68fb0d65f2c011b20f1e643cbf4e429e
 	
 	// 메인페이지 이동
 	@RequestMapping({"", "main"})
@@ -190,9 +198,11 @@ public class MainController {
       return "customer/matching/matchingMain";
    }  
    
-   @RequestMapping("board")
+   @RequestMapping("qnaList")
 	public String board(HttpServletRequest req, Model model) {
 		log.info("qnaList => qnaList");
+		
+		qnaservice.QNA_Notice_Board_ListUp(req, model);
 		
 		return "customer/board/qnaList";
 	}
