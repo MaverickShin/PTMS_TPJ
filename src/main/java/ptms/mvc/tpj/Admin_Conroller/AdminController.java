@@ -149,7 +149,6 @@ public class AdminController {
 	public String subscriber() {
 		return "admin/subscriber/subscriber";
 	}
-<<<<<<< HEAD
 
 	@RequestMapping("enroll")
 	public String enroll() {
@@ -172,9 +171,6 @@ public class AdminController {
 		enrollService.petCodeFee(req, model);
 		return "admin/sitter/sitterFeeAction";
 	}
-=======
-	
->>>>>>> 0fb694a88e2685a464d7aa138a44f835642e1457
 	
 	//펫 코드 및 요금 목록
 	@RequestMapping("sitterFeeList")

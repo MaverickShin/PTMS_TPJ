@@ -46,6 +46,7 @@ public class AdminAuthenticationService implements UserDetailsService {
 		
 		// 사용자의 권한을 불러와 추가
 		authority.add(new SimpleGrantedAuthority(vo.getAuthor()));
+		return null;
 		
 		// 오라클에서는 필드명을 대문자로 취급
 		
