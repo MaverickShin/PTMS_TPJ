@@ -19,6 +19,9 @@ public class CustomerVO extends User{
    private Date START_DT;       // 구독 시작일
    private Date END_DT;       // 구독 종료일
    private int ZIPCODE;      // 고객 우편번호
+   private String ADDRESS1;	// 지번 주소
+   private String ADDRESS2;	// 도로명 주소
+   private String SUBADDRESS; // 상세주소
    private int ENABLE_NO;      // 이메일 인증 여부
    private String AUTHOR;       // 기본 사용자 권한
    private Date CUST_DT;       // 고객 가입일
@@ -114,6 +117,28 @@ public class CustomerVO extends User{
 		CUST_DT = cUST_DT;
 	}
 
-   
+	public String getADDRESS1() {
+		return ADDRESS1;
+	}
+	
+	public void setADDRESS1(String aDDRESS1) {
+		ADDRESS1 = aDDRESS1;
+	}
+	
+	public String getADDRESS2() {
+		return ADDRESS2;
+	}
+	
+	public void setADDRESS2(String aDDRESS2) {
+		ADDRESS2 = aDDRESS2;
+	}
+	
+	public String getSUBADDRESS() {
+		return SUBADDRESS;
+	}
+	
+	public void setSUBADDRESS(String sUBADDRESS) {
+		SUBADDRESS = sUBADDRESS;
+	}
 	
 }

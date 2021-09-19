@@ -21,7 +21,7 @@
 						<span class="mr-2"><a href="main">Home<i
 								class="ion-ios-arrow-forward"></i></a></span>
 					</p>
-					<h1 class="mb-0 bread">SitterProfile</h1>
+					<h1 class="mb-0 bread">buyList</h1>
 				</div>
 			</div>
 		</div>
@@ -44,6 +44,7 @@
 								<li class="div_li"><a href="/tpj/cust/SitterProfile">시터 프로필</a></li>
 								<li class="div_li"><a href="/tpj/cust/TrainerProfile">훈련사 프로필</a></li>
 								<li class="div_li"><a href="/tpj/cust/buyList">결제내역</a></li>
+								<li class="div_li"><a href="/tpj/cust/delCustomer">회원탈퇴</a></li>
 							</ul>
 						</nav>
 						

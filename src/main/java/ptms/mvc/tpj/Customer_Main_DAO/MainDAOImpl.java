@@ -76,7 +76,7 @@ public class MainDAOImpl implements MainDAO {
 		return dao.gradeCheck(id);
 	}
 
-	// 우편번호 등록
+	// 우편번호 등록, 3. 우편번호가 다를시 우편번호등록 사용
 	@Override
 	public int insertzipcode(Map<String, Object> map) {
 		
@@ -93,7 +93,27 @@ public class MainDAOImpl implements MainDAO {
 		
 		return dao.zipcodeChk(zipcode);
 	}
+
+	@Override
+	public CustomerVO selectCustomer(String id) {
+		MainDAO dao = data.getMapper(MainDAO.class);
+		
+		return dao.selectCustomer(id);
+	}
 	
+	// 1.회원정보 수정처리(회원정보)
+	@Override
+	public int updateCustomer(CustomerVO vo) {
+		MainDAO dao = data.getMapper(MainDAO.class);
+		return dao.updateCustomer(vo);
+	}
+
+	// 2. 우편번호가 같을시 update
+	@Override
+	public int updateCustomer2(CustomerVO vo) {
+		MainDAO dao = data.getMapper(MainDAO.class);
+		return  dao.updateCustomer2(vo);
+	}
 	
 
 }

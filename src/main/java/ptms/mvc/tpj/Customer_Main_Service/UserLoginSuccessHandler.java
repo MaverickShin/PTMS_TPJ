@@ -28,7 +28,7 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler{
 			Authentication authentication) throws IOException, ServletException {
 		
 		UserVO vo = (UserVO)authentication.getPrincipal();
-		System.out.println("UserVO==> " + vo);
+		System.out.println("UserVO==> " + vo.getUsername());
 		
 		String msg = authentication.getName() + "님 환영합니다";
 		System.out.println("아이디 ==> " + authentication.getName());

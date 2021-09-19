@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.User;
 // User 클래스는 추상 클래스이므로 상속받아 추상메서드를 오버라이드해서 구현한다.
 public class UserVO extends User{
 	
+	private static final long serialVersionUID = 1L;
 	private String userId;
 
 	// super는 부모클래스

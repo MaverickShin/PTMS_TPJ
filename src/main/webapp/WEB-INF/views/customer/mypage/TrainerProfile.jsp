@@ -39,11 +39,12 @@
 					<div class="wrapper">
 						<nav class="div_nav">
 							<ul class="div_ul">
-								<li class="div_li"><a href="/tpj/cust/MyInfo">내정보 관리</a></li>
-								<li class="div_li"><a href="/tpj/cust/MyPet">MY PET</a></li>
-								<li class="div_li"><a href="/tpj/cust/SitterProfile">시터 프로필</a></li>
-								<li class="div_li"><a href="/tpj/cust/TrainerProfile">훈련사 프로필</a></li>
-								<li class="div_li"><a href="/tpj/cust/buyList">결제내역</a></li>
+								<li class="div_li"><a href="MyInfo">내정보 관리</a></li>
+								<li class="div_li"><a href="MyPet">MY PET</a></li>
+								<li class="div_li"><a href="SitterProfile">시터 프로필</a></li>
+								<li class="div_li"><a href="TrainerProfile">훈련사 프로필</a></li>
+								<li class="div_li"><a href="buyList">결제내역</a></li>
+								<li class="div_li"><a href="delCustomer">회원탈퇴</a></li>
 							</ul>
 						</nav>
 

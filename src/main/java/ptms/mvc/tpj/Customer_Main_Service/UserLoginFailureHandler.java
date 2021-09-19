@@ -34,17 +34,17 @@ public class UserLoginFailureHandler implements AuthenticationFailureHandler{
 			AuthenticationException exception) throws IOException, ServletException {
 	
 		System.out.println("실패 ");
-		String strId =  request.getParameter("id");
+		String strid =  request.getParameter("id");
 		String strPwd = request.getParameter("pwd");
 		
 		// 아이디 확인
-		int cnt = sqlSession.selectOne("ptms.mvc.tpj.Customer_Main_DAO.MainDAO.idCheck",strId);
+		int cnt = sqlSession.selectOne("ptms.mvc.tpj.Customer_Main_DAO.MainDAO.idCheck",strid);
 		
 		// 아이디가 존재 할 때
 		if(cnt!=0) {
 			
 			// 비번 확인
-			String pwd = sqlSession.selectOne("ptms.mvc.tpj.Customer_Main_DAO.MainDAO.pwdCheck",strId);
+			String pwd = sqlSession.selectOne("ptms.mvc.tpj.Customer_Main_DAO.MainDAO.pwdSearch",strid);
 			System.out.println(strPwd);
 			System.out.println(pwd);
 			System.out.println("strpwd : " + strPwd);
