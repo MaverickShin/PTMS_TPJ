@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="ptms.mvc.tpj.TrainerDAO.TrainerDAO">
+	
+	<insert id="insertTrainer" parameterType="ptms.mvc.tpj.CustVO.TrainerVO">
+		INSERT INTO TRAINER_TB(TA_CD, CUST_ID, TA_TITLE, TA_APPEAL, TA_IMG, TA_ST, TA_DT)
+		VALUES(TA_CD_seq.nextval, #{CUST_ID}, #{TA_TITLE}, #{TA_APPEAL}, #{TA_IMG}, 1, sysdate)
+	</insert>
+	
+	<insert id="insertTrainerDetail" parameterType="ptms.mvc.tpj.CustVO.TrainerVO">
+		INSERT INTO TRAINER_SERVICE_TB(TS_CD, TA_CD, TS_AREA, TS1_NO, TS1_FEE, TS2_NO, TS2_FEE, TS3_NO, TS3_FEE, TS4_NO, TS4_FEE, START_DAY, END_DAY, ADJUSTABLE)
+		VALUES(TS_CD_seq.nextval, TA_CD_seq.currval, #{TS_AREA}, #{TS1_NO}, #{TS1_FEE}, #{TS2_NO}, #{TS2_FEE}, #{TS3_NO}, #{TS3_FEE}, #{TS4_NO}, #{TS4_FEE}, #{START_DAY}, #{END_DAY}, #{ADJUSTABLE})
+	</insert>
+</mapper>

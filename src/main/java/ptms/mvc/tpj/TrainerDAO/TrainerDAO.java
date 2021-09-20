@@ -13,8 +13,11 @@ public interface TrainerDAO {
 	// selectOne(VO반환) - 훈련사 상세 정보
 	public TrainerVO trainerInfo(int taCd);
 	
-	// insert or update - 훈련사 등록
+	// insert or update - 훈련사 프로필 등록
 	public int insertTrainer(TrainerVO tVo);
+	
+	// insert - 훈련사 상세정보 등록
+	public int insertTrainerDetail(TrainerVO vo);
 	
 	// update - 훈련사 정보 수정
 	public int updateTrainer(TrainerVO tVo);
