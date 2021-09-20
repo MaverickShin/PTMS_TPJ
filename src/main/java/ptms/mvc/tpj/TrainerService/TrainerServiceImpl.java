@@ -1,5 +1,12 @@
 package ptms.mvc.tpj.TrainerService;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +24,7 @@ public class TrainerServiceImpl implements TrainerService{
 	TrainerDAOImpl dao;
 	
 	@Override
-	public void insertTrainer(HttpServletRequest req, Model model) {
+	public void insertTrainer(HttpServletRequest req, Model model) throws ParseException {
 		TrainerVO vo = new TrainerVO();
 		
 		String id = (String)req.getSession().getAttribute("cust_id");
@@ -25,8 +32,8 @@ public class TrainerServiceImpl implements TrainerService{
 		vo.setTA_TITLE(req.getParameter("TA_TITLE"));
 		vo.setTA_APPEAL(req.getParameter("TA_APPEAL"));
 		vo.setTA_IMG(req.getParameter("TA_IMG"));
-		vo.setTS_AREA(req.getParameter("address2"));
-		System.out.println(req.getParameter("address2"));
+		vo.setTS_AREA(req.getParameter("address1"));
+		System.out.println(req.getParameter("address1"));
 		
 		int TS1_NO = 0;
 		TS1_NO = req.getParameter("TS1_NO") == null ? 0 : Integer.parseInt(req.getParameter("TS1_NO"));
@@ -61,8 +68,17 @@ public class TrainerServiceImpl implements TrainerService{
 		System.out.println("tr_kind4_fee : " + tr_kind4_fee);
 		
 		String START_DAY = req.getParameter("START_DAY");
-		vo.setSTART_DAY(START_DAY);
-		vo.setEND_DAY(req.getParameter("END_DAY"));
+	    String END_DAY = req.getParameter("END_DAY");
+	      
+	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	      
+	    Date date = new Date(sdf.parse(START_DAY).getTime());
+	      
+	    vo.setSTART_DAY(date);
+	      
+	    date = new Date(sdf.parse(END_DAY).getTime());
+	      
+	    vo.setEND_DAY(date);
 		
 		int ADJUSTABLE = 0;
 		ADJUSTABLE = req.getParameter("ADJUSTABLE") == null ? 0 : Integer.parseInt(req.getParameter("ADJUSTABLE"));
@@ -80,7 +96,40 @@ public class TrainerServiceImpl implements TrainerService{
 
 	@Override
 	public void TrainerList(HttpServletRequest req, Model model) {
-		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int TQ_AMT = Integer.parseInt(req.getParameter("TQ_AMT"));
+		System.out.println("tq_amt : " + TQ_AMT);
+		map.put("TQ_AMT", TQ_AMT);
+		
+		String SQ_LOC = req.getParameter("SQ_LOC");
+		System.out.println("SQ_LOC : " + SQ_LOC);
+		map.put("SQ_LOC", SQ_LOC);
+		
+		String START_DAY = req.getParameter("START_DAY");
+		System.out.println("START_DAY : " + START_DAY);
+		map.put("START_DAY", START_DAY);
+		
+		String END_DAY = req.getParameter("END_DAY");
+		System.out.println("END_DAY : " + END_DAY);
+		map.put("END_DAY", END_DAY);
+		
+		int ADJUSTABLE = 0;
+		ADJUSTABLE = req.getParameter("ADJUSTABLE") == null ? 0 : Integer.parseInt(req.getParameter("ADJUSTABLE"));
+		System.out.println("ADJUSTABLE : " + ADJUSTABLE);
+		map.put("ADJUSTABLE", ADJUSTABLE);
+		
+		int selectCnt = dao.trainerSelectCnt(map);
+		System.out.println("selectCnt : " + selectCnt);
+		
+		List<TrainerVO> dtos = null;
+		
+		if(selectCnt > 0) {
+			dtos = dao.trainerList(map);
+		}
+		
+		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("dtos", dtos);
 		
 	}
 

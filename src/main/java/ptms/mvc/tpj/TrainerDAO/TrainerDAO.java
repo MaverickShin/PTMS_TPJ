@@ -1,14 +1,18 @@
 package ptms.mvc.tpj.TrainerDAO;
 
 import java.util.List;
+import java.util.Map;
 
 import ptms.mvc.tpj.CustVO.PetVO;
 import ptms.mvc.tpj.CustVO.TrainerVO;
 
 public interface TrainerDAO {
 	
-	// selectList - 훈련사 리스트
-	public List<TrainerVO> trainerList();
+	// selectList - (매칭 조건 걸린) 훈련사 리스트
+	public List<TrainerVO> trainerList(Map<String, Object> map);
+	
+	// selectCnt
+	public int trainerSelectCnt(Map<String, Object> map);
 	
 	// selectOne(VO반환) - 훈련사 상세 정보
 	public TrainerVO trainerInfo(int taCd);

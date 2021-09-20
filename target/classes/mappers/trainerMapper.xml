@@ -14,4 +14,109 @@
 		INSERT INTO TRAINER_SERVICE_TB(TS_CD, TA_CD, TS_AREA, TS1_NO, TS1_FEE, TS2_NO, TS2_FEE, TS3_NO, TS3_FEE, TS4_NO, TS4_FEE, START_DAY, END_DAY, ADJUSTABLE)
 		VALUES(TS_CD_seq.nextval, TA_CD_seq.currval, #{TS_AREA}, #{TS1_NO}, #{TS1_FEE}, #{TS2_NO}, #{TS2_FEE}, #{TS3_NO}, #{TS3_FEE}, #{TS4_NO}, #{TS4_FEE}, #{START_DAY}, #{END_DAY}, #{ADJUSTABLE})
 	</insert>
+	
+	<select id="trainerSelectCnt" parameterType="java.util.Map" resultType="int">
+		<if test='ADJUSTABLE == 1'>
+			select count(*)
+			from (select TA_CD
+				from TRAINER_SERVICE_TB
+				where TS_AREA LIKE '%'||#{SQ_LOC}||'%'
+				intersect
+				select TA_CD
+				from TRAINER_SERVICE_TB
+				where #{TQ_AMT} = TS1_NO
+				OR #{TQ_AMT} = TS2_NO
+				OR #{TQ_AMT} = TS3_NO
+				OR #{TQ_AMT} = TS4_NO
+				intersect
+				select TA_CD
+				from TRAINER_SERVICE_TB
+				where #{START_DAY} between START_DAY and END_DAY
+				   or #{END_DAY} between START_DAY and END_DAY
+				intersect
+				select tt.TA_CD
+				from TRAINER_SERVICE_TB ts, TRAINER_TB tt
+				where tt.TA_CD = ts.TA_CD
+				  and tt.TA_ST = 1)
+		</if>
+		
+		<if test='ADJUSTABLE != 1'>
+			select count(*)
+			from (select TA_CD
+				from TRAINER_SERVICE_TB
+				where TS_AREA LIKE '%'||#{SQ_LOC}||'%'
+				intersect
+				select TA_CD
+				from TRAINER_SERVICE_TB
+				where #{TQ_AMT} = TS1_NO
+				OR #{TQ_AMT} = TS2_NO
+				OR #{TQ_AMT} = TS3_NO
+				OR #{TQ_AMT} = TS4_NO
+				intersect
+				select TA_CD
+				from TRAINER_SERVICE_TB
+				where #{START_DAY} between START_DAY and END_DAY
+				  and #{END_DAY} between START_DAY and END_DAY
+				intersect
+				select tt.TA_CD
+				from TRAINER_SERVICE_TB ts, TRAINER_TB tt
+				where tt.TA_CD = ts.TA_CD
+				  and tt.TA_ST = 1)
+		</if>
+	</select>
+	
+	<select id="trainerList" parameterType="java.util.Map" resultType="ptms.mvc.tpj.CustVO.TrainerVO">
+		<if test='ADJUSTABLE == 1'>
+			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG
+			from TRAINER_SERVICE_TB ts, TRAINER_TB tt
+			where tt.TA_CD = ts.TA_CD
+			and ts.TS_AREA LIKE '%'||#{SQ_LOC}||'%'
+			intersect
+			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG
+			from TRAINER_SERVICE_TB ts, TRAINER_TB tt
+			where tt.TA_CD = ts.TA_CD
+			and #{TQ_AMT} = ts.TS1_NO
+			OR #{TQ_AMT} = ts.TS2_NO
+			OR #{TQ_AMT} = ts.TS3_NO
+			OR #{TQ_AMT} = ts.TS4_NO
+			intersect
+			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG
+			from TRAINER_SERVICE_TB ts, TRAINER_TB tt
+			where tt.TA_CD = ts.TA_CD
+			  and #{START_DAY} between ts.START_DAY and ts.END_DAY
+			   or #{END_DAY} between ts.START_DAY and ts.END_DAY
+			intersect
+			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG
+			from TRAINER_SERVICE_TB ts, TRAINER_TB tt
+			where tt.TA_CD = ts.TA_CD
+			  and tt.TA_ST = 1
+		</if>
+		
+		<if test='ADJUSTABLE != 1'>
+			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG
+			from TRAINER_SERVICE_TB ts, TRAINER_TB tt
+			where tt.TA_CD = ts.TA_CD
+			and ts.TS_AREA LIKE '%'||#{SQ_LOC}||'%'
+			intersect
+			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG
+			from TRAINER_SERVICE_TB ts, TRAINER_TB tt
+			where tt.TA_CD = ts.TA_CD
+			and #{TQ_AMT} = ts.TS1_NO
+			OR #{TQ_AMT} = ts.TS2_NO
+			OR #{TQ_AMT} = ts.TS3_NO
+			OR #{TQ_AMT} = ts.TS4_NO
+			intersect
+			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG
+			from TRAINER_SERVICE_TB ts, TRAINER_TB tt
+			where tt.TA_CD = ts.TA_CD
+			  and #{START_DAY} between ts.START_DAY and ts.END_DAY
+			  and #{END_DAY}' between ts.START_DAY and ts.END_DAY
+			intersect
+			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG
+			from TRAINER_SERVICE_TB ts, TRAINER_TB tt
+			where tt.TA_CD = ts.TA_CD
+			  and tt.TA_ST = 1
+		</if>
+	</select>
+	
 </mapper>

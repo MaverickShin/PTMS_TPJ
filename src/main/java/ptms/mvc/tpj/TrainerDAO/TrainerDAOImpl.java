@@ -1,6 +1,7 @@
 package ptms.mvc.tpj.TrainerDAO;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,15 @@ public class TrainerDAOImpl implements TrainerDAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public List<TrainerVO> trainerList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<TrainerVO> trainerList(Map<String, Object> map) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.trainerList(map);
+	}
+	
+	@Override
+	public int trainerSelectCnt(Map<String, Object> map) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.trainerSelectCnt(map);
 	}
 
 	@Override

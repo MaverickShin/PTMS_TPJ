@@ -1,5 +1,7 @@
 package ptms.mvc.tpj.TrainerController;
 
+import java.text.ParseException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -33,6 +35,8 @@ public class TrainerController {
    public String TrainerList(HttpServletRequest req, Model model) {
       log.info("url ==> trainerSearch");
       
+      //trainerservice.TrainerList(req, model);
+      
       return "customer/trainer/trainerSearch";
    }
    
@@ -53,7 +57,7 @@ public class TrainerController {
    }
    
    @RequestMapping("applyTrainerAction")
-   public String applyTrainerAction(HttpServletRequest req, Model model) {
+   public String applyTrainerAction(HttpServletRequest req, Model model) throws ParseException {
       log.info("url ==> applyTrainerAction");
       
       trainerservice.insertTrainer(req, model);

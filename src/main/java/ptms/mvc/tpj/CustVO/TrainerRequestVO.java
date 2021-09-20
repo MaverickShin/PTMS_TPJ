@@ -16,7 +16,7 @@ public class TrainerRequestVO {
 	private TIMESTAMP END_TM;	// 의뢰 종료 시간
 	private DATE START_DAY;		// 의뢰 시작일
 	private DATE END_DAY;		// 의뢰 종료일
-	private String DAY_SEL;		// 특정 요일
+	//private String DAY_SEL;		// 특정 요일
 	private int TQ_FEE;			// 훈련 요금
 	private DATE TQ_DT;			// 요청 등록일
 	
@@ -109,13 +109,11 @@ public class TrainerRequestVO {
 		END_DAY = eND_DAY;
 	}
 
-	public String getDAY_SEL() {
-		return DAY_SEL;
-	}
-
-	public void setDAY_SEL(String dAY_SEL) {
-		DAY_SEL = dAY_SEL;
-	}
+	/*
+	 * public String getDAY_SEL() { return DAY_SEL; }
+	 * 
+	 * public void setDAY_SEL(String dAY_SEL) { DAY_SEL = dAY_SEL; }
+	 */
 
 	public int getTQ_FEE() {
 		return TQ_FEE;
