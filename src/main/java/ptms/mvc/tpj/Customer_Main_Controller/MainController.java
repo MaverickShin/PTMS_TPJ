@@ -2,15 +2,12 @@ package ptms.mvc.tpj.Customer_Main_Controller;
 
 
 
-<<<<<<< HEAD
-=======
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
->>>>>>> f218f9b0889f409c1e5f0ffa45c4625fc6efe220
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
