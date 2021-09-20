@@ -1,8 +1,11 @@
 package ptms.mvc.tpj.Customer_Main_DAO;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import ptms.mvc.tpj.CustVO.CustomerVO;
+import ptms.mvc.tpj.CustVO.PetVO;
 
 public interface MainDAO {
 
@@ -42,5 +45,22 @@ public interface MainDAO {
 	// 2.우편번호가 같을때 (update)
 	public int updateCustomer2(CustomerVO vo);
 	
-	// 3.우편번호가 다를때 (insert)
+	// 펫 목록
+	public List<PetVO> getPetList(HashMap<String, Object> map);
+	
+	// 펫 등록
+	public int insertPet(PetVO vo);
+	
+	// 펫 수정 상세페이지
+	public PetVO PetDetail(int PET_CD);
+	
+	// 펫 수정 처리
+	public int updatePet(PetVO vo);
+	
+	// 펫 삭제
+	public int deletePet(int PET_CD);
+	
+	//등록된 펫 갯수
+	public int getPetCnt();
+	
 }

@@ -10,6 +10,46 @@
 <script src = "${jsPath}script.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <meta charset="utf-8">
+<style>
+.hide {
+	display:none;
+	background-color: #00bd56;
+	min-width: 160px;
+	box-shadow: 10px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+	font-size: 12px;
+	position: absolute;
+	left: -15px;
+	top: 80px;
+}
+.hide a {
+	color: white;
+  	padding: 12px 16px;
+  	text-decoration: none;
+  	display: block;
+  	text-align: left;
+}
+
+.hide a:hover {
+	color: #00bd56;
+	font-weight: bold;
+	background-color: white;
+}
+
+#mypages {
+	position:relative;
+	cursor: pointer;
+}
+
+#mypages:hover .hide {
+	display: block;
+}
+.link {
+	display: block;
+	padding: 2rem 0rem; 
+}	
+</style>
+
 </head>
 <body>
 <%@ include file = "../../main/header.jsp" %>
@@ -42,8 +82,13 @@
 				<div class="wrapper">
 					<nav class="div_nav">
 						<ul class="div_ul">
-							<li class="div_li"><a href="/tpj/cust/MyInfo">내정보 관리</a></li>
-							<li class="div_li"><a href="/tpj/cust/MyPet">MY PET</a></li>
+							<li class="div_li"><a href="/tpj/cust/MyInfoUser">내정보 관리</a></li>
+							<li class="div_li" id = "mypages"><a class="link">MY PET</a>
+								<div class = "hide">
+					    			<a href="/tpj/cust/MyPet">펫 등록</a>
+						    		<a href="/tpj/cust/MyPetList">펫 등록/수정</a>
+								</div>
+							</li>
 							<li class="div_li"><a href="/tpj/cust/SitterProfile">시터 프로필</a></li>
 							<li class="div_li"><a href="/tpj/cust/TrainerProfile">훈련사 프로필</a></li>
 							<li class="div_li"><a href="/tpj/cust/buyList">결제내역</a></li>
