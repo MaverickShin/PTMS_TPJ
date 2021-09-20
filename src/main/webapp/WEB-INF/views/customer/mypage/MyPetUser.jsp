@@ -54,7 +54,7 @@ function passwordCheck(){
 							<div class="contact-wrap w-100 p-md-5 p-4">
 								<h3 class="mb-4">내정보 관리</h3>
 								
-								<form action="MyInfo" method="POST" id="contactForm" name="contactForm" class="contactForm" onsubmit="return passwordCheck();">
+								<form action="MyPet" method="POST" id="contactForm" name="contactForm" class="contactForm" onsubmit="return passwordCheck();">
 									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 									<div class="row">
 										<div class="col-md-12">
@@ -66,7 +66,7 @@ function passwordCheck(){
 										<div class="col-md-12">
 											<div class="form-group">
 												<input type="submit" value="확인" class="btn btn-primary">
-												<input type="reset" value="취소" class="btn btn-primary" onclick="window.location= 'main'">
+												<input type="reset" value="취소" class="btn btn-primary" onclick="window.history.back();">
 											</div>
 										</div>
 									</div>
@@ -75,7 +75,7 @@ function passwordCheck(){
 						</div>
 						<div class="col-md-5 d-flex align-items-stretch">
 							<div class="info-wrap w-100 p-5 img"
-								style="background-image: url(${path}images/img.jpg);"></div>
+								style="background-image: url(${path}images/gallery-3.jpg);"></div>
 						</div>
 					</div>
 				</div>

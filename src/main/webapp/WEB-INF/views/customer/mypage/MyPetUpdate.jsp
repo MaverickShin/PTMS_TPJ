@@ -88,39 +88,41 @@
 							<li class="div_li"><a href="/tpj/cust/SitterProfile">시터 프로필</a></li>
 							<li class="div_li"><a href="/tpj/cust/TrainerProfile">훈련사 프로필</a></li>
 							<li class="div_li"><a href="/tpj/cust/buyList">결제내역</a></li>
-							<li class="div_li"><a href="/tpj/cust/delCustomer">회원탈퇴</a></li>
 						</ul>
 					</nav>
 					
 					<div class="row no-gutters">
 						<div class="col-md-7">
 							<div class="contact-wrap w-100 p-md-5 p-4">
-								<h3 class="mb-4">MyPet 등록</h3>
+								<h3 class="mb-4">MyPet 수정</h3>
 								
-								<form action="MyPetInsertAction" method="POST" id="contactForm" name="contactForm" class="contactForm" enctype="multipart/form-data">
+								<form action="MyPetUpdateAction" method="POST" id="contactForm" name="contactForm" class="contactForm" enctype="multipart/form-data">
 									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 									<s:csrfInput/>
 										<div class="row">
-											<%-- <div class="col-md-6">
+											<input type="hidden" name="PET_CD" value="${dto.PET_CD}">
+											<input type="hidden" name="PET_IMG" value="${dto.PET_IMG}">
+											<input type="hidden" name="pageNum" value="${pageNum}">
+											<div class="col-md-6">
 												<div class="form-group">
 													<label class="label" for="CUST_ID">고객아이디</label> <input
 														type="text" class="form-control" name="CUST_ID" id="CUST_ID"
-														value="${PetVO.getCUST_ID()}" readonly>
+														value="${dto.getCUST_ID()}" readonly>
 												</div>
-											</div> --%>
+											</div>
 											
 											<div class="col-md-6">
 												<div class="form-group">
 													<label class="label" for="PET_NM">펫이름</label> <input
 														type="text" class="form-control" name="PET_NM" id="PET_NM"
-														placeholder="펫이름">
+														value="${dto.getPET_NM()}" placeholder="펫이름">
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
 													<label class="label" for="PET_AGE">펫나이</label> <input
 														type="text" class="form-control" name="PET_AGE" id="PET_AGE"
-														placeholder="펫나이">
+														value="${dto.getPET_AGE()}" placeholder="펫나이">
 												</div>
 											</div>
 											<br>
@@ -140,7 +142,7 @@
 												<div class="form-group">
 													<label class="label" for="PET_CON">특이사항</label> <input
 														type="text" class="form-control" name="PET_CON"
-														id="PET_CON" placeholder="특이사항">
+														id="PET_CON" value="${dto.getPET_CON()}" placeholder="특이사항">
 												</div>
 											</div>
 											<div class="col-md-12">

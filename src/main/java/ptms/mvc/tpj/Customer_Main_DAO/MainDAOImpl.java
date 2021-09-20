@@ -1,11 +1,14 @@
 package ptms.mvc.tpj.Customer_Main_DAO;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ptms.mvc.tpj.CustVO.CustomerVO;
+import ptms.mvc.tpj.CustVO.PetVO;
 
 @Repository
 public class MainDAOImpl implements MainDAO {
@@ -94,6 +97,7 @@ public class MainDAOImpl implements MainDAO {
 		return dao.zipcodeChk(zipcode);
 	}
 
+	// 회원 조회
 	@Override
 	public CustomerVO selectCustomer(String id) {
 		MainDAO dao = data.getMapper(MainDAO.class);
@@ -115,7 +119,46 @@ public class MainDAOImpl implements MainDAO {
 		return  dao.updateCustomer2(vo);
 	}
 
+	// 펫 목록
+	@Override
+	public List<PetVO> getPetList(HashMap<String, Object> map) {
+		MainDAO dao = data.getMapper(MainDAO.class);
+		return dao.getPetList(map);
+	}
 	
-	
+	// 펫등록 처리
+	@Override
+	public int insertPet(PetVO vo) {
+		MainDAO dao = data.getMapper(MainDAO.class);
+		return dao.insertPet(vo);
+	}
 
+	// 펫 수정 상세 페이지
+	@Override
+	public PetVO PetDetail(int PET_CD) {
+		MainDAO dao = data.getMapper(MainDAO.class);
+		return dao.PetDetail(PET_CD);
+	}
+	
+	// 펫 수정 처리
+	@Override
+	public int updatePet(PetVO vo) {
+		MainDAO dao = data.getMapper(MainDAO.class);
+		return dao.updatePet(vo);
+	}
+
+	// 펫 삭제
+	@Override
+	public int deletePet(int PET_CD) {
+		MainDAO dao = data.getMapper(MainDAO.class);
+		return dao.deletePet(PET_CD);
+	}
+	
+	// 펫 목록 갯수
+	@Override
+	public int getPetCnt() {
+		MainDAO dao = data.getMapper(MainDAO.class);
+		return dao.getPetCnt();
+	}
+	
 }

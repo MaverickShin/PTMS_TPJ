@@ -2,9 +2,12 @@ package ptms.mvc.tpj.Customer_Main_Controller;
 
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -17,12 +20,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 import ptms.mvc.tpj.Customer_Main_Service.MainServiceImpl;
 import ptms.mvc.tpj.emailHandler.emailSender;
+import ptms.mvc.tpj.util.ImageUploaderHandler;
 
+@MultipartConfig(location = "D:\\Dev88\\workspace\\PTMS_TPJ\\src\\main\\webapp\\resources\\upload", fileSizeThreshold = 1024 * 1024,
+maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 @RequestMapping("/cust")
 @Controller
 public class MainController {
+	private static final long serialVersionUID = 1L;
+    private static final String IMG_UPLOAD_DIR = "D:\\\\Dev88\\\\workspace\\\\PTMS_TPJ\\\\src\\\\main\\\\webapp\\\\resources\\\\upload";
+    											//D:\\\\Dev88\\\\workspace\\\\플젝명\\\\WebContent\\\\upload
+	
+    private ImageUploaderHandler uploader;
 	
 	private static final Logger log = LoggerFactory.getLogger(MainController.class);
 	
@@ -141,17 +153,93 @@ public class MainController {
 		
 		return "customer/mypage/MyInfoAction";
 	}
+
+/*
+	// 반려인/펫 관리 - My Pet 인증화면
+	@RequestMapping("MyPetUser")
+	public String MyPetUser(HttpServletRequest req, Model model) {
+		log.info("컨트롤러 - 반려인/펫 관리 - 내정보 관리 인증화면");
+		
+		return "customer/mypage/MyPetUser";
+	}
+*/	
 	
-	// 반려인/펫 관리 - 내정보관리
+	// 반려인/펫 관리 - My Pet 추가
 	@RequestMapping("MyPet")
 	public String MyPet(HttpServletRequest req, Model model) {
 		log.info("컨트롤러 - 반려인/펫 관리 - MyPet");
-		service.custUpdate(req, model);
 		
 		return "customer/mypage/MyPet";
 	}
 	
-	// 반려인/펫 관리 - 내정보관리
+	// 반려인/펫 관리 - My Pet 추가 처리페이지
+	@RequestMapping("MyPetInsertAction")
+	public String MyPetInsertAction(HttpServletRequest req, Model model) throws ServletException, IOException {
+		log.info("컨트롤러 - 반려인/펫 관리 - MyPetInsertAction");
+		
+		// 이미지 업로드 시작
+		String contentType = req.getContentType();
+		if (contentType != null && contentType.toLowerCase().startsWith("multipart/")) {
+			uploader = new ImageUploaderHandler(); // image uploader 핸들러 호출
+			uploader.setUploadPath(IMG_UPLOAD_DIR); // img 경로
+		    uploader.imageUpload(req, model);
+		}
+		// 이미지 업로드 끝
+		service.petInAction(req, model);
+		
+		
+		return "customer/mypage/MyPetInsertAction";
+	}
+	
+	//상점 목록 페이지
+	@RequestMapping("MyPetList")
+	public String MyPetList(HttpServletRequest req, Model model) {
+		log.info("url ==> PetList");
+
+		service.petList(req, model);
+		
+		return "customer/mypage/MyPetList";
+	}
+	
+	// 반려인/펫 관리 - My Pet 수정페이지
+	@RequestMapping("MyPetUpdate")
+	public String MyPetUpdate(HttpServletRequest req, Model model){
+		log.info("컨트롤러 - 반려인/펫 관리 - MyPetUpdate");
+		
+		service.petUpdate(req, model);
+		
+		return "customer/mypage/MyPetUpdate";
+	}
+	
+	// 반려인/펫 관리 - My Pet 수정 처리페이지
+	@RequestMapping("MyPetUpdateAction")
+	public String MyPetUpdateAction(HttpServletRequest req, Model model) throws ServletException, IOException {
+		log.info("컨트롤러 - 반려인/펫 관리 - MyPetUpdateAction");
+		
+		// 이미지 업로드 시작
+		String contentType = req.getContentType();
+		if (contentType != null && contentType.toLowerCase().startsWith("multipart/")) {
+			uploader = new ImageUploaderHandler(); // image uploader 핸들러 호출
+			uploader.setUploadPath(IMG_UPLOAD_DIR); // img 경로
+		    uploader.imageUpload(req, model);
+		}
+		// 이미지 업로드 끝
+		
+		service.petUpdateAction(req, model);
+		
+		return "customer/mypage/MyPetUpdateAction";
+	}
+	
+	@RequestMapping("MyPetDelete")
+	public String MyPetDelete(HttpServletRequest req, Model model) {
+		log.info("컨트롤러 - 반려인/펫 관리 - MyPetDelete");
+		
+		service.petDelete(req, model);
+		
+		return "customer/mypage/MyPetDelete";
+	}
+	
+	// 반려인/펫 관리 - 펫시터 관리
 	@RequestMapping("SitterProfile")
 	public String SitterProfile() {
 		log.info("컨트롤러 - 반려인/펫 관리 - SitterProfile");

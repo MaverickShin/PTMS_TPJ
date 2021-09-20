@@ -39,11 +39,17 @@
 					<div class="wrapper">
 						<nav class="div_nav">
 							<ul class="div_ul">
-								<li class="div_li"><a href="/tpj/cust/MyInfo">내정보 관리</a></li>
-								<li class="div_li"><a href="/tpj/cust/MyPet">MY PET</a></li>
+								<li class="div_li"><a href="/tpj/cust/MyInfoUser">내정보 관리</a></li>
+								<li class="div_li" id = "mypages"><a class="link">MY PET</a>
+									<div class = "hide">
+						    			<a href="/tpj/cust/MyPet">펫 등록</a>
+							    		<a href="/tpj/cust/MyPetList">펫 등록/수정</a>
+									</div>
+								</li>
 								<li class="div_li"><a href="/tpj/cust/SitterProfile">시터 프로필</a></li>
 								<li class="div_li"><a href="/tpj/cust/TrainerProfile">훈련사 프로필</a></li>
 								<li class="div_li"><a href="/tpj/cust/buyList">결제내역</a></li>
+								<li class="div_li"><a href="/tpj/cust/delCustomer">회원탈퇴</a></li>
 							</ul>
 						</nav>
 						
