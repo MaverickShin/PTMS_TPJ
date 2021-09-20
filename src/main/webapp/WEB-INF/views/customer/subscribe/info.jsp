@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file = "../../setting.jsp" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <title>구독 서비스</title>
     <meta charset="utf-8">
@@ -47,7 +47,7 @@
 		              <li><span class="fa fa-check mr-2"></span>최초 구독시 시터 1회 무료 이용권</li>
 		            </ul>
 					
-		            <a href="#" class="btn btn-primary d-block px-2 py-3">Get Started</a>
+		            <a href="/tpj/pay/request" class="btn btn-primary d-block px-2 py-3">Get Started</a>
 	            </div>
 	          </div>
 	        </div>
@@ -63,12 +63,11 @@
 		              <li><span class="fa fa-check mr-2"></span>모바일 푸시 알림</li>
 		              <li><span class="fa fa-check mr-2"></span>매칭 지원 (시터, 훈련사 등록) </li>
 		            </ul>
-		            <a href="#" class="btn btn-primary d-block px-2 py-3">Get Started</a>
+		            <a href="${py}request" class="btn btn-primary d-block px-2 py-3">Get Started</a>
 	            </div>
 	          </div>
 	        </div>
 	      </div>
-    	</div>
     	</div>
     </section>
 

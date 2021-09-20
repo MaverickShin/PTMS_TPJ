@@ -284,7 +284,7 @@ public class MainController {
       
       log.info("컨트롤러 - 구독 페이지");
       
-      return "customer/subscribe/subscribe";
+      return "customer/subscribe/info";
    }   
    
    // 위치안내
