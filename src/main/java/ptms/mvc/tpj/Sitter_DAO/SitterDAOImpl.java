@@ -17,22 +17,29 @@ public class SitterDAOImpl implements SitterDAO{
 	@Autowired
 	SqlSession sqlSession;
 
+	// 시터 프로필 등록
 	@Override
 	public int profileInsert(SitterVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		System.out.println("dao ==> profileInsert");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.profileInsert(vo);
 	}
 
+	// 시터 주소 조회
 	@Override
 	public ZipcodeVO addressInfo(String cust_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	// 시터 서비스 정보 등록
 	@Override
 	public int insertService(SitterVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		System.out.println("dao ==> insertService");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.insertService(vo);
 	}
 
 	@Override

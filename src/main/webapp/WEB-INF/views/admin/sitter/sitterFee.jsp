@@ -16,7 +16,7 @@
 			<p>펫 코드 및 요금 등록</p>
 		</div>
 		<div>
-			<!--  펫 종류 코드 : <input type="number" class="iptags" name="PK_CD" value=""><br> -->
+			 펫 종류 코드 : <input type="number" class="iptags" name="PK_CD"><br>
 			 펫 종류 : <input type="text" class="iptags" name="PK_KIND"><br>
 			 펫 세부 분류 : <select size="1" id="iptags" name="PK_DETAIL">
 			 			<option value="해당없음">해당없음</option>

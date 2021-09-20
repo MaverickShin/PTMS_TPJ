@@ -8,8 +8,8 @@
 	<!-- 펫 코드 및 요금 등록 -->
 	<insert id="petCodeFee" parameterType="ptms.mvc.tpj.CustVO.PetVO">
 		INSERT ALL 
-   		INTO PET_KIND_TB VALUES (PK_CDSQE.nextval, #{PK_KIND}, #{PK_DETAIL})
-   		INTO SITTER_FEE_TB VALUES(SF_CD_SEQ.nextval , PK_CDSQE.nextval , #{SF_FEE})
+   		INTO PET_KIND_TB VALUES (#{PK_CD}, #{PK_KIND}, #{PK_DETAIL})
+   		INTO SITTER_FEE_TB VALUES(SF_CD_SEQ.nextval ,#{PK_CD} , #{SF_FEE})
 		SELECT * FROM DUAL  
 	</insert>
 	

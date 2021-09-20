@@ -33,6 +33,7 @@ public class SitterController {
 	 public String sitterMatching(HttpServletRequest req, Model model) {
 		 log.info("url ==> sitterMatching");
       
+		 sitterSer.workSitterList(req, model);
 		 return "customer/sitter/sitterMatching";
 	 } 
 	 
@@ -47,13 +48,22 @@ public class SitterController {
 		 return "customer/sitter/feeInfo";
 	 } 	 
 	 
-	 //펫시터 지원
+	 //펫시터 지원 페이지
 	 @RequestMapping("applySitter")
 	 public String applySitter(HttpServletRequest req, Model model) {
 		 log.info("url ==> applySitter");
       
 		 return "customer/sitter/applySitter";
-	 } 		 
+	 } 		
+	 
+	 //펫시터 등록 처리
+	 @RequestMapping("applySitteAction")
+	 public String applySitteAction(HttpServletRequest req, Model model) {
+		 log.info("url ==> applySitter");
+		 
+		 sitterSer.insertSitter(req, model);
+		 return "customer/sitter/applySitteAction";
+	 } 	 
 	 
 	 //활동 등록
 	 

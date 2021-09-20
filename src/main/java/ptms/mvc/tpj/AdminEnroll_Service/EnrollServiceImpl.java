@@ -22,9 +22,10 @@ public class EnrollServiceImpl implements EnrollService{
 	public void petCodeFee(HttpServletRequest req, Model model) {
 		System.out.println("service ==> petCodeFee");
 		
+		int PK_CD = Integer.parseInt(req.getParameter("PK_CD"));  //펫 종류 코드
 		String PK_KIND = req.getParameter("PK_KIND");     //펫종류
 		String PK_DETAIL = req.getParameter("PK_DETAIL"); //펫 세부분류
-		int SF_FEE = Integer.parseInt(req.getParameter("SF_FEE"));	      //서비스요금
+		int SF_FEE = Integer.parseInt(req.getParameter("SF_FEE"));  //서비스요금
 		System.out.println(PK_KIND);
 		System.out.println(PK_DETAIL);
 		System.out.println(SF_FEE);
@@ -32,6 +33,7 @@ public class EnrollServiceImpl implements EnrollService{
 		//PetVO바구니 생성
 		PetVO vo = new PetVO();
 		
+		vo.setPK_CD(PK_CD);
 		vo.setPK_KIND(PK_KIND);
 		vo.setPK_DETAIL(PK_DETAIL);
 		vo.setSF_FEE(SF_FEE);
