@@ -1,5 +1,7 @@
 package ptms.mvc.tpj.TrainerController;
 
+import java.text.ParseException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -28,7 +30,7 @@ public class TrainerController {
       return "main/index";
    }
    
-
+   //훈련사 조건 검색 페이지
    @RequestMapping("trainerSearch")
    public String TrainerList(HttpServletRequest req, Model model) {
       log.info("url ==> trainerSearch");
@@ -36,6 +38,7 @@ public class TrainerController {
       return "customer/trainer/trainerSearch";
    }
    
+   //훈련사 조건 충족 목록
    @RequestMapping("trainerMatchingList")
    public String trainerMatchingList(HttpServletRequest req, Model model) {
       log.info("url ==> trainerMatchingList");
@@ -45,6 +48,7 @@ public class TrainerController {
       return "customer/trainer/trainerMatchingList";
    }
    
+   // 훈련사 지원
    @RequestMapping("applyTrainer")
    public String applyTrainer(HttpServletRequest req, Model model) {
       log.info("url ==> applyTrainer");
@@ -52,8 +56,9 @@ public class TrainerController {
       return "customer/trainer/applyTrainer";
    }
    
+   // 훈련사 지원 처리
    @RequestMapping("applyTrainerAction")
-   public String applyTrainerAction(HttpServletRequest req, Model model) {
+   public String applyTrainerAction(HttpServletRequest req, Model model) throws ParseException {
       log.info("url ==> applyTrainerAction");
       
       trainerservice.insertTrainer(req, model);
@@ -66,6 +71,7 @@ public class TrainerController {
    public String requestTrainer(HttpServletRequest req, Model model) {
       log.info("url ==> requestTrainer");
       
-      return "customer/trainer/requestTrainer";
+      return "customer/matching/matchingMain";
    }
+ 
 }

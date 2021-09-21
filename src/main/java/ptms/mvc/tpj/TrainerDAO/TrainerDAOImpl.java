@@ -41,10 +41,25 @@ public class TrainerDAOImpl implements TrainerDAO {
 		return insertCntdt;
 	}
 
+	// 훈련사 정보 상세페이지
 	@Override
-	public int updateTrainer(TrainerVO tVo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public TrainerVO TrainerDetail(String CUST_ID) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.TrainerDetail(CUST_ID);
+	}
+	
+	// 훈련사 수정 처리1 (TRAINER_TB)
+	@Override
+	public int updateTrainer1(TrainerVO tVo) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.updateTrainer1(tVo);
+	}
+	
+	// 훈련사 수정 처리2 (TRAINER_SERVICE_TB)
+	@Override
+	public int updateTrainer2(TrainerVO tVo) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.updateTrainer2(tVo);
 	}
 
 	@Override
@@ -82,7 +97,5 @@ public class TrainerDAOImpl implements TrainerDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	
 
 }

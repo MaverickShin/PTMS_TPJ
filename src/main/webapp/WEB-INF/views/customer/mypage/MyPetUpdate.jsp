@@ -147,7 +147,7 @@
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
-													<input type="submit" value="등록" class="btn btn-primary">
+													<input type="submit" value="수정" class="btn btn-primary">
 												</div>
 											</div>
 										</div>

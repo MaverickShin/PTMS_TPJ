@@ -1,5 +1,7 @@
 package ptms.mvc.tpj.TrainerService;
 
+import java.text.ParseException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
@@ -7,7 +9,7 @@ import org.springframework.ui.Model;
 public interface TrainerService {
 
 	// 훈련사 등록
-	public void insertTrainer(HttpServletRequest req, Model model);
+	public void insertTrainer(HttpServletRequest req, Model model) throws ParseException;
 	
 	// 훈련사 리스트
 	public void TrainerList(HttpServletRequest req, Model model);
@@ -15,8 +17,11 @@ public interface TrainerService {
 	// 훈련사 정보
 	public void TrainerInfo(HttpServletRequest req, Model model);
 	
-	// 훈련사 정보 수정
+	// 훈련사 프로필 화면
 	public void updateTrainer(HttpServletRequest req, Model model);
+	
+	// 훈련사 정보 수정 처리
+	public void updateTrainerAction(HttpServletRequest req, Model model) throws ParseException;
 	
 	// 훈련사 등록 철회
 	public void deleteTrainer(HttpServletRequest req, Model model);
