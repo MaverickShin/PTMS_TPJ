@@ -9,7 +9,6 @@
 <c:set var="cssPath" value="${path}css/"/>
 <c:set var="imgPath" value="${path}images/"/>
 
-
 <c:set var = "ad" value = "/tpj/admin/" />
 <c:set var = "cu" value = "/tpj/cust/"/>
 <c:set var = "st" value = "/tpj/sitter/"/>

@@ -250,13 +250,12 @@ public class MainController {
 	
 	// 일정표
    @RequestMapping("calendar")
-   public String calendar() {
+   public String calendar(HttpServletRequest req, Model model) {
       
       log.info("컨트롤러 - 일정표 페이지");
-      
+      service.callCalendar(req, model);
       return "customer/calendar/calendar";
    }
-	   
    
    /*@RequestMapping("contact")
    public String contact(Model model) {
