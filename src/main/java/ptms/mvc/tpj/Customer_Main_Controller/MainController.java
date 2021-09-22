@@ -258,24 +258,48 @@ public class MainController {
    }
 	   
    
-   /*@RequestMapping("contact")
+   // 반려동물 건강관리 
+   @RequestMapping("contact")
    public String contact(Model model) {
+	   
+	   return "customer/health/contact";
+   }
+
+   // 자가진단 
+   @RequestMapping("selfdiagnosis")
+   public String selfdiagnosis() {
+	   
+	   return "customer/health/SELFDIAGNOSIS";
+   }
+   
+   // 질병정보 크롤링 
+   @RequestMapping("SYMPTOM")
+   public String symptom(Model model) {
 	   
 	   List<String> news = new ArrayList<>();
 	   
-	   blog1 blogs = new blog1();
+	   SYMPTOM_INFO_CRAWLING Symptom = new SYMPTOM_INFO_CRAWLING();
 	   
-	   news = blogs.blogInfo();
+	   news = Symptom.SymptomInfo();
 	   
 	   model.addAttribute("list", news);
 	   
-	   return "customer/health/contact";
-   }*/
-   
-   @RequestMapping("nutrient")
-   public String nutrient() {
+	   return "customer/health/SYMPTOM_INFO_VIEW";
+   }
+
+   // 반려동물 지식정보 크롤링 
+   @RequestMapping("SENSE")
+   public String sense(Model model) {
 	   
-	   return "customer/health/NUTRIENT_INFO";
+	   List<String> news = new ArrayList<>();
+	   
+	   SENSE_INFO_CRAWLING Sense = new SENSE_INFO_CRAWLING();
+	   
+	   news = Sense.SenseInfo();
+	   
+	   model.addAttribute("list", news);
+	   
+	   return "customer/health/SENSE_INFO_VIEW";
    }
    
    // 구독 페이지
