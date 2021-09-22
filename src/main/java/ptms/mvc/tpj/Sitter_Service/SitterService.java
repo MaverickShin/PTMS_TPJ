@@ -1,5 +1,7 @@
 package ptms.mvc.tpj.Sitter_Service;
 
+import java.text.ParseException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
@@ -7,10 +9,10 @@ import org.springframework.ui.Model;
 public interface SitterService {
 	
 	// 시터 등록
-	public void insertSitter(HttpServletRequest req, Model model);
+	public void insertSitter(HttpServletRequest req, Model model) throws ParseException;
 	
 	// 시터 활동 등록
-	public void workingeSitter(HttpServletRequest req, Model model);
+	//public void workingeSitter(HttpServletRequest req, Model model);
 	
 	// 시터 활동 취소
 	public void cancleSitter(HttpServletRequest req, Model model);
@@ -21,8 +23,8 @@ public interface SitterService {
 	// 시터 정보 수정
 	public void updateSitter(HttpServletRequest req, Model model);
 	
-	// 활동 시터 목록
-	public void workSitterList(HttpServletRequest req, Model model);
+	// 펫시터 찾기 - 리스트 출력
+	public void workSitterList(HttpServletRequest req, Model model) throws ParseException;
 	
 	// 시터 상세 조회
 	public void detailSitter(HttpServletRequest req, Model model);

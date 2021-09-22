@@ -32,16 +32,20 @@
 		SELECT p.PK_CD, p.PK_KIND, p.PK_DETAIL, s.SF_FEE
 		FROM PET_KIND_TB p , SITTER_FEE_TB s
 		WHERE p.PK_CD = s.PK_CD
-		AND p.PK_CD = #{PK_CD}
+		AND p.PK_CD =#{PK_CD}
 	</select>
 	
-	<!-- 펫 코드 및 요금 목록 수정처리 -->
-	<update id="UpdatePetCodeFee" parameterType="ptms.mvc.tpj.CustVO.PetVO">
-		UPDATE PET_KIND_TB p , SITTER_FEE_TB s
-		SET p.PK_KIND=#{PK_KIND}, p.PK_DETAIL=#{PK_DETAIL}, s.SF_FEE=#{SF_FEE}
-		WHERE p.PK_CD = s.PK_CD
-		AND p.PK_CD = #{PK_CD}
+	<!-- 펫 코드 수정처리 -->
+	<update id="UpdatePetCode" parameterType="ptms.mvc.tpj.CustVO.PetVO">
+		UPDATE PET_KIND_TB
+		SET PK_KIND=#{PK_KIND},PK_DETAIL=#{PK_DETAIL}
+		WHERE PK_CD =#{PK_CD}
 	</update>
 	
-	
+	<!-- 요금표 수정처리 -->
+	<update id="UpdateServiceFee" parameterType="ptms.mvc.tpj.CustVO.PetVO">
+		UPDATE SITTER_FEE_TB
+		SET SF_FEE=#{SF_FEE}
+		WHERE PK_CD =#{PK_CD}
+	</update>
 </mapper>

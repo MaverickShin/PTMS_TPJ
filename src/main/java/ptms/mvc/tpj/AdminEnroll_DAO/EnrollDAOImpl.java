@@ -54,11 +54,20 @@ public class EnrollDAOImpl implements EnrollDAO{
 
 	//펫 코드 및 요금 목록 수정처리
 	@Override
-	public int UpdatePetCodeFee(PetVO vo) {
+	public int UpdatePetCode(PetVO vo) {
 		System.out.println("DAO ==> UpdatePetCodeFee");
 		
 		EnrollDAO dao = sqlSession.getMapper(EnrollDAO.class);
-		return dao.UpdatePetCodeFee(vo);
+		return dao.UpdatePetCode(vo);
+	}
+	
+	//요금표 수정처리
+	@Override
+	public int UpdateServiceFee(PetVO vo) {
+		System.out.println("DAO ==> UpdateServiceFee");
+		
+		EnrollDAO dao = sqlSession.getMapper(EnrollDAO.class);
+		return dao.UpdateServiceFee(vo);
 	}
 
 	//펫 코드 및 요금 목록 삭제처리
@@ -67,7 +76,6 @@ public class EnrollDAOImpl implements EnrollDAO{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
 
 
 }
