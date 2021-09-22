@@ -100,7 +100,6 @@ public class MainDAOImpl implements MainDAO {
 	@Override
 	public CustomerVO selectCustomer(String id) {
 		MainDAO dao = data.getMapper(MainDAO.class);
-		
 		return dao.selectCustomer(id);
 	}
 	

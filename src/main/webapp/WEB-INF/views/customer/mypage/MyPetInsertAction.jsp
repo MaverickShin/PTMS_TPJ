@@ -14,6 +14,7 @@
 	<c:if test="${insertcnt == 0}" >
 		<script type="text/javascript">
 			alert("펫 등록 중 오류가 발생했습니다.\n 다시 시도해 주세요.");
+			window.history.back();
 		</script>
 	</c:if>
 	<c:if test="${insertcnt != 0}" >

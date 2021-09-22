@@ -11,6 +11,7 @@
 <c:if test="${updatecnt == 0}">
 	<script type="text/javascript">
 		alert("회원정보 수정중 문제가 발생했습니다.");
+		window.history.back();
 	</script>
 </c:if>
 <c:if test="${updatecnt != 0}">
