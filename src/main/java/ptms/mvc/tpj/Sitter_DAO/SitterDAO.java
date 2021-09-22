@@ -30,10 +30,13 @@ public interface SitterDAO {
 	// 시터 활동 등록 취소
 	public int activityDown(String cust_id);
 	
-	// 활동 시터 목록 
-	public List<SitterVO> activityList();
+	// 펫시터 찾기 -(조건에 맞는) 시터 수 구하기
+	public int getSitterCnt(SitterVO vo);
 	
-	// 지정 시터 상세 조회
+	//펫시터 찾기 - 리스트 출력
+	public List<SitterVO> activityList(SitterVO vo);
+	
+	// 시터 상세 조회 페이지
 	public SitterVO detailSitter(int sit_id);
 	
 	// 지정 시터 후기 조회
@@ -49,9 +52,9 @@ public interface SitterDAO {
 	public SitterVO feeSearch(int pet_cd);
 	
 	// 시터 의뢰 등록 (시터를 지정하지 않았을 때)
-	public int requestInsert(SitterVO vo);
+	//public int requestInsert(SitterVO vo);
 	
-	// 지정 시터 의뢰 등록 (시터를 지정하여 의뢰)
+	// 시터 의뢰 
 	public int selectRequestInsert(String sit_id);
 	
 	// 의뢰자 거주지역 조회
@@ -80,4 +83,9 @@ public interface SitterDAO {
 	//요금표 리스트
 	public ArrayList<PetVO> getPriceList();
 	
+	//고객 펫 수
+	public int MypetCount(String CUST_ID);
+	
+	//고객 펫 조회
+	public List<PetVO> MypetList(String CUST_ID);	
 }

@@ -157,10 +157,6 @@ public class TrainerVO {
 		return ADJUSTABLE; 
 	} 
 	
-	public void setADJUSTABLE(int aDJUSTABLE) { 
-		ADJUSTABLE = aDJUSTABLE; 
-	}
-
 	public Date getSTART_DAY() {
 		return START_DAY;
 	}
@@ -176,8 +172,10 @@ public class TrainerVO {
 	public void setEND_DAY(Date eND_DAY) {
 		END_DAY = eND_DAY;
 	}
-	
 
+	public void setADJUSTABLE(int aDJUSTABLE) { 
+		ADJUSTABLE = aDJUSTABLE; 
+	}
 	
 
 }

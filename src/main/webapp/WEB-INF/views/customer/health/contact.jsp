@@ -55,17 +55,16 @@
 </head>
 <body>
 	<%@ include file="../../main/header.jsp"%>
-	
-	<%@ include file = "../../news/test1.jsp" %>
-	
+
 	<section class="">
 		<form action="" id="">
 			<div class="container-fluid">
 				<div>
 					<table border="1" align="center">
 						<tr>
-							<td width="200px" align="center"><a href="/tpj/cust/contact">펫 건강관리</a></td>
-							<td width="200px" align="center"><a href="/tpj/cust/nutrient">자가진단 이력</a></td>
+							<td width="200px" align="center"><a href="/tpj/cust/contact">펫
+									건강관리</a></td>
+							<td width="200px" align="center"><a href="/tpj/cust/selfdiagnosis">자가진단 이력</a></td>
 
 						</tr>
 					</table>
@@ -79,13 +78,11 @@
 								<td rowspan="4"><img src="${imgPath}about-1.jpg"
 									width="500px" vspace=30 hspace=50></td>
 								<td><img src="${imgPath}image_4.jpg" width="500px"
-									height="300px" vspace=30 >
-									<p style="width:500px; height:20px; word-break:break-all; text-align:center;">소변검사, 외형검사 등 다양한 체험부터 행동교정
-										동영상, 맞춤식단 등 반려동물 헬스케어 및 질병예방을 효과적으로 할 수 있는 반려동물 지식정보 콘텐츠를 정기적인
-										서비스를 받을 수 있다.</p></td>
-<%-- 								<td><img src="${imgPath}gallery-1.jpg" width="300px"
-									height="200px" vspace=30>
-									<p style="width:300px; height:20px; word-break:break-all; text-align:center;">매월 정기적인 검사와 기록을 한 고객에게는 애견호텔 숙박권, 행동교정 이용권 등 제공한다.</p></td> --%>
+									height="300px" vspace=30>
+									<p
+										style="width: 500px; height: 20px; word-break: break-all; text-align: center;">소변검사,
+										외형검사 등 다양한 체험부터 행동교정 동영상, 맞춤식단 등 반려동물 헬스케어 및 질병예방을 효과적으로 할 수
+										있는 반려동물 지식정보 콘텐츠를 정기적인 서비스를 받을 수 있다.</p></td>
 							</tr>
 
 						</table>
@@ -93,7 +90,8 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-sm-6 section01_img" style="text-align: center">
-								<a href="#"><img src="${imgPath}bg_3.jpg" width="250px"></a>
+								<a href="/tpj/cust/SYMPTOM"><img src="${imgPath}bg_3.jpg"
+									width="250px"></a>
 							</div>
 							<div class="col-sm-6 section01_txt">
 								<h3>◀ 질병정보</h3>
@@ -108,14 +106,14 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-sm-6 section02_txt">
-								<h3>예방정보 ▶</h3>
+								<h3>반려동물 관련 지식 ▶</h3>
 								<p>반려동물 영양제 정보는 얻기 힘들 뿐만 아니라, 관련분야의 전문가 아니면 교육 및 상담을 받는 것도
 									사실상 불가능한 현실이다. 펫통합관리시스템에서는 영양제 성분정보와 반려동물 건강정보를 결합해 예측 가능하고
 									효율적으로 복용 관리할 수 있도록 최적화된 종합 펫케어 솔루션을 목표로 한다. 서비스는 10대부터 60대까지
 									누구나 언제 어디서든 쉽게 관리할 수 있도록 성분정보를 확인할 수 있다.</p>
 							</div>
 							<div class="col-sm-6 section02_img" style="text-align: center">
-								<a href="#"><img src="${imgPath}gallery-6.jpg" width="250px"></a>
+								<a href="/tpj/cust/SENSE"><img src="${imgPath}gallery-6.jpg" width="250px"></a>
 							</div>
 						</div>
 					</div>

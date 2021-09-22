@@ -1,4 +1,4 @@
-package ptms.mvc.tpj.AdminEnroll_Service;
+package ptms.mvc.tpj.Admin_Service;
 
 import java.util.ArrayList;
 
@@ -8,14 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import ptms.mvc.tpj.AdminEnroll_DAO.EnrollDAOImpl;
+import ptms.mvc.tpj.Admin_DAO.AdminDAOImpl;
 import ptms.mvc.tpj.CustVO.PetVO;
 
 @Service
-public class EnrollServiceImpl implements EnrollService{
+public class AdminServiceImpl implements AdminService{
 	
 	@Autowired
-	EnrollDAOImpl enrollDao;
+	AdminDAOImpl enrollDao;
 
 	//펫 코드 및 요금 등록
 	@Override
@@ -80,12 +80,18 @@ public class EnrollServiceImpl implements EnrollService{
 		int SF_FEE = Integer.parseInt(req.getParameter("SF_FEE"));
 		
 		PetVO vo = new PetVO();
+		vo.setPK_CD(PK_CD);
 		vo.setPK_KIND(PK_KIND);
-		vo.setSF_FEE(SF_FEE);
 		vo.setPK_DETAIL(PK_DETAIL);
-		
-		int updateCnt = enrollDao.UpdatePetCodeFee(vo);
-		System.out.println("updateCnt : " + updateCnt);
+		vo.setSF_FEE(SF_FEE);
+
+		int updateCnt = 0;
+		updateCnt = enrollDao.UpdatePetCode(vo);
+		System.out.println("코드 수정 updateCnt : " + updateCnt);
+		if(updateCnt == 1) {
+			updateCnt = enrollDao.UpdateServiceFee(vo);
+			System.out.println("요금표 수정 updateCnt : " + updateCnt);
+		}
 		
 		req.setAttribute("PK_CD", PK_CD);
 		req.setAttribute("updateCnt" , updateCnt);

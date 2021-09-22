@@ -1,4 +1,4 @@
-package ptms.mvc.tpj.AdminEnroll_DAO;
+package ptms.mvc.tpj.Admin_DAO;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import ptms.mvc.tpj.CustVO.PetVO;
 
 @Repository
-public class EnrollDAOImpl implements EnrollDAO{
+public class AdminDAOImpl implements AdminDAO{
 	
 	@Autowired
 	SqlSession sqlSession;
@@ -19,7 +19,7 @@ public class EnrollDAOImpl implements EnrollDAO{
 	public int petCodeFee(PetVO vo) {
 		System.out.println("DAO ==> petCodeFee");
 		
-		EnrollDAO dao = sqlSession.getMapper(EnrollDAO.class);
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		return dao.petCodeFee(vo);
 	}
 
@@ -39,7 +39,7 @@ public class EnrollDAOImpl implements EnrollDAO{
 	public ArrayList<PetVO> getpetCodeFee() {
 		System.out.println("DAO ==> getpetCodeFee");
 		
-		EnrollDAO dao = sqlSession.getMapper(EnrollDAO.class);
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		return dao.getpetCodeFee();
 	}
 
@@ -48,17 +48,26 @@ public class EnrollDAOImpl implements EnrollDAO{
 	public PetVO UpdatePetCodeFeeList(int PK_CD) {
 		System.out.println("DAO ==> UpdatePetCodeFeeList");
 		
-		EnrollDAO dao = sqlSession.getMapper(EnrollDAO.class);
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		return dao.UpdatePetCodeFeeList(PK_CD);
 	}
 
 	//펫 코드 및 요금 목록 수정처리
 	@Override
-	public int UpdatePetCodeFee(PetVO vo) {
+	public int UpdatePetCode(PetVO vo) {
 		System.out.println("DAO ==> UpdatePetCodeFee");
 		
-		EnrollDAO dao = sqlSession.getMapper(EnrollDAO.class);
-		return dao.UpdatePetCodeFee(vo);
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.UpdatePetCode(vo);
+	}
+	
+	//요금표 수정처리
+	@Override
+	public int UpdateServiceFee(PetVO vo) {
+		System.out.println("DAO ==> UpdateServiceFee");
+		
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.UpdateServiceFee(vo);
 	}
 
 	//펫 코드 및 요금 목록 삭제처리
@@ -67,7 +76,6 @@ public class EnrollDAOImpl implements EnrollDAO{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
 
 
 }

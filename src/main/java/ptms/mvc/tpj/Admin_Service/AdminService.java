@@ -1,10 +1,10 @@
-package ptms.mvc.tpj.AdminEnroll_Service;
+package ptms.mvc.tpj.Admin_Service;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
 
-public interface EnrollService {
+public interface AdminService {
 
 	//펫 코드 및 요금 등록
 	public void petCodeFee(HttpServletRequest req, Model model);

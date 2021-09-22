@@ -42,62 +42,26 @@
       },
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
-      events: [
-        {
-          title: 'All Day Event',
-          start: '2020-09-01'
-        },
-        {
-          title: 'Long Event',
-          start: '2020-09-07',
-          end: '2020-09-10'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2020-09-09T16:00:00'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2020-09-16T16:00:00'
-        },
-        {
-          title: 'Conference',
-          start: '2020-09-11',
-          end: '2020-09-13'
-        },
-        {
-          title: 'Meeting',
-          start: '2020-09-12T10:30:00',
-          end: '2020-09-12T12:30:00'
-        },
-        {
-          title: 'Lunch',
-          start: '2020-09-12T12:00:00'
-        },
-        {
-          title: 'Meeting',
-          start: '2020-09-12T14:30:00'
-        },
-        {
-          title: 'Happy Hour',
-          start: '2020-09-12T17:30:00'
-        },
-        {
-          title: 'Dinner',
-          start: '2020-09-12T20:00:00'
-        },
-        {
-          title: 'Birthday Party',
-          start: '2020-09-13T07:00:00'
-        },
-        {
-          title: 'Click for Google',
-          url: 'http://google.com/',
-          start: '2020-09-28'
-        }
-      ]
+      events: function (start, end, timezone, callback) {
+   	    $.ajax({
+   	      type: "get",
+   	      url: "http://localhost:8080/tpj/webapp/WEB-INF/views/customer/calendar/data.json",
+   	      data: {
+   	        // 화면이 바뀌면 Date 객체인 start, end 가 들어옴
+   	        //startDate : moment(start).format('YYYY-MM-DD'),
+   	        //endDate   : moment(end).format('YYYY-MM-DD')
+   	      },
+   	      success: function (response) {
+   	        var fixedDate = response.map(function (array) {
+   	          if (array.allDay && array.start !== array.end) {
+   	            array.end = moment(array.end).add(1, 'days'); // 이틀 이상 AllDay 일정인 경우 달력에 표기시 하루를 더해야 정상출력
+   	          }
+   	          return array;
+   	        });
+   	        callback(fixedDate);
+   	      }
+   	    });
+   	  },
     });
 
     calendar.render();

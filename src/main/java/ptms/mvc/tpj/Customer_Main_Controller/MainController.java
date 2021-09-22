@@ -3,6 +3,7 @@ package ptms.mvc.tpj.Customer_Main_Controller;
 
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import ptms.mvc.tpj.Customer_Main_Service.MainServiceImpl;
+import ptms.mvc.tpj.TrainerService.TrainerServiceImpl;
 import ptms.mvc.tpj.emailHandler.emailSender;
 import ptms.mvc.tpj.util.ImageUploaderHandler;
 
@@ -40,6 +42,9 @@ public class MainController {
 	
 	@Autowired
 	MainServiceImpl service;
+	
+	@Autowired
+	TrainerServiceImpl TrainerService;
 	
 	@Autowired
 	emailSender emailsender;
@@ -230,6 +235,7 @@ public class MainController {
 		return "customer/mypage/MyPetUpdateAction";
 	}
 	
+	// 반려인/펫 관리 - My Pet 삭제
 	@RequestMapping("MyPetDelete")
 	public String MyPetDelete(HttpServletRequest req, Model model) {
 		log.info("컨트롤러 - 반려인/펫 관리 - MyPetDelete");
@@ -250,32 +256,55 @@ public class MainController {
 	
 	// 일정표
    @RequestMapping("calendar")
-   public String calendar() {
+   public String calendar(HttpServletRequest req, Model model) {
       
       log.info("컨트롤러 - 일정표 페이지");
-      
+      service.callCalendar(req, model);
       return "customer/calendar/calendar";
    }
-	   
    
-   /*@RequestMapping("contact")
+   // 반려동물 건강관리 
+   @RequestMapping("contact")
    public String contact(Model model) {
+	   
+	   return "customer/health/contact";
+   }
+
+   // 자가진단 
+   @RequestMapping("selfdiagnosis")
+   public String selfdiagnosis() {
+	   
+	   return "customer/health/SELFDIAGNOSIS";
+   }
+   
+   // 질병정보 크롤링 
+   @RequestMapping("SYMPTOM")
+   public String symptom(Model model) {
 	   
 	   List<String> news = new ArrayList<>();
 	   
-	   blog1 blogs = new blog1();
+	   SYMPTOM_INFO_CRAWLING Symptom = new SYMPTOM_INFO_CRAWLING();
 	   
-	   news = blogs.blogInfo();
+	   news = Symptom.SymptomInfo();
 	   
 	   model.addAttribute("list", news);
 	   
-	   return "customer/health/contact";
-   }*/
-   
-   @RequestMapping("nutrient")
-   public String nutrient() {
+	   return "customer/health/SYMPTOM_INFO_VIEW";
+   }
+
+   // 반려동물 지식정보 크롤링 
+   @RequestMapping("SENSE")
+   public String sense(Model model) {
 	   
-	   return "customer/health/NUTRIENT_INFO";
+	   List<String> news = new ArrayList<>();
+	   
+	   SENSE_INFO_CRAWLING Sense = new SENSE_INFO_CRAWLING();
+	   
+	   news = Sense.SenseInfo();
+	   
+	   model.addAttribute("list", news);
+	   
+	   return "customer/health/SENSE_INFO_VIEW";
    }
    
    // 구독 페이지
@@ -315,15 +344,36 @@ public class MainController {
 		return "customer/board/qnaList";
 	}
    
+   // 반려인/펫 관리 - 훈련사 수정페이지
    @RequestMapping("TrainerProfile")
-   public String TrainerProfile() {
+   public String TrainerProfile(HttpServletRequest req, Model model) {
       log.info("컨트롤러 - 반려인/펫 관리 - TrainerProfile");
-      // 서비스에서 훈련사 정보 가져오기
+      
+      TrainerService.updateTrainer(req, model);
       
       return "customer/mypage/TrainerProfile";
    }
    
-   // 반려인/펫 관리 - 내정보관리
+   // 반려인/펫 관리 - 훈련사 수정 처리
+   @RequestMapping("TrainerProfileAction")
+   public String TrainerProfileAction(HttpServletRequest req, Model model) throws ParseException {
+	   log.info("컨트롤러 - 반려인/펫 관리 - TrainerProfileAction");
+	   
+	// 이미지 업로드 시작
+/*	String contentType = req.getContentType();
+	if (contentType != null && contentType.toLowerCase().startsWith("multipart/")) {
+		uploader = new ImageUploaderHandler(); // image uploader 핸들러 호출
+		uploader.setUploadPath(IMG_UPLOAD_DIR); // img 경로
+	    uploader.imageUpload(req, model);
+	}
+	// 이미지 업로드 끝
+*/	   
+	   TrainerService.updateTrainerAction(req, model);
+	   
+	   return "customer/mypage/TrainerProfileAction";
+   }
+   
+   // 반려인/펫 관리 - 결제내역
    @RequestMapping("buyList")
    public String buyList() {
       log.info("컨트롤러 - 반려인/펫 관리 - buyList");
