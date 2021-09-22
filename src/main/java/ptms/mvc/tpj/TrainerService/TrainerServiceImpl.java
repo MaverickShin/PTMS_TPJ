@@ -82,17 +82,6 @@ public class TrainerServiceImpl implements TrainerService{
 	    date = new Date(sdf.parse(END_DAY).getTime());
 	      
 	    vo.setEND_DAY(date);
-		String END_DAY = req.getParameter("END_DAY");
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		
-		Date date = new Date(sdf.parse(START_DAY).getTime());
-		
-		vo.setSTART_DAY(date);
-		
-		date = new Date(sdf.parse(END_DAY).getTime());
-		
-		vo.setEND_DAY(date);
 		
 		int ADJUSTABLE = 0;
 		ADJUSTABLE = req.getParameter("ADJUSTABLE") == null ? 0 : Integer.parseInt(req.getParameter("ADJUSTABLE"));

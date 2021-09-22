@@ -145,5 +145,4 @@
 				END_DAY = #{END_DAY}, ADJUSTABLE = #{ADJUSTABLE}
 		where TA_CD = #{TA_CD}
 	</update>
->>>>>>> 7b4ea573fc51e029e40b642046b09246bb8d61ee
 </mapper>
