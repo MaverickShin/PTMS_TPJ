@@ -1,11 +1,11 @@
-package ptms.mvc.tpj.AdminEnroll_DAO;
+package ptms.mvc.tpj.Admin_DAO;
 
 import java.util.ArrayList;
 import java.util.Map;
 
 import ptms.mvc.tpj.CustVO.PetVO;
 
-public interface EnrollDAO {
+public interface AdminDAO {
 	
 	//펫 코드 및 요금 등록
 	public int petCodeFee(PetVO vo);

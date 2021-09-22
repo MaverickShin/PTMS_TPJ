@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import ptms.mvc.tpj.AdminEnroll_Service.EnrollServiceImpl;
+import ptms.mvc.tpj.Admin_Service.AdminServiceImpl;
 
 @RequestMapping("/admin")
 @Controller
@@ -18,7 +18,7 @@ public class AdminController {
 	private static final Logger log = LoggerFactory.getLogger(AdminController.class);
 	
 	@Autowired
-	EnrollServiceImpl enrollService;
+	AdminServiceImpl enrollService;
 	
 	
 	@RequestMapping({"", "main", "adminlogin"})

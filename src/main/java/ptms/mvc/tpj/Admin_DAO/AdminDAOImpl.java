@@ -1,4 +1,4 @@
-package ptms.mvc.tpj.AdminEnroll_DAO;
+package ptms.mvc.tpj.Admin_DAO;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import ptms.mvc.tpj.CustVO.PetVO;
 
 @Repository
-public class EnrollDAOImpl implements EnrollDAO{
+public class AdminDAOImpl implements AdminDAO{
 	
 	@Autowired
 	SqlSession sqlSession;
@@ -19,7 +19,7 @@ public class EnrollDAOImpl implements EnrollDAO{
 	public int petCodeFee(PetVO vo) {
 		System.out.println("DAO ==> petCodeFee");
 		
-		EnrollDAO dao = sqlSession.getMapper(EnrollDAO.class);
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		return dao.petCodeFee(vo);
 	}
 
@@ -39,7 +39,7 @@ public class EnrollDAOImpl implements EnrollDAO{
 	public ArrayList<PetVO> getpetCodeFee() {
 		System.out.println("DAO ==> getpetCodeFee");
 		
-		EnrollDAO dao = sqlSession.getMapper(EnrollDAO.class);
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		return dao.getpetCodeFee();
 	}
 
@@ -48,7 +48,7 @@ public class EnrollDAOImpl implements EnrollDAO{
 	public PetVO UpdatePetCodeFeeList(int PK_CD) {
 		System.out.println("DAO ==> UpdatePetCodeFeeList");
 		
-		EnrollDAO dao = sqlSession.getMapper(EnrollDAO.class);
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		return dao.UpdatePetCodeFeeList(PK_CD);
 	}
 
@@ -57,7 +57,7 @@ public class EnrollDAOImpl implements EnrollDAO{
 	public int UpdatePetCode(PetVO vo) {
 		System.out.println("DAO ==> UpdatePetCodeFee");
 		
-		EnrollDAO dao = sqlSession.getMapper(EnrollDAO.class);
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		return dao.UpdatePetCode(vo);
 	}
 	
@@ -66,7 +66,7 @@ public class EnrollDAOImpl implements EnrollDAO{
 	public int UpdateServiceFee(PetVO vo) {
 		System.out.println("DAO ==> UpdateServiceFee");
 		
-		EnrollDAO dao = sqlSession.getMapper(EnrollDAO.class);
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		return dao.UpdateServiceFee(vo);
 	}
 

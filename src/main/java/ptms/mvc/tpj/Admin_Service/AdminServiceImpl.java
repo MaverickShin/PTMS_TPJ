@@ -1,4 +1,4 @@
-package ptms.mvc.tpj.AdminEnroll_Service;
+package ptms.mvc.tpj.Admin_Service;
 
 import java.util.ArrayList;
 
@@ -8,14 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import ptms.mvc.tpj.AdminEnroll_DAO.EnrollDAOImpl;
+import ptms.mvc.tpj.Admin_DAO.AdminDAOImpl;
 import ptms.mvc.tpj.CustVO.PetVO;
 
 @Service
-public class EnrollServiceImpl implements EnrollService{
+public class AdminServiceImpl implements AdminService{
 	
 	@Autowired
-	EnrollDAOImpl enrollDao;
+	AdminDAOImpl enrollDao;
 
 	//펫 코드 및 요금 등록
 	@Override
