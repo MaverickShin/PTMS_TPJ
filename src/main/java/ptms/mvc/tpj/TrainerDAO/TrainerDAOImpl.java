@@ -1,6 +1,5 @@
 package ptms.mvc.tpj.TrainerDAO;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ptms.mvc.tpj.CustVO.PetVO;
-import ptms.mvc.tpj.CustVO.TrainerRequestVO;
 import ptms.mvc.tpj.CustVO.TrainerVO;
 
 @Repository
@@ -32,8 +30,8 @@ public class TrainerDAOImpl implements TrainerDAO {
 
 	@Override
 	public TrainerVO trainerInfo(int taCd) {
-		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
-		return dao.trainerInfo(taCd);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -50,10 +48,25 @@ public class TrainerDAOImpl implements TrainerDAO {
 		return insertCntdt;
 	}
 
+	// 훈련사 정보 상세페이지
 	@Override
-	public int updateTrainer(TrainerVO tVo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public TrainerVO TrainerDetail(String CUST_ID) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.TrainerDetail(CUST_ID);
+	}
+	
+	// 훈련사 수정 처리1 (TRAINER_TB)
+	@Override
+	public int updateTrainer1(TrainerVO tVo) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.updateTrainer1(tVo);
+	}
+	
+	// 훈련사 수정 처리2 (TRAINER_SERVICE_TB)
+	@Override
+	public int updateTrainer2(TrainerVO tVo) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.updateTrainer2(tVo);
 	}
 
 	@Override
@@ -63,10 +76,9 @@ public class TrainerDAOImpl implements TrainerDAO {
 	}
 
 	@Override
-	public int insertTrainerReservation(TrainerRequestVO vo) {
-		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
-		int insertCnt = dao.insertTrainerReservation(vo);
-		return insertCnt;
+	public int insertTrainerReservation(TrainerVO tqVo) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
@@ -92,22 +104,5 @@ public class TrainerDAOImpl implements TrainerDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-	@Override
-	public int getPetCount(String id) {
-		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
-		int selectCnt = dao.getPetCount(id);
-		return selectCnt;
-	}
-	
-	@Override
-	public List<TrainerVO> getPetInfo(String id) {
-		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
-		List<TrainerVO> petName = dao.getPetInfo(id);
-		return petName;
-	}
-
-	
-	
 
 }

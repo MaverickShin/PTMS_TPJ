@@ -34,7 +34,7 @@
       <nav id="listdiv_id1" style="width:400px; padding:100px;">
          <ul>
            <li>-고객-</li>
-           <li><a href="#">펫시터 찾기</a></li>
+           <li><a href="sitter">펫시터 찾기</a></li>
            <li><a href="">이용후기</a></li>
            <li><a href="feeInfo">요금안내</a></li>
            <li>-펫시터-</li>
@@ -67,9 +67,9 @@
                                            <div class="select-wrap">
                                               	 <label class="label" for="tr_kind">제공 가능한 서비스를 선택해 주세요</label>
                                                  <label><input type="checkbox" value="1" name="SV1_NO" class="form-group">미용 서비스</label>
-                                                 <label><input type="checkbox" value="1" name="SV2_NO" class="form-group">놀이 서비스</label>
-                                                 <label><input type="checkbox" value="1" name="SV3_NO" class="form-group">산책 서비스</label>
-												 <label><input type="checkbox" value="1" name="SV4_NO" class="form-group" checked>응급처치 서비스<필수체크></label>
+                                                 <label><input type="checkbox" value="2" name="SV2_NO" class="form-group">놀이 서비스</label>
+                                                 <label><input type="checkbox" value="3" name="SV3_NO" class="form-group">산책 서비스</label>
+												 <label><input type="checkbox" value="4" name="SV4_NO" class="form-group" checked>응급처치 서비스<필수체크></label>
                                             </div>
                                         </div>
                                     </div>
@@ -125,7 +125,7 @@
                                  </div>
                               </div>
                               
-                              <div class="col-md-12">
+<!--                               <div class="col-md-12">
                                  <div class="form-group">
                                     <label class="label" for="RESERVATION">서비스 가능일 </label>
 				                        <select size="1" id="iptags" name="RESERVATION">
@@ -134,7 +134,15 @@
 								 			<option value="모두가능">모두가능 </option>
 							 		   </select><br>
                                  </div>
-                              </div>
+                              </div> -->
+                              
+		                     <div class="col-md-6">
+		                        <div class="form-group">
+		                           <label class="label" for="trainingDay">서비스 가능일</label> <br>
+		                           <input type="date" class="iptags" name="WK_START"> ~ 
+		                           <input type="date" class="iptags" name="WK_END"><br>
+		                        </div> 
+		                     </div>
                               
                               <div class="col-md-12" style="text-align:center;">
                                     <label class="label" for="SIT_TITLE">소개글</label>

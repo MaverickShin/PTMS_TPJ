@@ -3,6 +3,7 @@ package ptms.mvc.tpj.Customer_Main_Controller;
 
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import ptms.mvc.tpj.Customer_Main_Service.MainServiceImpl;
+import ptms.mvc.tpj.TrainerService.TrainerServiceImpl;
 import ptms.mvc.tpj.emailHandler.emailSender;
 import ptms.mvc.tpj.util.ImageUploaderHandler;
 
@@ -40,6 +42,9 @@ public class MainController {
 	
 	@Autowired
 	MainServiceImpl service;
+	
+	@Autowired
+	TrainerServiceImpl TrainerService;
 	
 	@Autowired
 	emailSender emailsender;
@@ -230,6 +235,7 @@ public class MainController {
 		return "customer/mypage/MyPetUpdateAction";
 	}
 	
+	// 반려인/펫 관리 - My Pet 삭제
 	@RequestMapping("MyPetDelete")
 	public String MyPetDelete(HttpServletRequest req, Model model) {
 		log.info("컨트롤러 - 반려인/펫 관리 - MyPetDelete");
@@ -284,7 +290,7 @@ public class MainController {
       
       log.info("컨트롤러 - 구독 페이지");
       
-      return "customer/subscribe/subscribe";
+      return "customer/subscribe/info";
    }   
    
    // 위치안내
@@ -315,15 +321,36 @@ public class MainController {
 		return "customer/board/qnaList";
 	}
    
+   // 반려인/펫 관리 - 훈련사 수정페이지
    @RequestMapping("TrainerProfile")
-   public String TrainerProfile() {
+   public String TrainerProfile(HttpServletRequest req, Model model) {
       log.info("컨트롤러 - 반려인/펫 관리 - TrainerProfile");
-      // 서비스에서 훈련사 정보 가져오기
+      
+      TrainerService.updateTrainer(req, model);
       
       return "customer/mypage/TrainerProfile";
    }
    
-   // 반려인/펫 관리 - 내정보관리
+   // 반려인/펫 관리 - 훈련사 수정 처리
+   @RequestMapping("TrainerProfileAction")
+   public String TrainerProfileAction(HttpServletRequest req, Model model) throws ParseException {
+	   log.info("컨트롤러 - 반려인/펫 관리 - TrainerProfileAction");
+	   
+	// 이미지 업로드 시작
+/*	String contentType = req.getContentType();
+	if (contentType != null && contentType.toLowerCase().startsWith("multipart/")) {
+		uploader = new ImageUploaderHandler(); // image uploader 핸들러 호출
+		uploader.setUploadPath(IMG_UPLOAD_DIR); // img 경로
+	    uploader.imageUpload(req, model);
+	}
+	// 이미지 업로드 끝
+*/	   
+	   TrainerService.updateTrainerAction(req, model);
+	   
+	   return "customer/mypage/TrainerProfileAction";
+   }
+   
+   // 반려인/펫 관리 - 결제내역
    @RequestMapping("buyList")
    public String buyList() {
       log.info("컨트롤러 - 반려인/펫 관리 - buyList");

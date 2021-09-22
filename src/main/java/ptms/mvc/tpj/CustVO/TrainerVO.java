@@ -31,11 +31,6 @@ public class TrainerVO {
 	private int ADJUSTABLE;		// 일정조정 여부 0:일정조정불가, 1:일정조정가능
 	//private String RESERVATION;	// 예약 가능일 (평일, 주말 등)
 	
-	private String CUST_NM;
-	
-	private String PET_NM;
-	private int PET_ID;
-	
 	public int getTA_CD() {
 		return TA_CD;
 	}
@@ -162,6 +157,22 @@ public class TrainerVO {
 		return ADJUSTABLE; 
 	} 
 	
+	public Date getSTART_DAY() {
+		return START_DAY;
+	}
+
+	public void setSTART_DAY(Date sTART_DAY) {
+		START_DAY = sTART_DAY;
+	}
+
+	public Date getEND_DAY() {
+		return END_DAY;
+	}
+
+	public void setEND_DAY(Date eND_DAY) {
+		END_DAY = eND_DAY;
+	}
+
 	public void setADJUSTABLE(int aDJUSTABLE) { 
 		ADJUSTABLE = aDJUSTABLE; 
 	}
@@ -181,32 +192,8 @@ public class TrainerVO {
 	public void setEND_DAY(Date eND_DAY) {
 		END_DAY = eND_DAY;
 	}
-
-	public String getCUST_NM() {
-		return CUST_NM;
-	}
-
-	public void setCUST_NM(String cUST_NM) {
-		CUST_NM = cUST_NM;
-	}
-
-	public String getPET_NM() {
-		return PET_NM;
-	}
-
-	public void setPET_NM(String pET_NM) {
-		PET_NM = pET_NM;
-	}
-
-	public int getPET_ID() {
-		return PET_ID;
-	}
-
-	public void setPET_ID(int pET_ID) {
-		PET_ID = pET_ID;
-	}
 	
-	
+
 	
 
 }

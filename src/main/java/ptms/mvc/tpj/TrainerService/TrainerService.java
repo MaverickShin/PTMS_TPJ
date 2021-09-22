@@ -17,14 +17,17 @@ public interface TrainerService {
 	// 훈련사 정보
 	public void TrainerInfo(HttpServletRequest req, Model model);
 	
-	// 훈련사 정보 수정
+	// 훈련사 프로필 화면
 	public void updateTrainer(HttpServletRequest req, Model model);
+	
+	// 훈련사 정보 수정 처리
+	public void updateTrainerAction(HttpServletRequest req, Model model) throws ParseException;
 	
 	// 훈련사 등록 철회
 	public void deleteTrainer(HttpServletRequest req, Model model);
 	
 	// 훈련 예약
-	public void reserveTrainer(HttpServletRequest req, Model model) throws ParseException;
+	public void reserveTrainer(HttpServletRequest req, Model model);
 		
 	// 결제하기
 	public void payToTrainer(HttpServletRequest req, Model model);

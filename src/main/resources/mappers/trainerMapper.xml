@@ -18,133 +18,132 @@
 	<select id="trainerSelectCnt" parameterType="java.util.Map" resultType="int">
 		<if test='ADJUSTABLE == 1'>
 			select count(*)
-			from (select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
-			where tt.TA_CD = ts.TA_CD
-			and ct.CUST_ID = tt.CUST_ID
-			and ts.TS_AREA LIKE '%'||#{SQ_LOC}||'%'
-			and tt.TA_ST = 1
-			intersect
-			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
-			where tt.TA_CD = ts.TA_CD
-			and ct.CUST_ID = tt.CUST_ID
-			and #{TQ_AMT} = ts.TS1_NO
-			OR #{TQ_AMT} = ts.TS2_NO
-			OR #{TQ_AMT} = ts.TS3_NO
-			OR #{TQ_AMT} = ts.TS4_NO
-			intersect
-			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
-			where tt.TA_CD = ts.TA_CD
-			  and ct.CUST_ID = tt.CUST_ID
-			  and #{START_DAY} between ts.START_DAY and ts.END_DAY
-			  or #{END_DAY} between ts.START_DAY and ts.END_DAY)
+			from (select TA_CD
+				from TRAINER_SERVICE_TB
+				where TS_AREA LIKE '%'||#{SQ_LOC}||'%'
+				intersect
+				select TA_CD
+				from TRAINER_SERVICE_TB
+				where #{TQ_AMT} = TS1_NO
+				OR #{TQ_AMT} = TS2_NO
+				OR #{TQ_AMT} = TS3_NO
+				OR #{TQ_AMT} = TS4_NO
+				intersect
+				select TA_CD
+				from TRAINER_SERVICE_TB
+				where #{START_DAY} between START_DAY and END_DAY
+				   or #{END_DAY} between START_DAY and END_DAY
+				intersect
+				select tt.TA_CD
+				from TRAINER_SERVICE_TB ts, TRAINER_TB tt
+				where tt.TA_CD = ts.TA_CD
+				  and tt.TA_ST = 1)
 		</if>
 		
 		<if test='ADJUSTABLE != 1'>
 			select count(*)
-			from (select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
-			where tt.TA_CD = ts.TA_CD
-			and ct.CUST_ID = tt.CUST_ID
-			and ts.TS_AREA LIKE '%'||#{SQ_LOC}||'%'
-			and tt.TA_ST = 1
-			intersect
-			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
-			where tt.TA_CD = ts.TA_CD
-			and ct.CUST_ID = tt.CUST_ID
-			and #{TQ_AMT} = ts.TS1_NO
-			OR #{TQ_AMT} = ts.TS2_NO
-			OR #{TQ_AMT} = ts.TS3_NO
-			OR #{TQ_AMT} = ts.TS4_NO
-			intersect
-			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
-			where tt.TA_CD = ts.TA_CD
-			  and ct.CUST_ID = tt.CUST_ID
-			  and #{START_DAY} between ts.START_DAY and ts.END_DAY
-			  and #{END_DAY} between ts.START_DAY and ts.END_DAY)
+			from (select TA_CD
+				from TRAINER_SERVICE_TB
+				where TS_AREA LIKE '%'||#{SQ_LOC}||'%'
+				intersect
+				select TA_CD
+				from TRAINER_SERVICE_TB
+				where #{TQ_AMT} = TS1_NO
+				OR #{TQ_AMT} = TS2_NO
+				OR #{TQ_AMT} = TS3_NO
+				OR #{TQ_AMT} = TS4_NO
+				intersect
+				select TA_CD
+				from TRAINER_SERVICE_TB
+				where #{START_DAY} between START_DAY and END_DAY
+				  and #{END_DAY} between START_DAY and END_DAY
+				intersect
+				select tt.TA_CD
+				from TRAINER_SERVICE_TB ts, TRAINER_TB tt
+				where tt.TA_CD = ts.TA_CD
+				  and tt.TA_ST = 1)
 		</if>
 	</select>
 	
 	<select id="trainerList" parameterType="java.util.Map" resultType="ptms.mvc.tpj.CustVO.TrainerVO">
 		<if test='ADJUSTABLE == 1'>
-			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
+			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG
+			from TRAINER_SERVICE_TB ts, TRAINER_TB tt
 			where tt.TA_CD = ts.TA_CD
-			and ct.CUST_ID = tt.CUST_ID
 			and ts.TS_AREA LIKE '%'||#{SQ_LOC}||'%'
-			and tt.TA_ST = 1
 			intersect
-			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
+			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG
+			from TRAINER_SERVICE_TB ts, TRAINER_TB tt
 			where tt.TA_CD = ts.TA_CD
-			and ct.CUST_ID = tt.CUST_ID
 			and #{TQ_AMT} = ts.TS1_NO
 			OR #{TQ_AMT} = ts.TS2_NO
 			OR #{TQ_AMT} = ts.TS3_NO
 			OR #{TQ_AMT} = ts.TS4_NO
 			intersect
-			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
+			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG
+			from TRAINER_SERVICE_TB ts, TRAINER_TB tt
 			where tt.TA_CD = ts.TA_CD
-			  and ct.CUST_ID = tt.CUST_ID
 			  and #{START_DAY} between ts.START_DAY and ts.END_DAY
-			  or #{END_DAY} between ts.START_DAY and ts.END_DAY
+			   or #{END_DAY} between ts.START_DAY and ts.END_DAY
+			intersect
+			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG
+			from TRAINER_SERVICE_TB ts, TRAINER_TB tt
+			where tt.TA_CD = ts.TA_CD
+			  and tt.TA_ST = 1
 		</if>
 		
 		<if test='ADJUSTABLE != 1'>
-			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
+			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG
+			from TRAINER_SERVICE_TB ts, TRAINER_TB tt
 			where tt.TA_CD = ts.TA_CD
-			and ct.CUST_ID = tt.CUST_ID
 			and ts.TS_AREA LIKE '%'||#{SQ_LOC}||'%'
-			and tt.TA_ST = 1
 			intersect
-			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
+			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG
+			from TRAINER_SERVICE_TB ts, TRAINER_TB tt
 			where tt.TA_CD = ts.TA_CD
-			and ct.CUST_ID = tt.CUST_ID
 			and #{TQ_AMT} = ts.TS1_NO
 			OR #{TQ_AMT} = ts.TS2_NO
 			OR #{TQ_AMT} = ts.TS3_NO
 			OR #{TQ_AMT} = ts.TS4_NO
 			intersect
-			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
+			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG
+			from TRAINER_SERVICE_TB ts, TRAINER_TB tt
 			where tt.TA_CD = ts.TA_CD
-			  and ct.CUST_ID = tt.CUST_ID
 			  and #{START_DAY} between ts.START_DAY and ts.END_DAY
-			  and #{END_DAY} between ts.START_DAY and ts.END_DAY
+			  and #{END_DAY}' between ts.START_DAY and ts.END_DAY
+			intersect
+			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG
+			from TRAINER_SERVICE_TB ts, TRAINER_TB tt
+			where tt.TA_CD = ts.TA_CD
+			  and tt.TA_ST = 1
 		</if>
 	</select>
 	
-	<select id="trainerInfo" parameterType="int" resultType="ptms.mvc.tpj.CustVO.TrainerVO">
-	    select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
-	    from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
-	    where tt.TA_CD = ts.TA_CD
-	    and ct.CUST_ID = tt.CUST_ID
-	    and tt.TA_CD = #{TA_CD}
+	<!-- 훈련사 상세정보 -->
+	<select id="TrainerDetail" parameterType="String" resultType="ptms.mvc.tpj.CustVO.TrainerVO">
+		select * 
+		from (select t.TA_CD,t.CUST_ID,t.TA_TITLE,t.TA_APPEAL,t.TA_IMG,t.TA_ST,
+		            ts.TS_AREA,ts.TS1_NO,ts.TS1_FEE,ts.TS2_NO,ts.TS2_FEE,ts.TS3_NO,ts.TS3_FEE,ts.TS4_NO,ts.TS4_FEE,ts.START_DAY,ts.END_DAY,ts.ADJUSTABLE
+		       from TRAINER_TB t ,TRAINER_SERVICE_TB ts
+		      where ts.TA_CD = t.TA_CD
+		     )
+		where CUST_ID = #{CUST_ID}
 	</select>
 	
-	<select id="getPetInfo" parameterType="String" resultType="ptms.mvc.tpj.CustVO.TrainerVO">
-		select pt.PET_NM, pt.PET_CD
-		from PET_TB pt, CUSTOMER_TB ct
-		where ct.CUST_ID = pt.CUST_ID
-		and ct.CUST_ID = #{id}
-	</select>
+	<!-- 훈련사 수정 처리 - 훈련사프로필 update-->
+	<update id="updateTrainer1" parameterType="ptms.mvc.tpj.CustVO.TrainerVO">
+		update TRAINER_TB
+		set TA_TITLE = #{TA_TITLE}, TA_APPEAL = #{TA_APPEAL}, TA_IMG = #{TA_IMG}
+		where CUST_ID = #{CUST_ID}
+	</update>
 	
-	<select id="getPetCount" parameterType="String" resultType="int">
-		select Count(*)
-		from PET_TB pt, CUSTOMER_TB ct
-		where ct.CUST_ID = #{id}
-	</select>
-	
-	<insert id="insertTrainerReservation" parameterType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
-		insert into TRAINER_REQUEST_TB(TQ_CD, CUST_ID, TA_CD, PET_CD, TQ_AMT, TQ_LOC, TQ_ST, START_DAY, END_DAY, TQ_DT)
-		values(TQ_CD_seq.nextval, #{CUST_ID}, #{TA_CD}, #{PET_CD}, #{TQ_AMT}, #{TQ_LOC}, 0, #{START_DAY}, #{START_DAY}, sysdate)
-	</insert>
-	
+	<!-- 훈련사 수정 처리 - 훈련사 서비스정보 update-->
+	<update id="updateTrainer2" parameterType="ptms.mvc.tpj.CustVO.TrainerVO">
+		update TRAINER_SERVICE_TB
+		set	TS_AREA = #{TS_AREA}, TS1_NO = #{TS1_NO}, TS1_FEE = #{TS1_FEE}, TS2_NO = #{TS2_NO}, TS2_FEE = #{TS2_FEE}, 
+				TS3_NO = #{TS3_NO}, TS3_FEE = #{TS3_FEE}, TS4_NO = #{TS4_NO}, TS4_FEE = #{TS4_FEE}, START_DAY = #{START_DAY}, 
+				END_DAY = #{END_DAY}, ADJUSTABLE = #{ADJUSTABLE}
+		where TA_CD = #{TA_CD}
+	</update>
+>>>>>>> 7b4ea573fc51e029e40b642046b09246bb8d61ee
 </mapper>

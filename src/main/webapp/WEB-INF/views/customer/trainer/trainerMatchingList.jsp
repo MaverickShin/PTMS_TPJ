@@ -6,14 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<style>
-	.blog-entry:hover {
-		width: 105%;
-		height: 90%;
-		box-shadow: 5px 5px 5px 5px gray;
-	}
-</style>
 </head>
 <body>
 	<%@ include file="../../main/header.jsp" %>
@@ -30,7 +22,7 @@
       </div>
     </section>
 	
-	<div style="display: flex"  >
+	<div style="display: flex">
 		<nav id="listdiv_id1" style="width: 400px; padding: 100px;">
 			<ul>
 				<li>-고객-</li>
@@ -43,36 +35,60 @@
 				<li><a href="">나에게 온 의뢰</a></li>
 			</ul>
 		</nav>
-	
-		<div class="container" style = "margin-top:50px; ">
-			<div class="row" style = "display: grid; grid-template-columns:1fr 1fr 1fr 1fr;">
+		
+	<section class="ftco-section bg-light">
+		<div class="container">
+			<div class="row d-flex">
 				<c:if test="${selectCnt > 0}">
 					<c:forEach var="dto" items="${dtos}">
-						<div class="col-md-12" onclick = "window.location = 'trainerDetail?TA_CD=${dto.TA_CD}'">
+						<div class="col-md-4 d-flex ftco-animate">
 				            <div class="blog-entry align-self-stretch">
-				              <a  class="block-20 rounded" style="background-image: url('${imgPath}image_1.jpg');">
+				              <a href="blog-single.html" class="block-20 rounded" style="background-image: url('${imgPath}${dto.TA_IMG}');">
 				              </a>
 				              <div class="text p-4">
 				              	<div class="meta mb-2">
 				                  <div><a href="#">April 07, 2020</a></div>
-				                  <div><a href="#">${dto.CUST_NM}</a></div>
-				                  <div><a href="#" class="meta-chat"><span class="fa fa-comment"></span>3</a></div><!-- 이곳에 좋아요 갯수 또는 평점을 넣으면 좋지 않을까? -->
+				                  <div><a href="#">${dto.CUST_ID}</a></div>
+				                  <div><a href="#" class="meta-chat"><span class="fa fa-comment"></span>3</a></div>
 				                </div>
-				                <h3 class="heading"><a href="trainerDetail?TA_CD=${dto.TA_CD}">${dto.TA_TITLE}</a></h3>
+				                <h3 class="heading"><a href="#">${dto.TA_TITLE}</a></h3>
 				              </div>
 				            </div>
 				        </div>
-				        
-			    	</c:forEach>
-		    	</c:if>
-		    	
-		    	<c:if test="${selectCnt == 0}">
-		    		<div class="col-md-12">
-		    			매칭된 훈련사가 없습니다. 조건을 바꿔 다시 검색해보세요!
-		    		</div>
+				    </c:forEach>
+						<div class="col-md-4 d-flex ftco-animate">
+				            <div class="blog-entry align-self-stretch">
+				              <a href="blog-single.html" class="block-20 rounded" style="background-image: url('images/image_2.jpg');">
+				              </a>
+				              <div class="text p-4">
+				              	<div class="meta mb-2">
+				                  <div><a href="#">April 07, 2020</a></div>
+				                  <div><a href="#">Admin</a></div>
+				                  <div><a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a></div>
+				                </div>
+				                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+				              </div>
+				            </div>
+				        </div>
+				        <div class="col-md-4 d-flex ftco-animate">
+				           <div class="blog-entry align-self-stretch">
+				              <a href="blog-single.html" class="block-20 rounded" style="background-image: url('images/image_3.jpg');">
+				              </a>
+				              <div class="text p-4">
+				              	<div class="meta mb-2">
+				                  <div><a href="#">April 07, 2020</a></div>
+				                  <div><a href="#">Admin</a></div>
+				                  <div><a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a></div>
+				                </div>
+				                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+				              </div>
+				           </div>
+				        </div>
+			    	
 		    	</c:if>
 	    	</div>
 	    </div>	        
+	</section>
 	</div>
 	
 	<%@ include file="../../main/footer.jsp" %>

@@ -6,6 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>시터 프로필 수정</title>
+<style type="text/css">
+.link {
+	display: block;
+	padding: 2rem 0rem; 
+}
+</style>
 </head>
 <body>
 	<%@ include file="../../main/header.jsp"%>

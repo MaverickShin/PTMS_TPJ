@@ -1,7 +1,6 @@
 package ptms.mvc.tpj.CustVO;
 
-import java.sql.Date;
-
+import oracle.sql.DATE;
 import oracle.sql.TIMESTAMP;
 
 public class TrainerRequestVO {
@@ -9,19 +8,18 @@ public class TrainerRequestVO {
 	// 훈련 서비스 요청 테이블
 	private int TQ_CD; 			// 훈련사 구하기 요청 번호
 	private String CUST_ID;		// 의뢰인 아이디
-	private int TA_CD;			// 훈련사 코드
+	private int TA_CD;			// 훈련사 ID(고객 아이디)
 	private String TQ_AMT;		// 훈련 종류
 	private String TQ_LOC;		// 고객 거주 지역
 	private int TQ_ST;			// 처리 상태
 	private TIMESTAMP START_TM; // 의뢰 시작 시간
 	private TIMESTAMP END_TM;	// 의뢰 종료 시간
-	private Date START_DAY;		// 의뢰 시작일
-	private Date END_DAY;		// 의뢰 종료일
+	private DATE START_DAY;		// 의뢰 시작일
+	private DATE END_DAY;		// 의뢰 종료일
 	//private String DAY_SEL;		// 특정 요일
 	private int TQ_FEE;			// 훈련 요금
-	private Date TQ_DT;			// 요청 등록일
+	private DATE TQ_DT;			// 요청 등록일
 	
-	private String PET_NM;
 	
 	// 훈련 요금 테이블
 	private int TF_CD;
@@ -95,19 +93,19 @@ public class TrainerRequestVO {
 		END_TM = eND_TM;
 	}
 
-	public Date getSTART_DAY() {
+	public DATE getSTART_DAY() {
 		return START_DAY;
 	}
 
-	public void setSTART_DAY(Date sTART_DAY) {
+	public void setSTART_DAY(DATE sTART_DAY) {
 		START_DAY = sTART_DAY;
 	}
 
-	public Date getEND_DAY() {
+	public DATE getEND_DAY() {
 		return END_DAY;
 	}
 
-	public void setEND_DAY(Date eND_DAY) {
+	public void setEND_DAY(DATE eND_DAY) {
 		END_DAY = eND_DAY;
 	}
 
@@ -125,11 +123,11 @@ public class TrainerRequestVO {
 		TQ_FEE = tQ_FEE;
 	}
 
-	public Date getTQ_DT() {
+	public DATE getTQ_DT() {
 		return TQ_DT;
 	}
 
-	public void setTQ_DT(Date tQ_DT) {
+	public void setTQ_DT(DATE tQ_DT) {
 		TQ_DT = tQ_DT;
 	}
 
@@ -155,14 +153,6 @@ public class TrainerRequestVO {
 
 	public void setTF_FEE(int tF_FEE) {
 		TF_FEE = tF_FEE;
-	}
-
-	public String getPET_NM() {
-		return PET_NM;
-	}
-
-	public void setPET_NM(String pET_NM) {
-		PET_NM = pET_NM;
 	}
 
 	
