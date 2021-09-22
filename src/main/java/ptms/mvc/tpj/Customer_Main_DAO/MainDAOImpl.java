@@ -7,6 +7,8 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import oracle.sql.DATE;
 import ptms.mvc.tpj.CustVO.CustomerVO;
 import ptms.mvc.tpj.CustVO.PetVO;
 
@@ -159,4 +161,10 @@ public class MainDAOImpl implements MainDAO {
 		return dao.getPetCnt();
 	}
 	
+	// 일정 가지고 오기(json변환을 위해 Map을 ResultType으로 받음)
+	@Override
+	public List<Map<String,Object>> getEvents(String id) {
+		MainDAO dao = data.getMapper(MainDAO.class);
+		return dao.getEvents(id);
+	}
 }

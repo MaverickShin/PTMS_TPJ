@@ -97,4 +97,17 @@
 	<select id="getPetCnt" resultType="int">
 		select count(*) as cnt from PET_TB
 	</select>
-</mapper>
+	
+	<!-- 일정 리스트 -->
+	<select id="getEvents" parameterType="String" resultType="Map">
+		select ck.CK_KIND type,
+			   cl.CL_CD _id,
+			   cl.CL_TITLE title,
+			   cl.CL_MEMO description,
+			   to_char (cl.START_TM, 'YY-MM-DDTHH24:MI') start,
+			   to_char (cl.END_TM, 'YY-MM-DDTHH24:MI') end
+		  from CALENDAR_TB cl, CALENDAR_KIND ck
+		 where CUST_ID = #{id} 
+		 order by START_TM asc     
+	</select>
+ </mapper>

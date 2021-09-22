@@ -10,4 +10,8 @@
    grant connect, resource, create view to PTMS_TEAM_PROJECT;
    -- grant create view to hr;
    
+   drop user PTMS_TEAM_PROJECT cascade;
    
+   SELECT SID,SERIAL#,USERNAME,STATUS FROM V$SESSION WHERE SCHEMANAME='PTMS_TEAM_PROJECT';
+   
+   ALTER SYSTEM KILL SESSION '167,537' IMMEDIATE;

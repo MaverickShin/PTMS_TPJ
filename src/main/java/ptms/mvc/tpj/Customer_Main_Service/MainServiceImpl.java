@@ -1,12 +1,17 @@
 package ptms.mvc.tpj.Customer_Main_Service;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.python.antlr.PythonParser.return_stmt_return;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -368,7 +373,41 @@ public class MainServiceImpl implements MainService{
 		model.addAttribute("deletecnt",deletecnt);
 	}
 
-
+	// 일정 호출
+	@SuppressWarnings("unchecked")
+	@Override
+	public void callCalendar(HttpServletRequest req, Model model) {
+		String id = (String) req.getSession().getAttribute("세션아이디");
+		List<Map<String,Object>> eventList = dao.getEvents(id);
+		
+		JSONArray jsonArray = new JSONArray();
+		for(Map<String,Object> map: eventList) {	
+			jsonArray.add(convertMapToJson(map));
+		}
+			
+		FileWriter file;
+		try {
+			file = new FileWriter("D:\\Dev88\\workspace\\PTMS_TPJ\\src\\main\\webapp\\WEB-INF\\views\\customer\\calendar\\data.json",false);
+			file.write(jsonArray.toJSONString());
+			file.flush();
+			file.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// JSON Map처리를 위한 보조 Method
+	@SuppressWarnings("unchecked")
+	public JSONObject convertMapToJson(Map<String, Object> map) {
+		JSONObject json = new JSONObject();
+		for (Map.Entry<String, Object> entry : map.entrySet()) {
+			String key = entry.getKey();
+			Object value = entry.getValue();
+			json.put(key, value);
+		}
+		return json;
+	}
+	
 	
 	// 펫정보 인증 및 상세 페이지
 /*	@Override

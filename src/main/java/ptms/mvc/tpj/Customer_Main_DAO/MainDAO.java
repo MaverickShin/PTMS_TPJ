@@ -60,7 +60,10 @@ public interface MainDAO {
 	// 펫 삭제
 	public int deletePet(int PET_CD);
 	
-	//등록된 펫 갯수
+	// 등록된 펫 갯수
 	public int getPetCnt();
+	
+	// 일정 가지고 오기(json변환을 위해 Map을 ResultType으로 받음)
+	public List<Map<String,Object>> getEvents(String id);
 	
 }
