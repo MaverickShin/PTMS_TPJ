@@ -24,7 +24,7 @@ public interface TrainerService {
 	public void deleteTrainer(HttpServletRequest req, Model model);
 	
 	// 훈련 예약
-	public void reserveTrainer(HttpServletRequest req, Model model);
+	public void reserveTrainer(HttpServletRequest req, Model model) throws ParseException;
 		
 	// 결제하기
 	public void payToTrainer(HttpServletRequest req, Model model);

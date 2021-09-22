@@ -1,9 +1,11 @@
 package ptms.mvc.tpj.TrainerDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import ptms.mvc.tpj.CustVO.PetVO;
+import ptms.mvc.tpj.CustVO.TrainerRequestVO;
 import ptms.mvc.tpj.CustVO.TrainerVO;
 
 public interface TrainerDAO {
@@ -30,7 +32,7 @@ public interface TrainerDAO {
 	public int deleteTrainer(int taCd);
 	
 	// insert - 훈련 예약
-	public int insertTrainerReservation(TrainerVO tqVo);
+	public int insertTrainerReservation(TrainerRequestVO vo);
 	
 	// insert - 훈련비 결제
 	public int insertTrainerFee(TrainerVO tfVo);
@@ -43,5 +45,11 @@ public interface TrainerDAO {
 	
 	// delete - 훈련 예약 변경
 	public int updateReservation(int tq_cd);
+	
+	// 의뢰인의 펫 마릿수 가져오기
+	public int getPetCount(String id);
+	
+	// 의뢰인의 펫 이름 가져오기
+	public List<TrainerVO> getPetInfo(String id);
 	
 }

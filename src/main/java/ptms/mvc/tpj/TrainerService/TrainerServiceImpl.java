@@ -3,6 +3,7 @@ package ptms.mvc.tpj.TrainerService;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import ptms.mvc.tpj.CustVO.TrainerRequestVO;
 import ptms.mvc.tpj.CustVO.TrainerVO;
 import ptms.mvc.tpj.TrainerDAO.TrainerDAO;
 import ptms.mvc.tpj.TrainerDAO.TrainerDAOImpl;
@@ -135,8 +137,22 @@ public class TrainerServiceImpl implements TrainerService{
 
 	@Override
 	public void TrainerInfo(HttpServletRequest req, Model model) {
-		// TODO Auto-generated method stub
+		String id = (String)req.getSession().getAttribute("cust_id");
+		int TA_CD = Integer.parseInt(req.getParameter("TA_CD"));
+		System.out.println("TA_CD : " + TA_CD);
 		
+		int selectCnt = dao.getPetCount(id);
+		
+		if(selectCnt > 0) {
+			List<TrainerVO> petInfo = dao.getPetInfo(id);
+			model.addAttribute("petInfo", petInfo);
+		}
+		
+
+		TrainerVO vo = dao.trainerInfo(TA_CD);
+
+		model.addAttribute("dto", vo);
+		model.addAttribute("selectCnt", selectCnt);
 	}
 
 	@Override
@@ -151,10 +167,47 @@ public class TrainerServiceImpl implements TrainerService{
 		
 	}
 
+	// 훈련사 요청테이블에 insert
 	@Override
-	public void reserveTrainer(HttpServletRequest req, Model model) {
-		// TODO Auto-generated method stub
+	public void reserveTrainer(HttpServletRequest req, Model model) throws ParseException {
+		TrainerRequestVO vo = new TrainerRequestVO();
 		
+		String CUST_ID = (String)req.getSession().getAttribute("cust_id"); //의뢰인 아이디
+		vo.setCUST_ID(CUST_ID);
+		
+		int TA_CD = Integer.parseInt(req.getParameter("TA_CD"));
+		vo.setTA_CD(TA_CD);
+		
+		String TQ_AMT = req.getParameter("TQ_AMT");
+		vo.setTQ_AMT(TQ_AMT);
+		
+		String PET_NM[] = req.getParameterValues("PET_NM");
+		
+		String result = "";
+		
+		for(int i = 0; i < PET_NM.length; i++) {
+			
+			if(PET_NM.length == 0) {
+				result += PET_NM[i];
+			} else {
+				result += ", " + PET_NM[i];
+			}
+		}
+		
+		vo.setPET_NM(result);
+		
+		String TQ_LOC = req.getParameter("TQ_LOC");
+		vo.setTQ_LOC(TQ_LOC);
+		
+		String START_DAY = req.getParameter("START_DAY");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	      
+	    Date date = new Date(sdf.parse(START_DAY).getTime());
+	    
+	    vo.setSTART_DAY(date);
+	    
+	    int insertCnt = dao.insertTrainerReservation(vo);
+		model.addAttribute("insertCnt", insertCnt);
 	}
 
 	@Override

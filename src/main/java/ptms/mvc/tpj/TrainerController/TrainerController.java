@@ -72,4 +72,24 @@ public class TrainerController {
       
       return "customer/trainer/requestTrainer";
    }
+   
+   @RequestMapping("trainerDetail")
+   public String trainerDetail(HttpServletRequest req, Model model) {
+      log.info("url ==> trainerDetail");
+      
+      trainerservice.TrainerInfo(req, model);
+      
+      return "customer/trainer/trainerDetail";
+   }
+
+   @RequestMapping("requestTraining")
+   public String requestTraining(HttpServletRequest req, Model model) throws ParseException {
+      log.info("url ==> requestTraining");
+
+      trainerservice.reserveTrainer(req, model);
+      
+      return "customer/trainer/requestTrainingAction";
+   }
+   
+   
 }
