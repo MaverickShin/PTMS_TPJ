@@ -1,6 +1,6 @@
 package ptms.mvc.tpj.CustVO;
 
-import oracle.sql.DATE;
+import java.sql.Date;
 
 public class SitterVO {
 	
@@ -11,11 +11,12 @@ public class SitterVO {
 	//시터 프로필 테이블
 	 private int SIT_ID;     		// 시터 ID
 	 private String CUST_ID;   	 	// 고객 아이디
+	 private String CUST_NM;        // 고객 이름
 	 private String SIT_TITLE; 		// 시터 소개글 제목
 	 private String SIT_APPEAL;  	// 시터 소개글 본문
 	 private String SIT_IMG;        // 프로필 사진
 	 private int SIT_ST;     		// 시터 활동 등록상태  --0이면 활동x, 1이면 활동o
-	 private DATE SIT_DT;			// 시터 등록일
+	 private Date SIT_DT;			// 시터 등록일
 	 
 	 // 시터 서비스 요금 테이블
 	 private int SF_CD;				// 서비스 요금 번호
@@ -27,7 +28,7 @@ public class SitterVO {
 	 private int SG_GRADE;			// 시터 평점
 	 private String SG_CON;			// 시터 이용 후기
 	 private String SG_IMG;			// 시터 이용 후기 이미지
-	 private DATE SG_DT;			// 시터 후기 등록일
+	 private Date SG_DT;			// 시터 후기 등록일
 	 
 	 //시터 서비스 정보 테이블
 	 private int SV_CD;				// 시터 서비스 코드
@@ -36,18 +37,18 @@ public class SitterVO {
 	 private int SV2_NO;			// 놀이 서비스
 	 private int SV3_NO;			// 응급처치 서비스
 	 private int SV4_NO;			// 산책 서비스
-	 private String RESERVATION;    // 예약 가능일(평일, 주말 등)
+	 private Date WK_START;		// 활동 시작 가능일
+	 private Date WK_END;			// 활동 시작 종료일
 	 
 	 //시터 구하기 요청 테이블
 	 private int SQ_CD;				// 시터 구하기 요청 번호
 	 private String SQ_AMT;			// 펫 종류 및 마리수
 	 private String SQ_LOC;			// 고객 거주 지역
 	 private int SQ_ST;				// 처리상태
-	 private DATE START_DAY;		// 의뢰 시작일
-	 private DATE END_DAY;			// 의뢰 종료일
-	 private DATE DAY_SEL;			// 특정 요일
+	 private Date START_DAY;		// 의뢰 시작일
+	 private Date END_DAY;			// 의뢰 종료일
 	 private int SQ_FEE;			// 서비스요금
-	 private DATE SQ_DT;			// 요청 등록일
+	 private Date SQ_DT;			// 요청 등록일
 	 
 	 
 	public int getSR_CD() {
@@ -113,11 +114,11 @@ public class SitterVO {
 		SIT_ST = sIT_ST;
 	}
 	
-	public DATE getSIT_DT() {
+	public Date getSIT_DT() {
 		return SIT_DT;
 	}
 	
-	public void setSIT_DT(DATE sIT_DT) {
+	public void setSIT_DT(Date sIT_DT) {
 		SIT_DT = sIT_DT;
 	}
 	
@@ -176,11 +177,11 @@ public class SitterVO {
 		SG_IMG = sG_IMG;
 	}
 	
-	public DATE getSG_DT() {
+	public Date getSG_DT() {
 		return SG_DT;
 	}
 	
-	public void setSG_DT(DATE sG_DT) {
+	public void setSG_DT(Date sG_DT) {
 		SG_DT = sG_DT;
 	}
 	
@@ -232,14 +233,6 @@ public class SitterVO {
 		SV4_NO = sV4_NO;
 	}
 	
-	public String getRESERVATION() {
-		return RESERVATION;
-	}
-	
-	public void setRESERVATION(String rESERVATION) {
-		RESERVATION = rESERVATION;
-	}
-	
 	public int getSQ_CD() {
 		return SQ_CD;
 	}
@@ -272,28 +265,20 @@ public class SitterVO {
 		SQ_ST = sQ_ST;
 	}
 	
-	public DATE getSTART_DAY() {
+	public Date getSTART_DAY() {
 		return START_DAY;
 	}
 	
-	public void setSTART_DAY(DATE sTART_DAY) {
+	public void setSTART_DAY(Date sTART_DAY) {
 		START_DAY = sTART_DAY;
 	}
 	
-	public DATE getEND_DAY() {
+	public Date getEND_DAY() {
 		return END_DAY;
 	}
 	
-	public void setEND_DAY(DATE eND_DAY) {
+	public void setEND_DAY(Date eND_DAY) {
 		END_DAY = eND_DAY;
-	}
-	
-	public DATE getDAY_SEL() {
-		return DAY_SEL;
-	}
-	
-	public void setDAY_SEL(DATE dAY_SEL) {
-		DAY_SEL = dAY_SEL;
 	}
 	
 	public int getSQ_FEE() {
@@ -304,13 +289,37 @@ public class SitterVO {
 		SQ_FEE = sQ_FEE;
 	}
 	
-	public DATE getSQ_DT() {
+	public Date getSQ_DT() {
 		return SQ_DT;
 	}
 	
-	public void setSQ_DT(DATE sQ_DT) {
+	public void setSQ_DT(Date sQ_DT) {
 		SQ_DT = sQ_DT;
 	}
-	 
 
+	public Date getWK_START() {
+		return WK_START;
+	}
+
+	public void setWK_START(Date wK_START) {
+		WK_START = wK_START;
+	}
+
+	public Date getWK_END() {
+		return WK_END;
+	}
+
+	public void setWK_END(Date wK_END) {
+		WK_END = wK_END;
+	}
+
+	public String getCUST_NM() {
+		return CUST_NM;
+	}
+
+	public void setCUST_NM(String cUST_NM) {
+		CUST_NM = cUST_NM;
+	}
+	
+	
 }

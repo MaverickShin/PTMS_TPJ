@@ -1,5 +1,7 @@
 package ptms.mvc.tpj.Sitter_Controller;
 
+import java.text.ParseException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -30,12 +32,30 @@ public class SitterController {
 	   
 	// (찾기 버튼 누른 후)시터 목록 페이지
 	 @RequestMapping("sitterMatching")
-	 public String sitterMatching(HttpServletRequest req, Model model) {
+	 public String sitterMatching(HttpServletRequest req, Model model) throws ParseException {
 		 log.info("url ==> sitterMatching");
       
 		 sitterSer.workSitterList(req, model);
 		 return "customer/sitter/sitterMatching";
-	 } 
+	 }  
+	 
+	 // 시터 상세 페이지
+	 @RequestMapping("sitterDetail")
+	 public String sitterDetail(HttpServletRequest req, Model model){
+		 log.info("url ==> sitterDetail");
+		 
+		 sitterSer.detailSitter(req, model);
+		 return "customer/sitter/sitterDetail";
+	 }
+	 
+	 // 펫시팅  신청하기
+	 @RequestMapping("requestSitting")
+	 public String requestSitting(HttpServletRequest req, Model model){
+		 log.info("url ==> requestSitting");
+		 
+		 sitterSer.insertRequest(req, model);
+		 return "customer/sitter/requestSitting";
+	 }	 
 	 
 	 //이용후기
 	 
@@ -58,7 +78,7 @@ public class SitterController {
 	 
 	 //펫시터 등록 처리
 	 @RequestMapping("applySitteAction")
-	 public String applySitteAction(HttpServletRequest req, Model model) {
+	 public String applySitteAction(HttpServletRequest req, Model model) throws ParseException {
 		 log.info("url ==> applySitter");
 		 
 		 sitterSer.insertSitter(req, model);

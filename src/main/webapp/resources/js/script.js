@@ -49,6 +49,6 @@ function addressSerch() {
             }
         }
     }).open({
-    	popupName:'postCode',
+    	popupName:'postCode'
     });
 }
