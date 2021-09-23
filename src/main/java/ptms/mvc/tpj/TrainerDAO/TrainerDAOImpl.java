@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ptms.mvc.tpj.CustVO.PetVO;
+import ptms.mvc.tpj.CustVO.TrainerRequestVO;
 import ptms.mvc.tpj.CustVO.TrainerVO;
 
 @Repository
@@ -30,8 +31,8 @@ public class TrainerDAOImpl implements TrainerDAO {
 
 	@Override
 	public TrainerVO trainerInfo(int taCd) {
-		// TODO Auto-generated method stub
-		return null;
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.trainerInfo(taCd);
 	}
 
 	@Override
@@ -76,9 +77,10 @@ public class TrainerDAOImpl implements TrainerDAO {
 	}
 
 	@Override
-	public int insertTrainerReservation(TrainerVO tqVo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertTrainerReservation(TrainerRequestVO vo) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		int insertCnt = dao.insertTrainerReservation(vo);
+		return insertCnt;
 	}
 
 	@Override
@@ -103,6 +105,22 @@ public class TrainerDAOImpl implements TrainerDAO {
 	public int updateReservation(int tq_cd) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	// 펫 마릿수 가져오기
+	@Override
+	public int getPetCount(String id) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		int selectCnt = dao.getPetCount(id);
+		return selectCnt;
+	}
+	
+	//펫 정보 가져오기(이름, 펫코드)
+	@Override
+	public List<TrainerVO> getPetInfo(String id) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		List<TrainerVO> petName = dao.getPetInfo(id);
+		return petName;
 	}
 
 }

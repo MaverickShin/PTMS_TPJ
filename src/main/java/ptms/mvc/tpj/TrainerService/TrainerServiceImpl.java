@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import ptms.mvc.tpj.CustVO.TrainerRequestVO;
 import ptms.mvc.tpj.CustVO.TrainerVO;
 import ptms.mvc.tpj.TrainerDAO.TrainerDAO;
 import ptms.mvc.tpj.TrainerDAO.TrainerDAOImpl;
@@ -106,7 +107,7 @@ public class TrainerServiceImpl implements TrainerService{
 		map.put("TQ_AMT", TQ_AMT);
 		
 		String SQ_LOC = req.getParameter("SQ_LOC");
-		System.out.println("SQ_LOC : " + SQ_LOC);
+		System.out.println("SQ_LOC- : " + SQ_LOC);
 		map.put("SQ_LOC", SQ_LOC);
 		
 		String START_DAY = req.getParameter("START_DAY");
@@ -133,13 +134,30 @@ public class TrainerServiceImpl implements TrainerService{
 		
 		model.addAttribute("selectCnt", selectCnt);
 		model.addAttribute("dtos", dtos);
+		model.addAttribute("SQ_LOC", SQ_LOC);
 		
 	}
 
 	@Override
 	public void TrainerInfo(HttpServletRequest req, Model model) {
-		// TODO Auto-generated method stub
+		String id = (String)req.getSession().getAttribute("cust_id");
+		String SQ_LOC = req.getParameter("SQ_LOC");
+		int TA_CD = Integer.parseInt(req.getParameter("TA_CD"));
+		System.out.println("TA_CD : " + TA_CD);
 		
+		int selectCnt = dao.getPetCount(id);
+		
+		if(selectCnt > 0) {
+			List<TrainerVO> petInfo = dao.getPetInfo(id);
+			model.addAttribute("petInfo", petInfo);
+		}
+		
+
+		TrainerVO vo = dao.trainerInfo(TA_CD);
+		System.out.println(vo.getTS1_NO());
+		model.addAttribute("dto", vo);
+		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("SQ_LOC", SQ_LOC);
 	}
 
 	// 훈련사 정보 수정 화면
@@ -239,9 +257,51 @@ public class TrainerServiceImpl implements TrainerService{
 		
 	}
 
+	// 훈련사 요청테이블에 insert
 	@Override
-	public void reserveTrainer(HttpServletRequest req, Model model) {
-		// TODO Auto-generated method stub
+	public void reserveTrainer(HttpServletRequest req, Model model) throws ParseException {
+		TrainerRequestVO vo = new TrainerRequestVO();
+		
+		String CUST_ID = (String)req.getSession().getAttribute("cust_id"); //의뢰인 아이디
+		System.out.println("CUST_ID : " + CUST_ID);
+		vo.setCUST_ID(CUST_ID);
+		
+		int TA_CD = Integer.parseInt(req.getParameter("TA_CD"));
+		System.out.println("TA_CD : " + TA_CD);
+		vo.setTA_CD(TA_CD);
+		
+		String TQ_AMT = req.getParameter("TQ_AMT");
+		System.out.println("TQ_AMT : " + TQ_AMT);
+		vo.setTQ_AMT(TQ_AMT);
+		
+		String PET_NM[] = req.getParameterValues("PET_NM");
+		
+		String result = "";
+		
+		for(int i = 0; i < PET_NM.length; i++) {
+			
+			if(PET_NM.length == 0) {
+				result += PET_NM[i];
+			} else {
+				result += PET_NM[i] + ", ";
+			}
+		}
+		System.out.println("result : " + result);
+		vo.setPET_NM(result);
+		
+		String TQ_LOC = req.getParameter("TQ_LOC");
+		System.out.println("TQ_LOC : " + TQ_LOC);
+		vo.setTQ_LOC(TQ_LOC);
+		
+		String START_DAY = req.getParameter("START_DAY");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	      
+	    Date date = new Date(sdf.parse(START_DAY).getTime());
+	    System.out.println("date : " + date);
+	    vo.setSTART_DAY(date);
+	    
+	    int insertCnt = dao.insertTrainerReservation(vo);
+		model.addAttribute("insertCnt", insertCnt);
 		
 	}
 

@@ -75,5 +75,26 @@ public class TrainerController {
       
       return "customer/matching/matchingMain";
    }
+   
+   // 훈련사 찾기 후 상세페이지로 이동
+   @RequestMapping("trainerDetail")
+   public String trainerDetail(HttpServletRequest req, Model model) {
+      log.info("url ==> trainerDetail");
+      
+      //상세페이지에 띄울 훈련사 정보 가져오기
+      trainerservice.TrainerInfo(req, model);
+      
+      return "customer/trainer/trainerDetail";
+   }
+
+   // 고객이 훈련 신청하기 -> 요청테이블에 INSERT
+   @RequestMapping("requestTraining")
+   public String requestTraining(HttpServletRequest req, Model model) throws ParseException {
+      log.info("url ==> requestTraining");
+
+      trainerservice.reserveTrainer(req, model);
+      
+      return "customer/trainer/requestTrainingAction";
+   }
  
 }

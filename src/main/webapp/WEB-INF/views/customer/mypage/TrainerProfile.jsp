@@ -138,11 +138,11 @@
 																	<label><input type="checkbox" value="1"
 																		name="TS1_NO" id="TS1_NO" class="form-group"
 																		onchange="check();">배변훈련</label> <label><input
-																		type="checkbox" value="1" name="TS2_NO" id="TS2_NO"
+																		type="checkbox" value="2" name="TS2_NO" id="TS2_NO"
 																		class="form-group" onchange="check();">분리불안</label> <label><input
-																		type="checkbox" value="1" name="TS3_NO" id="TS3_NO"
+																		type="checkbox" value="3" name="TS3_NO" id="TS3_NO"
 																		class="form-group" onchange="check();">기본훈련</label> <label><input
-																		type="checkbox" value="1" name="TS4_NO" id="TS4_NO"
+																		type="checkbox" value="4" name="TS4_NO" id="TS4_NO"
 																		class="form-group" onchange="check();">짖음해결</label>
 
 																	<div id="tr_kind1_fee" style="display: none">
