@@ -2,6 +2,7 @@ package ptms.mvc.tpj.Customer_Main_Service;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.python.antlr.PythonParser.return_stmt_return;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -406,6 +411,84 @@ public class MainServiceImpl implements MainService{
 			json.put(key, value);
 		}
 		return json;
+	}
+
+	// 질병정보 크롤링 - 21.09.23 창훈 추가
+	@Override
+	public void SymptomCrawling(HttpServletRequest req, Model model) {
+		
+		// Jsoup를 이용해서 반려동물 질병정보 크롤링
+		String url = "http://www.pethealth.kr/news/articleList.html?sc_section_code=S1N9&view_type=sm";
+		Document doc = null;
+		
+		// for문을 돌면서 뉴스 제목들을 가져오기 위한 list
+		List<String> list = new ArrayList<String>();
+		
+		try {
+			// Jsoup url 연결
+			doc = Jsoup.connect(url).get();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		// 주요 뉴스로 나오는 태그를 찾아서 가져오도록 한다. <section class="section-body">
+		Elements element = doc.select("section.section-body");
+		
+		// 1. 헤더 부분의 제목을 가져온다.
+		String title = element.select("h3.titles").text();
+		
+		System.out.println(title);
+		
+		for(Element el : element.select("h4")) { // 하위 뉴스 기사들을 for문을 돌면서 출력
+			
+			list.add(el.text());
+		}
+	
+		model.addAttribute("title", title);
+		model.addAttribute("list", list);
+			
+	}
+
+	// 반려동물 지식정보 크롤링 - 21.09.23 창훈 추가
+	@Override
+	public void SenseCrawling(HttpServletRequest req, Model model) {
+		// Jsoup를 이용해서 반려동물 지식정보 크롤링
+		String url = "http://www.pethealth.kr/news/articleList.html?sc_section_code=S1N9&view_type=sm";
+		Document doc = null;
+		
+		// for문을 돌면서 뉴스 제목들을 가져오기 위한 list
+		List<String> list = new ArrayList<String>();
+		
+		try {
+			// Jsoup url 연결
+			doc = Jsoup.connect(url).get();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		// 주요 뉴스로 나오는 태그를 찾아서 가져오도록 한다. <section class="section-body">
+		Elements element = doc.select("section.section-body");
+		
+		// 1. 헤더 부분의 제목을 가져온다.
+		String title = element.select("h3.titles").text();
+		
+		System.out.println("==================");
+		System.out.println(title);
+		System.out.println("==================");
+		
+		for(Element el : element.select("h4")) { // 하위 뉴스 기사들을 for문을 돌면서 출력
+			System.out.println(el.text());
+			
+			list.add(el.text());
+		}
+	
+		model.addAttribute("title", title);
+		model.addAttribute("list", list);
+		
+		System.out.println("==================");
+		
 	}
 	
 	

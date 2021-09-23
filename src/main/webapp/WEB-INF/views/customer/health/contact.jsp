@@ -90,7 +90,9 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-sm-6 section01_img" style="text-align: center">
-								<a href="/tpj/cust/SYMPTOM"><img src="${imgPath}bg_3.jpg"
+							
+								<!-- SYMPTOM => symptom 소문자로 수정 - 21.09.23-->
+								<a href="/tpj/cust/symptom"><img src="${imgPath}bg_3.jpg"
 									width="250px"></a>
 							</div>
 							<div class="col-sm-6 section01_txt">
@@ -113,7 +115,9 @@
 									누구나 언제 어디서든 쉽게 관리할 수 있도록 성분정보를 확인할 수 있다.</p>
 							</div>
 							<div class="col-sm-6 section02_img" style="text-align: center">
-								<a href="/tpj/cust/SENSE"><img src="${imgPath}gallery-6.jpg" width="250px"></a>
+								
+								<!-- SENSE => sense 소문자로 수정 - 21.09.23 -->
+								<a href="/tpj/cust/sense"><img src="${imgPath}gallery-6.jpg" width="250px"></a>
 							</div>
 						</div>
 					</div>

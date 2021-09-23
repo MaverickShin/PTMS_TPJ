@@ -274,37 +274,25 @@ public class MainController {
    @RequestMapping("selfdiagnosis")
    public String selfdiagnosis() {
 	   
-	   return "customer/health/SELFDIAGNOSIS";
+	   return "customer/health/selfdiagnosis";
    }
    
-   // 질병정보 크롤링 
-   @RequestMapping("SYMPTOM")
-   public String symptom(Model model) {
+   // 질병정보 크롤링  - 21.09.23. 셀레니움 방식에서 Jsoup으로 변경
+   @RequestMapping("symptom")
+   public String symptom(HttpServletRequest req, Model model) {
 	   
-	   List<String> news = new ArrayList<>();
+	   service.SymptomCrawling(req, model);
 	   
-	   SYMPTOM_INFO_CRAWLING Symptom = new SYMPTOM_INFO_CRAWLING();
-	   
-	   news = Symptom.SymptomInfo();
-	   
-	   model.addAttribute("list", news);
-	   
-	   return "customer/health/SYMPTOM_INFO_VIEW";
+	   return "customer/health/Symptom_Info_View";
    }
 
-   // 반려동물 지식정보 크롤링 
-   @RequestMapping("SENSE")
-   public String sense(Model model) {
+   // 반려동물 지식정보 크롤링 추가 - 21.09.23.
+   @RequestMapping("sense")
+   public String sense(HttpServletRequest req, Model model) {
 	   
-	   List<String> news = new ArrayList<>();
+	   service.SenseCrawling(req, model);
 	   
-	   SENSE_INFO_CRAWLING Sense = new SENSE_INFO_CRAWLING();
-	   
-	   news = Sense.SenseInfo();
-	   
-	   model.addAttribute("list", news);
-	   
-	   return "customer/health/SENSE_INFO_VIEW";
+	   return "customer/health/Sense_Info_View";
    }
    
    // 구독 페이지
