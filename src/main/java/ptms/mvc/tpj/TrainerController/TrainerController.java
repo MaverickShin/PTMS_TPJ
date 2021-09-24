@@ -73,7 +73,9 @@ public class TrainerController {
    public String requestTrainer(HttpServletRequest req, Model model) {
       log.info("url ==> requestTrainer");
       
-      return "customer/matching/matchingMain";
+      trainerservice.TraineeList(req, model);
+      
+      return "customer/trainer/requestTrainerList";
    }
    
    // 훈련사 찾기 후 상세페이지로 이동
