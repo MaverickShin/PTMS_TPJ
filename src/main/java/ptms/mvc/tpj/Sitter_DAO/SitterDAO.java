@@ -33,7 +33,7 @@ public interface SitterDAO {
 	// 펫시터 찾기 -(조건에 맞는) 시터 수 구하기
 	public int getSitterCnt(SitterVO vo);
 	
-	//펫시터 찾기 - 리스트 출력
+	// 펫시터 찾기 - 리스트 출력
 	public List<SitterVO> activityList(SitterVO vo);
 	
 	// 시터 상세 조회 페이지
@@ -46,7 +46,7 @@ public interface SitterDAO {
 	public List<SitterVO> requestList();
 	
 	// 지정 시터 의뢰 목록 (나에게온 의뢰)
-	public List<SitterVO> selectRequestList(int sit_id);
+	public List<SitterVO> selectRequestList(String cust_id);
 	
 	// 의뢰자 서비스 요금 조회
 	public SitterVO feeSearch(int pet_cd);

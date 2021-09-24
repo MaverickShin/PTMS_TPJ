@@ -38,9 +38,9 @@
            <li><a href="">이용후기</a></li>
            <li><a href="feeInfo">요금안내</a></li>
            <li>-펫시터-</li>
-           <li><a href="applySitter">펫시터 지원</a></li>
+           <li><a href="#">펫시터 지원</a></li>
            <li><a href="">활동 등록</a></li>
-           <li><a href="requestForMe">나에게 온 의뢰</a></li>
+           <li><a href="requestForSitter">나에게 온 의뢰</a></li>
         </ul>
       </nav>
       

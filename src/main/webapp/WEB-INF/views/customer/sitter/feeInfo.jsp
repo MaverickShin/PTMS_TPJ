@@ -20,7 +20,7 @@
 				<li>-펫시터-</li>
 				<li><a href="applySitter">펫시터 지원</a></li>
 				<li><a href="">활동 등록</a></li>
-				<li><a href="">나에게 온 의뢰</a></li>
+				<li><a href="requestForSitter">나에게 온 의뢰</a></li>
 			</ul>
 		</nav>
 
