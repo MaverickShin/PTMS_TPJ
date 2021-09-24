@@ -15,13 +15,13 @@
 	
 	<!-- 시터 프로필 등록 -->
 	<insert id="profileInsert" parameterType="ptms.mvc.tpj.CustVO.SitterVO">
-		INSERT INTO SITTERS_TB
+		INSERT INTO SITTERS_TB(SIT_ID,CUST_ID,SR_CD,SIT_TITLE,SIT_APPEAL,SIT_ST,SIT_DT,SIT_IMG)
 		VALUES(SIT_IDSQE.nextval,#{CUST_ID},#{SR_CD},#{SIT_TITLE}, #{SIT_APPEAL},1,sysdate,#{SIT_IMG})
 	</insert>
 	
 	<!-- 시터 서비스 정보 등록 -->
 	<insert id="insertService" parameterType="ptms.mvc.tpj.CustVO.SitterVO">
-		INSERT INTO SITTER_SERVICE_TB
+		INSERT INTO SITTER_SERVICE_TB(SV_CD,SIT_ID,SV_AREA,SV1_NO,SV2_NO,SV3_NO,SV4_NO,WK_START,WK_END)
 		VALUES(SV_CDSEQ.nextval, SIT_IDSQE.currval,#{SV_AREA},#{SV1_NO},#{SV2_NO},#{SV3_NO},#{SV4_NO},#{WK_START},#{WK_END})
 	</insert>
 	
@@ -32,19 +32,24 @@
 	          FROM SITTERS_TB s, SITTER_SERVICE_TB ser
 	          WHERE s.SIT_ID = ser.SIT_ID
 	          AND ser.SV_AREA LIKE '%'||#{SV_AREA}||'%'
-	          INTERSECT
-	          SELECT  s.SIT_ID 
-	          FROM SITTERS_TB s, SITTER_SERVICE_TB ser
-	          WHERE s.SIT_ID = ser.SIT_ID
 	          AND s.SIT_ST = 1
 	          INTERSECT
-	          SELECT  s.SIT_ID 
+	    SELECT s.SIT_ID 
 	          FROM SITTERS_TB s, SITTER_SERVICE_TB ser
 	          WHERE s.SIT_ID = ser.SIT_ID
 	          AND #{WK_START} between ser.WK_START AND ser.WK_END
 	          AND #{WK_END} between ser.WK_START AND ser.WK_END
+	          INTERSECT
+		SELECT s.SIT_ID
+	          FROM SITTERS_TB s, SITTER_SERVICE_TB ser
+	          WHERE s.SIT_ID = ser.SIT_ID
+	          AND ser.SV1_NO >= #{SV1_NO}
+	          AND ser.SV2_NO >= #{SV2_NO}
+			  AND ser.SV3_NO >= #{SV3_NO}
+			  AND ser.SV4_NO >= #{SV4_NO}
 			 )
 	</select>	
+	
 	<!-- 펫시터 찾기 - 리스트 출력  -->
 	<select id="activityList" parameterType="ptms.mvc.tpj.CustVO.SitterVO" resultType="ptms.mvc.tpj.CustVO.SitterVO">
 	  <![CDATA[
@@ -94,4 +99,10 @@
 		WHERE c.CUST_ID = p.CUST_ID
 		AND c.CUST_ID=#{CUST_ID}
 	</select>
+	
+	<!-- 펫시팅 신청하기 - 요청테이블에 insert -->
+ 	<insert id="selectRequestInsert" parameterType="ptms.mvc.tpj.CustVO.SitterVO">
+		INSERT INTO SITTER_REQUEST_TB(SQ_CD,CUST_ID,SIT_ID,SQ_AMT,SQ_LOC,SQ_ST,START_DAY,END_DAY,SQ_DT,REQ_SV)
+		VALUES(SQ_CDSEQ.nextval,#{CUST_ID},#{SIT_ID},#{SQ_AMT},#{SQ_LOC},0,#{START_DAY},#{END_DAY},sysdate,#{REQ_SV})
+	</insert> 
 </mapper>    

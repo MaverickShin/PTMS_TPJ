@@ -20,7 +20,7 @@
 				<li>-펫시터-</li>
 				<li><a href="applySitter">펫시터 지원</a></li>
 				<li><a href="">활동 등록</a></li>
-				<li><a href="">나에게 온 의뢰</a></li>
+				<li><a href="requestForMe">나에게 온 의뢰</a></li>
 			</ul>
 		</nav>
 
@@ -40,18 +40,6 @@
 									placeholder="시 또는 구 입력">
 							</div>
 							
-<!-- 							<div class="col-md-6">
-                                 <div class="form-group">
-                                    <label class="label" for="hometype">어떤 장소를 원하시나요?</label>
-                                   	   <select size="1" id="iptags" name="SR_CD">
-								 			<option value="1">주택(마당x)</option>
-								 			<option value="2)">주택(마당o)</option>
-								 			<option value="3">아파트</option>
-								 			<option value="4">빌라 </option>
-							 		   </select><br>
-                                 </div>
-                              </div> -->
-
 							<!-- <div>
 	      					<p class="label">언제 맡기시나요?</p>
 						      <input type="datetime-local" class="iptags" name="START_DAY" > ~
@@ -82,20 +70,11 @@
                                                  <label><input type="checkbox" value="1" name="SV1_NO" class="form-group">미용 서비스</label>
                                                  <label><input type="checkbox" value="2" name="SV2_NO" class="form-group">놀이 서비스</label>
                                                  <label><input type="checkbox" value="3" name="SV3_NO" class="form-group">산책 서비스</label>
-												 <label><input type="checkbox" value="4" name="SV4_NO" class="form-group" checked>응급처치 서비스<필수 서비스></label>
+												 <label><input type="checkbox" value="4" name="SV4_NO" class="form-group" checked onclick="return false;">응급처치 서비스<필수 서비스></label>
                                             </div>
                                         </div>
                                     </div>
                               </div>
-
-<%-- 							<div class="col-md-6">
-								<div class="form-group">
-									<label class="label" for="trainerImg">나의 반려동물 선택</label>
-								<c:forEach var="" items="">
-									
-									</c:forEach>
-								</div>
-							</div> --%>
 
 							<div class="col-md-12">
 								<div class="form-group" align="center">

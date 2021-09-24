@@ -54,8 +54,8 @@ public interface SitterDAO {
 	// 시터 의뢰 등록 (시터를 지정하지 않았을 때)
 	//public int requestInsert(SitterVO vo);
 	
-	// 시터 의뢰 
-	public int selectRequestInsert(String sit_id);
+	// 펫시팅 신청하기 - 요청테이블에 insert
+	public int selectRequestInsert(SitterVO vo);
 	
 	// 의뢰자 거주지역 조회
 	public ZipcodeVO RequesterAddressInfo(String cust_id);

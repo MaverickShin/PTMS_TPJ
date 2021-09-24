@@ -83,7 +83,7 @@ public class SitterServiceImpl implements SitterService{
 			 * if(insertCnt == 2) insertCnt =1; else insertCnt = 0;
 			 */
 		}
-		req.setAttribute("insertCnt", insertCnt);
+		 model.addAttribute("insertCnt", insertCnt);
 	}
 
 	// 시터 활동 등록
@@ -122,7 +122,8 @@ public class SitterServiceImpl implements SitterService{
 		//정보를 담을 sitterVO생성
 		SitterVO vo = new SitterVO();
 		
-		vo.setSV_AREA(req.getParameter("SV_AREA"));	    //서비스 가능 지역
+		String SV_AREA = req.getParameter("SV_AREA");
+		vo.setSV_AREA(SV_AREA);	    //서비스 가능 지역
 		
 		String WK_START = req.getParameter("WK_START");    //활동 시작 가능일
 	    String WK_END = req.getParameter("WK_END"); 	//활동 시작 종료일
@@ -136,6 +137,7 @@ public class SitterServiceImpl implements SitterService{
 		String SV2_NO = req.getParameter("SV2_NO");		//놀이서비스
 		String SV3_NO = req.getParameter("SV3_NO");		//산책서비스
 		String SV4_NO = req.getParameter("SV4_NO");		//응급처치서비스
+
 		if(SV1_NO == null) {
 			vo.setSV1_NO(0);
 		}else {
@@ -156,17 +158,22 @@ public class SitterServiceImpl implements SitterService{
 		}else {
 			vo.setSV4_NO(4);
 		}
+
+		System.out.println("SV1_NO : " + SV1_NO);
+		System.out.println("SV2_NO : " + SV2_NO);
+		System.out.println("SV3_NO : " + SV3_NO);
+		System.out.println("SV4_NO : " + SV4_NO);
 		
 		int selectCnt = sitterDao.getSitterCnt(vo);   //조건에 맞는 시터 수 구하기
-		System.out.println("selectCnt : " + selectCnt);
+		System.out.println("조건충족 시터수 selectCnt : " + selectCnt);
 		
 		List<SitterVO> list = null;
 		if(selectCnt > 0) {
 			list = sitterDao.activityList(vo);  //펫시터 찾기 - 리스트 출력
 		}
-		req.setAttribute("selectCnt", selectCnt);
-		req.setAttribute("dtos", list);
-		
+		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("dtos", list);
+		model.addAttribute("SV_AREA", SV_AREA);
 	}
 
 	// 시터 상세 조회
@@ -176,38 +183,100 @@ public class SitterServiceImpl implements SitterService{
 		
 		int SIT_ID = Integer.parseInt(req.getParameter("SIT_ID"));
 		String CUST_ID = (String)req.getSession().getAttribute("cust_id");
+		String SV_AREA = req.getParameter("SV_AREA");
 		System.out.println("세션CUST_ID: " + CUST_ID);
 		
 		SitterVO vo = sitterDao.detailSitter(SIT_ID);
 		int selectCnt = sitterDao.MypetCount(CUST_ID);
-		System.out.println("selectCnt : " + selectCnt);
+		System.out.println("마이펫 수 selectCnt : " + selectCnt);
 		List<PetVO> list = sitterDao.MypetList(CUST_ID);
-		System.out.println("펫이름 : " );
 		
-		req.setAttribute("selectCnt", selectCnt);
-		req.setAttribute("dto", vo);
-		req.setAttribute("list", list);
+		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("dto", vo);
+		model.addAttribute("list", list);
+		model.addAttribute("SIT_ID" , SIT_ID);
+		model.addAttribute("SV_AREA", SV_AREA);
 	}
 
-	// 시터 의뢰 목록 (전체)
+	//의뢰 목록 (전체)
 	@Override
 	public void allRequestList(HttpServletRequest req, Model model) {
-		// TODO Auto-generated method stub
+		System.out.println("service ==> allRequestList");
+		
 		
 	}
 
 	// 지정 시터 의뢰 목록 (고객이 본인을 지정하여 요청한 경우)
+	/*
 	@Override
 	public void selectRequestList(HttpServletRequest req, Model model) {
 		// TODO Auto-generated method stub
 		
 	}
-
-	// 고객 - 시터 의뢰 
+	*/
+	
+	// 고객 - 펫시팅 신청하기
 	@Override
-	public void insertRequest(HttpServletRequest req, Model model) {
-		// TODO Auto-generated method stub
+	public void insertRequest(HttpServletRequest req, Model model) throws ParseException {
+		System.out.println("service ==> insertRequest");
 		
+		//정보를 담을 sitterVO생성
+		  SitterVO vo = new SitterVO();		
+		  
+		  vo.setCUST_ID((String)req.getSession().getAttribute("cust_id"));
+	      String SQ_LOC = req.getParameter("SV_AREA");  //고객거주지역
+	      vo.setSQ_LOC(SQ_LOC);
+	      System.out.println("SQ_LOC : " + SQ_LOC);
+	      
+		  String PET_NM[] = req.getParameterValues("PET_NM");
+	      String result = "";
+	      for(int i = 0; i < PET_NM.length; i++) {
+	         if(PET_NM.length == 0) {
+	            result += PET_NM[i];
+	         } else {
+	            result += PET_NM[i] + "  ";
+	         }
+	      }
+	      System.out.println("result : " + result);
+	      
+	      vo.setSIT_ID(Integer.parseInt(req.getParameter("SIT_ID")));  //시터ID
+	      vo.setSQ_AMT(result);  //펫 이름
+
+	      
+	      String SV1_NO = req.getParameter("SV1_NO");	//미용서비스
+	      String SV2_NO = req.getParameter("SV2_NO");	//놀이서비스
+	      String SV3_NO = req.getParameter("SV3_NO");	//산책서비스
+	      String SV4_NO = req.getParameter("SV4_NO");	//응급처치서비스
+	      System.out.println("SV1_NO : " + SV1_NO);
+	      System.out.println("SV2_NO : " + SV2_NO);
+	      System.out.println("SV3_NO : " + SV3_NO);
+	      System.out.println("SV4_NO : " + SV4_NO);
+		 
+	      String service = "";
+	      if(SV1_NO != null) {
+	    	  service +=SV1_NO + ",";
+	      }if(SV2_NO != null) {
+	    	  service +=SV2_NO + ",";
+	      }if(SV3_NO != null) {
+			service +=SV3_NO + ",";
+		  }if(SV4_NO != null) {
+			 service +=SV4_NO;
+		 }
+	     System.out.println("service : " + service);
+	     vo.setREQ_SV(service);  //고객요청서비스
+	     
+	     String START_DAY = req.getParameter("START_DAY"); //의뢰시작일
+	  	 String END_DAY = req.getParameter("END_DAY"); 	   //의뢰종료일
+	  	 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	  	 Date date = new Date(sdf.parse(START_DAY).getTime());
+	  	 vo.setSTART_DAY(date);//의뢰시작일
+	  	 date = new Date(sdf.parse(END_DAY).getTime());
+	  	 vo.setEND_DAY(date); //의뢰종료일
+	   
+	  	 int insertCnt = sitterDao.selectRequestInsert(vo);
+	  	 System.out.println("펫시팅 요청 insertCnt : " + insertCnt);
+	  	 
+	  	 model.addAttribute("insertCnt" , insertCnt);
 	}
 
 	// 고객 - 시터 의뢰 취소

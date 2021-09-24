@@ -40,7 +40,7 @@
            <li>-펫시터-</li>
            <li><a href="applySitter">펫시터 지원</a></li>
            <li><a href="">활동 등록</a></li>
-           <li><a href="">나에게 온 의뢰</a></li>
+           <li><a href="requestForMe">나에게 온 의뢰</a></li>
         </ul>
       </nav>
       
@@ -152,8 +152,8 @@
                                  
                               <div class="col-md-12">
                                  <div class="form-group">
-                                    <label class="label" for="trainerImg">프로필 사진</label>
-                                    <label class="btn btn-primary" for="trainerImg">업로드</label> 
+                                    <label class="label" for="SIT_IMG">프로필 사진</label>
+                                    <label class="btn btn-primary" for="SIT_IMG">업로드</label> 
                                     <input type="file" id="SIT_IMG" name="SIT_IMG" accept="image/*" class="btn btn-primary" style="display:none">
                                  </div>
                               </div>
