@@ -92,7 +92,6 @@ local.properties
 hs_err_pid*
 
 ### Maven ###
-target/*
 *.mf
 pom.properties
 pom.xml.tag
