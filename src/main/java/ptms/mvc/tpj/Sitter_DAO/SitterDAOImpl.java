@@ -133,11 +133,13 @@ public class SitterDAOImpl implements SitterDAO{
 		return 0;
 	}*/
 
-	// 지정 시터 의뢰 등록 (시터를 지정하여 의뢰)
+	// 펫시팅 신청하기 - 요청테이블에 insert
 	@Override
-	public int selectRequestInsert(String sit_id) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int selectRequestInsert(SitterVO vo) {
+		System.out.println("dao ==> selectRequestInsert");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.selectRequestInsert(vo);
 	}
 
 	// 의뢰자 거주지역 조회

@@ -37,10 +37,10 @@ public interface SitterService {
 	public void allRequestList(HttpServletRequest req, Model model);
 	
 	// 지정 시터 의뢰 목록 (고객이 본인을 지정하여 요청한 경우)
-	public void selectRequestList(HttpServletRequest req, Model model);
+	//public void selectRequestList(HttpServletRequest req, Model model);
 	
 	// 고객 - 시터 의뢰 등록
-	public void insertRequest(HttpServletRequest req, Model model);
+	public void insertRequest(HttpServletRequest req, Model model)throws ParseException;
 	
 	// 고객 - 시터 의뢰 취소
 	public void cancleRequest(HttpServletRequest req, Model model);
