@@ -19,10 +19,10 @@
 				<div style="display: flex; justify-content: center">
 					<div style="margin: 10px; padding: 0;">
 						<%@ include file="../../news/Sense_Info.jsp"%>
-						<div>
+<%-- 						<div>
 							<img src="${imgPath}image_4.jpg" width="400px" height="300px"
 								vspace=30>
-						</div>
+						</div> --%>
 					</div>
 				</div>
 			</div>

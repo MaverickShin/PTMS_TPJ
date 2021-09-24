@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="root" value="${pageContext.request.contextPath}" />
+<%@ include file="../setting.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,9 +13,11 @@
 	height: 60px;
 	margin-bottom: 10px;
 }
+
 table tr {
 	text-align: center;
 }
+
 .big {
 	width: 80%;
 	margin: auto;
@@ -23,15 +25,17 @@ table tr {
 	margin-top: 20px;
 	border-radius: 15px;
 }
+
 .seongbukNews1, .seongbukNews2 {
 	width: 100%;
 }
+
 .seongbukNews1 tr, .seongbukNews2 tr {
 	height: 50px;
 }
-div {
+/* div {
 	text-align: center;
-}
+} */
 .seongbukNews1 tr, .seongbukNews1 td, .seongbukNews2 tr, .seongbukNews2 td
 	{
 	border-collapse: separate;
@@ -41,22 +45,27 @@ div {
 </style>
 </head>
 
-
 <body>
-	<table class=big>
+	<table class=big border="1">
 		<thead>
 			<tr class="title">
-				<th colspan="3">성북구의 실시간 뉴스를 알려드립니다 ^^</th>
+				<th colspan="3">반려동물 영양 정보</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="i" items="${list}">
+
+			<!-- 제목 불러오는 공간 추가 - 21.09.23 -->
+			<tr>
+				<td>${title}</td>
+				<td>${i}</td>
+			</tr>
+
+<%-- 			<c:forEach var="i" items="${list}">
 				<tr>
 					<td>${i}</td>
 				</tr>
-			</c:forEach>
+			</c:forEach> --%>
 		</tbody>
 	</table>
 </body>
-
 </html>

@@ -125,7 +125,7 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-sm-6 section03_img" style="text-align: center">
-								<a href="#"><img src="${imgPath}gallery-5.jpg" width="250px"></a>
+								<a href="/tpj/cust/nutrient"><img src="${imgPath}gallery-5.jpg" width="250px"></a>
 							</div>
 							<div class="col-sm-6 section03_txt">
 								<h3>◀ 영양정보</h3>

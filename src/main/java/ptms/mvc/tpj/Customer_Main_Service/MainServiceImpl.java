@@ -418,7 +418,7 @@ public class MainServiceImpl implements MainService{
 	public void SymptomCrawling(HttpServletRequest req, Model model) {
 		
 		// Jsoup를 이용해서 반려동물 질병정보 크롤링
-		String url = "http://www.pethealth.kr/news/articleList.html?sc_section_code=S1N9&view_type=sm";
+		String url = "http://www.pethealth.kr/news/articleList.html?sc_sub_section_code=S2N27&view_type=sm";
 		Document doc = null;
 		
 		// for문을 돌면서 뉴스 제목들을 가져오기 위한 list
@@ -436,14 +436,19 @@ public class MainServiceImpl implements MainService{
 		Elements element = doc.select("section.section-body");
 		
 		// 1. 헤더 부분의 제목을 가져온다.
-		String title = element.select("h3.titles").text();
+		//String title = element.select("h3.titles").text();
+		Elements title = doc.select("a[href]");
 		
 		System.out.println(title);
 		
-		for(Element el : element.select("h4")) { // 하위 뉴스 기사들을 for문을 돌면서 출력
-			
-			list.add(el.text());
-		}
+//		for(Element el : element.select("h4")) { // 하위 뉴스 기사들을 for문을 돌면서 출력
+//			
+//			list.add(el.text());  
+//		}
+		
+		for(Element link : title) {
+			list.add(link.attr("abs:href"));
+		}		
 	
 		model.addAttribute("title", title);
 		model.addAttribute("list", list);
@@ -454,7 +459,7 @@ public class MainServiceImpl implements MainService{
 	@Override
 	public void SenseCrawling(HttpServletRequest req, Model model) {
 		// Jsoup를 이용해서 반려동물 지식정보 크롤링
-		String url = "http://www.pethealth.kr/news/articleList.html?sc_section_code=S1N9&view_type=sm";
+		String url = "https://myanimals.co.kr/breeds/";
 		Document doc = null;
 		
 		// for문을 돌면서 뉴스 제목들을 가져오기 위한 list
@@ -469,22 +474,76 @@ public class MainServiceImpl implements MainService{
 		}
 		
 		// 주요 뉴스로 나오는 태그를 찾아서 가져오도록 한다. <section class="section-body">
-		Elements element = doc.select("section.section-body");
+		Elements element = doc.select("div.more-posts__list mt--x-big jsx-2532604687");
 		
 		// 1. 헤더 부분의 제목을 가져온다.
-		String title = element.select("h3.titles").text();
+		// String title = element.select("img").text();
+		Elements title = doc.select("[href]");
 		
 		System.out.println("==================");
 		System.out.println(title);
 		System.out.println("==================");
 		
-		for(Element el : element.select("h4")) { // 하위 뉴스 기사들을 for문을 돌면서 출력
-			System.out.println(el.text());
+//		for(Element el : element.select("div.view-cont")) { // 하위 뉴스 기사들을 for문을 돌면서 출력
+//			System.out.println(el.text());
+//			
+//			list.add(el.text());
+//		}
+		
+		for(Element link : title) {
+			list.add(link.attr("abs:href"));
+		}		
+	
+		model.addAttribute("title", title);
+		model.addAttribute("list", list);
+		
+		System.out.println("==================");
+		
+	}
+	
+	// 반려동물 영양정보 크롤링 - 21.09.23 창훈 추가
+	@Override
+	public void NutrientCrawling(HttpServletRequest req, Model model) {
+		// Jsoup를 이용해서 반려동물 영양정보 크롤링
+		String url = "https://myanimals.co.kr/nutrition-feeding/";
+		Document doc = null;
+		
+		// for문을 돌면서 뉴스 제목들을 가져오기 위한 list
+		List<String> list = new ArrayList<String>();
+		
+		try {
+			// Jsoup url 연결
+			doc = Jsoup.connect(url).get();
 			
-			list.add(el.text());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		// 주요 뉴스로 나오는 태그를 찾아서 가져오도록 한다. <section class="section-body">
+		Elements element = doc.select("div.caption");
+		
+		
+		// 1. 헤더 부분의 제목을 가져온다.
+		//String title = element.select("span.title").text();
+		Elements title = doc.select("[href]");
+		
+		System.out.println("==================");
+		System.out.println(title);
+		//System.out.println(links);
+		System.out.println("==================");
+		
+//		for(Element el : element.select("p")) { // 하위 뉴스 기사들을 for문을 돌면서 출력
+//			System.out.println(el.text());
+//			
+//			list.add(el.text());
+//		}
+		
+		for(Element link : title) {
+			list.add(link.attr("abs:href"));
 		}
 	
 		model.addAttribute("title", title);
+		//model.addAttribute(links);
 		model.addAttribute("list", list);
 		
 		System.out.println("==================");

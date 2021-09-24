@@ -54,13 +54,14 @@ div {
 			<!-- 제목 불러오는 공간 추가 - 21.09.23 -->
 			<tr>
 				<td>${title}</td>
+				<td>${i}</td>
 			</tr>
 		
-			<c:forEach var="i" items="${list}">
+<%-- 			<c:forEach var="i" items="${list}">
 				<tr>
 					<td>${i}</td>
 				</tr>
-			</c:forEach>
+			</c:forEach> --%>
 		</tbody>
 	</table>
 </body>
