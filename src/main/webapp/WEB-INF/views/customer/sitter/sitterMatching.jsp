@@ -47,7 +47,7 @@
 					<li>-펫시터-</li>
 					<li><a href="applySitter">펫시터 지원</a></li>
 					<li><a href="">활동 등록</a></li>
-					<li><a href="">나에게 온 의뢰</a></li>
+					<li><a href="requestForMe">나에게 온 의뢰</a></li>
 				</ul>
 			</nav>
 
@@ -57,7 +57,7 @@
 					<c:if test="${selectCnt > 0}">
 						<c:forEach var="dto" items="${dtos}">
 							<div class="col-md-12"
-								onclick="window.location = 'sitterDetail?SIT_ID=${dto.SIT_ID}'">
+								onclick="window.location ='sitterDetail?SIT_ID=${dto.SIT_ID}&SV_AREA=${SV_AREA}'">
 								<div class="blog-entry align-self-stretch">
 									<a class="block-20 rounded"
 										style="background-image: url('${imgPath}daon.jpg');"> </a>
@@ -76,7 +76,7 @@
 											<!-- 이곳에 좋아요 갯수 또는 평점을 넣으면 좋지 않을까? -->
 										</div>
 										<h3 class="heading">
-											<a href="sitterDetail?SIT_ID=${dto.SIT_ID}">${dto.SIT_TITLE}</a>
+											<a href="sitterDetail?SIT_ID=${dto.SIT_ID}&SV_AREA=${SV_AREA}">${dto.SIT_TITLE}</a>
 										</h3>
 									</div>
 								</div>

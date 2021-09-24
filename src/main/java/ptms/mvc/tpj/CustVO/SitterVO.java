@@ -49,6 +49,10 @@ public class SitterVO {
 	 private Date END_DAY;			// 의뢰 종료일
 	 private int SQ_FEE;			// 서비스요금
 	 private Date SQ_DT;			// 요청 등록일
+	 private String REQ_SV;			// 고객 요청 서비스
+	 
+	 //시터구하기 요청테이블에 INSERT할 PET_NM 
+	 private String PET_NM;			//펫이름
 	 
 	 
 	public int getSR_CD() {
@@ -319,6 +323,22 @@ public class SitterVO {
 
 	public void setCUST_NM(String cUST_NM) {
 		CUST_NM = cUST_NM;
+	}
+
+	public String getPET_NM() {
+		return PET_NM;
+	}
+
+	public void setPET_NM(String pET_NM) {
+		PET_NM = pET_NM;
+	}
+
+	public String getREQ_SV() {
+		return REQ_SV;
+	}
+
+	public void setREQ_SV(String rEQ_SV) {
+		REQ_SV = rEQ_SV;
 	}
 	
 	

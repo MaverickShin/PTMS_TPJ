@@ -48,16 +48,19 @@ public class SitterController {
 		 return "customer/sitter/sitterDetail";
 	 }
 	 
-	 // 펫시팅  신청하기
+	 /*
+	  * 날짜 : 21.09.23
+	  * 작성자 : 임지영
+	  * 내용 :  고객 - 펫시팅  신청하기
+	  */
 	 @RequestMapping("requestSitting")
-	 public String requestSitting(HttpServletRequest req, Model model){
+	 public String requestSitting(HttpServletRequest req, Model model) throws ParseException{
 		 log.info("url ==> requestSitting");
 		 
+		 //시터구하기 요청테이블에 INSERT를 위한 서비스
 		 sitterSer.insertRequest(req, model);
 		 return "customer/sitter/requestSitting";
 	 }	 
-	 
-	 //이용후기
 	 
 	 //요금 안내
 	 @RequestMapping("feeInfo")
@@ -83,7 +86,21 @@ public class SitterController {
 		 
 		 sitterSer.insertSitter(req, model);
 		 return "customer/sitter/applySitteAction";
-	 } 	 
+	 }
+	 
+	 /*
+	  * 날짜 : 21.09.24
+	  * 작성자 : 임지영
+	  * 내용 : 나에게 온 의뢰
+	  */
+	 @RequestMapping("requestForMe")
+	 public String requestForMe(HttpServletRequest req, Model model) {
+		 log.info("url ==> requestForMe");
+		 
+		 //
+		 sitterSer.allRequestList(req, model);
+		 return "customer/sitter/requestForMe";
+	 }	 
 	 
 	 //활동 등록
 	 

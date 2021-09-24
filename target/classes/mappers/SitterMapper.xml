@@ -5,6 +5,7 @@
     
 <mapper namespace="ptms.mvc.tpj.Sitter_DAO.SitterDAO">
 
+<<<<<<< HEAD
    <!-- 요금표 리스트 -->
    <select id="getPriceList" resultType="ptms.mvc.tpj.CustVO.PetVO">
       SELECT p.PK_CD, p.PK_KIND, p.PK_DETAIL, s.SF_FEE
@@ -141,4 +142,106 @@
    <delete id="deleteSitter2" parameterType="int">
    		delete from SITTER_SERVICE_TB where SIT_ID = #{SIT_ID}
    </delete>
+=======
+	<!-- 요금표 리스트 -->
+	<select id="getPriceList" resultType="ptms.mvc.tpj.CustVO.PetVO">
+		SELECT p.PK_CD, p.PK_KIND, p.PK_DETAIL, s.SF_FEE
+		FROM PET_KIND_TB p , SITTER_FEE_TB s
+		WHERE p.PK_CD = s.PK_CD
+		ORDER BY p.PK_CD
+	</select>
+	
+	<!-- 시터 프로필 등록 -->
+	<insert id="profileInsert" parameterType="ptms.mvc.tpj.CustVO.SitterVO">
+		INSERT INTO SITTERS_TB(SIT_ID,CUST_ID,SR_CD,SIT_TITLE,SIT_APPEAL,SIT_ST,SIT_DT,SIT_IMG)
+		VALUES(SIT_IDSQE.nextval,#{CUST_ID},#{SR_CD},#{SIT_TITLE}, #{SIT_APPEAL},1,sysdate,#{SIT_IMG})
+	</insert>
+	
+	<!-- 시터 서비스 정보 등록 -->
+	<insert id="insertService" parameterType="ptms.mvc.tpj.CustVO.SitterVO">
+		INSERT INTO SITTER_SERVICE_TB(SV_CD,SIT_ID,SV_AREA,SV1_NO,SV2_NO,SV3_NO,SV4_NO,WK_START,WK_END)
+		VALUES(SV_CDSEQ.nextval, SIT_IDSQE.currval,#{SV_AREA},#{SV1_NO},#{SV2_NO},#{SV3_NO},#{SV4_NO},#{WK_START},#{WK_END})
+	</insert>
+	
+	<!-- 펫시터 찾기 -(조건에 맞는) 시터 수 구하기 -->
+	<select id="getSitterCnt" parameterType="ptms.mvc.tpj.CustVO.SitterVO" resultType="int">
+		SELECT COUNT(*)
+		FROM (SELECT s.SIT_ID 
+	          FROM SITTERS_TB s, SITTER_SERVICE_TB ser
+	          WHERE s.SIT_ID = ser.SIT_ID
+	          AND ser.SV_AREA LIKE '%'||#{SV_AREA}||'%'
+	          AND s.SIT_ST = 1
+	          INTERSECT
+	    SELECT s.SIT_ID 
+	          FROM SITTERS_TB s, SITTER_SERVICE_TB ser
+	          WHERE s.SIT_ID = ser.SIT_ID
+	          AND #{WK_START} between ser.WK_START AND ser.WK_END
+	          AND #{WK_END} between ser.WK_START AND ser.WK_END
+	          INTERSECT
+		SELECT s.SIT_ID
+	          FROM SITTERS_TB s, SITTER_SERVICE_TB ser
+	          WHERE s.SIT_ID = ser.SIT_ID
+	          AND ser.SV1_NO >= #{SV1_NO}
+	          AND ser.SV2_NO >= #{SV2_NO}
+			  AND ser.SV3_NO >= #{SV3_NO}
+			  AND ser.SV4_NO >= #{SV4_NO}
+			 )
+	</select>	
+	
+	<!-- 펫시터 찾기 - 리스트 출력  -->
+	<select id="activityList" parameterType="ptms.mvc.tpj.CustVO.SitterVO" resultType="ptms.mvc.tpj.CustVO.SitterVO">
+	  <![CDATA[
+		SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM
+	          FROM SITTERS_TB s, SITTER_SERVICE_TB ser, CUSTOMER_TB c
+	          WHERE s.SIT_ID = ser.SIT_ID
+	          AND s.CUST_ID = c.CUST_ID
+	          AND ser.SV_AREA LIKE '%'||#{SV_AREA}||'%'
+	          AND s.SIT_ST = 1
+	          INTERSECT
+		SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM
+	          FROM SITTERS_TB s, SITTER_SERVICE_TB ser, CUSTOMER_TB c
+	          WHERE s.SIT_ID = ser.SIT_ID
+	          AND s.CUST_ID = c.CUST_ID
+	          AND #{WK_START} between ser.WK_START AND ser.WK_END
+	          AND #{WK_END} between ser.WK_START AND ser.WK_END
+	          INTERSECT
+		SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM
+	          FROM SITTERS_TB s, SITTER_SERVICE_TB ser, CUSTOMER_TB c
+	          WHERE s.SIT_ID = ser.SIT_ID
+	          AND s.CUST_ID = c.CUST_ID
+	          AND ser.SV1_NO >= #{SV1_NO}
+	          AND ser.SV2_NO >= #{SV2_NO}
+			  AND ser.SV3_NO >= #{SV3_NO}
+			  AND ser.SV4_NO >= #{SV4_NO}		
+	   ]]>		  	  
+	</select>
+	
+	<!-- 시터 상세 조회 페이지 -->
+	<select id="detailSitter" parameterType="int" resultType="ptms.mvc.tpj.CustVO.SitterVO">
+		SELECT SIT_TITLE, SIT_APPEAL, SIT_IMG
+		FROM SITTERS_TB
+		WHERE SIT_ID=#{SIT_ID}
+	</select>
+	
+	<!-- 고객 펫 수 -->
+	<select id="MypetCount" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM PET_TB
+		WHERE CUST_ID=#{CUST_ID}
+	</select>
+	
+	<!-- 고객 펫 조회 -->
+	<select id="MypetList" parameterType="String" resultType="ptms.mvc.tpj.CustVO.PetVO">
+		SELECT p.PET_NM, p.PK_CD
+		FROM PET_TB p, CUSTOMER_TB c
+		WHERE c.CUST_ID = p.CUST_ID
+		AND c.CUST_ID=#{CUST_ID}
+	</select>
+	
+	<!-- 펫시팅 신청하기 - 요청테이블에 insert -->
+ 	<insert id="selectRequestInsert" parameterType="ptms.mvc.tpj.CustVO.SitterVO">
+		INSERT INTO SITTER_REQUEST_TB(SQ_CD,CUST_ID,SIT_ID,SQ_AMT,SQ_LOC,SQ_ST,START_DAY,END_DAY,SQ_DT,REQ_SV)
+		VALUES(SQ_CDSEQ.nextval,#{CUST_ID},#{SIT_ID},#{SQ_AMT},#{SQ_LOC},0,#{START_DAY},#{END_DAY},sysdate,#{REQ_SV})
+	</insert> 
+>>>>>>> 650cb836ea99cf8998045f4511f4b4acdc2aaed8
 </mapper>    
