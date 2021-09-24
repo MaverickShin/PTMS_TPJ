@@ -155,6 +155,7 @@
 	<delete id="deleteTrainer2" parameterType="int">
 		delete from TRAINER_SERVICE_TB where TA_CD = #{TA_CD}
 	</delete>
+	
 	<select id="trainerInfo" parameterType="int" resultType="ptms.mvc.tpj.CustVO.TrainerVO">
 	    select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
 	    from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
@@ -180,5 +181,4 @@
 		insert into TRAINER_REQUEST_TB(TQ_CD, CUST_ID, TA_CD, PET_CD, TQ_AMT, TQ_LOC, TQ_ST, START_DAY, END_DAY, TQ_DT)
 		values(TQ_CD_seq.nextval, #{CUST_ID}, #{TA_CD}, #{PET_CD}, #{TQ_AMT}, #{TQ_LOC}, 0, #{START_DAY}, #{START_DAY}, sysdate)
 	</insert>
->>>>>>> 0139a5a7e19b210aaed9fcfa2f49569149b4497c
 </mapper>
