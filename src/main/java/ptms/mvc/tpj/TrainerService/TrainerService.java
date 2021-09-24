@@ -23,7 +23,7 @@ public interface TrainerService {
 	// 훈련사 정보 수정 처리
 	public void updateTrainerAction(HttpServletRequest req, Model model) throws ParseException;
 	
-	// 훈련사 등록 철회
+	// 훈련사 등록 탈퇴
 	public void deleteTrainer(HttpServletRequest req, Model model);
 	
 	// 훈련 예약

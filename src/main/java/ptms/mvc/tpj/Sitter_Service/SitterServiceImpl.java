@@ -100,20 +100,104 @@ public class SitterServiceImpl implements SitterService{
 		
 	}
 
-	// 시터 등록 해제
+	// 시터 등록 탈퇴
 	@Override
 	public void deleteSitter(HttpServletRequest req, Model model) {
-		// TODO Auto-generated method stub
+		int SIT_ID = Integer.parseInt(req.getParameter("SIT_ID"));
+		int deleteCnt = sitterDao.deleteSitter2(SIT_ID);
+		if(deleteCnt != 0) {
+			sitterDao.deleteSitter(SIT_ID);
+		}
 		
+		model.addAttribute("deleteCnt",deleteCnt);
 	}
 
-	// 시터 정보 수정
+	// 시터 정보 프로필 화면
 	@Override
 	public void updateSitter(HttpServletRequest req, Model model) {
-		// TODO Auto-generated method stub
+		String CUST_ID = (String)req.getSession().getAttribute("cust_id");
+		System.out.println("CUST_ID : "+CUST_ID);
 		
+		SitterVO vo = sitterDao.SitterDetail(CUST_ID);
+		
+		System.out.println("vo : "+vo);
+		
+		model.addAttribute("dto",vo);
 	}
 
+	// 시터 프로필 화면 수정 처리
+	@Override
+	public void updateSitterAction(HttpServletRequest req, Model model) throws ParseException {
+		SitterVO sVo = new SitterVO();
+		
+		int hiddenSIT_ID = Integer.parseInt(req.getParameter("SIT_ID"));
+		String id = (String)req.getSession().getAttribute("cust_id");
+		System.out.println("hiddenSIT_ID : "+hiddenSIT_ID);
+		System.out.println("id : "+id);
+		
+		int SV1_NO = 0;
+		SV1_NO = req.getParameter("SV1_NO") == null ? 0 : Integer.parseInt(req.getParameter("SV1_NO"));
+		System.out.println("SV1_NO"+SV1_NO);
+		
+		int SV2_NO = 0;
+		SV2_NO = req.getParameter("SV2_NO") == null ? 0 : Integer.parseInt(req.getParameter("SV2_NO"));
+		System.out.println("SV2_NO"+SV2_NO);
+		
+		int SV3_NO = 0;
+		SV3_NO = req.getParameter("SV3_NO") == null ? 0 : Integer.parseInt(req.getParameter("SV3_NO"));
+		System.out.println("SV3_NO"+SV3_NO);
+		
+		int SV4_NO = 0;
+		SV4_NO = req.getParameter("SV4_NO") == null ? 0 : Integer.parseInt(req.getParameter("SV4_NO"));
+		System.out.println("SV4_NO"+SV4_NO);
+		
+		String WK_START = req.getParameter("WK_START");
+		String WK_END = req.getParameter("WK_END");
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Date date = new Date(sdf.parse(WK_START).getTime());
+		sVo.setWK_START(date);
+		
+		date = new Date(sdf.parse(WK_END).getTime());
+		sVo.setWK_END(date);
+/*	
+		int SR_CD = Integer.parseInt(req.getParameter("SR_CD"));
+		String SR_KIND = "";
+		if(SR_CD == 1) {
+			SR_KIND = "주택(마당x)";
+		}else if(SR_CD == 2) {
+			SR_KIND = "주택(마당o)";
+		}else if(SR_CD == 3) {
+			SR_KIND = "아파트";
+		}else if(SR_CD == 4) {
+			SR_KIND = "빌라";
+		}
+*/		
+		sVo.setSIT_ID(hiddenSIT_ID);
+		sVo.setCUST_ID(id);
+		sVo.setSV1_NO(SV1_NO);
+		sVo.setSV2_NO(SV2_NO);
+		sVo.setSV3_NO(SV3_NO);
+		sVo.setSV4_NO(SV4_NO);
+		sVo.setSV_AREA(req.getParameter("SV_AREA"));
+//		sVo.setSR_CD(SR_CD);
+//		sVo.setSR_KIND(SR_KIND);
+		sVo.setSIT_TITLE(req.getParameter("SIT_TITLE"));
+		sVo.setSIT_APPEAL(req.getParameter("SIT_APPEAL"));
+		sVo.setSIT_IMG(req.getParameter("SIT_IMG"));
+		
+		int updateCnt = sitterDao.updateSitter1(sVo);
+		System.out.println("시터 1번재 update : "+updateCnt);
+		if(updateCnt != 0) {
+			updateCnt = sitterDao.updateSitter2(sVo);
+		}
+		System.out.println(updateCnt);
+		model.addAttribute("updateCnt",updateCnt);
+	};
+	
+	
+	
 	// 펫시터 찾기 - 리스트 출력
 	@Override
 	public void workSitterList(HttpServletRequest req, Model model) throws ParseException {
@@ -240,7 +324,6 @@ public class SitterServiceImpl implements SitterService{
 		dtos = sitterDao.getPriceList();
 		
 		req.setAttribute("dtos", dtos);
-	};
-	
+	}
 
 }

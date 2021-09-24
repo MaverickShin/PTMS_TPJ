@@ -18,11 +18,11 @@ public interface SitterDAO {
 	// 시터 서비스 정보 등록
 	public int insertService(SitterVO vo);
 	
-	// 시터 정보 수정
-	public int updateSitter(SitterVO vo);
+	// delete 시터 정보 삭제 (SITTERS_TB)
+	public int deleteSitter(int SIT_ID);
 	
-	// 시터 정보 삭제
-	public int deleteSitter(String cust_id);
+	// delete 시터 정보 삭제 (SITTER_SERVICE_TB)
+	public int deleteSitter2(int SIT_ID);
 	
 	// 시터 활동 등록
 	public int activityUp(String cust_id);
@@ -88,4 +88,18 @@ public interface SitterDAO {
 	
 	//고객 펫 조회
 	public List<PetVO> MypetList(String CUST_ID);	
+	
+	//--------------------------------------
+	// select 고객 - 시터 수정 상세 페이지
+	public SitterVO SitterDetail(String CUST_ID);
+	
+	// 기존에 있던 updateSitter는 삭제함, 이후 밑에 2개 추가
+	// update 고객 - 시터 수정 처리 (SITTERS_TB)
+	public int updateSitter1(SitterVO sVo);
+	
+	// update 고객 - 시터 수정 처리 (SITTER_SERVICE_TB)
+	public int updateSitter2(SitterVO sVo);
+	
+	
+	
 }

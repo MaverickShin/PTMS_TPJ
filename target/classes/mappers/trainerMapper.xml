@@ -145,4 +145,14 @@
 				END_DAY = #{END_DAY}, ADJUSTABLE = #{ADJUSTABLE}
 		where TA_CD = #{TA_CD}
 	</update>
+	
+	<!-- 훈련사 탈퇴 (TRAINER_TB) -->
+	<delete id="deleteTrainer" parameterType="int">
+		delete from TRAINER_TB where TA_CD = #{TA_CD}
+	</delete>
+	
+	<!-- 훈련사 탈퇴 (TRAINER_SERVICE_TB) -->
+	<delete id="deleteTrainer2" parameterType="int">
+		delete from TRAINER_SERVICE_TB where TA_CD = #{TA_CD}
+	</delete>
 </mapper>

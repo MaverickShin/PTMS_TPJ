@@ -5,8 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script
-	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	function check() {
@@ -188,10 +187,9 @@
 
 								<div class="col-md-12">
 									<div class="form-group">
-										<label class="label" for="TA_IMG">프로필 사진</label> <label
-											class="btn btn-primary" for="TA_IMG">업로드</label> <input
-											type="file" id="TA_IMG" name="TA_IMG" accept="image/*"
-											class="btn btn-primary" style="display: none">
+										<label class="label" for="TA_IMG">프로필 사진</label>
+										<label class="btn btn-primary" for="TA_IMG">업로드</label>
+										<input type="file" id="TA_IMG" name="TA_IMG" accept="image/*" class="btn btn-primary" style="display: none">
 									</div>
 								</div>
 

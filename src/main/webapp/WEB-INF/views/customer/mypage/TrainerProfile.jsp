@@ -9,52 +9,70 @@
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-	function check() {
+function check() {
 
-		var chk1 = document.applyform.TS1_NO.checked;
-		var chk2 = document.applyform.TS2_NO.checked;
-		var chk3 = document.applyform.TS3_NO.checked;
-		var chk4 = document.applyform.TS4_NO.checked;
+	var chk1 = document.applyform.TS1_NO.checked;
+	var chk2 = document.applyform.TS2_NO.checked;
+	var chk3 = document.applyform.TS3_NO.checked;
+	var chk4 = document.applyform.TS4_NO.checked;
 
-		var result1 = document.getElementById("tr_kind1_fee");
-		var result2 = document.getElementById("tr_kind2_fee");
-		var result3 = document.getElementById("tr_kind3_fee");
-		var result4 = document.getElementById("tr_kind4_fee");
+	var result1 = document.getElementById("tr_kind1_fee");
+	var result2 = document.getElementById("tr_kind2_fee");
+	var result3 = document.getElementById("tr_kind3_fee");
+	var result4 = document.getElementById("tr_kind4_fee");
 
-		if (chk1) {
-			result1.style.display = "block";
-		} else {
-			result1.style.display = "none";
-		}
-
-		if (chk2) {
-			result2.style.display = "block";
-		} else {
-			result2.style.display = "none";
-		}
-
-		if (chk3) {
-			result3.style.display = "block";
-		} else {
-			result3.style.display = "none";
-		}
-
-		if (chk4) {
-			result4.style.display = "block";
-		} else {
-			result4.style.display = "none";
-		}
-
-		/* if(document.getElementById("tr_kind1").checked) {
-			document.getElementById("input_check_hidden1").disabled = true;
-		} */
-
+	if (chk1) {
+		result1.style.display = "block";
+	} else {
+		result1.style.display = "none";
 	}
+
+	if (chk2) {
+		result2.style.display = "block";
+	} else {
+		result2.style.display = "none";
+	}
+
+	if (chk3) {
+		result3.style.display = "block";
+	} else {
+		result3.style.display = "none";
+	}
+
+	if (chk4) {
+		result4.style.display = "block";
+	} else {
+		result4.style.display = "none";
+	}
+
+	/* if(document.getElementById("tr_kind1").checked) {
+		document.getElementById("input_check_hidden1").disabled = true;
+	} */
+
+}
+
+function updateCheck(){
+	if (!document.applyform.START_DAY.value){
+		alert("시작 날짜를 입력하세요");
+		return false;
+	}else if(!document.applyform.END_DAY.value){
+		alert("마지막 날짜를 입력하세요");
+		return false;
+	}else if(!document.applyform.TA_IMG.value){
+		alert("이미지를 등록해 주세요");
+		return false;
+	}
+}
 </script>
 <style type="text/css">
 .link {
 	display: block;
 	padding: 2rem 0rem; 
+}
+#mypages {
+	position:relative;
+	cursor: pointer;
+	color:#00bd56;
 }
 </style>
 <title>훈련사 프로필 수정</title>
@@ -91,18 +109,16 @@
 					<div class="wrapper">
 						<nav class="div_nav">
 							<ul class="div_ul">
-								<li class="div_li"><a href="/tpj/cust/MyInfoUser">내정보
-										관리</a></li>
-								<li class="div_li" id = "mypages"><a class="link">MY PET</a>
+								<li class="div_li"><a href="/tpj/cust/MyInfoUser">내정보 관리</a></li>
+								<li class="div_li" id = "mypages">
+									<a class="link">MY PET</a>
 									<div class = "hide">
 						    			<a href="/tpj/cust/MyPet">펫 등록</a>
 							    		<a href="/tpj/cust/MyPetList">펫 등록/수정</a>
 									</div>
 								</li>
-								<li class="div_li"><a href="/tpj/cust/SitterProfile">시터
-										프로필</a></li>
-								<li class="div_li"><a href="/tpj/cust/TrainerProfile">훈련사
-										프로필</a></li>
+								<li class="div_li"><a href="/tpj/cust/SitterProfile">시터 프로필</a></li>
+								<li class="div_li"><a href="/tpj/cust/TrainerProfile">훈련사 프로필</a></li>
 								<li class="div_li"><a href="/tpj/cust/buyList">결제내역</a></li>
 								<li class="div_li"><a href="/tpj/cust/delCustomer">회원탈퇴</a></li>
 							</ul>
@@ -113,7 +129,7 @@
 								style="max-width: 100% !important; flex: 0 0 100% !important">
 								<div class="contact-wrap w-100 p-md-5 p-4">
 									<h3 class="mb-4">TrainerProfile 수정</h3>
-									<form name="applyform" action="TrainerProfileAction" method="post" onsubmit="return joinCheck();">
+									<form action="TrainerProfileAction" name="applyform" method="post" onsubmit="return updateCheck();">
 										<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 										<input type ="hidden" name="TA_CD" value="${dto.getTA_CD()}">
 										
@@ -138,11 +154,11 @@
 																	<label><input type="checkbox" value="1"
 																		name="TS1_NO" id="TS1_NO" class="form-group"
 																		onchange="check();">배변훈련</label> <label><input
-																		type="checkbox" value="1" name="TS2_NO" id="TS2_NO"
+																		type="checkbox" value="2" name="TS2_NO" id="TS2_NO"
 																		class="form-group" onchange="check();">분리불안</label> <label><input
-																		type="checkbox" value="1" name="TS3_NO" id="TS3_NO"
+																		type="checkbox" value="3" name="TS3_NO" id="TS3_NO"
 																		class="form-group" onchange="check();">기본훈련</label> <label><input
-																		type="checkbox" value="1" name="TS4_NO" id="TS4_NO"
+																		type="checkbox" value="4" name="TS4_NO" id="TS4_NO"
 																		class="form-group" onchange="check();">짖음해결</label>
 
 																	<div id="tr_kind1_fee" style="display: none">
@@ -249,8 +265,8 @@
 															<div class="form-group" align="center">
 																<input type="submit" value="수정하기"
 																	class="btn btn-primary" id="applyTrainer">
-																<!-- <input type="button" value="수정하기"
-																	class="btn btn-primary" id="applyTrainer" onclick="window.location='TrainerProfileAction?TA_CD=${dto.TA_CD}'"> -->
+																<input type="button" value="탈퇴하기"
+																	class="btn btn-primary" id="applyTrainer" onclick="if(confirm('정말 훈련사를 탈퇴하시겠습니까?')) window.location='TrainerDel?TA_CD=${dto.TA_CD}'">
 																<div class="submitting"></div>
 															</div>
 														</div>

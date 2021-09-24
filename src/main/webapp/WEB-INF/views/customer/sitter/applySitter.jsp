@@ -118,7 +118,7 @@
                                     <label class="label" for="hometype">주거지 유형</label>
                                    	   <select size="1" id="iptags" name="SR_CD">
 								 			<option value="1">주택(마당x)</option>
-								 			<option value="2)">주택(마당o)</option>
+								 			<option value="2">주택(마당o)</option>
 								 			<option value="3">아파트</option>
 								 			<option value="4">빌라 </option>
 							 		   </select><br>
@@ -152,8 +152,8 @@
                                  
                               <div class="col-md-12">
                                  <div class="form-group">
-                                    <label class="label" for="trainerImg">프로필 사진</label>
-                                    <label class="btn btn-primary" for="trainerImg">업로드</label> 
+                                    <label class="label" for="SIT_IMG">프로필 사진</label>
+                                    <label class="btn btn-primary" for="SIT_IMG">업로드</label> 
                                     <input type="file" id="SIT_IMG" name="SIT_IMG" accept="image/*" class="btn btn-primary" style="display:none">
                                  </div>
                               </div>

@@ -39,6 +39,7 @@
 #mypages {
 	position:relative;
 	cursor: pointer;
+	color:#00bd56;
 }
 
 #mypages:hover .hide {
@@ -49,7 +50,6 @@
 	padding: 2rem 0rem; 
 }	
 </style>
-
 </head>
 <body>
 <%@ include file = "../../main/header.jsp" %>
@@ -83,7 +83,8 @@
 					<nav class="div_nav">
 						<ul class="div_ul">
 							<li class="div_li"><a href="/tpj/cust/MyInfoUser">내정보 관리</a></li>
-							<li class="div_li" id = "mypages"><a class="link">MY PET</a>
+							<li class="div_li" id = "mypages">
+								<a class="link">MY PET</a>
 								<div class = "hide">
 					    			<a href="/tpj/cust/MyPet">펫 등록</a>
 						    		<a href="/tpj/cust/MyPetList">펫 등록/수정</a>
@@ -185,6 +186,12 @@
 												</div>
 											</div>
 										</div>
+									</c:if>
+									<c:if test="${selectCnt !=1 }">
+										<script type="text/javascript">
+											alert("입력하신 비밀번호가 일치하지 않습니다. \n다시 입력해주세요");
+											window.history.back();
+										</script>
 									</c:if>
 								</form>
 							</div>

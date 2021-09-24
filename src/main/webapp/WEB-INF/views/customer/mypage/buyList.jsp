@@ -6,6 +6,21 @@
 <head>
 <meta charset="UTF-8">
 <title>훈련사 프로필 수정</title>
+<style type="text/css">
+#mypages {
+	position:relative;
+	cursor: pointer;
+	color:#00bd56;
+}
+
+#mypages:hover .hide {
+	display: block;
+}
+.link {
+	display: block;
+	padding: 2rem 0rem; 
+}
+</style>
 </head>
 <body>
 	<%@ include file="../../main/header.jsp"%>
@@ -40,7 +55,8 @@
 						<nav class="div_nav">
 							<ul class="div_ul">
 								<li class="div_li"><a href="/tpj/cust/MyInfoUser">내정보 관리</a></li>
-								<li class="div_li" id = "mypages"><a class="link">MY PET</a>
+								<li class="div_li" id = "mypages">
+									<a class="link">MY PET</a>
 									<div class = "hide">
 						    			<a href="/tpj/cust/MyPet">펫 등록</a>
 							    		<a href="/tpj/cust/MyPetList">펫 등록/수정</a>

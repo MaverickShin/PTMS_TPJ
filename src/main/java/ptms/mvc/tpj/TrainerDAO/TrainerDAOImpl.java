@@ -69,10 +69,18 @@ public class TrainerDAOImpl implements TrainerDAO {
 		return dao.updateTrainer2(tVo);
 	}
 
+	// delete - 1.훈련사 등록 탈퇴 (TRAINER_TB)
 	@Override
-	public int deleteTrainer(int taCd) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteTrainer(int TA_CD) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.deleteTrainer(TA_CD);
+	}
+	
+	// delete - 2.훈련사 등록 탈퇴 (TRAINER_SERVICE_TB)
+	@Override
+	public int deleteTrainer2(int TA_CD) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.deleteTrainer2(TA_CD);
 	}
 
 	@Override

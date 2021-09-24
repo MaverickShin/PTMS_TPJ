@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import ptms.mvc.tpj.Customer_Main_Service.MainServiceImpl;
+import ptms.mvc.tpj.Sitter_Service.SitterServiceImpl;
 import ptms.mvc.tpj.TrainerService.TrainerServiceImpl;
 import ptms.mvc.tpj.emailHandler.emailSender;
 import ptms.mvc.tpj.util.ImageUploaderHandler;
@@ -45,6 +46,9 @@ public class MainController {
 	
 	@Autowired
 	TrainerServiceImpl TrainerService;
+	
+	@Autowired
+	SitterServiceImpl SitterService;
 	
 	@Autowired
 	emailSender emailsender;
@@ -144,6 +148,8 @@ public class MainController {
 	@RequestMapping("MyInfo")
 	public String MyInfo(HttpServletRequest req, Model model) {
 		log.info("컨트롤러 - 반려인/펫 관리 - 내정보 관리");
+		
+		// 회원정보 인증 및 상세 페이지
 		service.custDetail(req, model);
 		
 		return "customer/mypage/MyInfo";
@@ -154,6 +160,7 @@ public class MainController {
 	public String MyInfoAction(HttpServletRequest req, Model model) {
 		log.info("url ==> MyInfoAction");
 		
+		// 회원정보 수정 처리
 		service.custUpdate(req, model);
 		
 		return "customer/mypage/MyInfoAction";
@@ -190,6 +197,8 @@ public class MainController {
 		    uploader.imageUpload(req, model);
 		}
 		// 이미지 업로드 끝
+		
+		// 펫 등록
 		service.petInAction(req, model);
 		
 		
@@ -201,6 +210,7 @@ public class MainController {
 	public String MyPetList(HttpServletRequest req, Model model) {
 		log.info("url ==> PetList");
 
+		// 펫 목록
 		service.petList(req, model);
 		
 		return "customer/mypage/MyPetList";
@@ -211,6 +221,7 @@ public class MainController {
 	public String MyPetUpdate(HttpServletRequest req, Model model){
 		log.info("컨트롤러 - 반려인/펫 관리 - MyPetUpdate");
 		
+		// 펫 수정 화면
 		service.petUpdate(req, model);
 		
 		return "customer/mypage/MyPetUpdate";
@@ -230,6 +241,7 @@ public class MainController {
 		}
 		// 이미지 업로드 끝
 		
+		// 펫 수정 처리
 		service.petUpdateAction(req, model);
 		
 		return "customer/mypage/MyPetUpdateAction";
@@ -240,26 +252,19 @@ public class MainController {
 	public String MyPetDelete(HttpServletRequest req, Model model) {
 		log.info("컨트롤러 - 반려인/펫 관리 - MyPetDelete");
 		
+		// 펫 삭제 처리
 		service.petDelete(req, model);
 		
 		return "customer/mypage/MyPetDelete";
 	}
 	
-	// 반려인/펫 관리 - 펫시터 관리
-	@RequestMapping("SitterProfile")
-	public String SitterProfile() {
-		log.info("컨트롤러 - 반려인/펫 관리 - SitterProfile");
-		// 서비스에서 펫시터 정보 가져오기
-		
-		return "customer/mypage/SitterProfile";
-	}
-	
 	// 일정표
    @RequestMapping("calendar")
    public String calendar(HttpServletRequest req, Model model) {
-      
       log.info("컨트롤러 - 일정표 페이지");
+      
       service.callCalendar(req, model);
+      
       return "customer/calendar/calendar";
    }
    
@@ -337,6 +342,7 @@ public class MainController {
    public String TrainerProfile(HttpServletRequest req, Model model) {
       log.info("컨트롤러 - 반려인/펫 관리 - TrainerProfile");
       
+      // 훈련사 정보 수정 화면
       TrainerService.updateTrainer(req, model);
       
       return "customer/mypage/TrainerProfile";
@@ -356,9 +362,52 @@ public class MainController {
 	}
 	// 이미지 업로드 끝
 */	   
+	   // 훈련사 정보 수정 처리
 	   TrainerService.updateTrainerAction(req, model);
 	   
 	   return "customer/mypage/TrainerProfileAction";
+   }
+   
+   // 반려인/펫 관리 - 훈련사 탈퇴
+   @RequestMapping("TrainerDel")
+   public String TrainerDel(HttpServletRequest req, Model model) {
+	   log.info("컨트롤러 - 반려인/펫 관리 - SitterProfile");
+	   
+	   TrainerService.deleteTrainer(req, model);
+	   
+	   return "customer/mypage/TrainerDel";
+   }
+   
+   // 반려인/펫 관리 - 시터 수정페이지
+   @RequestMapping("SitterProfile")
+   public String SitterProfile(HttpServletRequest req, Model model) {
+      log.info("컨트롤러 - 반려인/펫 관리 - SitterProfile");
+      
+      // 시터 정보 수정 프로필 화면
+      SitterService.updateSitter(req, model);
+      
+      return "customer/mypage/SitterProfile";
+   }
+   
+   // 반려인/펫 관리 - 시터 수정 처리
+   @RequestMapping("SitterProfileAction")
+   public String SitterProfileAction(HttpServletRequest req, Model model) throws ParseException {
+	   log.info("컨트롤러 - 반려인/펫 관리 - SitterProfileAction");
+	   
+	   // 시터 정보 수정 처리
+	   SitterService.updateSitterAction(req, model);
+	   
+	   return "customer/mypage/SitterProfileAction";
+   }
+   
+   // 반려인/펫 관리 - 시터 탈퇴
+   @RequestMapping("SitterDel")
+   public String SitterDel(HttpServletRequest req, Model model) {
+	   log.info("컨트롤러 - 반려인/펫 관리 - SitterDel");
+	   
+	   SitterService.deleteSitter(req, model);
+	   
+	   return "customer/mypage/SitterDel";
    }
    
    // 반려인/펫 관리 - 결제내역
