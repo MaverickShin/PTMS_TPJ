@@ -254,13 +254,43 @@ public class MainController {
 		return "customer/mypage/SitterProfile";
 	}
 	
-	// 일정표
+   /*
+    * 2021-09-24
+    * 나도웅
+    * 일정표(달력) 요청 페이지
+    */
    @RequestMapping("calendar")
    public String calendar(HttpServletRequest req, Model model) {
       
       log.info("컨트롤러 - 일정표 페이지");
       service.callCalendar(req, model);
       return "customer/calendar/calendar";
+   }
+   
+   /*
+    * 2021-09-24
+    * 나도웅
+    * 일정 추가 페이지(ajax 로드)
+    */
+   @RequestMapping("addEvent")
+   public String addEvent(HttpServletRequest req, Model model) {
+      
+      log.info("컨트롤러 - 일정표 페이지");
+      service.addEvent(req, model);
+      return "redirect:calendar";
+   }
+   
+   /*
+    * 2021-09-24
+    * 나도웅
+    * 일정 삭제 페이지(ajax 로드)
+    */
+   @RequestMapping("deleteEvent")
+   public String deleteEvent(HttpServletRequest req, Model model) {
+      
+      log.info("컨트롤러 - 일정표 페이지");
+      service.deleteEvent(req, model);
+      return "redirect:calendar";
    }
    
    // 반려동물 건강관리 

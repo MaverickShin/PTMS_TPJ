@@ -36,4 +36,12 @@ public interface MainService {
 	// 일정 가지고 오기(json변환을 위해 Map을 ResultType으로 받음)
 	public void callCalendar(HttpServletRequest req, Model model);
 	
+	// 일정 추가
+	public void addEvent(HttpServletRequest req, Model model);
+	
+	// 일정 삭제
+	public void deleteEvent(HttpServletRequest req, Model model);
+
+	
+	
 }

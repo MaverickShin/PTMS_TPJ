@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import oracle.sql.DATE;
+import ptms.mvc.tpj.CustVO.CalendarVO;
 import ptms.mvc.tpj.CustVO.CustomerVO;
 import ptms.mvc.tpj.CustVO.PetVO;
 
@@ -166,5 +167,19 @@ public class MainDAOImpl implements MainDAO {
 	public List<Map<String,Object>> getEvents(String id) {
 		MainDAO dao = data.getMapper(MainDAO.class);
 		return dao.getEvents(id);
+	}
+	
+	// 일정 추가
+	@Override
+	public int insertEvent(CalendarVO vo) {
+		MainDAO dao = data.getMapper(MainDAO.class);
+		return dao.insertEvent(vo);		
+	}
+	
+	// 일정 삭제
+	@Override
+	public int deleteEvent(String CL_CD) {
+		MainDAO dao = data.getMapper(MainDAO.class);
+		return dao.deleteEvent(CL_CD);				
 	}
 }
