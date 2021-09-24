@@ -22,10 +22,10 @@
 							<td><%@ include file="../../news/Symptom_Info.jsp"%></td>
 						</tr>
 					</table>
-						<div>
+<%-- 						<div>
 							<img src="${imgPath}image_4.jpg" width="400px" height="300px"
 								vspace=30>
-						</div>
+						</div> --%>
 				</div>
 
 			</div>

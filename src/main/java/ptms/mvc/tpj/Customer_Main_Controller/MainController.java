@@ -299,6 +299,15 @@ public class MainController {
 	   
 	   return "customer/health/Sense_Info_View";
    }
+
+   // 반려동물 영양정보 크롤링 추가 - 21.09.24.
+   @RequestMapping("nutrient")
+   public String nutrient(HttpServletRequest req, Model model) {
+	   
+	   service.NutrientCrawling(req, model);  
+	   
+	   return "customer/health/Nutrient_Info_View";
+   }
    
    // 구독 페이지
    @RequestMapping("subscribe")

@@ -41,4 +41,7 @@ public interface MainService {
 	
 	// 반려동물 지식정보 크롤링 - 21.09.23 창훈 추가
 	public void SenseCrawling(HttpServletRequest req, Model model);
+	
+	// 영양정보 크롤링 - 21.09.24 창훈 추가
+	public void NutrientCrawling(HttpServletRequest req, Model model);	
 }
