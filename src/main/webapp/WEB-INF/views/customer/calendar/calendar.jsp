@@ -6,7 +6,7 @@
 <head>
 <meta charset='utf-8' />
 <link href='${cssPath}calendar.css' rel='stylesheet' />
-<script src='${jsPath}calendar.js'></script>
+<script src='${jsPath}fullcalendar.js'></script>
 <script>
 
   document.addEventListener('DOMContentLoaded', function() {
@@ -45,7 +45,7 @@
       events: function (start, end, timezone, callback) {
    	    $.ajax({
    	      type: "get",
-   	      url: "http://localhost:8080/tpj/webapp/WEB-INF/views/customer/calendar/data.json",
+   	      url: "http://localhost:8005/tpj/src/main/webapp/WEB-INF/views/customer/calendar/data.json",
    	      data: {
    	        // 화면이 바뀌면 Date 객체인 start, end 가 들어옴
    	        //startDate : moment(start).format('YYYY-MM-DD'),

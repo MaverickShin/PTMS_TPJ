@@ -44,4 +44,12 @@ public interface MainService {
 	
 	// 영양정보 크롤링 - 21.09.24 창훈 추가
 	public void NutrientCrawling(HttpServletRequest req, Model model);	
+	// 일정 추가
+	public void addEvent(HttpServletRequest req, Model model);
+	
+	// 일정 삭제
+	public void deleteEvent(HttpServletRequest req, Model model);
+
+	
+	
 }

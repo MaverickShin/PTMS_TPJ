@@ -10,7 +10,7 @@ public class CalendarVO {
 	private TIMESTAMP START_TM; // 이벤트 시작 시각(DATE타입은 TIMESTAMP로 형변환) NOT NULL
 	private TIMESTAMP END_TM; // 이벤트 종료 시각
 	private String CL_TITLE; // 이벤트 종류가 0일때 일정 이름 입력
-	private String CL_MOMO; // 해당 일정을 클릭했을 때 표시되는 메모
+	private String CL_MEMO; // 해당 일정을 클릭했을 때 표시되는 메모
 	
 	public int getCL_CD() {
 		return CL_CD;
@@ -48,11 +48,11 @@ public class CalendarVO {
 	public void setCL_TITLE(String cL_TITLE) {
 		CL_TITLE = cL_TITLE;
 	}
-	public String getCL_MOMO() {
-		return CL_MOMO;
+	public String getCL_MEMO() {
+		return CL_MEMO;
 	}
-	public void setCL_MOMO(String cL_MOMO) {
-		CL_MOMO = cL_MOMO;
+	public void setCL_MEMO(String cL_MEMO) {
+		CL_MEMO = cL_MEMO;
 	}
 	
 	

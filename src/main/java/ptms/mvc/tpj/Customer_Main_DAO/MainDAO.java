@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ptms.mvc.tpj.CustVO.CalendarVO;
 import ptms.mvc.tpj.CustVO.CustomerVO;
 import ptms.mvc.tpj.CustVO.PetVO;
 
@@ -68,5 +69,11 @@ public interface MainDAO {
 	
 	// 일정 가지고 오기(json변환을 위해 Map을 ResultType으로 받음)
 	public List<Map<String,Object>> getEvents(String id);
+	
+	// 일정 추가 
+	public int insertEvent(CalendarVO vo);
+
+	// 일정 삭제
+	public int deleteEvent(String CL_CD);
 	
 }
