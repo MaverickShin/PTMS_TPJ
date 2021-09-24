@@ -31,6 +31,11 @@ public class TrainerVO {
 	private int ADJUSTABLE;		// 일정조정 여부 0:일정조정불가, 1:일정조정가능
 	//private String RESERVATION;	// 예약 가능일 (평일, 주말 등)
 	
+	// join으로 가지고온 회원 이름
+	private String CUST_NM;
+	
+	private String PET_NM;
+	
 	public int getTA_CD() {
 		return TA_CD;
 	}
@@ -175,6 +180,22 @@ public class TrainerVO {
 
 	public void setADJUSTABLE(int aDJUSTABLE) { 
 		ADJUSTABLE = aDJUSTABLE; 
+	}
+
+	public String getCUST_NM() {
+		return CUST_NM;
+	}
+
+	public void setCUST_NM(String cUST_NM) {
+		CUST_NM = cUST_NM;
+	}
+
+	public String getPET_NM() {
+		return PET_NM;
+	}
+
+	public void setPET_NM(String pET_NM) {
+		PET_NM = pET_NM;
 	}
 	
 

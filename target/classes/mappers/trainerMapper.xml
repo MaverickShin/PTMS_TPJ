@@ -155,4 +155,30 @@
 	<delete id="deleteTrainer2" parameterType="int">
 		delete from TRAINER_SERVICE_TB where TA_CD = #{TA_CD}
 	</delete>
+	<select id="trainerInfo" parameterType="int" resultType="ptms.mvc.tpj.CustVO.TrainerVO">
+	    select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
+	    from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
+	    where tt.TA_CD = ts.TA_CD
+	    and ct.CUST_ID = tt.CUST_ID
+	    and tt.TA_CD = #{TA_CD}
+	</select>
+	
+	<select id="getPetInfo" parameterType="String" resultType="ptms.mvc.tpj.CustVO.TrainerVO">
+		select pt.PET_NM, pt.PET_CD
+		from PET_TB pt, CUSTOMER_TB ct
+		where ct.CUST_ID = pt.CUST_ID
+		and ct.CUST_ID = #{id}
+	</select>
+	
+	<select id="getPetCount" parameterType="String" resultType="int">
+		select Count(*)
+		from PET_TB pt, CUSTOMER_TB ct
+		where ct.CUST_ID = #{id}
+	</select>
+	
+	<insert id="insertTrainerReservation" parameterType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
+		insert into TRAINER_REQUEST_TB(TQ_CD, CUST_ID, TA_CD, PET_CD, TQ_AMT, TQ_LOC, TQ_ST, START_DAY, END_DAY, TQ_DT)
+		values(TQ_CD_seq.nextval, #{CUST_ID}, #{TA_CD}, #{PET_CD}, #{TQ_AMT}, #{TQ_LOC}, 0, #{START_DAY}, #{START_DAY}, sysdate)
+	</insert>
+>>>>>>> 0139a5a7e19b210aaed9fcfa2f49569149b4497c
 </mapper>

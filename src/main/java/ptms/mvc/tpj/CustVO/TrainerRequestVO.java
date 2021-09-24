@@ -1,5 +1,7 @@
 package ptms.mvc.tpj.CustVO;
 
+import java.sql.Date;
+
 import oracle.sql.DATE;
 import oracle.sql.TIMESTAMP;
 
@@ -14,12 +16,13 @@ public class TrainerRequestVO {
 	private int TQ_ST;			// 처리 상태
 	private TIMESTAMP START_TM; // 의뢰 시작 시간
 	private TIMESTAMP END_TM;	// 의뢰 종료 시간
-	private DATE START_DAY;		// 의뢰 시작일
-	private DATE END_DAY;		// 의뢰 종료일
+	private Date START_DAY;		// 의뢰 시작일
+	private Date END_DAY;		// 의뢰 종료일
 	//private String DAY_SEL;		// 특정 요일
 	private int TQ_FEE;			// 훈련 요금
 	private DATE TQ_DT;			// 요청 등록일
 	
+	private String PET_NM;		// 펫 이름
 	
 	// 훈련 요금 테이블
 	private int TF_CD;
@@ -93,19 +96,19 @@ public class TrainerRequestVO {
 		END_TM = eND_TM;
 	}
 
-	public DATE getSTART_DAY() {
+	public Date getSTART_DAY() {
 		return START_DAY;
 	}
 
-	public void setSTART_DAY(DATE sTART_DAY) {
+	public void setSTART_DAY(Date sTART_DAY) {
 		START_DAY = sTART_DAY;
 	}
 
-	public DATE getEND_DAY() {
+	public Date getEND_DAY() {
 		return END_DAY;
 	}
 
-	public void setEND_DAY(DATE eND_DAY) {
+	public void setEND_DAY(Date eND_DAY) {
 		END_DAY = eND_DAY;
 	}
 
@@ -153,6 +156,14 @@ public class TrainerRequestVO {
 
 	public void setTF_FEE(int tF_FEE) {
 		TF_FEE = tF_FEE;
+	}
+
+	public String getPET_NM() {
+		return PET_NM;
+	}
+
+	public void setPET_NM(String pET_NM) {
+		PET_NM = pET_NM;
 	}
 
 	
