@@ -45,8 +45,11 @@ public interface TrainerDAO {
 	// insert - 훈련비 결제
 	public int insertTrainerFee(TrainerVO tfVo);
 	
+	// selectCnt - 훈련사에게 온 의뢰 목록 갯수
+	public int TraineeListCnt(String id);
+	
 	// selectList - 훈련 반려동물 목록
-	public List<PetVO> TraineeList(int pet_cd, int pet_con);
+	public List<TrainerRequestVO> TraineeList(String id);
 	
 	// delete - 훈련 예약 취소
 	public int deleteReservation(int tq_cd);

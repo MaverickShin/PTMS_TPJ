@@ -319,7 +319,21 @@ public class TrainerServiceImpl implements TrainerService{
 
 	@Override
 	public void TraineeList(HttpServletRequest req, Model model) {
-		// TODO Auto-generated method stub
+		String id = (String)req.getSession().getAttribute("cust_id");
+		System.out.println("아이디 : " + id);
+		
+		int selectCnt = dao.TraineeListCnt(id);
+		System.out.println("selectCnt : " + selectCnt);
+		
+		
+		List<TrainerRequestVO> vo = null;
+		if(selectCnt > 0) {
+			System.out.println("요기");
+			vo = dao.TraineeList(id);
+			System.out.println("여기");
+		}
+		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("dto", vo);
 		
 	}
 
