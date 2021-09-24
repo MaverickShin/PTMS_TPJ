@@ -41,6 +41,8 @@ public class UserAuthenticationService implements UserDetailsService {
 		// 회원정보 조회
 		CustomerVO vo =  sqlSession.selectOne("ptms.mvc.tpj.Customer_Main_DAO.MainDAO.custInfo", id);
 		
+		System.out.println("id : " + id);
+		
 		// 정보가 존재하지 않을 때 예외 처리
 		if(vo == null) throw new UsernameNotFoundException(id);
 		
