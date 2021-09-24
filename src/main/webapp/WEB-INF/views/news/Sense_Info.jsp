@@ -38,18 +38,24 @@ div {
 	border-spacing: 1px;
 	border: 3px solid #ccc;
 }
+
 </style>
 </head>
-
 
 <body>
 	<table class=big>
 		<thead>
 			<tr class="title">
-				<th colspan="3"> 반려동물 질병·예방 정보 </th>
+				<th colspan="3"> 반려동물 관련 지식 정보 </th>
 			</tr>
 		</thead>
 		<tbody>
+		
+			<!-- 제목 불러오는 공간 추가 - 21.09.23 -->
+			<tr>
+				<td>${title}</td>
+			</tr>
+		
 			<c:forEach var="i" items="${list}">
 				<tr>
 					<td>${i}</td>
@@ -58,5 +64,4 @@ div {
 		</tbody>
 	</table>
 </body>
-
 </html>

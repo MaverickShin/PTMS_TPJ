@@ -36,4 +36,9 @@ public interface MainService {
 	// 일정 가지고 오기(json변환을 위해 Map을 ResultType으로 받음)
 	public void callCalendar(HttpServletRequest req, Model model);
 	
+	// 질병정보 크롤링 - 21.09.23 창훈 추가
+	public void SymptomCrawling(HttpServletRequest req, Model model);
+	
+	// 반려동물 지식정보 크롤링 - 21.09.23 창훈 추가
+	public void SenseCrawling(HttpServletRequest req, Model model);
 }
