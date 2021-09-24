@@ -282,12 +282,20 @@ public class SitterServiceImpl implements SitterService{
 		model.addAttribute("SV_AREA", SV_AREA);
 	}
 
-	//의뢰 목록 (전체)
+	/*
+	 * 날짜 : 21.09.24
+	 * 작성자 : 임지영
+	 * 내용 : 나에게 온 의뢰 목록
+	 */
 	@Override
 	public void allRequestList(HttpServletRequest req, Model model) {
 		System.out.println("service ==> allRequestList");
 		
+		String CUST_ID = (String)req.getSession().getAttribute("cust_id");
 		
+		List<SitterVO> list = sitterDao.selectRequestList(CUST_ID);
+		
+		model.addAttribute("list", list);
 	}
 
 	// 지정 시터 의뢰 목록 (고객이 본인을 지정하여 요청한 경우)

@@ -107,15 +107,17 @@ public class SitterDAOImpl implements SitterDAO{
 	// 시터 의뢰 요청 목록 (전체) 
 	@Override
 	public List<SitterVO> requestList() {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	// 지정 시터 의뢰 목록 (나에게온 의뢰)
 	@Override
-	public List<SitterVO> selectRequestList(int sit_id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<SitterVO> selectRequestList(String cust_id) {
+		System.out.println("dao ==> selectRequestList");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.selectRequestList(cust_id);
 	}
 
 	// 의뢰자 서비스 요금 조회

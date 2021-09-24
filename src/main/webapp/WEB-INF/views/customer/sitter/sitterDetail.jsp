@@ -125,17 +125,6 @@ body {
 								<input type="date" class="form-control" name="END_DAY">
 							</div>
 						</div>
-						<!-- 훈련유형 선택 및 요금안내 -->
-						<!-- 	<div class="sidebar-box ftco-animate"> -->
-						<!--   <div class="form-group">
-		                <h3>Services</h3>
-		                 <label class="label" for="tr_kind">원하는 서비스를 선택해 주세요</label><br>
-                         <label><input type="checkbox" value="1" name="SV1_NO" class="form-group">미용 서비스</label><br>
-                         <label><input type="checkbox" value="2" name="SV2_NO" class="form-group">놀이 서비스</label><br>
-                         <label><input type="checkbox" value="3" name="SV3_NO" class="form-group">산책 서비스</label><br>
-					 	 <label><input type="checkbox" value="4" name="SV4_NO" class="form-group" checked>응급처치 서비스<필수서비스></label>
-		               </div> -->
-						<!-- </div> -->
 
 						<div class="col-md-12">
 							<div class="form-group" align="center">

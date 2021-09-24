@@ -140,4 +140,12 @@
 		INSERT INTO SITTER_REQUEST_TB(SQ_CD,CUST_ID,SIT_ID,SQ_AMT,SQ_LOC,SQ_ST,START_DAY,END_DAY,SQ_DT,REQ_SV)
 		VALUES(SQ_CDSEQ.nextval,#{CUST_ID},#{SIT_ID},#{SQ_AMT},#{SQ_LOC},0,#{START_DAY},#{END_DAY},sysdate,#{REQ_SV})
 	</insert> 
+	
+	<!-- 지정 시터 의뢰 목록 (나에게온 의뢰) -->
+	<select id="selectRequestList" parameterType="String" resultType="ptms.mvc.tpj.CustVO.SitterVO">
+		SELECT req.*
+		FROM SITTER_REQUEST_TB req, SITTERS_TB s
+		WHERE s.CUST_ID =#{CUST_ID}
+		AND req.SIT_ID = s.SIT_ID
+	</select>
 </mapper>    
