@@ -9,9 +9,31 @@
 <style type="text/css">
 .link {
 	display: block;
-	padding: 2rem 0rem; 
+	padding: 2rem 0rem;
+}
+#mypages {
+	position:relative;
+	cursor: pointer;
+	color:#00bd56;
 }
 </style>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+function updateCheck(){
+	if (!document.applyform.WK_START.value){
+		alert("시작 날짜를 입력하세요");
+		return false;
+	}else if(!document.applyform.WK_END.value){
+		alert("마지막 날짜를 입력하세요");
+		return false;
+	}else if(!document.applyform.SIT_IMG.value){
+		alert("이미지를 등록해 주세요");
+		return false;
+	}
+}
+
+</script>
 </head>
 <body>
 	<%@ include file="../../main/header.jsp"%>
@@ -46,7 +68,8 @@
 						<nav class="div_nav">
 							<ul class="div_ul">
 								<li class="div_li"><a href="/tpj/cust/MyInfoUser">내정보 관리</a></li>
-								<li class="div_li" id = "mypages"><a class="link">MY PET</a>
+								<li class="div_li" id = "mypages">
+									<a class="link">MY PET</a>
 									<div class = "hide">
 						    			<a href="/tpj/cust/MyPet">펫 등록</a>
 							    		<a href="/tpj/cust/MyPetList">펫 등록/수정</a>
@@ -63,77 +86,125 @@
 							<div class="col-md-7"
 								style="max-width: 100% !important; flex: 0 0 100% !important">
 								<div class="contact-wrap w-100 p-md-5 p-4">
-									<h3 class="mb-4">SitterProfile</h3>
-									<form method="POST" id="contactForm" name="contactForm"
-										class="contactForm">
-										<div class="row">
-											<div class="col-md-12">
-												<div class="box">
-													<!-- 프로필 사진 -->
-													<img class="profile" alt="이미지"
-														src="${path}images/about-2.jpg">
-												</div>
-												<div class="filebox">
-													<input class="form-group" type="file" id="SIT_IMG"
-														name="SIT_IMG" accept="${imgPath}*">
-												</div>
-											</div>
+									<h3 class="mb-4">SitterProfile 수정</h3>
+									<form action="SitterProfileAction" name="applyform" method="post" onsubmit="return updateCheck();">
+										<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+										<input type="hidden" name="SIT_ID" value="${dto.getSIT_ID()}">
+										<div class="row no-gutters">
+											<div class="col-md-7"
+												style="max-width: 100% !important; flex: 0 0 100% !important">
+												<div class="contact-wrap w-100 p-md-5 p-4">
+													<h3 class="mb-4">펫시터 등록</h3>
+													<div class="row">
 
-											<div class="col-md-6">
-												<div class="form-group">
-													<label class="label" for="CUST_NM">이름</label> <input
-														type="${dto.CUST_NM}" class="form-control" name="CUST_NM"
-														id="CUST_NM" placeholder="아무개" readonly>
-												</div>
-											</div>
+														<div class="col-md-12">
+															<div class="form-group">
+																<label class="label" for="service_loc">고객 아이디</label><br>
+																${sessionScope.cust_id}
+															</div>
+														</div>
 
-											<div class="col-md-6">
-												<div class="form-group">
-													<label class="label" for="CUST_ID">아이디</label> <input
-														type="text" class="form-control" name="CUST_ID"
-														id="CUST_ID" value="${dto.CUST_ID}" placeholder="아이디">
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<label class="label" for="SR_KIND">주거지</label> <input
-														type="text" class="form-control" name="SR_KIND"
-														id="SR_KIND" value="${dto.SR_KIND}" readonly><!-- 시터 주거지 유형 테이블에서 주거지 유형정보 가져옴 -->
-												</div>
-											</div>
-											<div class="col-md-6">
-												<label class="label" for="SV_AREA">서비스 가능지역</label><br>
-													<input class="form-group" type="checkbox" id="SV_AREA1" name="SV_AREA" value="인천">인천&nbsp;
-													<input class="form-group" type="checkbox" id="SV_AREA2" name="SV_AREA" value="강남">강남&nbsp;
-													<input class="form-group" type="checkbox" id="SV_AREA3" name="SV_AREA" value="강남">홍대&nbsp;
-													<input class="form-group" type="checkbox" id="SV_AREA4" name="SV_AREA" value="잠실">잠실&nbsp;
-													<input class="form-group" type="checkbox" id="SV_AREA5" name="SV_AREA" value="마포">마포
-												<br>
-												<label class="label" for="SV_AREA">서비스</label><br>
-													<input class="form-group" type="checkbox" id="SV1_NO" name="SV1_NO" value="${dto.SV1_NO}">미용&nbsp;
-													<input class="form-group" type="checkbox" id="SV2_NO" name="SV2_NO" value="${dto.SV2_NO}">놀이&nbsp;
-													<input class="form-group" type="checkbox" id="SV3_NO" name="SV3_NO" value="${dto.SV3_NO}">응급처치&nbsp;
-													<input class="form-group" type="checkbox" id="SV4_NO" name="SV4_NO" value="${dto.SV4_NO}">산책
-												<br>
-												<label class="label" for="RESERVATION">예약 가능일</label>
-													<input type="checkbox" id="RESERVATION1" name="RESERVATION" value="${dto.RESERVATION}">평일
-													<input type="checkbox" id="RESERVATION2" name="RESERVATION" value="${dto.RESERVATION}">주말
-												<br>
-												<label class="label" for="CHK_IN">체크인</label>
-													<input type="time" id="CHK_IN" name="CHK_IN">
-												<label class="label" for="CHK_OUT">체크아웃</label>
-													<input type="time" id="CHK_OUT" name="CHK_OUT">
-												<br><br>
-											</div>
-											<div class="col-md-12" style="text-align:center;">
-												<label class="label" for="SIT_TITLE">소개글</label>
-												<input type="text" class="form-control" name="SIT_TITLE" id="SIT_TITLE" placeholder="소개글 제목">
-												<textarea rows="5px" cols="100%" name="SIT_APPEAL" id="SIT_APPEAL"></textarea>
-											</div>
-											
-											<div class="col-md-12" style="text-align:center;">
-												<div class="form-group">
-													<input type="submit" value="수정" class="btn btn-primary">
+
+														<div class="col-md-12">
+															<div class="form-group">
+																<div class="form-field">
+																	<div class="select-wrap">
+																		<label class="label" for="tr_kind">제공 가능한 서비스를 선택해 주세요</label>
+																		<br>
+																		<label><input type="checkbox" value="1" name="SV1_NO" class="form-group">미용 서비스</label>&nbsp;
+																		<label><input type="checkbox" value="2" name="SV2_NO" class="form-group">놀이 서비스</label>&nbsp;
+																		<label><input type="checkbox" value="3" name="SV3_NO" class="form-group">산책 서비스</label>&nbsp;
+																		<br>
+																		<label><input type="checkbox" value="4" name="SV4_NO" class="form-group" checked>응급처치 서비스<필수체크></label>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<div class="col-md-12">
+															<div class="form-group">
+																<label class="label" for="service_loc">시터 서비스 가능 지역</label> 
+																<input type="button" value="주소찾기"
+																	class="btn btn-primary" onclick="addressSerch();"
+																	style="margin-top: 25px;">
+															</div>
+														</div>
+
+														<div class="col-md-6">
+															<div class="form-group" style="display: none">
+																<label class="label" for="postcode">우편번호</label> <input
+																	type="text" class="form-control" name="address1"
+																	id="postcode" placeholder="우편번호" readonly>
+															</div>
+														</div>
+
+
+														<div class="col-md-12">
+															<div class="form-group">
+																<label class="label" for="address1">도로명 주소</label> <input
+																	type="text" class="form-control" name="SV_AREA"
+																	id="address1" value="${dto.getSV_AREA()}" placeholder="도로명 주소" readonly>
+															</div>
+														</div>
+
+														<div class="col-md-12" style="display: none">
+															<div class="form-group">
+																<label class="label" for="address2">지번 주소</label> <input
+																	type="text" class="form-control" name="address2"
+																	id="address2" placeholder="지번 주소" readonly>
+															</div>
+														</div>
+
+														<div class="col-md-6">
+															<div class="form-group">
+																<label class="label" for="hometype">주거지 유형</label> <select
+																	size="1" id="iptags" name="SR_CD">
+																	<option value="1">주택(마당x)</option>
+																	<option value="2">주택(마당o)</option>
+																	<option value="3">아파트</option>
+																	<option value="4">빌라</option>
+																</select><br>
+															</div>
+														</div>
+
+														<div class="col-md-6">
+															<div class="form-group">
+																<label class="label" for="trainingDay">서비스 가능일</label> <br>
+																<input type="date" class="iptags" name="WK_START">
+																~ <input type="date" class="iptags" name="WK_END">
+																<br>
+																<fmt:formatDate value="${dto.getWK_START() }"
+																	pattern="yyyy-MM-dd" />
+																&nbsp; ~ &nbsp;
+																<fmt:formatDate value="${dto.getWK_END() }"
+																	pattern="yyyy-MM-dd" />
+															</div>
+														</div>
+
+														<div class="col-md-12" style="text-align: center;">
+															<label class="label" for="SIT_TITLE">소개글</label> <input
+																type="text" class="form-control" name="SIT_TITLE"
+																id="SIT_TITLE" value="${dto.getSIT_TITLE() }" placeholder="소개글 제목">
+															<textarea class="col-md-12" rows="5px" name="SIT_APPEAL"
+																id="SIT_APPEAL" placeholder="소개글 본문">${dto.getSIT_APPEAL() }</textarea>
+														</div>
+
+														<div class="col-md-12">
+															<div class="form-group">
+																<label class="label" for="SIT_IMG">프로필 사진</label> 
+																<label class="btn btn-primary" for="SIT_IMG">업로드</label> 
+																<input type="file" id="SIT_IMG" name="SIT_IMG" accept="image/*" class="btn btn-primary" style="display: none">
+															</div>
+														</div>
+
+														<div class="col-md-12">
+															<div class="form-group" align="center">
+																<input type="submit" value="수정하기" class="btn btn-primary" id="join_sub"> 
+																<input type="button" value="탈퇴하기"
+																	class="btn btn-primary" id="applyTrainer" onclick = "if(confirm('정말 시터를 탈퇴하시겠습니까?')) window.location='SitterDel?SIT_ID=${dto.SIT_ID}'">
+															</div>
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>

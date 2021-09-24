@@ -42,18 +42,18 @@ public class SitterDAOImpl implements SitterDAO{
 		return dao.insertService(vo);
 	}
 
-	// 시터 정보 수정
+	// delete - 시터 탈퇴 (SITTERS_TB)
 	@Override
-	public int updateSitter(SitterVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteSitter(int SIT_ID) {
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.deleteSitter(SIT_ID);
 	}
-
-	// 시터 정보 삭제
+	
+	// delete - 시터 탈퇴 (SITTER_SERVICE_TB)
 	@Override
-	public int deleteSitter(String cust_id) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteSitter2(int SIT_ID) {
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.deleteSitter2(SIT_ID);
 	}
 
 	// 시터 활동 등록
@@ -214,6 +214,29 @@ public class SitterDAOImpl implements SitterDAO{
 		
 		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
 		return dao.MypetList(CUST_ID);
+	}
+
+	//--------------------------------------
+	// 고객 - 시터 수정 상세 페이지
+	@Override
+	public SitterVO SitterDetail(String CUST_ID) {
+		System.out.println("CUST_ID : "+CUST_ID);
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.SitterDetail(CUST_ID);
+	}
+
+	// 고객 - 시터 수정 처리 (SITTERS_TB)
+	@Override
+	public int updateSitter1(SitterVO sVo) {
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.updateSitter1(sVo);
+	}
+	
+	// 고객 - 시터 수정 처리 (SITTER_SERVICE_TB)
+	@Override
+	public int updateSitter2(SitterVO sVo) {
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.updateSitter2(sVo);
 	}
 
 

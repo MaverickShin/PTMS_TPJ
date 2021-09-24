@@ -17,12 +17,16 @@ public interface SitterService {
 	// 시터 활동 취소
 	public void cancleSitter(HttpServletRequest req, Model model);
 	
-	// 시터 등록 해제
+	// 시터 등록 해제 / 탈퇴
 	public void deleteSitter(HttpServletRequest req, Model model);
 	
-	// 시터 정보 수정
+	// 시터 정보 프로필 화면
 	public void updateSitter(HttpServletRequest req, Model model);
 	
+	//--------------- 추가 -----------------
+	// 시터 프로필 화면 수정 처리
+	public void updateSitterAction(HttpServletRequest req, Model model) throws ParseException;
+	//--------------- 추가 끝 -----------------
 	// 펫시터 찾기 - 리스트 출력
 	public void workSitterList(HttpServletRequest req, Model model) throws ParseException;
 	

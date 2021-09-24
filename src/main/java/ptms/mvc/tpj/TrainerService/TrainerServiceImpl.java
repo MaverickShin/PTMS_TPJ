@@ -233,10 +233,16 @@ public class TrainerServiceImpl implements TrainerService{
 		model.addAttribute("updateCnt",updateCnt);
 	}
 	
+	// 훈련사 등록 탈퇴
 	@Override
 	public void deleteTrainer(HttpServletRequest req, Model model) {
-		// TODO Auto-generated method stub
+		int TA_CD = Integer.parseInt(req.getParameter("TA_CD"));
+		int deleteCnt = dao.deleteTrainer2(TA_CD);
+		if(deleteCnt != 0) {
+			dao.deleteTrainer(TA_CD);
+		}
 		
+		model.addAttribute("deleteCnt",deleteCnt);
 	}
 
 	@Override

@@ -12,9 +12,9 @@
 <title>내정보 관리 - 인증화면</title>
 <script type="text/javascript">
 function passwordCheck(){
-	if(!document.contactForm.password.value){
+	if(!document.contactForm.CUST_PWD.value){
 		alert("비밀번호를 입력하세요");
-		document.contactForm.password.focus();
+		document.contactForm.CUST_PWD.focus();
 		return false;
 	}
 }

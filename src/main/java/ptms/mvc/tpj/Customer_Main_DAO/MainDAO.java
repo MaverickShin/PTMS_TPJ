@@ -45,6 +45,9 @@ public interface MainDAO {
 	// 2.우편번호가 같을때 (update)
 	public int updateCustomer2(CustomerVO vo);
 	
+	// 회원 탈퇴
+	
+	
 	// 펫 목록
 	public List<PetVO> getPetList(HashMap<String, Object> map);
 	

@@ -26,14 +26,17 @@ public interface TrainerDAO {
 	// 훈련사 정보 상세페이지
 	public TrainerVO TrainerDetail(String CUST_ID);
 	
-	// update - 훈련사 정보 수정 처리 (TRAINER_TB)
+	// update - 1.훈련사 정보 수정 처리 (TRAINER_TB 테이블)
 	public int updateTrainer1(TrainerVO tVo);
 	
-	// update - 훈련사 정보 수정 처리 (TRAINER_SERVICE_TB)
+	// update - 2.훈련사 정보 수정 처리 (TRAINER_SERVICE_TB 테이블)
 	public int updateTrainer2(TrainerVO tVo);
 	
-	// delete or update - 훈련사 등록 철회
-	public int deleteTrainer(int taCd);
+	// delete - 훈련사 등록 탈퇴 (TRAINER_TB)
+	public int deleteTrainer(int TA_CD);
+	
+	// delete - 훈련사 등록 탈퇴 (TRAINER_SERVICE_TB)
+	public int deleteTrainer2(int TA_CD);
 	
 	// insert - 훈련 예약
 	public int insertTrainerReservation(TrainerVO tqVo);
