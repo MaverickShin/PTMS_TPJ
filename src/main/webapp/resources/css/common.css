@@ -50,6 +50,7 @@
      border-radius: 5px;
      -webkit-box-shadow: none !important;
      box-shadow: none !important;
+     outline:none;
   } 
   
 .btn.btn-primary {
@@ -74,3 +75,216 @@
   margin : 200px;
   
 }
+
+
+
+
+
+/* ----------- 시터 & 훈련 ------------ */
+.sections {
+	font-family: 'Do Hyeon', sans-serif;
+}
+
+.list_nav1 {
+	background-color: #00bd56;
+	position:relative;
+}
+
+.list_div1 {
+	position:absolute; 
+    width:300px;
+    height: 600px;
+    left: 40px; /* //화면 왼쪽에 위치한다. right로 변경가능 */
+    top: 50px;
+    background-color: transparent;
+    margin:0;
+    padding:0;
+    animation: fadein 3s;
+    -moz-animation: fadein 3s; /* Firefox */
+    -webkit-animation: fadein 3s; /* Safari and Chrome */
+    -o-animation: fadein 3s; /* Opera */
+}
+
+.list_tb1 {
+	font-family: 'Do Hyeon', sans-serif;
+	color:white;
+	text-align:center;
+	margin:0;
+	border-collapse: collapse;
+  	border-radius: 30px;
+  	border-style: hidden;
+  	box-shadow: 0 0 0 3px white;
+  	margin-left:auto;
+  	margin-right:auto;
+}
+
+.list_tb1 th {
+	font-size: 24px;
+	border-top-left-radius: 26px;
+	border-top-right-radius: 26px;
+	background-color: white; 
+	color:#00bd56;
+}
+
+.list_tb1 td, th{
+	width: 200px;
+	padding: 15px;
+	margin:0;
+}
+
+.list_tb1 a{
+	font-size: 18px;
+	color:white !important;
+}
+
+.list_tb1 a:hover {
+	font-size: 22px !important;
+}
+
+.sel_chk1 {
+	width: 25px;
+	height: 25px;
+}
+
+.times {
+	cursor: pointer;
+	border: transparent;
+    background: white !important;
+    color: rgba(0, 0, 0, 0.8) !important;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 5px;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    outline:none;
+    font-size: 20px;
+    height: 52px;
+}
+
+.chk_label1 {
+	width: 500px;
+	font-size: 18px;
+}
+
+.chk_p1 label {
+	position: relative;
+    top:-10px;
+}
+.list_label_span1 {
+	margin-right: 150px;
+}
+
+/* // 체크박스 인풋은 숨김처리 */
+.sel_chk1 {
+  display: none;
+}
+
+/* // 체크박스 테두리 */
+.checkbox_icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border: 2px solid #00bd56;
+  position: relative;
+  cursor: pointer;
+}
+
+/* // 체크박스 가상요소 */
+.checkbox_icon::before, .checkbox_icon::after {
+  content: ''; /* // 가상요소 필수값 */
+  display: inline-block; /* // 크기 지정 */
+  width: 2px;
+  height: 0; /* // 체크박스가 체크가 되면 변화값으로 커지게 하기 위해 (일단 화면에는 나타나지 않음) */
+  background-color: #00bd56;
+  position: absolute; /*  // 체크박스 테두리 기준으로 위치조정 가능 */
+  transform-origin: left top; /* // 기울기 지정, 기준점을 왼쪽 상단 모서리로 (기본값은 중심임) */
+}
+
+/* // 가상요소 before */
+.checkbox_icon::before {
+  top: 9px; /* // 위치값 top */
+  left: 2px; /* // 위치값 left */
+  transform: rotate(-45deg); /* // 회전값 */
+}
+
+/* // 가상요소 after */ 
+.checkbox_icon::after {
+  top: 16px; /* // 위치값 top */
+  left: 9px; /* // 위치값 left */
+  transform: rotate(-135deg); /* // 회전값 */
+}
+
+/* // 체크되었을 때 테투리 설정 */
+.chk_p1 input:checked + .checkbox_icon {
+  border-color: #00bd56;
+}
+
+/* // 체크되었을 때 가상요소 before */
+.chk_p1 input:checked + .checkbox_icon::before {
+  height: 10px; /* // 높이값 지정 */
+  transition: all 0.15s ease; /* // 0.15초 변화시간 줌 */
+}
+
+/* // 체크되었을 때 가상요소 after */
+.chk_p1 input:checked + .checkbox_icon::after {
+  height: 20px; /* // 높이값 지정 */
+  transition: all 0.15s ease 0.15s; /* // 0.15초 변화시간 + 딜레이 시간 줌 */
+}
+
+.sections {
+  display: inline-block;
+  padding: 10px;
+  animation: fadein 3s;
+  -moz-animation: fadein 3s; /* Firefox */
+  -webkit-animation: fadein 3s; /* Safari and Chrome */
+  -o-animation: fadein 3s; /* Opera */
+}
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.list_tb2 {
+	font-size: 20px;
+	border-spacing: 0;
+	border-collapse: collapse;
+	border-bottom: 1px solid gray;
+	text-align: center
+}
+
+.list_tb2 td, th {
+	border-top: 1px solid gray;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+/* ---------------------------------- */

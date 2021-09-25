@@ -67,8 +67,7 @@
     <section class="ftco-section ftco-degree-bg">
     	<div class="container">
     		<div class="row">
-    			<div class="col-lg-8 ftco-animate">
-    			
+    			<div class="col-lg-6 ftco-animate">
     				<p>
 		              <img src="${imgPath}image_1.jpg" alt="" class="img-fluid">
 		            </p>
@@ -118,7 +117,8 @@
 	              <input type="hidden" value="${SQ_LOC}" name="TQ_LOC">
 	              <!-- 훈련사 일정 받아오기, 가능한 일정 선택하기 -->
 	              <div id='calendar' style = "margin-bottom:50px;"></div>
-	              <div class="col-lg-4 sidebar pl-lg-5 ftco-animate">
+	              
+	              <div class="col-lg-6">
 	              	<div class="form-group">
 	              		  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			                <div class="form-group">

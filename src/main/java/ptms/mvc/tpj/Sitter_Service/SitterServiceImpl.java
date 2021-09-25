@@ -397,8 +397,11 @@ public class SitterServiceImpl implements SitterService{
 	public void priceInfo(HttpServletRequest req, Model model) {
 		System.out.println("service ==> priceInfo");
 		
-		ArrayList<PetVO> dtos = null;
+		List<PetVO> dtos = new ArrayList<PetVO>();
+		
 		dtos = sitterDao.getPriceList();
+		
+		System.out.println("길이 : " + dtos.size());
 		
 		req.setAttribute("dtos", dtos);
 	}

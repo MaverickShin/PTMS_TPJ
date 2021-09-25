@@ -8,9 +8,10 @@
 <title>Insert title here</title>
 <style>
 .blog-entry:hover {
-	width: 105%;
-	height: 90%;
-	box-shadow: 5px 5px 5px 5px gray;
+	width: 110%;
+	height: 95%;
+	border:box shadow;
+	box-shadow: 3px 3px 5px 5px #e0e0e0;
 }
 </style>
 
@@ -36,29 +37,18 @@
 		</div>
 	</section>
 
-	<section class="ftco-section bg-light">
-		<div style="display: flex">
-			<nav id="listdiv_id1" style="width: 400px; padding: 100px;">
-				<ul>
-					<li>-고객-</li>
-					<li><a href="sitter">펫시터 찾기</a></li>
-					<li><a href="">이용후기</a></li>
-					<li><a href="feeInfo">요금안내</a></li>
-					<li>-펫시터-</li>
-					<li><a href="applySitter">펫시터 지원</a></li>
-					<li><a href="">활동 등록</a></li>
-					<li><a href="requestForSitter">나에게 온 의뢰</a></li>
-				</ul>
-			</nav>
+		<div style="display: flex; flex:1; justify-content:center;">
+		
+			<%@ include file = "sidebar.jsp" %>
 
 			<div class="container" style="margin-top: 50px;">
 				<div class="row"
-					style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;">
+					style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 15px;">
 					<c:if test="${selectCnt > 0}">
 						<c:forEach var="dto" items="${dtos}">
 							<div class="col-md-12"
 								onclick="window.location ='sitterDetail?SIT_ID=${dto.SIT_ID}&SV_AREA=${SV_AREA}'">
-								<div class="blog-entry align-self-stretch">
+								<div class="blog-entry align-self-stretch" style = "border:1px solid #eeeeee;">
 									<a class="block-20 rounded"
 										style="background-image: url('${imgPath}daon.jpg');"> </a>
 									<div class="text p-4">
@@ -92,7 +82,6 @@
 				</div>
 		</div>
 	</div>
-	</section>
 
 	<%@ include file="../../main/footer.jsp"%>
 	시터매칭

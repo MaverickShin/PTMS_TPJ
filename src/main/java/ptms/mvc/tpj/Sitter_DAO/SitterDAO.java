@@ -81,7 +81,7 @@ public interface SitterDAO {
 	public int requestConfirmState(int sq_cd);
 	
 	//요금표 리스트
-	public ArrayList<PetVO> getPriceList();
+	public List<PetVO> getPriceList();
 	
 	//고객 펫 수
 	public int MypetCount(String CUST_ID);

@@ -54,12 +54,12 @@
    <delete id="deleteSitter2" parameterType="int">
    		delete from SITTER_SERVICE_TB where SIT_ID = #{SIT_ID}
    </delete>
+   
 	<!-- 요금표 리스트 -->
 	<select id="getPriceList" resultType="ptms.mvc.tpj.CustVO.PetVO">
 		SELECT p.PK_CD, p.PK_KIND, p.PK_DETAIL, s.SF_FEE
 		FROM PET_KIND_TB p , SITTER_FEE_TB s
 		WHERE p.PK_CD = s.PK_CD
-		ORDER BY p.PK_CD
 	</select>
 	
 	<!-- 시터 프로필 등록 -->
