@@ -101,6 +101,119 @@ public class SitterController {
 		 return "customer/sitter/requestForSitter";
 	 }	 
 	 
+	 /*
+	  * 날짜 : 21.09.25
+	  * 작성자 : 임지영
+	  * 내용 :펫시터가 고객 요청 수락할때 SQ_ST(처리상태) 1로 업데이트
+	  */
+	 @RequestMapping("sitterAccept")
+	 public String sitterAccept(HttpServletRequest req, Model model) {
+		 log.info("url ==> sitterAccept");
+		 
+		 sitterSer.acceptRequest(req, model);
+		 return "customer/sitter/sitterAccept";
+	 }	 
+	 
+	 /*
+	  * 날짜 : 21.09.25
+	  * 작성자 : 임지영
+	  * 내용 : 펫시터가 수락한 고객요청 내역을 보여주는 페이지
+	  */
+	 @RequestMapping("sitterAcceptList")
+	 public String sitterAcceptList(HttpServletRequest req, Model model) {
+		 log.info("url ==> sitterRefuse");
+		 
+		 sitterSer.acceptRequestList(req, model);
+		 return "customer/sitter/sitterAcceptList";
+	 }
+	 
+	 /*
+	  * 날짜 : 21.09.25
+	  * 작성자 : 임지영
+	  * 내용 : 펫시터가 고객 요청 거절할때 SQ_ST(처리상태) 2로 업데이트
+	  */
+	 @RequestMapping("sitterRefuse")
+	 public String sitterRefuse(HttpServletRequest req, Model model) {
+		 log.info("url ==> sitterRefuse");
+		 
+		 sitterSer.cancleRequest(req, model);
+		 return "customer/sitter/sitterRefuse";
+	 }	 
+	 
+	 /*
+	  * 날짜 : 21.09.25
+	  * 작성자 : 임지영
+	  * 내용 : 펫시터가 거절한 고객요청 내역을 보여주는 페이지
+	  */
+	 @RequestMapping("sitterRefuseList")
+	 public String sitterRefuseList(HttpServletRequest req, Model model) {
+		 log.info("url ==> sitterRefuseList");
+		 
+		 sitterSer.cancleRequestList(req, model);
+		 return "customer/sitter/sitterRefuseList";
+	 }		 
+	 
+	 /*
+	  * 날짜 : 21.09.25
+	  * 작성자 : 임지영
+	  * 내용 : 고객이 펫시팅 결제를 완료한 리스트를 보여주는 페이지 
+	  */
+	 @RequestMapping("sitterserPayFinish")
+	 public String sitterserPayFinish(HttpServletRequest req, Model model) {
+		 log.info("url ==> sitterserPayFinish");
+		 
+		 return "customer/sitter/sitterserPayFinish";
+	 }		 
+
+	 /*
+	  * 날짜 : 21.09.25
+	  * 작성자 : 임지영
+	  * 내용 : 고객이 이용한 펫시터서비스 내역을 보여주는 페이지 (첫 페이지는 '요청수락대기')
+	  */
+	 @RequestMapping("MysitterSerList")
+	 public String MysitterSerList(HttpServletRequest req, Model model) {
+		 log.info("url ==> MysitterSerList");
+		 
+		 return "customer/sitter/MysitterSerList";
+	 }		 
+	 
+	 /*
+	  * 날짜 : 21.09.25
+	  * 작성자 : 임지영
+	  * 내용 : 고객 - 수락된 요청 리스트
+	  */
+	 @RequestMapping("acceptSitterSer")
+	 public String acceptSitterSer(HttpServletRequest req, Model model) {
+		 log.info("url ==> acceptSitterSer");
+		 
+		 return "customer/sitter/acceptSitterSer";
+	 }	
+	 
+	 /*
+	  * 날짜 : 21.09.25
+	  * 작성자 : 임지영
+	  * 내용 : 고객 - 거절된 요청 리스트
+	  */
+	 @RequestMapping("refuseSitterSer")
+	 public String refuseSitterSer(HttpServletRequest req, Model model) {
+		 log.info("url ==> refuseSitterSer");
+		 
+		 return "customer/sitter/refuseSitterSer";
+	 }		
+	 
+	 /*
+	  * 날짜 : 21.09.25
+	  * 작성자 : 임지영
+	  * 내용 : 고객 - 결제완료된 리스트
+	  */
+	 @RequestMapping("PayDoneSitterSer")
+	 public String PayDoneSitterSer(HttpServletRequest req, Model model) {
+		 log.info("url ==> PayDoneSitterSer");
+		 
+		 return "customer/sitter/PayDoneSitterSer";
+	 }		 
+
+	 
 	 //활동 등록
 	 
 	 

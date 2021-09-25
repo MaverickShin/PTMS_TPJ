@@ -141,11 +141,72 @@
 		VALUES(SQ_CDSEQ.nextval,#{CUST_ID},#{SIT_ID},#{SQ_AMT},#{SQ_LOC},0,#{START_DAY},#{END_DAY},sysdate,#{REQ_SV})
 	</insert> 
 	
+	<!-- 시터 의뢰 목록 수 구하기 (나에게온 의뢰) -->
+	<select id="getRequestList" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM SITTER_REQUEST_TB req, SITTERS_TB s
+		WHERE s.CUST_ID =#{CUST_ID}
+		AND req.SIT_ID = s.SIT_ID
+		AND req.SQ_ST =0
+	</select>
+	
 	<!-- 지정 시터 의뢰 목록 (나에게온 의뢰) -->
 	<select id="selectRequestList" parameterType="String" resultType="ptms.mvc.tpj.CustVO.SitterVO">
 		SELECT req.*
 		FROM SITTER_REQUEST_TB req, SITTERS_TB s
 		WHERE s.CUST_ID =#{CUST_ID}
 		AND req.SIT_ID = s.SIT_ID
+		AND req.SQ_ST =0
+	</select>
+	
+	<!-- 시터 - 고객 의뢰 수락 수 구하기 -->
+	<select id="getsitterAcceptCount" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM SITTER_REQUEST_TB req, SITTERS_TB s
+		WHERE s.CUST_ID =#{CUST_ID}
+		AND req.SIT_ID = s.SIT_ID
+		AND req.SQ_ST =1
+	</select>
+	
+	
+	<!-- 시터 - 고객 의뢰 수락 (SQ_ST[처리상태]를 1로 업데이트) -->
+	<update id="sitterAccept" parameterType="int">
+		UPDATE SITTER_REQUEST_TB
+		SET SQ_ST=1
+		WHERE SQ_CD=#{SQ_CD}
+	</update>
+	
+	<!-- 시터 - 고객 의뢰 수락 리스트	 -->
+	<select id="sitterAcceptList" parameterType="String" resultType="ptms.mvc.tpj.CustVO.SitterVO">
+		SELECT req.*
+		FROM SITTER_REQUEST_TB req, SITTERS_TB s
+		WHERE s.CUST_ID =#{CUST_ID}
+		AND req.SIT_ID = s.SIT_ID
+		AND SQ_ST=1
+	</select>
+	
+	<!-- 시터 - 고객 의뢰 거절 수 구하기 -->
+	<select id="getsitterRefuseCount" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM SITTER_REQUEST_TB req, SITTERS_TB s
+		WHERE s.CUST_ID =#{CUST_ID}
+		AND req.SIT_ID = s.SIT_ID
+		AND req.SQ_ST =2
+	</select>
+		
+	<!-- 시터 - 고객의뢰 거절 (SQ_ST[처리상태] 를 2로 업데이트) -->
+	<update id="sitterRefuse" parameterType="int">
+	UPDATE SITTER_REQUEST_TB
+	SET SQ_ST=2
+	WHERE SQ_CD=#{SQ_CD}
+	</update>
+	
+	<!-- 시터 - 고객 의뢰 거절 리스트	 -->
+	<select id="sitterRefuseList" parameterType="String" resultType="ptms.mvc.tpj.CustVO.SitterVO">
+		SELECT req.*
+		FROM SITTER_REQUEST_TB req, SITTERS_TB s
+		WHERE s.CUST_ID =#{CUST_ID}
+		AND req.SIT_ID = s.SIT_ID
+		AND SQ_ST=2
 	</select>
 </mapper>    
