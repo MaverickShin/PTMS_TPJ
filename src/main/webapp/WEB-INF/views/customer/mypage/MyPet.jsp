@@ -85,13 +85,12 @@
 								<a class="link">MY PET</a>
 								<div class = "hide">
 					    			<a href="/tpj/cust/MyPet">펫 등록</a>
-						    		<a href="/tpj/cust/MyPetList">펫 등록/수정</a>
+						    		<a href="/tpj/cust/MyPetList">펫 목록/수정</a>
 								</div>
 							</li>
 							<li class="div_li"><a href="/tpj/cust/SitterProfile">시터 프로필</a></li>
 							<li class="div_li"><a href="/tpj/cust/TrainerProfile">훈련사 프로필</a></li>
 							<li class="div_li"><a href="/tpj/cust/buyList">결제내역</a></li>
-							<li class="div_li"><a href="/tpj/cust/delCustomer">회원탈퇴</a></li>
 						</ul>
 					</nav>
 					

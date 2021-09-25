@@ -22,7 +22,7 @@
    <!-- 시터 수정 상세 페이지 -->
    <select id="SitterDetail" parameterType="String" resultType="ptms.mvc.tpj.CustVO.SitterVO">
 		select *
-		from (select st.SIT_ID, st.CUST_ID, st.SIT_TITLE, st.SIT_APPEAL, st.SIT_IMG,
+		from (select st.SIT_ID, st.CUST_ID, st.SIT_TITLE, st.SIT_APPEAL, st.SIT_IMG, st.SIT_ST,
 		            ss.SV_AREA, ss.SV1_NO, ss.SV2_NO, ss.SV3_NO, ss.SV4_NO, ss.WK_START, ss.WK_END
 		        from SITTERS_TB st, SITTER_SERVICE_TB ss
 		        where st.SIT_ID = ss.SIT_ID
@@ -33,7 +33,7 @@
    <!-- 시터 수정 처리 - 훈련사 프로필 update -->
    <update id="updateSitter1" parameterType="ptms.mvc.tpj.CustVO.SitterVO">
    		update SITTERS_TB
-   		set SIT_TITLE = #{SIT_TITLE}, SIT_APPEAL = #{SIT_APPEAL}, SIT_IMG = #{SIT_IMG}
+   		set SIT_TITLE = #{SIT_TITLE}, SIT_APPEAL = #{SIT_APPEAL}, SIT_IMG = #{SIT_IMG}, SIT_ST = #{SIT_ST}
    		where CUST_ID = #{CUST_ID}
    </update>
    

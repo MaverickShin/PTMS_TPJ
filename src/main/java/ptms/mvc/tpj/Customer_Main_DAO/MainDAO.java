@@ -46,11 +46,14 @@ public interface MainDAO {
 	// 2.우편번호가 같을때 (update)
 	public int updateCustomer2(CustomerVO vo);
 	
-	// 회원 탈퇴
+	// 회원 탈퇴 (CUSTOMER_TB)
+	public int deleteCustomer(int ZIP_CD);
 	
+	// 회원 탈퇴 (ZIPCODES_TB)
+	public int deleteCustomer2(int ZIP_CD);
 	
 	// 펫 목록
-	public List<PetVO> getPetList(HashMap<String, Object> map);
+	public List<PetVO> getPetList(String CUST_ID);
 	
 	// 펫 등록
 	public int insertPet(PetVO vo);
@@ -65,7 +68,7 @@ public interface MainDAO {
 	public int deletePet(int PET_CD);
 	
 	// 등록된 펫 갯수
-	public int getPetCnt();
+	public int getPetCnt(String CUST_ID);
 	
 	// 일정 가지고 오기(json변환을 위해 Map을 ResultType으로 받음)
 	public List<Map<String,Object>> getEvents(String id);

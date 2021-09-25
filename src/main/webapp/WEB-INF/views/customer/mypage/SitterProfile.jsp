@@ -72,13 +72,12 @@ function updateCheck(){
 									<a class="link">MY PET</a>
 									<div class = "hide">
 						    			<a href="/tpj/cust/MyPet">펫 등록</a>
-							    		<a href="/tpj/cust/MyPetList">펫 등록/수정</a>
+							    		<a href="/tpj/cust/MyPetList">펫 목록/수정</a>
 									</div>
 								</li>
 								<li class="div_li"><a href="/tpj/cust/SitterProfile">시터 프로필</a></li>
 								<li class="div_li"><a href="/tpj/cust/TrainerProfile">훈련사 프로필</a></li>
 								<li class="div_li"><a href="/tpj/cust/buyList">결제내역</a></li>
-								<li class="div_li"><a href="/tpj/cust/delCustomer">회원탈퇴</a></li>
 							</ul>
 						</nav>
 
@@ -104,7 +103,6 @@ function updateCheck(){
 															</div>
 														</div>
 
-
 														<div class="col-md-12">
 															<div class="form-group">
 																<div class="form-field">
@@ -121,6 +119,33 @@ function updateCheck(){
 															</div>
 														</div>
 
+														<div class="col-md-12">
+															<label class="label" for="SIT_ST">시터 활동 상태</label><br>
+															<c:if test="${dto.getSIT_ST() == 0}">
+																<label>
+																	<input
+																	type="radio" value="0" name="SIT_ST" id="SIT_ST"
+																	class="form-group" checked>활동해제
+																</label>
+																<label><input
+																	type="radio" value="1" name="SIT_ST" id="SIT_ST"
+																	class="form-group">활동중
+																</label>
+															</c:if>
+															&nbsp;
+															<c:if test="${dto.getSIT_ST() == 1}">
+																<label>
+																	<input
+																	type="radio" value="0" name="SIT_ST" id="SIT_ST"
+																	class="form-group">활동해제
+																</label>
+																<label><input
+																	type="radio" value="1" name="SIT_ST" id="SIT_ST"
+																	class="form-group" checked>활동중
+																</label>
+															</c:if>
+														</div>
+																
 														<div class="col-md-12">
 															<div class="form-group">
 																<label class="label" for="service_loc">시터 서비스 가능 지역</label> 
@@ -201,7 +226,7 @@ function updateCheck(){
 															<div class="form-group" align="center">
 																<input type="submit" value="수정하기" class="btn btn-primary" id="join_sub"> 
 																<input type="button" value="탈퇴하기"
-																	class="btn btn-primary" id="applyTrainer" onclick = "if(confirm('정말 시터를 탈퇴하시겠습니까?')) window.location='SitterDel?SIT_ID=${dto.SIT_ID}'">
+																	class="btn btn-primary" onclick = "if(confirm('정말 시터를 탈퇴하시겠습니까?')) window.location='SitterDel?SIT_ID=${dto.SIT_ID}'">
 															</div>
 														</div>
 													</div>

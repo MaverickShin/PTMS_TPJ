@@ -87,13 +87,12 @@
 								<a class="link">MY PET</a>
 								<div class = "hide">
 					    			<a href="/tpj/cust/MyPet">펫 등록</a>
-						    		<a href="/tpj/cust/MyPetList">펫 등록/수정</a>
+						    		<a href="/tpj/cust/MyPetList">펫 목록/수정</a>
 								</div>
 							</li>
 							<li class="div_li"><a href="/tpj/cust/SitterProfile">시터 프로필</a></li>
 							<li class="div_li"><a href="/tpj/cust/TrainerProfile">훈련사 프로필</a></li>
 							<li class="div_li"><a href="/tpj/cust/buyList">결제내역</a></li>
-							<li class="div_li"><a href="/tpj/cust/delCustomer">회원탈퇴</a></li>
 						</ul>
 					</nav>
 					
@@ -183,6 +182,8 @@
 											<div class="col-md-12">
 												<div class="form-group">
 													<input type="submit" value="수정" class="btn btn-primary">
+													<input type="button" value="탈퇴하기"
+														class="btn btn-primary" onclick = "if(confirm('정말 회원 탈퇴하시겠습니까?')) window.location='delCustomer?zipcode=${CustomerVO.getZIPCODE()}'">
 												</div>
 											</div>
 										</div>

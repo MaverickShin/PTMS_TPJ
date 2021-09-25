@@ -57,17 +57,25 @@
 	</update>
 	<!-- 3. 우편번호가 다를시 우편번호등록 사용 -->
 	
+	<!-- 회원 탈퇴 (CUSTOMER_TB) -->
+	<delete id="deleteCustomer" parameterType="int">
+		delete from CUSTOMER_TB where ZIPCODE = #{zipcode}
+	</delete>
+	
+	<!-- 회원 탈퇴 (ZIPCODES_TB) -->
+	<delete id="deleteCustomer2" parameterType="int">
+		delete from ZIPCODES_TB where ZIP_CD = #{zipcode}
+	</delete>
+	
 	<!-- 펫 목록 조회 -->
-	<select id="getPetList" parameterType="java.util.Map" resultType="ptms.mvc.tpj.CustVO.PetVO">
-		<![CDATA[
+	<select id="getPetList" parameterType="String" resultType="ptms.mvc.tpj.CustVO.PetVO">
 		select *
-		from (select PET_CD, CUST_ID, PK_CD, PET_AGE, PET_NM, PET_CON, PET_IMG, PET_DT, rowNum rNum  
+		from (select PET_CD, CUST_ID, PK_CD, PET_AGE, PET_NM, PET_CON, PET_IMG, PET_DT 
 				from (select *
 						from PET_TB
 					   order by abs(PET_CD) desc)
 			)
-		where rNum >= #{start} and rNum <= #{end} 
-		]]>
+		where CUST_ID = #{CUST_ID}
 	</select>
 	
 	<!-- 펫 가입 처리 -->
