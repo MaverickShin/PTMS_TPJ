@@ -82,7 +82,7 @@ function accept() {
    rb.style.backgroundColor = "#f5f5f5";
    rb.style.color = "black";
    
-   window.location = "${tr}acceptTrainingList";
+   window.location = "${tr}acceptTrainingList"
 }
 
 function refuse() {
@@ -102,7 +102,6 @@ function refuse() {
    window.location = "${tr}denyTrainingList"
 }
 </script>
-
 <title>Insert title here</title>
 </head>
 <body>
@@ -121,9 +120,9 @@ function refuse() {
     </section>
     
     <div class="list_tab">
-      <p id="left_button" style="background-color: #a3cde3; color: white;">요청 수락대기</p>
+      <p id="left_button" onclick="request();">요청 수락대기</p>
       <p id="accept_button" onclick="accept();">수락</p>   
-      <p id="right_button" onclick="refuse();">거절</p>      
+      <p id="right_button" style="background-color: #a3cde3; color: white;">거절</p>      
       <p id="center_button" onclick ="sitterserPayFinish();">결제 완료</p>
 
     </div>
@@ -157,8 +156,7 @@ function refuse() {
 		      <div class="desc" style="background-color:#dfe3eb; padding:20px;">
 		        <h6>펫주인 : ${dtos.CUST_ID}</h6>&nbsp;<h6>훈련받을 펫 : ${dtos.PET_NM}</h6>
 		        <p>훈련일 : ${dtos.START_DAY}&nbsp;훈련종류 : ${dtos.TQ_AMT}</p>
-		        <input type="button" value="수락" class="btn btn-primary" onclick="window.location='acceptRequestTraining?TQ_CD=${dtos.TQ_CD}'">
-		        <input type="button" value="거절" class="btn btn-primary" onclick="window.location='denyRequestTraining?TQ_CD=${dtos.TQ_CD}'">
+		        
 		      </div>
 		    </div>
 	    </c:forEach>

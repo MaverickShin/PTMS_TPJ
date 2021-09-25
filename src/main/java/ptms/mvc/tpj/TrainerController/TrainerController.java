@@ -98,5 +98,85 @@ public class TrainerController {
       
       return "customer/trainer/requestTrainingAction";
    }
+   
+   // 훈련사가 요청 거절 -> 테이블 요청상태 거절(2)로 update
+   @RequestMapping("denyRequestTraining")
+   public String denyRequestTraining(HttpServletRequest req, Model model) throws ParseException {
+      log.info("url ==> denyRequestTraining");
+
+      trainerservice.updateDenyTraining(req, model);
+      System.out.println("타고옴1");
+      return "customer/trainer/denyRequestTrainingAction";
+   }
+   
+   // 훈련사가 요청 수락 -> 테이블 요청상태 수락(1)으로 update
+   @RequestMapping("acceptRequestTraining")
+   public String acceptRequestTraining(HttpServletRequest req, Model model) throws ParseException {
+      log.info("url ==> acceptRequestTraining");
+
+      trainerservice.updateAcceptTraining(req, model);
+      System.out.println("타고옴");
+      return "customer/trainer/acceptRequestTrainingAction";
+   }
+   
+   // 훈련사가 수락한 요청리스트
+   @RequestMapping("acceptTrainingList")
+   public String acceptTrainingList(HttpServletRequest req, Model model) throws ParseException {
+      log.info("url ==> acceptTrainingList");
+
+      trainerservice.acceptTrainingList(req, model);
+      
+      return "customer/trainer/acceptTrainingList";
+   }
+   
+   // 훈련사가 거절한 요청리스트
+   @RequestMapping("denyTrainingList")
+   public String denyTrainingList(HttpServletRequest req, Model model) throws ParseException {
+      log.info("url ==> denyTrainingList");
+
+      trainerservice.denyTrainingList(req, model);
+      
+      return "customer/trainer/denyTrainingList";
+   }
+   
+   // 고객용 훈련 요청결과 리스트 - 대기중일때
+   @RequestMapping("custReqResult")
+   public String custReqResult(HttpServletRequest req, Model model) throws ParseException {
+      log.info("url ==> custReqResult");
+
+      trainerservice.custReqResultwait(req, model);
+      
+      return "customer/trainer/custReqResult";
+   }
+   
+   // 고객용 훈련 요청 취소 - delete
+   @RequestMapping("cancelRequestTraining")
+   public String cancelRequestTraining(HttpServletRequest req, Model model) throws ParseException {
+      log.info("url ==> cancelRequestTraining");
+
+      trainerservice.cancelRequestTraining(req, model);
+      
+      return "customer/trainer/cancelRequestTrainingAction";
+   }
+   
+   // 고객용 훈련 요청결과 리스트 - 수락일때
+   @RequestMapping("custReqResultAccept")
+   public String custReqResultAccept(HttpServletRequest req, Model model) throws ParseException {
+      log.info("url ==> custReqResultAccept");
+
+      trainerservice.custReqResultAccept(req, model);
+      
+      return "customer/trainer/custReqResultAcceptList";
+   }
+   
+   // 고객용 훈련 요청결과 리스트 - 거절일때
+   @RequestMapping("custReqResultDeny")
+   public String custReqResultDeny(HttpServletRequest req, Model model) throws ParseException {
+      log.info("url ==> custReqResultDeny");
+
+      trainerservice.custReqResultDeny(req, model);
+      
+      return "customer/trainer/custReqResultDenyList";
+   }
  
 }

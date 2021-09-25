@@ -9,52 +9,40 @@ import ptms.mvc.tpj.CustVO.ZipcodeVO;
 
 public interface SitterDAO {
 
-	// 시터 프로필 등록
+	// 시터 프로필 등록 <완료>
 	public int profileInsert(SitterVO vo);
 	
 	// 시터 주소 조회
 	public ZipcodeVO addressInfo(String cust_id);
 	
-	// 시터 서비스 정보 등록
+	// 시터 서비스 정보 등록  <완료>
 	public int insertService(SitterVO vo);
 	
-	// delete 시터 정보 삭제 (SITTERS_TB)
+	// delete 시터 정보 삭제 (SITTERS_TB)  <완료>
 	public int deleteSitter(int SIT_ID);
 	
-	// delete 시터 정보 삭제 (SITTER_SERVICE_TB)
+	// delete 시터 정보 삭제 (SITTER_SERVICE_TB)  <완료>
 	public int deleteSitter2(int SIT_ID);
 	
-	// 시터 활동 등록
-	public int activityUp(String cust_id);
-	
-	// 시터 활동 등록 취소
-	public int activityDown(String cust_id);
-	
-	// 펫시터 찾기 -(조건에 맞는) 시터 수 구하기
+	// 펫시터 찾기 -(조건에 맞는) 시터 수 구하기  <완료>
 	public int getSitterCnt(SitterVO vo);
 	
-	// 펫시터 찾기 - 리스트 출력
+	// 펫시터 찾기 - 리스트 출력  <완료>
 	public List<SitterVO> activityList(SitterVO vo);
 	
-	// 시터 상세 조회 페이지
+	// 시터 상세 조회 페이지  <완료>
 	public SitterVO detailSitter(int sit_id);
 	
 	// 지정 시터 후기 조회
 	public SitterVO gradeSitter(int sit_id);
 	
-	// 시터 의뢰 요청 목록 (전체) 
-	public List<SitterVO> requestList();
+	// 시터 의뢰 목록 수 구하기 (나에게온 의뢰)  <완료>
+	public int getRequestList(String cust_id);
 	
-	// 지정 시터 의뢰 목록 (나에게온 의뢰)
+	// 시터 의뢰 목록 (나에게온 의뢰)  <완료>
 	public List<SitterVO> selectRequestList(String cust_id);
 	
-	// 의뢰자 서비스 요금 조회
-	public SitterVO feeSearch(int pet_cd);
-	
-	// 시터 의뢰 등록 (시터를 지정하지 않았을 때)
-	//public int requestInsert(SitterVO vo);
-	
-	// 펫시팅 신청하기 - 요청테이블에 insert
+	// 펫시팅 신청하기 - 요청테이블에 insert <완료>
 	public int selectRequestInsert(SitterVO vo);
 	
 	// 의뢰자 거주지역 조회
@@ -74,30 +62,63 @@ public interface SitterDAO {
 	// 결제하기 - 의뢰 상태 업데이트
 	public int requestPayState(int sq_cd);
 	
-	// 시터 의뢰 수락
+	// 시터 - 고객 의뢰 수락 수 구하기
+	public int getsitterAcceptCount(String cust_id);
+	
+	// 시터 - 고객 의뢰 수락 처리상태(SQ_ST)업데이트
 	public int sitterAccept(int sq_cd);
 	
-	// 의뢰수락 - 의뢰 상태(의뢰 확정으로)업데이트
-	public int requestConfirmState(int sq_cd);
+	//시터 - 고객 의뢰 수락 리스트 
+	public List<SitterVO> sitterAcceptList(String CUST_ID);	
 	
-	//요금표 리스트
+	//시터 - 고객 의뢰 거절 수 구하기
+	public int getsitterRefuseCount(String cust_id);
+	
+	// 시터 - 고객 의뢰 거절 처리상태(SQ_ST)업데이트 <완료>
+	public int sitterRefuse(int SQ_CD);
+	
+	// 시터 - 고객 의뢰 거절 리스트 <완료>
+	public List<SitterVO> sitterRefuseList(String CUST_ID);	
+	
+	// 고객 - 요청수락대기 리스트 수 구하기
+	public int getWaitReqAccept(String CUST_ID);
+	
+	// 고객 - 요청수락대기 상태에서 취소할 시 요청테이블(SITTER_REQUEST_TB)에서 delete
+	public int sitterReqCancle(String CUST_ID);
+	
+	// 고객 - 요청수락대기 리스트 
+	public List<SitterVO> sitterWaitReqList(String CUST_ID);
+	
+	// 고객 - 수락된 요청 리스트 수 구하기
+	
+	// 고객 - 수락된 요청 리스트
+	
+	// 고객 - 거절된 요청 리스트 수 구하기
+	
+	// 고객 - 거절된 요청 리스트
+	
+	// 고객 - 결제완료 리스트 수 구하기
+	
+	// 고객 - 결제완료 리스트
+	
+	//요금표 리스트 <완료>
 	public ArrayList<PetVO> getPriceList();
 	
-	//고객 펫 수
+	//고객 펫 수 <완료>
 	public int MypetCount(String CUST_ID);
 	
-	//고객 펫 조회
+	//고객 펫 조회 <완료>
 	public List<PetVO> MypetList(String CUST_ID);	
 	
 	//--------------------------------------
-	// select 고객 - 시터 수정 상세 페이지
+	// select 고객 - 시터 수정 상세 페이지  <완료>
 	public SitterVO SitterDetail(String CUST_ID);
 	
-	// 기존에 있던 updateSitter는 삭제함, 이후 밑에 2개 추가
+	// 기존에 있던 updateSitter는 삭제함, 이후 밑에 2개 추가  <완료>
 	// update 고객 - 시터 수정 처리 (SITTERS_TB)
 	public int updateSitter1(SitterVO sVo);
 	
-	// update 고객 - 시터 수정 처리 (SITTER_SERVICE_TB)
+	// update 고객 - 시터 수정 처리 (SITTER_SERVICE_TB)  <완료>
 	public int updateSitter2(SitterVO sVo);
 	
 	

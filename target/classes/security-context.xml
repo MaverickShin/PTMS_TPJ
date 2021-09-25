@@ -114,6 +114,7 @@
 			authentication-manager-ref="uesrAuthManager">
 		
 		<security:intercept-url pattern="/cust/login" access="permitAll" />
+		<security:intercept-url pattern="/cust/logout" access="permitAll" />
 		<security:intercept-url pattern="/cust/main" access="permitAll" />
 		<security:intercept-url pattern="/cust/join" access="permitAll" />
 		<security:intercept-url pattern="/cust/confirmid" access="permitAll" />

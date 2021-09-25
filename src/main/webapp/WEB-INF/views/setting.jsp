@@ -35,6 +35,10 @@
  
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
  
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+ 
   <link rel="stylesheet" href="${cssPath}animate.css">
   
   <link rel="stylesheet" href="${cssPath}owl.carousel.min.css">

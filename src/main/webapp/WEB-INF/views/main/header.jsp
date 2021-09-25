@@ -28,7 +28,6 @@
 	
 	.hide a:hover {
 		color: #00bd56;
-		font-weight: bold;
 		background-color: white;
 	}
 	
@@ -39,6 +38,11 @@
 	
 	#mypages:hover .hide {
 		display: block;
+	}
+	
+	#ftco-nav a{
+		font-size: 18px !important;
+		font-weight: normal !important;
 	}
 	
 </style>
@@ -57,19 +61,19 @@
 							youremail@email.com</a> -->
 					</p>
 				</div>
-				<div class="col-md-6 d-flex justify-content-md-end">
+				<div class="col-md-6 d-flex justify-content-md-end" style = "font-family:'Do Hyeon', sans-serif;">
 					<div class="social-media" style = "display:flex;">
 						<p class="mb-0 d-flex" align="center">
 							<c:if test = "${sessionScope.cust_id == null}">
-								<a href="${cu}login" style="color:white; font-size:14px;  font-weight: bold; width:70px; padding-top:8px;">로그인</a>
-								<a href="${cu}join" style="color:white; font-size:14px; font-weight: bold; width:70px; padding-top:8px;">회원가입</a>
+								<a href="${cu}login" style="color:white; font-size:16px;  width:70px; padding-top:8px;">로그인</a>
+								<a href="${cu}join" style="color:white; font-size:16px;  width:70px; padding-top:8px;">회원가입</a>
 							</c:if>
 							
 							<c:if test = "${sessionScope.cust_id != null}">
-								<a style="color:white; font-size:14px;  font-weight: bold; width:80px; padding-top:8px;">${sessionScope.cust_nm} 님</a>
+								<a style="color:white; font-size:16px; width:80px; padding-top:8px;">${sessionScope.cust_nm} 님</a>
 								<form action = "${cu}logout" name = "logoutform" method = "post" style = "margin:0; padding:0;">
 									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-									<a href = "javascript:logoutform.submit();" style="color:white; font-size:14px; font-weight: bold; width:60px; line-height:40px; cursor:pointer;">로그아웃</a>
+									<a href = "javascript:logoutform.submit();" style="color:white; font-size:16px; width:60px; line-height:44px; cursor:pointer;">로그아웃</a>
 								</form>
 							</c:if>
 						</p>
@@ -89,7 +93,7 @@
 				aria-expanded="false" aria-label="Toggle navigation">
 				<span class="fa fa-bars"></span> Menu
 			</button>
-			<div class="collapse navbar-collapse" id="ftco-nav">
+			<div class="collapse navbar-collapse" id="ftco-nav" style = "font-family:'Do Hyeon', sans-serif;">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item" id = "mypages"><a class="nav-link">반려인/펫 관리</a>
 						<div class = "hide">
