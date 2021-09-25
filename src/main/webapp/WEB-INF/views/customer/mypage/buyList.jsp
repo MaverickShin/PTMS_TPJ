@@ -65,7 +65,6 @@
 								<li class="div_li"><a href="/tpj/cust/SitterProfile">시터 프로필</a></li>
 								<li class="div_li"><a href="/tpj/cust/TrainerProfile">훈련사 프로필</a></li>
 								<li class="div_li"><a href="/tpj/cust/buyList">결제내역</a></li>
-								<li class="div_li"><a href="/tpj/cust/delCustomer">회원탈퇴</a></li>
 							</ul>
 						</nav>
 						

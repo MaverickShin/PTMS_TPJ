@@ -48,19 +48,52 @@ public interface TrainerDAO {
 	// selectCnt - 훈련사에게 온 의뢰 목록 갯수
 	public int TraineeListCnt(String id);
 	
-	// selectList - 훈련 반려동물 목록
+	// selectList - 훈련 대기중인 리스트
 	public List<TrainerRequestVO> TraineeList(String id);
 	
 	// delete - 훈련 예약 취소
-	public int deleteReservation(int tq_cd);
+	public int deleteReservation(int TQ_CD);
 	
-	// delete - 훈련 예약 변경
-	public int updateReservation(int tq_cd);
+	// 훈련사가 훈련 수락 -> update
+	public int updateAcceptTraining(int TQ_CD);
+	
+	// 훈련사가 훈련 거절 -> update
+	public int updateDenyTraining(int TQ_CD);
 	
 	// 의뢰인의 펫 마릿수 가져오기
 	public int getPetCount(String id);
 	
 	// 의뢰인의 펫 이름 가져오기
 	public List<TrainerVO> getPetInfo(String id);
+	
+	// selectCnt - 훈련사에게 온 훈련수락 의뢰 목록 갯수
+	public int acceptTraineeListCnt(String id);
+	
+	// 훈련사 훈련 수락 리스트
+	public List<TrainerRequestVO> acceptTraineeList(String id);
+	
+	// selectCnt - 훈련사에게 온 훈련거절 의뢰 목록 갯수
+	public int denyTraineeListCnt(String id);
+	
+	// 훈련사 훈련 거절 리스트
+	public List<TrainerRequestVO> denyTraineeList(String id);
+	
+	// 고객용 훈련요청 결과 리스트 건수(대기중일때)
+	public int custReqResultwaitCnt(String id);
+	
+	// 고객용 훈련요청 결과 리스트(대기중일때)
+	public List<TrainerRequestVO> custReqResultwaitList(String id);
+	
+	// 고객용 훈련요청결과 리스트 건수(수락일때)
+	public int custReqResultacceptCnt(String id);
+	
+	// 고객용 훈련요청 결과 리스트(수락일때)
+	public List<TrainerRequestVO> custReqResultacceptList(String id);
+	
+	// 고객용 훈련요청결과 리스트 건수(수락일때)
+	public int custReqResultdenyCnt(String id);
+		
+	// 고객용 훈련요청 결과 리스트(수락일때)
+	public List<TrainerRequestVO> custReqResultdenyList(String id);
 	
 }

@@ -131,7 +131,7 @@
 	<!-- 훈련사 수정 처리 - 훈련사프로필 update-->
 	<update id="updateTrainer1" parameterType="ptms.mvc.tpj.CustVO.TrainerVO">
 		update TRAINER_TB
-		set TA_TITLE = #{TA_TITLE}, TA_APPEAL = #{TA_APPEAL}, TA_IMG = #{TA_IMG}
+		set TA_TITLE = #{TA_TITLE}, TA_APPEAL = #{TA_APPEAL}, TA_IMG = #{TA_IMG}, TA_ST = #{TA_ST}
 		where CUST_ID = #{CUST_ID}
 	</update>
 	
@@ -184,6 +184,7 @@
 		select count(*)
 		from TRAINER_REQUEST_TB tr, TRAINER_TB tt
 		where tt.TA_CD = tr.TA_CD
+		and tr.TQ_ST = 0
 		and tt.CUST_ID = #{id}
 	</select>
 	
@@ -193,6 +194,103 @@
 		where tt.TA_CD = tr.TA_CD
 		and pt.CUST_ID = tr.CUST_ID
 		and tt.CUST_ID = #{id}
+		and tr.TQ_ST = 0
 		order by TQ_DT
+	</select>
+	
+	<update id="updateDenyTraining" parameterType="int">
+		update TRAINER_REQUEST_TB set TQ_ST = 2 where TQ_CD = #{TQ_CD}
+	</update>
+	
+	<update id="updateAcceptTraining">
+		update TRAINER_REQUEST_TB set TQ_ST = 1 where TQ_CD = #{TQ_CD}
+	</update>
+	
+	<select id="acceptTraineeListCnt" parameterType="String" resultType="int">
+		select count(*)
+		from TRAINER_REQUEST_TB tr, TRAINER_TB tt
+		where tt.TA_CD = tr.TA_CD
+		and tr.TQ_ST = 1
+		and tt.CUST_ID = #{id}
+	</select>
+	
+	<select id="acceptTraineeList" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
+		select distinct tr.*, pt.PET_CON
+		from TRAINER_REQUEST_TB tr, TRAINER_TB tt, PET_TB pt
+		where tt.TA_CD = tr.TA_CD
+		and pt.CUST_ID = tr.CUST_ID
+		and tt.CUST_ID = #{id}
+		and tr.TQ_ST = 1
+		order by TQ_DT
+	</select>
+	
+	<select id="denyTraineeListCnt" parameterType="String" resultType="int">
+		select count(*)
+		from TRAINER_REQUEST_TB tr, TRAINER_TB tt
+		where tt.TA_CD = tr.TA_CD
+		and tr.TQ_ST = 2
+		and tt.CUST_ID = #{id}
+	</select>
+	
+	<select id="denyTraineeList" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
+		select distinct tr.*, pt.PET_CON
+		from TRAINER_REQUEST_TB tr, TRAINER_TB tt, PET_TB pt
+		where tt.TA_CD = tr.TA_CD
+		and pt.CUST_ID = tr.CUST_ID
+		and tt.CUST_ID = #{id}
+		and tr.TQ_ST = 2
+		order by TQ_DT
+	</select>
+	
+	<select id="custReqResultwaitCnt" resultType="int">
+		select count(*) 
+		from TRAINER_REQUEST_TB 
+		where CUST_ID= #{id}
+		and TQ_ST = 0
+	</select>
+	
+	<select id="custReqResultwaitList" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
+		select tr.*, ct.cust_nm
+		from TRAINER_REQUEST_TB tr, TRAINER_TB tt, CUSTOMER_TB ct
+		where tr.TA_CD = tt.TA_CD
+		and tt.CUST_ID = ct.CUST_ID
+		and ct.CUST_ID = #{id}
+		and TQ_ST = 0
+	</select>
+	
+	<delete id="deleteReservation" parameterType="int">
+		delete from TRAINER_REQUEST_TB where TQ_CD = #{TQ_CD}
+	</delete>
+	
+	<select id="custReqResultacceptCnt" resultType="int">
+		select count(*) 
+		from TRAINER_REQUEST_TB 
+		where CUST_ID= #{id}
+		and TQ_ST = 1
+	</select>
+	
+	<select id="custReqResultacceptList" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
+		select tr.*, ct.cust_nm
+		from TRAINER_REQUEST_TB tr, TRAINER_TB tt, CUSTOMER_TB ct
+		where tr.TA_CD = tt.TA_CD
+		and tt.CUST_ID = ct.CUST_ID
+		and ct.CUST_ID = #{id}
+		and TQ_ST = 1
+	</select>
+	
+	<select id="custReqResultdenyCnt" resultType="int">
+		select count(*) 
+		from TRAINER_REQUEST_TB 
+		where CUST_ID= #{id}
+		and TQ_ST = 2
+	</select>
+	
+	<select id="custReqResultdenyList" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
+		select tr.*, ct.cust_nm
+		from TRAINER_REQUEST_TB tr, TRAINER_TB tt, CUSTOMER_TB ct
+		where tr.TA_CD = tt.TA_CD
+		and tt.CUST_ID = ct.CUST_ID
+		and ct.CUST_ID = #{id}
+		and TQ_ST = 2
 	</select>
 </mapper>

@@ -16,7 +16,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.python.antlr.PythonParser.return_stmt_return;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -204,86 +203,37 @@ public class MainServiceImpl implements MainService{
 		model.addAttribute("updatecnt", updatecnt);
 	}
 	
+	// 회월 탈퇴
+	@Override
+	public void custDelete(HttpServletRequest req, Model model) {
+		int ZIP_CD = Integer.parseInt(req.getParameter("zipcode"));
+		int deleteCnt = dao.deleteCustomer2(ZIP_CD);
+		if(deleteCnt != 0) {
+			dao.deleteCustomer(ZIP_CD);
+		}
+		
+		model.addAttribute("deleteCnt", deleteCnt);
+	}
+	
 	// 펫 목록
 	@Override
 	public void petList(HttpServletRequest req, Model model) {
-		int pageSize = 3; 	 // 한 페이지당 출력할 글 갯수
-		int pageBlock = 3; 	 // 한 블럭당 페이지 갯수
-		
 		int cnt = 0;		 // 글 갯수
-		int start = 0;		 // 현재 페이지 시작 글 번호
-		int end = 0;		 // 현재 페이지 마지막 글 번호
-		int number = 0;		 // 출력용 글번호
-		String pageNum = ""; // 페이지 번호
-		int currentPage = 0; // 현재 페이지
 		
-		int pageCount = 0;	 // 페이지 갯수
-		int startPage = 0;	 // 시작 페이지
-		int endPage = 0;	 // 마지막 페이지
-		
-		cnt = dao.getPetCnt();
+		String CUST_ID = (String)req.getSession().getAttribute("cust_id");
+		cnt = dao.getPetCnt(CUST_ID);
 		System.out.println("cnt : "+cnt);
 		
-		// 등록된 펫 갯수 조회
-		pageNum = req.getParameter("pageNum");
-		if(pageNum == null) {
-			pageNum="1";// 첫 페이지를 1로 설정
-		}
-		
-		currentPage = Integer.parseInt(pageNum);
-		System.out.println(" 현제 페이지 currentPage : " + currentPage);
-		
-		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1:0); // 페이지 갯수 + 나머지가 있으면 1페이지 추가
-		
-		// 현재페이지 시작 글번호(페이지별) 
-		start = (currentPage -1) * pageSize + 1;
-		
-		// 현재페이지 마지막 글번호(페이지별) 
-		end = start + pageSize - 1;
-		
-		System.out.println("start : " + start);
-		System.out.println("end : " + end);
-		
-		// 출력용 글번호
-		number = cnt - (currentPage - 1) * pageSize;
-		
-		System.out.println("number : " + number);
-		System.out.println("pageSize : " + pageSize);
-		
-		// 시작 페이지
-		startPage = (currentPage / pageBlock) * pageBlock + 1;
-		if(currentPage % pageBlock == 0) startPage -= pageBlock;
-		
-		System.out.println("startPage : " + startPage);
-		
-		// 마지막 페이지
-		endPage = startPage + pageBlock - 1;
-		if(endPage > pageCount) endPage = pageCount;
-		
-		System.out.println("endPage : " + endPage);
-		
-		List<PetVO> dtos = null;
+		List<PetVO> dtos = new ArrayList<PetVO>();
 		
 		if(cnt > 0) {
-			HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("start", start);
-			map.put("end", end);
-			dtos = dao.getPetList(map);
+			dtos = dao.getPetList(CUST_ID);
 			System.out.println("dtos : "+dtos);
 		}
 		
 		model.addAttribute("dtos", dtos); // 상품 게시글 목록
 		model.addAttribute("cnt", cnt);   // 상품 게시글 갯수
-		model.addAttribute("pageNum", pageNum); // 페이지 번호
-		model.addAttribute("number", number); // 출력용 글번호
 		
-		if(cnt > 0 ) {
-			req.setAttribute("startPage", startPage);	// 시작페이지
-			req.setAttribute("endPage", endPage);		// 마지막페이지
-			req.setAttribute("pageBlock", pageBlock);	// 한 블럭당 페이지 갯수
-			req.setAttribute("pageCount", pageCount);	// 페이지 갯수
-			req.setAttribute("currentPage", currentPage);	// 현재페이지
-		}
 	}
 	
 	// 펫 등록 
@@ -592,9 +542,6 @@ public class MainServiceImpl implements MainService{
 	public void deleteEvent(HttpServletRequest req, Model model) {
 		
 	}
-
-
-	
 	
 	// 펫정보 인증 및 상세 페이지
 /*	@Override

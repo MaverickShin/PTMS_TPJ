@@ -18,6 +18,9 @@ public interface MainService {
 	// 회원정보 수정 처리
 	public void custUpdate(HttpServletRequest req, Model model);
 	
+	// 회월 탈퇴
+	public void custDelete(HttpServletRequest req, Model model);
+	
 	// 펫 목록
 	public void petList(HttpServletRequest req, Model model);
 	

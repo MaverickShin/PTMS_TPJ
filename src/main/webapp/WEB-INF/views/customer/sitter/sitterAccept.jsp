@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@include file="../../setting.jsp" %>       
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- 수락 실패  -->
+<c:if test="${upadateCnt == 0}">
+	<script type="text/javascript">
+		alert("수락에 실패하였습니다. 다시한번 시도해 주세요.")
+		window.history.back();
+	</script>
+</c:if>
+
+<!-- 수락 성공 -->
+<c:if test="${upadateCnt != 0}">
+	<script type="text/javascript">
+		alert("고객 요청을 수락하였습니다.");
+		window.location='${st}sitterAcceptList';
+	</script>
+</c:if>	
+</body>
+</html>

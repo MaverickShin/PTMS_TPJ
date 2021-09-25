@@ -111,15 +111,15 @@ public class TrainerDAOImpl implements TrainerDAO {
 	}
 
 	@Override
-	public int deleteReservation(int tq_cd) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteReservation(int TQ_CD) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.deleteReservation(TQ_CD);
 	}
 
 	@Override
-	public int updateReservation(int tq_cd) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateAcceptTraining(int TQ_CD) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.updateAcceptTraining(TQ_CD);
 	}
 	
 	// 펫 마릿수 가져오기
@@ -137,5 +137,79 @@ public class TrainerDAOImpl implements TrainerDAO {
 		List<TrainerVO> petName = dao.getPetInfo(id);
 		return petName;
 	}
+
+	@Override
+	public int updateDenyTraining(int TQ_CD) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		int updateCnt = dao.updateDenyTraining(TQ_CD);
+		return updateCnt;
+	}
+	
+	@Override
+	public int acceptTraineeListCnt(String id) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		int selectCnt = dao.acceptTraineeListCnt(id);
+		return selectCnt;
+	}
+
+	@Override
+	public List<TrainerRequestVO> acceptTraineeList(String id) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.acceptTraineeList(id);
+	}
+	
+	@Override
+	public int denyTraineeListCnt(String id) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		int selectCnt = dao.denyTraineeListCnt(id);
+		return selectCnt;
+	}
+
+	@Override
+	public List<TrainerRequestVO> denyTraineeList(String id) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.denyTraineeList(id);
+	}
+
+	@Override
+	public int custReqResultwaitCnt(String id) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		int selectCnt = dao.custReqResultwaitCnt(id);
+		return selectCnt;
+	}
+
+	@Override
+	public List<TrainerRequestVO> custReqResultwaitList(String id) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.custReqResultwaitList(id);
+	}
+
+	@Override
+	public int custReqResultacceptCnt(String id) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		int selectCnt = dao.custReqResultacceptCnt(id);
+		return selectCnt;
+	}
+
+	@Override
+	public List<TrainerRequestVO> custReqResultacceptList(String id) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.custReqResultacceptList(id);
+	}
+
+	@Override
+	public int custReqResultdenyCnt(String id) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		int selectCnt = dao.custReqResultdenyCnt(id);
+		return selectCnt;
+	}
+
+	@Override
+	public List<TrainerRequestVO> custReqResultdenyList(String id) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.custReqResultdenyList(id);
+	}
+
+	
 
 }

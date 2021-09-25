@@ -32,6 +32,8 @@ public class TrainerRequestVO {
 	private String TF_KIND;
 	private int TF_FEE;
 	
+	// 요청한 훈련사 이름 가져오기
+	private String CUST_NM;
 	
 	public TrainerRequestVO() {}
 
@@ -185,6 +187,13 @@ public class TrainerRequestVO {
 		PET_AGE = pET_AGE;
 	}
 
+	public String getCUST_NM() {
+		return CUST_NM;
+	}
+
+	public void setCUST_NM(String cUST_NM) {
+		CUST_NM = cUST_NM;
+	}
 	
 	
 

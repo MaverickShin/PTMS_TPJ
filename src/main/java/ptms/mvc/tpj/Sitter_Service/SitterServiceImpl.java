@@ -86,20 +86,6 @@ public class SitterServiceImpl implements SitterService{
 		 model.addAttribute("insertCnt", insertCnt);
 	}
 
-	// 시터 활동 등록
-/*	@Override
-	public void workingeSitter(HttpServletRequest req, Model model) {
-		// TODO Auto-generated method stub
-		
-	}*/
-
-	// 시터 활동 취소
-	@Override
-	public void cancleSitter(HttpServletRequest req, Model model) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	// 시터 등록 탈퇴
 	@Override
 	public void deleteSitter(HttpServletRequest req, Model model) {
@@ -112,7 +98,7 @@ public class SitterServiceImpl implements SitterService{
 		model.addAttribute("deleteCnt",deleteCnt);
 	}
 
-	// 시터 정보 프로필 화면
+	// 시터 정보 수정 화면
 	@Override
 	public void updateSitter(HttpServletRequest req, Model model) {
 		String CUST_ID = (String)req.getSession().getAttribute("cust_id");
@@ -121,7 +107,7 @@ public class SitterServiceImpl implements SitterService{
 		SitterVO vo = sitterDao.SitterDetail(CUST_ID);
 		
 		System.out.println("vo : "+vo);
-		
+		System.out.println("SIT_ST : "+ vo.getSIT_ST());
 		model.addAttribute("dto",vo);
 	}
 
@@ -183,6 +169,8 @@ public class SitterServiceImpl implements SitterService{
 		sVo.setSV_AREA(req.getParameter("SV_AREA"));
 //		sVo.setSR_CD(SR_CD);
 //		sVo.setSR_KIND(SR_KIND);
+		sVo.setSIT_ST(Integer.parseInt(req.getParameter("SIT_ST")));
+		
 		sVo.setSIT_TITLE(req.getParameter("SIT_TITLE"));
 		sVo.setSIT_APPEAL(req.getParameter("SIT_APPEAL"));
 		sVo.setSIT_IMG(req.getParameter("SIT_IMG"));
@@ -293,19 +281,53 @@ public class SitterServiceImpl implements SitterService{
 		
 		String CUST_ID = (String)req.getSession().getAttribute("cust_id");
 		
-		List<SitterVO> list = sitterDao.selectRequestList(CUST_ID);
+		int selectCnt = sitterDao.getRequestList(CUST_ID);
+		System.out.println("요청 제안 selectCnt : " + selectCnt);
 		
+		List<SitterVO> list = null;
+		if(selectCnt > 0) {
+			list = sitterDao.selectRequestList(CUST_ID);
+		}
+		
+		model.addAttribute("selectCnt" , selectCnt);
 		model.addAttribute("list", list);
+	
 	}
 
-	// 지정 시터 의뢰 목록 (고객이 본인을 지정하여 요청한 경우)
-	/*
+	// 시터 - 고객의 요청 수락할시	
 	@Override
-	public void selectRequestList(HttpServletRequest req, Model model) {
-		// TODO Auto-generated method stub
+	public void acceptRequest(HttpServletRequest req, Model model) {
+		System.out.println("service ==> acceptRequest");
+		
+		int SQ_CD = Integer.parseInt(req.getParameter("SQ_CD"));
+		System.out.println("SQ_CD : " + SQ_CD);
+		
+		int updateCnt = sitterDao.sitterAccept(SQ_CD);
+		System.out.println("upadateCnt : " + updateCnt);
+		
+		model.addAttribute("updateCnt", updateCnt);
+		model.addAttribute("SQ_CD" , SQ_CD);
 		
 	}
-	*/
+
+	//시터 - 고객의 요청 수락할 시 내역을 보여주는 페이지
+	@Override
+	public void acceptRequestList(HttpServletRequest req, Model model) {
+		System.out.println("service ==> acceptRequestList");
+		
+		String CUST_ID = (String)req.getSession().getAttribute("cust_id");
+		
+		List<SitterVO> list = null;
+		int selectCnt = sitterDao.getsitterAcceptCount(CUST_ID);
+		System.out.println("수락한 내역selectCnt : " + selectCnt);
+		if(selectCnt > 0) {
+		 list = sitterDao.sitterAcceptList(CUST_ID);
+		}
+		
+		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("CUST_ID", CUST_ID);
+		model.addAttribute("list", list);
+	}	
 	
 	// 고객 - 펫시팅 신청하기
 	@Override
@@ -371,9 +393,58 @@ public class SitterServiceImpl implements SitterService{
 	  	 model.addAttribute("insertCnt" , insertCnt);
 	}
 
-	// 고객 - 시터 의뢰 취소
+	// 시터 - 고객의 요청 거절할 시 
 	@Override
 	public void cancleRequest(HttpServletRequest req, Model model) {
+		System.out.println("service ==> cancleRequest");
+		int SQ_CD = Integer.parseInt(req.getParameter("SQ_CD"));
+		System.out.println("SQ_CD : " + SQ_CD);
+		
+		int updateCnt = sitterDao.sitterRefuse(SQ_CD);
+		System.out.println("upadateCnt : " + updateCnt);
+		
+		model.addAttribute("updateCnt", updateCnt);
+		model.addAttribute("SQ_CD" , SQ_CD);
+	}
+	
+	// 시터 - 고객의 요청 거절할 시 내역을 보여주는 페이지
+	@Override
+	public void cancleRequestList(HttpServletRequest req, Model model) {
+		System.out.println("service ==> cancleRequestList");
+		
+		String CUST_ID = (String)req.getSession().getAttribute("cust_id");
+		
+		int selectCnt = sitterDao.getsitterRefuseCount(CUST_ID);
+		System.out.println("거절리스트 selectCnt : " + selectCnt);
+		
+		List<SitterVO> list = null;
+		if(selectCnt >0) {
+		list = sitterDao.sitterRefuseList(CUST_ID);
+		}
+		
+		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("CUST_ID", CUST_ID);
+		model.addAttribute("list", list);
+		
+	}	
+	
+	// 고객 - (시터로부터) 요청수락 대기 중인 내역을 보여주는 페이지
+	@Override
+	public void WaitRequestAccept(HttpServletRequest req, Model model) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	// 고객 - (시터로부터) 수락된 요청 내역을 보여주는 페이지
+	@Override
+	public void acceptFromSitter(HttpServletRequest req, Model model) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	// 고객 - (시터로부터) 거절된 요청 내역을 보여주는 페이지
+	@Override
+	public void refuseFromSitter(HttpServletRequest req, Model model) {
 		// TODO Auto-generated method stub
 		
 	}

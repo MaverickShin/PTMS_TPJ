@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 
 import ptms.mvc.tpj.CustVO.TrainerRequestVO;
 import ptms.mvc.tpj.CustVO.TrainerVO;
+import ptms.mvc.tpj.Sitter_DAO.SitterDAOImpl;
 import ptms.mvc.tpj.TrainerDAO.TrainerDAO;
 import ptms.mvc.tpj.TrainerDAO.TrainerDAOImpl;
 
@@ -165,7 +166,7 @@ public class TrainerServiceImpl implements TrainerService{
 	public void updateTrainer(HttpServletRequest req, Model model) {
 		String CUST_ID = (String)req.getSession().getAttribute("cust_id");
 		TrainerVO vo = dao.TrainerDetail(CUST_ID);
-		
+		System.out.println("TA_ST : "+ vo.getTA_ST());
 		model.addAttribute("dto",vo);
 		
 	}
@@ -230,6 +231,7 @@ public class TrainerServiceImpl implements TrainerService{
 		tVo.setTS3_FEE(tr_kind3_fee);
 		tVo.setTS4_NO(TS4_NO);
 		tVo.setTS4_FEE(tr_kind4_fee);
+		tVo.setTA_ST(Integer.parseInt(req.getParameter("TA_ST")));
 		tVo.setTS_AREA(req.getParameter("address2"));
 		tVo.setTA_TITLE(req.getParameter("TA_TITLE"));
 		tVo.setTA_APPEAL(req.getParameter("TA_APPEAL"));
@@ -276,9 +278,17 @@ public class TrainerServiceImpl implements TrainerService{
 		System.out.println("TA_CD : " + TA_CD);
 		vo.setTA_CD(TA_CD);
 		
-		String TQ_AMT = req.getParameter("TQ_AMT");
+		int TQ_AMT = Integer.parseInt(req.getParameter("TQ_AMT"));
 		System.out.println("TQ_AMT : " + TQ_AMT);
-		vo.setTQ_AMT(TQ_AMT);
+		if(TQ_AMT == 1) {
+			vo.setTQ_AMT("배변해결");
+		} else if(TQ_AMT == 2) {
+			vo.setTQ_AMT("분리불안");
+		} else if(TQ_AMT == 3) {
+			vo.setTQ_AMT("기본훈련");
+		} else {
+			vo.setTQ_AMT("짖음해결");
+		}
 		
 		String PET_NM[] = req.getParameterValues("PET_NM");
 		
@@ -328,9 +338,7 @@ public class TrainerServiceImpl implements TrainerService{
 		
 		List<TrainerRequestVO> vo = null;
 		if(selectCnt > 0) {
-			System.out.println("요기");
 			vo = dao.TraineeList(id);
-			System.out.println("여기");
 		}
 		model.addAttribute("selectCnt", selectCnt);
 		model.addAttribute("dto", vo);
@@ -350,8 +358,125 @@ public class TrainerServiceImpl implements TrainerService{
 	}
 
 	@Override
-	public void updateTraiee(HttpServletRequest req, Model model) {
-		// TODO Auto-generated method stub
+	public void updateAcceptTraining(HttpServletRequest req, Model model) {
+		int TQ_CD = Integer.parseInt(req.getParameter("TQ_CD"));
+		System.out.println("TQ_CD : " + TQ_CD);
+		
+		int updateCnt = dao.updateAcceptTraining(TQ_CD);
+		System.out.println("updateCnt-accept : " +updateCnt);
+		
+		model.addAttribute("updateCnt", updateCnt);
+		
+	}
+
+	@Override
+	public void updateDenyTraining(HttpServletRequest req, Model model) {
+		int TQ_CD = Integer.parseInt(req.getParameter("TQ_CD"));
+		System.out.println("TQ_CD : " + TQ_CD);
+		
+		int updateCnt = dao.updateDenyTraining(TQ_CD);
+		System.out.println("updateCnt-deny : " + updateCnt);
+		model.addAttribute("updateCnt", updateCnt);
+	}
+
+	@Override
+	public void acceptTrainingList(HttpServletRequest req, Model model) {
+		String id = (String)req.getSession().getAttribute("cust_id");
+		System.out.println("아이디 : " + id);
+		
+		int selectCnt = dao.acceptTraineeListCnt(id);
+		System.out.println("selectCnt : " + selectCnt);
+		
+		
+		List<TrainerRequestVO> vo = null;
+		if(selectCnt > 0) {
+			vo = dao.acceptTraineeList(id);
+		}
+		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("dto", vo);
+		
+	}
+
+	@Override
+	public void denyTrainingList(HttpServletRequest req, Model model) {
+		String id = (String)req.getSession().getAttribute("cust_id");
+		System.out.println("아이디 : " + id);
+		
+		int selectCnt = dao.denyTraineeListCnt(id);
+		System.out.println("selectCnt : " + selectCnt);
+		
+		
+		List<TrainerRequestVO> vo = null;
+		if(selectCnt > 0) {
+			vo = dao.denyTraineeList(id);
+		}
+		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("dto", vo);
+		
+	}
+
+	@Override
+	public void custReqResultwait(HttpServletRequest req, Model model) {
+		String id = (String)req.getSession().getAttribute("cust_id");
+		System.out.println("아이디 : " + id);
+		
+		int selectCnt = dao.custReqResultwaitCnt(id);
+		System.out.println("selectCnt : " + selectCnt);
+		
+		
+		List<TrainerRequestVO> vo = null;
+		if(selectCnt > 0) {
+			vo = dao.custReqResultwaitList(id);
+		}
+		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("dto", vo);
+		
+	}
+
+	@Override
+	public void cancelRequestTraining(HttpServletRequest req, Model model) {
+		int TQ_CD = Integer.parseInt(req.getParameter("TQ_CD"));
+		System.out.println("TQ_CD : " + TQ_CD);
+		
+		int deleteCnt = dao.deleteReservation(TQ_CD);
+		System.out.println("deleteCnt : " + deleteCnt);
+		
+		model.addAttribute("deleteCnt", deleteCnt);
+	}
+
+	@Override
+	public void custReqResultAccept(HttpServletRequest req, Model model) {
+		String id = (String)req.getSession().getAttribute("cust_id");
+		System.out.println("아이디 : " + id);
+		
+		int selectCnt = dao.custReqResultacceptCnt(id);
+		System.out.println("selectCnt : " + selectCnt);
+		
+		
+		List<TrainerRequestVO> vo = null;
+		if(selectCnt > 0) {
+			vo = dao.custReqResultacceptList(id);
+		}
+		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("dto", vo);
+		
+	}
+
+	@Override
+	public void custReqResultDeny(HttpServletRequest req, Model model) {
+		String id = (String)req.getSession().getAttribute("cust_id");
+		System.out.println("아이디 : " + id);
+		
+		int selectCnt = dao.custReqResultdenyCnt(id);
+		System.out.println("selectCnt : " + selectCnt);
+		
+		
+		List<TrainerRequestVO> vo = null;
+		if(selectCnt > 0) {
+			vo = dao.custReqResultdenyList(id);
+		}
+		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("dto", vo);
 		
 	}
 }
