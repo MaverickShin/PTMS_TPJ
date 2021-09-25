@@ -36,7 +36,7 @@
 				<li>-고객-</li>
 				<li><a href="trainerSearch">훈련사 목록</a></li>
 				<li><a href="">이용 후기</a></li>
-				<li><a href="">훈련 종류</a></li>
+				<li><a href="custReqResult">요청 내역</a></li>
 				<li>-훈련사-</li>
 				<li><a href="applyTrainer">훈련사지원</a></li>
 				<li><a href="">나에게 온 의뢰</a></li>

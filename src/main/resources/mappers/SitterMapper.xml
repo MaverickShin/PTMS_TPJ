@@ -148,4 +148,5 @@
 		WHERE s.CUST_ID =#{CUST_ID}
 		AND req.SIT_ID = s.SIT_ID
 	</select>
+	
 </mapper>    

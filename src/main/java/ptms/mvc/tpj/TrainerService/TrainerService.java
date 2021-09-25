@@ -41,7 +41,27 @@ public interface TrainerService {
 	// 훈련 예약 취소(반려인)
 	public void withrawTrainee(HttpServletRequest req, Model model);
 	
-	// 훈련 예약 변경
-	public void updateTraiee(HttpServletRequest req, Model model);
+	// 훈련사 훈련 수락
+	public void updateAcceptTraining(HttpServletRequest req, Model model);
 	
+	// 훈련사 훈련 거절
+	public void updateDenyTraining(HttpServletRequest req, Model model);
+	
+	// 훈련사 훈련 수락 리스트
+	public void acceptTrainingList(HttpServletRequest req, Model model);
+	
+	// 훈련사 훈련 거절 리스트
+	public void denyTrainingList(HttpServletRequest req, Model model);
+	
+	// 고객용 훈련 요청 결과 리스트(요청대기)
+	public void custReqResultwait(HttpServletRequest req, Model model);
+	
+	// 고객 훈련 요청 취소
+	public void cancelRequestTraining(HttpServletRequest req, Model model);
+	
+	// 고객용 훈련 요청 결과 리스트(수락)
+	public void custReqResultAccept(HttpServletRequest req, Model model);
+	
+	// 고객용 훈련 요청 결과 리스트(수락)
+	public void custReqResultDeny(HttpServletRequest req, Model model);
 }
