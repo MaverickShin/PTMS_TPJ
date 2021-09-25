@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../../setting.jsp" %>
+<%@include file="../../setting.jsp" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,33 +24,12 @@
    border: 1px solid #eeeeee;
 }
 </style>
-<script type="text/javascript">
-function sitterserPayFinish() {
-	
-	var lb = document.getElementById("left_button");
-	var cb = document.getElementById("center_button");
-	var rb = document.getElementById("right_button");
-	var ac = document.getElementById("accept_button");
-	
-	cb.style.backgroundColor = "#1e88e5";
-	cb.style.color = "white";
-	
-	lb.style.backgroundColor = "#f5f5f5";
-	lb.style.color = "black";
-	rb.style.backgroundColor = "#f5f5f5";
-	rb.style.color = "black";
-	ac.style.backgroundColor = "#f5f5f5";
-	ac.style.color = "black";
-	
-	window.location = "${st}sitterserPayFinish"
-}
 
-function refuse() {
-	
+<script type="text/javascript">
+function request(){
 	var lb = document.getElementById("left_button");
 	var cb = document.getElementById("center_button");
 	var rb = document.getElementById("right_button");
-	var ac = document.getElementById("accept_button");
 	
 	rb.style.backgroundColor = "#1e88e5";
 	rb.style.color = "white";
@@ -59,8 +38,24 @@ function refuse() {
 	cb.style.color = "black";
 	lb.style.backgroundColor = "#f5f5f5";
 	lb.style.color = "black";
-	ac.style.backgroundColor = "#f5f5f5";
-	ac.style.color = "black";
+	
+	window.location = "${st}requestForSitter"
+	
+}
+
+function refuse() {
+	
+	var lb = document.getElementById("left_button");
+	var cb = document.getElementById("center_button");
+	var rb = document.getElementById("right_button");
+	
+	rb.style.backgroundColor = "#1e88e5";
+	rb.style.color = "white";
+	
+	cb.style.backgroundColor = "#f5f5f5";
+	cb.style.color = "black";
+	lb.style.backgroundColor = "#f5f5f5";
+	lb.style.color = "black";
 	
 	window.location = "${st}sitterRefuseList"
 }
@@ -84,47 +79,49 @@ function accept() {
 	
 	window.location = "${st}sitterAcceptList"
 }
-
 </script>
+
 <title>Insert title here</title>
 </head>
 <body>
-   <%@ include file="../../main/header.jsp" %>
-   
+  <%@ include file="../../main/header.jsp" %>
+  
    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-end">
           <div class="col-md-9 ftco-animate pb-5">
              <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">Sitter<i class="ion-ios-arrow-forward"></i></a></span> <span>Blog <i class="ion-ios-arrow-forward"></i></span></p>
-            <h1 class="mb-0 bread">펫시터님의 의뢰사항을 알려드립니다.</h1>
+            <h1 class="mb-0 bread">결제완료된 요청 리스트 입니다.</h1>
           </div>
         </div>
       </div>
     </section>
     
     <div class="list_tab">
-      <p id="left_button" style="background-color: #a3cde3; color: white;">요청 수락대기</p>
-      <p id="accept_button" onclick="accept();">수락</p>   
-      <p id="right_button" onclick="refuse();">거절</p>
-      <p id="center_button" onclick="sitterserPayFinish();">결제 완료</p>
-    </div>
+      <p id="left_button" onclick ="request();">요청 수락대기</p>
+      <p id="accept_button" onclick="accept();">수락</p> 
+      <p id="right_button" onclick="refuse();">거절</p>      
+      <p id="center_button" style="background-color: #a3cde3; color: white;">결제 완료</p>
+    </div>    
+  
     
-    <div style="display:flex">
+ <div style="display:flex">
     
       <nav id="listdiv_id1" style="width:400px; padding:100px;">
          <ul>
            <li>-고객-</li>
            <li><a href="sitter">펫시터 찾기</a></li>
-		   <li><a href="MysitterSerList">나의 펫시터 이용 내역</a></li>
+           <li><a href="">이용후기</a></li>
            <li><a href="feeInfo">요금안내</a></li>
            <li>-펫시터-</li>
            <li><a href="applySitter">펫시터 지원</a></li>
+           <li><a href="">활동 등록</a></li>
            <li><a href="#">나에게 온 의뢰</a></li>
         </ul>
       </nav>
     
-  <c:if test="${selectCnt == 0}">
+<%--   <c:if test="${selectCnt == 0}">
        <div class="about-author d-flex p-4 bg-light">
          <div class="desc">
            <h3></h3>
@@ -146,10 +143,10 @@ function accept() {
             </div>
           </div>
        </c:forEach>
-    </c:if> 
+    </c:if>  --%>
    
-   </div>
+   </div>     
    
-   <%@ include file="../../main/footer.jsp" %>
+  <%@ include file="../../main/footer.jsp" %>  
 </body>
 </html>
