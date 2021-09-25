@@ -58,7 +58,8 @@ function updateCheck(){
 	}else if(!document.applyform.END_DAY.value){
 		alert("마지막 날짜를 입력하세요");
 		return false;
-	}else if(!document.applyform.TA_IMG.value){
+	}
+	else if(!document.applyform.TA_IMG.value){
 		alert("이미지를 등록해 주세요");
 		return false;
 	}
@@ -114,13 +115,12 @@ function updateCheck(){
 									<a class="link">MY PET</a>
 									<div class = "hide">
 						    			<a href="/tpj/cust/MyPet">펫 등록</a>
-							    		<a href="/tpj/cust/MyPetList">펫 등록/수정</a>
+							    		<a href="/tpj/cust/MyPetList">펫 목록/수정</a>
 									</div>
 								</li>
 								<li class="div_li"><a href="/tpj/cust/SitterProfile">시터 프로필</a></li>
 								<li class="div_li"><a href="/tpj/cust/TrainerProfile">훈련사 프로필</a></li>
 								<li class="div_li"><a href="/tpj/cust/buyList">결제내역</a></li>
-								<li class="div_li"><a href="/tpj/cust/delCustomer">회원탈퇴</a></li>
 							</ul>
 						</nav>
 
@@ -137,7 +137,7 @@ function updateCheck(){
 											<div class="col-md-7"
 												style="max-width: 100% !important; flex: 0 0 100% !important">
 												<div class="contact-wrap w-100 p-md-5 p-4">
-													<h3 class="mb-4">훈련사 등록</h3>
+													<h3 class="mb-4">훈련사 등록 수정</h3>
 													<div class="row">
 														<div class="form-group">
 															<div class="form-field">
@@ -151,13 +151,16 @@ function updateCheck(){
 
 																<div class="col-md-12">
 																	<label class="label" for="tr_kind">훈련가능 유형</label><br>
-																	<label><input type="checkbox" value="1"
+																	<label><input type="checkbox" value="1" 
 																		name="TS1_NO" id="TS1_NO" class="form-group"
-																		onchange="check();">배변훈련</label> <label><input
+																		onchange="check();">배변훈련</label>
+																	<label><input 
 																		type="checkbox" value="2" name="TS2_NO" id="TS2_NO"
-																		class="form-group" onchange="check();">분리불안</label> <label><input
+																		class="form-group" onchange="check();">분리불안</label>
+																	<label><input
 																		type="checkbox" value="3" name="TS3_NO" id="TS3_NO"
-																		class="form-group" onchange="check();">기본훈련</label> <label><input
+																		class="form-group" onchange="check();">기본훈련</label>
+																	<label><input
 																		type="checkbox" value="4" name="TS4_NO" id="TS4_NO"
 																		class="form-group" onchange="check();">짖음해결</label>
 
@@ -181,6 +184,32 @@ function updateCheck(){
 																			id="tr_kind4_fee" name="tr_kind4_fee"
 																			value="${dto.getTS4_FEE()}" class="form-control">
 																	</div>
+																</div>
+																<div class="col-md-12">
+																	<label class="label" for="TA_ST">훈련사 활동 상태</label><br>
+																	<c:if test="${dto.getTA_ST() == 0}">
+																		<label>
+																			<input
+																			type="radio" value="0" name="TA_ST" id="TA_ST"
+																			class="form-group" checked>활동해제
+																		</label>
+																		<label><input
+																			type="radio" value="1" name="TA_ST" id="TA_ST"
+																			class="form-group">활동중
+																		</label>
+																	</c:if>
+																	&nbsp;
+																	<c:if test="${dto.getTA_ST() == 1}">
+																		<label>
+																			<input
+																			type="radio" value="0" name="TA_ST" id="TA_ST"
+																			class="form-group">활동해제
+																		</label>
+																		<label><input
+																			type="radio" value="1" name="TA_ST" id="TA_ST"
+																			class="form-group" checked>활동중
+																		</label>
+																	</c:if>
 																</div>
 															</div>
 														</div>

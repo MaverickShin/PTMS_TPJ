@@ -133,7 +133,7 @@
 	<!-- 훈련사 수정 처리 - 훈련사프로필 update-->
 	<update id="updateTrainer1" parameterType="ptms.mvc.tpj.CustVO.TrainerVO">
 		update TRAINER_TB
-		set TA_TITLE = #{TA_TITLE}, TA_APPEAL = #{TA_APPEAL}, TA_IMG = #{TA_IMG}
+		set TA_TITLE = #{TA_TITLE}, TA_APPEAL = #{TA_APPEAL}, TA_IMG = #{TA_IMG}, TA_ST = #{TA_ST}
 		where CUST_ID = #{CUST_ID}
 	</update>
 	

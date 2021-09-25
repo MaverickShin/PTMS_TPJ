@@ -165,7 +165,7 @@ public class TrainerServiceImpl implements TrainerService{
 	public void updateTrainer(HttpServletRequest req, Model model) {
 		String CUST_ID = (String)req.getSession().getAttribute("cust_id");
 		TrainerVO vo = dao.TrainerDetail(CUST_ID);
-		
+		System.out.println("TA_ST : "+ vo.getTA_ST());
 		model.addAttribute("dto",vo);
 		
 	}
@@ -230,6 +230,7 @@ public class TrainerServiceImpl implements TrainerService{
 		tVo.setTS3_FEE(tr_kind3_fee);
 		tVo.setTS4_NO(TS4_NO);
 		tVo.setTS4_FEE(tr_kind4_fee);
+		tVo.setTA_ST(Integer.parseInt(req.getParameter("TA_ST")));
 		tVo.setTS_AREA(req.getParameter("address2"));
 		tVo.setTA_TITLE(req.getParameter("TA_TITLE"));
 		tVo.setTA_APPEAL(req.getParameter("TA_APPEAL"));

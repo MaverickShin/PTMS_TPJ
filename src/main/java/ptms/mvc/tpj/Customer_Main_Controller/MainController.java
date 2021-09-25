@@ -165,6 +165,16 @@ public class MainController {
 		
 		return "customer/mypage/MyInfoAction";
 	}
+	
+	// 회원 탈퇴 처리
+	@RequestMapping("delCustomer")
+	public String delCustomer(HttpServletRequest req, Model model) {
+		log.info("url ==> delCustomer");
+		
+		service.custDelete(req, model);
+		
+		return "customer/mypage/delCustomer";
+	}
 
 /*
 	// 반려인/펫 관리 - My Pet 인증화면

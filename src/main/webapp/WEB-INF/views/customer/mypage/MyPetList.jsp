@@ -82,13 +82,12 @@
 								<a class="link">MY PET</a>
 								<div class = "hide">
 					    			<a href="/tpj/cust/MyPet">펫 등록</a>
-						    		<a href="/tpj/cust/MyPetList">펫 등록/수정</a>
+						    		<a href="/tpj/cust/MyPetList">펫 목록/수정</a>
 								</div>
 							</li>
 							<li class="div_li"><a href="/tpj/cust/SitterProfile">시터 프로필</a></li>
 							<li class="div_li"><a href="/tpj/cust/TrainerProfile">훈련사 프로필</a></li>
 							<li class="div_li"><a href="/tpj/cust/buyList">결제내역</a></li>
-							<li class="div_li"><a href="/tpj/cust/delCustomer">회원탈퇴</a></li>
 						</ul>
 					</nav>
 					
@@ -125,58 +124,14 @@
 													<!-- 수정/삭제 -->
 													<td align="center">
 														<input class="btn btn-primary" type="button" id="update" value="수정" 
-																onclick="window.location='MyPetUpdate?PET_CD=${dto.PET_CD}&pageNum=${pageNum}'">
+																onclick="window.location='MyPetUpdate?PET_CD=${dto.PET_CD}'">
 														<input class="btn btn-primary" type="button" id="delete" value="삭제" 
-																onclick="window.location='MyPetDelete?PET_CD=${dto.PET_CD}&pageNum=${pageNum}'">
+																onclick="window.location='MyPetDelete?PET_CD=${dto.PET_CD}'">
 													</td>
 												</tr>
 												</c:forEach>
 											</c:if>
-											
-											<!-- 목록이 없으면 -->
-											<c:if test="${cnt == 0 }">
-												<tr>
-													<td colspan="10" align="center">
-														등록된 반려동물이 없습니다!
-													</td>
-												</tr>
-											</c:if>
 										</table>
-										
-										<!-- 페이지 컨트롤 -->
-										<table class="col-md-12">
-											<tr align="center">
-												<th align="center">
-													<!-- 게시글이 있으면 -->
-													<c:if test="${cnt > 0 }">
-														<!-- 처음블록 / 이전블록 -->
-														<c:if test="${startPage > pageBlock }">
-															<a href="MyPetList">[맨 앞]</a>
-															<a href="MyPetList?pageNum=${startPage - pageBlock}">[이전]</a>
-														</c:if>
-										
-														<!-- 블록페이지 -->
-														<c:forEach var="i" begin="${startPage }" end="${endPage }">
-															<c:if test="${i == currentPage }">
-																<!-- 형재 해당되는 페이지 -->
-																<span><b>[${i }]</b></span>
-															</c:if>
-															
-															<c:if test="${i != currentPage }">
-																<a href="MyPetList?pageNum=${i }">[${i }]</a>
-															</c:if>
-														</c:forEach>
-														
-														<!-- 다음블록 / 마지막블록 -->
-														<c:if test="${pageCount > endPage}">
-															<a href="MyPetList?pageNum=${startPage + pageBlock}">[다음]</a>
-															<a href="MyPetList?pageNum=${pageCount}">[맨 끝]</a>
-														</c:if>
-													</c:if>
-												</th>
-											</tr>
-										</table>
-										
 									</div>
 							</div>
 						</div>

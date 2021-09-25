@@ -112,7 +112,7 @@ public class SitterServiceImpl implements SitterService{
 		model.addAttribute("deleteCnt",deleteCnt);
 	}
 
-	// 시터 정보 프로필 화면
+	// 시터 정보 수정 화면
 	@Override
 	public void updateSitter(HttpServletRequest req, Model model) {
 		String CUST_ID = (String)req.getSession().getAttribute("cust_id");
@@ -121,7 +121,7 @@ public class SitterServiceImpl implements SitterService{
 		SitterVO vo = sitterDao.SitterDetail(CUST_ID);
 		
 		System.out.println("vo : "+vo);
-		
+		System.out.println("SIT_ST : "+ vo.getSIT_ST());
 		model.addAttribute("dto",vo);
 	}
 
@@ -183,6 +183,8 @@ public class SitterServiceImpl implements SitterService{
 		sVo.setSV_AREA(req.getParameter("SV_AREA"));
 //		sVo.setSR_CD(SR_CD);
 //		sVo.setSR_KIND(SR_KIND);
+		sVo.setSIT_ST(Integer.parseInt(req.getParameter("SIT_ST")));
+		
 		sVo.setSIT_TITLE(req.getParameter("SIT_TITLE"));
 		sVo.setSIT_APPEAL(req.getParameter("SIT_APPEAL"));
 		sVo.setSIT_IMG(req.getParameter("SIT_IMG"));

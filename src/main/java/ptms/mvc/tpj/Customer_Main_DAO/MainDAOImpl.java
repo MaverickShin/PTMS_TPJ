@@ -119,11 +119,25 @@ public class MainDAOImpl implements MainDAO {
 		return  dao.updateCustomer2(vo);
 	}
 
+	// 회원 탈퇴 (CUSTOMER_TB)
+	@Override
+	public int deleteCustomer(int ZIP_CD) {
+		MainDAO dao = data.getMapper(MainDAO.class);
+		return dao.deleteCustomer(ZIP_CD);
+	}
+
+	// 회원 탈퇴 (ZIPCODES_TB)
+	@Override
+	public int deleteCustomer2(int ZIP_CD) {
+		MainDAO dao = data.getMapper(MainDAO.class);
+		return dao.deleteCustomer2(ZIP_CD);
+	}
+	
 	// 펫 목록
 	@Override
-	public List<PetVO> getPetList(HashMap<String, Object> map) {
+	public List<PetVO> getPetList(String CUST_ID) {
 		MainDAO dao = data.getMapper(MainDAO.class);
-		return dao.getPetList(map);
+		return dao.getPetList(CUST_ID);
 	}
 	
 	// 펫등록 처리
@@ -156,9 +170,9 @@ public class MainDAOImpl implements MainDAO {
 	
 	// 펫 목록 갯수
 	@Override
-	public int getPetCnt() {
+	public int getPetCnt(String CUST_ID) {
 		MainDAO dao = data.getMapper(MainDAO.class);
-		return dao.getPetCnt();
+		return dao.getPetCnt(CUST_ID);
 	}
 	
 	// 일정 가지고 오기(json변환을 위해 Map을 ResultType으로 받음)
@@ -181,4 +195,5 @@ public class MainDAOImpl implements MainDAO {
 		MainDAO dao = data.getMapper(MainDAO.class);
 		return dao.deleteEvent(CL_CD);				
 	}
+
 }
