@@ -101,13 +101,8 @@ public interface SitterDAO {
 	
 	// 고객 - 결제완료 리스트
 	
-<<<<<<< HEAD
-	//요금표 리스트
-	public List<PetVO> getPriceList();
-=======
 	//요금표 리스트 <완료>
 	public ArrayList<PetVO> getPriceList();
->>>>>>> 2468d1ed8ed323e682f612866251c5ce70224df9
 	
 	//고객 펫 수 <완료>
 	public int MypetCount(String CUST_ID);

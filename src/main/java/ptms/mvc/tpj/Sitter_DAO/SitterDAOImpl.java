@@ -236,7 +236,7 @@ public class SitterDAOImpl implements SitterDAO{
 	
 	//요금표 리스트
 	@Override
-	public List<PetVO> getPriceList() {
+	public ArrayList<PetVO> getPriceList() {
 		System.out.println("dao ==> ArrayList");
 		
 		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
