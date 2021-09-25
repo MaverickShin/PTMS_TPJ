@@ -67,55 +67,53 @@
 	
 	<select id="trainerList" parameterType="java.util.Map" resultType="ptms.mvc.tpj.CustVO.TrainerVO">
 		<if test='ADJUSTABLE == 1'>
-			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt
+			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
+			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
 			where tt.TA_CD = ts.TA_CD
+			and ct.CUST_ID = tt.CUST_ID
 			and ts.TS_AREA LIKE '%'||#{SQ_LOC}||'%'
+			and tt.TA_ST = 1
 			intersect
-			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt
+			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
+			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
 			where tt.TA_CD = ts.TA_CD
+			and ct.CUST_ID = tt.CUST_ID
 			and #{TQ_AMT} = ts.TS1_NO
 			OR #{TQ_AMT} = ts.TS2_NO
 			OR #{TQ_AMT} = ts.TS3_NO
 			OR #{TQ_AMT} = ts.TS4_NO
 			intersect
-			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt
+			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
+			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
 			where tt.TA_CD = ts.TA_CD
+			  and ct.CUST_ID = tt.CUST_ID
 			  and #{START_DAY} between ts.START_DAY and ts.END_DAY
-			   or #{END_DAY} between ts.START_DAY and ts.END_DAY
-			intersect
-			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt
-			where tt.TA_CD = ts.TA_CD
-			  and tt.TA_ST = 1
+			  or #{END_DAY} between ts.START_DAY and ts.END_DAY
 		</if>
 		
 		<if test='ADJUSTABLE != 1'>
-			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt
+			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
+			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
 			where tt.TA_CD = ts.TA_CD
+			and ct.CUST_ID = tt.CUST_ID
 			and ts.TS_AREA LIKE '%'||#{SQ_LOC}||'%'
+			and tt.TA_ST = 1
 			intersect
-			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt
+			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
+			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
 			where tt.TA_CD = ts.TA_CD
+			and ct.CUST_ID = tt.CUST_ID
 			and #{TQ_AMT} = ts.TS1_NO
 			OR #{TQ_AMT} = ts.TS2_NO
 			OR #{TQ_AMT} = ts.TS3_NO
 			OR #{TQ_AMT} = ts.TS4_NO
 			intersect
-			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt
+			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
+			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
 			where tt.TA_CD = ts.TA_CD
+			  and ct.CUST_ID = tt.CUST_ID
 			  and #{START_DAY} between ts.START_DAY and ts.END_DAY
-			  and #{END_DAY}' between ts.START_DAY and ts.END_DAY
-			intersect
-			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt
-			where tt.TA_CD = ts.TA_CD
-			  and tt.TA_ST = 1
+			  or #{END_DAY} between ts.START_DAY and ts.END_DAY
 		</if>
 	</select>
 	
@@ -178,7 +176,23 @@
 	</select>
 	
 	<insert id="insertTrainerReservation" parameterType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
-		insert into TRAINER_REQUEST_TB(TQ_CD, CUST_ID, TA_CD, PET_CD, TQ_AMT, TQ_LOC, TQ_ST, START_DAY, END_DAY, TQ_DT)
-		values(TQ_CD_seq.nextval, #{CUST_ID}, #{TA_CD}, #{PET_CD}, #{TQ_AMT}, #{TQ_LOC}, 0, #{START_DAY}, #{START_DAY}, sysdate)
+		insert into TRAINER_REQUEST_TB(TQ_CD, CUST_ID, TA_CD, PET_NM, TQ_AMT, TQ_LOC, TQ_ST, START_DAY, END_DAY, TQ_DT)
+		values(TQ_CD_seq.nextval, #{CUST_ID}, #{TA_CD}, #{PET_NM}, #{TQ_AMT}, #{TQ_LOC}, 0, #{START_DAY}, #{START_DAY}, sysdate)
 	</insert>
+	
+	<select id="TraineeListCnt" parameterType="String" resultType="int">
+		select count(*)
+		from TRAINER_REQUEST_TB tr, TRAINER_TB tt
+		where tt.TA_CD = tr.TA_CD
+		and tt.CUST_ID = #{id}
+	</select>
+	
+	<select id="TraineeList" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
+		select distinct tr.*, pt.PET_CON
+		from TRAINER_REQUEST_TB tr, TRAINER_TB tt, PET_TB pt
+		where tt.TA_CD = tr.TA_CD
+		and pt.CUST_ID = tr.CUST_ID
+		and tt.CUST_ID = #{id}
+		order by TQ_DT
+	</select>
 </mapper>

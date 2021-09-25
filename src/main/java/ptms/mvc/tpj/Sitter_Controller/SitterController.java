@@ -91,21 +91,18 @@ public class SitterController {
 	 /*
 	  * 날짜 : 21.09.24
 	  * 작성자 : 임지영
-	  * 내용 : 나에게 온 의뢰
+	  * 내용 : 나에게 온 의뢰 목록
 	  */
-	 @RequestMapping("requestForMe")
+	 @RequestMapping("requestForSitter")
 	 public String requestForMe(HttpServletRequest req, Model model) {
-		 log.info("url ==> requestForMe");
+		 log.info("url ==> requestForSitter");
 		 
-		 //
 		 sitterSer.allRequestList(req, model);
-		 return "customer/sitter/requestForMe";
+		 return "customer/sitter/requestForSitter";
 	 }	 
 	 
 	 //활동 등록
 	 
-	 
-	 //나에게 온 의뢰
 	 
 	 
 }

@@ -22,7 +22,10 @@ public class TrainerRequestVO {
 	private int TQ_FEE;			// 훈련 요금
 	private DATE TQ_DT;			// 요청 등록일
 	
+	// 펫 테이블에서 가져올 정보
 	private String PET_NM;		// 펫 이름
+	private String PET_CON;		// 펫 특이사항
+	private int PET_AGE;		// 펫 나이
 	
 	// 훈련 요금 테이블
 	private int TF_CD;
@@ -164,6 +167,22 @@ public class TrainerRequestVO {
 
 	public void setPET_NM(String pET_NM) {
 		PET_NM = pET_NM;
+	}
+
+	public String getPET_CON() {
+		return PET_CON;
+	}
+
+	public void setPET_CON(String pET_CON) {
+		PET_CON = pET_CON;
+	}
+
+	public int getPET_AGE() {
+		return PET_AGE;
+	}
+
+	public void setPET_AGE(int pET_AGE) {
+		PET_AGE = pET_AGE;
 	}
 
 	

@@ -96,11 +96,18 @@ public class TrainerDAOImpl implements TrainerDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	@Override
+	public int TraineeListCnt(String id) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		int selectCnt = dao.TraineeListCnt(id);
+		return selectCnt;
+	}
 
 	@Override
-	public List<PetVO> TraineeList(int pet_cd, int pet_con) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<TrainerRequestVO> TraineeList(String id) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.TraineeList(id);
 	}
 
 	@Override

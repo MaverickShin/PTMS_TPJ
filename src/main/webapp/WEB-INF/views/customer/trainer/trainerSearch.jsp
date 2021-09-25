@@ -20,7 +20,7 @@
 					<li>-훈련사-</li>
 					<li><a href="applyTrainer">훈련사지원</a></li>
 					<li><a href="">활동 등록</a></li>
-					<li><a href="">나에게 온 의뢰</a></li>
+					<li><a href="requestTrainer">나에게 온 의뢰</a></li>
 				</ul>
 			</nav>
 			
