@@ -209,4 +209,5 @@
 		AND req.SIT_ID = s.SIT_ID
 		AND SQ_ST=2
 	</select>
+	
 </mapper>    
