@@ -84,18 +84,22 @@ public interface SitterDAO {
 	public int getWaitReqAccept(String CUST_ID);
 	
 	// 고객 - 요청수락대기 상태에서 취소할 시 요청테이블(SITTER_REQUEST_TB)에서 delete
-	public int sitterReqCancle(String CUST_ID);
+	public int sitterReqCancle(int SQ_CD);
 	
 	// 고객 - 요청수락대기 리스트 
 	public List<SitterVO> sitterWaitReqList(String CUST_ID);
 	
 	// 고객 - 수락된 요청 리스트 수 구하기
+	public int getAcceptList(String CUST_ID);
 	
 	// 고객 - 수락된 요청 리스트
+	public List<SitterVO> acceptReqList(String CUST_ID);
 	
 	// 고객 - 거절된 요청 리스트 수 구하기
+	public int getRefuseList(String CUST_ID);
 	
 	// 고객 - 거절된 요청 리스트
+	public List<SitterVO> refuseReqList(String CUST_ID);
 	
 	// 고객 - 결제완료 리스트 수 구하기
 	

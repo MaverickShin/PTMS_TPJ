@@ -11,7 +11,6 @@
 <body>
 
 	<div style="display: flex; flex:1; justify-content:center;">
-		
 		<%@ include file = "sidebar.jsp" %>
 		
 		<section style="width: 700px; margin-left: auto; margin-right: auto; margin-top: 30px;" class = "sections">

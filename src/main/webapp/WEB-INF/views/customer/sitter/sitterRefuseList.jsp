@@ -135,6 +135,8 @@ function refuse() {
     </div>   
    
     <c:if test="${selectCnt == 0}">
+      <p id="center_button" onclick="sitterserPayFinish();">시터서비스 완료</p>
+  <c:if test="${selectCnt == 0}">
        <div class="about-author d-flex p-4 bg-light">
          <div class="desc">
            <h3></h3>
