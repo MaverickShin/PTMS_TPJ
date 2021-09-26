@@ -52,7 +52,7 @@ public interface SitterDAO {
 	public List<PetVO> petKindInfo(String cust_id);
 	
 	// 의뢰시 - 펫 별 서비스 요금 조회 : 위 의뢰자 펫 정보 조회에서 pk_cd(펫 종류 코드)를 활용
-	public List<PetVO> petServiceFee(int pk_cd) ;
+	public int petServiceFee(int pk_cd) ;
 	
 	// 의뢰 취소
 	public int deleteRequest(int sq_cd);

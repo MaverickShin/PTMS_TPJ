@@ -121,31 +121,20 @@ function refuse() {
       </div>
     </section>
     
+ <div style="display: flex; flex:1; justify-content:center;">
+    
+     <%@ include file = "sidebar.jsp" %>
+    
+   
+    <section style="width: 700px; margin-left: auto; margin-right: auto; margin-top: 30px;" class = "sections">
     <div class="list_tab">
       <p id="left_button" onclick ="request();">요청 수락대기</p>
       <p id="accept_button" onclick="accept();">수락</p>   
       <p id="right_button" style="background-color: #a3cde3; color: white;">거절</p>      
       <p id="center_button" onclick ="sitterserPayFinish();">결제 완료</p>
-
-    </div>    
-  
-    
- <div style="display:flex">
-    
-      <nav id="listdiv_id1" style="width:400px; padding:100px;">
-         <ul>
-           <li>-고객-</li>
-           <li><a href="sitter">펫시터 찾기</a></li>
-           <li><a href="">이용후기</a></li>
-           <li><a href="feeInfo">요금안내</a></li>
-           <li>-펫시터-</li>
-           <li><a href="applySitter">펫시터 지원</a></li>
-           <li><a href="">활동 등록</a></li>
-           <li><a href="#">나에게 온 의뢰</a></li>
-        </ul>
-      </nav>
-    
-  <c:if test="${selectCnt == 0}">
+    </div>   
+   
+    <c:if test="${selectCnt == 0}">
        <div class="about-author d-flex p-4 bg-light">
          <div class="desc">
            <h3></h3>
@@ -166,9 +155,9 @@ function refuse() {
           </div>
        </c:forEach>
     </c:if> 
-  
+  	 </section>
    </div>     
-   
+  
    
   <%@ include file="../../main/footer.jsp" %>  
 </body>

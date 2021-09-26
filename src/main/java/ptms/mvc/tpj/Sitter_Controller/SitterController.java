@@ -1,6 +1,7 @@
 package ptms.mvc.tpj.Sitter_Controller;
 
 import java.text.ParseException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ptms.mvc.tpj.CustVO.PetVO;
+import ptms.mvc.tpj.Sitter_DAO.SitterDAOImpl;
 import ptms.mvc.tpj.Sitter_Service.SitterServiceImpl;
 
 @RequestMapping("/sitter")
@@ -22,11 +25,23 @@ public class SitterController {
 	 @Autowired
 	 SitterServiceImpl sitterSer;
 	 
+	 @Autowired
+	 SitterDAOImpl dao;
+	 
 	 //(찾기 버튼 누르기 전 조건 입력)시터 찾기 페이지
 	 @RequestMapping("sitter")
 	   public String sitter(HttpServletRequest req, Model model) {
 	      log.info("url ==> sitter");
 	      
+	      String CUST_ID = (String)req.getSession().getAttribute("cust_id");
+	      
+	      int selectCnt = dao.MypetCount(CUST_ID);
+		  System.out.println("마이펫 수 selectCnt : " + selectCnt);
+		  List<PetVO> list = dao.MypetList(CUST_ID);
+		  
+		  model.addAttribute("selectCnt", selectCnt);
+		  model.addAttribute("list", list);
+		  
 	      return "customer/sitter/sitter";
 	   }   
 	   

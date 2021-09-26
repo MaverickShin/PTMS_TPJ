@@ -134,9 +134,11 @@ public class SitterDAOImpl implements SitterDAO{
 
 	// 의뢰시 - 펫 별 서비스 요금 조회 : 위 의뢰자 펫 정보 조회에서 pk_cd(펫 종류 코드)를 활용
 	@Override
-	public List<PetVO> petServiceFee(int pk_cd) {
-		// TODO Auto-generated method stub
-		return null;
+	public int petServiceFee(int pk_cd) {
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		
+		return dao.petServiceFee(pk_cd);
 	}
 
 	// 의뢰 취소

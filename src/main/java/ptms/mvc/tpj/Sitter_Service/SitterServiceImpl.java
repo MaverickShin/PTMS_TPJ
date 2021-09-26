@@ -78,12 +78,9 @@ public class SitterServiceImpl implements SitterService{
 		System.out.println("시터프로필 등록 : " + insertCnt);
 		if(insertCnt == 1) {
 			 insertCnt = sitterDao.insertService(vo); //시터 서비스 정보 등록
-			 System.out.println("시터 서비스 정보 등록  : " + insertCnt);
-			/*
-			 * if(insertCnt == 2) insertCnt =1; else insertCnt = 0;
-			 */
 		}
-		 model.addAttribute("insertCnt", insertCnt);
+		
+		model.addAttribute("insertCnt", insertCnt);
 	}
 
 	// 시터 등록 탈퇴
@@ -205,36 +202,56 @@ public class SitterServiceImpl implements SitterService{
 	    date = new Date(sdf.parse(WK_END).getTime());
 	    vo.setWK_END(date);
 		
-		String SV1_NO =req.getParameter("SV1_NO");		//미용서비스
+		String SV1_NO = req.getParameter("SV1_NO");		//미용서비스
 		String SV2_NO = req.getParameter("SV2_NO");		//놀이서비스
 		String SV3_NO = req.getParameter("SV3_NO");		//산책서비스
-		String SV4_NO = req.getParameter("SV4_NO");		//응급처치서비스
+	    
+	    // 요금 조회
+	 	String[] pk_cd = req.getParameterValues("pk_cd");
+	    
+	 	int sum = 0;
+	 	
+	 	for (int i = 0; i < pk_cd.length; i++) {
+			sum += sitterDao.petServiceFee(Integer.parseInt(pk_cd[i]));
+		}
 
+	 	// 필수 값 이므로 강제 입력
+	 	vo.setSV4_NO(4);
+	 	
+	 	// 선택한 서비스별 요금을 더한 값을 담을 변수
+	 	int total = sum;
+	 
+	 	Integer[] sv_no = new Integer[3];
+	 	
 		if(SV1_NO == null) {
 			vo.setSV1_NO(0);
-		}else {
+			sv_no[0] = 0;
+		} else {
 			vo.setSV1_NO(1);
+			total += sum; 
+			sv_no[0] = 1;
 		}
 		if(SV2_NO == null) {
 			vo.setSV2_NO(0);
+			sv_no[1] = 0;
 		}else {
 			vo.setSV2_NO(2);
+			total += sum;
+			sv_no[1] = 1;
 		}
 		if(SV3_NO == null) {
 			vo.setSV3_NO(0);
+			sv_no[2] = 0;
 		}else {
 			vo.setSV3_NO(3);
+			total += sum;
+			sv_no[2] = 1;
 		}
-		if(SV4_NO == null) {
-			vo.setSV4_NO(0);
-		}else {
-			vo.setSV4_NO(4);
-		}
+		
+		vo.setSQ_FEE(total);
 
-		System.out.println("SV1_NO : " + SV1_NO);
-		System.out.println("SV2_NO : " + SV2_NO);
-		System.out.println("SV3_NO : " + SV3_NO);
-		System.out.println("SV4_NO : " + SV4_NO);
+		
+		System.out.println("total" + total);
 		
 		int selectCnt = sitterDao.getSitterCnt(vo);   //조건에 맞는 시터 수 구하기
 		System.out.println("조건충족 시터수 selectCnt : " + selectCnt);
@@ -246,6 +263,11 @@ public class SitterServiceImpl implements SitterService{
 		model.addAttribute("selectCnt", selectCnt);
 		model.addAttribute("dtos", list);
 		model.addAttribute("SV_AREA", SV_AREA);
+		model.addAttribute("total", total);
+		model.addAttribute("sv_no", sv_no);
+		model.addAttribute("pet", pk_cd);
+		model.addAttribute("WK_START", WK_START);
+		model.addAttribute("WK_END", WK_END);
 	}
 
 	// 시터 상세 조회
@@ -253,21 +275,31 @@ public class SitterServiceImpl implements SitterService{
 	public void detailSitter(HttpServletRequest req, Model model) {
 		System.out.println("service ==> detailSitter");		
 		
+		String WK_START = req.getParameter("WK_START");
+		String WK_END = req.getParameter("WK_END");
+		String[] sv_no = req.getParameterValues("sv_no");
+		String total = req.getParameter("total");
+		String[] pet = req.getParameterValues("pet");
+		
 		int SIT_ID = Integer.parseInt(req.getParameter("SIT_ID"));
 		String CUST_ID = (String)req.getSession().getAttribute("cust_id");
 		String SV_AREA = req.getParameter("SV_AREA");
 		System.out.println("세션CUST_ID: " + CUST_ID);
 		
 		SitterVO vo = sitterDao.detailSitter(SIT_ID);
-		int selectCnt = sitterDao.MypetCount(CUST_ID);
-		System.out.println("마이펫 수 selectCnt : " + selectCnt);
+		
 		List<PetVO> list = sitterDao.MypetList(CUST_ID);
 		
-		model.addAttribute("selectCnt", selectCnt);
+		
 		model.addAttribute("dto", vo);
-		model.addAttribute("list", list);
 		model.addAttribute("SIT_ID" , SIT_ID);
 		model.addAttribute("SV_AREA", SV_AREA);
+		model.addAttribute("sv_no", sv_no);
+		model.addAttribute("total", total);
+		model.addAttribute("pet", pet);
+		model.addAttribute("list", list);
+		model.addAttribute("WK_START", WK_START);
+		model.addAttribute("WK_END", WK_END);
 	}
 
 	/*
@@ -332,9 +364,10 @@ public class SitterServiceImpl implements SitterService{
 	// 고객 - 펫시팅 신청하기
 	@Override
 	public void insertRequest(HttpServletRequest req, Model model) throws ParseException {
-		System.out.println("service ==> insertRequest");
+		  
+		  System.out.println("service ==> insertRequest");
 		
-		//정보를 담을 sitterVO생성
+		  //정보를 담을 sitterVO생성
 		  SitterVO vo = new SitterVO();		
 		  
 		  vo.setCUST_ID((String)req.getSession().getAttribute("cust_id"));
@@ -342,20 +375,26 @@ public class SitterServiceImpl implements SitterService{
 	      vo.setSQ_LOC(SQ_LOC);
 	      System.out.println("SQ_LOC : " + SQ_LOC);
 	      
-		  String PET_NM[] = req.getParameterValues("PET_NM");
+		  String PET_CD[] = req.getParameterValues("PET_CD");
+		  String PK_CD[] = req.getParameterValues("PK_CD");
 	      String result = "";
-	      for(int i = 0; i < PET_NM.length; i++) {
-	         if(PET_NM.length == 0) {
-	            result += PET_NM[i];
-	         } else {
-	            result += PET_NM[i] + "  ";
-	         }
+	      
+	      System.out.println("길이 : " + PK_CD.length);
+	      
+	      int sum = 0;
+	      for(int i = 0; i < PET_CD.length; i++) {
+	    	 
+	    	 sum += sitterDao.petServiceFee(Integer.parseInt(PK_CD[i])); 
+	    	 System.out.println("길이 확인 :" + PET_CD.length);
+	    	 
+	         if(PET_CD.length == 0) result += PET_CD[i];
+	         else result += PET_CD[i] + "  ";
 	      }
+	      
 	      System.out.println("result : " + result);
 	      
 	      vo.setSIT_ID(Integer.parseInt(req.getParameter("SIT_ID")));  //시터ID
 	      vo.setSQ_AMT(result);  //펫 이름
-
 	      
 	      String SV1_NO = req.getParameter("SV1_NO");	//미용서비스
 	      String SV2_NO = req.getParameter("SV2_NO");	//놀이서비스
@@ -367,18 +406,25 @@ public class SitterServiceImpl implements SitterService{
 	      System.out.println("SV4_NO : " + SV4_NO);
 		 
 	      String service = "";
+	      
+	      int total = sum;
+	      
 	      if(SV1_NO != null) {
 	    	  service +=SV1_NO + ",";
+	    	  total += sum;
 	      }if(SV2_NO != null) {
 	    	  service +=SV2_NO + ",";
+	    	  total += sum;
 	      }if(SV3_NO != null) {
 			service +=SV3_NO + ",";
+			total += sum;
 		  }if(SV4_NO != null) {
 			 service +=SV4_NO;
+			 total += sum;
 		 }
+		  
 	     System.out.println("service : " + service);
 	     vo.setREQ_SV(service);  //고객요청서비스
-	     
 	     String START_DAY = req.getParameter("START_DAY"); //의뢰시작일
 	  	 String END_DAY = req.getParameter("END_DAY"); 	   //의뢰종료일
 	  	 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -386,7 +432,8 @@ public class SitterServiceImpl implements SitterService{
 	  	 vo.setSTART_DAY(date);//의뢰시작일
 	  	 date = new Date(sdf.parse(END_DAY).getTime());
 	  	 vo.setEND_DAY(date); //의뢰종료일
-	   
+	  	 vo.setSQ_FEE(total);
+	  	 
 	  	 int insertCnt = sitterDao.selectRequestInsert(vo);
 	  	 System.out.println("펫시팅 요청 insertCnt : " + insertCnt);
 	  	 

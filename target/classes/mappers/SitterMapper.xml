@@ -210,4 +210,9 @@
 		AND SQ_ST=2
 	</select>
 	
+	<!-- 시터 - 의뢰시 : 펫 별 서비스 요금 조회 -->
+	<select id = "petServiceFee" resultType = "int">
+		SELECT SF_FEE FROM SITTER_FEE_TB WHERE PK_CD = #{pk_cd}
+	</select>
+	
 </mapper>    
