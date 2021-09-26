@@ -129,7 +129,7 @@
 	
 	<!-- 고객 펫 조회 -->
 	<select id="MypetList" parameterType="String" resultType="ptms.mvc.tpj.CustVO.PetVO">
-		SELECT p.PET_NM, p.PK_CD
+		SELECT p.PET_NM, p.PK_CD, p.PET_CD
 		FROM PET_TB p, CUSTOMER_TB c
 		WHERE c.CUST_ID = p.CUST_ID
 		AND c.CUST_ID=#{CUST_ID}
