@@ -218,11 +218,11 @@ public class SitterDAOImpl implements SitterDAO{
 
 	// 고객 - 요청수락대기 상태에서 취소할 시 요청테이블(SITTER_REQUEST_TB)에서 delete
 	@Override
-	public int sitterReqCancle(String CUST_ID) {
+	public int sitterReqCancle(int SQ_CD) { //요청번호(SQ_CD)로 취소요청
 		System.out.println("dao ==> sitterReqCancle");
 		
 		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
-		return dao.sitterReqCancle(CUST_ID);
+		return dao.sitterReqCancle(SQ_CD);
 	}
 
 	// 고객 - 요청수락대기 리스트 
@@ -233,6 +233,42 @@ public class SitterDAOImpl implements SitterDAO{
 		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
 		return dao.sitterWaitReqList(CUST_ID);
 	}
+
+	// 고객 - 수락된 요청 리스트 수 구하기
+	@Override
+	public int getAcceptList(String CUST_ID) {
+		System.out.println("dao ==> getAcceptList");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.getAcceptList(CUST_ID);
+	}
+
+	// 고객 - 수락된 요청 리스트
+	@Override
+	public List<SitterVO> acceptReqList(String CUST_ID) {
+		System.out.println("dao ==> acceptReqList");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.acceptReqList(CUST_ID);
+	}
+
+	// 고객 - 거절된 요청 리스트 수 구하기
+	@Override
+	public int getRefuseList(String CUST_ID) {
+		System.out.println("dao ==> getRefuseList");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.getRefuseList(CUST_ID);
+	}
+
+	// 고객 - 거절된 요청 리스트
+	@Override
+	public List<SitterVO> refuseReqList(String CUST_ID) {
+		System.out.println("dao ==> refuseReqList");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.refuseReqList(CUST_ID);
+	}	
 	
 	//요금표 리스트
 	@Override

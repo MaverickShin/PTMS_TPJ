@@ -107,7 +107,7 @@ function accept() {
       <p id="left_button" style="background-color: #a3cde3; color: white;">요청 수락대기</p>
       <p id="accept_button" onclick="accept();">수락</p>   
       <p id="right_button" onclick="refuse();">거절</p>
-      <p id="center_button" onclick="sitterserPayFinish();">결제 완료</p>
+      <p id="center_button" onclick="sitterserPayFinish();">시터서비스 완료</p>
     </div>
     
     <div style="display:flex">
@@ -120,7 +120,7 @@ function accept() {
            <li><a href="feeInfo">요금안내</a></li>
            <li>-펫시터-</li>
            <li><a href="applySitter">펫시터 지원</a></li>
-           <li><a href="#">나에게 온 의뢰</a></li>
+           <li><a href="requestForSitter">나에게 온 의뢰</a></li>
         </ul>
       </nav>
     

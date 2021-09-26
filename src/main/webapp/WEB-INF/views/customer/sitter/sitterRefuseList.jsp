@@ -125,7 +125,7 @@ function refuse() {
       <p id="left_button" onclick ="request();">요청 수락대기</p>
       <p id="accept_button" onclick="accept();">수락</p>   
       <p id="right_button" style="background-color: #a3cde3; color: white;">거절</p>      
-      <p id="center_button" onclick ="sitterserPayFinish();">결제 완료</p>
+      <p id="center_button" onclick="sitterserPayFinish();">시터서비스 완료</p>
 
     </div>    
   
@@ -136,12 +136,11 @@ function refuse() {
          <ul>
            <li>-고객-</li>
            <li><a href="sitter">펫시터 찾기</a></li>
-           <li><a href="">이용후기</a></li>
+           <li><a href="MysitterSerList">나의 펫시터 이용 내역</a></li>
            <li><a href="feeInfo">요금안내</a></li>
            <li>-펫시터-</li>
            <li><a href="applySitter">펫시터 지원</a></li>
-           <li><a href="">활동 등록</a></li>
-           <li><a href="#">나에게 온 의뢰</a></li>
+           <li><a href="requestForSitter">나에게 온 의뢰</a></li>
         </ul>
       </nav>
     

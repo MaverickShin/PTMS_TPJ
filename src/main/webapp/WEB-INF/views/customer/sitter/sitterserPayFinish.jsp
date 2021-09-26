@@ -92,7 +92,7 @@ function accept() {
         <div class="row no-gutters slider-text align-items-end">
           <div class="col-md-9 ftco-animate pb-5">
              <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">Sitter<i class="ion-ios-arrow-forward"></i></a></span> <span>Blog <i class="ion-ios-arrow-forward"></i></span></p>
-            <h1 class="mb-0 bread">결제완료된 요청 리스트 입니다.</h1>
+            <h1 class="mb-0 bread">완료된 서비스 입니다.</h1>
           </div>
         </div>
       </div>
@@ -102,7 +102,7 @@ function accept() {
       <p id="left_button" onclick ="request();">요청 수락대기</p>
       <p id="accept_button" onclick="accept();">수락</p> 
       <p id="right_button" onclick="refuse();">거절</p>      
-      <p id="center_button" style="background-color: #a3cde3; color: white;">결제 완료</p>
+      <p id="center_button" style="background-color: #a3cde3; color: white;">시터서비스 완료</p>
     </div>    
   
     
@@ -112,12 +112,11 @@ function accept() {
          <ul>
            <li>-고객-</li>
            <li><a href="sitter">펫시터 찾기</a></li>
-           <li><a href="">이용후기</a></li>
+		   <li><a href="MysitterSerList">나의 펫시터 이용 내역</a></li>
            <li><a href="feeInfo">요금안내</a></li>
            <li>-펫시터-</li>
            <li><a href="applySitter">펫시터 지원</a></li>
-           <li><a href="">활동 등록</a></li>
-           <li><a href="#">나에게 온 의뢰</a></li>
+           <li><a href="requestForSitter">나에게 온 의뢰</a></li>
         </ul>
       </nav>
     
