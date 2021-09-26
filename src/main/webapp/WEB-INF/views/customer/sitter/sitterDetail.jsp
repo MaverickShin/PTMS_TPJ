@@ -96,7 +96,7 @@ body {
 														<span class="checkbox_icon"></span>
 														<span class = "list_label_span2">${li.PET_NM}(${li.PK_CD})</span>
 													</label>
-													<input type="text" name = "PET_CD" value = "${li.PET_CD}">
+													<input type="hidden" name = "PET_CD" value = "${li.PET_CD}">
 												</p>
 												<c:set var= "suc" value = "true"/>
 											</c:if>
@@ -104,13 +104,13 @@ body {
 											<c:if test = "${i != li.PK_CD}">
 												<c:if test = "${suc ne 'true'}">
 													<p class = "chk_p1">
-													<label class = "chk_label1" for = "pet_li_${i}">
-														<input type="checkbox" id = "pet_li_${i}" class = "sel_chk1" name="PK_CD" value="${li.PK_CD}">
-														<span class="checkbox_icon"></span>
-														<span class = "list_label_span2">${li.PET_NM}(${li.PK_CD})</span>
-													</label>
-													<input type="text" name = "PET_CD" value = "${li.PET_CD}">
-												</p>
+														<label class = "chk_label1" for = "pet_li_${i}">
+															<input type="checkbox" id = "pet_li_${i}" class = "sel_chk1" name="PK_CD" value="${li.PK_CD}">
+															<span class="checkbox_icon"></span>
+															<span class = "list_label_span2">${li.PET_NM}(${li.PK_CD})</span>
+														</label>
+														<input type="hidden" name = "PET_CD" value = "${li.PET_CD}">
+													</p>
 												</c:if>
 											</c:if>
 										</c:forEach>

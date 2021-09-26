@@ -268,5 +268,4 @@
 		AND SQ_ST=2
 	</select>	
 	
->>>>>>> 4a3c6353e2bad263402145a3b86551eeb9708077
 </mapper>    

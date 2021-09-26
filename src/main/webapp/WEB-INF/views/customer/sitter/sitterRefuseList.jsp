@@ -132,11 +132,10 @@ function refuse() {
       <p id="accept_button" onclick="accept();">수락</p>   
       <p id="right_button" style="background-color: #a3cde3; color: white;">거절</p>      
       <p id="center_button" onclick ="sitterserPayFinish();">결제 완료</p>
+   	  <p id="center_button" onclick="sitterserPayFinish();">시터서비스 완료</p>
     </div>   
-   
-    <c:if test="${selectCnt == 0}">
-      <p id="center_button" onclick="sitterserPayFinish();">시터서비스 완료</p>
-  <c:if test="${selectCnt == 0}">
+      
+  	<c:if test="${selectCnt == 0}">
        <div class="about-author d-flex p-4 bg-light">
          <div class="desc">
            <h3></h3>
