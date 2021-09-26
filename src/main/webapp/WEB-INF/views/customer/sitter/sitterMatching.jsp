@@ -55,7 +55,7 @@
 				<div class="row"
 					style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 15px;">
 					<c:if test="${selectCnt > 0}">
-						<c:forEach var="dto" items="${dtos}">
+						<c:forEach var="dto" items="${dtos}" varStatus = "i">
 							<form action = "sitterDetail" method = "post" id = "detail_form">
 								<div class="col-md-12" id = "detail_submit">
 									<input type = "hidden" name = "SIT_ID" value = "${dto.SIT_ID}">
@@ -89,6 +89,10 @@
 											<h3 class="heading">
 												${dto.SIT_TITLE}
 											</h3>
+											
+											<div class="form-group" align= center>
+												<input type="submit" value="자세히 보기" class="btn btn-primary" style = "text-align:center; width:150px; font-size: 14px !important;">
+											</div>
 										</div>
 									</div>
 								</div>
