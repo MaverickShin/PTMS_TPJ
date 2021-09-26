@@ -178,5 +178,53 @@ public class TrainerController {
       
       return "customer/trainer/custReqResultDenyList";
    }
+   
+   // 훈련사 결제하기
+   @RequestMapping("payTraining")
+   public String payTraining(HttpServletRequest req, Model model) {
+      log.info("url ==> payTraining");
+
+      return "customer/trainer/payTrainingAction";
+   }
+   
+   // 훈련완료 리스트 / 후기 중복체크
+   @RequestMapping("trainingComplete")
+   public String trainingComplete(HttpServletRequest req, Model model) {
+      log.info("url ==> trainingComplete");
+      
+      trainerservice.trainingComplete(req, model);
+
+      return "customer/trainer/trainingComplete";
+   }
+   
+   // 훈련사 후기작성 페이지
+   @RequestMapping("writeTrainingReview")
+   public String writeTrainingReview(HttpServletRequest req, Model model) {
+      log.info("url ==> writeTrainingReview");
+      
+      int TG_ID = Integer.parseInt(req.getParameter("TG_ID"));
+      model.addAttribute("TG_ID", TG_ID);
+      
+      return "customer/trainer/writeTrainingReview";
+   }
+   
+   // 훈련사 후기작성 처리 - 리뷰테이블 insert
+   @RequestMapping("writeTrainingReviewAction")
+   public String writeTrainingReviewAction(HttpServletRequest req, Model model) {
+      log.info("url ==> writeTrainingReviewAction");
+      
+      trainerservice.writeTrainingReview(req, model);
+      
+      return "customer/trainer/writeTrainingReviewAction";
+   }
+   
+   // 훈련사 후기 미리보기(평점 높은순)
+   @RequestMapping("previewTraining")
+   public String previewTraining(HttpServletRequest req, Model model) {
+      log.info("url ==> previewTraining");
+      
+      
+      return "customer/trainer/previewTraining";
+   }
  
 }
