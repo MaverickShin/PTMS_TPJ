@@ -5,6 +5,73 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){
+	
+	$("#accept_button").click(function() {
+		
+		$.ajax({
+			type: "get",
+			url: "/tpj/sitter/sitterAcceptList",
+			cache: false,
+			success: function(result) {
+				$(".result_div").html(result);
+		},
+		error : function(request, status, error) {
+			alert("에러!");
+		}
+		});
+	});
+	
+	$("#right_button").click(function() {
+		
+		$.ajax({
+			type: "get",
+			url: "/tpj/sitter/sitterRefuseList",
+			cache: false,
+			success: function(result) {
+				$(".result_div").html(result);
+		},
+		error : function(request, status, error) {
+			alert("에러!");
+		}
+		});
+	});
+	
+	$("#center_button").click(function() {
+		
+		$.ajax({
+			type: "get",
+			url: "/tpj/sitter/sitterserPayFinish",
+			cache: false,
+			success: function(result) {
+				$(".result_div").html(result);
+		},
+		error : function(request, status, error) {
+			alert("에러!");
+		}
+		});
+	});
+	
+	$("#left_button").click(function() {
+		
+		$.ajax({
+			type: "get",
+			url: "/tpj/sitter/requestForSitter2",
+			cache: false,
+			success: function(result) {
+				$(".result_div").html(result);
+		},
+		error : function(request, status, error) {
+			alert("에러!");
+		}
+		});
+	});
+	
+}); 
+</script>
+
 <style type="text/css">
 .list_tab {
    display: flex;
@@ -15,9 +82,8 @@
 .list_tab p {
    display: block;
    text-align: center;
-   font-weight: bold;
    cursor: pointer;
-   width: 200px;
+   width: 220px;
    height: 60px;
    line-height: 60px;
    background-color: #f5f5f5;
@@ -32,17 +98,34 @@ function sitterserPayFinish() {
 	var rb = document.getElementById("right_button");
 	var ac = document.getElementById("accept_button");
 	
-	cb.style.backgroundColor = "#1e88e5";
+	cb.style.backgroundColor = "#a3cde3";
 	cb.style.color = "white";
 	
 	lb.style.backgroundColor = "#f5f5f5";
-	lb.style.color = "black";
+	lb.style.color = "#808080";
 	rb.style.backgroundColor = "#f5f5f5";
-	rb.style.color = "black";
+	rb.style.color = "#808080";
 	ac.style.backgroundColor = "#f5f5f5";
-	ac.style.color = "black";
+	ac.style.color = "#808080";
 	
-	window.location = "${st}sitterserPayFinish"
+}
+
+function request(){
+	
+   var lb = document.getElementById("left_button");
+   var cb = document.getElementById("center_button");
+   var rb = document.getElementById("right_button");
+   var ac = document.getElementById("accept_button");
+   
+   lb.style.backgroundColor = "#a3cde3";
+   lb.style.color = "white";
+   
+   cb.style.backgroundColor = "#f5f5f5";
+   cb.style.color = "#808080";
+   rb.style.backgroundColor = "#f5f5f5";
+   rb.style.color = "#808080";
+   ac.style.backgroundColor = "#f5f5f5";
+   ac.style.color = "#808080";
 }
 
 function refuse() {
@@ -52,17 +135,16 @@ function refuse() {
 	var rb = document.getElementById("right_button");
 	var ac = document.getElementById("accept_button");
 	
-	rb.style.backgroundColor = "#1e88e5";
+	rb.style.backgroundColor = "#a3cde3";
 	rb.style.color = "white";
 	
 	cb.style.backgroundColor = "#f5f5f5";
-	cb.style.color = "black";
+	cb.style.color = "#808080";
 	lb.style.backgroundColor = "#f5f5f5";
-	lb.style.color = "black";
+	lb.style.color = "#808080";
 	ac.style.backgroundColor = "#f5f5f5";
-	ac.style.color = "black";
+	ac.style.color = "#808080";
 	
-	window.location = "${st}sitterRefuseList"
 }
 
 function accept() {
@@ -72,17 +154,16 @@ function accept() {
 	var rb = document.getElementById("right_button");
 	var ac = document.getElementById("accept_button");
 	
-	ac.style.backgroundColor = "#1e88e5";
+	ac.style.backgroundColor = "#a3cde3";
 	ac.style.color = "white";
 	
 	cb.style.backgroundColor = "#f5f5f5";
-	cb.style.color = "black";
+	cb.style.color = "#808080";
 	lb.style.backgroundColor = "#f5f5f5";
-	lb.style.color = "black";
+	lb.style.color = "#808080";
 	rb.style.backgroundColor = "#f5f5f5";
-	rb.style.color = "black";
+	rb.style.color = "#808080";
 	
-	window.location = "${st}sitterAcceptList"
 }
 
 </script>
@@ -91,63 +172,58 @@ function accept() {
 <body>
    <%@ include file="../../main/header.jsp" %>
    
-   <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+   <section class="hero-wrap hero-wrap-2" style="background-image: url('${path}images/bg_2.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-end">
           <div class="col-md-9 ftco-animate pb-5">
              <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">Sitter<i class="ion-ios-arrow-forward"></i></a></span> <span>Blog <i class="ion-ios-arrow-forward"></i></span></p>
-            <h1 class="mb-0 bread">펫시터님의 의뢰사항을 알려드립니다.</h1>
+            <h1 class="mb-0 bread" style = "font-family: 'Do Hyeon', sans-serif;">펫시터님의 의뢰사항을 알려드립니다.</h1>
           </div>
         </div>
       </div>
     </section>
     
-    <div class="list_tab">
-      <p id="left_button" style="background-color: #a3cde3; color: white;">요청 수락대기</p>
-      <p id="accept_button" onclick="accept();">수락</p>   
-      <p id="right_button" onclick="refuse();">거절</p>
-      <p id="center_button" onclick="sitterserPayFinish();">결제 완료</p>
-    </div>
+    <div style="display: flex; flex:1; justify-content:center;">
     
-    <div style="display:flex">
+      <%@ include file = "sidebar.jsp" %>
     
-      <nav id="listdiv_id1" style="width:400px; padding:100px;">
-         <ul>
-           <li>-고객-</li>
-           <li><a href="sitter">펫시터 찾기</a></li>
-		   <li><a href="MysitterSerList">나의 펫시터 이용 내역</a></li>
-           <li><a href="feeInfo">요금안내</a></li>
-           <li>-펫시터-</li>
-           <li><a href="applySitter">펫시터 지원</a></li>
-           <li><a href="#">나에게 온 의뢰</a></li>
-        </ul>
-      </nav>
-    
-  <c:if test="${selectCnt == 0}">
-       <div class="about-author d-flex p-4 bg-light">
-         <div class="desc">
-           <h3></h3>
-           <p>아직 들어온 의뢰가 없습니다. 일정 조정으로 매칭률을 높여보세요!</p>
-         </div>
-       </div>
-    </c:if> 
+      <section style="width: 900px; margin-left: auto; margin-right: auto; margin-top: 30px;" class = "sections">
+		  
+		  <div class="list_tab">
+	         <p id="left_button" style="background-color: #a3cde3; color: white;" onclick = "request();">요청 수락대기</p>
+	      	 <p id="accept_button" onclick="accept();">수락</p>   
+	      	 <p id="right_button" onclick="refuse();">거절</p>
+	         <p id="center_button" onclick="sitterserPayFinish();">결제 완료</p>
+	      </div>
+	  
+	  	  <div class= "result_div">
+		    <c:if test="${selectCnt == 0}">
+		       <div class="about-author d-flex p-4 bg-light">
+		         <div class="desc">
+		           <h3></h3>
+		           <p>아직 들어온 의뢰가 없습니다. 일정 조정으로 매칭률을 높여보세요!</p>
+		         </div>
+		       </div>
+		    </c:if> 
    
-   <c:if test="${selectCnt > 0}"> 
-   	  <c:forEach var="li" items="${list}">
-         <div class="about-author d-flex p-4 bg-light" style="place-content:center;">
-            <div class="desc" style="background-color:#dfe3eb; padding:20px;">
-              <h5>고객 : ${li.CUST_ID}</h5>&nbsp;<h6>훈련받을 펫 : ${li.SQ_AMT}</h6>
-              <p>의뢰시작일 : ${li.START_DAY}</p>
-              <p> 의뢰종료일 : ${li.END_DAY}</p>
-              <p> 고객요청서비스 : ${li.REQ_SV}</p>
-              <input type="button" value="수락" class="btn btn-primary" style="backgrount-color:#a3cde3;" onclick="window.location='sitterAccept?SQ_CD=${li.SQ_CD}'">
-              <input type="button" value="거절" class="btn btn-primary" style="backgrount-color:#a3cde3;" onclick="window.location='sitterRefuse?SQ_CD=${li.SQ_CD}'">
-            </div>
-          </div>
-       </c:forEach>
-    </c:if> 
-   
+		   <c:if test="${selectCnt > 0}"> 
+		   	  <c:forEach var="li" items="${list}">
+		         <div class="about-author d-flex p-4 bg-light" style="place-content:center;">
+		            <div class="desc" style="background-color:#dfe3eb; padding:20px;">
+		              <h5>고객 : ${li.CUST_ID}</h5>&nbsp;<h6>훈련받을 펫 : ${li.SQ_AMT}</h6>
+		              <p>의뢰시작일 : ${li.START_DAY}</p>
+		              <p> 의뢰종료일 : ${li.END_DAY}</p>
+		              <p> 고객요청서비스 : ${li.REQ_SV}</p>
+		              <p>금액 : ${li.SQ_FEE} 원</p> 
+		              <input type="button" value="수락" class="btn btn-primary" style="backgrount-color:#a3cde3;" onclick="window.location='sitterAccept?SQ_CD=${li.SQ_CD}'">
+		              <input type="button" value="거절" class="btn btn-primary" style="backgrount-color:#a3cde3;" onclick="window.location='sitterRefuse?SQ_CD=${li.SQ_CD}'">
+		            </div>
+		          </div>
+		       </c:forEach>
+		    </c:if> 
+		    </div>
+    	</section>
    </div>
    
    <%@ include file="../../main/footer.jsp" %>

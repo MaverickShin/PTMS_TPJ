@@ -45,22 +45,25 @@ public interface SitterService {
 	// 시터 - 고객의 요청 거절할 시 내역을 보여주는 페이지 <완료>	
 	public void cancleRequestList(HttpServletRequest req, Model model);
 	
-	// 고객 - (시터로부터) 요청수락 대기 중인 내역을 보여주는 페이지
+	// 시터 - 
+	
+	// 고객 - (시터로부터) 요청수락 대기 중인 내역을 보여주는 페이지 <완료>
 	public void WaitRequestAccept(HttpServletRequest req, Model model);
 	
-	// 고객 - (시터로부터) 수락된 요청 내역을 보여주는 페이지
+	//고객 - '요청수락대기' 중인 서비스 취소 <완료>
+	public void reqSitterSerCancle(HttpServletRequest req, Model model);
+	
+	// 고객 - (시터로부터) 수락된 요청 내역을 보여주는 페이지 <완료>
 	public void acceptFromSitter(HttpServletRequest req, Model model);
 	
-	// 고객 - (시터로부터) 거절된 요청 내역을 보여주는 페이지
+	// 고객 - (시터로부터) 거절된 요청 내역을 보여주는 페이지 <완료>
 	public void refuseFromSitter(HttpServletRequest req, Model model);
 	
 	// 고객 - 고객이 결제 완료한 내역을 보여주는 페이지
+	public void payment(HttpServletRequest req, Model model);
 	
 	// 결제하기
 	public void sitterPay(HttpServletRequest req, Model model);
-	
-	// 시터 의뢰 수락 - 의뢰 확정
-	public void payUpdate(HttpServletRequest req, Model model);
 	
 	//요금표 리스트 <완료>
 	public void priceInfo(HttpServletRequest req, Model model);

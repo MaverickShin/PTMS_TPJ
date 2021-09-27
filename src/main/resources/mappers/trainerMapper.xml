@@ -293,4 +293,36 @@
 		and ct.CUST_ID = #{id}
 		and TQ_ST = 2
 	</select>
+	
+	<select id="trainingCompleteCnt" resultType="int">
+		select count(*) 
+		from TRAINER_REQUEST_TB 
+		where CUST_ID= #{id}
+		and TQ_ST = 4
+	</select>
+	
+	<select id="trainingComplete" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
+		select tr.*, ct.cust_nm, tt.TA_CD as TG_ID
+		from TRAINER_REQUEST_TB tr, TRAINER_TB tt, CUSTOMER_TB ct
+		where tr.TA_CD = tt.TA_CD
+		and tt.CUST_ID = ct.CUST_ID
+		and ct.CUST_ID = #{id}
+		and TQ_ST = 4
+	</select>
+	
+	<insert id="insertTrainingReview" parameterType="ptms.mvc.tpj.CustVO.TrainerVO">
+		insert into TRAINER_GRADE_TB(TG_CD, CUST_ID, TG_ID, TG_GRADE, TG_CON, TG_IMG, TG_DT)
+		values(TG_CD_seq.nextval, #{CUST_ID}, #{TG_ID}, #{TG_GRADE}, #{TG_CON}, #{TG_IMG}, sysdate)
+	</insert>
+	
+	<select id="reviewCheckCnt" resultType="int">
+		select count(*)
+		from TRAINER_GRADE_TB tg, TRAINER_REQUEST_TB tr
+		where tg.tg_id = tr.ta_cd
+		and tr.tq_cd = #{TQ_CD}
+	</select>
+	
+	<select id="previewTrainingGrade" resultType="ptms.mvc.tpj.CustVO.TrainerVO">
+	
+	</select>
 </mapper>

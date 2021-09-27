@@ -34,7 +34,7 @@
    
    		<%@ include file = "sidebar.jsp" %>
       
-      <section style = "width:700px; margin-left:auto; margin-right:auto; margin-top:30px;" class = "sections">
+      <section style = "width:900px; margin-left:auto; margin-right:auto; margin-top:30px;" class = "sections">
          <form name="applyform" action="applySitteAction" method="post">
                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                <div class="row no-gutters" >

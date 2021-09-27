@@ -210,6 +210,37 @@ public class TrainerDAOImpl implements TrainerDAO {
 		return dao.custReqResultdenyList(id);
 	}
 
-	
+	@Override
+	public int trainingCompleteCnt(String id) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		int selectCnt = dao.trainingCompleteCnt(id);
+		return selectCnt;
+	}
+
+	@Override
+	public List<TrainerRequestVO> trainingComplete(String id) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.trainingComplete(id);
+	}
+
+	@Override
+	public int insertTrainingReview(TrainerVO vo) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		int insertCnt = dao.insertTrainingReview(vo);
+		return insertCnt;
+	}
+
+	@Override
+	public int reviewCheckCnt(int TQ_CD) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		int reviewCheckCnt = dao.reviewCheckCnt(TQ_CD);
+		return reviewCheckCnt;
+	}
+
+	@Override
+	public List<TrainerVO> previewTrainingGrade() {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.previewTrainingGrade();
+	}
 
 }

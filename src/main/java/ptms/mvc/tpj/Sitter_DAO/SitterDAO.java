@@ -52,7 +52,7 @@ public interface SitterDAO {
 	public List<PetVO> petKindInfo(String cust_id);
 	
 	// 의뢰시 - 펫 별 서비스 요금 조회 : 위 의뢰자 펫 정보 조회에서 pk_cd(펫 종류 코드)를 활용
-	public List<PetVO> petServiceFee(int pk_cd) ;
+	public int petServiceFee(int pk_cd) ;
 	
 	// 의뢰 취소
 	public int deleteRequest(int sq_cd);
@@ -84,18 +84,22 @@ public interface SitterDAO {
 	public int getWaitReqAccept(String CUST_ID);
 	
 	// 고객 - 요청수락대기 상태에서 취소할 시 요청테이블(SITTER_REQUEST_TB)에서 delete
-	public int sitterReqCancle(String CUST_ID);
+	public int sitterReqCancle(int SQ_CD);
 	
 	// 고객 - 요청수락대기 리스트 
 	public List<SitterVO> sitterWaitReqList(String CUST_ID);
 	
 	// 고객 - 수락된 요청 리스트 수 구하기
+	public int getAcceptList(String CUST_ID);
 	
 	// 고객 - 수락된 요청 리스트
+	public List<SitterVO> acceptReqList(String CUST_ID);
 	
 	// 고객 - 거절된 요청 리스트 수 구하기
+	public int getRefuseList(String CUST_ID);
 	
 	// 고객 - 거절된 요청 리스트
+	public List<SitterVO> refuseReqList(String CUST_ID);
 	
 	// 고객 - 결제완료 리스트 수 구하기
 	

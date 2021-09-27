@@ -8,7 +8,7 @@
 <meta name = "_csrf_header" content="${_csrf.headerName}">
 <meta name = "_csrf" content = "${_csrf.token}">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 //아이디 유효성 검사(1 = 중복 / 0 != 중복)
 $(document).ready(function(){

@@ -11,7 +11,6 @@
 <body>
 
 	<div style="display: flex; flex:1; justify-content:center;">
-		
 		<%@ include file = "sidebar.jsp" %>
 		
 		<section style="width: 700px; margin-left: auto; margin-right: auto; margin-top: 30px;" class = "sections">
@@ -72,6 +71,30 @@
                                     </div>
                               </div>
 
+							<!-- 나의 반려동물  -->
+							<div class="col-md-12" style = "margin-bottom:30px; border-bottom:1px solid #00bd56;">
+								<div class="form-group">
+									<h2>나의 반려동물</h2>
+									<c:if test="${selectCnt > 0 }"> 
+										<div style = "display:flex; margin-top: 30px;">
+											<c:forEach var="li" items="${list}">
+												<p class = "chk_p1">
+													<label class = "chk_label1" for = "pet_li_${li.PK_CD}">
+														<input type="checkbox" id = "pet_li_${li.PK_CD}" class = "sel_chk1" name="pk_cd" value="${li.PK_CD}">
+														<span class="checkbox_icon"></span>
+														<span class = "list_label_span2">${li.PET_NM}(${li.PK_CD})</span>
+													</label>
+												</p>
+						        			</c:forEach>
+					        			</div>
+									</c:if>
+		
+									<c:if test="${selectCnt == 0}">
+										<p>마이펫을 먼저 등록해 주세요</p>
+									</c:if>
+								</div>
+							</div>
+
 							<div class="col-md-12">
 								<div class="form-group" align="center">
 									<input type="submit" value="찾기" class="btn btn-primary" style = "font-size: 20px; width: 150px">
@@ -79,6 +102,8 @@
 								</div>
 							</div>
 						</div>
+						
+						
 					</div>
 				</div>
 			</form>

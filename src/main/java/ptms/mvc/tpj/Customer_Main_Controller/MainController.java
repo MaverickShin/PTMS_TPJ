@@ -49,7 +49,7 @@ public class MainController {
 	
 	@Autowired
 	SitterServiceImpl SitterService;
-	
+	 
 	@Autowired
 	emailSender emailsender;
 	
@@ -469,5 +469,6 @@ public class MainController {
       
       return "customer/mypage/buyList";
    }
+   
    
 }

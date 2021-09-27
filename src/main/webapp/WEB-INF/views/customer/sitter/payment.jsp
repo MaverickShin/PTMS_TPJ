@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-고객 - 거절된 요청 리스트
+결제페이지
 </body>
 </html>
