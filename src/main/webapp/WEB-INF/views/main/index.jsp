@@ -10,7 +10,13 @@
 <body>
 
 <%@ include file = "header.jsp" %>
-
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+	<df-messenger
+	  intent="WELCOME"
+	  chat-title="PTMS"
+	  agent-id="0b66c0d5-09a4-4a16-aeb7-b92963e6f8ca"
+	  language-code="ko"
+	></df-messenger>
     <!-- END nav -->
     <div  style= "background-image: url('${path}images/bg_1.jpg'); width:100%; height: 100%;">
       
