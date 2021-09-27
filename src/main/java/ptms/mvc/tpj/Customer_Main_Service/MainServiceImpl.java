@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -508,7 +509,101 @@ public class MainServiceImpl implements MainService{
 		System.out.println("==================");
 		
 	}
+
+////////////////////////////////////////////////////////////////
+	// 제휴정보 크롤링 테스트용 - 진수
+	@Override
+	public void AffiliateCrwaling(HttpServletRequest req, Model model) {
+		//Jsoup으로 호텔 정보 크롤링
+		//크롤링할 url 지정
+		String url="https://shopping.naver.com/home/p/index.naver";
+//		String url="https://search.naver.com/search.naver?where=nexearch&sm=top_sug.pre&fbm=1&acr=1&acq=%EC%9C%A0%EA%B8%B0%EB%8F%99%EB%AC%BC&qdt=0&ie=utf8&query=%EC%9C%A0%EA%B8%B0%EB%8F%99%EB%AC%BC%EB%B3%B4%ED%98%B8%EC%84%BC%ED%84%B0";
+		
+		// Document에는 페이지의 전체 소스가 저장된다.
+		Document doc = null;
+		
+		// 호텔 정보를 담을 list바구니
+		List<String> list = new ArrayList<String>();
+		
+		try {
+			// url 연결
+			doc = Jsoup.connect(url).get();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		// select를 이용하여 원하는 태그를 선택한다. <div class="search-container__csa">
+		// 				원하는 값들이 들어있는 '전체'덩어리를 가져온다.
+//		Elements element = doc.select("div#BODYCON");
+		Elements element = doc.select("div.section_wrap");
+		System.out.println("element : "+element);
+		Elements element1 = element.select("div.section_cell");
+		System.out.println("element1 : "+element1);
+		Elements element2 = element1.select("div.list_type ul li");
+		System.out.println("element2 : "+element2);
+
+		// element에 들어있는 세부정보 찾기 - 호텔 이름
+		Elements detailele = element2.select("a.link_a");
+		
+		
+		System.out.println("detailele2 : "+detailele);
+//		Elements txt = detailele.select("span.txt");
+		// element에 들어있는 세부정보 찾기 - 이미지
+//		Elements detailele2 = element.select("a.sr_item_photo_link");
+//		Elements detailele2 = element.select("a.[href]");
+//		System.out.println("detailele2 : "+detailele2);
+		
+		System.out.println("=========================================");
+		//Iterator를 이용하여 하나씩 값을 가져온다.
+		//전체 덩어리에서 필요한 부분만 선택하여 가져올 수 있다.
+//		Elements item = detailele.select("a[href]");
+//		Elements item = detailele.select("span.sr-hotel__name");
+//		Elements href = detailele.select("a[href]");
+//		Iterator<Element> img = detailele2.select("img").iterator();
+
+		for(Element link : detailele) {
+			System.out.println(link.text());
+			list.add(link.attr("abs:href"+"\n"));
+		}
+		
+//		for(Element t : txt) {
+//			System.out.println(t.text());
+//		}
+
+		
+//		Elements element = doc.select("div.api_cs_wrap");
+//		System.out.println("element : "+element);
+//		Elements element1 = element.select("div.animal_lst div");
+//		System.out.println("element1 : "+element1);
+//		Elements element2 = element1.select("ul.first_list");
+//		System.out.println("element2 : "+element2);
+//		Elements element3 = element2.select("string.info_tit");
+//		System.out.println("element3 : "+element3);
+////		Elements element4 = element2.select("dl.info_add");
+////		System.out.println("element4 : "+element4);
+//		
+//		// element에 들어있는 세부정보 찾기 - 호텔 이름
+//		Elements detailele = element3.select("");
+//		Elements detailele1 = element2.select("dl.info_add");
+//		System.out.println("detailele : "+detailele);
+//		System.out.println("detailele1 : "+detailele1);
+//		System.out.println("=========================================");
+//		
+//		for(Element link : detailele) {
+//			System.out.println(link.text());
+//			list.add(link.attr("abs:href"+"\n"));
+//		}
+		
+		model.addAttribute("item",detailele);
+//		model.addAttribute("item1",detailele1);
+//		model.addAttribute("href",txt);
+		model.addAttribute("list",list);
+		
+	}
 	
+	
+/////////////////////////////////////////////////////////////////	
 	/*
 	 * 2021-09-22
 	 * 나도웅
@@ -542,6 +637,7 @@ public class MainServiceImpl implements MainService{
 	public void deleteEvent(HttpServletRequest req, Model model) {
 		
 	}
+
 	
 	// 펫정보 인증 및 상세 페이지
 /*	@Override

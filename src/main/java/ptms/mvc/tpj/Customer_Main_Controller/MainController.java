@@ -343,6 +343,14 @@ public class MainController {
 	   return "customer/health/Nutrient_Info_View";
    }
    
+// *************** 제휴정보 크롤링 테스트용 **************** - 진수 21.09.25
+   @RequestMapping("CrawlingTest")
+   public String CrawlingTest(HttpServletRequest req, Model model) {
+	   service.AffiliateCrwaling(req, model);
+	   return "customer/calendar/CrawlingTest";
+   }
+// *********************************************************
+   
    // 구독 페이지
    @RequestMapping("subscribe")
    public String subscribe() {
