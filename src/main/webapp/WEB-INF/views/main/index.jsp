@@ -11,6 +11,22 @@
 
 <%@ include file = "header.jsp" %>
 
+	<section>
+		<div>
+			<div>
+				<div>
+					<div>
+						<%@ include file="../news/newsletter.jsp"%>
+<%-- 						<div>
+							<img src="${imgPath}image_4.jpg" width="400px" height="300px"
+								vspace=30>
+						</div> --%>
+				 	</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
     <!-- END nav -->
     <div  style= "background-image: url('${path}images/bg_1.jpg'); width:100%; height: 100%;">
       

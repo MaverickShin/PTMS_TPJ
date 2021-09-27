@@ -101,27 +101,25 @@ public class TrainerController {
    
    // 훈련사가 요청 거절 -> 테이블 요청상태 거절(2)로 update
    @RequestMapping("denyRequestTraining")
-   public String denyRequestTraining(HttpServletRequest req, Model model) throws ParseException {
+   public String denyRequestTraining(HttpServletRequest req, Model model) {
       log.info("url ==> denyRequestTraining");
 
       trainerservice.updateDenyTraining(req, model);
-      System.out.println("타고옴1");
       return "customer/trainer/denyRequestTrainingAction";
    }
    
    // 훈련사가 요청 수락 -> 테이블 요청상태 수락(1)으로 update
    @RequestMapping("acceptRequestTraining")
-   public String acceptRequestTraining(HttpServletRequest req, Model model) throws ParseException {
+   public String acceptRequestTraining(HttpServletRequest req, Model model) {
       log.info("url ==> acceptRequestTraining");
 
       trainerservice.updateAcceptTraining(req, model);
-      System.out.println("타고옴");
       return "customer/trainer/acceptRequestTrainingAction";
    }
    
    // 훈련사가 수락한 요청리스트
    @RequestMapping("acceptTrainingList")
-   public String acceptTrainingList(HttpServletRequest req, Model model) throws ParseException {
+   public String acceptTrainingList(HttpServletRequest req, Model model)  {
       log.info("url ==> acceptTrainingList");
 
       trainerservice.acceptTrainingList(req, model);
@@ -131,7 +129,7 @@ public class TrainerController {
    
    // 훈련사가 거절한 요청리스트
    @RequestMapping("denyTrainingList")
-   public String denyTrainingList(HttpServletRequest req, Model model) throws ParseException {
+   public String denyTrainingList(HttpServletRequest req, Model model) {
       log.info("url ==> denyTrainingList");
 
       trainerservice.denyTrainingList(req, model);
@@ -141,7 +139,7 @@ public class TrainerController {
    
    // 고객용 훈련 요청결과 리스트 - 대기중일때
    @RequestMapping("custReqResult")
-   public String custReqResult(HttpServletRequest req, Model model) throws ParseException {
+   public String custReqResult(HttpServletRequest req, Model model) {
       log.info("url ==> custReqResult");
 
       trainerservice.custReqResultwait(req, model);
@@ -151,7 +149,7 @@ public class TrainerController {
    
    // 고객용 훈련 요청 취소 - delete
    @RequestMapping("cancelRequestTraining")
-   public String cancelRequestTraining(HttpServletRequest req, Model model) throws ParseException {
+   public String cancelRequestTraining(HttpServletRequest req, Model model) {
       log.info("url ==> cancelRequestTraining");
 
       trainerservice.cancelRequestTraining(req, model);
@@ -161,7 +159,7 @@ public class TrainerController {
    
    // 고객용 훈련 요청결과 리스트 - 수락일때
    @RequestMapping("custReqResultAccept")
-   public String custReqResultAccept(HttpServletRequest req, Model model) throws ParseException {
+   public String custReqResultAccept(HttpServletRequest req, Model model) {
       log.info("url ==> custReqResultAccept");
 
       trainerservice.custReqResultAccept(req, model);
@@ -171,12 +169,60 @@ public class TrainerController {
    
    // 고객용 훈련 요청결과 리스트 - 거절일때
    @RequestMapping("custReqResultDeny")
-   public String custReqResultDeny(HttpServletRequest req, Model model) throws ParseException {
+   public String custReqResultDeny(HttpServletRequest req, Model model) {
       log.info("url ==> custReqResultDeny");
 
       trainerservice.custReqResultDeny(req, model);
       
       return "customer/trainer/custReqResultDenyList";
+   }
+   
+   // 훈련사 결제하기
+   @RequestMapping("payTraining")
+   public String payTraining(HttpServletRequest req, Model model) {
+      log.info("url ==> payTraining");
+
+      return "customer/trainer/payTrainingAction";
+   }
+   
+   // 훈련완료 리스트 / 후기 중복체크
+   @RequestMapping("trainingComplete")
+   public String trainingComplete(HttpServletRequest req, Model model) {
+      log.info("url ==> trainingComplete");
+      
+      trainerservice.trainingComplete(req, model);
+
+      return "customer/trainer/trainingComplete";
+   }
+   
+   // 훈련사 후기작성 페이지
+   @RequestMapping("writeTrainingReview")
+   public String writeTrainingReview(HttpServletRequest req, Model model) {
+      log.info("url ==> writeTrainingReview");
+      
+      int TG_ID = Integer.parseInt(req.getParameter("TG_ID"));
+      model.addAttribute("TG_ID", TG_ID);
+      
+      return "customer/trainer/writeTrainingReview";
+   }
+   
+   // 훈련사 후기작성 처리 - 리뷰테이블 insert
+   @RequestMapping("writeTrainingReviewAction")
+   public String writeTrainingReviewAction(HttpServletRequest req, Model model) {
+      log.info("url ==> writeTrainingReviewAction");
+      
+      trainerservice.writeTrainingReview(req, model);
+      
+      return "customer/trainer/writeTrainingReviewAction";
+   }
+   
+   // 훈련사 후기 미리보기(평점 높은순)
+   @RequestMapping("previewTraining")
+   public String previewTraining(HttpServletRequest req, Model model) {
+      log.info("url ==> previewTraining");
+      
+      trainerservice.previewTrainingGrade(req, model);
+      return "customer/trainer/previewTraining";
    }
  
 }

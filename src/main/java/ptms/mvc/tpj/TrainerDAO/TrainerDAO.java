@@ -96,4 +96,18 @@ public interface TrainerDAO {
 	// 고객용 훈련요청 결과 리스트(수락일때)
 	public List<TrainerRequestVO> custReqResultdenyList(String id);
 	
+	// 고객용 훈련완료 리스트 건수
+	public int trainingCompleteCnt(String id);
+	
+	// 고객용 훈련요청 결과 리스트(수락일때)
+	public List<TrainerRequestVO> trainingComplete(String id);
+	
+	// 훈련사 후기 작성 insert
+	public int insertTrainingReview(TrainerVO vo);
+	
+	// 훈련사 후기 작성 중복체크
+	public int reviewCheckCnt(int TQ_CD);
+	
+	// 후기 미리보기 평점순 훈련사 정렬
+	public List<TrainerVO> previewTrainingGrade();
 }

@@ -54,9 +54,10 @@ public class MainController {
 	emailSender emailsender;
 	
 	// 메인페이지 이동
-	@RequestMapping({"", "main"})
-	public String main() {
+	@RequestMapping({"", "main", "Newsletter"})
+	public String main(HttpServletRequest req, Model model) {
 		
+		service.Newsletter(req, model); 
 		return "main/index";
 	}
 	

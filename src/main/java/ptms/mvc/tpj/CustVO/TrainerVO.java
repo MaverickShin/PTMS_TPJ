@@ -36,6 +36,13 @@ public class TrainerVO {
 	
 	private String PET_NM;
 	
+	// 훈련사 후기 테이블
+	private int TG_CD;
+	private int TG_ID;
+	private float TG_GRADE;
+	private String TG_CON;
+	private String TG_IMG;
+	
 	public int getTA_CD() {
 		return TA_CD;
 	}
@@ -197,6 +204,46 @@ public class TrainerVO {
 	public void setPET_NM(String pET_NM) {
 		PET_NM = pET_NM;
 	}
-	
 
+	public int getTG_CD() {
+		return TG_CD;
+	}
+
+	public void setTG_CD(int tG_CD) {
+		TG_CD = tG_CD;
+	}
+
+	public int getTG_ID() {
+		return TG_ID;
+	}
+
+	public void setTG_ID(int tG_ID) {
+		TG_ID = tG_ID;
+	}
+
+	public float getTG_GRADE() {
+		return TG_GRADE;
+	}
+
+	public void setTG_GRADE(float tG_GRADE) {
+		TG_GRADE = tG_GRADE;
+	}
+
+	public String getTG_CON() {
+		return TG_CON;
+	}
+
+	public void setTG_CON(String tG_CON) {
+		TG_CON = tG_CON;
+	}
+
+	public String getTG_IMG() {
+		return TG_IMG;
+	}
+
+	public void setTG_IMG(String tG_IMG) {
+		TG_IMG = tG_IMG;
+	}
+	
+	
 }

@@ -99,7 +99,7 @@ function refuse() {
    lb.style.backgroundColor = "#f5f5f5";
    lb.style.color = "black";
    
-   window.location = "${tr}denyTrainingList"
+   window.location = "${tr}custReqResultDeny"
 }
 </script>
 <title>Insert title here</title>
@@ -122,8 +122,8 @@ function refuse() {
     <div class="list_tab">
       <p id="left_button" onclick="request();">요청 수락대기</p>
       <p id="accept_button" onclick="accept();">수락된 요청</p>   
-      <p id="right_button" style="background-color: #a3cde3; color: white;">거절된 요청</p>      
-      <p id="center_button" onclick ="TrainingComplete();">매칭 완료</p>
+      <p id="right_button" onclick="refuse();">거절된 요청</p>      
+      <p id="center_button" style="background-color: #a3cde3; color: white;">매칭 완료</p>
 
     </div>
     
@@ -154,8 +154,14 @@ function refuse() {
 		<c:forEach var="dtos" items="${dto}">
 			<div class="about-author d-flex p-4 bg-light" style="place-content:center;">
 		      <div class="desc" style="background-color:#dfe3eb; padding:20px;">
-		        <h6>훈련받을 펫 : ${dtos.PET_NM}</h6>&nbsp;<h6>훈련사 : ${dtos.CUST_NM}</h6>
+		       <h6>훈련받은 펫 : ${dtos.PET_NM}</h6>&nbsp;<h6>훈련사 : ${dtos.CUST_NM}</h6>
 		        <p>훈련일 : ${dtos.START_DAY}<br>훈련종류 : ${dtos.TQ_AMT}</p>
+		        <c:if test="${reviewCheckCnt == 1}">
+		        	<input type="button" value="후기작성완료" class="btn btn-primary" readonly>
+		        </c:if>
+		        <c:if test="${reviewCheckCnt != 1}">
+		        	<input type="button" value="후기쓰기" class="btn btn-primary" onclick="window.location='writeTrainingReview?TG_ID=${dtos.TG_ID}'">
+		        </c:if>
 		      </div>
 		    </div>
 	    </c:forEach>

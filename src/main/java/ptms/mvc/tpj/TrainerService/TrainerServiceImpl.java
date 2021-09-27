@@ -335,7 +335,6 @@ public class TrainerServiceImpl implements TrainerService{
 		int selectCnt = dao.TraineeListCnt(id);
 		System.out.println("selectCnt : " + selectCnt);
 		
-		
 		List<TrainerRequestVO> vo = null;
 		if(selectCnt > 0) {
 			vo = dao.TraineeList(id);
@@ -387,7 +386,6 @@ public class TrainerServiceImpl implements TrainerService{
 		int selectCnt = dao.acceptTraineeListCnt(id);
 		System.out.println("selectCnt : " + selectCnt);
 		
-		
 		List<TrainerRequestVO> vo = null;
 		if(selectCnt > 0) {
 			vo = dao.acceptTraineeList(id);
@@ -405,7 +403,6 @@ public class TrainerServiceImpl implements TrainerService{
 		int selectCnt = dao.denyTraineeListCnt(id);
 		System.out.println("selectCnt : " + selectCnt);
 		
-		
 		List<TrainerRequestVO> vo = null;
 		if(selectCnt > 0) {
 			vo = dao.denyTraineeList(id);
@@ -422,7 +419,6 @@ public class TrainerServiceImpl implements TrainerService{
 		
 		int selectCnt = dao.custReqResultwaitCnt(id);
 		System.out.println("selectCnt : " + selectCnt);
-		
 		
 		List<TrainerRequestVO> vo = null;
 		if(selectCnt > 0) {
@@ -452,7 +448,6 @@ public class TrainerServiceImpl implements TrainerService{
 		int selectCnt = dao.custReqResultacceptCnt(id);
 		System.out.println("selectCnt : " + selectCnt);
 		
-		
 		List<TrainerRequestVO> vo = null;
 		if(selectCnt > 0) {
 			vo = dao.custReqResultacceptList(id);
@@ -477,6 +472,66 @@ public class TrainerServiceImpl implements TrainerService{
 		}
 		model.addAttribute("selectCnt", selectCnt);
 		model.addAttribute("dto", vo);
+		
+	}
+
+	@Override
+	public void trainingComplete(HttpServletRequest req, Model model) {
+		String id = (String)req.getSession().getAttribute("cust_id");
+		System.out.println("아이디 : " + id);
+		
+		int selectCnt = dao.trainingCompleteCnt(id);
+		System.out.println("selectCnt : " + selectCnt);
+		
+		List<TrainerRequestVO> vo = null;
+		
+		int reviewCheckCnt = 0;
+		
+		if(selectCnt > 0) {
+			//훈련 완료 정보를 가져옴
+			vo = dao.trainingComplete(id);
+			System.out.println(vo.get(0).getTQ_CD());
+			
+			for(int i = 0; i < vo.size(); i++) {
+				int TQ_CD = vo.get(i).getTQ_CD();
+				//후기 작성 중복체크
+				reviewCheckCnt = dao.reviewCheckCnt(TQ_CD);
+			}
+		}
+		
+		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("dto", vo);
+		model.addAttribute("reviewCheckCnt", reviewCheckCnt);
+	}
+
+	@Override
+	public void writeTrainingReview(HttpServletRequest req, Model model) {
+		TrainerVO vo = new TrainerVO();
+		
+		String CUST_ID = (String)req.getSession().getAttribute("cust_id");
+		System.out.println("아이디 : " + CUST_ID);
+		vo.setCUST_ID(CUST_ID);
+		
+		int TG_ID = Integer.parseInt(req.getParameter("TG_ID"));
+		System.out.println("TG_ID : " + TG_ID);
+		vo.setTG_ID(TG_ID);
+		
+		float TG_GRADE = Float.valueOf(req.getParameter("TG_GRADE"));
+		vo.setTG_GRADE(TG_GRADE);
+		
+		String TG_CON = req.getParameter("TG_CON");
+		vo.setTG_CON(TG_CON);
+		
+		String TG_IMG = req.getParameter("TG_IMG");
+		vo.setTG_IMG(TG_IMG);
+		
+		int insertCnt = dao.insertTrainingReview(vo);
+		model.addAttribute("insertCnt", insertCnt);
+	}
+
+	@Override
+	public void previewTrainingGrade(HttpServletRequest req, Model model) {
+		
 		
 	}
 }

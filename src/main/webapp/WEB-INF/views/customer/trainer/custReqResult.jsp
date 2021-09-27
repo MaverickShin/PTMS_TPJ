@@ -25,7 +25,7 @@
 }
 </style>
 <script type="text/javascript">
-function sitterserPayFinish() {
+function TrainingComplete() {
    
    var lb = document.getElementById("left_button");
    var cb = document.getElementById("center_button");
@@ -42,7 +42,7 @@ function sitterserPayFinish() {
    ac.style.backgroundColor = "#f5f5f5";
    ac.style.color = "black";
    
-   window.location = "${tr}sitterserPayFinish"
+   window.location = "${tr}trainingComplete"
 }
 
 function request(){
@@ -123,7 +123,7 @@ function refuse() {
       <p id="left_button" style="background-color: #a3cde3; color: white;">요청 수락대기</p>
       <p id="accept_button" onclick="accept();">수락된 요청</p>   
       <p id="right_button" onclick="refuse();">거절된 요청</p>      
-      <p id="center_button" onclick ="sitterserPayFinish();">결제 완료</p>
+      <p id="center_button" onclick ="TrainingComplete();">매칭 완료</p>
 
     </div>
     
@@ -133,11 +133,11 @@ function refuse() {
 		<ul>
 			<li>-고객-</li>
 			<li><a href="trainerSearch">훈련사 목록</a></li>
-			<li><a href="">이용 후기</a></li>
-			<li><a href="custReqResult">요청 내역</a></li>
+			<li><a href="previewTraining">후기 미리보기</a></li>
+			<li><a href="custReqResult">요청 내역 및 후기 작성</a></li>
 			<li>-훈련사-</li>
 			<li><a href="applyTrainer">훈련사지원</a></li>
-			<li><a href="">나에게 온 의뢰</a></li>
+			<li><a href="requestTrainer">나에게 온 의뢰</a></li>
 		</ul>
 	</nav>
     

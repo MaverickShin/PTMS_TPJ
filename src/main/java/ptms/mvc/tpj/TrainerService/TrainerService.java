@@ -64,4 +64,13 @@ public interface TrainerService {
 	
 	// 고객용 훈련 요청 결과 리스트(수락)
 	public void custReqResultDeny(HttpServletRequest req, Model model);
+	
+	// 고객용 훈련 완료 리스트
+	public void trainingComplete(HttpServletRequest req, Model model);
+	
+	// 훈련 후기 작성
+	public void writeTrainingReview(HttpServletRequest req, Model model);
+	
+	// 훈련 후기 미리보기 - 평점순
+	public void previewTrainingGrade(HttpServletRequest req, Model model);
 }
