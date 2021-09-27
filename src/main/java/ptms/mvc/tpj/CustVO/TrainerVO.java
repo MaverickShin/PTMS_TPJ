@@ -244,6 +244,8 @@ public class TrainerVO {
 	public void setTG_IMG(String tG_IMG) {
 		TG_IMG = tG_IMG;
 	}
-	
 
+	
+	
+	
 }

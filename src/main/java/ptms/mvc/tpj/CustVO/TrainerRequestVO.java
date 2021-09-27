@@ -34,6 +34,7 @@ public class TrainerRequestVO {
 	
 	// 요청한 훈련사 이름 가져오기
 	private String CUST_NM;
+	private int TG_ID;
 	
 	public TrainerRequestVO() {}
 
@@ -193,6 +194,14 @@ public class TrainerRequestVO {
 
 	public void setCUST_NM(String cUST_NM) {
 		CUST_NM = cUST_NM;
+	}
+
+	public int getTG_ID() {
+		return TG_ID;
+	}
+
+	public void setTG_ID(int tG_ID) {
+		TG_ID = tG_ID;
 	}
 	
 	

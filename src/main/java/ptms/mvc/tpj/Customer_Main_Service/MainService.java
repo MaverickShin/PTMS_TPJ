@@ -57,6 +57,7 @@ public interface MainService {
 	// 일정 삭제
 	public void deleteEvent(HttpServletRequest req, Model model);
 
-	
+	// 뉴스레이터 크롤링 - 21.09.26 선영
+	public void Newsletter(HttpServletRequest req, Model model);
 	
 }

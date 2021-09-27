@@ -8,18 +8,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<!-- 훈련 요청 성공 -->
+	<!-- 취소 성공 -->
 	<c:if test="${insertCnt == 1}">
 		<script type="text/javascript">
-			alert("훈련이 요청되었습니다.");
-			window.location="custReqResult";
+			alert("후기가 작성되었습니다.");
+			window.location="trainingComplete";
 		</script>
 	</c:if>
 	
-	<!-- 훈련 요청 실패 -->
-	<c:if test="${insertCnt != 1}">
+	<!-- 취소 실패 -->
+	<c:if test="${insertCnt != 0}">
 		<script type="text/javascript">
-			alert("훈련요청에 실패하였습니다.");
+			alert("후기 작성에 실패했습니다.");
 			window.history.back();
 		</script>
 	</c:if>

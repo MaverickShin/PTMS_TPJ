@@ -335,7 +335,6 @@ public class TrainerServiceImpl implements TrainerService{
 		int selectCnt = dao.TraineeListCnt(id);
 		System.out.println("selectCnt : " + selectCnt);
 		
-		
 		List<TrainerRequestVO> vo = null;
 		if(selectCnt > 0) {
 			vo = dao.TraineeList(id);
@@ -387,7 +386,6 @@ public class TrainerServiceImpl implements TrainerService{
 		int selectCnt = dao.acceptTraineeListCnt(id);
 		System.out.println("selectCnt : " + selectCnt);
 		
-		
 		List<TrainerRequestVO> vo = null;
 		if(selectCnt > 0) {
 			vo = dao.acceptTraineeList(id);
@@ -405,7 +403,6 @@ public class TrainerServiceImpl implements TrainerService{
 		int selectCnt = dao.denyTraineeListCnt(id);
 		System.out.println("selectCnt : " + selectCnt);
 		
-		
 		List<TrainerRequestVO> vo = null;
 		if(selectCnt > 0) {
 			vo = dao.denyTraineeList(id);
@@ -422,7 +419,6 @@ public class TrainerServiceImpl implements TrainerService{
 		
 		int selectCnt = dao.custReqResultwaitCnt(id);
 		System.out.println("selectCnt : " + selectCnt);
-		
 		
 		List<TrainerRequestVO> vo = null;
 		if(selectCnt > 0) {
@@ -453,7 +449,6 @@ public class TrainerServiceImpl implements TrainerService{
 		int selectCnt = dao.custReqResultacceptCnt(id);
 		System.out.println("selectCnt : " + selectCnt);
 		
-		
 		List<TrainerRequestVO> vo = null;
 		if(selectCnt > 0) {
 			vo = dao.custReqResultacceptList(id);
@@ -482,7 +477,7 @@ public class TrainerServiceImpl implements TrainerService{
 		model.addAttribute("st", 2);
 		
 	}
-	
+
 	@Override
 	public void trainingComplete(HttpServletRequest req, Model model) {
 		String id = (String)req.getSession().getAttribute("cust_id");

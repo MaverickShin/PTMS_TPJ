@@ -91,7 +91,7 @@ $(document).ready(function(){
 }
 </style>
 <script type="text/javascript">
-function sitterserPayFinish() {
+function TrainingComplete() {
    
    var lb = document.getElementById("left_button");
    var cb = document.getElementById("center_button");
