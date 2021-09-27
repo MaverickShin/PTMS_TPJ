@@ -86,7 +86,7 @@
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="main"><span
+			<a class="navbar-brand" href="/tpj/cust/main"><span
 				class="flaticon-pawprint-1 mr-2"></span>Pet Management</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#ftco-nav" aria-controls="ftco-nav"
