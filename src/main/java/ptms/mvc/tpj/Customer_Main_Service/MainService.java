@@ -47,6 +47,10 @@ public interface MainService {
 	
 	// 영양정보 크롤링 - 21.09.24 창훈 추가
 	public void NutrientCrawling(HttpServletRequest req, Model model);	
+	
+	// 제휴정보 크롤링 테스트용 - 진수 21.09.25
+	public void AffiliateCrwaling(HttpServletRequest req, Model model);
+	
 	// 일정 추가
 	public void addEvent(HttpServletRequest req, Model model);
 	
