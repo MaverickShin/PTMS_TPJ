@@ -430,6 +430,7 @@ public class TrainerServiceImpl implements TrainerService{
 		}
 		model.addAttribute("selectCnt", selectCnt);
 		model.addAttribute("dto", vo);
+		model.addAttribute("st", 0);
 		
 	}
 
@@ -459,6 +460,7 @@ public class TrainerServiceImpl implements TrainerService{
 		}
 		model.addAttribute("selectCnt", selectCnt);
 		model.addAttribute("dto", vo);
+		model.addAttribute("st", 1);
 		
 	}
 
@@ -477,6 +479,7 @@ public class TrainerServiceImpl implements TrainerService{
 		}
 		model.addAttribute("selectCnt", selectCnt);
 		model.addAttribute("dto", vo);
+		model.addAttribute("st", 2);
 		
 	}
 	
@@ -538,5 +541,18 @@ public class TrainerServiceImpl implements TrainerService{
 	public void previewTrainingGrade(HttpServletRequest req, Model model) {
 		
 		
+	}
+
+	// 고객 - 결제완료 내역
+	@Override
+	public void payment(HttpServletRequest req, Model model) {
+		
+		int selectCnt = 0;
+		
+		List<TrainerRequestVO> vo = null;
+		
+		model.addAttribute("st", 3);
+		model.addAttribute("list", vo);
+		model.addAttribute("selectCnt", selectCnt);
 	}
 }

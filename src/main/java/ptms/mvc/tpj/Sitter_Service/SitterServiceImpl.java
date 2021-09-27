@@ -322,6 +322,7 @@ public class SitterServiceImpl implements SitterService{
 		}
 		
 		model.addAttribute("selectCnt" , selectCnt);
+		model.addAttribute("st", 0);
 		model.addAttribute("list", list);
 	
 	}
@@ -357,6 +358,7 @@ public class SitterServiceImpl implements SitterService{
 		}
 		
 		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("st", 1);
 		model.addAttribute("CUST_ID", CUST_ID);
 		model.addAttribute("list", list);
 	}	
@@ -384,12 +386,13 @@ public class SitterServiceImpl implements SitterService{
 	      int sum = 0;
 	      for(int i = 0; i < PET_CD.length; i++) {
 	    	 
-	    	 sum += sitterDao.petServiceFee(Integer.parseInt(PK_CD[i])); 
-	    	 System.out.println("길이 확인 :" + PET_CD.length);
-	    	 
 	         if(PET_CD.length == 0) result += PET_CD[i];
 	         else result += PET_CD[i] + "  ";
 	      }
+	      
+	      for (int i = 0; i < PK_CD.length; i++) {
+	    	  sum += sitterDao.petServiceFee(Integer.parseInt(PK_CD[i])); 
+		  }
 	      
 	      System.out.println("result : " + result);
 	      
@@ -432,6 +435,7 @@ public class SitterServiceImpl implements SitterService{
 	  	 vo.setSTART_DAY(date);//의뢰시작일
 	  	 date = new Date(sdf.parse(END_DAY).getTime());
 	  	 vo.setEND_DAY(date); //의뢰종료일
+	  	 
 	  	 vo.setSQ_FEE(total);
 	  	 
 	  	 int insertCnt = sitterDao.selectRequestInsert(vo);
@@ -471,6 +475,7 @@ public class SitterServiceImpl implements SitterService{
 		
 		model.addAttribute("selectCnt", selectCnt);
 		model.addAttribute("CUST_ID", CUST_ID);
+		model.addAttribute("st", 2);
 		model.addAttribute("list", list);
 		
 	}	
@@ -548,7 +553,13 @@ public class SitterServiceImpl implements SitterService{
 	public void payment(HttpServletRequest req, Model model) {
 		System.out.println("service ==> payment");
 		
+		int selectCnt = 0;
 		
+		List<SitterVO> list =null;
+		
+		model.addAttribute("st", 3);
+		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("list", list);
 	}
 	
 	// 결제하기

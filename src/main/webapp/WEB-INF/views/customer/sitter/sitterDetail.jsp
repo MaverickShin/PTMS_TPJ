@@ -87,10 +87,11 @@ body {
 							
 								<h5 style = "padding-bottom:20px; color:#00bd56;">마이 펫</h5>
 								<div style = "display: grid; grid-template-columns: 1fr 1fr; border-bottom:1px solid #eeeeee;">
+									
+									<c:set var= "suc" value = "false"/>
+									
 									<c:forEach var="li" items="${list}" varStatus = "lst">
 										<c:forEach var = "i" items= "${pet}" varStatus = "st">
-											
-											<c:set var= "suc" value = "false"/>
 											
 											<c:if test = "${i == li.PK_CD}">
 												<p class = "chk_p1">
@@ -105,7 +106,7 @@ body {
 											</c:if>
 											
 											<c:if test = "${i != li.PK_CD}">
-												<c:if test = "${suc ne 'true'}">
+												<c:if test = "${suc eq 'false'}">
 													<p class = "chk_p1">
 														<label class = "chk_label1" for = "pet_li_${lst.index}">
 															<input type="checkbox" id = "pet_li_${lst.index}" class = "sel_chk1" name="PK_CD" value="${li.PK_CD}">
@@ -203,30 +204,30 @@ body {
                                 </div>
                                    <div class="select-wrap">
                                     <c:if test = "${dto.SV1_NO == null}">
-                                    	<p class = "chk_p1"><label class = "chk_label1" for = "SV1_NO"><span class = "list_label_span1">미용 서비스</span><input type="checkbox" value="1" class="sel_chk1" id = "SV1_NO" disabled><span class = "checkbox_icon"></span></label></p>
+                                    	<p class = "chk_p1"><label class = "chk_label1"><span class = "list_label_span1">미용 서비스</span><input type="checkbox" value="1" class="sel_chk1" id = "SV1_NO" disabled><span class = "checkbox_icon"></span></label></p>
                                     </c:if>
                                     
                                     <c:if test = "${dto.SV1_NO != null}">
-                                    	<p class = "chk_p1"><label class = "chk_label1" for = "SV1_NO"><span class = "list_label_span1">미용 서비스</span><input type="checkbox" value="1" class="sel_chk1" id = "SV1_NO" value = "${dto.SV1_NO}"checked disabled><span class = "checkbox_icon"></span></label></p>
+                                    	<p class = "chk_p1"><label class = "chk_label1"><span class = "list_label_span1">미용 서비스</span><input type="checkbox" value="1" class="sel_chk1" id = "SV1_NO" value = "${dto.SV1_NO}"checked disabled><span class = "checkbox_icon"></span></label></p>
                                     </c:if>
                                     
                                     <c:if test ="${dto.SV2_NO == null}">
-                                    	<p class = "chk_p1"><label class = "chk_label1" for = "SV2_NO"><span class = "list_label_span1">놀이 서비스</span><input type="checkbox" value="2" id = "SV2_NO" class="sel_chk1" disabled ><span class = "checkbox_icon"></span></label></p>
+                                    	<p class = "chk_p1"><label class = "chk_label1"><span class = "list_label_span1">놀이 서비스</span><input type="checkbox" value="2" id = "SV2_NO" class="sel_chk1" disabled ><span class = "checkbox_icon"></span></label></p>
                                     </c:if>
                                     
                                     <c:if test = "${dto.SV2_NO != null}">
-                                    	<p class = "chk_p1"><label class = "chk_label1" for = "SV2_NO"><span class = "list_label_span1">놀이 서비스</span><input type="checkbox" value="2" id = "SV2_NO" class="sel_chk1" value = "${dto.SV2_NO}" checked disabled><span class = "checkbox_icon"></span></label></p>
+                                    	<p class = "chk_p1"><label class = "chk_label1"><span class = "list_label_span1">놀이 서비스</span><input type="checkbox" value="2" id = "SV2_NO" class="sel_chk1" value = "${dto.SV2_NO}" checked disabled><span class = "checkbox_icon"></span></label></p>
                                     </c:if>
                                     
                                     <c:if test = "${dto.SV3_NO == null}">
-                                    	<p class = "chk_p1"><label class = "chk_label1" for = "SV3_NO"><span class = "list_label_span1">산책 서비스</span><input type="checkbox" value="3" id = "SV3_NO" class="sel_chk1" disabled><span class = "checkbox_icon"></span></label></p>
+                                    	<p class = "chk_p1"><label class = "chk_label1"><span class = "list_label_span1">산책 서비스</span><input type="checkbox" value="3" id = "SV3_NO" class="sel_chk1" disabled><span class = "checkbox_icon"></span></label></p>
                                     </c:if>
                                     
                                     <c:if test = "${dto.SV3_NO != null}">
-                                    	<p class = "chk_p1"><label class = "chk_label1" for = "SV3_NO"><span class = "list_label_span1">산책 서비스</span><input type="checkbox" value="3" id = "SV3_NO"  value = "${dto.SV3_NO}" class="sel_chk1" checked disabled><span class = "checkbox_icon"></span></label></p>
+                                    	<p class = "chk_p1"><label class = "chk_label1"><span class = "list_label_span1">산책 서비스</span><input type="checkbox" value="3" id = "SV3_NO"  value = "${dto.SV3_NO}" class="sel_chk1" checked disabled><span class = "checkbox_icon"></span></label></p>
                                     </c:if>
                                     
-				 				 	<p class = "chk_p1"><label class = "chk_label1" for = "SV4_NO"><span style = "margin-right: 79px;">응급처치 서비스 (필수)</span><input type="checkbox" value="4" class="sel_chk1" id = "SV4_NO"  value = "${dto.SV4_NO}" checked disabled><span class = "checkbox_icon"></span></label></p>
+				 				 	<p class = "chk_p1"><label class = "chk_label1"><span style = "margin-right: 79px;">응급처치 서비스 (필수)</span><input type="checkbox" value="4" class="sel_chk1" id = "SV4_NO"  value = "${dto.SV4_NO}" checked disabled><span class = "checkbox_icon"></span></label></p>
                                 </div>
 						</div>
 						

@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ptms.mvc.tpj.CustVO.PetVO;
 import ptms.mvc.tpj.Sitter_DAO.SitterDAOImpl;
@@ -114,7 +116,15 @@ public class SitterController {
 		 
 		 sitterSer.allRequestList(req, model);
 		 return "customer/sitter/requestForSitter";
-	 }	 
+	 }	
+	 
+	 @RequestMapping("requestForSitter2")
+	 public String requestForMe2(HttpServletRequest req, Model model) {
+		 log.info("url ==> requestForSitter");
+		 
+		 sitterSer.allRequestList(req, model);
+		 return "customer/sitter/requestForSitterClone";
+	 }	
 	 
 	 /*
 	  * 날짜 : 21.09.25
@@ -139,7 +149,7 @@ public class SitterController {
 		 log.info("url ==> sitterRefuse");
 		 
 		 sitterSer.acceptRequestList(req, model);
-		 return "customer/sitter/sitterAcceptList";
+		 return "customer/sitter/requestForSitterClone";
 	 }
 	 
 	 /*
@@ -165,7 +175,7 @@ public class SitterController {
 		 log.info("url ==> sitterRefuseList");
 		 
 		 sitterSer.cancleRequestList(req, model);
-		 return "customer/sitter/sitterRefuseList";
+		 return "customer/sitter/requestForSitterClone";
 	 }		 
 	 
 	 /*
@@ -177,8 +187,9 @@ public class SitterController {
 	 public String sitterserPayFinish(HttpServletRequest req, Model model) {
 		 log.info("url ==> sitterserPayFinish");
 		 
+		 sitterSer.payment(req, model);
 		 
-		 return "customer/sitter/sitterserPayFinish";
+		 return "customer/sitter/requestForSitterClone";
 	 }		 
 
 	 /*
@@ -193,6 +204,15 @@ public class SitterController {
 		 sitterSer.WaitRequestAccept(req, model);
 		 return "customer/sitter/MysitterSerList";
 	 }	
+	 
+	 @RequestMapping("MysitterSerList2")
+	 public String MysitterSerList2(HttpServletRequest req, Model model) {
+		 log.info("url ==> MysitterSerList2");
+		 
+		 sitterSer.WaitRequestAccept(req, model);
+		 return "customer/sitter/MysitterListClone";
+	 }	
+	 
 	 
 	 /*
 	  * 날짜 : 21.09.25
@@ -217,7 +237,8 @@ public class SitterController {
 		 log.info("url ==> acceptSitterSer");
 		 
 		 sitterSer.acceptFromSitter(req, model);
-		 return "customer/sitter/acceptSitterSer";
+		
+		 return "customer/sitter/MysitterListClone";
 	 }	
 	 
 	 /*
@@ -230,7 +251,7 @@ public class SitterController {
 		 log.info("url ==> refuseSitterSer");
 		 
 		 sitterSer.refuseFromSitter(req, model);
-		 return "customer/sitter/refuseSitterSer";
+		 return "customer/sitter/MysitterListClone";
 	 }		
 	 
 	 /*
@@ -243,7 +264,7 @@ public class SitterController {
 		 log.info("url ==> matchingFinish");
 		 
 		 sitterSer.payment(req, model);
-		 return "customer/sitter/matchingFinish";
+		 return "customer/sitter/MysitterListClone";
 	 }		 
 
 	 /*

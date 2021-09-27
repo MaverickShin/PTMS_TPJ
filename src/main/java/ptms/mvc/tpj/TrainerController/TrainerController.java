@@ -149,6 +149,18 @@ public class TrainerController {
       return "customer/trainer/custReqResult";
    }
    
+   // 고객용 훈련 요청결과 리스트 - 대기중일때
+   @RequestMapping("custReqResult2")
+   public String custReqResult2(HttpServletRequest req, Model model) throws ParseException {
+      log.info("url ==> custReqResult");
+
+      trainerservice.custReqResultwait(req, model);
+      
+      return "customer/trainer/custReqResultClone";
+   }
+   
+   
+   
    // 고객용 훈련 요청 취소 - delete
    @RequestMapping("cancelRequestTraining")
    public String cancelRequestTraining(HttpServletRequest req, Model model) throws ParseException {
@@ -166,7 +178,7 @@ public class TrainerController {
 
       trainerservice.custReqResultAccept(req, model);
       
-      return "customer/trainer/custReqResultAcceptList";
+      return "customer/trainer/custReqResultClone";
    }
    
    // 고객용 훈련 요청결과 리스트 - 거절일때
@@ -176,7 +188,7 @@ public class TrainerController {
 
       trainerservice.custReqResultDeny(req, model);
       
-      return "customer/trainer/custReqResultDenyList";
+      return "customer/trainer/custReqResultClone";
    }
    
    // 훈련사 결제하기
@@ -225,6 +237,15 @@ public class TrainerController {
       
       
       return "customer/trainer/previewTraining";
+   }
+   
+   // 고객 - 결제완료 내역
+   @RequestMapping("trainerserPayFinish")
+   public String trainerserPayFinish(HttpServletRequest req, Model model) {
+	   
+	   trainerservice.payment(req, model);
+	   
+	   return "customer/trainer/custReqResultClone";
    }
  
 }

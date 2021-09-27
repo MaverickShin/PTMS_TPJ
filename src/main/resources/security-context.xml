@@ -122,12 +122,12 @@
 		<security:intercept-url pattern="/cust/mailAction" access="permitAll" />
 		<security:intercept-url pattern="/cust/mailChkAction" access="permitAll" />
 		<security:intercept-url pattern="/cust/emailSuccess" access="permitAll" />
-		<security:intercept-url pattern="/buy/**" access="permitAll" />
-		<security:intercept-url pattern="/product/**" access="permitAll" />
 		<security:intercept-url pattern="/**" access="permitAll" />
+		<security:intercept-url pattern="/sitter/**" access="permitAll" />
+		
 		
 		<!-- 로그인한 사용자 영역 -->
-		<security:intercept-url pattern="/cust/**" access="hasAnyRole('ROLE_FREE')"/> 
+		<security:intercept-url pattern="/sitter/**" access="hasAnyRole('ROLE_FREE')"/> 
 		
 		<!-- iframe -->
       	<security:headers>
@@ -167,7 +167,10 @@
 		<security:access-denied-handler ref="userDeniedHandler" />
 		
 		</security:http>
-		
+	
+		<!-- 인증예외처리 -->
+     	<security:http pattern="/sitter/**"     security="none" />
+     	<security:http pattern="/trainer/**"     security="none" />  
 	
 		<!-- 비밀번호 암호화 빈 -->
 		<!-- BCryptPasswordEncoder : 스프링에서 제공하는 클래스 -->

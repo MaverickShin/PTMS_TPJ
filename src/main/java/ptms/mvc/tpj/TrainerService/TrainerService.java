@@ -73,4 +73,7 @@ public interface TrainerService {
 	
 	// 훈련 후기 미리보기 - 평점순
 	public void previewTrainingGrade(HttpServletRequest req, Model model);
+
+	// 고객 - 결제 완료 내역
+	public void payment(HttpServletRequest req, Model model);
 }
