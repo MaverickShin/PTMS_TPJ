@@ -25,7 +25,7 @@
 }
 </style>
 <script type="text/javascript">
-function sitterserPayFinish() {
+function matchingFinish() {
    
    var lb = document.getElementById("left_button");
    var cb = document.getElementById("center_button");
@@ -42,7 +42,7 @@ function sitterserPayFinish() {
    ac.style.backgroundColor = "#f5f5f5";
    ac.style.color = "black";
    
-   window.location = "${st}sitterserPayFinish"
+   window.location = "${st}matchingFinish"
 }
 
 function request(){
@@ -61,7 +61,7 @@ function request(){
    ac.style.backgroundColor = "#f5f5f5";
    ac.style.color = "black";
    
-   window.location = "${st}requestTrainer"
+   window.location = "${st}MysitterSerList"
    
 }
 
@@ -82,7 +82,7 @@ function accept() {
    rb.style.backgroundColor = "#f5f5f5";
    rb.style.color = "black";
    
-   window.location = "${st}acceptTrainingList";
+   window.location = "${st}acceptSitterSer";
 }
 
 function refuse() {
@@ -99,7 +99,7 @@ function refuse() {
    lb.style.backgroundColor = "#f5f5f5";
    lb.style.color = "black";
    
-   window.location = "${st}denyTrainingList"
+   window.location = "${st}refuseSitterSer"
 }
 </script>
 <title>Insert title here</title>
@@ -113,55 +113,47 @@ function refuse() {
         <div class="row no-gutters slider-text align-items-end">
           <div class="col-md-9 ftco-animate pb-5">
              <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">Trainer<i class="ion-ios-arrow-forward"></i></a></span> <span>Blog <i class="ion-ios-arrow-forward"></i></span></p>
-            <h1 class="mb-0 bread">고객님의 요청사항을 알려드립니다.</h1>
+            <h1 class="mb-0 bread">요청하신 펫시터 서비스가 수락대기 중입니다.</h1>
           </div>
         </div>
       </div>
     </section>
-    
+  
+    <div style="display: flex; flex:1; justify-content:center;">
+    	<%@ include file = "sidebar.jsp" %>
+	
+	<section style="width: 700px; margin-left: auto; margin-right: auto; margin-top: 30px;" class = "sections">
+	    
     <div class="list_tab">
       <p id="left_button" style="background-color: #a3cde3; color: white;">요청 수락대기</p>
       <p id="accept_button" onclick="accept();">수락된 요청</p>   
       <p id="right_button" onclick="refuse();">거절된 요청</p>      
-      <p id="center_button" onclick ="sitterserPayFinish();">결제 완료</p>
-
+      <p id="center_button" onclick ="matchingFinish();">매칭완료</p>
     </div>
-    
-    <div style="display:flex">
-    
-      <nav id="listdiv_id1" style="width:400px; padding:100px;">
-         <ul>
-           <li>-고객-</li>
-           <li><a href="sitter">펫시터 찾기</a></li>
-		   <li><a href="MysitterSerList">나의 펫시터 이용 내역</a></li>
-           <li><a href="feeInfo">요금안내</a></li>
-           <li>-펫시터-</li>
-           <li><a href="applySitter">펫시터 지원</a></li>
-           <li><a href="#">나에게 온 의뢰</a></li>
-        </ul>
-      </nav>
     
     <c:if test="${selectCnt == 0}">
        <div class="about-author d-flex p-4 bg-light">
          <div class="desc">
            <h3></h3>
-           <p>아직 요청한 훈련이 없습니다. 훈련사 찾기로 나에게 딱맞는 훈련사를 찾아보세요!</p>
+           <p>아직 요청한 펫시터 서비스가 없습니다.첫 펫시팅 서비스를 이용해 보세요!</p>
          </div>
        </div>
     </c:if>
    
-   <c:if test="${selectCnt > 0}">
-      <c:forEach var="dtos" items="${dto}">
+   <c:if test="${selectCnt > 0}"> 
+   	  <c:forEach var="li" items="${list}">
          <div class="about-author d-flex p-4 bg-light" style="place-content:center;">
             <div class="desc" style="background-color:#dfe3eb; padding:20px;">
-              <h6>훈련받을 펫 : ${dtos.PET_NM}</h6>&nbsp;<h6>훈련사 : ${dtos.CUST_NM}</h6>
-              <p>훈련일 : ${dtos.START_DAY}&nbsp;훈련종류 : ${dtos.TQ_AMT}</p>
-              <input type="button" value="요청취소" class="btn btn-primary" onclick="window.location='cancelRequestTraining?TQ_CD=${dtos.TQ_CD}'">
+              <h5>고객 : ${li.CUST_ID}</h5>&nbsp;<h6>훈련받을 펫 : ${li.SQ_AMT}</h6>
+              <p>의뢰시작일 : ${li.START_DAY}</p>
+              <p> 의뢰종료일 : ${li.END_DAY}</p>
+              <p> 고객요청서비스 : ${li.REQ_SV}</p>
+              <p><input type="button" name="reqCancleByCus" value="요청취소" onclick="window.location='reqsitterSerCancle?SQ_CD=${li.SQ_CD}'"></p>
             </div>
           </div>
        </c:forEach>
-   </c:if>
-   
+    </c:if> 
+   </section>
    </div>
    
    

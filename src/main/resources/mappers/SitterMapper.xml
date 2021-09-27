@@ -129,7 +129,7 @@
 	
 	<!-- 고객 펫 조회 -->
 	<select id="MypetList" parameterType="String" resultType="ptms.mvc.tpj.CustVO.PetVO">
-		SELECT p.PET_NM, p.PK_CD
+		SELECT p.PET_NM, p.PK_CD, p.PET_CD
 		FROM PET_TB p, CUSTOMER_TB c
 		WHERE c.CUST_ID = p.CUST_ID
 		AND c.CUST_ID=#{CUST_ID}
@@ -209,5 +209,63 @@
 		AND req.SIT_ID = s.SIT_ID
 		AND SQ_ST=2
 	</select>
+	
+	<!-- 시터 - 의뢰시 : 펫 별 서비스 요금 조회 -->
+	<select id = "petServiceFee" resultType = "int">
+		SELECT SF_FEE FROM SITTER_FEE_TB WHERE PK_CD = #{pk_cd}
+	</select>
+	
+	<!-- 고객 - 요청수락대기 리스트 수 구하기 -->
+	<select id="getWaitReqAccept" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM SITTER_REQUEST_TB 
+		WHERE CUST_ID =#{CUST_ID}
+		AND SQ_ST =0
+	</select>
+	
+	<!-- 고객 - 요청수락대기 상태에서 취소할 시 요청테이블(SITTER_REQUEST_TB)에서 delete -->
+	<delete id="sitterReqCancle" parameterType="int">
+		DELETE FROM SITTER_REQUEST_TB
+		WHERE SQ_CD=#{SQ_CD}
+	</delete>
+	
+	<!-- 고객 - 요청수락대기 리스트  -->
+	<select id="sitterWaitReqList" parameterType="String" resultType="ptms.mvc.tpj.CustVO.SitterVO">
+		SELECT *
+		FROM SITTER_REQUEST_TB req
+		WHERE CUST_ID =#{CUST_ID}
+		AND SQ_ST=0
+	</select>
+	
+	<!-- 고객 - 수락된 요청 리스트 수 구하기 -->
+	<select id="getAcceptList"  parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM SITTER_REQUEST_TB 
+		WHERE CUST_ID =#{CUST_ID}
+		AND SQ_ST =1
+	</select>
+	<!-- 고객 - 수락된 요청 리스트 -->
+	<select id="acceptReqList" parameterType="String" resultType="ptms.mvc.tpj.CustVO.SitterVO">
+		SELECT *
+		FROM SITTER_REQUEST_TB req
+		WHERE CUST_ID =#{CUST_ID}
+		AND SQ_ST=1
+	</select>
+	
+	<!-- 고객 - 거절된 요청 리스트 수 구하기 -->
+	<select id="getRefuseList"  parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM SITTER_REQUEST_TB 
+		WHERE CUST_ID =#{CUST_ID}
+		AND SQ_ST =2
+	</select>	
+	
+	<!-- 고객 - 거절된 요청 리스트 -->
+	<select id="refuseReqList" parameterType="String" resultType="ptms.mvc.tpj.CustVO.SitterVO">
+		SELECT *
+		FROM SITTER_REQUEST_TB
+		WHERE CUST_ID =#{CUST_ID}
+		AND SQ_ST=2
+	</select>	
 	
 </mapper>    

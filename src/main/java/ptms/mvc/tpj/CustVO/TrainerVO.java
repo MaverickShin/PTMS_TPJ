@@ -245,5 +245,46 @@ public class TrainerVO {
 		TG_IMG = tG_IMG;
 	}
 	
+
+	public int getTG_CD() {
+		return TG_CD;
+	}
+
+	public void setTG_CD(int tG_CD) {
+		TG_CD = tG_CD;
+	}
+
+	public int getTG_ID() {
+		return TG_ID;
+	}
+
+	public void setTG_ID(int tG_ID) {
+		TG_ID = tG_ID;
+	}
+
+	public float getTG_GRADE() {
+		return TG_GRADE;
+	}
+
+	public void setTG_GRADE(float tG_GRADE) {
+		TG_GRADE = tG_GRADE;
+	}
+
+	public String getTG_CON() {
+		return TG_CON;
+	}
+
+	public void setTG_CON(String tG_CON) {
+		TG_CON = tG_CON;
+	}
+
+	public String getTG_IMG() {
+		return TG_IMG;
+	}
+
+	public void setTG_IMG(String tG_IMG) {
+		TG_IMG = tG_IMG;
+	}
+	
 	
 }

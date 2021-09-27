@@ -49,7 +49,7 @@ $(function(){ // document ready
 					</tr>
 					
 					<tr>
-						<td><a href="">이용후기</a></td>
+						<td><a href="/tpj/sitter/MysitterSerList">나의 펫시터 이용 내역</a></td>
 					</tr>
 					
 					<tr>
@@ -61,10 +61,6 @@ $(function(){ // document ready
 					
 					<tr>
 						<td><a href="applySitter">펫 시터 지원</a></td>
-					</tr>
-					
-					<tr>
-						<td><a href="">활동 등록</a></td>
 					</tr>
 					
 					<tr>

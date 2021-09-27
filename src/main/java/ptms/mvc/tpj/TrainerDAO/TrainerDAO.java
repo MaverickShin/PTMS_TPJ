@@ -90,12 +90,12 @@ public interface TrainerDAO {
 	// 고객용 훈련요청 결과 리스트(수락일때)
 	public List<TrainerRequestVO> custReqResultacceptList(String id);
 	
-	// 고객용 훈련요청결과 리스트 건수(수락일때)
+	// 고객용 훈련요청결과 리스트 건수(거절일때)
 	public int custReqResultdenyCnt(String id);
 		
-	// 고객용 훈련요청 결과 리스트(수락일때)
+	// 고객용 훈련요청 결과 리스트(거절일때)
 	public List<TrainerRequestVO> custReqResultdenyList(String id);
-	
+
 	// 고객용 훈련완료 리스트 건수
 	public int trainingCompleteCnt(String id);
 	
@@ -108,6 +108,21 @@ public interface TrainerDAO {
 	// 훈련사 후기 작성 중복체크
 	public int reviewCheckCnt(int TQ_CD);
 	
+<<<<<<< HEAD
+	// 고객용 훈련완료 리스트 건수
+	public int trainingCompleteCnt(String id);
+	
+	// 고객용 훈련요청 결과 리스트(수락일때)
+	public List<TrainerRequestVO> trainingComplete(String id);
+	
+	// 훈련사 후기 작성 insert
+	public int insertTrainingReview(TrainerVO vo);
+	
+	// 훈련사 후기 작성 중복체크
+	public int reviewCheckCnt(int TQ_CD);
+	
+=======
+>>>>>>> 0616d4e40675a9cab5ce35d5aaad0017ce0f3ccb
 	// 후기 미리보기 평점순 훈련사 정렬
 	public List<TrainerVO> previewTrainingGrade();
 }

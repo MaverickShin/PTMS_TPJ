@@ -62,7 +62,7 @@ public interface TrainerService {
 	// 고객용 훈련 요청 결과 리스트(수락)
 	public void custReqResultAccept(HttpServletRequest req, Model model);
 	
-	// 고객용 훈련 요청 결과 리스트(수락)
+	// 고객용 훈련 요청 결과 리스트(거절)
 	public void custReqResultDeny(HttpServletRequest req, Model model);
 	
 	// 고객용 훈련 완료 리스트
