@@ -56,7 +56,7 @@ body {
 		<input type="hidden" name="SV_AREA" value="${SV_AREA}">
 		<input type="hidden" name="SIT_ID" value="${SIT_ID}">
 		<section class="hero-wrap hero-wrap-2"
-			style="background-image: url('images/bg_2.jpg');"
+			style="background-image: url('${path}images/bg_2.jpg');"
 			data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
 			<div class="container">

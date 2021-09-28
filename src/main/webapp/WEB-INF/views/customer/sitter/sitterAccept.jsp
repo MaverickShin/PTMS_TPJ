@@ -20,7 +20,7 @@
 <c:if test="${upadateCnt != 0}">
 	<script type="text/javascript">
 		alert("고객 요청을 수락하였습니다.");
-		window.location='${st}sitterAcceptList';
+		window.location='${st}requestForSitter';
 	</script>
 </c:if>	
 </body>

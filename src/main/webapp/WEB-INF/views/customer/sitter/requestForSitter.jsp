@@ -5,11 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name = "_csrf_header" content="${_csrf.headerName}">
+<meta name = "_csrf" content = "${_csrf.token}">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function(){
 	
-	$("#accept_button").click(function() {
+	$("#sitaccept_button").click(function() { //수락
 		
 		$.ajax({
 			type: "get",
@@ -24,7 +26,7 @@ $(document).ready(function(){
 		});
 	});
 	
-	$("#right_button").click(function() {
+	$("#sitright_button").click(function() { //거절
 		
 		$.ajax({
 			type: "get",
@@ -39,7 +41,7 @@ $(document).ready(function(){
 		});
 	});
 	
-	$("#center_button").click(function() {
+	$("#sitcenter_button").click(function() { //매칭완료
 		
 		$.ajax({
 			type: "get",
@@ -54,7 +56,7 @@ $(document).ready(function(){
 		});
 	});
 	
-	$("#left_button").click(function() {
+	$("#sitleft_button").click(function() {  //요청수락대기
 		
 		$.ajax({
 			type: "get",
@@ -93,10 +95,10 @@ $(document).ready(function(){
 <script type="text/javascript">
 function sitterserPayFinish() {
 	
-	var lb = document.getElementById("left_button");
-	var cb = document.getElementById("center_button");
-	var rb = document.getElementById("right_button");
-	var ac = document.getElementById("accept_button");
+	var lb = document.getElementById("sitleft_button");
+	var cb = document.getElementById("sitcenter_button");
+	var rb = document.getElementById("sitright_button");
+	var ac = document.getElementById("sitaccept_button");
 	
 	cb.style.backgroundColor = "#a3cde3";
 	cb.style.color = "white";
@@ -112,10 +114,10 @@ function sitterserPayFinish() {
 
 function request(){
 	
-   var lb = document.getElementById("left_button");
-   var cb = document.getElementById("center_button");
-   var rb = document.getElementById("right_button");
-   var ac = document.getElementById("accept_button");
+	var lb = document.getElementById("sitleft_button");
+	var cb = document.getElementById("sitcenter_button");
+	var rb = document.getElementById("sitright_button");
+	var ac = document.getElementById("sitaccept_button");
    
    lb.style.backgroundColor = "#a3cde3";
    lb.style.color = "white";
@@ -130,10 +132,10 @@ function request(){
 
 function refuse() {
 	
-	var lb = document.getElementById("left_button");
-	var cb = document.getElementById("center_button");
-	var rb = document.getElementById("right_button");
-	var ac = document.getElementById("accept_button");
+	var lb = document.getElementById("sitleft_button");
+	var cb = document.getElementById("sitcenter_button");
+	var rb = document.getElementById("sitright_button");
+	var ac = document.getElementById("sitaccept_button");
 	
 	rb.style.backgroundColor = "#a3cde3";
 	rb.style.color = "white";
@@ -149,10 +151,10 @@ function refuse() {
 
 function accept() {
 	
-	var lb = document.getElementById("left_button");
-	var cb = document.getElementById("center_button");
-	var rb = document.getElementById("right_button");
-	var ac = document.getElementById("accept_button");
+	var lb = document.getElementById("sitleft_button");
+	var cb = document.getElementById("sitcenter_button");
+	var rb = document.getElementById("sitright_button");
+	var ac = document.getElementById("sitaccept_button");
 	
 	ac.style.backgroundColor = "#a3cde3";
 	ac.style.color = "white";
@@ -191,10 +193,10 @@ function accept() {
       <section style="width: 900px; margin-left: auto; margin-right: auto; margin-top: 30px;" class = "sections">
 		  
 		  <div class="list_tab">
-	         <p id="left_button" style="background-color: #a3cde3; color: white;" onclick = "request();">요청 수락대기</p>
-	      	 <p id="accept_button" onclick="accept();">수락</p>   
-	      	 <p id="right_button" onclick="refuse();">거절</p>
-	         <p id="center_button" onclick="sitterserPayFinish();">결제 완료</p>
+	         <p id="sitleft_button" style="background-color: #a3cde3; color: white;" onclick = "request();">요청 수락대기</p>
+	      	 <p id="sitaccept_button" onclick="accept();">수락</p>   
+	      	 <p id="sitright_button" onclick="refuse();">거절</p>
+	         <p id="sitcenter_button" onclick="sitterserPayFinish();">매칭 완료</p>
 	      </div>
 	  
 	  	  <div class= "result_div">

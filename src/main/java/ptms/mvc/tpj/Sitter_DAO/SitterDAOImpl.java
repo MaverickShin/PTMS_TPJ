@@ -208,6 +208,24 @@ public class SitterDAOImpl implements SitterDAO{
 		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
 		return dao.sitterRefuseList(CUST_ID);
 	}	
+
+	// 시터 - 고객 의뢰 매칭완료 수 구하기
+	@Override
+	public int getSitterMTFinCount(String CUST_ID) {
+		System.out.println("dao ==> getSitterMTFinCount");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.getSitterMTFinCount(CUST_ID);
+	}
+	
+	// 시터 - 고객 의뢰 매칭완료 리스트
+	@Override
+	public List<SitterVO> sitterMatchingFinList(String CUST_ID) {
+		System.out.println("dao ==> sitterMatchingFinList");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.sitterMatchingFinList(CUST_ID);
+	}
 	
 	// 고객 - 요청수락대기 리스트 수 구하기
 	@Override
@@ -271,7 +289,24 @@ public class SitterDAOImpl implements SitterDAO{
 		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
 		return dao.refuseReqList(CUST_ID);
 	}	
-	
+
+	// 고객 - 매칭완료된 서비스 리스트 수 구하기
+	@Override
+	public int getMatchingFin(String CUST_ID) {
+		System.out.println("dao ==> getMatchingFin");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.getMatchingFin(CUST_ID);
+	}
+
+	// 고객 - 매칭완료된 서비스 리스트 
+	@Override
+	public List<SitterVO> MatchingFinish(String CUST_ID) {
+		System.out.println("dao ==> MatchingFinish");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.MatchingFinish(CUST_ID);
+	}	
 	//요금표 리스트
 	@Override
 	public ArrayList<PetVO> getPriceList() {
@@ -321,6 +356,8 @@ public class SitterDAOImpl implements SitterDAO{
 		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
 		return dao.updateSitter2(sVo);
 	}
+
+
 
 
 }

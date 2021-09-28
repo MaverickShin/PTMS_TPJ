@@ -45,7 +45,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type: "get",
-			url: "/tpj/sitter/acceptSitterSer",
+			url: "/tpj/sitter/matchingFinish",
 			cache: false,
 			success: function(result) {
 				$(".result_div").html(result);

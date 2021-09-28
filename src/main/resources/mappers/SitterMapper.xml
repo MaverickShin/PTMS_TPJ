@@ -209,6 +209,24 @@
 		AND req.SIT_ID = s.SIT_ID
 		AND SQ_ST=2
 	</select>
+
+	<!-- 시터 - 고객 의뢰 매칭완료 수 구하기 -->
+	<select id="getSitterMTFinCount" parameterType="String" resultType="int" >
+		SELECT COUNT(*)
+		FROM SITTER_REQUEST_TB req, SITTERS_TB s
+		WHERE s.CUST_ID =#{CUST_ID}
+		AND req.SIT_ID = s.SIT_ID
+		AND req.SQ_ST =3	
+	</select>
+	
+	<!-- 시터 - 고객 의뢰 매칭완료 리스트 -->
+	<select id="sitterMatchingFinList" parameterType="String" resultType="ptms.mvc.tpj.CustVO.SitterVO" >
+		SELECT req.*
+		FROM SITTER_REQUEST_TB req, SITTERS_TB s
+		WHERE s.CUST_ID =#{CUST_ID}
+		AND req.SIT_ID = s.SIT_ID
+		AND SQ_ST=3
+	</select>
 	
 	<!-- 시터 - 의뢰시 : 펫 별 서비스 요금 조회 -->
 	<select id = "petServiceFee" resultType = "int">
@@ -267,5 +285,22 @@
 		WHERE CUST_ID =#{CUST_ID}
 		AND SQ_ST=2
 	</select>	
+	
+	<!-- 고객 - 매칭완료된 서비스 리스트 수 구하기  -->
+	<select id="getMatchingFin" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM SITTER_REQUEST_TB 
+		WHERE CUST_ID =#{CUST_ID}
+		AND SQ_ST =3
+	</select>
+	
+	<!-- 고객 - 매칭완료된 서비스 리스트  -->
+	<select id="MatchingFinish" parameterType="String" resultType="ptms.mvc.tpj.CustVO.SitterVO">
+		SELECT *
+		FROM SITTER_REQUEST_TB
+		WHERE CUST_ID =#{CUST_ID}
+		AND SQ_ST=3
+	</select>
+	
 	
 </mapper>    

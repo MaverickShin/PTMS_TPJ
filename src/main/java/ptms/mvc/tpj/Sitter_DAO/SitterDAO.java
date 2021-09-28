@@ -80,6 +80,12 @@ public interface SitterDAO {
 	// 시터 - 고객 의뢰 거절 리스트 <완료>
 	public List<SitterVO> sitterRefuseList(String CUST_ID);	
 	
+	// 시터 - 고객 의뢰 매칭완료 수 구하기
+	public int getSitterMTFinCount(String CUST_ID);
+	
+	// 시터 - 고객 의뢰 매칭완료 리스트
+	public List<SitterVO> sitterMatchingFinList(String CUST_ID);	
+	
 	// 고객 - 요청수락대기 리스트 수 구하기
 	public int getWaitReqAccept(String CUST_ID);
 	
@@ -101,9 +107,11 @@ public interface SitterDAO {
 	// 고객 - 거절된 요청 리스트
 	public List<SitterVO> refuseReqList(String CUST_ID);
 	
-	// 고객 - 결제완료 리스트 수 구하기
+	// 고객 - 매칭완료된 서비스 리스트 수 구하기
+	public int getMatchingFin(String CUST_ID);
 	
-	// 고객 - 결제완료 리스트
+	// 고객 - 매칭완료된 서비스 리스트 
+	public List<SitterVO> MatchingFinish(String CUST_ID);
 	
 	//요금표 리스트 <완료>
 	public ArrayList<PetVO> getPriceList();

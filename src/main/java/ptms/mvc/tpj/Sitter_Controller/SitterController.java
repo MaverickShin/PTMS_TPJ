@@ -181,14 +181,13 @@ public class SitterController {
 	 /*
 	  * 날짜 : 21.09.25
 	  * 작성자 : 임지영
-	  * 내용 : 시터 - 고객이 펫시팅 결제를 완료한 리스트를 보여주는 페이지 
+	  * 내용 : 시터 - 고객이 펫시팅 결제를 완료한 리스트를 보여주는 페이지 , 후기작성버튼
 	  */
 	 @RequestMapping("sitterserPayFinish")
 	 public String sitterserPayFinish(HttpServletRequest req, Model model) {
 		 log.info("url ==> sitterserPayFinish");
 		 
-		 sitterSer.payment(req, model);
-		 
+		 sitterSer.MatchingFinishList(req, model);
 		 return "customer/sitter/requestForSitterClone";
 	 }		 
 
@@ -236,8 +235,7 @@ public class SitterController {
 	 public String acceptSitterSer(HttpServletRequest req, Model model) {
 		 log.info("url ==> acceptSitterSer");
 		 
-		 sitterSer.acceptFromSitter(req, model);
-		
+		 sitterSer.acceptFromSitter(req, model);		
 		 return "customer/sitter/MysitterListClone";
 	 }	
 	 
