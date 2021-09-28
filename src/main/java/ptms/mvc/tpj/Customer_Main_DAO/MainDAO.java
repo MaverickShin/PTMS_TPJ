@@ -13,8 +13,11 @@ public interface MainDAO {
 	// 중복확인 처리 - 아이디확인
 	public int idCheck(String strid);
 	
-	// 회원정보 인증 및 상세 페이지
+	// 회원정보 인증 및 상세 
 	public CustomerVO custInfo(String id);
+	
+	// 결제 - 회원정보 상세 (주소포함)
+	public CustomerVO custDetailInfo(String id);
 	
 	// 회원가입 처리
 	public int insertCust(CustomerVO vo);

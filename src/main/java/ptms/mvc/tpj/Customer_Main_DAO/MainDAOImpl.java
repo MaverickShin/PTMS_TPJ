@@ -34,6 +34,15 @@ public class MainDAOImpl implements MainDAO {
 		
 		return dao.custInfo(id);
 	}
+	
+	// 결제 - 회원정보 상세 조회 (주소 포함)
+	@Override
+	public CustomerVO custDetailInfo(String id) {
+		
+		MainDAO dao = data.getMapper(MainDAO.class);
+		
+		return dao.custInfo(id);
+	}
 
 	// 회원가입 처리
 	@Override
@@ -195,5 +204,6 @@ public class MainDAOImpl implements MainDAO {
 		MainDAO dao = data.getMapper(MainDAO.class);
 		return dao.deleteEvent(CL_CD);				
 	}
+
 
 }

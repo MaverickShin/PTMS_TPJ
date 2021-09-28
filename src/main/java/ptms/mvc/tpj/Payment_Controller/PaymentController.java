@@ -21,6 +21,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ptms.mvc.tpj.CustVO.CustomerVO;
+import ptms.mvc.tpj.Customer_Main_DAO.MainDAOImpl;
 import ptms.mvc.tpj.Payment_Service.PaymentService;
 
 @RequestMapping("/pay")
@@ -31,6 +33,9 @@ public class PaymentController {
 	
 	@Autowired
 	PaymentService service;
+
+	@Autowired
+	MainDAOImpl dao;
 	
 	// 결제 요청창 로드
 	@RequestMapping("request")
@@ -43,51 +48,98 @@ public class PaymentController {
 	@RequestMapping("kpOnce")
 	public String kpOnetime(HttpServletRequest req, Model model){
 		log.info("cnt pay kpOnce");
+		
+		String paykind = req.getParameter("paykind");
+		String price = req.getParameter("payPrice");
+		String item_name = req.getParameter("item_name");
+		String cust_id = (String)req.getSession().getAttribute("cust_id");
+		
+		CustomerVO vo = dao.custDetailInfo(cust_id);
+		
 		URL url;
 		try {
+			// 카카오페이 주소 연결
 			url = new URL("https://kapi.kakao.com/v1/payment/ready");
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("POST");
-			conn.setRequestProperty("Authorization", "KakaoAK 65102fb923c8a1bcfa0394a9a2be3c59");
-			conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-			conn.setDoOutput(true);
 			
+			
+			
+			/* ------------------ 카카오페이 서버연결 -------------------- */
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			
+			// 통신 방식 무조건 post
+			conn.setRequestMethod("POST");
+			
+			/* 프로퍼티 설정 */
+			// 인증자 설정 : 카카오페이 admin key 부여 및 콘텐츠 타입 설정 - 콘텐츠 타입은 kakao에서 제안하는 공개값 (공통)
+			conn.setRequestProperty("Authorization", "KakaoAK 42e4b3500327e7794b4a7d9b95409308");
+			conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+			
+			// 서버에 전달할 값이 있으면 true
+			conn.setDoOutput(true);
+			/* ------------------ 카카오페이 서버연결 -------------------- */
+			
+			
+			
+			/* ------------------ 파라미터 설정 -------------------- */
 			Map<String, String> params = new HashMap<String, String>();
-			params.put("cid", "TC0ONETIME");
-			params.put("partner_order_id", "partner_order_id");
+			params.put("cid", "TC0ONETIME");						// 샘플 코드
+			params.put("partner_order_id", "partner_order_id");		
 			params.put("partner_user_id", "partner_user_id");
-			params.put("item_name","1회구독"); //req.getParameter("item_name")
-			params.put("item_code","1"); //req.getParameter("item_code")
+			params.put("item_name", item_name); //req.getParameter("item_name")
+			params.put("item_code", paykind); //req.getParameter("item_code")
 			params.put("quantity", "1");
-			params.put("total_amount","29900"); //req.getParameter("total_amount")
+			params.put("total_amount", price); //req.getParameter("total_amount")
 			params.put("tex_free_amount","0");
-			params.put("approval_url","https://localhost:8080/tpj/customer/payment/approval");
-			params.put("cancel_url","https://localhost:8080/tpj/customer/payment/cancel");
-			params.put("fail_url","https://localhost:8080/tpj/customer/payment/fail");
+			params.put("approval_url","https://localhost:8080/tpj/pay/approval");
+			params.put("cancel_url","https://localhost:8080/tpj/pay/cancel");
+			params.put("fail_url","https://localhost:8080/tpj/pay/fail");
+			
+			model.addAttribute("item_name", item_name);
+			model.addAttribute("paykind", paykind);
+			model.addAttribute("price", price);
+			model.addAttribute("vo", vo);
 			
 			String strParams = new String();
 			for(Map.Entry<String, String> elem : params.entrySet()) {
 				strParams += (elem.getKey() + "=" + elem.getValue() + "&");
 			}
 			
+			/* -------- 데이터 output 설정  ------------ */
+			// 보내는이 설정
 			OutputStream os = conn.getOutputStream();
+			// 데이터 보내는이 설정
 			DataOutputStream dos = new DataOutputStream(os);
+			// 문자열 데이터를 byte로 변환
 			dos.writeBytes(strParams);
+			// 자원 해제
 			dos.close();
 			
+			// 실행 결과 코드를 담는 변수 result에 getResponseCode함수를 통해 대입
 			int result = conn.getResponseCode();
 			
+			// 받는이 변수 선언
 			InputStream in;
-			if(result == 200) {
+			
+			// http 코드에서 정상적인 통신을 뜻하는 코드는 200이다.
+			if(result == 200) { // 통신코드 200 (통신이 정상일 때)
+				// 받는이 변수에 결과를 대입
 				in = conn.getInputStream();
 			} else {
+				// 에러일 경우 에러상태를 대입
 				in = conn.getErrorStream();
 			}
 			
+			// 데이터를 읽어주는 reader로 형 변환
 			InputStreamReader isr = new InputStreamReader(in);
-			BufferedReader bfr = new BufferedReader(isr);
 			
-			bfr.readLine();
+			// 읽어들인 데이터는 byte형 이므로 문자열로 다시 형변환 (BufferedReader)
+			BufferedReader bfr = new BufferedReader(isr);
+		
+			
+			return bfr.readLine();
+			/* -------- 데이터 output 설정  ------------ */
+			
+			
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -97,11 +149,17 @@ public class PaymentController {
 		return "{\"result\":\"NO\"}";
 	}
 	
-	// 정기구독 결제창 로드
-	@RequestMapping("subscribe")
-	public String paySubscribe(HttpServletRequest req, Model model){
-		log.info("");
-		return "";
+	// 결제 성공시 - 결제 정보 처리
+	@RequestMapping("approval")
+	public String approval(HttpServletRequest req, Model model){
+		
+		String imp_uid = req.getParameter("imp_uid");
+		String merchant_uid = req.getParameter("merchant_uid");
+		
+		System.out.println("uid : " + imp_uid);
+		System.out.println("merchant_uid : " + merchant_uid);
+		
+		return imp_uid;
 	}
 	
 	// 정기구독 카카오 페이

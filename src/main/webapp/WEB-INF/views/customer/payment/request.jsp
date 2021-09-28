@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file = "../../setting.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <body>
@@ -14,28 +15,32 @@ $(function(){
     var IMP = window.IMP; // 생략가능
     IMP.init('imp47762918'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
     var msg;
+    var item_name = ${item_name};
+    var email = ${vo.CUST_EM};
+    
     
     IMP.request_pay({
         pg : 'kakaopay',
         pay_method : 'card',
         merchant_uid : 'merchant_' + new Date().getTime(),
-        name : '프리미엄 서비스 1달 구독',
-        amount : '29900',
-        buyer_email : 'email@email.com',
-        buyer_name : '홍길동',
-        buyer_tel : '010-1234-5678',
-        buyer_addr : '서울특별시 강남구 신사동',
-        buyer_postcode : '123-456',
+        name : item_name,
+        amount : ${price},
+        buyer_email : email,
+        buyer_name : ${vo.CUST_NM},
+        buyer_tel : ${vo.CUST_PH},
+        buyer_addr : ${vo.ADDRESS1},
+        buyer_postcode : ${vo.ZIPCODE},
         //m_redirect_url : 'http://www.naver.com'
     }, function(rsp) {
         if ( rsp.success ) {
             //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
             $.ajax({
-                url: "/tpj/customer/payment/approval", //cross-domain error가 발생하지 않도록 주의해주세요
+                url: "/tpj/pay/approval", //cross-domain error가 발생하지 않도록 주의해주세요
                 type: 'POST',
                 dataType: 'json',
                 data: {
                     imp_uid : rsp.imp_uid
+                    merchant_uid: rsp.merchant_uid
                     //기타 필요한 데이터가 있으면 추가 전달
                 }
             }).done(function(data) {
