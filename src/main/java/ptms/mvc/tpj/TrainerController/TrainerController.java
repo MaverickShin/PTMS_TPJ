@@ -78,6 +78,16 @@ public class TrainerController {
       return "customer/trainer/requestTrainerList";
    }
    
+   // 훈련사 - 나에게 온 의뢰 Clone
+   @RequestMapping("requestTrainer2")
+   public String requestTrainer2(HttpServletRequest req, Model model) {
+      log.info("url ==> requestTrainer2");
+      
+      trainerservice.TraineeList(req, model);
+      
+      return "customer/trainer/requestTrainerListClone";
+   }
+   
    // 훈련사 찾기 후 상세페이지로 이동
    @RequestMapping("trainerDetail")
    public String trainerDetail(HttpServletRequest req, Model model) {
@@ -98,6 +108,8 @@ public class TrainerController {
       
       return "customer/trainer/requestTrainingAction";
    }
+   
+   
    
    // 훈련사가 요청 거절 -> 테이블 요청상태 거절(2)로 update
    @RequestMapping("denyRequestTraining")
@@ -124,7 +136,7 @@ public class TrainerController {
 
       trainerservice.acceptTrainingList(req, model);
       
-      return "customer/trainer/acceptTrainingList";
+      return "customer/trainer/requestTrainerListClone";
    }
    
    // 훈련사가 거절한 요청리스트
@@ -134,7 +146,7 @@ public class TrainerController {
 
       trainerservice.denyTrainingList(req, model);
       
-      return "customer/trainer/denyTrainingList";
+      return "customer/trainer/requestTrainerListClone";
    }
    
    // 고객용 훈련 요청결과 리스트 - 대기중일때

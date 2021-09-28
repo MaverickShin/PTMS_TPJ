@@ -56,14 +56,14 @@ body {
 		<input type="hidden" name="SV_AREA" value="${SV_AREA}">
 		<input type="hidden" name="SIT_ID" value="${SIT_ID}">
 		<section class="hero-wrap hero-wrap-2"
-			style="background-image: url('images/bg_2.jpg');"
+			style="background-image: url('${path}images/bg_2.jpg');"
 			data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
 			<div class="container">
 				<div class="row no-gutters slider-text align-items-end">
 					<div class="col-md-9 ftco-animate pb-5">
 						<p class="breadcrumbs mb-2">
-							<span class="mr-2"><a href="index.html">Trainer<i
+							<span class="mr-2"><a href="">Trainer<i
 									class="ion-ios-arrow-forward"></i></a></span> <span>Blog <i
 								class="ion-ios-arrow-forward"></i></span>
 						</p>
@@ -92,31 +92,19 @@ body {
 									
 									<c:forEach var="li" items="${list}" varStatus = "lst">
 										<c:forEach var = "i" items= "${pet}" varStatus = "st">
-											
-											<c:if test = "${i == li.PK_CD}">
-												<p class = "chk_p1">
-													<label class = "chk_label1" for = "pet_li_${lst.index}">
-														<input type="checkbox" id = "pet_li_${lst.index}" class = "sel_chk1" name="PK_CD" value="${li.PK_CD}" checked>
-														<span class="checkbox_icon"></span>
-														<span class = "list_label_span2">${li.PET_NM}(${li.PK_CD})</span>
-													</label>
-													<input type="hidden" name = "PET_CD" value = "${li.PET_CD}">
-												</p>
-												<c:set var= "suc" value = "true"/>
-											</c:if>
-											
-											<c:if test = "${i != li.PK_CD}">
-												<c:if test = "${suc eq 'false'}">
-													<p class = "chk_p1">
-														<label class = "chk_label1" for = "pet_li_${lst.index}">
-															<input type="checkbox" id = "pet_li_${lst.index}" class = "sel_chk1" name="PK_CD" value="${li.PK_CD}">
-															<span class="checkbox_icon"></span>
-															<span class = "list_label_span2">${li.PET_NM}(${li.PK_CD})</span>
-														</label>
-														<input type="hidden" name = "PET_CD" value = "${li.PET_CD}">
-													</p>
-												</c:if>
-											</c:if>
+											<p class = "chk_p1">
+												<label class = "chk_label1" for = "pet_li_${lst.index}">
+													<input type="checkbox" id = "pet_li_${lst.index}" class = "sel_chk1" name="PK_CD" value="${li.PK_CD}" 
+														<c:if test = "${i == li.PK_CD}">
+															checked
+														</c:if>
+													>
+														
+													<span class="checkbox_icon"></span>
+													<span class = "list_label_span2">${li.PET_NM}(${li.PK_CD})</span>
+												</label>
+												<input type="hidden" name = "PET_CD" value = "${li.PET_CD}">
+											</p>
 										</c:forEach>
 				        			</c:forEach>
 				        		</div>
