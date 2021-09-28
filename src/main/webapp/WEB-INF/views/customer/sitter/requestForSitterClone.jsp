@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+   
   <c:if test="${selectCnt == 0}">
        <div class="about-author d-flex p-4 bg-light">
          <div class="desc">
@@ -29,7 +30,8 @@
            </c:if>
            
          </div>
-       </div>
+       </div> 
+
     </c:if> 
  
    <c:if test="${selectCnt > 0}"> 
@@ -49,5 +51,6 @@
           </div>
        </c:forEach>
 	</c:if> 
+
 </body>
 </html>

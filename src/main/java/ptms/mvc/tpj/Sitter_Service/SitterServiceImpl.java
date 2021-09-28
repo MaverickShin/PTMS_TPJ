@@ -322,7 +322,7 @@ public class SitterServiceImpl implements SitterService{
 		}
 		
 		model.addAttribute("selectCnt" , selectCnt);
-		model.addAttribute("st", 0);
+		/* model.addAttribute("st", 0); */
 		model.addAttribute("list", list);
 	
 	}
@@ -358,7 +358,7 @@ public class SitterServiceImpl implements SitterService{
 		}
 		
 		model.addAttribute("selectCnt", selectCnt);
-		model.addAttribute("st", 1);
+		model.addAttribute("st", 1); 
 		model.addAttribute("CUST_ID", CUST_ID);
 		model.addAttribute("list", list);
 	}	
@@ -475,10 +475,31 @@ public class SitterServiceImpl implements SitterService{
 		
 		model.addAttribute("selectCnt", selectCnt);
 		model.addAttribute("CUST_ID", CUST_ID);
-		model.addAttribute("st", 2);
+		model.addAttribute("st", 2); 
 		model.addAttribute("list", list);
 		
 	}	
+	
+	
+	// 시터 - 고객과의 서비스 매칭완료 내역을 보여주는 페이지(고객이 결제완료하면 매칭완료)
+	@Override
+	public void MatchingFinishList(HttpServletRequest req, Model model) {
+		System.out.println("service ==> MatchingFinishList");
+		
+		String CUST_ID = (String)req.getSession().getAttribute("cust_id");
+		
+		int selectCnt = sitterDao.getSitterMTFinCount(CUST_ID);
+		System.out.println("시터 - 매칭완료selectCnt : " + selectCnt);
+		
+		List<SitterVO> list = null;
+		if(selectCnt > 0) {
+			list = sitterDao.sitterMatchingFinList(CUST_ID);
+		}
+		model.addAttribute("selectCnt" , selectCnt);
+		model.addAttribute("st", 3); 
+		model.addAttribute("list", list);
+	}
+	
 	
 	// 고객 - (시터로부터) 요청수락 대기 중인 내역을 보여주는 페이지
 	@Override
@@ -522,7 +543,7 @@ public class SitterServiceImpl implements SitterService{
 		List<SitterVO> list =null;
 		int selectCnt = sitterDao.getAcceptList(CUST_ID);
 		System.out.println("수락된요청수 selectCnt : " + selectCnt);
-		if(selectCnt ==1) {
+		if(selectCnt > 0) {
 		 list = sitterDao.acceptReqList(CUST_ID);
 		}
 		
@@ -553,11 +574,14 @@ public class SitterServiceImpl implements SitterService{
 	public void payment(HttpServletRequest req, Model model) {
 		System.out.println("service ==> payment");
 		
-		int selectCnt = 0;
+		String CUST_ID = (String)req.getSession().getAttribute("cust_id");		
 		
 		List<SitterVO> list =null;
+		int selectCnt = sitterDao.getMatchingFin(CUST_ID);
+		if(selectCnt > 0) {
+			list = sitterDao.MatchingFinish(CUST_ID);
+		}
 		
-		model.addAttribute("st", 3);
 		model.addAttribute("selectCnt", selectCnt);
 		model.addAttribute("list", list);
 	}
@@ -582,8 +606,6 @@ public class SitterServiceImpl implements SitterService{
 		
 		req.setAttribute("dtos", dtos);
 	}
-
-
 
 
 }

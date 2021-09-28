@@ -45,7 +45,8 @@ public interface SitterService {
 	// 시터 - 고객의 요청 거절할 시 내역을 보여주는 페이지 <완료>	
 	public void cancleRequestList(HttpServletRequest req, Model model);
 	
-	// 시터 - 
+	// 시터 - 고객과의 서비스 매칭완료 내역을 보여주는 페이지(고객이 결제완료하면 매칭완료)
+	public void MatchingFinishList(HttpServletRequest req, Model model);
 	
 	// 고객 - (시터로부터) 요청수락 대기 중인 내역을 보여주는 페이지 <완료>
 	public void WaitRequestAccept(HttpServletRequest req, Model model);

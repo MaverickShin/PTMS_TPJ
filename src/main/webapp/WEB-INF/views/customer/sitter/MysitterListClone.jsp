@@ -38,7 +38,5 @@
           </div>
        </c:forEach>
     </c:if> 
-
-
 </body>
 </html>
