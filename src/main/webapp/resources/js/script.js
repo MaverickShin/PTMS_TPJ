@@ -52,3 +52,20 @@ function addressSerch() {
     	popupName:'postCode'
     });
 }
+
+// sitter/sitter(펫시터찾기)
+function sittingCheck(){
+	if(!document.sitterMatching.SV_AREA.value){
+		alert("시 또는 구를 입력해 주세요.");
+		document.sitterMatching.SV_AREA.focus();
+		return false;
+	} else if(!document.sitterMatching.WK_START.value){
+		alert("서비스 시작일을 지정해 주세요.");
+		document.sitterMatching.WK_START.focus();
+		return false;
+	}else if(!document.sitterMatching.WK_END.value){
+		alert("서비스 종료일을 지정해 주세요.");
+		document.sitterMatching.WK_END.focus();
+		return false;
+	}
+}

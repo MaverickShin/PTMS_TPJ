@@ -34,6 +34,14 @@
               <c:if test = "${li.SQ_ST == 0}">
               	<p><input type="button" name="reqCancleByCus" value="요청취소" onclick="window.location='reqsitterSerCancle?SQ_CD=${li.SQ_CD}'"></p>
               </c:if>
+              <c:if test = "${li.SQ_ST == 3}">
+	              	<c:if test="${reviewCheckCnt > 0}">
+	              		<p><input type="button" name="Mysitterreview" value="후기작성완료" disabled></p>
+	              	</c:if> 
+	              	<c:if test="${reviewCheckCnt == 0}">
+              			<p><input type="button" name="Mysitterreview" value="후기작성" onclick="window.location='Mysitterreview?SIT_ID=${li.SIT_ID}'"></p>
+              		</c:if>	
+              </c:if>
             </div>
           </div>
        </c:forEach>

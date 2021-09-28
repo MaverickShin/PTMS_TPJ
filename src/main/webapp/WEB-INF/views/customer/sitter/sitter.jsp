@@ -14,7 +14,7 @@
 		<%@ include file = "sidebar.jsp" %>
 		
 		<section style="width: 700px; margin-left: auto; margin-right: auto; margin-top: 30px;" class = "sections">
-			<form action="sitterMatching" method="post" name="sitterMatching">
+			<form action="sitterMatching" method="post" name="sitterMatching" onsubmit="return sittingCheck();">
 				<input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token}">
 				<div class="row no-gutters">
@@ -31,19 +31,13 @@
 										placeholder="시 또는 구 입력">
 								</div>
 							</div>
-							
-							<!-- <div>
-	      					<p class="label">언제 맡기시나요?</p>
-						      <input type="datetime-local" class="iptags" name="START_DAY" > ~
-						      <input type="datetime-local" class="iptags" name="END_DAY" >
-						   </div> -->
 
 							<div class="col-md-9" style = "margin-bottom: 10px;">
 								<div class="form-group">
 									<label class="label" for="SIT_TITLE" style = "font-size: 20px !important;">언제 맡기시나요?</label> <br>
-									<input type="date" class="times" name="WK_START"> 
+									<input type="date" class="times" name="WK_START" id="WK_START"> 
 									<span style = "font-size: 20px; font-weight:bold; color: black">&nbsp; ~ &nbsp;</span> 
-									<input type="date" class="times" name="WK_END">
+									<input type="date" class="times" name="WK_END" id="WK_END">
 								</div>
 							</div>
 
@@ -51,7 +45,6 @@
 								<div class="form-group">
 									<label class="label" for="trainerImg" style = "font-size: 20px !important;">몇시에 맡기시나요?</label> <br>
 									<input type="time" class="times" name="START_TM">
-									<!--  <input type="time" class="iptags" name="END_TM" > -->
 								</div>
 							</div>
 							
@@ -97,8 +90,13 @@
 
 							<div class="col-md-12">
 								<div class="form-group" align="center">
-									<input type="submit" value="찾기" class="btn btn-primary" style = "font-size: 20px; width: 150px">
-									<div class="submitting"></div>
+									<c:if test="${selectCnt == 0}">
+										<input type="button" value="마이펫 등록하기" class="btn btn-primary" style = "font-size: 20px; width: 200px" onclick="window.location='/tpj/cust/MyInfoUser'">
+									</c:if>
+									<c:if test="${selectCnt != 0}">
+										<input type="submit" value="찾기" class="btn btn-primary" style = "font-size: 20px; width: 150px">
+										<div class="submitting"></div>
+									</c:if>	
 								</div>
 							</div>
 						</div>

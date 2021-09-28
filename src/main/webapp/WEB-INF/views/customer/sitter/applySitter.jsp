@@ -28,6 +28,15 @@
 <title>Insert title here</title>
 </head>
 <body>
+ 
+   <c:if test="${selectCnt != 0}">
+   		<script type="text/javascript">
+   			alert("이미 펫시터로 활동중인 아이디 입니다. 내정보관리를 확인해 주세요");
+   			window.location='${st}sitter';
+		</script>
+   	</c:if>
+
+  <c:if test="${selectCnt == 0}">
    <%@ include file="../../main/header.jsp" %>
    
    <div style="display: flex; flex:1; justify-content:center;">
@@ -96,15 +105,6 @@
                                  </div>
                               </div>
                               
-                             <!--  <div class="col-md-12">
-                                 <div class="form-group">
-                                    <label class="label" for="trainingDay">펫시팅 가능일</label><br>
-                                    <input type="date" class="iptags" name="START_DAY" >~
-                                    <input type="date" class="iptags" name="END_DAY" >
-                            	       조정가능<input type="checkbox" class="iptags" name="ADJUSTABLE" value="1">
-                                 </div>
-                              </div> -->
-                              
                               <div class="col-md-4">
                                  <div class="form-group">
                                     <label class="label" for="hometype" style = "font-size: 20px !important;">주거지 유형</label>
@@ -116,17 +116,6 @@
 							 		   </select><br>
                                  </div>
                               </div>
-                              
-<!--                               <div class="col-md-12">
-                                 <div class="form-group">
-                                    <label class="label" for="RESERVATION">서비스 가능일 </label>
-				                        <select size="1" id="iptags" name="RESERVATION">
-								 			<option value="평일">평일</option>
-								 			<option value="주말">주말</option>
-								 			<option value="모두가능">모두가능 </option>
-							 		   </select><br>
-                                 </div>
-                              </div> -->
                               
 		                     <div class="col-md-8">
 		                        <div class="form-group" >
@@ -170,5 +159,6 @@
    </div>
    
    <%@ include file="../../main/footer.jsp" %>
+ </c:if>  
 </body>
 </html>

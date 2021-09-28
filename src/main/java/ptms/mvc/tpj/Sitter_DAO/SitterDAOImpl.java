@@ -307,6 +307,52 @@ public class SitterDAOImpl implements SitterDAO{
 		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
 		return dao.MatchingFinish(CUST_ID);
 	}	
+	
+	// 고객 - 매칭 완료 후 후기 작성 중복체크
+	@Override
+	public int sittterReviewChkCnt(int SQ_CD) {
+		System.out.println("dao ==> sittterReviewChkCnt");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.sittterReviewChkCnt(SQ_CD);
+	}
+	
+	// 고객 - 후기작성 (시터 후기 테이블에 INSERT)
+	@Override
+	public int ReviewWrite(SitterVO vo) {
+		System.out.println("dao ==> ReviewWrite");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.ReviewWrite(vo);
+	}	
+	
+	// 고객 - 시터후기 미리보기 (별점순) 리스트 정렬
+	@Override
+	public List<SitterVO> bestStarSitter() {
+		System.out.println("dao ==> bestStarSitter");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.bestStarSitter();
+	}
+
+	// 고객 - 시터후기 미리보기 (최신작성순) 리스트 정렬
+	@Override
+	public List<SitterVO> newSitterReview() {
+		System.out.println("dao ==> newSitterReview");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.newSitterReview();
+	}
+
+	// 고객 - 시터후기 미리보기 (후기많은순) 리스트 정렬
+	@Override
+	public List<SitterVO> bigSitterReview() {
+		System.out.println("dao ==> bigSitterReview");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.bigSitterReview();
+	}
+
 	//요금표 리스트
 	@Override
 	public ArrayList<PetVO> getPriceList() {
@@ -333,6 +379,15 @@ public class SitterDAOImpl implements SitterDAO{
 		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
 		return dao.MypetList(CUST_ID);
 	}
+	
+	//고객 - 펫시터 지원 - 동일한 아이디로 시터가입여부 중복체크
+	@Override
+	public int sitterSignChk(String CUST_ID) {
+		System.out.println("dao ==> sitterSignChk");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.sitterSignChk(CUST_ID);
+	}	
 
 	//--------------------------------------
 	// 고객 - 시터 수정 상세 페이지
@@ -356,8 +411,6 @@ public class SitterDAOImpl implements SitterDAO{
 		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
 		return dao.updateSitter2(sVo);
 	}
-
-
 
 
 }

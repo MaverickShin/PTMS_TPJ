@@ -113,6 +113,21 @@ public interface SitterDAO {
 	// 고객 - 매칭완료된 서비스 리스트 
 	public List<SitterVO> MatchingFinish(String CUST_ID);
 	
+	// 고객 - 매칭 완료 후 후기 작성 중복체크
+	public int sittterReviewChkCnt(int SQ_CD);
+	
+	// 고객 - 후기작성 (시터 후기 테이블에 INSERT)
+	public int ReviewWrite(SitterVO vo);
+	
+	// 고객 - 시터후기 미리보기 (별점순) 리스트
+	public List<SitterVO> bestStarSitter();
+	
+	// 고객 - 시터후기 미리보기 (최신작성순) 리스트
+	public List<SitterVO> newSitterReview();
+	
+	// 고객 - 시터후기 미리보기 (후기많은순) 리스트
+	public List<SitterVO> bigSitterReview();
+	
 	//요금표 리스트 <완료>
 	public ArrayList<PetVO> getPriceList();
 	
@@ -121,6 +136,9 @@ public interface SitterDAO {
 	
 	//고객 펫 조회 <완료>
 	public List<PetVO> MypetList(String CUST_ID);	
+	
+	//고객 - 동일한 아이디로 시터가입여부 중복체크
+	public int sitterSignChk(String CUST_ID);
 	
 	//--------------------------------------
 	// select 고객 - 시터 수정 상세 페이지  <완료>

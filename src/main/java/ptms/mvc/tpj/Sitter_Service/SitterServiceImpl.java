@@ -571,18 +571,82 @@ public class SitterServiceImpl implements SitterService{
 
 	// 고객 - 고객이 결제 완료한 내역을 보여주는 페이지
 	@Override
-	public void payment(HttpServletRequest req, Model model) {
-		System.out.println("service ==> payment");
+	public void matchingList(HttpServletRequest req, Model model) {
+		System.out.println("service ==> matchingList");
 		
 		String CUST_ID = (String)req.getSession().getAttribute("cust_id");		
 		
 		List<SitterVO> list =null;
+		int reviewCheckCnt =0;
 		int selectCnt = sitterDao.getMatchingFin(CUST_ID);
 		if(selectCnt > 0) {
 			list = sitterDao.MatchingFinish(CUST_ID);
+			System.out.println("매칭완료selectCnt : " + selectCnt);
+			
+	         for(int i = 0; i < list.size(); i++) {
+	             int SQ_CD = list.get(i).getSQ_CD();
+	             System.out.println("시터구하기요청번호SQ_CD : " + SQ_CD);
+	             //후기 작성 중복체크
+	             reviewCheckCnt = sitterDao.sittterReviewChkCnt(SQ_CD);
+	             System.out.println("중복체크 reviewCheckCnt : " + reviewCheckCnt);
+	          }
+
 		}
 		
+		model.addAttribute("reviewCheckCnt", reviewCheckCnt);
 		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("list", list);
+	}
+	
+	// 고객 - (서비스완료-결제완료) 후 이용한 펫시터서비스에 대한 후기를 작성하는 페이지
+	@Override
+	public void writeSitterReview(HttpServletRequest req, Model model) {
+		System.out.println("service ==> writeSitterReview");
+		
+		SitterVO vo = new SitterVO();
+		
+		String CUST_ID = (String)req.getSession().getAttribute("cust_id");
+	     vo.setCUST_ID(CUST_ID);
+	     
+	    int SIT_ID = Integer.parseInt(req.getParameter("SIT_ID"));
+	    System.out.println("SIT_ID : " + SIT_ID);
+	     vo.setSIT_ID(SIT_ID);
+	     
+	     float SG_GRADE = Float.valueOf(req.getParameter("SG_GRADE"));
+	     vo.setSG_GRADE(SG_GRADE);
+	     vo.setSG_CON(req.getParameter("SG_CON"));
+	     vo.setSG_IMG(req.getParameter("SG_IMG"));
+	     
+	     int insertCnt = sitterDao.ReviewWrite(vo);
+	     System.out.println("후기테이블 insertCnt : " + insertCnt);
+	     
+	     model.addAttribute("insertCnt", insertCnt);
+	}
+
+	// 고객 - 시터후기 미리보기(별점 높은순)
+	@Override
+	public void highSittergrade(HttpServletRequest req, Model model) {
+		System.out.println("service ==> highSittergrade");
+		
+		List<SitterVO> list = sitterDao.bestStarSitter();
+		model.addAttribute("list", list);
+	}
+
+	// 고객 - 시터후기 미리보기(최신등록순)
+	@Override
+	public void newSitterPost(HttpServletRequest req, Model model) {
+		System.out.println("service ==> newSitterPost");
+		
+		List<SitterVO> list = sitterDao.newSitterReview();
+		model.addAttribute("list", list);
+	}
+
+	// 고객 - 시터후기 미리보기(후기 많은순)
+	@Override
+	public void themostsitterReview(HttpServletRequest req, Model model) {
+		System.out.println("service ==> themostsitterReview");
+		
+		List<SitterVO> list = sitterDao.bigSitterReview();
 		model.addAttribute("list", list);
 	}
 	
@@ -605,6 +669,19 @@ public class SitterServiceImpl implements SitterService{
 		System.out.println("길이 : " + dtos.size());
 		
 		req.setAttribute("dtos", dtos);
+	}
+
+	// 고객 - 펫시터지원 - 동일한 아이디로 시터 등록이 되어있을시 페이지접근x
+	@Override
+	public void sitterSignInChk(HttpServletRequest req, Model model) {
+		System.out.println("service ==> sitterSignInChk");
+		
+		String CUST_ID = (String)req.getSession().getAttribute("cust_id");
+		int selectCnt = sitterDao.sitterSignChk(CUST_ID);
+		System.out.println("시터중복체크selectCnt : " + selectCnt);
+		
+		model.addAttribute("selectCnt", selectCnt);
+		
 	}
 
 

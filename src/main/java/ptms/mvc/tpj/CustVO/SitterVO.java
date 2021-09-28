@@ -25,7 +25,7 @@ public class SitterVO {
 	 
 	 //시터 후기 테이블
 	 private int SG_CD;				// 시터 후기 코드
-	 private int SG_GRADE;			// 시터 평점
+	 private float SG_GRADE;			// 시터 평점
 	 private String SG_CON;			// 시터 이용 후기
 	 private String SG_IMG;			// 시터 이용 후기 이미지
 	 private Date SG_DT;			// 시터 후기 등록일
@@ -157,11 +157,11 @@ public class SitterVO {
 		SG_CD = sG_CD;
 	}
 	
-	public int getSG_GRADE() {
+	public float getSG_GRADE() {
 		return SG_GRADE;
 	}
 	
-	public void setSG_GRADE(int sG_GRADE) {
+	public void setSG_GRADE(float sG_GRADE) {
 		SG_GRADE = sG_GRADE;
 	}
 	

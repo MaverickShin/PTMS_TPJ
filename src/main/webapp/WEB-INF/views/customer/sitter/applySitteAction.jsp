@@ -11,7 +11,7 @@
 <!-- 삭제 실패  -->
 <c:if test="${insertCnt !=1}">
 	<script type="text/javascript">
-		alert("펫시터 지원에 실패하셨습니다. 정보를 다시 입력해 주세요.")
+		alert("펫시터 지원에 실패하셨습니다. 정보를 다시 입력해 주세요.");
 		window.history.back();
 	</script>
 </c:if>

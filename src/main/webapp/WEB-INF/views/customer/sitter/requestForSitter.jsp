@@ -172,62 +172,72 @@ function accept() {
 <title>Insert title here</title>
 </head>
 <body>
-   <%@ include file="../../main/header.jsp" %>
-   
-   <section class="hero-wrap hero-wrap-2" style="background-image: url('${path}images/bg_2.jpg');" data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-end">
-          <div class="col-md-9 ftco-animate pb-5">
-             <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">Sitter<i class="ion-ios-arrow-forward"></i></a></span> <span>Blog <i class="ion-ios-arrow-forward"></i></span></p>
-            <h1 class="mb-0 bread" style = "font-family: 'Do Hyeon', sans-serif;">펫시터님의 의뢰사항을 알려드립니다.</h1>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <div style="display: flex; flex:1; justify-content:center;">
-    
-      <%@ include file = "sidebar.jsp" %>
-    
-      <section style="width: 900px; margin-left: auto; margin-right: auto; margin-top: 30px;" class = "sections">
-		  
-		  <div class="list_tab">
-	         <p id="sitleft_button" style="background-color: #a3cde3; color: white;" onclick = "request();">요청 수락대기</p>
-	      	 <p id="sitaccept_button" onclick="accept();">수락</p>   
-	      	 <p id="sitright_button" onclick="refuse();">거절</p>
-	         <p id="sitcenter_button" onclick="sitterserPayFinish();">매칭 완료</p>
+
+   <c:if test="${selectCnt == 0}">
+   		<script type="text/javascript">
+   			alert("펫시터 등록 후 이용가능한 페이지 입니다.가입을  통해 펫시터로 활동해 보세요.");
+   			window.location='${st}sitter';
+		</script>
+   	</c:if>
+   	
+   <c:if test="${selectCnt != 0}">	
+	   <%@ include file="../../main/header.jsp" %>
+	   
+	   <section class="hero-wrap hero-wrap-2" style="background-image: url('${path}images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+	      <div class="overlay"></div>
+	      <div class="container">
+	        <div class="row no-gutters slider-text align-items-end">
+	          <div class="col-md-9 ftco-animate pb-5">
+	             <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">Sitter<i class="ion-ios-arrow-forward"></i></a></span> <span>Blog <i class="ion-ios-arrow-forward"></i></span></p>
+	            <h1 class="mb-0 bread" style = "font-family: 'Do Hyeon', sans-serif;">펫시터님의 의뢰사항을 알려드립니다.</h1>
+	          </div>
+	        </div>
 	      </div>
-	  
-	  	  <div class= "result_div">
-		    <c:if test="${selectCnt == 0}">
-		       <div class="about-author d-flex p-4 bg-light">
-		         <div class="desc">
-		           <h3></h3>
-		           <p>아직 들어온 의뢰가 없습니다. 일정 조정으로 매칭률을 높여보세요!</p>
-		         </div>
-		       </div>
-		    </c:if> 
-   
-		   <c:if test="${selectCnt > 0}"> 
-		   	  <c:forEach var="li" items="${list}">
-		         <div class="about-author d-flex p-4 bg-light" style="place-content:center;">
-		            <div class="desc" style="background-color:#dfe3eb; padding:20px;">
-		              <h5>고객 : ${li.CUST_ID}</h5>&nbsp;<h6>훈련받을 펫 : ${li.SQ_AMT}</h6>
-		              <p>의뢰시작일 : ${li.START_DAY}</p>
-		              <p> 의뢰종료일 : ${li.END_DAY}</p>
-		              <p> 고객요청서비스 : ${li.REQ_SV}</p>
-		              <p>금액 : ${li.SQ_FEE} 원</p> 
-		              <input type="button" value="수락" class="btn btn-primary" style="backgrount-color:#a3cde3;" onclick="window.location='sitterAccept?SQ_CD=${li.SQ_CD}'">
-		              <input type="button" value="거절" class="btn btn-primary" style="backgrount-color:#a3cde3;" onclick="window.location='sitterRefuse?SQ_CD=${li.SQ_CD}'">
-		            </div>
-		          </div>
-		       </c:forEach>
-		    </c:if> 
-		    </div>
-    	</section>
-   </div>
-   
-   <%@ include file="../../main/footer.jsp" %>
+	    </section>
+	    
+	    <div style="display: flex; flex:1; justify-content:center;">
+	    
+	      <%@ include file = "sidebar.jsp" %>
+	    
+	      <section style="width: 900px; margin-left: auto; margin-right: auto; margin-top: 30px;" class = "sections">
+			  
+			  <div class="list_tab">
+		         <p id="sitleft_button" style="background-color: #a3cde3; color: white;" onclick = "request();">요청 수락대기</p>
+		      	 <p id="sitaccept_button" onclick="accept();">수락</p>   
+		      	 <p id="sitright_button" onclick="refuse();">거절</p>
+		         <p id="sitcenter_button" onclick="sitterserPayFinish();">매칭 완료</p>
+		      </div>
+		  
+		  	  <div class= "result_div">
+			    <c:if test="${selectCnt == 0}">
+			       <div class="about-author d-flex p-4 bg-light">
+			         <div class="desc">
+			           <h3></h3>
+			           <p>아직 들어온 의뢰가 없습니다. 일정 조정으로 매칭률을 높여보세요!</p>
+			         </div>
+			       </div>
+			    </c:if> 
+	   
+			   <c:if test="${selectCnt > 0}"> 
+			   	  <c:forEach var="li" items="${list}">
+			         <div class="about-author d-flex p-4 bg-light" style="place-content:center;">
+			            <div class="desc" style="background-color:#dfe3eb; padding:20px;">
+			              <h5>고객 : ${li.CUST_ID}</h5>&nbsp;<h6>훈련받을 펫 : ${li.SQ_AMT}</h6>
+			              <p>의뢰시작일 : ${li.START_DAY}</p>
+			              <p> 의뢰종료일 : ${li.END_DAY}</p>
+			              <p> 고객요청서비스 : ${li.REQ_SV}</p>
+			              <p>금액 : ${li.SQ_FEE} 원</p> 
+			              <input type="button" value="수락" class="btn btn-primary" style="backgrount-color:#a3cde3;" onclick="window.location='sitterAccept?SQ_CD=${li.SQ_CD}'">
+			              <input type="button" value="거절" class="btn btn-primary" style="backgrount-color:#a3cde3;" onclick="window.location='sitterRefuse?SQ_CD=${li.SQ_CD}'">
+			            </div>
+			          </div>
+			       </c:forEach>
+			    </c:if> 
+			    </div>
+	    	</section>
+	   </div>
+	   
+	   <%@ include file="../../main/footer.jsp" %>
+	</c:if>   
 </body>
 </html>

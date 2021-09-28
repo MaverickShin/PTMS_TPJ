@@ -11,7 +11,7 @@
 <script>
 $(document).ready(function(){
 	
-	$("#accept_button").click(function() {
+	$("#accept_button").click(function() { //수락된요청
 		
 		$.ajax({
 			type: "get",
@@ -26,7 +26,7 @@ $(document).ready(function(){
 		});
 	});
 	
-	$("#right_button").click(function() {
+	$("#right_button").click(function() { //거절된요청
 		
 		$.ajax({
 			type: "get",
@@ -41,7 +41,7 @@ $(document).ready(function(){
 		});
 	});
 	
-	$("#center_button").click(function() {
+	$("#center_button").click(function() { //매칭완료
 		
 		$.ajax({
 			type: "get",
@@ -56,7 +56,7 @@ $(document).ready(function(){
 		});
 	});
 	
-	$("#left_button").click(function() {
+	$("#left_button").click(function() { //요청수락대기
 		
 		$.ajax({
 			type: "get",
@@ -182,8 +182,8 @@ function refuse() {
       <div class="container">
         <div class="row no-gutters slider-text align-items-end">
           <div class="col-md-9 ftco-animate pb-5">
-             <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">Trainer<i class="ion-ios-arrow-forward"></i></a></span> <span>Blog <i class="ion-ios-arrow-forward"></i></span></p>
-            <h1 class="mb-0 bread">요청하신 펫시터 서비스가 수락대기 중입니다.</h1>
+             <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">sitter<i class="ion-ios-arrow-forward"></i></a></span> <span>Blog <i class="ion-ios-arrow-forward"></i></span></p>
+            <h1 class="mb-0 bread">요청하신 펫시터 서비스내역 입니다.</h1>
           </div>
         </div>
       </div>
@@ -195,7 +195,7 @@ function refuse() {
 	<section style="width: 700px; margin-left: auto; margin-right: auto; margin-top: 30px;" class = "sections">
 	    
 	    <div class="list_tab">
-	      <p id="left_button" style="background-color: #a3cde3; color: white;"" onclick = "request();">요청 수락대기</p>
+	      <p id="left_button" style="background-color: #a3cde3; color: white;" onclick = "request();">요청 수락대기</p>
 	      <p id="accept_button" onclick="accept();">수락된 요청</p>   
 	      <p id="right_button" onclick="refuse();">거절된 요청</p>      
 	      <p id="center_button" onclick ="matchingFinish();">매칭완료</p>

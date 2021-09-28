@@ -61,12 +61,27 @@ public interface SitterService {
 	public void refuseFromSitter(HttpServletRequest req, Model model);
 	
 	// 고객 - 고객이 결제 완료한 내역을 보여주는 페이지
-	public void payment(HttpServletRequest req, Model model);
+	public void matchingList(HttpServletRequest req, Model model);
+	
+	// 고객 - (서비스완료-결제완료) 후 이용한 펫시터서비스에 대한 후기를 작성하는 페이지
+	public void writeSitterReview(HttpServletRequest req, Model model);
+	
+	// 고객 - 시터후기 미리보기(별점 높은순)
+	public void highSittergrade(HttpServletRequest req, Model model);
+	
+	// 고객 - 시터후기 미리보기(최신등록순)
+	public void newSitterPost(HttpServletRequest req, Model model);
+	
+	// 고객 - 시터후기 미리보기(후기 많은순)
+	public void themostsitterReview(HttpServletRequest req, Model model);
 	
 	// 결제하기
 	public void sitterPay(HttpServletRequest req, Model model);
 	
 	//요금표 리스트 <완료>
 	public void priceInfo(HttpServletRequest req, Model model);
+	
+	// 고객 - 동일한 아이디로 시터 등록이 되어있을시 페이지접근x
+	public void sitterSignInChk(HttpServletRequest req, Model model);
 	
 }

@@ -46,7 +46,7 @@ public class SitterController {
 		  
 	      return "customer/sitter/sitter";
 	   }   
-	   
+	 
 	// (찾기 버튼 누른 후)시터 목록 페이지
 	 @RequestMapping("sitterMatching")
 	 public String sitterMatching(HttpServletRequest req, Model model) throws ParseException {
@@ -93,6 +93,7 @@ public class SitterController {
 	 public String applySitter(HttpServletRequest req, Model model) {
 		 log.info("url ==> applySitter");
       
+		 sitterSer.sitterSignInChk(req, model);
 		 return "customer/sitter/applySitter";
 	 } 		
 	 
@@ -114,7 +115,7 @@ public class SitterController {
 	 public String requestForMe(HttpServletRequest req, Model model) {
 		 log.info("url ==> requestForSitter");
 		 
-		 sitterSer.allRequestList(req, model);
+		 sitterSer.sitterSignInChk(req, model);
 		 return "customer/sitter/requestForSitter";
 	 }	
 	 
@@ -261,7 +262,7 @@ public class SitterController {
 	 public String MachtingFinish(HttpServletRequest req, Model model) {
 		 log.info("url ==> matchingFinish");
 		 
-		 sitterSer.payment(req, model);
+		 sitterSer.matchingList(req, model);
 		 return "customer/sitter/MysitterListClone";
 	 }		 
 
@@ -276,8 +277,85 @@ public class SitterController {
 		 
 		 
 		 return "customer/sitter/payment";
+	 }	
+	 
+	 /*
+	  *  날짜 : 21.09.28
+	  *  작성자 : 임지영
+	  *  내용 : 고객 - 결제 완료 후 후기작성 페이지
+	  */
+	 @RequestMapping("Mysitterreview")
+	 public String Mysitterreview(HttpServletRequest req, Model model) {
+		 log.info("url ==> Mysitterreview");
+		 
+		 int SIT_ID = Integer.parseInt(req.getParameter("SIT_ID"));
+		 model.addAttribute("SIT_ID", SIT_ID);
+		 return "customer/sitter/Mysitterreview";
+	 }
+	 
+	 /*
+	  *  날짜 : 21.09.28
+	  *  작성자 : 임지영
+	  *  내용 : 고객 - 결제 완료 후 후기 작성 (테이블(SITTER_GRADE_TB)에 insert)
+	  */
+	 @RequestMapping("MysitterreviewAction")
+	 public String MysitterreviewAction(HttpServletRequest req, Model model) {
+		 log.info("url ==> MysitterreviewAction");
+		 
+		 sitterSer.writeSitterReview(req, model);
+		 return "customer/sitter/MysitterreviewAction";
+	 }	 
+	 
+	 /*
+	  *  날짜 : 21.09.28
+	  *  작성자 : 임지영
+	  *  내용 : 고객 - 펫시터 후기 미리보기 페이지
+	  */
+	 @RequestMapping("sitterPreview")
+	 public String sitterPreview(HttpServletRequest req, Model model) {
+		 log.info("url ==> sitterPreview");
+		 
+		 return "customer/sitter/sitterPreview";
 	 }		
 	 
-	 //활동 등록
 	 
+	 /*
+	  *  날짜 : 21.09.28
+	  *  작성자 : 임지영
+	  *  내용 : 고객 - 펫시터 후기글을 별점높은순 으로 볼 수 있는 페이지 
+	  */
+	 @RequestMapping("bestStarSitter")
+	 public String bestStarSitter(HttpServletRequest req, Model model) {
+		 log.info("url ==> bestStarSitter");
+		 
+		 sitterSer.highSittergrade(req, model);
+		 return "customer/sitter/bestStarSitter";
+	 }		 
+	 
+	 /*
+	  *  날짜 : 21.09.28
+	  *  작성자 : 임지영
+	  *  내용 : 고객 - 펫시터 후기글을 최신작성순으로 볼 수 있는 페이지 
+	  */
+	 @RequestMapping("newSitterReview")
+	 public String newSitterReview(HttpServletRequest req, Model model) {
+		 log.info("url ==> newSitterReview");
+		 
+		 sitterSer.newSitterPost(req, model);
+		 return "customer/sitter/newSitterReview";
+	 }		
+	 
+	 /*
+	  *  날짜 : 21.09.28
+	  *  작성자 : 임지영
+	  *  내용 : 고객 - 펫시터 후기글을 후기많은순 으로 볼 수 있는 페이지 
+	  */
+	 @RequestMapping("bigSitterReview")
+	 public String bigSitterReview(HttpServletRequest req, Model model) {
+		 log.info("url ==> bigSitterReview");
+		 
+		 sitterSer.themostsitterReview(req, model);
+		 return "customer/sitter/bigSitterReview";
+	 }		 
 }
+

@@ -53,18 +53,22 @@ $(function(){ // document ready
 					</tr>
 					
 					<tr>
-						<td><a href="feeInfo">요금안내</a></td>
+						<td><a href="/tpj/sitter/sitterPreview">후기 미리보기</a></td>
+					</tr>
+					
+					<tr>
+						<td><a href="/tpj/sitter/feeInfo">요금안내</a></td>
 					</tr>
 					<tr>
 						<td style = "background-color: white; color:#00bd56; font-size: 24px;"><strong>펫 시터</strong></td>
 					</tr>
 					
 					<tr>
-						<td><a href="applySitter">펫 시터 지원</a></td>
+						<td><a href="/tpj/sitter/applySitter">펫 시터 지원</a></td>
 					</tr>
 					
 					<tr>
-						<td style = "margin-bottom:20px;"><a href="requestForSitter">나에게 온 의뢰</a></td>
+						<td style = "margin-bottom:20px;"><a href="/tpj/sitter/requestForSitter">나에게 온 의뢰</a></td>
 					</tr>
 				</table>
 			</div>

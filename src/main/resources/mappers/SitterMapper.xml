@@ -302,5 +302,39 @@
 		AND SQ_ST=3
 	</select>
 	
+	<!-- 고객 - 매칭 완료 후 후기 작성 중복체크 -->
+	<select id="sittterReviewChkCnt" parameterType="int" resultType="int">
+	  SELECT COUNT(*)
+      FROM SITTER_GRADE_TB sg, SITTER_REQUEST_TB sr
+      WHERE sg.SIT_ID = sr.SIT_ID
+      AND sr.SQ_CD = #{SQ_CD}	
+	</select>
 	
+	<!-- 고객 - 후기작성 (시터 후기 테이블에 INSERT) -->
+	<insert id="ReviewWrite" parameterType="ptms.mvc.tpj.CustVO.SitterVO">
+		INSERT INTO SITTER_GRADE_TB(SG_CD, CUST_ID, SIT_ID, SG_GRADE, SG_CON, SG_IMG, SG_DT)
+		VALUES(SG_CDSQE.nextval, #{CUST_ID}, #{SIT_ID}, #{SG_GRADE}, #{SG_CON}, #{SG_IMG}, sysdate)
+	</insert>
+	
+	<!-- 고객 - 동일한 아이디로 시터가입여부 중복체크 -->
+	<select id="sitterSignChk" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM SITTERS_TB
+		WHERE CUST_ID=#{CUST_ID}
+	</select>
+	
+	<!-- 고객 - 시터후기 미리보기 (별점순) 정렬 -->
+	<select id="bestStarSitter" resultType="ptms.mvc.tpj.CustVO.SitterVO">
+	
+	</select>
+	
+	<!-- 고객 - 시터후기 미리보기 (최신작성순) 리스트 정렬 -->
+	<select id="newSitterReview" resultType="ptms.mvc.tpj.CustVO.SitterVO">
+	
+	</select>
+	
+	<!-- 고객 - 시터후기 미리보기 (후기많은순) 리스트 정렬 -->
+	<select id="bigSitterReview" resultType="ptms.mvc.tpj.CustVO.SitterVO">
+	
+	</select>
 </mapper>    
