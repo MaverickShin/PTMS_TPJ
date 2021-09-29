@@ -38,7 +38,7 @@
 			<div class="row" style = "display: grid; grid-template-columns:1fr 1fr 1fr 1fr;">
 				<c:if test="${selectCnt > 0}">
 					<c:forEach var="dto" items="${dtos}">
-						<div class="col-md-12" onclick = "window.location = 'trainerDetail?TA_CD=${dto.TA_CD}'">
+						<div class="col-md-12" onclick = "window.location = 'trainerDetail?TA_CD=${dto.TA_CD}&TQ_LOC=${TQ_LOC}'">
 				            <div class="blog-entry align-self-stretch">
 				              <a  class="block-20 rounded" style="background-image: url('${imgPath}image_1.jpg');">
 				              </a>
@@ -48,7 +48,7 @@
 				                  <div><a href="#">${dto.CUST_NM}</a></div>
 				                  <div><a href="#" class="meta-chat"><span class="fa fa-comment"></span>3</a></div><!-- 이곳에 좋아요 갯수 또는 평점을 넣으면 좋지 않을까? -->
 				                </div>
-				                <h3 class="heading"><a href="trainerDetail?TA_CD=${dto.TA_CD}&SQ_LOC=${SQ_LOC}">${dto.TA_TITLE}</a></h3>
+				                <h3 class="heading"><a href="trainerDetail?TA_CD=${dto.TA_CD}&TQ_LOC=${TQ_LOC}">${dto.TA_TITLE}</a></h3>
 				              </div>
 				            </div>
 				        </div>

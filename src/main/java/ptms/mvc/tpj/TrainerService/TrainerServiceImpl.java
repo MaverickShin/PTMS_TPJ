@@ -107,9 +107,9 @@ public class TrainerServiceImpl implements TrainerService{
 		System.out.println("tq_amt : " + TQ_AMT);
 		map.put("TQ_AMT", TQ_AMT);
 		
-		String SQ_LOC = req.getParameter("SQ_LOC");
-		System.out.println("SQ_LOC- : " + SQ_LOC);
-		map.put("SQ_LOC", SQ_LOC);
+		String TQ_LOC = req.getParameter("TQ_LOC");
+		System.out.println("TQ_LOC- : " + TQ_LOC);
+		map.put("TQ_LOC", TQ_LOC);
 		
 		String START_DAY = req.getParameter("START_DAY");
 		System.out.println("START_DAY : " + START_DAY);
@@ -135,14 +135,15 @@ public class TrainerServiceImpl implements TrainerService{
 		
 		model.addAttribute("selectCnt", selectCnt);
 		model.addAttribute("dtos", dtos);
-		model.addAttribute("SQ_LOC", SQ_LOC);
+		model.addAttribute("TQ_LOC", TQ_LOC);
 		
 	}
 
 	@Override
 	public void TrainerInfo(HttpServletRequest req, Model model) {
 		String id = (String)req.getSession().getAttribute("cust_id");
-		String SQ_LOC = req.getParameter("SQ_LOC");
+		String TQ_LOC = req.getParameter("TQ_LOC");
+		System.out.println("tq_loc : " + TQ_LOC);
 		int TA_CD = Integer.parseInt(req.getParameter("TA_CD"));
 		System.out.println("TA_CD : " + TA_CD);
 		
@@ -158,7 +159,8 @@ public class TrainerServiceImpl implements TrainerService{
 		System.out.println(vo.getTS1_NO());
 		model.addAttribute("dto", vo);
 		model.addAttribute("selectCnt", selectCnt);
-		model.addAttribute("SQ_LOC", SQ_LOC);
+		model.addAttribute("TQ_LOC", TQ_LOC);
+		model.addAttribute("TA_CD", TA_CD);
 	}
 
 	// 훈련사 정보 수정 화면

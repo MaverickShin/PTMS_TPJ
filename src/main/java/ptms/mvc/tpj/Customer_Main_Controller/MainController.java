@@ -481,23 +481,4 @@ public class MainController {
 	  return "customer/payment/test";
    }
    
-   @RequestMapping("paySuccess")
-   public int paySuccess(HttpServletRequest req, Model model) {
-	   
-	   String paykind = req.getParameter("kind");
-	   int price = Integer.parseInt(req.getParameter("price"));
-	   String id = req.getParameter("id");
-	   float fee = (float) (price * 0.5);
-	   
-	   
-	   Map<String, Object> map = new HashMap<>();
-	   
-	   map.put("PAYKIND_CD", paykind);
-	   map.put("CUST_ID", id);
-	   map.put("BY_SUM", price);
-	   map.put("BY_FEES", fee);
-	   
-	   return dao.insertPayhistory(map);
-   }
-   
 }

@@ -42,7 +42,7 @@
                      <div class="col-md-6">
                         <div class="form-group">
                            <label class="label" for="SQ_LOC">어디서 훈련을 진행할까요?</label> <br>
-                           <input type="text" class="iptags" name="SQ_LOC" placeholder="시 또는 구 입력">
+                           <input type="text" class="iptags" name="TQ_LOC" placeholder="시 또는 구 입력">
                         </div>
                      </div>
                      

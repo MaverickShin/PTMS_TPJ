@@ -365,7 +365,8 @@ public class SitterController {
 	  *  작성자 : 신도빈
 	  *  내용 : 고객 - 결제 완료 후 요청 테이블 상태 업데이트 (SQ_ST : 1) 
 	  */
-	 @RequestMapping("paySuccess")
+	 @RequestMapping(value = "paySuccess", method = RequestMethod.GET)
+	 @ResponseBody
 	 public int paySuccess(HttpServletRequest req, Model model) {
 		 
 		 int updateCnt = sitterSer.paySuccessUpdate(req, model);

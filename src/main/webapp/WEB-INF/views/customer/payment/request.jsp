@@ -5,9 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name = "_csrf_header" content="${_csrf.headerName}">
+<meta name = "_csrf" content = "${_csrf.token}">
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <script>
@@ -24,9 +27,15 @@ $(function(){
     var post = '<c:out value = "${vo.ZIPCODE}"/>';
     var urls = '<c:out value = "${url}"/>';
     var pk = '<c:out value = "${primarykey}"/>';
-    var page = '<c:out value = "${page}"/>';
+    var pages = '<c:out value = "${page}"/>';
     var paykind = '<c:out value = "${paykind}"/>';
-    var id = '<c:out value = "${id}"/>';
+    var ids = '<c:out value = "${id}"/>';
+    var state = 0;
+    var token = $("meta[name='_csrf_header']").attr("content");
+	var header = $("meta[name='_csrf']").attr("content");
+	
+	console.log("token1 : " + token);
+	console.log("header1 : " + header);
     
     IMP.request_pay({
         pg : 'kakaopay',
@@ -44,44 +53,44 @@ $(function(){
             //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
             $.ajax({
                 url: urls, //cross-domain error가 발생하지 않도록 주의해주세요
-                type: 'POST',
+                type: 'get',
                 dataType: 'json',
-                data: {
-                	priamrykey : pk
-                }
-            }).done(function(data) {
+                data: "primarykey=" + pk,
+            success: function(data) {
                 //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
                 if (data == 1) {
                     msg = '결제가 완료되었습니다.';
                     alert(msg);
                     
                     $.ajax({
-                        url: "/tpj/cust/paySuccess", //cross-domain error가 발생하지 않도록 주의해주세요
-                        type: 'POST',
-                        dataType: 'json',
-                        data: {
-                        	kind : paykind,
-                        	price : price,
-                        	id : id
-                        }
-                    ,
+                    	type: "get",
+                        url: "/tpj/pay/paySuccess", //cross-domain error가 발생하지 않도록 주의해주세요
+                        data: {"kind" : paykind, "price" : amount, "id" : ids},
+                        dataType: "json",
                     success: function(result) {
-                    	if(result == 1) window.location = page; 
-                    	else alert("시스템 오류 : 결제 정보가 정상적으로 처리 되지 않았습니다!");
+                    	if(result == 1) {
+                    		window.location = pages; 
+                    	}
+                    	else {
+                    		alert("시스템 오류 : 결제 정보가 정상적으로 처리 되지 않았습니다!");
+                    	}
                     },
                     error: function(request, status, error) {
                     	alert(error);
                     }
                     });
-                                        
                 } else {
                     //[3] 아직 제대로 결제가 되지 않았습니다.
                     msg = "결제가 완료 되지 않았습니다!";
                     msg += "\n" + rsp.error_msg;
                     
-                    window.location = page;
+                    window.location = pages;
                     //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
                 }
+            },
+            error : function(request, status, error) {
+    			alert("에러!");
+    		}
             });
         } else {
             msg = '결제에 실패하였습니다.';
@@ -90,7 +99,9 @@ $(function(){
             alert(msg);
             window.history.go(-3);
         }
+        	
     });
+    
 });
 </script>
  

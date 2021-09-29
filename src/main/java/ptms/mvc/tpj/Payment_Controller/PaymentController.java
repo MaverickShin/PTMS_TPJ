@@ -20,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ptms.mvc.tpj.CustVO.CustomerVO;
 import ptms.mvc.tpj.Customer_Main_DAO.MainDAOImpl;
@@ -48,6 +50,8 @@ public class PaymentController {
 		String item_name = req.getParameter("item_name");
 		String cust_id = (String)req.getSession().getAttribute("cust_id");
 		CustomerVO vo = dao.custDetailInfo(cust_id);
+		
+		System.out.println("pk :" + primarykey);
 		
 		String url = "";
 		String page = "";
@@ -191,16 +195,28 @@ public class PaymentController {
 		return imp_uid;
 	}
 	
-	@RequestMapping("paySuccess")
-	public String paySuccess(HttpServletRequest req, Model model) {
-		
-		String msg = req.getParameter("msg");
-		
-		model.addAttribute("msg", msg);
-		
-		return "customer/payment/paySuccess";
-		
-	}
-	
-	// 정기구독 카카오 페이
+	 @RequestMapping(value = "paySuccess", method = RequestMethod.GET )
+	 @ResponseBody
+	 public int paySuccess(HttpServletRequest req, Model model) {
+		   
+		   String paykind = req.getParameter("kind");
+		   int price = Integer.parseInt(req.getParameter("price"));
+		   String id = req.getParameter("id");
+		   float fee = (float) (price * 0.5);
+		   
+		   System.out.println("paykind : " + paykind);
+		   System.out.println("price : " + price);
+		   System.out.println("id : " + id);
+		   
+		   Map<String, Object> map = new HashMap<>();
+		   
+		   map.put("PAYKIND_CD", paykind);
+		   map.put("CUST_ID", id);
+		   map.put("BY_SUM", price);
+		   map.put("BY_FEES", fee);
+		   
+		   int result = dao.insertPayhistory(map);
+		   
+		   return result;
+	 }
 }

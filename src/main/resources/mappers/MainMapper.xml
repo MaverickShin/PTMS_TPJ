@@ -126,7 +126,7 @@
 	</select>
 	
 	<!-- 결제 정보 처리 -->
-	<insert id="insertPayhistory">
+	<insert id="insertPayhistory" parameterType="java.util.Map">
 		INSERT INTO BUYLIST_TB
 		VALUES (BY_CD_SEQ.nextval, #{CUST_ID}, #{PAYKIND_CD}, #{BY_SUM}, #{BY_FEES}, sysdate)
 	</insert>

@@ -113,8 +113,8 @@
 	              </ul> -->
 	              
 	              <form action="requestTraining" method="post">
-	              <input type="hidden" value="${dto.TA_CD}" name="TA_CD">
-	              <input type="hidden" value="${SQ_LOC}" name="TQ_LOC">
+	              <input type="hidden" value="${TA_CD}" name="TA_CD">
+	              <input type="hidden" value="${TQ_LOC}" name="TQ_LOC">
 	              <!-- 훈련사 일정 받아오기, 가능한 일정 선택하기 -->
 	              <div id='calendar' style = "margin-bottom:50px;"></div>
 	              

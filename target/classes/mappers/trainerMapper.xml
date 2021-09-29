@@ -20,7 +20,7 @@
 			select count(*)
 			from (select TA_CD
 				from TRAINER_SERVICE_TB
-				where TS_AREA LIKE '%'||#{SQ_LOC}||'%'
+				where TS_AREA LIKE '%'||#{TQ_LOC}||'%'
 				intersect
 				select TA_CD
 				from TRAINER_SERVICE_TB
@@ -44,7 +44,7 @@
 			select count(*)
 			from (select TA_CD
 				from TRAINER_SERVICE_TB
-				where TS_AREA LIKE '%'||#{SQ_LOC}||'%'
+				where TS_AREA LIKE '%'||#{TQ_LOC}||'%'
 				intersect
 				select TA_CD
 				from TRAINER_SERVICE_TB
@@ -71,7 +71,7 @@
 			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
 			where tt.TA_CD = ts.TA_CD
 			and ct.CUST_ID = tt.CUST_ID
-			and ts.TS_AREA LIKE '%'||#{SQ_LOC}||'%'
+			and ts.TS_AREA LIKE '%'||#{TQ_LOC}||'%'
 			and tt.TA_ST = 1
 			intersect
 			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
@@ -96,7 +96,7 @@
 			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
 			where tt.TA_CD = ts.TA_CD
 			and ct.CUST_ID = tt.CUST_ID
-			and ts.TS_AREA LIKE '%'||#{SQ_LOC}||'%'
+			and ts.TS_AREA LIKE '%'||#{TQ_LOC}||'%'
 			and tt.TA_ST = 1
 			intersect
 			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM

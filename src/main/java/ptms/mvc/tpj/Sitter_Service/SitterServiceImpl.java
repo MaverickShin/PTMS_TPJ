@@ -690,7 +690,9 @@ public class SitterServiceImpl implements SitterService{
 	@Override
 	public int paySuccessUpdate(HttpServletRequest req, Model model) {
 		
-		int primarykey = Integer.parseInt(req.getParameter("priamrykey"));
+		int primarykey = Integer.parseInt(req.getParameter("primarykey"));
+		
+		System.out.println("서비스 pk : " + primarykey);
 		
 		int updateCnt = sitterDao.updatePay(primarykey);
 		
