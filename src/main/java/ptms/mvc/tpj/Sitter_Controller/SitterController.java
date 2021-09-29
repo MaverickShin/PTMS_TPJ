@@ -45,6 +45,8 @@ public class SitterController {
 		  model.addAttribute("selectCnt", selectCnt);
 		  model.addAttribute("list", list);
 		  
+		  System.out.println("list : " + list.size());
+		  
 	      return "customer/sitter/sitter";
 	   }   
 	 
@@ -316,10 +318,10 @@ public class SitterController {
 	 public String sitterPreview(HttpServletRequest req, Model model) {
 		 log.info("url ==> sitterPreview");
 		 
+		 sitterSer.highSittergrade(req, model);
 		 return "customer/sitter/sitterPreview";
 	 }		
-	 
-	 
+	 	 
 	 /*
 	  *  날짜 : 21.09.28
 	  *  작성자 : 임지영
@@ -330,7 +332,7 @@ public class SitterController {
 		 log.info("url ==> bestStarSitter");
 		 
 		 sitterSer.highSittergrade(req, model);
-		 return "customer/sitter/bestStarSitter";
+		 return "customer/sitter/sitterPreviewClone";
 	 }		 
 	 
 	 /*
@@ -343,7 +345,7 @@ public class SitterController {
 		 log.info("url ==> newSitterReview");
 		 
 		 sitterSer.newSitterPost(req, model);
-		 return "customer/sitter/newSitterReview";
+		 return "customer/sitter/sitterPreviewClone";
 	 }		
 	 
 	 /*

@@ -149,6 +149,16 @@ public class TrainerController {
       return "customer/trainer/requestTrainerListClone";
    }
    
+   // 훈련사가 보는 훈련 완료 리스트
+   @RequestMapping("TrainingServiceComplete")
+   public String TrainingServiceComplete(HttpServletRequest req, Model model) throws ParseException {
+      log.info("url ==> TrainingServiceComplete");
+
+      trainerservice.TrainingServiceComplete(req, model);
+      
+      return "customer/trainer/TrainingServiceComplete";
+   }
+   
    // 고객용 훈련 요청결과 리스트 - 대기중일때
    @RequestMapping("custReqResult")
    public String custReqResult(HttpServletRequest req, Model model) {
@@ -162,7 +172,7 @@ public class TrainerController {
    // 고객용 훈련 요청결과 리스트 - 대기중일때
    @RequestMapping("custReqResult2")
    public String custReqResult2(HttpServletRequest req, Model model) throws ParseException {
-      log.info("url ==> custReqResult");
+      log.info("url ==> custReqResult2");
 
       trainerservice.custReqResultwait(req, model);
       
@@ -216,7 +226,7 @@ public class TrainerController {
       
       trainerservice.trainingComplete(req, model);
 
-      return "customer/trainer/trainingComplete";
+      return "customer/trainer/custReqResultClone";
    }
    
    // 훈련사 후기작성 페이지
@@ -239,8 +249,8 @@ public class TrainerController {
       
       return "customer/trainer/writeTrainingReviewAction";
    }
-   
-   // 훈련사 후기 미리보기(평점 높은순)
+   /*
+   // 훈련사 후기 미리보기(평점 높은순 - 인기 많은 훈련사)
    @RequestMapping("previewTraining")
    public String previewTraining(HttpServletRequest req, Model model) {
       log.info("url ==> previewTraining");
@@ -249,6 +259,24 @@ public class TrainerController {
       return "customer/trainer/previewTraining";
    }
    
+   // 훈련사 후기 미리보기(최신등록순 - NEW 훈련사)
+   @RequestMapping("newTrainerList")
+   public String newTrainerList(HttpServletRequest req, Model model) {
+      log.info("url ==> newTrainerList");
+      trainerservice.newTrainerList(req, model);
+      
+      return "customer/trainer/newTrainerList";
+   }
+   
+   // 훈련사 후기 미리보기(후기 많은 순 - 많이 찾는 훈련사)
+   @RequestMapping("lotsOfReviews")
+   public String lotsOfReviews(HttpServletRequest req, Model model) {
+      log.info("url ==> lotsOfReviews");
+      trainerservice.lotsOfReviews(req, model);
+      
+      return "customer/trainer/lotsOfReviews";
+   }
+   */
    // 고객 - 결제완료 내역
    @RequestMapping("trainerserPayFinish")
    public String trainerserPayFinish(HttpServletRequest req, Model model) {

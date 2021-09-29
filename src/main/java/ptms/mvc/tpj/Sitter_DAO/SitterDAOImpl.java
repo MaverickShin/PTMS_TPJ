@@ -325,6 +325,15 @@ public class SitterDAOImpl implements SitterDAO{
 		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
 		return dao.ReviewWrite(vo);
 	}	
+
+	// 고객 - 시터후기 테이블 갯수	
+	@Override
+	public int getreviewCnt() {
+		System.out.println("dao ==> getreviewCnt");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.getreviewCnt();
+	}
 	
 	// 고객 - 시터후기 미리보기 (별점순) 리스트 정렬
 	@Override
@@ -334,7 +343,7 @@ public class SitterDAOImpl implements SitterDAO{
 		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
 		return dao.bestStarSitter();
 	}
-
+	
 	// 고객 - 시터후기 미리보기 (최신작성순) 리스트 정렬
 	@Override
 	public List<SitterVO> newSitterReview() {
@@ -343,7 +352,7 @@ public class SitterDAOImpl implements SitterDAO{
 		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
 		return dao.newSitterReview();
 	}
-
+	
 	// 고객 - 시터후기 미리보기 (후기많은순) 리스트 정렬
 	@Override
 	public List<SitterVO> bigSitterReview() {

@@ -43,7 +43,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type: "get",
-			url: "/tpj/trainer/trainerserPayFinish",
+			url: "/tpj/trainer/trainingComplete",
 			cache: false,
 			success: function(result) {
 				$(".result_div").html(result);
@@ -193,7 +193,7 @@ function refuse() {
 		      <p id="left_button" style="background-color: #a3cde3; color: white;" onclick="request();">요청 수락대기</p>
 		      <p id="accept_button" onclick="accept();">수락된 요청</p>   
 		      <p id="right_button" onclick="refuse();">거절된 요청</p>      
-		      <p id="center_button" onclick ="TrainingComplete();">결제 완료</p>
+		      <p id="center_button" onclick ="TrainingComplete();">매칭 완료</p>
 		    </div>
 		
 			<div class = "result_div">
@@ -211,7 +211,8 @@ function refuse() {
 						<div class="about-author d-flex p-4 bg-light" style="place-content:center;">
 					      <div class="desc" style="background-color:#dfe3eb; padding:20px;">
 					        <h6>훈련받을 펫 : ${dtos.PET_NM}</h6>&nbsp;<h6>훈련사 : ${dtos.CUST_NM}</h6>
-					        <p>훈련일 : ${dtos.START_DAY}<br>훈련종류 : ${dtos.TQ_AMT}</p>
+					        <p>훈련일 : ${dtos.START_DAY}<br>훈련종류 : ${dtos.TQ_AMT}<br>${dtos.TQ_FEE}</p>
+					        
 					        <input type="button" value="요청취소" class="btn btn-primary" onclick="window.location='cancelRequestTraining?TQ_CD=${dtos.TQ_CD}'">
 					      </div>
 					    </div>

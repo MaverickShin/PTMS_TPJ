@@ -53,6 +53,9 @@ public interface TrainerService {
 	// 훈련사 훈련 거절 리스트
 	public void denyTrainingList(HttpServletRequest req, Model model);
 	
+	// 훈련사 매칭완료 리스트
+	public void TrainingServiceComplete(HttpServletRequest req, Model model);
+	
 	// 고객용 훈련 요청 결과 리스트(요청대기)
 	public void custReqResultwait(HttpServletRequest req, Model model);
 	
@@ -70,10 +73,16 @@ public interface TrainerService {
 	
 	// 훈련 후기 작성
 	public void writeTrainingReview(HttpServletRequest req, Model model);
-	
+	/*
 	// 훈련 후기 미리보기 - 평점순
 	public void previewTrainingGrade(HttpServletRequest req, Model model);
-
+	
+	// 훈련 후기 미리보기 - 최신등록순
+	public void newTrainerList(HttpServletRequest req, Model model);
+	
+	// 훈련 후기 미리보기 - 후기 많은 순
+	public void lotsOfReviews(HttpServletRequest req, Model model);
+	*/
 	// 고객 - 결제 완료 내역
 	public void payment(HttpServletRequest req, Model model);
 	

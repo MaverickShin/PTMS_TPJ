@@ -4,17 +4,19 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="ptms.mvc.tpj.TrainerDAO.TrainerDAO">
-	
+	<!-- 훈련사 프로필 테이블 등록 -->
 	<insert id="insertTrainer" parameterType="ptms.mvc.tpj.CustVO.TrainerVO">
 		INSERT INTO TRAINER_TB(TA_CD, CUST_ID, TA_TITLE, TA_APPEAL, TA_IMG, TA_ST, TA_DT)
 		VALUES(TA_CD_seq.nextval, #{CUST_ID}, #{TA_TITLE}, #{TA_APPEAL}, #{TA_IMG}, 1, sysdate)
 	</insert>
 	
+	<!-- 훈련사 상세정보 테이블 등록 -->
 	<insert id="insertTrainerDetail" parameterType="ptms.mvc.tpj.CustVO.TrainerVO">
 		INSERT INTO TRAINER_SERVICE_TB(TS_CD, TA_CD, TS_AREA, TS1_NO, TS1_FEE, TS2_NO, TS2_FEE, TS3_NO, TS3_FEE, TS4_NO, TS4_FEE, START_DAY, END_DAY, ADJUSTABLE)
 		VALUES(TS_CD_seq.nextval, TA_CD_seq.currval, #{TS_AREA}, #{TS1_NO}, #{TS1_FEE}, #{TS2_NO}, #{TS2_FEE}, #{TS3_NO}, #{TS3_FEE}, #{TS4_NO}, #{TS4_FEE}, #{START_DAY}, #{END_DAY}, #{ADJUSTABLE})
 	</insert>
 	
+	<!-- 조건을 충족한 훈련사 리스트 건수 -->
 	<select id="trainerSelectCnt" parameterType="java.util.Map" resultType="int">
 		<if test='ADJUSTABLE == 1'>
 			select count(*)
@@ -65,6 +67,7 @@
 		</if>
 	</select>
 	
+	<!-- 조건을 충족한 훈련사 리스트 -->
 	<select id="trainerList" parameterType="java.util.Map" resultType="ptms.mvc.tpj.CustVO.TrainerVO">
 		<if test='ADJUSTABLE == 1'>
 			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
@@ -113,7 +116,7 @@
 			where tt.TA_CD = ts.TA_CD
 			  and ct.CUST_ID = tt.CUST_ID
 			  and #{START_DAY} between ts.START_DAY and ts.END_DAY
-			  or #{END_DAY} between ts.START_DAY and ts.END_DAY
+			  and #{END_DAY} between ts.START_DAY and ts.END_DAY
 		</if>
 	</select>
 	
@@ -154,6 +157,7 @@
 		delete from TRAINER_SERVICE_TB where TA_CD = #{TA_CD}
 	</delete>
 	
+	<!-- 훈련사 상세 정보 -->
 	<select id="trainerInfo" parameterType="int" resultType="ptms.mvc.tpj.CustVO.TrainerVO">
 	    select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
 	    from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
@@ -162,6 +166,7 @@
 	    and tt.TA_CD = #{TA_CD}
 	</select>
 	
+	<!-- 펫 정보 가져오기(이름, 펫코드) -->
 	<select id="getPetInfo" parameterType="String" resultType="ptms.mvc.tpj.CustVO.TrainerVO">
 		select pt.PET_NM, pt.PET_CD
 		from PET_TB pt, CUSTOMER_TB ct
@@ -169,17 +174,20 @@
 		and ct.CUST_ID = #{id}
 	</select>
 	
+	<!-- 의뢰인의 펫 마릿수 가져오기 -->
 	<select id="getPetCount" parameterType="String" resultType="int">
 		select Count(*)
 		from PET_TB pt, CUSTOMER_TB ct
 		where ct.CUST_ID = #{id}
 	</select>
 	
+	<!-- 훈련 예약 - 훈련요청테이블에 등록 -->
 	<insert id="insertTrainerReservation" parameterType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
-		insert into TRAINER_REQUEST_TB(TQ_CD, CUST_ID, TA_CD, PET_NM, TQ_AMT, TQ_LOC, TQ_ST, START_DAY, END_DAY, TQ_DT)
-		values(TQ_CD_seq.nextval, #{CUST_ID}, #{TA_CD}, #{PET_NM}, #{TQ_AMT}, #{TQ_LOC}, 0, #{START_DAY}, #{START_DAY}, sysdate)
+		insert into TRAINER_REQUEST_TB(TQ_CD, CUST_ID, TA_CD, PET_NM, TQ_AMT, TQ_LOC, TQ_ST, START_DAY, END_DAY, TQ_FEE, TQ_DT)
+		values(TQ_CD_seq.nextval, #{CUST_ID}, #{TA_CD}, #{PET_NM}, #{TQ_AMT}, #{TQ_LOC}, 0, #{START_DAY}, #{START_DAY}, #{TQ_FEE}, sysdate)
 	</insert>
 	
+	<!-- 훈련사에게 온 훈련대기중인 리스트 건수 -->
 	<select id="TraineeListCnt" parameterType="String" resultType="int">
 		select count(*)
 		from TRAINER_REQUEST_TB tr, TRAINER_TB tt
@@ -188,6 +196,7 @@
 		and tt.CUST_ID = #{id}
 	</select>
 	
+	<!-- 훈련 대기중인 리스트 -->
 	<select id="TraineeList" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
 		select distinct tr.*, pt.PET_CON
 		from TRAINER_REQUEST_TB tr, TRAINER_TB tt, PET_TB pt
@@ -198,14 +207,17 @@
 		order by TQ_DT
 	</select>
 	
+	<!-- 훈련 거절 처리 -->
 	<update id="updateDenyTraining" parameterType="int">
 		update TRAINER_REQUEST_TB set TQ_ST = 2 where TQ_CD = #{TQ_CD}
 	</update>
 	
+	<!-- 훈련 수락 처리 -->
 	<update id="updateAcceptTraining">
 		update TRAINER_REQUEST_TB set TQ_ST = 1 where TQ_CD = #{TQ_CD}
 	</update>
 	
+	<!-- 훈련사에게 온 훈련 수락 리스트 건수 -->
 	<select id="acceptTraineeListCnt" parameterType="String" resultType="int">
 		select count(*)
 		from TRAINER_REQUEST_TB tr, TRAINER_TB tt
@@ -214,6 +226,7 @@
 		and tt.CUST_ID = #{id}
 	</select>
 	
+	<!-- 훈련사에게 온 훈련 수락 리스트 -->
 	<select id="acceptTraineeList" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
 		select distinct tr.*, pt.PET_CON
 		from TRAINER_REQUEST_TB tr, TRAINER_TB tt, PET_TB pt
@@ -224,6 +237,7 @@
 		order by TQ_DT
 	</select>
 	
+	<!-- 훈련사에게 온 훈련거절 리스트 건수 -->
 	<select id="denyTraineeListCnt" parameterType="String" resultType="int">
 		select count(*)
 		from TRAINER_REQUEST_TB tr, TRAINER_TB tt
@@ -232,6 +246,7 @@
 		and tt.CUST_ID = #{id}
 	</select>
 	
+	<!-- 훈련사에게 온 훈련 거절 리스트 -->
 	<select id="denyTraineeList" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
 		select distinct tr.*, pt.PET_CON
 		from TRAINER_REQUEST_TB tr, TRAINER_TB tt, PET_TB pt
@@ -242,6 +257,27 @@
 		order by TQ_DT
 	</select>
 	
+	<!-- 훈련사 매칭 완료 리스트 건수 -->
+	<select id="TrainingServiceCompleteCnt" resultType="int">
+		select count(*)
+		from TRAINER_REQUEST_TB tr, TRAINER_TB tt
+		where tt.TA_CD = tr.TA_CD
+		and tr.TQ_ST = 4
+		and tt.CUST_ID = #{id}
+	</select>
+	
+	<!-- 훈련사 매칭완료 리스트 -->
+	<select id="TrainingServiceCompleteList" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
+		select distinct tr.*, pt.PET_CON
+		from TRAINER_REQUEST_TB tr, TRAINER_TB tt, PET_TB pt
+		where tt.TA_CD = tr.TA_CD
+		and pt.CUST_ID = tr.CUST_ID
+		and tt.CUST_ID = #{id}
+		and tr.TQ_ST = 4
+		order by TQ_DT desc
+	</select>
+	
+	<!-- 고객용 훈련요청 결과 리스트 건수(대기중일때) -->
 	<select id="custReqResultwaitCnt" resultType="int">
 		select count(*) 
 		from TRAINER_REQUEST_TB 
@@ -249,6 +285,7 @@
 		and TQ_ST = 0
 	</select>
 	
+	<!-- 고객용 훈련요청 결과 리스트(대기중일때) -->
 	<select id="custReqResultwaitList" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
 		select tr.*, ct.cust_nm
 		from TRAINER_REQUEST_TB tr, TRAINER_TB tt, CUSTOMER_TB ct
@@ -258,10 +295,12 @@
 		and TQ_ST = 0
 	</select>
 	
+	<!-- 훈련 예약 취소 -->
 	<delete id="deleteReservation" parameterType="int">
 		delete from TRAINER_REQUEST_TB where TQ_CD = #{TQ_CD}
 	</delete>
 	
+	<!-- 고객용 훈련요청결과 리스트 건수(수락일때) -->
 	<select id="custReqResultacceptCnt" resultType="int">
 		select count(*) 
 		from TRAINER_REQUEST_TB 
@@ -269,6 +308,7 @@
 		and TQ_ST = 1
 	</select>
 	
+	<!-- 고객용 훈련요청 결과 리스트(수락일때) -->
 	<select id="custReqResultacceptList" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
 		select tr.*, ct.cust_nm
 		from TRAINER_REQUEST_TB tr, TRAINER_TB tt, CUSTOMER_TB ct
@@ -278,6 +318,7 @@
 		and TQ_ST = 1
 	</select>
 	
+	<!-- 고객용 훈련요청결과 리스트 건수(거절일때) -->
 	<select id="custReqResultdenyCnt" resultType="int">
 		select count(*) 
 		from TRAINER_REQUEST_TB 
@@ -285,6 +326,7 @@
 		and TQ_ST = 2
 	</select>
 	
+	<!-- 고객용 훈련요청 결과 리스트(거절일때) -->
 	<select id="custReqResultdenyList" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
 		select tr.*, ct.cust_nm
 		from TRAINER_REQUEST_TB tr, TRAINER_TB tt, CUSTOMER_TB ct
@@ -294,6 +336,7 @@
 		and TQ_ST = 2
 	</select>
 	
+	<!-- 고객용 훈련완료 리스트 건수 -->
 	<select id="trainingCompleteCnt" resultType="int">
 		select count(*) 
 		from TRAINER_REQUEST_TB 
@@ -301,6 +344,7 @@
 		and TQ_ST = 4
 	</select>
 	
+	<!-- 고객용 훈련완료 리스트 건수 -->
 	<select id="trainingComplete" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
 		select tr.*, ct.cust_nm, tt.TA_CD as TG_ID
 		from TRAINER_REQUEST_TB tr, TRAINER_TB tt, CUSTOMER_TB ct
@@ -310,11 +354,13 @@
 		and TQ_ST = 4
 	</select>
 	
+	<!-- 훈련사 후기 작성 -->
 	<insert id="insertTrainingReview" parameterType="ptms.mvc.tpj.CustVO.TrainerVO">
 		insert into TRAINER_GRADE_TB(TG_CD, CUST_ID, TG_ID, TG_GRADE, TG_CON, TG_IMG, TG_DT)
 		values(TG_CD_seq.nextval, #{CUST_ID}, #{TG_ID}, #{TG_GRADE}, #{TG_CON}, #{TG_IMG}, sysdate)
 	</insert>
 	
+	<!-- 훈련사 후기 작성 중복체크 -->
 	<select id="reviewCheckCnt" resultType="int">
 		select count(*)
 		from TRAINER_GRADE_TB tg, TRAINER_REQUEST_TB tr
@@ -322,8 +368,36 @@
 		and tr.tq_cd = #{TQ_CD}
 	</select>
 	
-	<select id="previewTrainingGrade" resultType="ptms.mvc.tpj.CustVO.TrainerVO">
+	<!-- 후기 미리보기 평점순 훈련사 정렬 -->
+	<!-- <select id="previewTrainingGrade" resultType="List<ptms.mvc.tpj.CustVO.TrainerVO>">
+		select tg.*, tt.*, ct.cust_nm, ts.TS_AREA
+		from (select tg.TG_ID, nvl(count(TG_CD),0) tg_count, nvl(avg(TG_GRADE),0) tg_avg
+		        from TRAINER_GRADE_TB tg
+		        group by TG_ID
+		        order by nvl(avg(TG_GRADE),0) desc) tg
+		full outer join TRAINER_TB tt
+		on tg.TG_ID = tt.TA_CD
+		full outer join CUSTOMER_TB ct
+		on ct.cust_id = tt.cust_id
+		full outer join TRAINER_SERVICE_TB ts
+		on tt.ta_cd = ts.ta_cd
+		where tt.ta_st = 1
+	</select> -->
 	
+	<!-- 후기 미리보기 최신등록순 훈련사 정렬 -->
+	<!-- <select id="newTrainerList" resultType="ptms.mvc.tpj.CustVO.TrainerVO">
+		select tg.*, tt.*, ct.cust_nm, ts.TS_AREA
+		from (select tg.TG_ID, count(TG_CD) tg_count, avg(TG_GRADE) tg_avg
+		        from TRAINER_GRADE_TB tg
+		        group by TG_ID) tg 
+		full outer join TRAINER_TB tt
+		on tg.TG_ID = tt.TA_CD
+		full outer join CUSTOMER_TB ct
+		on ct.cust_id = tt.cust_id
+		full outer join TRAINER_SERVICE_TB ts
+		on tt.ta_cd = ts.ta_cd
+		where tt.ta_st = 1
+		order by tt.ta_dt desc
 	</select>
 	
 	<!-- 고객 - 결제 완료 후 요청 테이블 상태 업데이트  -->
