@@ -37,11 +37,15 @@ public class TrainerVO {
 	private String PET_NM;
 	
 	// 훈련사 후기 테이블
-	private int TG_CD;
-	private int TG_ID;
-	private float TG_GRADE;
-	private String TG_CON;
-	private String TG_IMG;
+	private int TG_CD;			// 훈련사 후기 코드
+	private int TG_ID;			// 훈련사ID
+	private float TG_GRADE;		// 훈련사 평점
+	private String TG_CON;		// 훈련 후기 내용
+	private String TG_IMG;		// 훈련 후기 이미지
+	private Date TG_DT;			// 훈련 후기 등록일
+	
+	private float TG_AVG;		// 훈련사별 평점 평균
+	private int TG_COUNT;		// 훈련사별 후기 갯수
 	
 	public int getTA_CD() {
 		return TA_CD;
@@ -243,6 +247,30 @@ public class TrainerVO {
 
 	public void setTG_IMG(String tG_IMG) {
 		TG_IMG = tG_IMG;
+	}
+
+	public Date getTG_DT() {
+		return TG_DT;
+	}
+
+	public void setTG_DT(Date tG_DT) {
+		TG_DT = tG_DT;
+	}
+
+	public float getTG_AVG() {
+		return TG_AVG;
+	}
+
+	public void setTG_AVG(float tG_AVG) {
+		TG_AVG = tG_AVG;
+	}
+
+	public int getTG_COUNT() {
+		return TG_COUNT;
+	}
+
+	public void setTG_COUNT(int tG_COUNT) {
+		TG_COUNT = tG_COUNT;
 	}
 
 	

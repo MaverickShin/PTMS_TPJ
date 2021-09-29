@@ -17,24 +17,28 @@ public class TrainerDAOImpl implements TrainerDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
+	// 조건을 충족한 훈련사 리스트
 	@Override
 	public List<TrainerVO> trainerList(Map<String, Object> map) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
 		return dao.trainerList(map);
 	}
 	
+	// 조건을 충족한 훈련사 리스트 건수
 	@Override
 	public int trainerSelectCnt(Map<String, Object> map) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
 		return dao.trainerSelectCnt(map);
 	}
 
+	// 훈련사 상세 정보 
 	@Override
 	public TrainerVO trainerInfo(int taCd) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
 		return dao.trainerInfo(taCd);
 	}
 
+	// 훈련사 프로필 테이블 등록
 	@Override
 	public int insertTrainer(TrainerVO tVo) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
@@ -42,6 +46,7 @@ public class TrainerDAOImpl implements TrainerDAO {
 		return insertCnttr;
 	}
 	
+	// 훈련사 상세정보 테이블 등록
 	@Override
 	public int insertTrainerDetail(TrainerVO vo) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
@@ -84,6 +89,7 @@ public class TrainerDAOImpl implements TrainerDAO {
 		return dao.deleteTrainer2(TA_CD);
 	}
 
+	// 훈련 예약 - 훈련요청테이블에 등록
 	@Override
 	public int insertTrainerReservation(TrainerRequestVO vo) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
@@ -97,6 +103,7 @@ public class TrainerDAOImpl implements TrainerDAO {
 		return 0;
 	}
 	
+	// 훈련사에게 온 훈련대기중인 리스트 건수
 	@Override
 	public int TraineeListCnt(String id) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
@@ -104,25 +111,28 @@ public class TrainerDAOImpl implements TrainerDAO {
 		return selectCnt;
 	}
 
+	// 훈련 대기중인 리스트
 	@Override
 	public List<TrainerRequestVO> TraineeList(String id) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
 		return dao.TraineeList(id);
 	}
 
+	// 훈련 예약 취소
 	@Override
 	public int deleteReservation(int TQ_CD) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
 		return dao.deleteReservation(TQ_CD);
 	}
 
+	// 훈련 수락 처리
 	@Override
 	public int updateAcceptTraining(int TQ_CD) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
 		return dao.updateAcceptTraining(TQ_CD);
 	}
 	
-	// 펫 마릿수 가져오기
+	// 의뢰인의 펫 마릿수 가져오기
 	@Override
 	public int getPetCount(String id) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
@@ -138,6 +148,7 @@ public class TrainerDAOImpl implements TrainerDAO {
 		return petName;
 	}
 
+	// 훈련 거절 처리
 	@Override
 	public int updateDenyTraining(int TQ_CD) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
@@ -145,6 +156,7 @@ public class TrainerDAOImpl implements TrainerDAO {
 		return updateCnt;
 	}
 	
+	// 훈련사에게 온 훈련 수락 리스트 건수
 	@Override
 	public int acceptTraineeListCnt(String id) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
@@ -152,12 +164,14 @@ public class TrainerDAOImpl implements TrainerDAO {
 		return selectCnt;
 	}
 
+	// 훈련사에게 온 훈련 수락 리스트
 	@Override
 	public List<TrainerRequestVO> acceptTraineeList(String id) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
 		return dao.acceptTraineeList(id);
 	}
 	
+	// 훈련사에게 온 훈련거절 리스트 건수
 	@Override
 	public int denyTraineeListCnt(String id) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
@@ -165,12 +179,29 @@ public class TrainerDAOImpl implements TrainerDAO {
 		return selectCnt;
 	}
 
+	// 훈련사에게 온 훈련 거절 리스트
 	@Override
 	public List<TrainerRequestVO> denyTraineeList(String id) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
 		return dao.denyTraineeList(id);
 	}
 
+	// 훈련사 매칭 완료 리스트 건수
+	@Override
+	public int TrainingServiceCompleteCnt(String id) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		int selectCnt = dao.trainingCompleteCnt(id);
+		return selectCnt;
+	}
+	
+	// 훈련사 매칭완료 리스트 
+	@Override
+	public List<TrainerRequestVO> TrainingServiceCompleteList(String id) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.TrainingServiceCompleteList(id);
+	}
+
+	// 고객용 훈련요청 결과 리스트 건수(대기중일때)
 	@Override
 	public int custReqResultwaitCnt(String id) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
@@ -178,12 +209,14 @@ public class TrainerDAOImpl implements TrainerDAO {
 		return selectCnt;
 	}
 
+	// 고객용 훈련요청 결과 리스트(대기중일때)
 	@Override
 	public List<TrainerRequestVO> custReqResultwaitList(String id) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
 		return dao.custReqResultwaitList(id);
 	}
 
+	// 고객용 훈련요청결과 리스트 건수(수락일때)
 	@Override
 	public int custReqResultacceptCnt(String id) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
@@ -191,12 +224,14 @@ public class TrainerDAOImpl implements TrainerDAO {
 		return selectCnt;
 	}
 
+	// 고객용 훈련요청 결과 리스트(수락일때)
 	@Override
 	public List<TrainerRequestVO> custReqResultacceptList(String id) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
 		return dao.custReqResultacceptList(id);
 	}
 
+	// 고객용 훈련요청결과 리스트 건수(거절일때)
 	@Override
 	public int custReqResultdenyCnt(String id) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
@@ -204,12 +239,14 @@ public class TrainerDAOImpl implements TrainerDAO {
 		return selectCnt;
 	}
 
+	// 고객용 훈련요청 결과 리스트(거절일때)
 	@Override
 	public List<TrainerRequestVO> custReqResultdenyList(String id) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
 		return dao.custReqResultdenyList(id);
 	}
 
+	// 고객용 훈련완료 리스트 건수
 	@Override
 	public int trainingCompleteCnt(String id) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
@@ -217,12 +254,14 @@ public class TrainerDAOImpl implements TrainerDAO {
 		return selectCnt;
 	}
 
+	// 고객용 훈련완료 리스트
 	@Override
 	public List<TrainerRequestVO> trainingComplete(String id) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
 		return dao.trainingComplete(id);
 	}
 
+	// 훈련사 후기 작성
 	@Override
 	public int insertTrainingReview(TrainerVO vo) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
@@ -230,19 +269,58 @@ public class TrainerDAOImpl implements TrainerDAO {
 		return insertCnt;
 	}
 
+	// 훈련사 후기 작성 중복체크
 	@Override
 	public int reviewCheckCnt(int TQ_CD) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
 		int reviewCheckCnt = dao.reviewCheckCnt(TQ_CD);
 		return reviewCheckCnt;
 	}
+	
+	/*
+	// 평점순 훈련사 정렬 건수
+	@Override
+	public int trainingGradeCnt() {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		int selectCnt = dao.trainingGradeCnt();
+		return selectCnt;
+	}
 
+	// 평점순 훈련사 정렬
 	@Override
 	public List<TrainerVO> previewTrainingGrade() {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
 		return dao.previewTrainingGrade();
 	}
-
 	
+	// 최신등록순 훈련사 정렬 건수
+	@Override
+	public int newTrainerCnt() {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		int selectCnt = dao.newTrainerCnt();
+		return selectCnt;
+	}
 
+	// 후기 미리보기 최신등록순 훈련사 정렬
+	@Override
+	public List<TrainerVO> newTrainerList() {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.newTrainerList();
+	}
+	
+	// 후기 많은 순 훈련사 정렬 건수
+	@Override
+	public int lotsOfReviewsCnt() {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		int selectCnt = dao.lotsOfReviewsCnt();
+		return selectCnt;
+	}
+
+	// 후기 미리보기 후기 많은 순 훈련사 정렬
+	@Override
+	public List<TrainerVO> lotsOfReviews() {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.lotsOfReviews();
+	}
+	*/
 }
