@@ -27,7 +27,7 @@
         var title = prompt('일정 제목:');
         if (title) {
           calendar.addEvent({
-            title: title,
+            title: ti12tle,
             start: arg.start,
             end: arg.end,
             allDay: arg.allDay

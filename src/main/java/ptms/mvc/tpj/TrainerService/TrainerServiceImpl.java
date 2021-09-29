@@ -552,4 +552,18 @@ public class TrainerServiceImpl implements TrainerService{
 		model.addAttribute("list", vo);
 		model.addAttribute("selectCnt", selectCnt);
 	}
+	
+	/* 21-09-29 / 신도빈  / 결제완료 후 요청테이블 상태 업데이트 'TQ_ST : 1' */
+	// 고객 - 카카오페이 결제 완료 후 요청 테이블 상태 업데이트
+	@Override
+	public int paySuccessUpdate(HttpServletRequest req, Model model) {
+		
+		int primarykey = Integer.parseInt(req.getParameter("primarykey"));
+		
+		System.out.println("서비스 pk : " + primarykey);
+		
+		int updateCnt = dao.updatePay(primarykey);
+		
+		return updateCnt; 
+	}
 }

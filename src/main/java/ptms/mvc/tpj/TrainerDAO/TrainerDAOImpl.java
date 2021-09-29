@@ -243,6 +243,10 @@ public class TrainerDAOImpl implements TrainerDAO {
 		return dao.previewTrainingGrade();
 	}
 
-	
+	@Override
+	public int updatePay(int TQ_CD) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.updatePay(TQ_CD);
+	}
 
 }

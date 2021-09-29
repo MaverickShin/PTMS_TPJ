@@ -325,4 +325,10 @@
 	<select id="previewTrainingGrade" resultType="ptms.mvc.tpj.CustVO.TrainerVO">
 	
 	</select>
+	
+	<!-- 고객 - 결제 완료 후 요청 테이블 상태 업데이트  -->
+	<update id="updatePay" parameterType="int">
+		UPDATE TRAINER_REQUEST_TB SET SQ_ST = 3 WHERE TQ_CD = #{TQ_CD}
+	</update>
+	
 </mapper>

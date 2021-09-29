@@ -338,6 +338,7 @@ public class MainServiceImpl implements MainService{
 	@SuppressWarnings("unchecked")
 	@Override
 	public void callCalendar(HttpServletRequest req, Model model) {
+		
 		String id = (String) req.getSession().getAttribute("cust_id");
 		List<Map<String,Object>> eventList = dao.getEvents(id);
 		
@@ -364,6 +365,7 @@ public class MainServiceImpl implements MainService{
 	 */
 	@SuppressWarnings("unchecked")
 	public JSONObject convertMapToJson(Map<String, Object> map) {
+		
 		JSONObject json = new JSONObject();
 		for (Map.Entry<String, Object> entry : map.entrySet()) {
 			String key = entry.getKey();
