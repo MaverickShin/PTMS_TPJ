@@ -82,4 +82,7 @@ public interface MainDAO {
 	// 일정 삭제
 	public int deleteEvent(String CL_CD);
 	
+	// 결제 이력 처리
+	public int insertPayhistory(Map<String, Object> map);
+	
 }

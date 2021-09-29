@@ -684,5 +684,18 @@ public class SitterServiceImpl implements SitterService{
 		
 	}
 
+	
+	/* 21-09-29 / 신도빈  / 결제완료 후 요청테이블 상태 업데이트 'SQ_ST : 1' */
+	// 고객 - 카카오페이 결제 완료 후 요청 테이블 상태 업데이트
+	@Override
+	public int paySuccessUpdate(HttpServletRequest req, Model model) {
+		
+		int primarykey = Integer.parseInt(req.getParameter("priamrykey"));
+		
+		int updateCnt = sitterDao.updatePay(primarykey);
+		
+		return updateCnt; 
+	}
+
 
 }

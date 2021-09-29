@@ -40,7 +40,41 @@ public class PaymentController {
 	// 결제 요청창 로드
 	@RequestMapping("request")
 	public String payOneTime(HttpServletRequest req, Model model){
+		
 		log.info("payment cnt request");
+		
+		String primarykey = req.getParameter("primarykey");
+		String price = req.getParameter("price");
+		String item_name = req.getParameter("item_name");
+		String cust_id = (String)req.getSession().getAttribute("cust_id");
+		CustomerVO vo = dao.custDetailInfo(cust_id);
+		
+		String url = "";
+		String page = "";
+		int paykind = 0;
+		
+		if(item_name.equals("펫 시터 결제")) {
+			url = "/tpj/sitter/paySuccess";
+			page = "/tpj/sitter/sitter";
+			paykind = 1;
+		} else if(item_name.equals("펫 훈련 결제")) {
+			url = "/tpj/trainer/paySuccess";
+			page = "/tpj/trainer/trainerSearch";
+			paykind = 2;
+		} else if(item_name.equals("프리미엄 결제")) {
+			url = "/tpj/cust/paySuccess";
+			paykind = 3;
+		}
+		
+		model.addAttribute("item_name", item_name);
+		model.addAttribute("primarykey", primarykey);
+		model.addAttribute("price", price);
+		model.addAttribute("url", url);
+		model.addAttribute("page", page);
+		model.addAttribute("vo", vo);
+		model.addAttribute("paykind", paykind);
+		model.addAttribute("id", cust_id);
+		
 		return "customer/payment/request";
 	}
 	
@@ -53,14 +87,13 @@ public class PaymentController {
 		String price = req.getParameter("payPrice");
 		String item_name = req.getParameter("item_name");
 		String cust_id = (String)req.getSession().getAttribute("cust_id");
-		
 		CustomerVO vo = dao.custDetailInfo(cust_id);
+		
 		
 		URL url;
 		try {
 			// 카카오페이 주소 연결
 			url = new URL("https://kapi.kakao.com/v1/payment/ready");
-			
 			
 			
 			/* ------------------ 카카오페이 서버연결 -------------------- */
@@ -94,10 +127,6 @@ public class PaymentController {
 			params.put("cancel_url","https://localhost:8080/tpj/pay/cancel");
 			params.put("fail_url","https://localhost:8080/tpj/pay/fail");
 			
-			model.addAttribute("item_name", item_name);
-			model.addAttribute("paykind", paykind);
-			model.addAttribute("price", price);
-			model.addAttribute("vo", vo);
 			
 			String strParams = new String();
 			for(Map.Entry<String, String> elem : params.entrySet()) {
@@ -160,6 +189,17 @@ public class PaymentController {
 		System.out.println("merchant_uid : " + merchant_uid);
 		
 		return imp_uid;
+	}
+	
+	@RequestMapping("paySuccess")
+	public String paySuccess(HttpServletRequest req, Model model) {
+		
+		String msg = req.getParameter("msg");
+		
+		model.addAttribute("msg", msg);
+		
+		return "customer/payment/paySuccess";
+		
 	}
 	
 	// 정기구독 카카오 페이

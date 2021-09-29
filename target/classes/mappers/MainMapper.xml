@@ -17,9 +17,9 @@
 	
 	<!-- 결제 - 회원정보 조회 (주소포함) -->
 	<select id = "custDetailInfo" resultType = "ptms.mvc.tpj.CustVO.CustomerVO">
-		SELECT c.*, z.ADDRESS1 FROM CUSTOMER_TB c, ZIPCODES_TB z
+		SELECT c.*, z.ADDRESS1 as ADDRESS1 FROM CUSTOMER_TB c, ZIPCODES_TB z
 		WHERE c.ZIPCODE = z.ZIP_CD
-		AND CUST_ID = ${id}
+		AND CUST_ID = #{id}
 	</select>
 	
 	<!-- 회원가입 처리 -->
@@ -124,4 +124,11 @@
 		from   CALENDAR_KIND_TB ck, CALENDAR_TB cl  
 		where  ck.CK_CD = cl.CK_CD
 	</select>
+	
+	<!-- 결제 정보 처리 -->
+	<insert id="insertPayhistory">
+		INSERT INTO BUYLIST_TB
+		VALUES (BY_CD_SEQ.nextval, #{CUST_ID}, #{PAYKIND_CD}, #{BY_SUM}, #{BY_FEES}, sysdate)
+	</insert>
+	
 </mapper>

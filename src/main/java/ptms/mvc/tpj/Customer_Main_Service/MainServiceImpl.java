@@ -692,24 +692,19 @@ public class MainServiceImpl implements MainService{
 	      //             원하는 값들이 들어있는 '전체'덩어리를 가져온다.
 //	      Elements element = doc.select("div#BODYCON");
 	      Elements element = doc.select("div.GyAeWb");
-	      System.out.println("element : "+element);
 	      Elements element1 = element.select("div.v7W49e");
-	      System.out.println("element1 : "+element1);
 	      Elements element2 = element1.select("g-card.ftSUBd");
-	      System.out.println("element2 : "+element2);
 
 	      // element에 들어있는 세부정보 찾기 - 호텔 이름
 	      Elements detailele = element2.select("a.WlydOe");
 	      
 	      
-	      System.out.println("detailele : "+detailele);
 //	      Elements txt = detailele.select("span.txt");
 	      // element에 들어있는 세부정보 찾기 - 이미지
 //	      Elements detailele2 = element.select("a.sr_item_photo_link");
 //	      Elements detailele2 = element.select("a.[href]");
 //	      System.out.println("detailele2 : "+detailele2);
 	      
-	      System.out.println("=========================================");
 	      //Iterator를 이용하여 하나씩 값을 가져온다.
 	      //전체 덩어리에서 필요한 부분만 선택하여 가져올 수 있다.
 //	      Elements item = detailele.select("a[href]");
@@ -718,7 +713,6 @@ public class MainServiceImpl implements MainService{
 //	      Iterator<Element> img = detailele2.select("img").iterator();
 
 	      for(Element link : detailele) {
-	         System.out.println(link.text());
 	         list.add(link.attr("abs:href"+"\n"));
 	      }
 	      

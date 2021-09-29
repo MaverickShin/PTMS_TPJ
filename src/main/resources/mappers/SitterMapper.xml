@@ -337,4 +337,10 @@
 	<select id="bigSitterReview" resultType="ptms.mvc.tpj.CustVO.SitterVO">
 	
 	</select>
+	
+	<!-- 고객 - 결제 완료 후 요청 테이블 상태 업데이트  -->
+	<select id="updatePay">
+		UPDATE SITTER_REQUEST_TB SET SQ_ST = 1 WHERE SQ_CD = #{SQ_CD}
+	</select>
+	
 </mapper>    

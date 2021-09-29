@@ -209,6 +209,7 @@ function accept() {
 		      </div>
 		  
 		  	  <div class= "result_div">
+		  	  
 			    <c:if test="${selectCnt == 0}">
 			       <div class="about-author d-flex p-4 bg-light">
 			         <div class="desc">

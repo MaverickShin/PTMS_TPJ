@@ -60,6 +60,13 @@ public interface SitterService {
 	// 고객 - (시터로부터) 거절된 요청 내역을 보여주는 페이지 <완료>
 	public void refuseFromSitter(HttpServletRequest req, Model model);
 	
+	
+	
+	/* 21-09-29 / 신도빈  / 결제완료 후 요청테이블 상태 업데이트 'SQ_ST : 1' */
+	// 고객 - 카카오페이 결제 완료 후 요청 테이블 상태 업데이트
+	public int paySuccessUpdate(HttpServletRequest req, Model model);
+	
+	
 	// 고객 - 고객이 결제 완료한 내역을 보여주는 페이지
 	public void matchingList(HttpServletRequest req, Model model);
 	

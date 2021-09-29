@@ -205,5 +205,14 @@ public class MainDAOImpl implements MainDAO {
 		return dao.deleteEvent(CL_CD);				
 	}
 
+	// 결제 정보 입력
+	@Override
+	public int insertPayhistory(Map<String, Object> map) {
+		
+		MainDAO dao = data.getMapper(MainDAO.class);
+		
+		return dao.insertPayhistory(map);
+	}
+
 
 }

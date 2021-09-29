@@ -5,7 +5,9 @@ package ptms.mvc.tpj.Customer_Main_Controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -21,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import ptms.mvc.tpj.Customer_Main_DAO.MainDAOImpl;
 import ptms.mvc.tpj.Customer_Main_Service.MainServiceImpl;
 import ptms.mvc.tpj.Sitter_Service.SitterServiceImpl;
 import ptms.mvc.tpj.TrainerService.TrainerServiceImpl;
@@ -52,6 +54,9 @@ public class MainController {
 	 
 	@Autowired
 	emailSender emailsender;
+	
+	@Autowired
+	MainDAOImpl dao;
 	
 	// 메인페이지 이동
 	@RequestMapping({"", "main", "Newsletter"})
@@ -471,5 +476,28 @@ public class MainController {
       return "customer/mypage/buyList";
    }
    
+   @RequestMapping("test")
+   public String test() {
+	  return "customer/payment/test";
+   }
+   
+   @RequestMapping("paySuccess")
+   public int paySuccess(HttpServletRequest req, Model model) {
+	   
+	   String paykind = req.getParameter("kind");
+	   int price = Integer.parseInt(req.getParameter("price"));
+	   String id = req.getParameter("id");
+	   float fee = (float) (price * 0.5);
+	   
+	   
+	   Map<String, Object> map = new HashMap<>();
+	   
+	   map.put("PAYKIND_CD", paykind);
+	   map.put("CUST_ID", id);
+	   map.put("BY_SUM", price);
+	   map.put("BY_FEES", fee);
+	   
+	   return dao.insertPayhistory(map);
+   }
    
 }

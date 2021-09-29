@@ -3,6 +3,7 @@ package ptms.mvc.tpj.Sitter_Controller;
 import java.text.ParseException;
 import java.util.List;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -115,7 +116,7 @@ public class SitterController {
 	 public String requestForMe(HttpServletRequest req, Model model) {
 		 log.info("url ==> requestForSitter");
 		 
-		 sitterSer.sitterSignInChk(req, model);
+		 sitterSer.allRequestList(req, model);
 		 return "customer/sitter/requestForSitter";
 	 }	
 	 
@@ -356,6 +357,20 @@ public class SitterController {
 		 
 		 sitterSer.themostsitterReview(req, model);
 		 return "customer/sitter/bigSitterReview";
-	 }		 
+	 }	
+	 
+	 
+	 /*
+	  *  날짜 : 21.09.29
+	  *  작성자 : 신도빈
+	  *  내용 : 고객 - 결제 완료 후 요청 테이블 상태 업데이트 (SQ_ST : 1) 
+	  */
+	 @RequestMapping("paySuccess")
+	 public int paySuccess(HttpServletRequest req, Model model) {
+		 
+		 int updateCnt = sitterSer.paySuccessUpdate(req, model);
+		 
+		 return updateCnt;
+	 }
 }
 

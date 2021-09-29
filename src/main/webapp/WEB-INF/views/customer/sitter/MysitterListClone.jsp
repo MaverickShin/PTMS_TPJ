@@ -28,7 +28,7 @@
               <p>고객요청서비스 : ${li.REQ_SV}</p>
               <p>금액 : ${li.SQ_FEE} 원</p> 
               <c:if test = "${li.SQ_ST == 1}">
-              	<p><input type="button" name="reqCancleByCus" value="결제하기" onclick="window.location='payment?SQ_CD=${li.SQ_CD}'"></p>
+              	<p><input type="button" name="reqCancleByCus" value="결제하기" onclick="window.location='/tpj/pay/request?item_name=펫 시터 결제&price=${li.SQ_FEE}&priamrykey=${li.SQ_CD}'"></p>
               </c:if>
               
               <c:if test = "${li.SQ_ST == 0}">
