@@ -154,9 +154,31 @@ function big() {
 	      <p id="star_button" onclick="star();">평점순</p>   
 	      <p id="big_button" onclick="big();">후기 많은 순</p>      
 	    </div>
+	    
 	    <div class = "result_div">
-	      <h1> 버튼을 눌러 후기를 확인해 보세요 </h1>
-	    </div>
+	    
+	    <c:if test="${selectCnt == 0}">
+	       <div class="about-author d-flex p-4 bg-light">
+	         <div class="desc">
+	           <h3></h3>
+	           <p>작성된 후기글이 없습니다. 첫 후기를 작성할수 있는 기회를 놓치지 마세요~!!</p>
+	         </div>
+	       </div>
+    	</c:if>
+    	
+       <c:if test="${selectCnt > 0}"> 
+	   	   <c:forEach var="li" items="${list}">
+	          <div class="about-author d-flex p-4 bg-light" style="place-content:center;">
+	            <div class="desc" style="background-color:#dfe3eb; padding:20px;">
+		       	  <a href=""><img src="${imgPath}${dtos.TA_IMG}"></a><br>
+	              <h6>${dtos.CUST_NM}&nbsp;훈련사</h6><br>
+	              <h6><i class="fas fa-star"></i>${dtos.TG_AVG}&nbsp;<span class="fa fa-comment"></span>${dtos.TG_COUNT}</h6>
+	              <p>서비스지역 : ${dtos.TS_AREA}<br>${dtos.TA_TITLE}</p>
+		        </div>
+	          </div>
+	         </c:forEach>
+	       </c:if>
+	     </div>  
     	</section>
     </div>	
 <%@ include file="../../main/footer.jsp" %>

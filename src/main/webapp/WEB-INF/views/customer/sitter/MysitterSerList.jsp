@@ -93,6 +93,10 @@ $(document).ready(function(){
    background-color: #f5f5f5;
    border: 1px solid #eeeeee;
 }
+
+.result_div {
+	background-color: #e3f2fd;
+}
 </style>
 <script type="text/javascript">
 function matchingFinish() {
@@ -192,7 +196,7 @@ function refuse() {
     <div style="display: flex; flex:1; justify-content:center;">
     	<%@ include file = "sidebar.jsp" %>
 	
-	<section style="width: 700px; margin-left: auto; margin-right: auto; margin-top: 30px;" class = "sections">
+	<section style="width: 800px; margin-left: auto; margin-right: auto; margin-top: 30px;" class = "sections">
 	    
 	    <div class="list_tab">
 	      <p id="left_button" style="background-color: #a3cde3; color: white;" onclick = "request();">요청 수락대기</p>
@@ -201,32 +205,40 @@ function refuse() {
 	      <p id="center_button" onclick ="matchingFinish();">매칭완료</p>
 	    </div>
 	    
-	    <div class = "result_div">
-		    <c:if test="${selectCnt == 0}">
-		       <div class="about-author d-flex p-4 bg-light">
-		         <div class="desc">
-		           <h3></h3>
-		           <p>아직 요청한 펫시터 서비스가 없습니다.첫 펫시팅 서비스를 이용해 보세요!</p>
-		         </div>
-		       </div>
-		    </c:if>
-		   
-		   <c:if test="${selectCnt > 0}"> 
-		   	  <c:forEach var="li" items="${list}">
-		         <div class="about-author d-flex p-4 bg-light" style="place-content:center;">
-		            <div class="desc" style="background-color:#dfe3eb; padding:20px;">
-		              <h5>고객 : ${li.CUST_ID}</h5>&nbsp;<h6>훈련받을 펫 : ${li.SQ_AMT}</h6>
-		              <p>의뢰시작일 : ${li.START_DAY}</p>
-		              <p> 의뢰종료일 : ${li.END_DAY}</p>
-		              <p> 고객요청서비스 : ${li.REQ_SV}</p>
-		              <p>금액 : ${li.SQ_FEE} 원</p> 
-		              <p><input type="button" name="reqCancleByCus" value="요청취소" onclick="window.location='reqsitterSerCancle?SQ_CD=${li.SQ_CD}'"></p>
-		            </div>
-		          </div>
-		       </c:forEach>
-		    </c:if>
+	    
+	    <div class = "result_div" style = "width:100%; padding-top: 10px; padding-bottom:10px;">
+	    
+	    	<div class = "container">
+			    <c:if test="${selectCnt == 0}">
+			       <div class="row" id = "divs" style = "display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 20px; width: 700px; margin-left: auto; margin-right: auto; margin-top: 10px;">			         
+			       <div class="col-md-12">
+			           <h3></h3>
+			           <p>아직 요청한 펫시터 서비스가 없습니다.첫 펫시팅 서비스를 이용해 보세요!</p>
+			         </div>
+			       </div>
+			    </c:if>
+			   
+			   <c:if test="${selectCnt > 0}"> 
+			   	<div class="row" id = "divs" style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 15px; width: 700px; margin-left: auto; margin-right: auto; margin-top: 30px;">
+			   	  <c:forEach var="li" items="${list}">
+			            <div class="col-md-12" style="background-color:#dfe3eb; padding:20px;">
+			              <h5>고객 : ${li.CUST_ID}</h5>&nbsp;<h6>훈련받을 펫 : ${li.SQ_AMT}</h6>
+			              <p>의뢰시작일 : ${li.START_DAY}</p>
+			              <p> 의뢰종료일 : ${li.END_DAY}</p>
+			              <p> 고객요청서비스 : ${li.REQ_SV}</p>
+			              <p>금액 : ${li.SQ_FEE} 원</p> 
+			              <p><input type="button" name="reqCancleByCus" value="요청취소" onclick="window.location='reqsitterSerCancle?SQ_CD=${li.SQ_CD}'"></p>
+			           	  </div>
+			         
+			       </c:forEach>
+			        </div>
+			    </c:if>
+		    </div>
 	    </div> 
+	    
   	 </section>
+  	 
+  	
    </div>
    
    

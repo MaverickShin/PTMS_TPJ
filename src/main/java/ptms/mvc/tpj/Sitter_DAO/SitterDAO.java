@@ -68,10 +68,10 @@ public interface SitterDAO {
 	// 시터 - 고객 의뢰 수락 처리상태(SQ_ST)업데이트
 	public int sitterAccept(int sq_cd);
 	
-	//시터 - 고객 의뢰 수락 리스트 
+	// 시터 - 고객 의뢰 수락 리스트 
 	public List<SitterVO> sitterAcceptList(String CUST_ID);	
 	
-	//시터 - 고객 의뢰 거절 수 구하기
+	// 시터 - 고객 의뢰 거절 수 구하기
 	public int getsitterRefuseCount(String cust_id);
 	
 	// 시터 - 고객 의뢰 거절 처리상태(SQ_ST)업데이트 <완료>
@@ -118,6 +118,9 @@ public interface SitterDAO {
 	
 	// 고객 - 후기작성 (시터 후기 테이블에 INSERT)
 	public int ReviewWrite(SitterVO vo);
+	
+	// 고객 - 시터후기테이블 갯수
+	public int getreviewCnt();
 	
 	// 고객 - 시터후기 미리보기 (별점순) 리스트
 	public List<SitterVO> bestStarSitter();
