@@ -38,7 +38,7 @@
 			<div class="row" style = "display: grid; grid-template-columns:1fr 1fr 1fr 1fr;">
 				<c:if test="${selectCnt > 0}">
 					<c:forEach var="dto" items="${dtos}">
-						<div class="col-md-12" onclick = "window.location = 'trainerDetail?TA_CD=${dto.TA_CD}'">
+						<div class="col-md-12" onclick = "window.location = 'trainerDetail?TA_CD=${dto.TA_CD}&SQ_LOC=${SQ_LOC}'">
 				            <div class="blog-entry align-self-stretch">
 				              <a  class="block-20 rounded" style="background-image: url('${imgPath}image_1.jpg');">
 				              </a>

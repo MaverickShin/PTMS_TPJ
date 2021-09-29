@@ -101,6 +101,21 @@ public class TrainerServiceImpl implements TrainerService{
 
 	@Override
 	public void TrainerList(HttpServletRequest req, Model model) {
+		//페이징
+		int pageSize = 5;	//한 페이지당 출력할 글 갯수
+		int pageBlock = 3;  //한 블럭당 페이지 갯수
+		
+		int cnt = 0;		//글갯수
+		int start = 0;		//현재 페이지 시작 글번호
+		int end = 0;		//현재 페이지 마지막 글번호
+		int number = 0;		//출력용 글번호
+		String pageNum = "";//페이지번호
+		int currentPage = 0;//현재 페이지
+		
+		int pageCount = 0;  //페이지 갯수
+		int startPage = 0;	//시작페이지
+		int endPage = 0;	//마지막 페이지
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		int TQ_AMT = Integer.parseInt(req.getParameter("TQ_AMT"));
@@ -126,27 +141,54 @@ public class TrainerServiceImpl implements TrainerService{
 		
 		int selectCnt = dao.trainerSelectCnt(map);
 		System.out.println("selectCnt : " + selectCnt);
+		pageNum = req.getParameter("pageNum");
+		if(pageNum == null) {
+			pageNum = "1"; // 첫 페이지를 1페이지로 지정
+		}
+		currentPage = Integer.parseInt(pageNum);
+		System.out.println("currentPage : " + currentPage);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1:0);
+		start = (currentPage -1) * pageSize + 1;
+		end = start + pageSize - 1;
+		number = cnt - (currentPage - 1) * pageSize;
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		
+		System.out.println("startPage : " + startPage);
+		endPage = startPage + pageBlock - 1;
+		if(endPage > pageCount) endPage = pageCount;
 		
 		List<TrainerVO> dtos = null;
 		
 		if(selectCnt > 0) {
+			map.put("start", start);
+			map.put("end", end);
+			
 			dtos = dao.trainerList(map);
+			
+			model.addAttribute("startPage", startPage);	// 시작페이지
+			model.addAttribute("endPage", endPage);		// 마지막페이지
+			model.addAttribute("pageBlock", pageBlock);	// 한 블럭당 페이지 갯수
+			model.addAttribute("pageCount", pageCount);	// 페이지 갯수
+			model.addAttribute("currentPage", currentPage); // 현재페이지
 		}
 		
 		model.addAttribute("selectCnt", selectCnt);
 		model.addAttribute("dtos", dtos);
 		model.addAttribute("SQ_LOC", SQ_LOC);
-		
+		model.addAttribute("pageNum", pageNum); // 페이지 번호
+		model.addAttribute("number", number); // 출력용 글번호
 	}
 
 	@Override
 	public void TrainerInfo(HttpServletRequest req, Model model) {
 		String id = (String)req.getSession().getAttribute("cust_id");
-		String SQ_LOC = req.getParameter("SQ_LOC");
+		String TQ_LOC = req.getParameter("SQ_LOC");
 		int TA_CD = Integer.parseInt(req.getParameter("TA_CD"));
 		System.out.println("TA_CD : " + TA_CD);
 		
 		int selectCnt = dao.getPetCount(id);
+		System.out.println("selectCnt  :" + selectCnt);
 		
 		if(selectCnt > 0) {
 			List<TrainerVO> petInfo = dao.getPetInfo(id);
@@ -158,7 +200,7 @@ public class TrainerServiceImpl implements TrainerService{
 		System.out.println(vo.getTS1_NO());
 		model.addAttribute("dto", vo);
 		model.addAttribute("selectCnt", selectCnt);
-		model.addAttribute("SQ_LOC", SQ_LOC);
+		model.addAttribute("TQ_LOC", TQ_LOC);
 	}
 
 	// 훈련사 정보 수정 화면
@@ -290,6 +332,9 @@ public class TrainerServiceImpl implements TrainerService{
 			vo.setTQ_AMT("짖음해결");
 		}
 		
+		int TQ_FEE = Integer.parseInt(req.getParameter("TQ_FEE"));
+		System.out.println("TQ_FEE : " + TQ_FEE);
+		
 		String PET_NM[] = req.getParameterValues("PET_NM");
 		
 		String result = "";
@@ -299,9 +344,10 @@ public class TrainerServiceImpl implements TrainerService{
 			if(PET_NM.length == 0) {
 				result += PET_NM[i];
 			} else {
-				result += PET_NM[i] + ", ";
+				result += PET_NM[i] + " ";
 			}
 		}
+		vo.setTQ_FEE(TQ_FEE * PET_NM.length);
 		System.out.println("result : " + result);
 		vo.setPET_NM(result);
 		
@@ -418,11 +464,12 @@ public class TrainerServiceImpl implements TrainerService{
 		System.out.println("아이디 : " + id);
 		
 		int selectCnt = dao.custReqResultwaitCnt(id);
-		System.out.println("selectCnt : " + selectCnt);
+		System.out.println("수락요청대기selectCnt : " + selectCnt);
 		
 		List<TrainerRequestVO> vo = null;
 		if(selectCnt > 0) {
 			vo = dao.custReqResultwaitList(id);
+			
 		}
 		model.addAttribute("selectCnt", selectCnt);
 		model.addAttribute("dto", vo);
@@ -531,13 +578,22 @@ public class TrainerServiceImpl implements TrainerService{
 		int insertCnt = dao.insertTrainingReview(vo);
 		model.addAttribute("insertCnt", insertCnt);
 	}
-
+/*
 	@Override
 	public void previewTrainingGrade(HttpServletRequest req, Model model) {
 		
+		int selectCnt = dao.trainingGradeCnt();
+		System.out.println("selectCnt : " + selectCnt);
+		
+		List<TrainerVO> vo = null;
+		if(selectCnt > 0) {
+			vo = dao.previewTrainingGrade();
+		}
+		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("dto", vo);
 		
 	}
-
+*/
 	// 고객 - 결제완료 내역
 	@Override
 	public void payment(HttpServletRequest req, Model model) {
@@ -550,4 +606,50 @@ public class TrainerServiceImpl implements TrainerService{
 		model.addAttribute("list", vo);
 		model.addAttribute("selectCnt", selectCnt);
 	}
+
+	@Override
+	public void TrainingServiceComplete(HttpServletRequest req, Model model) {
+		String id = (String)req.getSession().getAttribute("cust_id");
+		System.out.println("id : " + id);
+		
+		int selectCnt = dao.TrainingServiceCompleteCnt(id);
+		System.out.println("selectCnt : " + selectCnt);
+		
+		List<TrainerRequestVO> vo = null;
+		if(selectCnt > 0) {
+			vo = dao.TrainingServiceCompleteList(id);
+		}
+		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("dto", vo);
+		
+	}
+	/*
+	@Override
+	public void newTrainerList(HttpServletRequest req, Model model) {
+		
+		int selectCnt = dao.newTrainerCnt();
+		
+		List<TrainerVO> vo = null;
+		if(selectCnt > 0) {
+			vo = dao.newTrainerList();
+		}
+		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("dto", vo);
+		
+	}
+
+	@Override
+	public void lotsOfReviews(HttpServletRequest req, Model model) {
+		
+		int selectCnt = dao.lotsOfReviewsCnt();
+		
+		List<TrainerVO> vo = null;
+		if(selectCnt > 0) {
+			vo = dao.lotsOfReviews();
+		}
+		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("dto", vo);
+		
+	}
+	*/
 }

@@ -12,7 +12,7 @@
 	<c:if test="${updateCnt != 0}">
 		<script type="text/javascript">
 			alert("요청이 수락되었습니다.");
-			window.location="acceptTrainingList";
+			window.location="${tr}acceptTrainingList";
 		</script>
 	</c:if>
 	

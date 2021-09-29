@@ -48,15 +48,15 @@ $(function(){ // document ready
 						<td><a href="/tpj/trainer/trainerSearch">훈련사 찾기</a></td>
 					</tr>
 					
-					<tr>
-						<td><a href="/tpj/trainer/MysitterSerList">이용 후기</a></td>
-					</tr>
+					<!-- <tr>
+						<td><a href="/tpj/trainer/previewTraining">후기 미리보기</a></td>
+					</tr> -->
 					
 					<tr>
-						<td><a href="/tpj/trainer/custReqResult">요청 내역</a></td>
+						<td><a href="/tpj/trainer/custReqResult">요청내역 및 후기작성</a></td>
 					</tr>
 					<tr>
-						<td style = "background-color: white; color:#00bd56; font-size: 24px;"><strong>펫 시터</strong></td>
+						<td style = "background-color: white; color:#00bd56; font-size: 24px;"><strong>펫 훈련사</strong></td>
 					</tr>
 					
 					<tr>
