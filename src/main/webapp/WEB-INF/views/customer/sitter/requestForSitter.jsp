@@ -219,6 +219,7 @@ function accept() {
 			    </c:if> 
 	   
 			   <c:if test="${selectCnt > 0}"> 
+			   	<div class="row" id = "divs" style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 15px; width: 700px; margin-left: auto; margin-right: auto; margin-top: 30px;">			   
 			   	  <c:forEach var="li" items="${list}">
 			         <div class="about-author d-flex p-4 bg-light" style="place-content:center;">
 			            <div class="desc" style="background-color:#dfe3eb; padding:20px;">
@@ -232,6 +233,7 @@ function accept() {
 			            </div>
 			          </div>
 			       </c:forEach>
+			       </div>
 			    </c:if> 
 			    </div>
 	    	</section>

@@ -70,10 +70,10 @@
 									<h2>나의 반려동물</h2>
 									<c:if test="${selectCnt > 0 }"> 
 										<div style = "display:flex; margin-top: 30px;">
-											<c:forEach var="li" items="${list}">
+											<c:forEach var="li" items="${list}" varStatus = "st">
 												<p class = "chk_p1">
-													<label class = "chk_label1" for = "pet_li_${li.PK_CD}">
-														<input type="checkbox" id = "pet_li_${li.PK_CD}" class = "sel_chk1" name="pk_cd" value="${li.PK_CD}">
+													<label class = "chk_label1" for = "pet_li_${st.index}">
+														<input type="checkbox" id = "pet_li_${st.index}" class = "sel_chk1" name="pk_cd" value="${li.PK_CD}">
 														<span class="checkbox_icon"></span>
 														<span class = "list_label_span2">${li.PET_NM}(${li.PK_CD})</span>
 													</label>

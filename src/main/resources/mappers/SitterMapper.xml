@@ -323,6 +323,12 @@
 		WHERE CUST_ID=#{CUST_ID}
 	</select>
 	
+	<!-- 고객 - 시터후기테이블 갯수	 -->
+	<select id="getbestStarSitter" resultType="int">
+		SELECT COUNT(*) 
+		FROM SITTER_GRADE_TB;
+	</select>
+	
 	<!-- 고객 - 시터후기 미리보기 (별점순) 정렬 -->
 	<select id="bestStarSitter" resultType="ptms.mvc.tpj.CustVO.SitterVO">
 	
@@ -332,7 +338,7 @@
 	<select id="newSitterReview" resultType="ptms.mvc.tpj.CustVO.SitterVO">
 	
 	</select>
-	
+		
 	<!-- 고객 - 시터후기 미리보기 (후기많은순) 리스트 정렬 -->
 	<select id="bigSitterReview" resultType="ptms.mvc.tpj.CustVO.SitterVO">
 	

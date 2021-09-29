@@ -628,7 +628,15 @@ public class SitterServiceImpl implements SitterService{
 	public void highSittergrade(HttpServletRequest req, Model model) {
 		System.out.println("service ==> highSittergrade");
 		
-		List<SitterVO> list = sitterDao.bestStarSitter();
+		int selectCnt = sitterDao.getreviewCnt();
+		System.out.println("후기테이블selectCnt : " + selectCnt);
+		List<SitterVO> list=null;
+		
+		if(selectCnt > 0) {
+		 list = sitterDao.bestStarSitter();
+		}
+		
+		model.addAttribute("selectCnt" , selectCnt);
 		model.addAttribute("list", list);
 	}
 
@@ -637,7 +645,15 @@ public class SitterServiceImpl implements SitterService{
 	public void newSitterPost(HttpServletRequest req, Model model) {
 		System.out.println("service ==> newSitterPost");
 		
-		List<SitterVO> list = sitterDao.newSitterReview();
+		int selectCnt = sitterDao.getreviewCnt();
+		System.out.println("후기테이블selectCnt : " + selectCnt);
+		List<SitterVO> list=null;
+		
+		if(selectCnt > 0) {
+		 list = sitterDao.newSitterReview();
+		}
+		
+		model.addAttribute("selectCnt" , selectCnt);
 		model.addAttribute("list", list);
 	}
 
@@ -646,7 +662,15 @@ public class SitterServiceImpl implements SitterService{
 	public void themostsitterReview(HttpServletRequest req, Model model) {
 		System.out.println("service ==> themostsitterReview");
 		
-		List<SitterVO> list = sitterDao.bigSitterReview();
+		int selectCnt = sitterDao.getreviewCnt();
+		System.out.println("후기테이블selectCnt : " + selectCnt);
+		List<SitterVO> list=null;
+		
+		if(selectCnt > 0) {
+		 list = sitterDao.bigSitterReview();
+		}
+		
+		model.addAttribute("selectCnt" , selectCnt);
 		model.addAttribute("list", list);
 	}
 	
