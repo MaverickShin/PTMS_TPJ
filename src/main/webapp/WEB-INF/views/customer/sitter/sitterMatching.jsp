@@ -54,7 +54,7 @@
 			<div class="container" style="margin-top: 50px;">
 				<div class="row"
 					style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 15px;">
-					<c:if test="${selectCnt > 0}">
+					<c:if test="${cnt > 0}">
 						<c:forEach var="dto" items="${dtos}" varStatus = "i">
 							<form action = "sitterDetail" method = "post" id = "detail_form">
 								<div class="col-md-12" id = "detail_submit">
@@ -84,7 +84,6 @@
 													<a href="#" class="meta-chat"><span
 														class="fa fa-comment"></span>3</a>
 												</div>
-												<!-- 이곳에 좋아요 갯수 또는 평점을 넣으면 좋지 않을까? -->
 											</div>
 											<h3 class="heading">
 												${dto.SIT_TITLE}
@@ -100,16 +99,46 @@
 						</c:forEach>
 					</c:if>
 					
-					<c:if test="${selectCnt == 0}">
+					<c:if test="${cnt == 0}">
 						<div>
 							매칭결과가 없습니다. 다시 조건을 입력해 주세요.
 						</div>
 					</c:if>
 				</div>
+				<div class = "page_control">
+               <table>
+                  <tr>
+                     <th align = "center">
+                        <!-- 게시글이 있으면 -->
+                        <!-- 처음[◀◀]    / 이전블록[◀]  / -->
+                        <c:if test = "${startPage > pageBlock}">
+                           <a href = "sitterMatching"> [◀◀] </a>
+                           <a href = "sitterMatching?pageNum=${startPage - pageBlock}"> [◀] </a>
+                        </c:if>
+                        
+                        <!-- 블록내의 페이지 번호 -->
+                        <c:forEach var = "i" begin = "${startPage}" end = "${endPage}">
+                           <c:if test = "${i == currentPage}">
+                              <span style = "cursor: pointer;"><b>[${i}]</b></span>
+                           </c:if>
+                           
+                           <c:if test = "${i != currentPage}">
+                              <a href = "sitterMatching?pageNum=${i}">[${i}]</a>
+                           </c:if>
+                        </c:forEach>
+                        
+                        <!-- 다음[▶]   /  마지막[▶▶]  / -->
+                        <c:if test = "${pageCount > endPage}">
+                           <a href = "sitterMatching?pageNum=${startPage + pageBlock}">[▶]</a>
+                           <a href = "sitterMatching?pageNum=${pageCount}">[▶▶]</a>
+                        </c:if>
+                     </th>
+                  </tr>
+               </table>
+            </div>
 		</div>
 	</div>
 
 	<%@ include file="../../main/footer.jsp"%>
-	시터매칭
 </body>
 </html>

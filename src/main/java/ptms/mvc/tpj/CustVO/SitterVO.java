@@ -55,6 +55,10 @@ public class SitterVO {
 	 private String PET_NM;			//펫이름
 	 
 	 
+	 //페이징처리
+	 private int start;   //첫번째건수ㄴ
+	 private int end;     //마지막건수
+	 
 	public int getSR_CD() {
 		return SR_CD;
 	}
@@ -339,6 +343,22 @@ public class SitterVO {
 
 	public void setREQ_SV(String rEQ_SV) {
 		REQ_SV = rEQ_SV;
+	}
+
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	public int getEnd() {
+		return end;
+	}
+
+	public void setEnd(int end) {
+		this.end = end;
 	}
 	
 	

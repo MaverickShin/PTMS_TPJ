@@ -2,6 +2,7 @@ package ptms.mvc.tpj.Sitter_DAO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import ptms.mvc.tpj.CustVO.PetVO;
 import ptms.mvc.tpj.CustVO.SitterVO;
@@ -30,8 +31,14 @@ public interface SitterDAO {
 	// 펫시터 찾기 - 리스트 출력  <완료>
 	public List<SitterVO> activityList(SitterVO vo);
 	
-	// 시터 상세 조회 페이지  <완료>
+	// 고객 - 시터찾기 상세 페이지  <완료>
 	public SitterVO detailSitter(int sit_id);
+	
+	// 고객 - 시터찾기 상세페이지 - 리뷰 갯수
+	public int sitreviwCnt(int sit_id);
+	
+	// 고객 - 시터찾기 상세페이지 - 리뷰 리스트
+	public List<SitterVO> sitreviewList(int sit_id);
 	
 	// 지정 시터 후기 조회
 	public SitterVO gradeSitter(int sit_id);
@@ -40,7 +47,7 @@ public interface SitterDAO {
 	public int getRequestList(String cust_id);
 	
 	// 시터 의뢰 목록 (나에게온 의뢰)  <완료>
-	public List<SitterVO> selectRequestList(String cust_id);
+	public List<SitterVO> selectRequestList(Map<String, Object> map);
 	
 	// 펫시팅 신청하기 - 요청테이블에 insert <완료>
 	public int selectRequestInsert(SitterVO vo);
@@ -69,7 +76,7 @@ public interface SitterDAO {
 	public int sitterAccept(int sq_cd);
 	
 	// 시터 - 고객 의뢰 수락 리스트 
-	public List<SitterVO> sitterAcceptList(String CUST_ID);	
+	public List<SitterVO> sitterAcceptList(Map<String, Object> map);	
 	
 	// 시터 - 고객 의뢰 거절 수 구하기
 	public int getsitterRefuseCount(String cust_id);
@@ -78,13 +85,13 @@ public interface SitterDAO {
 	public int sitterRefuse(int SQ_CD);
 	
 	// 시터 - 고객 의뢰 거절 리스트 <완료>
-	public List<SitterVO> sitterRefuseList(String CUST_ID);	
+	public List<SitterVO> sitterRefuseList(Map<String, Object> map);	
 	
 	// 시터 - 고객 의뢰 매칭완료 수 구하기
 	public int getSitterMTFinCount(String CUST_ID);
 	
 	// 시터 - 고객 의뢰 매칭완료 리스트
-	public List<SitterVO> sitterMatchingFinList(String CUST_ID);	
+	public List<SitterVO> sitterMatchingFinList(Map<String, Object> map);	
 	
 	// 고객 - 요청수락대기 리스트 수 구하기
 	public int getWaitReqAccept(String CUST_ID);
@@ -93,25 +100,28 @@ public interface SitterDAO {
 	public int sitterReqCancle(int SQ_CD);
 	
 	// 고객 - 요청수락대기 리스트 
-	public List<SitterVO> sitterWaitReqList(String CUST_ID);
+	public List<SitterVO> sitterWaitReqList(Map<String, Object> map);
 	
 	// 고객 - 수락된 요청 리스트 수 구하기
 	public int getAcceptList(String CUST_ID);
 	
 	// 고객 - 수락된 요청 리스트
-	public List<SitterVO> acceptReqList(String CUST_ID);
+	public List<SitterVO> acceptReqList(Map<String, Object> map);
+
+	// 고객 - 결제 완료 후 매칭확정 버튼을 클릭하면 처리상태(SQ_ST) 4로 업데이트
+	public int matchingConfirm(int sq_cd);
 	
 	// 고객 - 거절된 요청 리스트 수 구하기
 	public int getRefuseList(String CUST_ID);
 	
 	// 고객 - 거절된 요청 리스트
-	public List<SitterVO> refuseReqList(String CUST_ID);
+	public List<SitterVO> refuseReqList(Map<String, Object> map);
 	
 	// 고객 - 매칭완료된 서비스 리스트 수 구하기
 	public int getMatchingFin(String CUST_ID);
 	
 	// 고객 - 매칭완료된 서비스 리스트 
-	public List<SitterVO> MatchingFinish(String CUST_ID);
+	public List<SitterVO> MatchingFinish(Map<String, Object> map);
 	
 	// 고객 - 매칭 완료 후 후기 작성 중복체크
 	public int sittterReviewChkCnt(int SQ_CD);
@@ -120,16 +130,16 @@ public interface SitterDAO {
 	public int ReviewWrite(SitterVO vo);
 	
 	// 고객 - 시터후기테이블 갯수
-	public int getreviewCnt();
+	//public int getreviewCnt();
 	
 	// 고객 - 시터후기 미리보기 (별점순) 리스트
-	public List<SitterVO> bestStarSitter();
+	//public List<SitterVO> bestStarSitter();
 	
 	// 고객 - 시터후기 미리보기 (최신작성순) 리스트
-	public List<SitterVO> newSitterReview();
+	//public List<SitterVO> newSitterReview();
 	
 	// 고객 - 시터후기 미리보기 (후기많은순) 리스트
-	public List<SitterVO> bigSitterReview();
+	//public List<SitterVO> bigSitterReview();
 	
 	//요금표 리스트 <완료>
 	public ArrayList<PetVO> getPriceList();

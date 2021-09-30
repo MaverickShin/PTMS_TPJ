@@ -112,7 +112,7 @@ public class SitterController {
 	 /*
 	  * 날짜 : 21.09.24
 	  * 작성자 : 임지영
-	  * 내용 : 시터 - 나에게 온 의뢰 목록
+	  * 내용 : 시터 - 고객으로부터의 요청 수락대기
 	  */
 	 @RequestMapping("requestForSitter")
 	 public String requestForMe(HttpServletRequest req, Model model) {
@@ -150,7 +150,7 @@ public class SitterController {
 	  */
 	 @RequestMapping("sitterAcceptList")
 	 public String sitterAcceptList(HttpServletRequest req, Model model) {
-		 log.info("url ==> sitterRefuse");
+		 log.info("url ==> sitterAcceptList");
 		 
 		 sitterSer.acceptRequestList(req, model);
 		 return "customer/sitter/requestForSitterClone";
@@ -174,7 +174,7 @@ public class SitterController {
 	  * 작성자 : 임지영
 	  * 내용 : 시터 - 펫시터가 거절한 고객요청 내역을 보여주는 페이지
 	  */
-	 @RequestMapping("sitterRefuseList")
+	 @RequestMapping("sitterRefuseList") 
 	 public String sitterRefuseList(HttpServletRequest req, Model model) {
 		 log.info("url ==> sitterRefuseList");
 		 
@@ -257,6 +257,19 @@ public class SitterController {
 	 }		
 	 
 	 /*
+	  * 날짜 : 21.09.30
+	  * 작성자 : 임지영
+	  * 내용 : 고객 - 결제 완료 후 매칭확정 버튼을 클릭하면 처리상태(SQ_ST) 로 업데이트
+	  */
+	 @RequestMapping("matchingConfirm")
+	 public String matchingConfirm(HttpServletRequest req, Model model) {
+		 log.info("url ==> matchingConfirm");
+		 
+		 sitterSer.matchingConfirm(req, model);
+		 return "customer/sitter/matchingConfirm";
+	 }		 
+	 
+	 /*
 	  * 날짜 : 21.09.25
 	  * 작성자 : 임지영
 	  * 내용 : 고객 - 매칭완료된 리스트
@@ -308,17 +321,17 @@ public class SitterController {
 		 sitterSer.writeSitterReview(req, model);
 		 return "customer/sitter/MysitterreviewAction";
 	 }	 
-	 
+/*	 
 	 /*
 	  *  날짜 : 21.09.28
 	  *  작성자 : 임지영
 	  *  내용 : 고객 - 펫시터 후기 미리보기 페이지
-	  */
+	  
 	 @RequestMapping("sitterPreview")
 	 public String sitterPreview(HttpServletRequest req, Model model) {
-		 log.info("url ==> sitterPreview");
+		 log.info("url ==> sitterPreview"); 
 		 
-		 sitterSer.highSittergrade(req, model);
+		 sitterSer.highSittergrade(req, model); 
 		 return "customer/sitter/sitterPreview";
 	 }		
 	 	 
@@ -326,7 +339,7 @@ public class SitterController {
 	  *  날짜 : 21.09.28
 	  *  작성자 : 임지영
 	  *  내용 : 고객 - 펫시터 후기글을 별점높은순 으로 볼 수 있는 페이지 
-	  */
+	  
 	 @RequestMapping("bestStarSitter")
 	 public String bestStarSitter(HttpServletRequest req, Model model) {
 		 log.info("url ==> bestStarSitter");
@@ -339,7 +352,7 @@ public class SitterController {
 	  *  날짜 : 21.09.28
 	  *  작성자 : 임지영
 	  *  내용 : 고객 - 펫시터 후기글을 최신작성순으로 볼 수 있는 페이지 
-	  */
+	  
 	 @RequestMapping("newSitterReview")
 	 public String newSitterReview(HttpServletRequest req, Model model) {
 		 log.info("url ==> newSitterReview");
@@ -352,7 +365,7 @@ public class SitterController {
 	  *  날짜 : 21.09.28
 	  *  작성자 : 임지영
 	  *  내용 : 고객 - 펫시터 후기글을 후기많은순 으로 볼 수 있는 페이지 
-	  */
+	  
 	 @RequestMapping("bigSitterReview")
 	 public String bigSitterReview(HttpServletRequest req, Model model) {
 		 log.info("url ==> bigSitterReview");
@@ -360,7 +373,7 @@ public class SitterController {
 		 sitterSer.themostsitterReview(req, model);
 		 return "customer/sitter/bigSitterReview";
 	 }	
-	 
+*/	 
 	 
 	 /*
 	  *  날짜 : 21.09.29

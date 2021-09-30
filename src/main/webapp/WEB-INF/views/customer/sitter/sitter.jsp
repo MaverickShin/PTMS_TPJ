@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>Insert title here</title>
 </head>
 <%@ include file="../../main/header.jsp"%>
@@ -70,12 +71,12 @@
 									<h2>나의 반려동물</h2>
 									<c:if test="${selectCnt > 0 }"> 
 										<div style = "display:flex; margin-top: 30px;">
-											<c:forEach var="li" items="${list}" varStatus = "st">
+											<c:forEach var="li" items="${list}" varStatus = "st" >
 												<p class = "chk_p1">
 													<label class = "chk_label1" for = "pet_li_${st.index}">
-														<input type="checkbox" id = "pet_li_${st.index}" class = "sel_chk1" name="pk_cd" value="${li.PK_CD}">
+														<input type="checkbox" id = "pet_li_${st.index}" name="pk_cd" class = "sel_chk1" value="${li.PK_CD}">
 														<span class="checkbox_icon"></span>
-														<span class = "list_label_span2">${li.PET_NM}(${li.PK_CD})</span>
+														<span class = "list_label_span2" >${li.PET_NM}(${li.PK_CD})</span>
 													</label>
 												</p>
 						        			</c:forEach>

@@ -55,6 +55,24 @@ function addressSerch() {
 
 // sitter/sitter(펫시터찾기)
 function sittingCheck(){
+	
+	var gSize = "";
+
+	$("input[name=pk_cd]:checked").each(function() {
+
+	if(gSize == ""){
+
+	gSize = $(this).val();
+
+	} else {
+
+	gSize = gSize + "," + $(this).val();
+
+	}
+
+	});
+
+
 	if(!document.sitterMatching.SV_AREA.value){
 		alert("시 또는 구를 입력해 주세요.");
 		document.sitterMatching.SV_AREA.focus();
@@ -67,5 +85,10 @@ function sittingCheck(){
 		alert("서비스 종료일을 지정해 주세요.");
 		document.sitterMatching.WK_END.focus();
 		return false;
+	}else if(!gSize){
+		alert("한마리 이상의 반려동물을 선택하셔야 합니다.");
+		return false;
 	}
+	
 }
+

@@ -60,7 +60,8 @@ public interface SitterService {
 	// 고객 - (시터로부터) 거절된 요청 내역을 보여주는 페이지 <완료>
 	public void refuseFromSitter(HttpServletRequest req, Model model);
 	
-	
+	// 고객 - 결제 완료 후 매칭확정 버튼을 클릭하면 처리상태(SQ_ST) 4로 업데이트
+	public void matchingConfirm(HttpServletRequest req, Model model);
 	
 	/* 21-09-29 / 신도빈  / 결제완료 후 요청테이블 상태 업데이트 'SQ_ST : 1' */
 	// 고객 - 카카오페이 결제 완료 후 요청 테이블 상태 업데이트
@@ -74,13 +75,13 @@ public interface SitterService {
 	public void writeSitterReview(HttpServletRequest req, Model model);
 	
 	// 고객 - 시터후기 미리보기(별점 높은순)
-	public void highSittergrade(HttpServletRequest req, Model model);
+	//public void highSittergrade(HttpServletRequest req, Model model);
 	
 	// 고객 - 시터후기 미리보기(최신등록순)
-	public void newSitterPost(HttpServletRequest req, Model model);
+	//public void newSitterPost(HttpServletRequest req, Model model);
 	
 	// 고객 - 시터후기 미리보기(후기 많은순)
-	public void themostsitterReview(HttpServletRequest req, Model model);
+	//public void themostsitterReview(HttpServletRequest req, Model model);
 	
 	// 결제하기
 	public void sitterPay(HttpServletRequest req, Model model);

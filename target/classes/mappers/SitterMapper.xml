@@ -102,28 +102,34 @@
 	<!-- 펫시터 찾기 - 리스트 출력  -->
 	<select id="activityList" parameterType="ptms.mvc.tpj.CustVO.SitterVO" resultType="ptms.mvc.tpj.CustVO.SitterVO">
 	  <![CDATA[
-		SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM
-	          FROM SITTERS_TB s, SITTER_SERVICE_TB ser, CUSTOMER_TB c
-	          WHERE s.SIT_ID = ser.SIT_ID
-	          AND s.CUST_ID = c.CUST_ID
-	          AND ser.SV_AREA LIKE '%'||#{SV_AREA}||'%'
-	          AND s.SIT_ST = 1
-	          INTERSECT
-		SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM
-	          FROM SITTERS_TB s, SITTER_SERVICE_TB ser, CUSTOMER_TB c
-	          WHERE s.SIT_ID = ser.SIT_ID
-	          AND s.CUST_ID = c.CUST_ID
-	          AND #{WK_START} between ser.WK_START AND ser.WK_END
-	          AND #{WK_END} between ser.WK_START AND ser.WK_END
-	          INTERSECT
-		SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM
-	          FROM SITTERS_TB s, SITTER_SERVICE_TB ser, CUSTOMER_TB c
-	          WHERE s.SIT_ID = ser.SIT_ID
-	          AND s.CUST_ID = c.CUST_ID
-	          AND ser.SV1_NO >= #{SV1_NO}
-	          AND ser.SV2_NO >= #{SV2_NO}
-			  AND ser.SV3_NO >= #{SV3_NO}
-			  AND ser.SV4_NO >= #{SV4_NO}		
+	  	 SELECT *
+	  	 FROM
+	  	 (SELECT SIT_ID, SIT_TITLE, SIT_APPEAL, SIT_IMG, CUST_NM, ROWNUM rNUM
+	  	 	FROM(
+			SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM
+		          FROM SITTERS_TB s, SITTER_SERVICE_TB ser, CUSTOMER_TB c
+		          WHERE s.SIT_ID = ser.SIT_ID
+		          AND s.CUST_ID = c.CUST_ID
+		          AND ser.SV_AREA LIKE '%'||#{SV_AREA}||'%'
+		          AND s.SIT_ST = 1
+		          INTERSECT
+			SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM
+		          FROM SITTERS_TB s, SITTER_SERVICE_TB ser, CUSTOMER_TB c
+		          WHERE s.SIT_ID = ser.SIT_ID
+		          AND s.CUST_ID = c.CUST_ID
+		          AND #{WK_START} between ser.WK_START AND ser.WK_END
+		          AND #{WK_END} between ser.WK_START AND ser.WK_END
+		          INTERSECT
+			SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM
+		          FROM SITTERS_TB s, SITTER_SERVICE_TB ser, CUSTOMER_TB c
+		          WHERE s.SIT_ID = ser.SIT_ID
+		          AND s.CUST_ID = c.CUST_ID
+		          AND ser.SV1_NO >= #{SV1_NO}
+		          AND ser.SV2_NO >= #{SV2_NO}
+				  AND ser.SV3_NO >= #{SV3_NO}
+				  AND ser.SV4_NO >= #{SV4_NO})	
+				)	
+			 where rNUM >= #{start} and rNUM <= #{end}
 	   ]]>		  	  
 	</select>
 	
@@ -133,6 +139,23 @@
 		FROM PET_TB p, CUSTOMER_TB c
 		WHERE c.CUST_ID = p.CUST_ID
 		AND c.CUST_ID=#{CUST_ID}
+	</select>
+	
+	<!-- 고객 - 시터찾기 상세페이지 - 리뷰 갯수  -->
+	<select id="sitreviwCnt" parameterType="int" resultType="int">
+		SELECT COUNT(*)
+		FROM SITTER_GRADE_TB
+		WHERE SIT_ID=#{SIT_ID}
+	</select>
+	
+	<!-- 고객 - 시터찾기 상세페이지 - 리뷰 리스트 -->
+	<select id="sitreviewList" parameterType="int" resultType="ptms.mvc.tpj.CustVO.SitterVO">
+		<![CDATA[
+			SELECT *
+			FROM SITTER_GRADE_TB
+			WHERE SIT_ID=#{SIT_ID}
+			AND rowNum >= 1 and rownum <= 3
+		]]>
 	</select>
 	
 	<!-- 펫시팅 신청하기 - 요청테이블에 insert -->
@@ -151,12 +174,21 @@
 	</select>
 	
 	<!-- 지정 시터 의뢰 목록 (나에게온 의뢰) -->
-	<select id="selectRequestList" parameterType="String" resultType="ptms.mvc.tpj.CustVO.SitterVO">
-		SELECT req.*
-		FROM SITTER_REQUEST_TB req, SITTERS_TB s
-		WHERE s.CUST_ID =#{CUST_ID}
-		AND req.SIT_ID = s.SIT_ID
-		AND req.SQ_ST =0
+	<select id="selectRequestList" parameterType="java.util.Map" resultType="ptms.mvc.tpj.CustVO.SitterVO">
+	  <![CDATA[
+	  	 SELECT *
+	  	 FROM	
+	  	  (SELECT r.*, ROWNUM rNUM
+	  	    FROM(
+			 SELECT req.*
+				FROM SITTER_REQUEST_TB req, SITTERS_TB s
+				WHERE s.CUST_ID =#{CUST_ID}
+				AND req.SIT_ID = s.SIT_ID
+				AND req.SQ_ST =0)r
+			)
+			 where rNUM >= #{start} and rNUM <= #{end}
+             ORDER BY SQ_DT DESC
+	   ]]>					
 	</select>
 	
 	<!-- 시터 - 고객 의뢰 수락 수 구하기 -->
@@ -177,12 +209,21 @@
 	</update>
 	
 	<!-- 시터 - 고객 의뢰 수락 리스트	 -->
-	<select id="sitterAcceptList" parameterType="String" resultType="ptms.mvc.tpj.CustVO.SitterVO">
-		SELECT req.*
-		FROM SITTER_REQUEST_TB req, SITTERS_TB s
-		WHERE s.CUST_ID =#{CUST_ID}
-		AND req.SIT_ID = s.SIT_ID
-		AND SQ_ST=1
+	<select id="sitterAcceptList" parameterType="java.util.Map" resultType="ptms.mvc.tpj.CustVO.SitterVO">
+	  <![CDATA[
+	  	 SELECT *
+	  	 FROM	
+	  	  (SELECT r.*, ROWNUM rNUM
+	  	    FROM(
+			 SELECT req.*
+				FROM SITTER_REQUEST_TB req, SITTERS_TB s
+				WHERE s.CUST_ID =#{CUST_ID}
+				AND req.SIT_ID = s.SIT_ID
+				AND req.SQ_ST =1)r
+			)
+			 where rNUM >= #{start} and rNUM <= #{end}
+			 ORDER BY SQ_DT DESC
+	   ]]>	
 	</select>
 	
 	<!-- 시터 - 고객 의뢰 거절 수 구하기 -->
@@ -202,12 +243,21 @@
 	</update>
 	
 	<!-- 시터 - 고객 의뢰 거절 리스트	 -->
-	<select id="sitterRefuseList" parameterType="String" resultType="ptms.mvc.tpj.CustVO.SitterVO">
-		SELECT req.*
-		FROM SITTER_REQUEST_TB req, SITTERS_TB s
-		WHERE s.CUST_ID =#{CUST_ID}
-		AND req.SIT_ID = s.SIT_ID
-		AND SQ_ST=2
+	<select id="sitterRefuseList" parameterType="java.util.Map" resultType="ptms.mvc.tpj.CustVO.SitterVO">
+	  <![CDATA[
+	  	 SELECT *
+	  	 FROM	
+	  	  (SELECT r.*, ROWNUM rNUM
+	  	    FROM(
+			 SELECT req.*
+				FROM SITTER_REQUEST_TB req, SITTERS_TB s
+				WHERE s.CUST_ID =#{CUST_ID}
+				AND req.SIT_ID = s.SIT_ID
+				AND req.SQ_ST =2)r
+			)
+			 where rNUM >= #{start} and rNUM <= #{end}
+			 ORDER BY SQ_DT DESC
+	   ]]>	
 	</select>
 
 	<!-- 시터 - 고객 의뢰 매칭완료 수 구하기 -->
@@ -216,16 +266,25 @@
 		FROM SITTER_REQUEST_TB req, SITTERS_TB s
 		WHERE s.CUST_ID =#{CUST_ID}
 		AND req.SIT_ID = s.SIT_ID
-		AND req.SQ_ST =3	
+		AND req.SQ_ST =4	
 	</select>
 	
 	<!-- 시터 - 고객 의뢰 매칭완료 리스트 -->
-	<select id="sitterMatchingFinList" parameterType="String" resultType="ptms.mvc.tpj.CustVO.SitterVO" >
-		SELECT req.*
-		FROM SITTER_REQUEST_TB req, SITTERS_TB s
-		WHERE s.CUST_ID =#{CUST_ID}
-		AND req.SIT_ID = s.SIT_ID
-		AND SQ_ST=3
+	<select id="sitterMatchingFinList" parameterType="java.util.Map" resultType="ptms.mvc.tpj.CustVO.SitterVO" >
+	  <![CDATA[
+	  	 SELECT *
+	  	 FROM	
+	  	  (SELECT r.*, ROWNUM rNUM
+	  	    FROM(
+			 SELECT req.*
+				FROM SITTER_REQUEST_TB req, SITTERS_TB s
+				WHERE s.CUST_ID =#{CUST_ID}
+				AND req.SIT_ID = s.SIT_ID
+				AND req.SQ_ST =4)r
+			)
+			 where rNUM >= #{start} and rNUM <= #{end}
+			 ORDER BY SQ_DT DESC
+	   ]]>
 	</select>
 	
 	<!-- 시터 - 의뢰시 : 펫 별 서비스 요금 조회 -->
@@ -248,11 +307,20 @@
 	</delete>
 	
 	<!-- 고객 - 요청수락대기 리스트  -->
-	<select id="sitterWaitReqList" parameterType="String" resultType="ptms.mvc.tpj.CustVO.SitterVO">
-		SELECT *
-		FROM SITTER_REQUEST_TB req
-		WHERE CUST_ID =#{CUST_ID}
-		AND SQ_ST=0
+	<select id="sitterWaitReqList" parameterType="java.util.Map" resultType="ptms.mvc.tpj.CustVO.SitterVO">
+	  <![CDATA[
+	  	 SELECT *
+	  	 FROM	
+	  	  (SELECT r.*, ROWNUM rNUM
+	  	    FROM(
+			 SELECT *
+				FROM SITTER_REQUEST_TB
+				WHERE CUST_ID =#{CUST_ID}
+				AND SQ_ST =0)r
+			)
+			 where rNUM >= #{start} and rNUM <= #{end}
+			 ORDER BY SQ_DT DESC
+	   ]]>	
 	</select>
 	
 	<!-- 고객 - 수락된 요청 리스트 수 구하기 -->
@@ -263,11 +331,21 @@
 		AND SQ_ST =1
 	</select>
 	<!-- 고객 - 수락된 요청 리스트 -->
-	<select id="acceptReqList" parameterType="String" resultType="ptms.mvc.tpj.CustVO.SitterVO">
-		SELECT *
-		FROM SITTER_REQUEST_TB
-		WHERE CUST_ID =#{CUST_ID}
-		AND SQ_ST=1
+	<select id="acceptReqList" parameterType="java.util.Map" resultType="ptms.mvc.tpj.CustVO.SitterVO">
+	  <![CDATA[
+	  	 SELECT *
+	  	 FROM	
+	  	  (SELECT r.*, ROWNUM rNUM
+	  	    FROM(
+			 SELECT DISTINCT *
+				FROM SITTER_REQUEST_TB
+				WHERE CUST_ID =#{CUST_ID}
+				AND SQ_ST=1
+				OR SQ_ST=3)r
+			)
+			 where rNUM >= #{start} and rNUM <= #{end}
+			 ORDER BY SQ_DT DESC
+	   ]]>	
 	</select>
 	
 	<!-- 고객 - 거절된 요청 리스트 수 구하기 -->
@@ -279,27 +357,52 @@
 	</select>	
 	
 	<!-- 고객 - 거절된 요청 리스트 -->
-	<select id="refuseReqList" parameterType="String" resultType="ptms.mvc.tpj.CustVO.SitterVO">
-		SELECT *
-		FROM SITTER_REQUEST_TB
-		WHERE CUST_ID =#{CUST_ID}
-		AND SQ_ST=2
-	</select>	
+	<select id="refuseReqList" parameterType="java.util.Map" resultType="ptms.mvc.tpj.CustVO.SitterVO">
+	  <![CDATA[
+	  	 SELECT *
+	  	 FROM	
+	  	  (SELECT r.*, ROWNUM rNUM
+	  	    FROM(
+			 SELECT *
+				FROM SITTER_REQUEST_TB
+				WHERE CUST_ID =#{CUST_ID}
+				AND SQ_ST =2)r
+			)
+			 where rNUM >= #{start} and rNUM <= #{end}
+			 ORDER BY SQ_DT DESC
+	   ]]>
+	</select>
+		
+	<!-- 고객 - 결제 완료 후 매칭확정 버튼을 클릭하면 처리상태(SQ_ST) 4로 업데이트 -->
+	<update id="matchingConfirm" parameterType="int">
+		UPDATE SITTER_REQUEST_TB
+		SET SQ_ST=4
+		WHERE SQ_CD=#{SQ_CD}
+	</update>
 	
 	<!-- 고객 - 매칭완료된 서비스 리스트 수 구하기  -->
 	<select id="getMatchingFin" parameterType="String" resultType="int">
 		SELECT COUNT(*)
 		FROM SITTER_REQUEST_TB 
 		WHERE CUST_ID =#{CUST_ID}
-		AND SQ_ST =3
+		AND SQ_ST =4
 	</select>
 	
 	<!-- 고객 - 매칭완료된 서비스 리스트  -->
-	<select id="MatchingFinish" parameterType="String" resultType="ptms.mvc.tpj.CustVO.SitterVO">
-		SELECT *
-		FROM SITTER_REQUEST_TB
-		WHERE CUST_ID =#{CUST_ID}
-		AND SQ_ST=3
+	<select id="MatchingFinish" parameterType="java.util.Map" resultType="ptms.mvc.tpj.CustVO.SitterVO">
+	  <![CDATA[
+	  	 SELECT *
+	  	 FROM	
+	  	  (SELECT r.*, ROWNUM rNUM
+	  	    FROM(
+			 SELECT *
+				FROM SITTER_REQUEST_TB
+				WHERE CUST_ID =#{CUST_ID}
+				AND SQ_ST =4)r
+			)
+			 where rNUM >= #{start} and rNUM <= #{end}
+			 ORDER BY SQ_DT DESC
+	   ]]>
 	</select>
 	
 	<!-- 고객 - 매칭 완료 후 후기 작성 중복체크 -->
@@ -329,24 +432,11 @@
 		FROM SITTER_GRADE_TB;
 	</select>
 	
-	<!-- 고객 - 시터후기 미리보기 (별점순) 정렬 -->
-	<select id="bestStarSitter" resultType="ptms.mvc.tpj.CustVO.SitterVO">
-	
-	</select>
-	
-	<!-- 고객 - 시터후기 미리보기 (최신작성순) 리스트 정렬 -->
-	<select id="newSitterReview" resultType="ptms.mvc.tpj.CustVO.SitterVO">
-	
-	</select>
-		
-	<!-- 고객 - 시터후기 미리보기 (후기많은순) 리스트 정렬 -->
-	<select id="bigSitterReview" resultType="ptms.mvc.tpj.CustVO.SitterVO">
-	
-	</select>
-	
 	<!-- 고객 - 결제 완료 후 요청 테이블 상태 업데이트  -->
 	<update id="updatePay" parameterType="int">
 		UPDATE SITTER_REQUEST_TB SET SQ_ST = 3 WHERE SQ_CD = #{SQ_CD}
 	</update>
 	
 </mapper>    
+
+

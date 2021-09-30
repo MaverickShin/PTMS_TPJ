@@ -115,7 +115,7 @@ public interface TrainerDAO {
 	public int reviewCheckCnt(int TQ_CD);
 	
 	// 후기 미리보기 평점순 훈련사 정렬
-	public List<TrainerVO> previewTrainingGrade();
+	//public List<TrainerVO> previewTrainingGrade();
 	
 	
 	
