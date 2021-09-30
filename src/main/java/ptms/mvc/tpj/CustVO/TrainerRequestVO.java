@@ -36,6 +36,10 @@ public class TrainerRequestVO {
 	private String CUST_NM;
 	private int TG_ID;
 	
+	// 페이징 처리용 start, end
+	private int start;
+	private int end;
+	
 	public TrainerRequestVO() {}
 
 	public int getTQ_CD() {
@@ -202,6 +206,22 @@ public class TrainerRequestVO {
 
 	public void setTG_ID(int tG_ID) {
 		TG_ID = tG_ID;
+	}
+
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	public int getEnd() {
+		return end;
+	}
+
+	public void setEnd(int end) {
+		this.end = end;
 	}
 	
 	

@@ -101,34 +101,21 @@
 		            <p>Odit voluptatibus, eveniet vel nihil cum ullam dolores laborum, quo velit commodi rerum eum quidem pariatur! Quia fuga iste tenetur, ipsa vel nisi in dolorum consequatur, veritatis porro explicabo soluta commodi libero voluptatem similique id quidem? Blanditiis voluptates aperiam non magni. Reprehenderit nobis odit inventore, quia laboriosam harum excepturi ea.</p>
 		            <p>Adipisci vero culpa, eius nobis soluta. Dolore, maxime ullam ipsam quidem, dolor distinctio similique asperiores voluptas enim, exercitationem ratione aut adipisci modi quod quibusdam iusto, voluptates beatae iure nemo itaque laborum. Consequuntur et pariatur totam fuga eligendi vero dolorum provident. Voluptatibus, veritatis. Beatae numquam nam ab voluptatibus culpa, tenetur recusandae!</p>
 		            <p>Voluptas dolores dignissimos dolorum temporibus, autem aliquam ducimus at officia adipisci quasi nemo a perspiciatis provident magni laboriosam repudiandae iure iusto commodi debitis est blanditiis alias laborum sint dolore. Dolores, iure, reprehenderit. Error provident, pariatur cupiditate soluta doloremque aut ratione. Harum voluptates mollitia illo minus praesentium, rerum ipsa debitis, inventore?</p> -->
-    			</div>
     			
-    			<!-- <h3 class="mb-5">6 후기</h3>
-	              <ul class="comment-list">
-	                <li class="comment">
-	                  <div class="vcard bio">
-	                    <img src="images/person_1.jpg" alt="Image placeholder">
-	                  </div>
-	                  <div class="comment-body">
-	                    <h3>John Doe</h3>
-	                    <div class="meta">April 7, 2020 at 10:05pm</div>
-	                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-	                    <p><a href="#" class="reply">Reply</a></p>
-	                  </div>
-	                </li>
-	
-	                <li class="comment">
-	                  <div class="vcard bio">
-	                    <img src="images/person_1.jpg" alt="Image placeholder">
-	                  </div>
-	                  <div class="comment-body">
-	                    <h3>John Doe</h3>
-	                    <div class="meta">April 7, 2020 at 10:05pm</div>
-	                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-	                    <p><a href="#" class="reply">Reply</a></p>
-	                  </div>
-	                </li>
-	              </ul> -->
+    				<c:if test="${reviewCnt > 0}">
+	    				<c:forEach var="dto" items="${reviewInfo}" varStatus = "st">
+			    			<h4 class="mb-5">후기</h4>
+				                  <div class="comment-body">
+				                    <h5>${dto.CUST_ID}</h5>
+				                    <div class="meta">${dto.TG_DT}</div>
+				                    <p>${dto.TG_CON}</p>
+				                  </div>
+		              	</c:forEach>
+					</c:if>
+					<c:if test="${reviewCnt == 0}">
+    					아직 등록된 후기가 없습니다.
+    				</c:if>
+    			</div>
 	              
 	              <form action="requestTraining" method="post">
 	              <input type="hidden" value="${TA_CD}" name="TA_CD">
@@ -140,10 +127,10 @@
 	              
 	              <div class="col-lg-6">
 	              	<div class="form-group">
-			                <div class="form-group">
-			                  <span class="fa fa-search"></span>
-			                  <input type="date" class="iptags" name="START_DAY">
-			                </div>
+		                <div class="form-group">
+		                  <span class="fa fa-search"></span>
+		                  <input type="date" class="iptags" name="START_DAY">
+		                </div>
 	              	</div>
 	              	
 	              	<!-- 훈련유형 선택 및 요금안내 -->

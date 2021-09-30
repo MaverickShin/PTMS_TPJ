@@ -1,5 +1,6 @@
 package ptms.mvc.tpj.TrainerDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -49,7 +50,7 @@ public interface TrainerDAO {
 	public int TraineeListCnt(String id);
 	
 	// 훈련 대기중인 리스트
-	public List<TrainerRequestVO> TraineeList(String id);
+	public List<TrainerRequestVO> TraineeList(Map<String, Object> map);
 	
 	// 훈련 예약 취소
 	public int deleteReservation(int TQ_CD);
@@ -70,43 +71,43 @@ public interface TrainerDAO {
 	public int acceptTraineeListCnt(String id);
 	
 	// 훈련사에게 온 훈련 수락 리스트
-	public List<TrainerRequestVO> acceptTraineeList(String id);
+	public List<TrainerRequestVO> acceptTraineeList(Map<String, Object> map);
 	
 	// 훈련사에게 온 훈련거절 리스트 건수
 	public int denyTraineeListCnt(String id);
 	
 	// 훈련사에게 온 훈련 거절 리스트
-	public List<TrainerRequestVO> denyTraineeList(String id);
+	public List<TrainerRequestVO> denyTraineeList(Map<String, Object> map);
 	
 	// 훈련사 매칭 완료 리스트 건수
 	public int TrainingServiceCompleteCnt(String id);
 	
 	// 훈련사 매칭완료 리스트
-	public List<TrainerRequestVO> TrainingServiceCompleteList(String id);
+	public List<TrainerRequestVO> TrainingServiceCompleteList(Map<String, Object> map);
 	
 	// 고객용 훈련요청 결과 리스트 건수(대기중일때)
 	public int custReqResultwaitCnt(String id);
 	
 	// 고객용 훈련요청 결과 리스트(대기중일때)
-	public List<TrainerRequestVO> custReqResultwaitList(String id);
+	public List<TrainerRequestVO> custReqResultwaitList(Map<String, Object> map);
 	
 	// 고객용 훈련요청결과 리스트 건수(수락일때)
 	public int custReqResultacceptCnt(String id);
 	
 	// 고객용 훈련요청 결과 리스트(수락일때)
-	public List<TrainerRequestVO> custReqResultacceptList(String id);
+	public List<TrainerRequestVO> custReqResultacceptList(Map<String, Object> map);
 	
 	// 고객용 훈련요청결과 리스트 건수(거절일때)
 	public int custReqResultdenyCnt(String id);
 		
 	// 고객용 훈련요청 결과 리스트(거절일때)
-	public List<TrainerRequestVO> custReqResultdenyList(String id);
+	public List<TrainerRequestVO> custReqResultdenyList(Map<String, Object> map);
 
 	// 고객용 훈련완료 리스트 건수
 	public int trainingCompleteCnt(String id);
 	
 	// 고객용 훈련완료 리스트
-	public List<TrainerRequestVO> trainingComplete(String id);
+	public List<TrainerRequestVO> trainingComplete(Map<String, Object> map);
 	
 	// 훈련사 후기 작성
 	public int insertTrainingReview(TrainerVO vo);
@@ -114,8 +115,20 @@ public interface TrainerDAO {
 	// 훈련사 후기 작성 중복체크
 	public int reviewCheckCnt(int TQ_CD);
 	
+	// 훈련사 후기 갯수
+	public int reviewCnt(int TA_CD);
+	
+	// 훈련사 후기 정보
+	public List<TrainerVO> getReviewInfo(int TA_CD);
+	
+	// 훈련사 지원 중복체크
+	public int trainerDupChk(String id);
+	
+	// 훈련 매칭확정 처리
+	public int updateTrainingComplete(int TQ_CD);
+	
 	// 후기 미리보기 평점순 훈련사 정렬
-	public List<TrainerVO> previewTrainingGrade();
+	//public List<TrainerVO> previewTrainingGrade();
 	
 	
 	

@@ -1,5 +1,6 @@
 package ptms.mvc.tpj.TrainerDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -113,9 +114,9 @@ public class TrainerDAOImpl implements TrainerDAO {
 
 	// 훈련 대기중인 리스트
 	@Override
-	public List<TrainerRequestVO> TraineeList(String id) {
+	public List<TrainerRequestVO> TraineeList(Map<String, Object> map) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
-		return dao.TraineeList(id);
+		return dao.TraineeList(map);
 	}
 
 	// 훈련 예약 취소
@@ -166,9 +167,9 @@ public class TrainerDAOImpl implements TrainerDAO {
 
 	// 훈련사에게 온 훈련 수락 리스트
 	@Override
-	public List<TrainerRequestVO> acceptTraineeList(String id) {
+	public List<TrainerRequestVO> acceptTraineeList(Map<String, Object> map) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
-		return dao.acceptTraineeList(id);
+		return dao.acceptTraineeList(map);
 	}
 	
 	// 훈련사에게 온 훈련거절 리스트 건수
@@ -181,9 +182,9 @@ public class TrainerDAOImpl implements TrainerDAO {
 
 	// 훈련사에게 온 훈련 거절 리스트
 	@Override
-	public List<TrainerRequestVO> denyTraineeList(String id) {
+	public List<TrainerRequestVO> denyTraineeList(Map<String, Object> map) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
-		return dao.denyTraineeList(id);
+		return dao.denyTraineeList(map);
 	}
 
 	// 훈련사 매칭 완료 리스트 건수
@@ -196,9 +197,9 @@ public class TrainerDAOImpl implements TrainerDAO {
 	
 	// 훈련사 매칭완료 리스트 
 	@Override
-	public List<TrainerRequestVO> TrainingServiceCompleteList(String id) {
+	public List<TrainerRequestVO> TrainingServiceCompleteList(Map<String, Object> map) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
-		return dao.TrainingServiceCompleteList(id);
+		return dao.TrainingServiceCompleteList(map);
 	}
 
 	// 고객용 훈련요청 결과 리스트 건수(대기중일때)
@@ -211,9 +212,9 @@ public class TrainerDAOImpl implements TrainerDAO {
 
 	// 고객용 훈련요청 결과 리스트(대기중일때)
 	@Override
-	public List<TrainerRequestVO> custReqResultwaitList(String id) {
+	public List<TrainerRequestVO> custReqResultwaitList(Map<String, Object> map) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
-		return dao.custReqResultwaitList(id);
+		return dao.custReqResultwaitList(map);
 	}
 
 	// 고객용 훈련요청결과 리스트 건수(수락일때)
@@ -226,9 +227,9 @@ public class TrainerDAOImpl implements TrainerDAO {
 
 	// 고객용 훈련요청 결과 리스트(수락일때)
 	@Override
-	public List<TrainerRequestVO> custReqResultacceptList(String id) {
+	public List<TrainerRequestVO> custReqResultacceptList(Map<String, Object> map) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
-		return dao.custReqResultacceptList(id);
+		return dao.custReqResultacceptList(map);
 	}
 
 	// 고객용 훈련요청결과 리스트 건수(거절일때)
@@ -241,9 +242,9 @@ public class TrainerDAOImpl implements TrainerDAO {
 
 	// 고객용 훈련요청 결과 리스트(거절일때)
 	@Override
-	public List<TrainerRequestVO> custReqResultdenyList(String id) {
+	public List<TrainerRequestVO> custReqResultdenyList(Map<String, Object> map) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
-		return dao.custReqResultdenyList(id);
+		return dao.custReqResultdenyList(map);
 	}
 
 	// 고객용 훈련완료 리스트 건수
@@ -256,9 +257,9 @@ public class TrainerDAOImpl implements TrainerDAO {
 
 	// 고객용 훈련완료 리스트
 	@Override
-	public List<TrainerRequestVO> trainingComplete(String id) {
+	public List<TrainerRequestVO> trainingComplete(Map<String, Object> map) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
-		return dao.trainingComplete(id);
+		return dao.trainingComplete(map);
 	}
 
 	// 훈련사 후기 작성
@@ -273,8 +274,34 @@ public class TrainerDAOImpl implements TrainerDAO {
 	@Override
 	public int reviewCheckCnt(int TQ_CD) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
-		int reviewCheckCnt = dao.reviewCheckCnt(TQ_CD);
-		return reviewCheckCnt;
+		return dao.reviewCheckCnt(TQ_CD);
+	}
+
+	@Override
+	public int reviewCnt(int TA_CD) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		int reviewCnt = dao.reviewCnt(TA_CD);
+		return reviewCnt;
+	}
+
+	@Override
+	public List<TrainerVO> getReviewInfo(int TA_CD) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.getReviewInfo(TA_CD);
+	}
+
+	@Override
+	public int trainerDupChk(String id) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		int selectCnt = dao.trainerDupChk(id);
+		return selectCnt;
+	}
+
+	@Override
+	public int updateTrainingComplete(int TQ_CD) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		int updateCnt = dao.updateTrainingComplete(TQ_CD);
+		return updateCnt;
 	}
 	
 	/*

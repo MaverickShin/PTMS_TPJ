@@ -38,6 +38,7 @@
                class="contactForm">
                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                <input type="hidden" name="TG_ID" value="${TG_ID}">
+               <input type="hidden" name="TQ_CD" value="${TQ_CD}">
                <div class="row">
                   <div class="col-md-6">
                      <div class="form-group">
