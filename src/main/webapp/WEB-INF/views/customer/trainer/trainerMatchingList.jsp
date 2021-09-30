@@ -36,7 +36,7 @@
 	
 		<div class="container" style = "margin-top:50px; ">
 			<div class="row" style = "display: grid; grid-template-columns:1fr 1fr 1fr 1fr;">
-				<c:if test="${selectCnt > 0}">
+				<c:if test="${cnt > 0}">
 					<c:forEach var="dto" items="${dtos}">
 						<div class="col-md-12" onclick = "window.location = 'trainerDetail?TA_CD=${dto.TA_CD}&TQ_LOC=${TQ_LOC}'">
 				            <div class="blog-entry align-self-stretch">
@@ -54,14 +54,46 @@
 				        </div>
 				        
 			    	</c:forEach>
-		    	</c:if>
+					
+		    	<div class = "page_control">
+					<table>
+						<tr>
+							<th align = "center">
+								<!-- 게시글이 있으면 -->
+								<!-- 처음[◀◀]	 / 이전블록[◀]  / -->
+								<c:if test = "${startPage > pageBlock}">
+									<a href = "trainerMatchingList"> [◀◀] </a>
+									<a href = "trainerMatchingList?pageNum=${startPage - pageBlock}"> [◀] </a>
+								</c:if>
+								
+								<!-- 블록내의 페이지 번호 -->
+								<c:forEach var = "i" begin = "${startPage}" end = "${endPage}">
+									<c:if test = "${i == currentPage}">
+										<span style = "cursor: pointer;"><b>[${i}]</b></span>
+									</c:if>
+									
+									<c:if test = "${i != currentPage}">
+										<a href = "trainerMatchingList?pageNum=${i}">[${i}]</a>
+									</c:if>
+								</c:forEach>
+								
+								<!-- 다음[▶]	/  마지막[▶▶]  / -->
+								<c:if test = "${pageCount > endPage}">
+									<a href = "trainerMatchingList?pageNum=${startPage + pageBlock}">[▶]</a>
+									<a href = "trainerMatchingList?pageNum=${pageCount}">[▶▶]</a>
+								</c:if>
+							</th>
+						</tr>
+					</table>
+				</div>
+				</c:if>
 		    	
-		    	<c:if test="${selectCnt == 0}">
+		    	<c:if test="${cnt == 0}">
 		    		<div class="col-md-12">
 		    			매칭된 훈련사가 없습니다. 조건을 바꿔 다시 검색해보세요!
 		    		</div>
 		    	</c:if>
-	    	</div>
+		    </div>
 	    </div>	        
 	</div>
 	

@@ -160,7 +160,7 @@ function refuse() {
 		        	<input type="button" value="후기작성완료" class="btn btn-primary" readonly>
 		        </c:if>
 		        <c:if test="${reviewCheckCnt != 1}">
-		        	<input type="button" value="후기쓰기" class="btn btn-primary" onclick="window.location='writeTrainingReview?TG_ID=${dtos.TG_ID}'">
+		        	<input type="button" value="후기쓰기" class="btn btn-primary" onclick="window.location='writeTrainingReview?TQ_CD=${dtos.TQ_CD}&TG_ID=${dtos.TA_CD}'">
 		        </c:if>
 		      </div>
 		    </div>

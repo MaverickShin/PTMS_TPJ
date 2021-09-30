@@ -15,6 +15,11 @@
 		font-size: 20px !important;
 	}
 </style>
+<script>
+	function searchCheck() {
+		if(!document.trainerSearchform.TQ_AMT)
+	}
+</script>
 </head>
 <body>
 	<%@ include file="../../main/header.jsp" %>
@@ -23,7 +28,7 @@
 			<%@ include file = "sidebar.jsp" %>
 			
 			<section style="width: 700px; margin-left: auto; margin-right: auto; margin-top: 30px;" class = "sections">
-         <form action="trainerMatchingList" method="post" name="sitterMatching">
+         <form action="trainerMatchingList" method="post" name="trainerSearchform" onsubmit="return searchCheck();">
             <input type="hidden" name="${_csrf.parameterName}"
                value="${_csrf.token}">
             <div class="row no-gutters">

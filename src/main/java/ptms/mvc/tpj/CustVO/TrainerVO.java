@@ -39,6 +39,7 @@ public class TrainerVO {
 	// 훈련사 후기 테이블
 	private int TG_CD;			// 훈련사 후기 코드
 	private int TG_ID;			// 훈련사ID
+	private int TQ_CD;
 	private float TG_GRADE;		// 훈련사 평점
 	private String TG_CON;		// 훈련 후기 내용
 	private String TG_IMG;		// 훈련 후기 이미지
@@ -271,6 +272,14 @@ public class TrainerVO {
 
 	public void setTG_COUNT(int tG_COUNT) {
 		TG_COUNT = tG_COUNT;
+	}
+
+	public int getTQ_CD() {
+		return TQ_CD;
+	}
+
+	public void setTQ_CD(int tQ_CD) {
+		TQ_CD = tQ_CD;
 	}
 
 	

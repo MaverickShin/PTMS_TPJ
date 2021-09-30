@@ -73,6 +73,9 @@ public interface TrainerService {
 	
 	// 훈련 후기 작성
 	public void writeTrainingReview(HttpServletRequest req, Model model);
+	
+	// 훈련사 지원 중복체크
+	public void trainerDupChk(HttpServletRequest req, Model model);
 	/*
 	// 훈련 후기 미리보기 - 평점순
 	public void previewTrainingGrade(HttpServletRequest req, Model model);
@@ -85,4 +88,7 @@ public interface TrainerService {
 	*/
 	// 고객 - 결제 완료 내역
 	public void payment(HttpServletRequest req, Model model);
+	
+	// 매칭확정하기
+	public void updateTrainingComplete(HttpServletRequest req, Model model);
 }

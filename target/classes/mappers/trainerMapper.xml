@@ -70,53 +70,67 @@
 	<!-- 조건을 충족한 훈련사 리스트 -->
 	<select id="trainerList" parameterType="java.util.Map" resultType="ptms.mvc.tpj.CustVO.TrainerVO">
 		<if test='ADJUSTABLE == 1'>
-			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
-			where tt.TA_CD = ts.TA_CD
-			and ct.CUST_ID = tt.CUST_ID
-			and ts.TS_AREA LIKE '%'||#{TQ_LOC}||'%'
-			and tt.TA_ST = 1
-			intersect
-			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
-			where tt.TA_CD = ts.TA_CD
-			and ct.CUST_ID = tt.CUST_ID
-			and #{TQ_AMT} = ts.TS1_NO
-			OR #{TQ_AMT} = ts.TS2_NO
-			OR #{TQ_AMT} = ts.TS3_NO
-			OR #{TQ_AMT} = ts.TS4_NO
-			intersect
-			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
-			where tt.TA_CD = ts.TA_CD
-			  and ct.CUST_ID = tt.CUST_ID
-			  and #{START_DAY} between ts.START_DAY and ts.END_DAY
-			  or #{END_DAY} between ts.START_DAY and ts.END_DAY
+			<![CDATA[
+			select * 
+			from
+			(select ts_cd, ta_cd, ts_area, ts1_no, ts1_fee, ts2_no, ts2_fee, ts3_no, ts3_fee, ts4_no, ts4_fee, start_day, end_day, ADJUSTABLE, TA_TITLE, TA_APPEAL, TA_IMG, CUST_NM, ROWNUM rNUM
+			    from (select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
+			            from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
+			            where tt.TA_CD = ts.TA_CD
+			            and ct.CUST_ID = tt.CUST_ID
+			            and ts.TS_AREA LIKE '%'||#{TQ_LOC}||'%'
+			            and tt.TA_ST = 1
+			            intersect
+			            select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
+			            from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
+			            where tt.TA_CD = ts.TA_CD
+			            and ct.CUST_ID = tt.CUST_ID
+			            and #{TQ_AMT} = ts.TS1_NO
+			            OR #{TQ_AMT} = ts.TS2_NO
+			            OR #{TQ_AMT} = ts.TS3_NO
+			            OR #{TQ_AMT} = ts.TS4_NO
+			            intersect
+			            select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
+			            from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
+			            where tt.TA_CD = ts.TA_CD
+			              and ct.CUST_ID = tt.CUST_ID
+			              and #{START_DAY} between ts.START_DAY and ts.END_DAY
+			              or #{END_DAY} between ts.START_DAY and ts.END_DAY)
+			              )
+			where rNUM >= #{start} and rNUM <= #{end}
+			]]>
 		</if>
 		
 		<if test='ADJUSTABLE != 1'>
-			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
-			where tt.TA_CD = ts.TA_CD
-			and ct.CUST_ID = tt.CUST_ID
-			and ts.TS_AREA LIKE '%'||#{TQ_LOC}||'%'
-			and tt.TA_ST = 1
-			intersect
-			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
-			where tt.TA_CD = ts.TA_CD
-			and ct.CUST_ID = tt.CUST_ID
-			and #{TQ_AMT} = ts.TS1_NO
-			OR #{TQ_AMT} = ts.TS2_NO
-			OR #{TQ_AMT} = ts.TS3_NO
-			OR #{TQ_AMT} = ts.TS4_NO
-			intersect
-			select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
-			from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
-			where tt.TA_CD = ts.TA_CD
-			  and ct.CUST_ID = tt.CUST_ID
-			  and #{START_DAY} between ts.START_DAY and ts.END_DAY
-			  and #{END_DAY} between ts.START_DAY and ts.END_DAY
+			<![CDATA[
+			select * 
+			from
+			(select ts_cd, ta_cd, ts_area, ts1_no, ts1_fee, ts2_no, ts2_fee, ts3_no, ts3_fee, ts4_no, ts4_fee, start_day, end_day, ADJUSTABLE, TA_TITLE, TA_APPEAL, TA_IMG, CUST_NM, ROWNUM rNUM
+			    from (select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
+			            from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
+			            where tt.TA_CD = ts.TA_CD
+			            and ct.CUST_ID = tt.CUST_ID
+			            and ts.TS_AREA LIKE '%'||#{TQ_LOC}||'%'
+			            and tt.TA_ST = 1
+			            intersect
+			            select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
+			            from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
+			            where tt.TA_CD = ts.TA_CD
+			            and ct.CUST_ID = tt.CUST_ID
+			            and #{TQ_AMT} = ts.TS1_NO
+			            OR #{TQ_AMT} = ts.TS2_NO
+			            OR #{TQ_AMT} = ts.TS3_NO
+			            OR #{TQ_AMT} = ts.TS4_NO
+			            intersect
+			            select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
+			            from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
+			            where tt.TA_CD = ts.TA_CD
+			              and ct.CUST_ID = tt.CUST_ID
+			              and #{START_DAY} between ts.START_DAY and ts.END_DAY
+			              and #{END_DAY} between ts.START_DAY and ts.END_DAY)
+			              )
+			where rNUM >= 1 and rNUM <= 12
+			]]>
 		</if>
 	</select>
 	
@@ -198,13 +212,18 @@
 	
 	<!-- 훈련 대기중인 리스트 -->
 	<select id="TraineeList" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
-		select distinct tr.*, pt.PET_CON
-		from TRAINER_REQUEST_TB tr, TRAINER_TB tt, PET_TB pt
-		where tt.TA_CD = tr.TA_CD
-		and pt.CUST_ID = tr.CUST_ID
-		and tt.CUST_ID = #{id}
-		and tr.TQ_ST = 0
-		order by TQ_DT
+		<![CDATA[
+		select * from
+		        (select tq_cd, cust_id, ta_cd, pet_nm, tq_amt, tq_loc, tq_st, start_day, end_day, tq_fee, tq_dt, pet_con, rownum rNum
+		        from(select distinct tr.*, pt.PET_CON
+			        from TRAINER_REQUEST_TB tr, TRAINER_TB tt, PET_TB pt
+			        where tt.TA_CD = tr.TA_CD
+			        and pt.CUST_ID = tr.CUST_ID
+			        and tt.CUST_ID = #{id}
+			        and tr.TQ_ST = 0
+			        order by TQ_DT))
+		where rNum >= #{start} and rNum <= #{end}
+		]]>
 	</select>
 	
 	<!-- 훈련 거절 처리 -->
@@ -227,14 +246,19 @@
 	</select>
 	
 	<!-- 훈련사에게 온 훈련 수락 리스트 -->
-	<select id="acceptTraineeList" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
-		select distinct tr.*, pt.PET_CON
-		from TRAINER_REQUEST_TB tr, TRAINER_TB tt, PET_TB pt
-		where tt.TA_CD = tr.TA_CD
-		and pt.CUST_ID = tr.CUST_ID
-		and tt.CUST_ID = #{id}
-		and tr.TQ_ST = 1
-		order by TQ_DT
+	<select id="acceptTraineeList" parameterType="java.util.Map" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
+		<![CDATA[
+		select * from
+		        (select cu.*, rownum rNum
+		         from (select distinct tr.*, pt.PET_CON
+		                from TRAINER_REQUEST_TB tr, TRAINER_TB tt, PET_TB pt
+		                where tt.TA_CD = tr.TA_CD
+		                and pt.CUST_ID = tr.CUST_ID
+		                and tt.CUST_ID = #{id}
+		                and tr.TQ_ST = 1
+		                order by TQ_DT) cu)
+		where rNum >= #{start} and rNum <= #{end}
+		]]>
 	</select>
 	
 	<!-- 훈련사에게 온 훈련거절 리스트 건수 -->
@@ -248,13 +272,18 @@
 	
 	<!-- 훈련사에게 온 훈련 거절 리스트 -->
 	<select id="denyTraineeList" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
-		select distinct tr.*, pt.PET_CON
-		from TRAINER_REQUEST_TB tr, TRAINER_TB tt, PET_TB pt
-		where tt.TA_CD = tr.TA_CD
-		and pt.CUST_ID = tr.CUST_ID
-		and tt.CUST_ID = #{id}
-		and tr.TQ_ST = 2
-		order by TQ_DT
+		<![CDATA[
+		select * from
+		        (select cu.*, rownum rNum
+		         from (select distinct tr.*, pt.PET_CON
+		                from TRAINER_REQUEST_TB tr, TRAINER_TB tt, PET_TB pt
+		                where tt.TA_CD = tr.TA_CD
+		                and pt.CUST_ID = tr.CUST_ID
+		                and tt.CUST_ID = #{id}
+		                and tr.TQ_ST = 2
+		                order by TQ_DT) cu)
+		where rNum >= #{start} and rNum <= #{end}
+		]]>
 	</select>
 	
 	<!-- 훈련사 매칭 완료 리스트 건수 -->
@@ -268,13 +297,18 @@
 	
 	<!-- 훈련사 매칭완료 리스트 -->
 	<select id="TrainingServiceCompleteList" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
-		select distinct tr.*, pt.PET_CON
-		from TRAINER_REQUEST_TB tr, TRAINER_TB tt, PET_TB pt
-		where tt.TA_CD = tr.TA_CD
-		and pt.CUST_ID = tr.CUST_ID
-		and tt.CUST_ID = #{id}
-		and tr.TQ_ST = 4
-		order by TQ_DT desc
+		<![CDATA[
+		select * from
+		        (select cu.*, rownum rNum
+		         from (select distinct tr.*, pt.PET_CON
+		                from TRAINER_REQUEST_TB tr, TRAINER_TB tt, PET_TB pt
+		                where tt.TA_CD = tr.TA_CD
+		                and pt.CUST_ID = tr.CUST_ID
+		                and tt.CUST_ID = #{id}
+		                and tr.TQ_ST = 4
+		                order by TQ_DT) cu)
+		where rNum >= #{start} and rNum <= #{end}
+		]]>
 	</select>
 	
 	<!-- 고객용 훈련요청 결과 리스트 건수(대기중일때) -->
@@ -287,12 +321,17 @@
 	
 	<!-- 고객용 훈련요청 결과 리스트(대기중일때) -->
 	<select id="custReqResultwaitList" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
-		select tr.*, ct.cust_nm
-		from TRAINER_REQUEST_TB tr, TRAINER_TB tt, CUSTOMER_TB ct
-		where tr.TA_CD = tt.TA_CD
-		and tt.CUST_ID = ct.CUST_ID
-		and ct.CUST_ID = #{id}
-		and TQ_ST = 0
+		<![CDATA[
+		select * from
+		        (select cu.*, rownum rNum
+		        from (select tr.*, ct.cust_nm
+		                from TRAINER_REQUEST_TB tr, TRAINER_TB tt, CUSTOMER_TB ct
+		                where tr.TA_CD = tt.TA_CD
+		                and tt.CUST_ID = ct.CUST_ID
+		                and ct.CUST_ID = #{id}
+		                and TQ_ST = 0) cu)
+		where rNum >= #{start} and rNum <= #{end}
+		]]>
 	</select>
 	
 	<!-- 훈련 예약 취소 -->
@@ -306,16 +345,23 @@
 		from TRAINER_REQUEST_TB 
 		where CUST_ID= #{id}
 		and TQ_ST = 1
+		or TQ_ST = 3
 	</select>
 	
 	<!-- 고객용 훈련요청 결과 리스트(수락일때) -->
 	<select id="custReqResultacceptList" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
-		select tr.*, ct.cust_nm
-		from TRAINER_REQUEST_TB tr, TRAINER_TB tt, CUSTOMER_TB ct
-		where tr.TA_CD = tt.TA_CD
-		and tt.CUST_ID = ct.CUST_ID
-		and ct.CUST_ID = #{id}
-		and TQ_ST = 1
+		<![CDATA[
+		select * from
+		        (select distinct cu.*, rownum rNum
+		        from (select distinct tr.*, ct.cust_nm
+		                from TRAINER_REQUEST_TB tr, TRAINER_TB tt, CUSTOMER_TB ct
+		                where tr.TA_CD = tt.TA_CD
+		                and tt.CUST_ID = ct.CUST_ID
+		                and ct.CUST_ID = #{id}
+		                and TQ_ST = 1
+		                or TQ_ST = 3) cu)
+		where rNum >= #{start} and rNum <= #{end}
+		]]>
 	</select>
 	
 	<!-- 고객용 훈련요청결과 리스트 건수(거절일때) -->
@@ -328,12 +374,17 @@
 	
 	<!-- 고객용 훈련요청 결과 리스트(거절일때) -->
 	<select id="custReqResultdenyList" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
-		select tr.*, ct.cust_nm
-		from TRAINER_REQUEST_TB tr, TRAINER_TB tt, CUSTOMER_TB ct
-		where tr.TA_CD = tt.TA_CD
-		and tt.CUST_ID = ct.CUST_ID
-		and ct.CUST_ID = #{id}
-		and TQ_ST = 2
+		<![CDATA[
+		select * from
+		        (select cu.*, rownum rNum
+		        from (select tr.*, ct.cust_nm
+		                from TRAINER_REQUEST_TB tr, TRAINER_TB tt, CUSTOMER_TB ct
+		                where tr.TA_CD = tt.TA_CD
+		                and tt.CUST_ID = ct.CUST_ID
+		                and ct.CUST_ID = #{id}
+		                and TQ_ST = 2) cu)
+		where rNum >= #{start} and rNum <= #{end}
+		]]>
 	</select>
 	
 	<!-- 고객용 훈련완료 리스트 건수 -->
@@ -344,29 +395,56 @@
 		and TQ_ST = 4
 	</select>
 	
-	<!-- 고객용 훈련완료 리스트 건수 -->
+	<!-- 고객용 훈련완료 리스트 -->
 	<select id="trainingComplete" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
-		select tr.*, ct.cust_nm, tt.TA_CD as TG_ID
-		from TRAINER_REQUEST_TB tr, TRAINER_TB tt, CUSTOMER_TB ct
-		where tr.TA_CD = tt.TA_CD
-		and tt.CUST_ID = ct.CUST_ID
-		and ct.CUST_ID = #{id}
-		and TQ_ST = 4
+		<![CDATA[
+		select * from
+		        (select cu.*, rownum rNum
+		        from (select tr.*, ct.cust_nm
+		                from TRAINER_REQUEST_TB tr, TRAINER_TB tt, CUSTOMER_TB ct
+		                where tr.TA_CD = tt.TA_CD
+		                and tt.CUST_ID = ct.CUST_ID
+		                and ct.CUST_ID = #{id}
+		                and TQ_ST = 4) cu)
+		where rNum >= #{start} and rNum <= #{end}
+		]]>
 	</select>
 	
 	<!-- 훈련사 후기 작성 -->
 	<insert id="insertTrainingReview" parameterType="ptms.mvc.tpj.CustVO.TrainerVO">
-		insert into TRAINER_GRADE_TB(TG_CD, CUST_ID, TG_ID, TG_GRADE, TG_CON, TG_IMG, TG_DT)
-		values(TG_CD_seq.nextval, #{CUST_ID}, #{TG_ID}, #{TG_GRADE}, #{TG_CON}, #{TG_IMG}, sysdate)
+		insert into TRAINER_GRADE_TB(TG_CD, CUST_ID, TG_ID, TQ_CD, TG_GRADE, TG_CON, TG_IMG, TG_DT)
+		values(TG_CD_seq.nextval, #{CUST_ID}, #{TG_ID}, #{TQ_CD}, #{TG_GRADE}, #{TG_CON}, #{TG_IMG}, sysdate)
 	</insert>
 	
 	<!-- 훈련사 후기 작성 중복체크 -->
 	<select id="reviewCheckCnt" resultType="int">
-		select count(*)
-		from TRAINER_GRADE_TB tg, TRAINER_REQUEST_TB tr
-		where tg.tg_id = tr.ta_cd
-		and tr.tq_cd = #{TQ_CD}
+		select count(*) as cnt
+		from TRAINER_GRADE_TB
+		where tq_cd = #{TQ_CD}
 	</select>
+	
+	<select id="reviewCnt" resultType="int">
+		select count(*) from TRAINER_GRADE_TB where TG_ID = #{TA_CD}
+	</select>
+	
+	<select id="getReviewInfo" resultType="ptms.mvc.tpj.CustVO.TrainerVO">
+		<![CDATA[
+		select * 
+		from TRAINER_GRADE_TB
+		where TG_ID = #{TA_CD}
+		and rowNum >= 1 and rownum <= 3
+		]]>
+	</select>
+	
+	<select id="trainerDupChk" resultType="int">
+		SELECT COUNT(*)
+		FROM TRAINER_TB
+		WHERE CUST_ID = #{id}
+	</select>
+	
+	<update id="updateTrainingComplete">
+		update TRAINER_REQUEST_TB set TQ_ST = 4 where TQ_CD = #{TQ_CD}
+	</update>
 	
 	<!-- 후기 미리보기 평점순 훈련사 정렬 -->
 	<!-- <select id="previewTrainingGrade" resultType="List<ptms.mvc.tpj.CustVO.TrainerVO>">

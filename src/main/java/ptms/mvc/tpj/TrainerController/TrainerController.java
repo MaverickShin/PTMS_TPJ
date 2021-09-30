@@ -55,6 +55,8 @@ public class TrainerController {
    public String applyTrainer(HttpServletRequest req, Model model) {
       log.info("url ==> applyTrainer");
       
+      trainerservice.trainerDupChk(req, model);
+      
       return "customer/trainer/applyTrainer";
    }
    
@@ -156,7 +158,7 @@ public class TrainerController {
 
       trainerservice.TrainingServiceComplete(req, model);
       
-      return "customer/trainer/TrainingServiceComplete";
+      return "customer/trainer/requestTrainerListClone";
    }
    
    // 고객용 훈련 요청결과 리스트 - 대기중일때
@@ -237,6 +239,9 @@ public class TrainerController {
       int TG_ID = Integer.parseInt(req.getParameter("TG_ID"));
       model.addAttribute("TG_ID", TG_ID);
       
+      int TQ_CD = Integer.parseInt(req.getParameter("TQ_CD"));
+      model.addAttribute("TQ_CD", TQ_CD);
+      
       return "customer/trainer/writeTrainingReview";
    }
    
@@ -282,6 +287,15 @@ public class TrainerController {
    public String trainerserPayFinish(HttpServletRequest req, Model model) {
 	   
 	   trainerservice.payment(req, model);
+	   
+	   return "customer/trainer/custReqResultClone";
+   }
+   
+   // 매칭확정하기 - 매칭완료로 상태코드(4) update 
+   @RequestMapping("updateTrainingComplete")
+   public String updateTrainingComplete(HttpServletRequest req, Model model) {
+	   
+	   trainerservice.updateTrainingComplete(req, model);
 	   
 	   return "customer/trainer/custReqResultClone";
    }

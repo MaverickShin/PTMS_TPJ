@@ -3,11 +3,10 @@ package ptms.mvc.tpj.TrainerService;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,8 +16,6 @@ import org.springframework.ui.Model;
 
 import ptms.mvc.tpj.CustVO.TrainerRequestVO;
 import ptms.mvc.tpj.CustVO.TrainerVO;
-import ptms.mvc.tpj.Sitter_DAO.SitterDAOImpl;
-import ptms.mvc.tpj.TrainerDAO.TrainerDAO;
 import ptms.mvc.tpj.TrainerDAO.TrainerDAOImpl;
 
 @Service
@@ -102,7 +99,7 @@ public class TrainerServiceImpl implements TrainerService{
 	@Override
 	public void TrainerList(HttpServletRequest req, Model model) {
 		//페이징
-		int pageSize = 5;	//한 페이지당 출력할 글 갯수
+		int pageSize = 12;	//한 페이지당 출력할 글 갯수
 		int pageBlock = 3;  //한 블럭당 페이지 갯수
 		
 		int cnt = 0;		//글갯수
@@ -139,9 +136,11 @@ public class TrainerServiceImpl implements TrainerService{
 		System.out.println("ADJUSTABLE : " + ADJUSTABLE);
 		map.put("ADJUSTABLE", ADJUSTABLE);
 		
-		int selectCnt = dao.trainerSelectCnt(map);
-		System.out.println("selectCnt : " + selectCnt);
+		cnt = dao.trainerSelectCnt(map);
+		System.out.println("cnt : " + cnt);
+		
 		pageNum = req.getParameter("pageNum");
+		
 		if(pageNum == null) {
 			pageNum = "1"; // 첫 페이지를 1페이지로 지정
 		}
@@ -157,10 +156,14 @@ public class TrainerServiceImpl implements TrainerService{
 		System.out.println("startPage : " + startPage);
 		endPage = startPage + pageBlock - 1;
 		if(endPage > pageCount) endPage = pageCount;
+		System.out.println("endPage : " + endPage);
+		System.out.println("result : " + pageCount);
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
 		
 		List<TrainerVO> dtos = null;
 		
-		if(selectCnt > 0) {
+		if(cnt > 0) {
 			map.put("start", start);
 			map.put("end", end);
 			
@@ -173,7 +176,7 @@ public class TrainerServiceImpl implements TrainerService{
 			model.addAttribute("currentPage", currentPage); // 현재페이지
 		}
 		
-		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("cnt", cnt);
 		model.addAttribute("dtos", dtos);
 		model.addAttribute("TQ_LOC", TQ_LOC);
 		
@@ -196,9 +199,18 @@ public class TrainerServiceImpl implements TrainerService{
 			List<TrainerVO> petInfo = dao.getPetInfo(id);
 			model.addAttribute("petInfo", petInfo);
 		}
-		
 
 		TrainerVO vo = dao.trainerInfo(TA_CD);
+		
+		int reviewCnt = dao.reviewCnt(TA_CD);
+		System.out.println("reviewCnt : " + reviewCnt);
+		
+		if(reviewCnt > 0) {
+			List<TrainerVO> reviewInfo = dao.getReviewInfo(TA_CD);
+			model.addAttribute("reviewInfo", reviewInfo);
+		}
+		
+		model.addAttribute("reviewCnt", reviewCnt);
 		System.out.println(vo.getTS1_NO());
 		model.addAttribute("dto", vo);
 		model.addAttribute("selectCnt", selectCnt);
@@ -376,21 +388,73 @@ public class TrainerServiceImpl implements TrainerService{
 		
 	}
 
+	// 나에게 온 의뢰 - 요청대기
 	@Override
 	public void TraineeList(HttpServletRequest req, Model model) {
+		//페이징
+		int pageSize = 12;	//한 페이지당 출력할 글 갯수
+		int pageBlock = 3;  //한 블럭당 페이지 갯수
+		
+		int cnt = 0;		//글갯수
+		int start = 0;		//현재 페이지 시작 글번호
+		int end = 0;		//현재 페이지 마지막 글번호
+		int number = 0;		//출력용 글번호
+		String pageNum = "";//페이지번호
+		int currentPage = 0;//현재 페이지
+		
+		int pageCount = 0;  //페이지 갯수
+		int startPage = 0;	//시작페이지
+		int endPage = 0;	//마지막 페이지
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		String id = (String)req.getSession().getAttribute("cust_id");
 		System.out.println("아이디 : " + id);
 		
-		int selectCnt = dao.TraineeListCnt(id);
-		System.out.println("selectCnt : " + selectCnt);
+		cnt = dao.TraineeListCnt(id);
+		
+		pageNum = req.getParameter("pageNum");
+		
+		if(pageNum == null) {
+			pageNum = "1"; // 첫 페이지를 1페이지로 지정
+		}
+		currentPage = Integer.parseInt(pageNum);
+		System.out.println("currentPage : " + currentPage);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1:0);
+		start = (currentPage -1) * pageSize + 1;
+		end = start + pageSize - 1;
+		number = cnt - (currentPage - 1) * pageSize;
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		
+		System.out.println("startPage : " + startPage);
+		endPage = startPage + pageBlock - 1;
+		if(endPage > pageCount) endPage = pageCount;
+		System.out.println("endPage : " + endPage);
+		System.out.println("result : " + pageCount);
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
 		
 		List<TrainerRequestVO> vo = null;
-		if(selectCnt > 0) {
-			vo = dao.TraineeList(id);
+		if(cnt > 0) {
+			map.put("start", start);
+			map.put("end", end);
+			map.put("id", id);
+			
+			vo = dao.TraineeList(map);
+			
+			model.addAttribute("startPage", startPage);	// 시작페이지
+			model.addAttribute("endPage", endPage);		// 마지막페이지
+			model.addAttribute("pageBlock", pageBlock);	// 한 블럭당 페이지 갯수
+			model.addAttribute("pageCount", pageCount);	// 페이지 갯수
+			model.addAttribute("currentPage", currentPage); // 현재페이지
 		}
-		model.addAttribute("selectCnt", selectCnt);
-		model.addAttribute("dto", vo);
 		
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("dto", vo);
+		model.addAttribute("pageNum", pageNum); // 페이지 번호
+		model.addAttribute("number", number); // 출력용 글번호
+		model.addAttribute("t", "requestTrainer2");
 	}
 
 	@Override
@@ -427,57 +491,214 @@ public class TrainerServiceImpl implements TrainerService{
 		model.addAttribute("updateCnt", updateCnt);
 	}
 
+	// 훈련사용 요청 수락 리스트
 	@Override
 	public void acceptTrainingList(HttpServletRequest req, Model model) {
+		
+		//페이징
+		int pageSize = 12;	//한 페이지당 출력할 글 갯수
+		int pageBlock = 3;  //한 블럭당 페이지 갯수
+		
+		int cnt = 0;		//글갯수
+		int start = 0;		//현재 페이지 시작 글번호
+		int end = 0;		//현재 페이지 마지막 글번호
+		int number = 0;		//출력용 글번호
+		String pageNum = "";//페이지번호
+		int currentPage = 0;//현재 페이지
+		
+		int pageCount = 0;  //페이지 갯수
+		int startPage = 0;	//시작페이지
+		int endPage = 0;	//마지막 페이지
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		String id = (String)req.getSession().getAttribute("cust_id");
 		System.out.println("아이디 : " + id);
 		
-		int selectCnt = dao.acceptTraineeListCnt(id);
-		System.out.println("selectCnt : " + selectCnt);
+		cnt = dao.acceptTraineeListCnt(id);
+		System.out.println("cnt : " + cnt);
+		
+		pageNum = req.getParameter("pageNum");
+		
+		if(pageNum == null) {
+			pageNum = "1"; // 첫 페이지를 1페이지로 지정
+		}
+		currentPage = Integer.parseInt(pageNum);
+		System.out.println("currentPage : " + currentPage);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1:0);
+		start = (currentPage -1) * pageSize + 1;
+		end = start + pageSize - 1;
+		number = cnt - (currentPage - 1) * pageSize;
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		
+		System.out.println("startPage : " + startPage);
+		endPage = startPage + pageBlock - 1;
+		if(endPage > pageCount) endPage = pageCount;
+		System.out.println("endPage : " + endPage);
+		System.out.println("result : " + pageCount);
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
 		
 		List<TrainerRequestVO> vo = null;
-		if(selectCnt > 0) {
-			vo = dao.acceptTraineeList(id);
+		if(cnt > 0) {
+			map.put("start", start);
+			map.put("end", end);
+			map.put("id", id);
+			
+			vo = dao.acceptTraineeList(map);
+			
+			model.addAttribute("startPage", startPage);	// 시작페이지
+			model.addAttribute("endPage", endPage);		// 마지막페이지
+			model.addAttribute("pageBlock", pageBlock);	// 한 블럭당 페이지 갯수
+			model.addAttribute("pageCount", pageCount);	// 페이지 갯수
+			model.addAttribute("currentPage", currentPage); // 현재페이지
 		}
-		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("cnt", cnt);
 		model.addAttribute("dto", vo);
-		
+		model.addAttribute("pageNum", pageNum); // 페이지 번호
+		model.addAttribute("number", number); // 출력용 글번호
+		model.addAttribute("t", "acceptTrainingList");
 	}
 
+	// 훈련사용 요청 거절 리스트
 	@Override
 	public void denyTrainingList(HttpServletRequest req, Model model) {
+		
+		//페이징
+		int pageSize = 12;	//한 페이지당 출력할 글 갯수
+		int pageBlock = 3;  //한 블럭당 페이지 갯수
+		
+		int cnt = 0;		//글갯수
+		int start = 0;		//현재 페이지 시작 글번호
+		int end = 0;		//현재 페이지 마지막 글번호
+		int number = 0;		//출력용 글번호
+		String pageNum = "";//페이지번호
+		int currentPage = 0;//현재 페이지
+		
+		int pageCount = 0;  //페이지 갯수
+		int startPage = 0;	//시작페이지
+		int endPage = 0;	//마지막 페이지
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		String id = (String)req.getSession().getAttribute("cust_id");
 		System.out.println("아이디 : " + id);
 		
-		int selectCnt = dao.denyTraineeListCnt(id);
-		System.out.println("selectCnt : " + selectCnt);
+		cnt = dao.denyTraineeListCnt(id);
+		System.out.println("cnt : " + cnt);
+		
+		pageNum = req.getParameter("pageNum");
+		
+		if(pageNum == null) {
+			pageNum = "1"; // 첫 페이지를 1페이지로 지정
+		}
+		currentPage = Integer.parseInt(pageNum);
+		System.out.println("currentPage : " + currentPage);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1:0);
+		start = (currentPage -1) * pageSize + 1;
+		end = start + pageSize - 1;
+		number = cnt - (currentPage - 1) * pageSize;
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		
+		System.out.println("startPage : " + startPage);
+		endPage = startPage + pageBlock - 1;
+		if(endPage > pageCount) endPage = pageCount;
+		System.out.println("endPage : " + endPage);
+		System.out.println("result : " + pageCount);
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
 		
 		List<TrainerRequestVO> vo = null;
-		if(selectCnt > 0) {
-			vo = dao.denyTraineeList(id);
+		if(cnt > 0) {
+			map.put("start", start);
+			map.put("end", end);
+			map.put("id", id);
+			
+			vo = dao.denyTraineeList(map);
+			
+			model.addAttribute("startPage", startPage);	// 시작페이지
+			model.addAttribute("endPage", endPage);		// 마지막페이지
+			model.addAttribute("pageBlock", pageBlock);	// 한 블럭당 페이지 갯수
+			model.addAttribute("pageCount", pageCount);	// 페이지 갯수
+			model.addAttribute("currentPage", currentPage); // 현재페이지
 		}
-		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("cnt", cnt);
 		model.addAttribute("dto", vo);
-		
+		model.addAttribute("pageNum", pageNum); // 페이지 번호
+		model.addAttribute("number", number); // 출력용 글번호
+		model.addAttribute("t", "denyTrainingList");
 	}
 
 	@Override
 	public void custReqResultwait(HttpServletRequest req, Model model) {
+		//페이징
+		int pageSize = 12;	//한 페이지당 출력할 글 갯수
+		int pageBlock = 3;  //한 블럭당 페이지 갯수
+		
+		int cnt = 0;		//글갯수
+		int start = 0;		//현재 페이지 시작 글번호
+		int end = 0;		//현재 페이지 마지막 글번호
+		int number = 0;		//출력용 글번호
+		String pageNum = "";//페이지번호
+		int currentPage = 0;//현재 페이지
+		
+		int pageCount = 0;  //페이지 갯수
+		int startPage = 0;	//시작페이지
+		int endPage = 0;	//마지막 페이지
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		String id = (String)req.getSession().getAttribute("cust_id");
 		System.out.println("아이디 : " + id);
 		
-		int selectCnt = dao.custReqResultwaitCnt(id);
-		System.out.println("수락요청대기selectCnt : " + selectCnt);
+		cnt = dao.custReqResultwaitCnt(id);
+		System.out.println("수락요청대기selectCnt : " + cnt);
+		
+		pageNum = req.getParameter("pageNum");
+		
+		if(pageNum == null) {
+			pageNum = "1"; // 첫 페이지를 1페이지로 지정
+		}
+		currentPage = Integer.parseInt(pageNum);
+		System.out.println("currentPage : " + currentPage);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1:0);
+		start = (currentPage -1) * pageSize + 1;
+		end = start + pageSize - 1;
+		number = cnt - (currentPage - 1) * pageSize;
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		
+		System.out.println("startPage : " + startPage);
+		endPage = startPage + pageBlock - 1;
+		if(endPage > pageCount) endPage = pageCount;
+		System.out.println("endPage : " + endPage);
+		System.out.println("result : " + pageCount);
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
 		
 		List<TrainerRequestVO> vo = null;
-		if(selectCnt > 0) {
-			vo = dao.custReqResultwaitList(id);
+		if(cnt > 0) {
+			map.put("start", start);
+			map.put("end", end);
+			map.put("id", id);
+			
+			vo = dao.custReqResultwaitList(map);
+			
+			model.addAttribute("startPage", startPage);	// 시작페이지
+			model.addAttribute("endPage", endPage);		// 마지막페이지
+			model.addAttribute("pageBlock", pageBlock);	// 한 블럭당 페이지 갯수
+			model.addAttribute("pageCount", pageCount);	// 페이지 갯수
+			model.addAttribute("currentPage", currentPage); // 현재페이지
 			
 		}
-		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("cnt", cnt);
 		model.addAttribute("dto", vo);
 		model.addAttribute("st", 0);
-		
+		model.addAttribute("pageNum", pageNum); // 페이지 번호
+		model.addAttribute("number", number); // 출력용 글번호
+		model.addAttribute("t", "custReqResult2");
 	}
 
 	@Override
@@ -493,68 +714,230 @@ public class TrainerServiceImpl implements TrainerService{
 
 	@Override
 	public void custReqResultAccept(HttpServletRequest req, Model model) {
+		//페이징
+		int pageSize = 12;	//한 페이지당 출력할 글 갯수
+		int pageBlock = 3;  //한 블럭당 페이지 갯수
+		
+		int cnt = 0;		//글갯수
+		int start = 0;		//현재 페이지 시작 글번호
+		int end = 0;		//현재 페이지 마지막 글번호
+		int number = 0;		//출력용 글번호
+		String pageNum = "";//페이지번호
+		int currentPage = 0;//현재 페이지
+		
+		int pageCount = 0;  //페이지 갯수
+		int startPage = 0;	//시작페이지
+		int endPage = 0;	//마지막 페이지
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		String id = (String)req.getSession().getAttribute("cust_id");
 		System.out.println("아이디 : " + id);
 		
-		int selectCnt = dao.custReqResultacceptCnt(id);
-		System.out.println("selectCnt : " + selectCnt);
+		cnt = dao.custReqResultacceptCnt(id);
+		System.out.println("cnt : " + cnt);
+		
+		pageNum = req.getParameter("pageNum");
+		
+		if(pageNum == null) {
+			pageNum = "1"; // 첫 페이지를 1페이지로 지정
+		}
+		currentPage = Integer.parseInt(pageNum);
+		System.out.println("currentPage : " + currentPage);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1:0);
+		start = (currentPage -1) * pageSize + 1;
+		end = start + pageSize - 1;
+		number = cnt - (currentPage - 1) * pageSize;
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		
+		System.out.println("startPage : " + startPage);
+		endPage = startPage + pageBlock - 1;
+		if(endPage > pageCount) endPage = pageCount;
+		System.out.println("endPage : " + endPage);
+		System.out.println("result : " + pageCount);
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
 		
 		List<TrainerRequestVO> vo = null;
-		if(selectCnt > 0) {
-			vo = dao.custReqResultacceptList(id);
+		if(cnt > 0) {
+			map.put("start", start);
+			map.put("end", end);
+			map.put("id", id);
+			
+			vo = dao.custReqResultacceptList(map);
+			
+			model.addAttribute("startPage", startPage);	// 시작페이지
+			model.addAttribute("endPage", endPage);		// 마지막페이지
+			model.addAttribute("pageBlock", pageBlock);	// 한 블럭당 페이지 갯수
+			model.addAttribute("pageCount", pageCount);	// 페이지 갯수
+			model.addAttribute("currentPage", currentPage); // 현재페이지
 		}
-		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("cnt", cnt);
 		model.addAttribute("dto", vo);
 		model.addAttribute("st", 1);
-		
+		model.addAttribute("pageNum", pageNum); // 페이지 번호
+		model.addAttribute("number", number); // 출력용 글번호
+		model.addAttribute("t", "custReqResultAccept");
 	}
 
 	@Override
 	public void custReqResultDeny(HttpServletRequest req, Model model) {
+		//페이징
+		int pageSize = 12;	//한 페이지당 출력할 글 갯수
+		int pageBlock = 3;  //한 블럭당 페이지 갯수
+		
+		int cnt = 0;		//글갯수
+		int start = 0;		//현재 페이지 시작 글번호
+		int end = 0;		//현재 페이지 마지막 글번호
+		int number = 0;		//출력용 글번호
+		String pageNum = "";//페이지번호
+		int currentPage = 0;//현재 페이지
+		
+		int pageCount = 0;  //페이지 갯수
+		int startPage = 0;	//시작페이지
+		int endPage = 0;	//마지막 페이지
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+				
 		String id = (String)req.getSession().getAttribute("cust_id");
 		System.out.println("아이디 : " + id);
 		
-		int selectCnt = dao.custReqResultdenyCnt(id);
-		System.out.println("selectCnt : " + selectCnt);
+		cnt = dao.custReqResultdenyCnt(id);
+		System.out.println("cnt : " + cnt);
 		
+		pageNum = req.getParameter("pageNum");
+		
+		if(pageNum == null) {
+			pageNum = "1"; // 첫 페이지를 1페이지로 지정
+		}
+		currentPage = Integer.parseInt(pageNum);
+		System.out.println("currentPage : " + currentPage);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1:0);
+		start = (currentPage -1) * pageSize + 1;
+		end = start + pageSize - 1;
+		number = cnt - (currentPage - 1) * pageSize;
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		
+		System.out.println("startPage : " + startPage);
+		endPage = startPage + pageBlock - 1;
+		if(endPage > pageCount) endPage = pageCount;
+		System.out.println("endPage : " + endPage);
+		System.out.println("result : " + pageCount);
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
 		
 		List<TrainerRequestVO> vo = null;
-		if(selectCnt > 0) {
-			vo = dao.custReqResultdenyList(id);
+		if(cnt > 0) {
+			map.put("start", start);
+			map.put("end", end);
+			map.put("id", id);
+			
+			vo = dao.custReqResultdenyList(map);
+			
+			model.addAttribute("startPage", startPage);	// 시작페이지
+			model.addAttribute("endPage", endPage);		// 마지막페이지
+			model.addAttribute("pageBlock", pageBlock);	// 한 블럭당 페이지 갯수
+			model.addAttribute("pageCount", pageCount);	// 페이지 갯수
+			model.addAttribute("currentPage", currentPage); // 현재페이지
 		}
-		model.addAttribute("selectCnt", selectCnt);
+		model.addAttribute("cnt", cnt);
 		model.addAttribute("dto", vo);
 		model.addAttribute("st", 2);
-		
+		model.addAttribute("pageNum", pageNum); // 페이지 번호
+		model.addAttribute("number", number); // 출력용 글번호
+		model.addAttribute("t", "custReqResultDeny");
 	}
 
 	@Override
 	public void trainingComplete(HttpServletRequest req, Model model) {
+		//페이징
+		int pageSize = 12;	//한 페이지당 출력할 글 갯수
+		int pageBlock = 3;  //한 블럭당 페이지 갯수
+		
+		int cnt = 0;		//글갯수
+		int start = 0;		//현재 페이지 시작 글번호
+		int end = 0;		//현재 페이지 마지막 글번호
+		int number = 0;		//출력용 글번호
+		String pageNum = "";//페이지번호
+		int currentPage = 0;//현재 페이지
+		
+		int pageCount = 0;  //페이지 갯수
+		int startPage = 0;	//시작페이지
+		int endPage = 0;	//마지막 페이지
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		String id = (String)req.getSession().getAttribute("cust_id");
 		System.out.println("아이디 : " + id);
 		
-		int selectCnt = dao.trainingCompleteCnt(id);
-		System.out.println("selectCnt : " + selectCnt);
+		cnt = dao.trainingCompleteCnt(id);
+		System.out.println("cnt : " + cnt);
+		
+		pageNum = req.getParameter("pageNum");
+		
+		if(pageNum == null) {
+			pageNum = "1"; // 첫 페이지를 1페이지로 지정
+		}
+		currentPage = Integer.parseInt(pageNum);
+		System.out.println("currentPage : " + currentPage);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1:0);
+		start = (currentPage -1) * pageSize + 1;
+		end = start + pageSize - 1;
+		number = cnt - (currentPage - 1) * pageSize;
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		
+		System.out.println("startPage : " + startPage);
+		endPage = startPage + pageBlock - 1;
+		if(endPage > pageCount) endPage = pageCount;
+		System.out.println("endPage : " + endPage);
+		System.out.println("result : " + pageCount);
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
 		
 		List<TrainerRequestVO> vo = null;
 		
-		int reviewCheckCnt = 0;
+		List<String> rc = new ArrayList<String>();
 		
-		if(selectCnt > 0) {
+		if(cnt > 0) {
+			map.put("start", start);
+			map.put("end", end);
+			map.put("id", id);
+			
 			//훈련 완료 정보를 가져옴
-			vo = dao.trainingComplete(id);
+			vo = dao.trainingComplete(map);
 			System.out.println(vo.get(0).getTQ_CD());
+			
+			model.addAttribute("startPage", startPage);	// 시작페이지
+			model.addAttribute("endPage", endPage);		// 마지막페이지
+			model.addAttribute("pageBlock", pageBlock);	// 한 블럭당 페이지 갯수
+			model.addAttribute("pageCount", pageCount);	// 페이지 갯수
+			model.addAttribute("currentPage", currentPage); // 현재페이지
 			
 			for(int i = 0; i < vo.size(); i++) {
 				int TQ_CD = vo.get(i).getTQ_CD();
 				//후기 작성 중복체크
-				reviewCheckCnt = dao.reviewCheckCnt(TQ_CD);
+				int result = dao.reviewCheckCnt(TQ_CD);
+				
+				System.out.println("result : " + result);
+				
+				
+				rc.add(Integer.toString(result));
 			}
+		
+			
 		}
 		
-		model.addAttribute("selectCnt", selectCnt);
+		System.out.println("rc : " + rc.size());
+		
+		model.addAttribute("cnt", cnt);
 		model.addAttribute("dto", vo);
-		model.addAttribute("reviewCheckCnt", reviewCheckCnt);
+		model.addAttribute("reviewCheckCnt", rc);
+		model.addAttribute("pageNum", pageNum); // 페이지 번호
+		model.addAttribute("number", number); // 출력용 글번호
+		model.addAttribute("t", "trainingComplete");
 	}
 
 	@Override
@@ -568,6 +951,10 @@ public class TrainerServiceImpl implements TrainerService{
 		int TG_ID = Integer.parseInt(req.getParameter("TG_ID"));
 		System.out.println("TG_ID : " + TG_ID);
 		vo.setTG_ID(TG_ID);
+		
+		int TQ_CD = Integer.parseInt(req.getParameter("TQ_CD"));
+		System.out.println("TQ_CD : " + TQ_CD);
+		vo.setTQ_CD(TQ_CD);
 		
 		float TG_GRADE = Float.valueOf(req.getParameter("TG_GRADE"));
 		vo.setTG_GRADE(TG_GRADE);
@@ -612,19 +999,71 @@ public class TrainerServiceImpl implements TrainerService{
 
 	@Override
 	public void TrainingServiceComplete(HttpServletRequest req, Model model) {
+		//페이징
+		int pageSize = 12;	//한 페이지당 출력할 글 갯수
+		int pageBlock = 3;  //한 블럭당 페이지 갯수
+		
+		int cnt = 0;		//글갯수
+		int start = 0;		//현재 페이지 시작 글번호
+		int end = 0;		//현재 페이지 마지막 글번호
+		int number = 0;		//출력용 글번호
+		String pageNum = "";//페이지번호
+		int currentPage = 0;//현재 페이지
+		
+		int pageCount = 0;  //페이지 갯수
+		int startPage = 0;	//시작페이지
+		int endPage = 0;	//마지막 페이지
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		String id = (String)req.getSession().getAttribute("cust_id");
 		System.out.println("id : " + id);
 		
-		int selectCnt = dao.TrainingServiceCompleteCnt(id);
-		System.out.println("selectCnt : " + selectCnt);
+		cnt = dao.TrainingServiceCompleteCnt(id);
+		System.out.println("cnt : " + cnt);
+		
+		pageNum = req.getParameter("pageNum");
+		
+		if(pageNum == null) {
+			pageNum = "1"; // 첫 페이지를 1페이지로 지정
+		}
+		currentPage = Integer.parseInt(pageNum);
+		System.out.println("currentPage : " + currentPage);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1:0);
+		start = (currentPage -1) * pageSize + 1;
+		end = start + pageSize - 1;
+		number = cnt - (currentPage - 1) * pageSize;
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		
+		System.out.println("startPage : " + startPage);
+		endPage = startPage + pageBlock - 1;
+		if(endPage > pageCount) endPage = pageCount;
+		System.out.println("endPage : " + endPage);
+		System.out.println("result : " + pageCount);
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
 		
 		List<TrainerRequestVO> vo = null;
-		if(selectCnt > 0) {
-			vo = dao.TrainingServiceCompleteList(id);
-		}
-		model.addAttribute("selectCnt", selectCnt);
-		model.addAttribute("dto", vo);
 		
+		if(cnt > 0) {
+			map.put("start", start);
+			map.put("end", end);
+			map.put("id", id);
+			
+			vo = dao.TrainingServiceCompleteList(map);
+			
+			model.addAttribute("startPage", startPage);	// 시작페이지
+			model.addAttribute("endPage", endPage);		// 마지막페이지
+			model.addAttribute("pageBlock", pageBlock);	// 한 블럭당 페이지 갯수
+			model.addAttribute("pageCount", pageCount);	// 페이지 갯수
+			model.addAttribute("currentPage", currentPage); // 현재페이지
+		}
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("dto", vo);
+		model.addAttribute("pageNum", pageNum); // 페이지 번호
+		model.addAttribute("number", number); // 출력용 글번호
+		model.addAttribute("t", 4);
 	}
 	/*
 	@Override
@@ -655,4 +1094,25 @@ public class TrainerServiceImpl implements TrainerService{
 		
 	}
 	*/
+
+	@Override
+	public void trainerDupChk(HttpServletRequest req, Model model) {
+		String id = (String)req.getSession().getAttribute("cust_id");
+		int selectCnt = dao.trainerDupChk(id);
+		System.out.println("훈련사중복체크selectCnt : " + selectCnt);
+		  
+		model.addAttribute("selectCnt", selectCnt);
+		
+	}
+
+	@Override
+	public void updateTrainingComplete(HttpServletRequest req, Model model) {
+		int TQ_CD = Integer.parseInt(req.getParameter("TQ_CD"));
+		System.out.println("TQ_CD : " + TQ_CD);
+		
+		int updateCnt = dao.updateTrainingComplete(TQ_CD);
+		
+		model.addAttribute("updateCnt", updateCnt);
+		
+	}
 }

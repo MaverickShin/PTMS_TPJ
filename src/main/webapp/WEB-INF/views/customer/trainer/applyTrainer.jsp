@@ -128,6 +128,13 @@ input:checked + .slider:before {
 
 	<div style="display: flex; flex:1; justify-content:center;">
 			<%@ include file = "sidebar.jsp" %>
+			
+			<c:if test="${selectCnt != 0}">
+				<script type="text/javascript">
+					alert("이미 훈련사로 활동중인 아이디 입니다. 내정보관리를 확인해 주세요");
+					window.location='${tr}requestTrainer';
+				</script>
+			</c:if>
 
 		<section style="width: 900px; margin-left: auto; margin-right: auto; margin-top: 30px;" class = "sections">
 			<form name="applyform" action="applyTrainerAction" method="post"
