@@ -49,7 +49,72 @@
 		} */
 
 	}
+	
+	function joinCheck() {
+		
+		
+		
+		var chk = $("input:checkbox[class='form-group']");
+		
+		var bool = false;
+		
+		
+		for (var i = 0; i < chk.length; i++) {
+			
+			if(chk[i].checked) {
+				bool = true;
+			}
+			
+		}
+		
+		if(bool == false) {
+			alert("훈련가능 유형을 선택하세요.");
+			return false;
+			
+		} else if($("#TS1_NO").is(":checked")) {
+			if($("#tr_kind1_fee").val() === "") {
+				alert("111훈련요금을 입력하세요.");
+				$("#tr_kind1_fee").focus();
+				return false;
+			}
+		} else if($("#TS2_NO").is(":checked")) {
+			if(!$("#tr_kind2_fee2").val()) {
+				alert("222훈련요금을 입력하세요.");
+				$("#tr_kind2_fee2").focus();
+				return false;
+			}
+		} else if($("#TS3_NO").is(":checked")) {
+			if(!$("#tr_kind3_fee").val()) {
+				alert("333 입력하세요.");
+				$("#tr_kind3_fee").focus();
+				return false;
+			}
+		} else if($("#TS4_NO").is(":checked")) {
+			if(!$("#tr_kind4_fee").val()) {
+				alert("4 입력하세요.");
+				$("#tr_kind4_fee").focus();
+				return false;
+			}
+		} else if(!document.applyform.address1.value) {
+			alert("훈련가능 지역을 입력하세요.");
+			return false;
+		} else if(!document.applyform.START_DAY.value) {
+			alert("서비스 시작일을 지정하세요.");
+			return false;
+		} else if(!document.applyform.END_DAY.value) {
+			alert("서비스 종료일을 지정하세요.");
+			return false;
+		} else if(!document.applyform.TA_TITLE.value) {
+			alert("")
+		}
+		
+	}
 </script>
+<script type="text/javascript">
+
+	
+</script>
+
 <style>
 	.row label {
 		font-size: 24px !important;
@@ -198,19 +263,19 @@ input:checked + .slider:before {
 
 												<div id="tr_kind1_fee" style="display: none; margin-bottom:30px;">
 													<label>한 회차당 <span style = "color:#00bd56">배변훈련</span> 요금</label> <input type="number"
-														id="tr_kind1_fee" name="tr_kind1_fee" class="form-control">
+														id="tr_kind1_fee1" name="tr_kind1_fee" min="1000" class="form-control">
 												</div>
 												<div id="tr_kind2_fee" style="display: none; margin-bottom:30px;">
-													<label>한 회차당 <span style = "color:#00bd56">분리불안</span> 요금</label> <input type="number"
-														id="tr_kind2_fee" name="tr_kind2_fee" class="form-control">
+													<label>한 회차당 <span style = "color:#00bd56">분리불안</span> 요금</label> <input type="text"
+														id="tr_kind2_fee2" name="tr_kind2_fee" min="1000" class="form-control">
 												</div>
 												<div id="tr_kind3_fee" style="display: none; margin-bottom:30px;">
 													<label>한 회차당 <span style = "color:#00bd56">기본훈련</span> 요금</label> <input type="number"
-														id="tr_kind3_fee" name="tr_kind3_fee" class="form-control">
+														id="tr_kind3_fee3" name="tr_kind3_fee" min="1000" class="form-control">
 												</div>
 												<div id="tr_kind4_fee" style="display: none; margin-bottom:30px;">
 													<label>한 회차당 <span style = "color:#00bd56">짖음해결</span> 요금</label> <input type="number"
-														id="tr_kind4_fee" name="tr_kind4_fee" class="form-control">
+														id="tr_kind4_fee4" name="tr_kind4_fee" min="1000" class="form-control">
 												</div>
 											</div>
 										</div>
@@ -219,8 +284,8 @@ input:checked + .slider:before {
 
 								<div class="col-md-12" style = "margin-bottom:10px;">
 									<div class="form-group">
-										<label class="label" for="service_loc">훈련사 서비스 가능 지역</label> <input
-											type="button" value="주소찾기" class="btn btn-primary"
+										<label class="label" for="service_loc">훈련사 서비스 가능 지역</label> 
+										<input type="button" value="주소찾기" class="btn btn-primary"
 											onclick="addressSerch();" style = "line-height:10px; margin-left:30px; height: 35px; font-size: 14px !important;">
 									</div>
 								</div>

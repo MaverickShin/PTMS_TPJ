@@ -8,28 +8,6 @@
 <link href='${cssPath}calendar.css' rel='stylesheet' />
 <script src='${jsPath}calendar.js'></script>
 <script>
-
-	document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
-
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-    	
-      height: 400,
-      editable: true,
-      selectable: true,
-      businessHours: true,
-      dayMaxEvents: true, // allow "more" link when too many events
-      events: [
-        {
-          title: 'Long Event',
-          start: '2021-09-07',
-          end: '2021-09-22'
-        }
-      ]
-    });
-
-    calendar.render();
-  });
 	
 	function checkFee() {
 		var tq_amt = document.querySelectorAll('input[name="TQ_AMT"]');
@@ -123,7 +101,6 @@
 	              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	              <input type="hidden" value="" name="TQ_FEE">
 	              <!-- 훈련사 일정 받아오기, 가능한 일정 선택하기 -->
-	              <div id='calendar' style = "margin-bottom:50px;"></div>
 	              
 	              <div class="col-lg-6">
 	              	<div class="form-group">
