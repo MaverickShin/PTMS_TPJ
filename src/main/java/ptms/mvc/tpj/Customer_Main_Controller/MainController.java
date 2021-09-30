@@ -273,15 +273,14 @@ public class MainController {
     * 나도웅
     * 일정표(달력) 요청 페이지
     */
-   @RequestMapping("calendar")
-   public String calendar(HttpServletRequest req, Model model) {
-      log.info("컨트롤러 - 일정표 페이지");
-      
-      service.callCalendar(req, model);
-      
-      return "customer/calendar/calendar";
-   }
-   
+	/*
+	 * @RequestMapping("calendar") public String calendar(HttpServletRequest req,
+	 * Model model) { log.info("컨트롤러 - 일정표 페이지");
+	 * 
+	 * //service.callCalendar(req, model);
+	 * 
+	 * return "customer/calendar/calendar"; }
+	 */
    /*
     * 2021-09-24
     * 나도웅
@@ -291,7 +290,7 @@ public class MainController {
    public String addEvent(HttpServletRequest req, Model model) {
       
       log.info("컨트롤러 - 일정표 페이지");
-      service.addEvent(req, model);
+     // service.addEvent(req, model);
       return "redirect:calendar";
    }
    
@@ -304,7 +303,7 @@ public class MainController {
    public String deleteEvent(HttpServletRequest req, Model model) {
       
       log.info("컨트롤러 - 일정표 페이지");
-      service.deleteEvent(req, model);
+      // service.deleteEvent(req, model);
       return "redirect:calendar";
    }
    

@@ -476,25 +476,11 @@
 		on tt.ta_cd = ts.ta_cd
 		where tt.ta_st = 1
 		order by tt.ta_dt desc
-	</select>
-	 -->
-	<!-- 후기 미리보기 후기 많은 순 훈련사 정렬 -->
-	<!-- <select id="lotsOfReviews" resultType="ptms.mvc.tpj.CustVO.TrainerVO">
-		select tg.*, tt.*, ct.cust_nm, ts.TS_AREA
-		from (select tg.TG_ID, count(TG_CD) tg_count, avg(TG_GRADE) tg_avg
-		        from TRAINER_GRADE_TB tg
-		        group by TG_ID
-		        order by count(TG_ID) desc) tg 
-		full outer join TRAINER_TB tt
-		on tg.TG_ID = tt.TA_CD
-		full outer join CUSTOMER_TB ct
-		on ct.cust_id = tt.cust_id
-		full outer join TRAINER_SERVICE_TB ts
-		on tt.ta_cd = ts.ta_cd
-		where tt.ta_st = 1
-	</select>
-	
-	<select id="trainingGradeCnt" resultType="int">
-		select * from TRAINER_TB
 	</select> -->
+	
+	<!-- 고객 - 결제 완료 후 요청 테이블 상태 업데이트  -->
+	<update id="updatePay" parameterType="int">
+		UPDATE TRAINER_REQUEST_TB SET SQ_ST = 3 WHERE TQ_CD = #{TQ_CD}
+	</update>
+	
 </mapper>

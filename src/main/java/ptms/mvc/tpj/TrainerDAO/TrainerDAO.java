@@ -130,7 +130,9 @@ public interface TrainerDAO {
 	// 후기 미리보기 평점순 훈련사 정렬
 	//public List<TrainerVO> previewTrainingGrade();
 	
-	
+	/* 21-09-29 / 신도빈  / 결제완료 후 요청테이블 상태 업데이트 'TQ_ST : 1' */
+	// 고객 - 카카오페이 결제 완료 후 요청 테이블 상태 업데이트
+	public int updatePay(int TQ_CD);
 	
 	/*
 	 * // 후기 미리보기 평점순 훈련사 정렬 건수 public int trainingGradeCnt();

@@ -13,13 +13,14 @@ import org.springframework.ui.Model;
 
 
 public class ImageUploaderHandler {
+	
 	private String uploadPath;
-	    
+	
     public void setUploadPath(String url) {
-        this.uploadPath = url;
+        
+    	this.uploadPath = url;
+    
     }
-    
-    
     
     public void imageUpload(HttpServletRequest req, Model model)
     		throws ServletException, IOException {
@@ -27,9 +28,13 @@ public class ImageUploaderHandler {
     	req.setCharacterEncoding("utf-8");
     	
         File uploadDir = new File(uploadPath);
+        
         // 업로드할 경로에 폴더가 없는 경우 폴더 생성
+        
         if (!uploadDir.exists()) {
-            uploadDir.mkdir();
+            
+        	uploadDir.mkdir();
+        
         }
 
         try {
@@ -38,9 +43,13 @@ public class ImageUploaderHandler {
             uploadDir.setExecutable(true);
 
             String fileName = "";
+            
             for (Part part : req.getParts()) {
-                System.out.println(part.getHeader("content-disposition"));
+                
+            	System.out.println(part.getHeader("content-disposition"));
+                
                 fileName = getFileName(part);
+                
                 if (fileName != null && !"".equals(fileName)) {
                     part.write(uploadPath + File.separator + fileName);
                     // form에서 받아온 이미지 값을 attribute 
@@ -57,11 +66,15 @@ public class ImageUploaderHandler {
     }
 
     private String getFileName(Part part) {
-        for (String content : part.getHeader("content-disposition").split(";")) {
-            if (content.trim().startsWith("filename")) {
+        
+    	
+    	for (String content : part.getHeader("content-disposition").split(";")) {
+            
+    		if (content.trim().startsWith("filename")) {
                 return content.substring(content.indexOf("=") + 2, content.length() - 1);
             }
         }
         return null; // filename이 없는 경우 (폼필드 데이터인 경우):
     }
+
 }

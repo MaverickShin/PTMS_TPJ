@@ -303,6 +303,18 @@ public class TrainerDAOImpl implements TrainerDAO {
 		int updateCnt = dao.updateTrainingComplete(TQ_CD);
 		return updateCnt;
 	}
+
+	@Override
+	public List<TrainerVO> previewTrainingGrade() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int updatePay(int TQ_CD) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	/*
 	// 평점순 훈련사 정렬 건수
@@ -328,19 +340,10 @@ public class TrainerDAOImpl implements TrainerDAO {
 		return selectCnt;
 	}
 
-	// 후기 미리보기 최신등록순 훈련사 정렬
 	@Override
-	public List<TrainerVO> newTrainerList() {
+	public int updatePay(int TQ_CD) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
-		return dao.newTrainerList();
-	}
-	
-	// 후기 많은 순 훈련사 정렬 건수
-	@Override
-	public int lotsOfReviewsCnt() {
-		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
-		int selectCnt = dao.lotsOfReviewsCnt();
-		return selectCnt;
+		return dao.updatePay(TQ_CD);
 	}
 
 	// 후기 미리보기 후기 많은 순 훈련사 정렬

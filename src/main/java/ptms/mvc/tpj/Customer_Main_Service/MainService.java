@@ -36,8 +36,10 @@ public interface MainService {
 	// 펫 수정 처리
 	public void petUpdateAction(HttpServletRequest req, Model model);
 	
-	// 일정 가지고 오기(json변환을 위해 Map을 ResultType으로 받음)
-	public void callCalendar(HttpServletRequest req, Model model);
+	/*
+	 * // 일정 가지고 오기(json변환을 위해 Map을 ResultType으로 받음) public void
+	 * callCalendar(HttpServletRequest req, Model model);
+	 */
 	
 	// 질병정보 크롤링 - 21.09.23 창훈 추가
 	public void SymptomCrawling(HttpServletRequest req, Model model);
@@ -51,11 +53,11 @@ public interface MainService {
 	// 제휴정보 크롤링 테스트용 - 진수 21.09.25
 	public void AffiliateCrwaling(HttpServletRequest req, Model model);
 	
-	// 일정 추가
-	public void addEvent(HttpServletRequest req, Model model);
-	
-	// 일정 삭제
-	public void deleteEvent(HttpServletRequest req, Model model);
+	/*
+	 * // 일정 추가 public void addEvent(HttpServletRequest req, Model model);
+	 * 
+	 * // 일정 삭제 public void deleteEvent(HttpServletRequest req, Model model);
+	 */
 
 	// 뉴스레이터 크롤링 - 21.09.26 선영
 	public void Newsletter(HttpServletRequest req, Model model);
