@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="ptms.mvc.tpj.Schedule_DAO.ScheduleDAO">
+
+	<select id = "calendarList" resultType="ptms.mvc.tpj.CustVO.CalendarVO">
+		select * from calendar_tb where CUST_ID = #{cust_id}
+	</select>
+
+	<delete id="deleteCalendar">
+		delete from calendar_tb where cl_cd = #{cl_cd}
+	</delete>
+
+	<insert id="insertCalendar" parameterType="ptms.mvc.tpj.CustVO.CalendarVO">
+		insert into calendar_tb (CL_CD, CUST_ID, CL_KIND, START_TM, END_TM, CL_TITLE, CL_MEMO, CL_BACKCOL, CL_COLOR, CL_BORDER)
+		values(CL_CD_SEQ.nextval, #{CUST_ID}, #{CL_KIND}, to_date(#{start},'YYYY/MM/DD'), to_date(#{end},'YYYY/MM/DD'), #{CL_TITLE}, #{CL_MEMO}, #{CL_BACKCOL}, #{CL_COLOR}, #{CL_BORDER})
+	</insert>
+
+	<update id="updateCalendar" parameterType="ptms.mvc.tpj.CustVO.CalendarVO">
+		update calendar_tb
+		set 
+			START_TM = to_date(#{start},'YYYY/MM/DD'), 
+			END_TM = to_date(#{end},'YYYY/MM/DD'),
+			CL_TITLE = #{CL_TITLE},
+			CL_BACKCOL = #{CL_BACKCOL},
+			CL_COLOR = #{CL_COLOR},
+			CL_BORDER = #{CL_BORDER}
+		WHERE cl_cd = #{CL_CD}
+	</update>
+
+</mapper>

@@ -67,7 +67,7 @@ $(function(){
                         url: "/tpj/pay/paySuccess", //cross-domain error가 발생하지 않도록 주의해주세요
                         data: {"kind" : paykind, "price" : amount, "id" : ids},
                         dataType: "json",
-                    success: function(result) {
+                    	success: function(result) {
                     	if(result == 1) {
                     		window.location = pages; 
                     	}

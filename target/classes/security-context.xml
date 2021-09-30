@@ -172,6 +172,7 @@
      	<security:http pattern="/sitter/**"     security="none" />
      	<security:http pattern="/trainer/**"     security="none" />  
      	<security:http pattern="/pay/**"     security="none" /> 
+     	<security:http pattern="/sch nmj/**"     security="none" /> 
 	
 		<!-- 비밀번호 암호화 빈 -->
 		<!-- BCryptPasswordEncoder : 스프링에서 제공하는 클래스 -->

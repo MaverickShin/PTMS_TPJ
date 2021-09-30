@@ -110,6 +110,5 @@
 	</div>
 
 	<%@ include file="../../main/footer.jsp"%>
-	시터매칭
 </body>
 </html>

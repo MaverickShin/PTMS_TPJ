@@ -97,7 +97,7 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item" id = "mypages"><a class="nav-link">반려인/펫 관리</a>
 						<div class = "hide">
-			    			<a href="/tpj/cust/calendar">캘린더</a>
+			    			<a href="/tpj/sch/calendar">캘린더</a>
 				    		<a href="/tpj/cust/MyInfoUser">내정보관리</a>
 				    		<a href="/tpj/cust/contact">건강관리</a>
 						</div>

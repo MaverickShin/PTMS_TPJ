@@ -276,6 +276,18 @@ public class TrainerDAOImpl implements TrainerDAO {
 		int reviewCheckCnt = dao.reviewCheckCnt(TQ_CD);
 		return reviewCheckCnt;
 	}
+
+	@Override
+	public List<TrainerVO> previewTrainingGrade() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int updatePay(int TQ_CD) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	/*
 	// 평점순 훈련사 정렬 건수

@@ -1,16 +1,22 @@
 package ptms.mvc.tpj.CustVO;
 
-import oracle.sql.TIMESTAMP;
+import java.sql.Date;
 
 public class CalendarVO {
+
+	private int CL_CD;
+	private String CUST_ID;
+	private String CL_KIND;
+	private Date START_TM;
+	private Date END_TM;
+	private String CL_TITLE;
+	private String CL_MEMO;
+	private String CL_BACKCOL;
+	private String CL_COLOR;
+	private String CL_BORDER;
+	private String start;
+	private String end;
 	
-	private int CL_CD;		// 달력 PK
-	private String CUST_ID;	// 해당 달력(일정)의 소유자 ID
-	private int CK_CD;		// 이벤트 종류 (0: 기타, 1: 시터, 2: 훈련사)
-	private TIMESTAMP START_TM; // 이벤트 시작 시각(DATE타입은 TIMESTAMP로 형변환) NOT NULL
-	private TIMESTAMP END_TM; // 이벤트 종료 시각
-	private String CL_TITLE; // 이벤트 종류가 0일때 일정 이름 입력
-	private String CL_MEMO; // 해당 일정을 클릭했을 때 표시되는 메모
 	
 	public int getCL_CD() {
 		return CL_CD;
@@ -24,22 +30,22 @@ public class CalendarVO {
 	public void setCUST_ID(String cUST_ID) {
 		CUST_ID = cUST_ID;
 	}
-	public int getCK_CD() {
-		return CK_CD;
+	public String getCL_KIND() {
+		return CL_KIND;
 	}
-	public void setCK_CD(int cK_CD) {
-		CK_CD = cK_CD;
+	public void setCL_KIND(String cL_KIND) {
+		CL_KIND = cL_KIND;
 	}
-	public TIMESTAMP getSTART_TM() {
+	public Date getSTART_TM() {
 		return START_TM;
 	}
-	public void setSTART_TM(TIMESTAMP sTART_TM) {
+	public void setSTART_TM(Date sTART_TM) {
 		START_TM = sTART_TM;
 	}
-	public TIMESTAMP getEND_TM() {
+	public Date getEND_TM() {
 		return END_TM;
 	}
-	public void setEND_TM(TIMESTAMP eND_TM) {
+	public void setEND_TM(Date eND_TM) {
 		END_TM = eND_TM;
 	}
 	public String getCL_TITLE() {
@@ -54,6 +60,35 @@ public class CalendarVO {
 	public void setCL_MEMO(String cL_MEMO) {
 		CL_MEMO = cL_MEMO;
 	}
-	
+	public String getCL_BACKCOL() {
+		return CL_BACKCOL;
+	}
+	public void setCL_BACKCOL(String cL_BACKCOL) {
+		CL_BACKCOL = cL_BACKCOL;
+	}
+	public String getCL_COLOR() {
+		return CL_COLOR;
+	}
+	public void setCL_COLOR(String cL_COLOR) {
+		CL_COLOR = cL_COLOR;
+	}
+	public String getCL_BORDER() {
+		return CL_BORDER;
+	}
+	public void setCL_BORDER(String cL_BORDER) {
+		CL_BORDER = cL_BORDER;
+	}
+	public String getStart() {
+		return start;
+	}
+	public void setStart(String start) {
+		this.start = start;
+	}
+	public String getEnd() {
+		return end;
+	}
+	public void setEnd(String end) {
+		this.end = end;
+	}
 	
 }

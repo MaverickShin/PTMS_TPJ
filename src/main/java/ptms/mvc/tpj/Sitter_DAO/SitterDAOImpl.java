@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import ptms.mvc.tpj.CustVO.PetVO;
 import ptms.mvc.tpj.CustVO.SitterVO;
 import ptms.mvc.tpj.CustVO.ZipcodeVO;
-import ptms.mvc.tpj.TrainerDAO.TrainerDAO;
 
 @Repository
 public class SitterDAOImpl implements SitterDAO{
