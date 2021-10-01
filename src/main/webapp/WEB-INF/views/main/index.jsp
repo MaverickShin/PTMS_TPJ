@@ -7,33 +7,111 @@
     <title>Pet Sitting - Free Bootstrap 4 Template by Colorlib</title>
     <meta charset="utf-8">
   </head>
-<body>
+ 
+<script type="text/javascript">
+function showImage(){ 
+	var imgNum=Math.round(Math.random()*3); 
+	var objImg= $(".vJOb1e"); 
+	var td = $(".big td");
+	objImg.hide();
+	td.hide();
+	objImg[imgNum].style.display = 'block';
+	td[imgNum].style.display = 'block';
+	setTimeout(showImage,3000); 
+}
+</script>  
+<style>
 
+	.news {
+		width: 100%;
+		background-color: #2C3E50;
+		padding-top: 50px;
+		padding-bottom: 50px;
+	}
+
+	.vJOb1e {
+		display: none;
+	}
+	
+	.CEMjEf {
+		margin-bottom: 20px;
+	}
+	
+	.big {
+		width : 500px;
+		margin-left:auto;
+		margin-right:auto;
+		margin-top: 30px;
+		margin-bottom: 30px;
+		color: white;
+		border: 1px solid white;
+		font-family: 'Do Hyeon', sans-serif;
+		border-collapse: collapse;
+		border-left:none;
+		border-right:none;
+	}
+	
+	.big th {
+		font-size: 20px;
+		font-weight: bold;
+		border-left:none;
+		border-right:none;
+		border-top: 1px solid white;
+	}
+	
+	.big td {
+		height: 250px;
+		display: none;
+		color: white;
+		border: 1px solid white;
+		border-left: none;
+		border-right: none;
+	}
+	
+	.FAkayc  {
+		display: none;
+	}
+	
+	.iRPxbe {
+		color: white;
+		padding: 20px;
+	}
+	
+	.GI74Re:hover {
+		color: green;
+		font-weight: bold;
+		margin-top: 10px;
+	}
+	
+	.lO8SBd {
+		display: none;	
+	}
+	
+	.mCBkyc:hover {
+		color: green;
+		font-weight: bold;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	
+	.ZE0LJd {
+		margin-top: 10px;
+	}
+</style>
+<body onload = "showImage();">
 <%@ include file = "header.jsp" %>
 
 	<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+		
+		<df-messenger
+	 		intent="WELCOME"
+	  		chat-title="PTMS"
+	  		agent-id="0b66c0d5-09a4-4a16-aeb7-b92963e6f8ca"
+	  		language-code="ko">
+	  	</df-messenger>
 	
-	<df-messenger
- 		intent="WELCOME"
-  		chat-title="PTMS"
-  		agent-id="0b66c0d5-09a4-4a16-aeb7-b92963e6f8ca"
-  		language-code="ko">
-  	</df-messenger>
-
-	<section>
-		<div>
-			<div>
-				<div>
-					<div>
-						<%@ include file="../news/newsletter.jsp"%>
-<%-- 						<div>
-							<img src="${imgPath}image_4.jpg" width="400px" height="300px"
-								vspace=30>
-						</div> --%>
-				 	</div>
-				</div>
-			</div>
-		</div>
+	<section class = "news">
+		<%@ include file="../news/newsletter.jsp"%>
 	</section>
 
     <!-- END nav -->
