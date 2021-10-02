@@ -48,4 +48,12 @@
 		SET SF_FEE=#{SF_FEE}
 		WHERE PK_CD =#{PK_CD}
 	</update>
+	
+	<!-- 펫 코드 및 요금 목록 삭제처리 -->
+	<delete id="DeletePetCodeFee" parameterType="int">
+		DELETE FROM PET_KIND_TB
+		WHERE PK_CD =#{PK_CD}
+	</delete>
+	
+	
 </mapper>

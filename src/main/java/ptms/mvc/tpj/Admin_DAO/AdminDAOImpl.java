@@ -73,8 +73,10 @@ public class AdminDAOImpl implements AdminDAO{
 	//펫 코드 및 요금 목록 삭제처리
 	@Override
 	public int DeletePetCodeFee(int PK_CD) {
-		// TODO Auto-generated method stub
-		return 0;
+		System.out.println("DAO ==> DeletePetCodeFee");
+		
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.DeletePetCodeFee(PK_CD);
 	}
 
 
