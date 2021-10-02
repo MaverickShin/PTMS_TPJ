@@ -41,4 +41,9 @@ public class HomeController {
 		return "index";
 	}
 	
+	@RequestMapping("gal")
+	public String gal() {
+		return "include/gallery";
+	}
+	
 }

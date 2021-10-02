@@ -95,8 +95,6 @@
 						<div class="col-md-7" style="max-width: 100% !important; flex: 0 0 100% !important">
 							<div class="contact-wrap w-100 p-md-5 p-4">
 								<h3 class="mb-4">MyPet 목록</h3>
-								
-								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 									<div class="row">
 										<table class="col-md-12">
 											<tr align="center">
@@ -107,32 +105,67 @@
 												<th>특이사항</th>
 												<th>수정/삭제</th>
 											</tr>	
+											
+											<c:if test = "${cnt == 0}">
+												<tr>
+													<td colspan = "5">아직 등록된 펫이 없습니다!</td>
+												</tr>
+											</c:if>
+											
 											<!-- 등록된게 있으면 -->
 											<c:if test="${cnt > 0}">
-												<c:forEach var="dto" items="${dtos}">
-												<tr>
-													<!-- 목록번호 -->
-													<%-- <td align="center">${dto.PET_CD}</td> --%>
-													<!-- 펫 사진 -->
-													<td align="center"><img src="${dto.PET_IMG}" width="150px" height="150px"></td>
-													<!-- 펫 나이 -->
-													<td align="center">${dto.PET_AGE}</td>
-													<!-- 펫 이름 -->
-													<td align="center">${dto.PET_NM}</td>
-													<!-- 특이사항 -->
-													<td align="center">${dto.PET_CON}</td>
-													<!-- 수정/삭제 -->
-													<td align="center">
-														<input class="btn btn-primary" type="button" id="update" value="수정" 
-																onclick="window.location='MyPetUpdate?PET_CD=${dto.PET_CD}'">
-														<input class="btn btn-primary" type="button" id="delete" value="삭제" 
-																onclick="window.location='MyPetDelete?PET_CD=${dto.PET_CD}'">
-													</td>
-												</tr>
+												<c:forEach var="dto" items="${vo}">
+													<tr>
+														<!-- 목록번호 -->
+														<%-- <td align="center">${dto.PET_CD}</td> --%>
+														<!-- 펫 사진 -->
+														<td align="center"><img src="${dto.PET_IMG}" width="150px" height="150px"></td>
+														<!-- 펫 나이 -->
+														<td align="center">${dto.PET_AGE}</td>
+														<!-- 펫 이름 -->
+														<td align="center">${dto.PET_NM}</td>
+														<!-- 특이사항 -->
+														<td align="center">${dto.PET_CON}</td>
+														<!-- 수정/삭제 -->
+														<td align="center">
+															<input class="btn btn-primary" type="button" id="update" value="수정" 
+																	onclick="window.location='MyPetUpdate?PET_CD=${dto.PET_CD}&pageNum=${pageNum}'">
+															<input class="btn btn-primary" type="button" id="delete" value="삭제" 
+																	onclick="window.location='MyPetDelete?PET_CD=${dto.PET_CD}&pageNum=${pageNum}'">
+														</td>
+													</tr>
 												</c:forEach>
 											</c:if>
-										</table>
+									</table>
+								</div>
+								
+								<c:if test = "${cnt > 0}">
+									<div class = "row">
+										<div class="col-md-12" align="center">
+											<div class="block-27">
+								              <ul>
+								                <li><a href="${s}">&lt;&lt;</a>
+								                <li><a href="${s}?pageNum=${startPage - pageBlock}">&lt;</a></li>
+								                
+								                <c:forEach var="i" begin="${startPage}" end="${endPage}">
+													<c:if test="${i == currentPage}">
+														<li class="active"><span><a href="${s}?pageNum=${i}">${i}</a></span></li>
+													</c:if>
+					
+													<c:if test="${i != currentPage}">
+														<li><span><a href="${s}?pageNum=${i}">${i}</a></span></li>
+													</c:if>
+													
+												</c:forEach> 
+								                
+							                	<li><a href="${s}?pageNum=${startPage + pageBlock}">&gt;</a></li>
+							                	<li><a href="${s}?pageNum=${pageCount}">&gt;&gt;</a></li>
+								              </ul>
+											</div>
+										</div>
 									</div>
+								</c:if>
+								
 							</div>
 						</div>
 						

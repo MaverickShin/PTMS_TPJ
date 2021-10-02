@@ -6,7 +6,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name = "_csrf_header" content="${_csrf.headerName}">
+<meta name = "_csrf" content = "${_csrf.token}">
 <title>Insert title here</title>
+<script>
+//아이디 유효성 검사(1 = 중복 / 0 != 중복)
+$(document).ready(function(){
+	
+	$.ajax({
+		type: "get",
+		url: "/tpj/cust/nutrient",
+		cache: false,
+		dataType: "json",
+		contentType: "application/json; charset=utf-8",
+		beforeSend : function(jqXHR, settings)
+		{
+			var token = $("meta[name='_csrf_header']").attr("content");
+			var header = $("meta[name='_csrf']").attr("content");
+			jqXHR.setRequestHeader(header, token);
+	},
+	success: function(cnt) {
+	},
+	error : function(request, status, error) {
+		alert("에러!");
+	}
+	});
+});
+</script>
 <style>
 .title {
 	font-size: 20pt;

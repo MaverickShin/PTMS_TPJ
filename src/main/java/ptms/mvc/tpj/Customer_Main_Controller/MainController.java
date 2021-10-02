@@ -14,6 +14,10 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -310,6 +314,70 @@ public class MainController {
    // 반려동물 건강관리 
    @RequestMapping("contact")
    public String contact(Model model) {
+	   
+	// Jsoup를 이용해서 반려동물 지식정보 크롤링
+		String url = "http://www.mypetgene.com/sub/sub05_05.php?boardid=board4";
+		Document doc = null;
+
+		// for문을 돌면서 뉴스 제목들을 가져오기 위한 list
+		List<String> list = new ArrayList<String>();
+
+		try {
+			// Jsoup url 연결
+			doc = Jsoup.connect(url).get();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// 주요 뉴스로 나오는 태그를 찾아서 가져오도록 한다. <section class="section-body">
+		Elements element = doc.select("div.board-list");
+		Elements element1 = element.select("td");
+		//Elements element2 = element1.select("")
+		// 1. 헤더 부분의 제목을 가져온다.
+		// String title = element.select("img").text();
+		
+		Elements images = element1.select("img");
+		
+		Elements element2 = element1.select("div.bbs-tit");
+		
+		Elements title = element2.select("a[href]");
+		
+		System.out.println("img : " + images);
+		
+		for (Element link : title) {
+			
+			String urls = link.attr("abs:href");
+			
+			String con = link.text();
+			
+			String sum = "<a href = '" + urls + "'>" + con + "</a>";
+			
+			list.add(sum);
+			
+		}
+	
+		List<String> list2 = new ArrayList<String>();
+		
+		for (Element imgs : images) {
+			
+			String img = "<img src = '"+imgs.getElementsByAttribute("src").attr("abs:src")+"'>";
+			
+			list2.add(img);
+		}
+		
+		List<String> list3 = new ArrayList<String>();
+
+		for (int i = 0; i < list.size(); i++) {
+			for (int j = 0; j < list2.size(); j++) {
+				String sum = "<div class = 'contents'>"+list2.get(j)+list.get(j)+"</div>";
+				
+				System.out.println("sum : " + sum);
+				list3.add(sum);
+			}
+		}
+
+	   model.addAttribute("list", list3);
 	   
 	   return "customer/health/contact";
    }
