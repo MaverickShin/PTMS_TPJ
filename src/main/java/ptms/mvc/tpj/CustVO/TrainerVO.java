@@ -39,7 +39,7 @@ public class TrainerVO {
 	// 훈련사 후기 테이블
 	private int TG_CD;			// 훈련사 후기 코드
 	private int TG_ID;			// 훈련사ID
-	private int TQ_CD;
+	private int TQ_CD;			// 훈련사 요청 코드
 	private float TG_GRADE;		// 훈련사 평점
 	private String TG_CON;		// 훈련 후기 내용
 	private String TG_IMG;		// 훈련 후기 이미지
@@ -47,6 +47,10 @@ public class TrainerVO {
 	
 	private float TG_AVG;		// 훈련사별 평점 평균
 	private int TG_COUNT;		// 훈련사별 후기 갯수
+	
+	// 훈련사 요청 테이블과 조인한 정보
+	private String TQ_AMT;
+	private int TQ_FEE;
 	
 	public int getTA_CD() {
 		return TA_CD;
@@ -280,6 +284,35 @@ public class TrainerVO {
 
 	public void setTQ_CD(int tQ_CD) {
 		TQ_CD = tQ_CD;
+	}
+
+	public String getTQ_AMT() {
+		return TQ_AMT;
+	}
+
+	public void setTQ_AMT(String tQ_AMT) {
+		TQ_AMT = tQ_AMT;
+	}
+
+	public int getTQ_FEE() {
+		return TQ_FEE;
+	}
+
+	public void setTQ_FEE(int tQ_FEE) {
+		TQ_FEE = tQ_FEE;
+	}
+
+	@Override
+	public String toString() {
+		return "TrainerVO [TA_CD=" + TA_CD + ", CUST_ID=" + CUST_ID + ", TA_TITLE=" + TA_TITLE + ", TA_APPEAL="
+				+ TA_APPEAL + ", TA_IMG=" + TA_IMG + ", TA_ST=" + TA_ST + ", TA_DT=" + TA_DT + ", TS_CD=" + TS_CD
+				+ ", TS_AREA=" + TS_AREA + ", TS1_NO=" + TS1_NO + ", TS1_FEE=" + TS1_FEE + ", TS2_NO=" + TS2_NO
+				+ ", TS2_FEE=" + TS2_FEE + ", TS3_NO=" + TS3_NO + ", TS3_FEE=" + TS3_FEE + ", TS4_NO=" + TS4_NO
+				+ ", TS4_FEE=" + TS4_FEE + ", START_DAY=" + START_DAY + ", END_DAY=" + END_DAY + ", ADJUSTABLE="
+				+ ADJUSTABLE + ", CUST_NM=" + CUST_NM + ", PET_NM=" + PET_NM + ", TG_CD=" + TG_CD + ", TG_ID=" + TG_ID
+				+ ", TQ_CD=" + TQ_CD + ", TG_GRADE=" + TG_GRADE + ", TG_CON=" + TG_CON + ", TG_IMG=" + TG_IMG
+				+ ", TG_DT=" + TG_DT + ", TG_AVG=" + TG_AVG + ", TG_COUNT=" + TG_COUNT + ", TQ_AMT=" + TQ_AMT
+				+ ", TQ_FEE=" + TQ_FEE + "]";
 	}
 
 	

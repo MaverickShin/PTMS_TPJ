@@ -43,7 +43,7 @@
                   <div class="col-md-6">
                      <div class="form-group">
                         <label class="label" for="TG_GRADE">평점</label> 
-                        <input type="number" class="form-control" name="TG_GRADE" id="TG_GRADE" max="5">
+                        <input type="number" class="form-control" name="TG_GRADE" id="TG_GRADE" step ="0.5" max="5">
                      </div>
                   </div>
                   <div class="col-md-6">

@@ -297,7 +297,39 @@ public class TrainerController {
 	   
 	   trainerservice.updateTrainingComplete(req, model);
 	   
-	   return "customer/trainer/custReqResultClone";
+	   return "customer/trainer/updateTrainingCompleteAction";
+   }
+   
+   // 내후기 보기
+   @RequestMapping("getReviewInfo")
+   public String getReviewInfo(HttpServletRequest req, Model model) {
+      log.info("url - getReviewInfo");
+      
+      trainerservice.getReviewInfo(req, model);
+      
+      return "customer/trainer/getReviewlist";
+   }
+   
+   // 내후기 수정 페이지
+   @RequestMapping("modifyTrainingReview")
+   public String modifyTrainingReview(HttpServletRequest req, Model model) {
+      log.info("url - modifyTrainingReview");
+      
+      // 훈련사 정보 수정 화면
+      trainerservice.modifyReview(req, model);
+      
+      return "customer/trainer/modifyTrainingReview";
+   }
+   
+   // 내후기 수정 처리
+   @RequestMapping("modifyTrainingReviewAction")
+   public String modifyTrainingReviewAction(HttpServletRequest req, Model model) {
+      log.info("url - modifyTrainingReviewAction");
+      
+      // 훈련사 정보 수정 화면
+      trainerservice.modifyReviewAction(req, model);
+      
+      return "customer/trainer/modifyTrainingReviewAction";
    }
  
 }
