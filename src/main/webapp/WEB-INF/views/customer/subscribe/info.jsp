@@ -47,7 +47,7 @@
 		              <li><span class="fa fa-check mr-2"></span>최초 구독시 시터 1회 무료 이용권</li>
 		            </ul>
 					
-		            <a href="/tpj/pay/request" class="btn btn-primary d-block px-2 py-3">Get Started</a>
+		            <a href="/tpj/pay/request?item_name=프리미엄 결제&price=29900&primarykey=null" class="btn btn-primary d-block px-2 py-3">Get Started</a>
 	            </div>
 	          </div>
 	        </div>
@@ -63,7 +63,7 @@
 		              <li><span class="fa fa-check mr-2"></span>모바일 푸시 알림</li>
 		              <li><span class="fa fa-check mr-2"></span>매칭 지원 (시터, 훈련사 등록) </li>
 		            </ul>
-		            <a href="${py}request" class="btn btn-primary d-block px-2 py-3">Get Started</a>
+		            <a href="/tpj/pay/request?item_name=비지니스 결제&price=49900&primarykey=null" class="btn btn-primary d-block px-2 py-3">Get Started</a>
 	            </div>
 	          </div>
 	        </div>

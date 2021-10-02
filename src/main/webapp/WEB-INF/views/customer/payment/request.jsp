@@ -55,7 +55,7 @@ $(function(){
                 url: urls, //cross-domain error가 발생하지 않도록 주의해주세요
                 type: 'get',
                 dataType: 'json',
-                data: "primarykey=" + pk,
+                data: {"primarykey" : pk, "item_name" : item},
             success: function(data) {
                 //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
                 if (data == 1) {

@@ -86,4 +86,7 @@ public interface MainDAO {
 	// 결제 이력 처리
 	public int insertPayhistory(Map<String, Object> map);
 	
+	// 구독 업데이트 처리
+	public int updateSubscribe(Map<String, Object> map); 
+
 }
