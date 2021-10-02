@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+   pageEncoding="UTF-8"%>
+<%@include file="../../setting.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="_csrf_header" content="${_csrf.headerName}">
-<meta name="_csrf" content="${_csrf.token}">
+<meta name="_csrf" content="${_csrf.token}"> 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 	$(document).ready(function() {
@@ -231,7 +231,7 @@
 					<c:if test="${cnt > 0}">
 						<div class="row" id="divs"
 							style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 30px; width: 700px; margin-left: auto; margin-right: auto; margin-top: 10px;">
-							<c:forEach var="li" items="${list}">
+							<c:forEach var="li" items="${list}" varStatus="status">
 								<div class="col-md-12" style="background-color: #f5f5f5;">
 									<h5>고객 : ${li.CUST_ID}</h5>
 									&nbsp;
@@ -263,16 +263,16 @@
 										</p>
 									</c:if>
 									<c:if test="${li.SQ_ST == 4}">
-										<c:if test="${reviewCheckCnt > 0}">
+										<c:if test="${reviewCheckCnt[status.index] == 1}">
 											<p>
 												<input type="button" name="Mysitterreview" value="후기작성완료"
 													disabled>
 											</p>
 										</c:if>
-										<c:if test="${reviewCheckCnt == 0}">
+										<c:if test="${reviewCheckCnt[status.index] != 1}">
 											<p>
 												<input type="button" name="Mysitterreview" value="후기작성"
-													onclick="window.location='Mysitterreview?SIT_ID=${li.SIT_ID}'">
+													onclick="window.location='Mysitterreview??SIT_ID=${li.SIT_ID}&SQ_CD=${li.SQ_CD}'">
 											</p>
 										 </c:if> 
 									</c:if>
@@ -280,32 +280,30 @@
 							</c:forEach>
 						</div>
 
-						<div class="page_control">
-							<table>
-								<tr>
-									<th align="center">
-										<!-- 게시글이 있으면 --> <!-- 처음[◀◀]    / 이전블록[◀]  / --> <c:if
-											test="${startPage > pageBlock}">
-											<a href="${s}"> [◀◀] </a>
-											<a href="${s}?pageNum=${startPage - pageBlock}"> [◀] </a>
-										</c:if> <!-- 블록내의 페이지 번호 --> <c:forEach var="i" begin="${startPage}"
-											end="${endPage}">
-											<c:if test="${i == currentPage}">
-												<span style="cursor: pointer;"><b>[${i}]</b></span>
-											</c:if>
-
-											<c:if test="${i != currentPage}">
-												<a href="${s}?pageNum=${i}">[${i}]</a>
-											</c:if>
-										</c:forEach> <!-- 다음[▶]   /  마지막[▶▶]  / --> <c:if
-											test="${pageCount > endPage}">
-											<a href="${s}?pageNum=${startPage + pageBlock}">[▶]</a>
-											<a href="${s}?pageNum=${pageCount}">[▶▶]</a>
-										</c:if>
-									</th>
-								</tr>
-							</table>
-						</div>
+						<div class = "row">
+                              <div class="col-md-12" align="center">
+                                 <div class="block-27">
+                                      <ul>
+                                        <li><a href="${s}">&lt;&lt;</a>
+                                        <li><a href="${s}?pageNum=${startPage - pageBlock}">&lt;</a></li>
+                                        
+                                        <c:forEach var="i" begin="${startPage}" end="${endPage}">
+                                       <c:if test="${i == currentPage}">
+                                          <li class="active"><span><a href="${s}?pageNum=${i}">${i}</a></span></li>
+                                       </c:if>
+               
+                                       <c:if test="${i != currentPage}">
+                                          <li><span><a href="${s}?pageNum=${i}">${i}</a></span></li>
+                                       </c:if>
+                                       
+                                    </c:forEach> 
+                                        
+                                        <li><a href="${s}?pageNum=${startPage + pageBlock}">&gt;</a></li>
+                                        <li><a href="${s}?pageNum=${pageCount}">&gt;&gt;</a></li>
+                                      </ul>
+                                 </div>
+                              </div>
+                           </div>
 					</c:if>
 				</div>
 			</div>

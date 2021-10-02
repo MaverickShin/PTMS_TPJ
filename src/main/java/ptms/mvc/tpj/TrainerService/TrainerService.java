@@ -94,4 +94,13 @@ public interface TrainerService {
 	/* 21-09-29 / 신도빈  / 결제완료 후 요청테이블 상태 업데이트 'TQ_ST : 1' */
 	// 고객 - 카카오페이 결제 완료 후 요청 테이블 상태 업데이트
 	public int paySuccessUpdate(HttpServletRequest req, Model model);
+	
+	// 내후기 보기
+	public void getReviewInfo(HttpServletRequest req, Model model);
+	
+	// 내후기 수정
+	public void modifyReview(HttpServletRequest req, Model model);
+	
+	// 내후기 수정처리
+	public void modifyReviewAction(HttpServletRequest req, Model model);
 }

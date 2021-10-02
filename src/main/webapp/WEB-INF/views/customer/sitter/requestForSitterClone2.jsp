@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="../../setting.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,22 +63,22 @@
 				<div class="col-md-12" align="center">
 					<div class="block-27">
 						<ul>
-							<li><a href="${s}" class = "page1">&lt;&lt;</a>
-							<li><a href="${s}?pageNum=${startPage - pageBlock}" class = "page2">&lt;</a></li>
+							<li><a href="${s}">&lt;&lt;</a>
+							<li><a href="${s}?pageNum=${startPage - pageBlock}">&lt;</a></li>
 
 							<c:forEach var="i" begin="${startPage}" end="${endPage}">
 								<c:if test="${i == currentPage}">
 									<li class="active"><span><a
-											href="${s}?pageNum=${i}" class = "page3">${i}</a></span></li>
+											href="${s}?pageNum=${i}">${i}</a></span></li>
 								</c:if>
 
 								<c:if test="${i != currentPage}">
-									<li><span><a href="${s}?pageNum=${i}" class = "page4">${i}</a></span></li>
+									<li><span><a href="${s}?pageNum=${i}">${i}</a></span></li>
 								</c:if>
 
 							</c:forEach>
 
-							<li><a href="${s}?pageNum=${startPage + pageBlock} ">&gt;</a></li>
+							<li><a href="${s}?pageNum=${startPage + pageBlock}">&gt;</a></li>
 							<li><a href="${s}?pageNum=${pageCount}">&gt;&gt;</a></li>
 						</ul>
 					</div>
@@ -116,28 +116,4 @@
 	</c:if>
 
 </body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-	$(document).ready(function() {
-
-		$(".col-md-12 a").click(function() { //수락
-
-			var urls = '<c:out value = "${s}"/>';
-			var pageNum = '<c:out value = "${pageNum}"/>';
-			
-			$.ajax({
-				type : "get",
-				url : urls,
-				cache : false,
-				data : "pageNum=" + 
-				success : function(result) {
-					$(".result_div").html(result);
-				},
-				error : function(request, status, error) {
-					alert("에러!");
-				}
-			});
-		});
-	});
-</script>
 </html>

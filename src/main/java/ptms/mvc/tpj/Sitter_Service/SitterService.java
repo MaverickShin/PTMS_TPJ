@@ -74,7 +74,19 @@ public interface SitterService {
 	// 고객 - (서비스완료-결제완료) 후 이용한 펫시터서비스에 대한 후기를 작성하는 페이지
 	public void writeSitterReview(HttpServletRequest req, Model model);
 	
-	// 고객 - 시터후기 미리보기(별점 높은순)
+	//고객 - 나의 리뷰내역 리스트
+	public void myreviewList(HttpServletRequest req, Model model);
+	
+	// 고객 - 나의 리뷰내역 수정 페이지
+	public void myreviewModify(HttpServletRequest req, Model model);
+	
+	// 고객 - 나의 리뷰내역 수정 처리
+	public void myreviewModifyAction(HttpServletRequest req, Model model);
+	
+	// 고객 - 나의 리뷰내역 삭제 처리
+	public void myreviewDelete(HttpServletRequest req, Model model);
+	
+	// 고객 - 시터후기 미리보기ㅡ(별점 높은순)
 	//public void highSittergrade(HttpServletRequest req, Model model);
 	
 	// 고객 - 시터후기 미리보기(최신등록순)

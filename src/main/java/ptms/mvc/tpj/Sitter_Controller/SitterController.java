@@ -115,7 +115,7 @@ public class SitterController {
 	  * 내용 : 시터 - 고객으로부터의 요청 수락대기
 	  */
 	 @RequestMapping("requestForSitter")
-	 public String requestForMe(HttpServletRequest req, Model model) {
+	 public String requestForSitter(HttpServletRequest req, Model model) {
 		 log.info("url ==> requestForSitter");
 		 
 		 sitterSer.allRequestList(req, model);
@@ -123,7 +123,7 @@ public class SitterController {
 	 }	
 	 
 	 @RequestMapping("requestForSitter2")
-	 public String requestForMe2(HttpServletRequest req, Model model) {
+	 public String requestForSitter2(HttpServletRequest req, Model model) {
 		 log.info("url ==> requestForSitter");
 		 
 		 sitterSer.allRequestList(req, model);
@@ -193,7 +193,15 @@ public class SitterController {
 		 
 		 sitterSer.MatchingFinishList(req, model);
 		 return "customer/sitter/requestForSitterClone";
-	 }		 
+	 }
+	 
+	 @RequestMapping("sitterserPayFinish2")
+	 public String sitterserPayFinish2(HttpServletRequest req, Model model) {
+		 log.info("url ==> sitterserPayFinish");
+		 
+		 sitterSer.MatchingFinishList(req, model);
+		 return "customer/sitter/requestForSitterClone2";
+	 }	
 
 	 /*
 	  * 날짜 : 21.09.25
@@ -305,7 +313,9 @@ public class SitterController {
 		 log.info("url ==> Mysitterreview");
 		 
 		 int SIT_ID = Integer.parseInt(req.getParameter("SIT_ID"));
+		 int SQ_CD = Integer.parseInt(req.getParameter("SQ_CD"));
 		 model.addAttribute("SIT_ID", SIT_ID);
+		 model.addAttribute("SQ_CD", SQ_CD);
 		 return "customer/sitter/Mysitterreview";
 	 }
 	 
@@ -321,6 +331,61 @@ public class SitterController {
 		 sitterSer.writeSitterReview(req, model);
 		 return "customer/sitter/MysitterreviewAction";
 	 }	 
+	 
+	 /*
+	  * 날짜 : 21.10.02
+	  * 작성자  : 임지영
+	  * 내용 : 고객 - 나의 리뷰내역 목록,수정,삭제 페이지
+	  */
+	 @RequestMapping("MyreviewList")
+	 public String MyreviewList(HttpServletRequest req, Model model) {
+		 log.info("url ==> MyreviewList");
+		 
+		 sitterSer.myreviewList(req, model);
+		 return "customer/sitter/MyreviewList";
+	 }
+	 
+	 /*
+	  * 날짜 : 21.10.02
+	  * 작성자  : 임지영
+	  * 내용 : 고객 - 나의 리뷰내역 수정 페이지
+	  */
+	 @RequestMapping("MyreviewModify")
+	 public String MyreviewModify(HttpServletRequest req, Model model) {
+		 log.info("url ==> MyreviewModify");
+		 
+		 sitterSer.myreviewModify(req, model);
+		 return "customer/sitter/MyreviewModify";
+	 }
+
+	 /*
+	  * 날짜 : 21.10.02
+	  * 작성자  : 임지영 
+	  * 내용 : 고객 - 나의 리뷰내역 수정 처리
+	  */
+	 @RequestMapping("MyreviewModifyAction")
+	 public String MyreviewModifyAction(HttpServletRequest req, Model model) {
+		 log.info("url ==> MyreviewModifyAction");
+		 
+		 sitterSer.myreviewModifyAction(req, model);
+		 return "customer/sitter/MyreviewModifyAction";
+	 }
+	 
+	 /*
+	  * 날짜 : 21.10.02
+	  * 작성자  : 임지영
+	  * 내용 : 고객 - 나의 리뷰내역 삭제
+	  */
+	 @RequestMapping("MyreviewDelete")
+	 public String MyreviewDelete(HttpServletRequest req, Model model) {
+		 log.info("url ==> MyreviewDelete");
+		 
+		 sitterSer.myreviewDelete(req, model);
+		 return "customer/sitter/MyreviewDelete";
+	 }	 
+	 
+	 
+	 
 /*	 
 	 /*
 	  *  날짜 : 21.09.28

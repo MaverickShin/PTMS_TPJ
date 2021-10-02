@@ -322,6 +322,30 @@ public class TrainerDAOImpl implements TrainerDAO {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
 		return dao.getTrainerCalendar(TA_CD);
 	}
+
+	@Override
+	public int getIDreviewCnt(String id) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.getIDreviewCnt(id);
+	}
+
+	@Override
+	public List<TrainerVO> getIDreviewInfo(Map<String, Object> map) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.getIDreviewInfo(map);
+	}
+
+	@Override
+	public TrainerVO ModifyInfo(int TG_CD) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.ModifyInfo(TG_CD);
+	}
+
+	@Override
+	public int modifyReviewAction(TrainerVO vo) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.modifyReviewAction(vo);
+	}
 	
 	/*
 	// 평점순 훈련사 정렬 건수

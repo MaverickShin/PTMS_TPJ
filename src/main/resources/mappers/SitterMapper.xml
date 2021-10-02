@@ -105,23 +105,23 @@
 	  <![CDATA[
 	  	 SELECT *
 	  	 FROM
-	  	 (SELECT SIT_ID, SIT_TITLE, SIT_APPEAL, SIT_IMG, CUST_NM, WK_START, WK_END, ROWNUM rNUM
+	  	 (SELECT SIT_ID, SIT_TITLE, SIT_APPEAL, SIT_IMG, CUST_NM, SIT_DT, ROWNUM rNUM
 	  	 	FROM(
-			SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM, ser.WK_START, ser.WK_END
+			SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM, s.SIT_DT
 		          FROM SITTERS_TB s, SITTER_SERVICE_TB ser, CUSTOMER_TB c
 		          WHERE s.SIT_ID = ser.SIT_ID
 		          AND s.CUST_ID = c.CUST_ID
 		          AND ser.SV_AREA LIKE '%'||#{SV_AREA}||'%'
 		          AND s.SIT_ST = 1
 		          INTERSECT
-			SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM, ser.WK_START, ser.WK_END
+			SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM, s.SIT_DT
 		          FROM SITTERS_TB s, SITTER_SERVICE_TB ser, CUSTOMER_TB c
 		          WHERE s.SIT_ID = ser.SIT_ID
 		          AND s.CUST_ID = c.CUST_ID
 		          AND #{WK_START} between ser.WK_START AND ser.WK_END
 		          AND #{WK_END} between ser.WK_START AND ser.WK_END
 		          INTERSECT
-			SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM, ser.WK_START, ser.WK_END
+			SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM, s.SIT_DT
 		          FROM SITTERS_TB s, SITTER_SERVICE_TB ser, CUSTOMER_TB c
 		          WHERE s.SIT_ID = ser.SIT_ID
 		          AND s.CUST_ID = c.CUST_ID
@@ -157,6 +157,15 @@
 			WHERE SIT_ID=#{SIT_ID}
 			AND rowNum >= 1 and rownum <= 3
 		]]>
+	</select>
+	
+	<!-- 고객 - 시터찾기 상세페이지 - 시터일정 가져오기 -->
+	<select id="sitterSchedule" parameterType="int" resultType="String">
+		SELECT START_DAY, END_DAY
+		FROM SITTER_REQUEST_TB
+		WHERE SIT_ID= #{SIT_ID}
+		AND SQ_ST=1
+		OR SQ_ST=3
 	</select>
 	
 	<!-- 펫시팅 신청하기 - 요청테이블에 insert -->
@@ -405,19 +414,60 @@
 			 ORDER BY SQ_DT DESC
 	   ]]>
 	</select>
+
+	<!-- 고객 - 나의 리뷰내역 리스트 수 -->
+	<select id="getMyreviewList" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM SITTER_GRADE_TB
+		WHERE CUST_ID=#{CUST_ID}
+	</select>
+
+	<!-- 고객 - 나의 리뷰내역 리스트 -->
+	<select id="MyreviewList" parameterType="java.util.Map" resultType="ptms.mvc.tpj.CustVO.SitterVO">	
+	  <![CDATA[	
+		SELECT * FROM
+		   (SELECT  REQ_SV, SQ_FEE, START_DAY, END_DAY, SG_GRADE, SG_CON, SG_DT, SG_CD ,ROWNUM rNUM
+		  	 FROM(
+				SELECT SG_GRADE, SG_CON, SG_DT, REQ_SV, SQ_FEE, START_DAY, END_DAY, SG_CD
+				FROM SITTER_GRADE_TB sg, SITTER_REQUEST_TB sr
+		        WHERE sg.SQ_CD = sr.SQ_CD
+				AND sg.CUST_ID=#{CUST_ID})
+	       )    	
+			 where rNUM >= #{start} and rNUM <= #{end}
+			 ORDER BY SG_DT DESC
+	   ]]>	
+	  </select>		 	
+	<!-- 고객 - 나의 리뷰내역 수정페이지 -->
+	<select id="reviewModifypg" parameterType="int" resultType="ptms.mvc.tpj.CustVO.SitterVO">
+		SELECT *
+		FROM SITTER_GRADE_TB
+		WHERE SG_CD=#{SG_CD}
+	</select>
+	
+	<!-- 고객 - 나의 리뷰내역 수정 처리 -->
+	<update id="reviewModifyAction" parameterType="ptms.mvc.tpj.CustVO.SitterVO">
+		UPDATE SITTER_GRADE_TB
+		SET SG_GRADE=#{SG_GRADE}, SG_CON=#{SG_CON}, SG_IMG=#{SG_IMG}
+		WHERE SG_CD=#{SG_CD}
+	</update>
+	
+	<!-- 고객 - 나의 리뷰 내역 삭제처리 -->
+	<delete id="reviewDeleteAction" parameterType="int">
+		DELETE FROM SITTER_GRADE_TB
+		WHERE SG_CD=#{SG_CD}
+	</delete>
 	
 	<!-- 고객 - 매칭 완료 후 후기 작성 중복체크 -->
 	<select id="sittterReviewChkCnt" parameterType="int" resultType="int">
 	  SELECT COUNT(*)
-      FROM SITTER_GRADE_TB sg, SITTER_REQUEST_TB sr
-      WHERE sg.SIT_ID = sr.SIT_ID
-      AND sr.SQ_CD = #{SQ_CD}	
+      FROM SITTER_GRADE_TB 
+      WHERE SQ_CD = #{SQ_CD}	
 	</select>
 	
 	<!-- 고객 - 후기작성 (시터 후기 테이블에 INSERT) -->
 	<insert id="ReviewWrite" parameterType="ptms.mvc.tpj.CustVO.SitterVO">
-		INSERT INTO SITTER_GRADE_TB(SG_CD, CUST_ID, SIT_ID, SG_GRADE, SG_CON, SG_IMG, SG_DT)
-		VALUES(SG_CDSQE.nextval, #{CUST_ID}, #{SIT_ID}, #{SG_GRADE}, #{SG_CON}, #{SG_IMG}, sysdate)
+		INSERT INTO SITTER_GRADE_TB(SG_CD, CUST_ID, SIT_ID, SQ_CD, SG_GRADE, SG_CON, SG_IMG, SG_DT)
+		VALUES(SG_CDSQE.nextval, #{CUST_ID}, #{SIT_ID},#{SQ_CD},#{SG_GRADE}, #{SG_CON}, #{SG_IMG}, sysdate)
 	</insert>
 	
 	<!-- 고객 - 동일한 아이디로 시터가입여부 중복체크 -->

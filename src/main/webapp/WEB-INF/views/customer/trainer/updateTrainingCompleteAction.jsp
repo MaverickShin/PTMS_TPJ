@@ -8,18 +8,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<!-- 취소 성공 -->
-	<c:if test="${insertCnt != 0}">
+	<!-- 매칭확정 성공 -->
+	<c:if test="${updateCnt == 1}">
 		<script type="text/javascript">
-			alert("후기가 작성되었습니다.");
-			window.location="${st}MysitterSerList";
+			alert("매칭이 확정되었습니다.");
+			window.location="custReqResult";
 		</script>
 	</c:if>
 	
-	<!-- 취소 실패 -->
-	<c:if test="${insertCnt == 0}">
+	<!-- 매칭확정 실패 -->
+	<c:if test="${updateCnt != 1}">
 		<script type="text/javascript">
-			alert("후기 작성에 실패했습니다.");
+			alert("매칭 확정에 실패하였습니다.");
 			window.history.back();
 		</script>
 	</c:if>
