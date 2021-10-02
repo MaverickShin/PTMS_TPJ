@@ -68,6 +68,9 @@ public class PaymentController {
 		} else if(item_name.equals("프리미엄 결제")) {
 			url = "/tpj/cust/paySuccess";
 			paykind = 3;
+		} else if(item_name.equals("비지니스 결제")) {
+			url = "/tpj/cust/paySuccess";
+			paykind = 4;
 		}
 		
 		model.addAttribute("item_name", item_name);
