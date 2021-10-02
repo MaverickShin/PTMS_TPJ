@@ -1,5 +1,6 @@
 package ptms.mvc.tpj.TrainerDAO;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -314,6 +315,12 @@ public class TrainerDAOImpl implements TrainerDAO {
 	public int updatePay(int TQ_CD) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<String> getTrainerCalendar(int TA_CD) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.getTrainerCalendar(TA_CD);
 	}
 	
 	/*

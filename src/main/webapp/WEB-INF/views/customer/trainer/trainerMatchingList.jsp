@@ -18,7 +18,7 @@
 <body>
 	<%@ include file="../../main/header.jsp" %>
 	
-	<section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+	<section class="hero-wrap hero-wrap-2" style="background-image: url('${imgPath}bg_2.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-end">
@@ -44,7 +44,7 @@
 				              </a>
 				              <div class="text p-4">
 				              	<div class="meta mb-2">
-				                  <div><a href="#">April 07, 2020</a></div>
+				                  <div><a href="#">${dto.START_DAY}~${dto.END_DAY}</a></div>
 				                  <div><a href="#">${dto.CUST_NM}</a></div>
 				                  <div><a href="#" class="meta-chat"><span class="fa fa-comment"></span>3</a></div><!-- 이곳에 좋아요 갯수 또는 평점을 넣으면 좋지 않을까? -->
 				                </div>

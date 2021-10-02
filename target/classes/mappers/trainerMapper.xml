@@ -483,4 +483,12 @@
 		UPDATE TRAINER_REQUEST_TB SET SQ_ST = 3 WHERE TQ_CD = #{TQ_CD}
 	</update>
 	
+	<select id="getTrainerCalendar" resultType="String">
+		select start_day
+		from TRAINER_REQUEST_TB
+		where TA_CD = #{TA_CD}
+		and TQ_ST = 1
+		or TQ_ST = 3
+	</select>
+	
 </mapper>

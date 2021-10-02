@@ -17,7 +17,20 @@
 </style>
 <script>
 	function searchCheck() {
-		if(!document.trainerSearchform.TQ_AMT)
+		if(!document.trainerSearchform.TQ_AMT.value) {
+			alert("원하는 훈련을 선택해 주세요.");
+			return false;
+		} else if(!document.trainerSearchform.TQ_LOC.value) {
+			alert("시 또는 구를 입력해 주세요.");
+			document.trainerSearchform.TQ_LOC.focus();
+			return false;
+		} else if(!document.trainerSearchform.START_DAY.value) {
+			alert("서비스 시작일을 지정해 주세요.");
+			return false;
+		} else if(!document.trainerSearchform.END_DAY.value) {
+			alert("서비스 마지막일을 지정해 주세요.");
+			return false;
+		} 
 	}
 </script>
 </head>

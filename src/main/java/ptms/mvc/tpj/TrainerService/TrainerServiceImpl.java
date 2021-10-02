@@ -192,19 +192,31 @@ public class TrainerServiceImpl implements TrainerService{
 		int TA_CD = Integer.parseInt(req.getParameter("TA_CD"));
 		System.out.println("TA_CD : " + TA_CD);
 		
+		// 회원의 마이펫 마릿수 가져오기
 		int selectCnt = dao.getPetCount(id);
 		System.out.println("selectCnt  :" + selectCnt);
 		
+		// 회원의 마이펫이 있으면 펫의 정보 가져오기
 		if(selectCnt > 0) {
 			List<TrainerVO> petInfo = dao.getPetInfo(id);
 			model.addAttribute("petInfo", petInfo);
 		}
 
+		// 훈련사 정보 가져오기
 		TrainerVO vo = dao.trainerInfo(TA_CD);
 		
+		// 훈련사의 일정 가져오기
+		List<String> calendar = new ArrayList<String>();
+		calendar = dao.getTrainerCalendar(TA_CD);
+		for(int i = 0; i <= calendar.size() - 1; i++) {
+			System.out.println("calendar : " + calendar.get(i));
+		}
+		
+		// 훈련사의 후기 갯수 가져오기
 		int reviewCnt = dao.reviewCnt(TA_CD);
 		System.out.println("reviewCnt : " + reviewCnt);
 		
+		// 훈련사의 후기가 있으면 후기 정보 가져오기
 		if(reviewCnt > 0) {
 			List<TrainerVO> reviewInfo = dao.getReviewInfo(TA_CD);
 			model.addAttribute("reviewInfo", reviewInfo);
@@ -216,6 +228,7 @@ public class TrainerServiceImpl implements TrainerService{
 		model.addAttribute("selectCnt", selectCnt);
 		model.addAttribute("TQ_LOC", TQ_LOC);
 		model.addAttribute("TA_CD", TA_CD);
+		model.addAttribute("calendar", calendar);
 	}
 
 	// 훈련사 정보 수정 화면

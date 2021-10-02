@@ -72,9 +72,9 @@
 			return false;
 			
 		} else if($("#TS1_NO").is(":checked")) {
-			if($("#tr_kind1_fee").val() === "") {
+			if(!$("#tr_kind1_fee1").val()) {
 				alert("111훈련요금을 입력하세요.");
-				$("#tr_kind1_fee").focus();
+				$("#tr_kind1_fee1").focus();
 				return false;
 			}
 		} else if($("#TS2_NO").is(":checked")) {
@@ -84,28 +84,39 @@
 				return false;
 			}
 		} else if($("#TS3_NO").is(":checked")) {
-			if(!$("#tr_kind3_fee").val()) {
+			if(!$("#tr_kind3_fee3").val()) {
 				alert("333 입력하세요.");
-				$("#tr_kind3_fee").focus();
+				$("#tr_kind3_fee3").focus();
 				return false;
 			}
 		} else if($("#TS4_NO").is(":checked")) {
-			if(!$("#tr_kind4_fee").val()) {
+			if(!$("#tr_kind4_fee4").val()) {
 				alert("4 입력하세요.");
-				$("#tr_kind4_fee").focus();
+				$("#tr_kind4_fee4").focus();
 				return false;
 			}
-		} else if(!document.applyform.address1.value) {
+		} else if(!document.getElementById("address1").value) {
 			alert("훈련가능 지역을 입력하세요.");
 			return false;
 		} else if(!document.applyform.START_DAY.value) {
 			alert("서비스 시작일을 지정하세요.");
+			document.applyform.START_DAY.focus();
 			return false;
 		} else if(!document.applyform.END_DAY.value) {
 			alert("서비스 종료일을 지정하세요.");
+			document.applyform.END_DAY.focus();
 			return false;
 		} else if(!document.applyform.TA_TITLE.value) {
-			alert("")
+			alert("소개글 제목을 입력하세요.");
+			document.applyform.TA_TITLE.focus();
+			return false;
+		} else if(!document.applyform.TA_APPEAL.value) {
+			alert("소개글 본문을 입력하세요.");
+			document.applyform.TA_APPEAL.focus();
+			return false;
+		} else if(!document.applyform.TA_IMG.value) {
+			alert("프로필 이미지를 첨부하세요.");
+			return false;
 		}
 		
 	}
