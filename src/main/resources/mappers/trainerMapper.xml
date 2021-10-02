@@ -491,4 +491,31 @@
 		or TQ_ST = 3
 	</select>
 	
+	<select id="getIDreviewCnt" resultType="int">
+		select count(*)
+		from TRAINER_GRADE_TB
+		where cust_id = #{id}
+	</select>
+	
+	<select id="getIDreviewInfo" resultType="ptms.mvc.tpj.CustVO.TrainerVO">
+		<![CDATA[
+		select * from
+		    (select tg_cd, tg_grade, tg_con, tg_img, pet_nm, tq_amt, tq_fee, start_day, rownum rNum
+		    from(select tg_cd, tg_grade, tg_con, tg_img, pet_nm, tq_amt, tq_fee, start_day
+		            from TRAINER_GRADE_TB tg, TRAINER_REQUEST_TB tr
+		            where tg.tq_cd = tr.tq_cd
+		            and tg.cust_id = #{id}))
+		where rNum >= #{start} and rNum <= #{end}
+		]]>
+	</select>
+	
+	<select id="ModifyInfo" resultType="ptms.mvc.tpj.CustVO.TrainerVO">
+		select * from TRAINER_GRADE_TB where TG_CD = #{TG_CD}
+	</select>
+	
+	<update id="modifyReviewAction" parameterType="ptms.mvc.tpj.CustVO.TrainerVO">
+		update TRAINER_GRADE_TB 
+		set TG_GRADE = #{TG_GRADE}, TG_CON = #{TG_CON}, TG_IMG = #{TG_IMG}
+		where TG_CD = #{TG_CD}
+	</update>
 </mapper>

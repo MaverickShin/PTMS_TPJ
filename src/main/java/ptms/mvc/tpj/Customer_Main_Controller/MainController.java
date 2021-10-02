@@ -404,6 +404,17 @@ public class MainController {
       return "customer/mypage/TrainerProfile";
    }
    
+   // 반려인/펫 관리 - 훈련사 수정페이지
+   @RequestMapping("TrainerProfile2")
+   public String TrainerProfile2(HttpServletRequest req, Model model) {
+      log.info("컨트롤러 - 반려인/펫 관리 - TrainerProfile");
+      
+      // 훈련사 정보 수정 화면
+      TrainerService.updateTrainer(req, model);
+      
+      return "customer/mypage/TrainerProfile2";
+   }
+   
    // 반려인/펫 관리 - 훈련사 수정 처리
    @RequestMapping("TrainerProfileAction")
    public String TrainerProfileAction(HttpServletRequest req, Model model) throws ParseException {
