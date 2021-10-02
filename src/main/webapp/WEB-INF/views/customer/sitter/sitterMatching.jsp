@@ -75,10 +75,11 @@
 										<div class="text p-4">
 											<div class="meta mb-2">
 												<div>
-													<a href="#">April 07, 2020</a>
+													<a href="#">해당시터 서비스 종료일  :<br>
+													 ${dto.WK_END}<br></a>
 												</div>
 												<div>
-													<a href="#">${dto.CUST_NM}</a>
+													<a href="#">펫시터 이름 : ${dto.CUST_NM}</a>
 												</div>
 												<div>
 													<a href="#" class="meta-chat"><span

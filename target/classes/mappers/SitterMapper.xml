@@ -60,6 +60,7 @@
 		SELECT p.PK_CD, p.PK_KIND, p.PK_DETAIL, s.SF_FEE
 		FROM PET_KIND_TB p , SITTER_FEE_TB s
 		WHERE p.PK_CD = s.PK_CD
+		ORDER BY p.PK_CD ASC
 	</select>
 	
 	<!-- 시터 프로필 등록 -->
@@ -104,23 +105,23 @@
 	  <![CDATA[
 	  	 SELECT *
 	  	 FROM
-	  	 (SELECT SIT_ID, SIT_TITLE, SIT_APPEAL, SIT_IMG, CUST_NM, ROWNUM rNUM
+	  	 (SELECT SIT_ID, SIT_TITLE, SIT_APPEAL, SIT_IMG, CUST_NM, WK_START, WK_END, ROWNUM rNUM
 	  	 	FROM(
-			SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM
+			SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM, ser.WK_START, ser.WK_END
 		          FROM SITTERS_TB s, SITTER_SERVICE_TB ser, CUSTOMER_TB c
 		          WHERE s.SIT_ID = ser.SIT_ID
 		          AND s.CUST_ID = c.CUST_ID
 		          AND ser.SV_AREA LIKE '%'||#{SV_AREA}||'%'
 		          AND s.SIT_ST = 1
 		          INTERSECT
-			SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM
+			SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM, ser.WK_START, ser.WK_END
 		          FROM SITTERS_TB s, SITTER_SERVICE_TB ser, CUSTOMER_TB c
 		          WHERE s.SIT_ID = ser.SIT_ID
 		          AND s.CUST_ID = c.CUST_ID
 		          AND #{WK_START} between ser.WK_START AND ser.WK_END
 		          AND #{WK_END} between ser.WK_START AND ser.WK_END
 		          INTERSECT
-			SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM
+			SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM, ser.WK_START, ser.WK_END
 		          FROM SITTERS_TB s, SITTER_SERVICE_TB ser, CUSTOMER_TB c
 		          WHERE s.SIT_ID = ser.SIT_ID
 		          AND s.CUST_ID = c.CUST_ID
@@ -128,7 +129,7 @@
 		          AND ser.SV2_NO >= #{SV2_NO}
 				  AND ser.SV3_NO >= #{SV3_NO}
 				  AND ser.SV4_NO >= #{SV4_NO})	
-				)	
+				)
 			 where rNUM >= #{start} and rNUM <= #{end}
 	   ]]>		  	  
 	</select>

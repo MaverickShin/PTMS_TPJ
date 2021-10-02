@@ -25,7 +25,7 @@
 			<td>${dto.PK_DETAIL}</td>
 			<td>${dto.SF_FEE}</td>
 			<td><input type="button" class="btn btn-primary" value="수정" onclick="window.location='sitterFeeUpdate?PK_CD=${dto.PK_CD}'"></td>
-			<td><input type="button" class="btn btn-primary" value="삭제" onclick="window.location='sitterFeeUpdateAction?PK_CD=${dto.PK_CD}'"></td>
+			<td><input type="button" class="btn btn-primary" value="삭제" onclick="window.location='sitterFeeDelete?PK_CD=${dto.PK_CD}'"></td>
 		</tr>
 		</c:forEach>
 	</table>

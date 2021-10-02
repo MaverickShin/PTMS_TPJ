@@ -72,7 +72,11 @@ function sittingCheck(){
 
 	});
 
-
+/*	if(window.sessionStorage.getItem("cust_id") == null){
+		alert("로그인이 필요한 서비스 입니다. 로그인 후 이용해 주세요");
+		window.location='/tpj/cust/login';
+	} else*/
+	
 	if(!document.sitterMatching.SV_AREA.value){
 		alert("시 또는 구를 입력해 주세요.");
 		document.sitterMatching.SV_AREA.focus();
