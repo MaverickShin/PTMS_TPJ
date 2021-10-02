@@ -331,13 +331,21 @@ public class SitterServiceImpl implements SitterService {
 		String SV_AREA = req.getParameter("SV_AREA");
 		System.out.println("세션CUST_ID: " + CUST_ID);
 
+		//상세페이지 리스트
 		SitterVO vo = sitterDao.detailSitter(SIT_ID);
 
+		//해당 고객의 반려동물 리스트 조회
 		List<PetVO> list = sitterDao.MypetList(CUST_ID);
+		
+		//해당 시터 펫시팅일정 가져오기
+		List<String> sitCalendar = new ArrayList<String>();
+		sitCalendar = sitterDao.sitterSchedule(SIT_ID);
 
+		//해당 훈련사 리뷰 갯수
 		int reviewCnt = sitterDao.sitreviwCnt(SIT_ID);
 		System.out.println("reviewCnt : " + reviewCnt);
 		if (reviewCnt > 0) {
+			//상세페이지 - 리뷰 리스트
 			List<SitterVO> revInfo = sitterDao.sitreviewList(SIT_ID);
 			model.addAttribute("revInfo", revInfo);
 		}
@@ -352,6 +360,7 @@ public class SitterServiceImpl implements SitterService {
 		model.addAttribute("list", list);
 		model.addAttribute("WK_START", WK_START);
 		model.addAttribute("WK_END", WK_END);
+		model.addAttribute("sitCalendar", sitCalendar);
 	}
 
 	/*
@@ -1021,6 +1030,7 @@ public class SitterServiceImpl implements SitterService {
 		System.out.println("service ==> matchingConfirm");
 		
 		int SQ_CD = Integer.parseInt(req.getParameter("SQ_CD"));
+		System.out.println("시터요청번호SQ_CD : " + SQ_CD);
 		int updateCnt = sitterDao.matchingConfirm(SQ_CD);
 		
 		model.addAttribute("updateCnt", updateCnt);
@@ -1078,6 +1088,8 @@ public class SitterServiceImpl implements SitterService {
 		System.out.println("end : " + end);
 
 		List<SitterVO> list = null;
+		List<Integer> rc = new ArrayList<Integer>();
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		int reviewCheckCnt = 0;
 
@@ -1093,6 +1105,7 @@ public class SitterServiceImpl implements SitterService {
 				// 후기 작성 중복체크
 				reviewCheckCnt = sitterDao.sittterReviewChkCnt(SQ_CD);
 				System.out.println("중복체크 reviewCheckCnt : " + reviewCheckCnt);
+				rc.add(reviewCheckCnt);
 			}
 			model.addAttribute("startPage", startPage); // 시작페이지
 			model.addAttribute("endPage", endPage); // 마지막페이지
@@ -1103,7 +1116,7 @@ public class SitterServiceImpl implements SitterService {
 		}
 
 		model.addAttribute("s", "matchingFinish");
-		model.addAttribute("reviewCheckCnt", reviewCheckCnt);
+		model.addAttribute("reviewCheckCnt", rc);
 		model.addAttribute("cnt", cnt);
 		model.addAttribute("list", list);
 		model.addAttribute("pageNum", pageNum); // 페이지 번호
@@ -1123,8 +1136,12 @@ public class SitterServiceImpl implements SitterService {
 		int SIT_ID = Integer.parseInt(req.getParameter("SIT_ID"));
 		System.out.println("SIT_ID : " + SIT_ID);
 		vo.setSIT_ID(SIT_ID);
+		
+		int SQ_CD = Integer.parseInt(req.getParameter("SQ_CD"));
+		System.out.println("SQ_CD" + SQ_CD);
+		vo.setSQ_CD(SQ_CD);
 
-		float SG_GRADE = Float.valueOf(req.getParameter("SG_GRADE"));
+		float SG_GRADE = Float.parseFloat(req.getParameter("SG_GRADE"));
 		vo.setSG_GRADE(SG_GRADE);
 		vo.setSG_CON(req.getParameter("SG_CON"));
 		vo.setSG_IMG(req.getParameter("SG_IMG"));
@@ -1135,6 +1152,131 @@ public class SitterServiceImpl implements SitterService {
 		model.addAttribute("insertCnt", insertCnt);
 	}
 
+	//고객 - 나의 리뷰내역 리스트
+	@Override
+	public void myreviewList(HttpServletRequest req, Model model) {
+		System.out.println("service ==> myreviewList");	
+
+		// 페이징
+		int pageSize = 12; // 한 페이지당 출력할 글 갯수
+		int pageBlock = 3; // 한 블럭당 페이지 갯수
+
+		int cnt = 0; // 글갯수
+		int start = 0; // 현재 페이지 시작 글번호
+		int end = 0; // 현재 페이지 마지막 글번호
+		int number = 0; // 출력용 글번호
+		String pageNum = "";// 페이지번호
+		int currentPage = 0;// 현재 페이지
+
+		int pageCount = 0; // 페이지 갯수
+		int startPage = 0; // 시작페이지
+		int endPage = 0; // 마지막 페이지
+		
+		String CUST_ID = (String) req.getSession().getAttribute("cust_id");
+		
+		List<SitterVO> list=null;
+		cnt = sitterDao.getMyreviewList(CUST_ID);
+		System.out.println("리뷰수selectCnt : " + cnt);
+		
+		pageNum = req.getParameter("pageNum");
+
+		if (pageNum == null) {
+			pageNum = "1"; // 첫 페이지를 1페이지로 지정
+		}
+
+		currentPage = Integer.parseInt(pageNum);
+		System.out.println("currentPage : " + currentPage);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
+		start = (currentPage - 1) * pageSize + 1;
+		end = start + pageSize - 1;
+		number = cnt - (currentPage - 1) * pageSize;
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if (currentPage % pageBlock == 0)
+			startPage -= pageBlock;
+
+		System.out.println("startPage : " + startPage);
+		endPage = startPage + pageBlock - 1;
+		if (endPage > pageCount)
+			endPage = pageCount;
+		System.out.println("endPage : " + endPage);
+		System.out.println("result : " + pageCount);
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);	
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(cnt > 0) {
+			
+			map.put("CUST_ID", CUST_ID);
+			map.put("start", start);
+			map.put("end", end);
+			list = sitterDao.MyreviewList(map);
+			
+			model.addAttribute("startPage", startPage); // 시작페이지
+			model.addAttribute("endPage", endPage); // 마지막페이지
+			model.addAttribute("pageBlock", pageBlock); // 한 블럭당 페이지 갯수
+			model.addAttribute("pageCount", pageCount); // 페이지 갯수
+			model.addAttribute("currentPage", currentPage); // 현재페이지
+		}
+		
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("list",list);
+		model.addAttribute("pageNum", pageNum); // 페이지 번호
+		model.addAttribute("number", number); // 출력용 글번호
+		
+		
+	}
+
+	//고객 - 나의 리뷰내역 수정 페이지
+	@Override
+	public void myreviewModify(HttpServletRequest req, Model model) {
+		System.out.println("service ==> myreviewModify");
+		
+		int SG_CD = Integer.parseInt(req.getParameter("SG_CD"));
+		System.out.println("후기번호 SG_CD : " + SG_CD);
+		
+		List<SitterVO> list = sitterDao.reviewModifypg(SG_CD);
+	
+		model.addAttribute("list", list);
+		model.addAttribute("SG_CD", SG_CD);
+	}
+	
+	// 고객 - 나의 리뷰내역 수정 처리
+	@Override
+	public void myreviewModifyAction(HttpServletRequest req, Model model) {
+		System.out.println("service ==> myreviewModifyAction");
+		
+		SitterVO vo = new SitterVO(); 
+		int SG_CD = Integer.parseInt(req.getParameter("SG_CD"));
+		System.out.println("SG_CD : " + SG_CD);
+		vo.setSG_CD(SG_CD);
+		
+		float SG_GRADE = Float.valueOf(req.getParameter("SG_GRADE"));
+		vo.setSG_GRADE(SG_GRADE);
+		vo.setSG_CON(req.getParameter("SG_CON"));
+		vo.setSG_IMG(req.getParameter("SG_IMG"));
+		
+		int updateCnt = sitterDao.reviewModifyAction(vo);
+		System.out.println("리뷰수정처리updateCnt : " + updateCnt);
+		
+		model.addAttribute("updateCnt",updateCnt);
+		
+	}
+	
+	//고객 - 나의 리뷰내역 삭제
+	@Override
+	public void myreviewDelete(HttpServletRequest req, Model model) {
+		System.out.println("service ==> myreviewDelete");	
+		
+		int SG_CD = Integer.parseInt(req.getParameter("SG_CD"));
+		int deleteCnt = sitterDao.reviewDeleteAction(SG_CD);
+		System.out.println("리뷰삭제처리 deleteCnt : " + deleteCnt);
+		
+		model.addAttribute("deleteCnt", deleteCnt);
+	}
+	
+	
+	
 	/*
 	 * // 고객 - 시터후기 미리보기(별점 높은순)
 	 * 
@@ -1225,5 +1367,7 @@ public class SitterServiceImpl implements SitterService {
 
 		return updateCnt;
 	}
+
+
 
 }

@@ -31,7 +31,8 @@
               <div class="icon d-flex align-items-center justify-content-center">
             		<span class="flaticon-dog-eating"></span>
               </div>
-              <div class="media-body p-3">
+              <div class="media-body p-3.
+              .">
                 <h3 class="heading">Pet Training</h3>
                 <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right.</p>
                 <a href="/tpj/trainer/trainerSearch" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>

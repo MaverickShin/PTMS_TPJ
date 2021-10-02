@@ -93,6 +93,15 @@ public class SitterDAOImpl implements SitterDAO{
 		return dao.sitreviwCnt(sit_id);
 	}
 
+	// 고객 - 시터찾기 상세페이지 - 시터일정 가져오기	
+	@Override
+	public List<String> sitterSchedule(int sit_id) {
+		System.out.println("dao ==> sitterSchedule");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.sitterSchedule(sit_id);
+	}
+	
 	// 고객 - 시터찾기 상세페이지 - 리뷰 리스트
 	@Override
 	public List<SitterVO> sitreviewList(int sit_id) {
@@ -351,7 +360,52 @@ public class SitterDAOImpl implements SitterDAO{
 		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
 		return dao.ReviewWrite(vo);
 	}	
+	
+	// 고객 - 나의 리뷰내역 리스트 수
+	@Override
+	public int getMyreviewList(String CUST_ID) {
+		System.out.println("dao ==> getMyreviewList");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.getMyreviewList(CUST_ID);
+	}
 
+	// 고객 - 나의 리뷰내역 리스트
+	@Override
+	public List<SitterVO> MyreviewList(Map<String, Object> map) {
+		System.out.println("dao ==> ReviewWrite");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.MyreviewList(map);
+	}	
+
+	// 고객 - 나의 리뷰내역 수정페이지
+	@Override
+	public List<SitterVO> reviewModifypg(int SG_CD) {
+		System.out.println("dao ==> reviewModifypg");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.reviewModifypg(SG_CD);
+	}
+
+	// 고객 - 나의 리뷰내역 수정 처리
+	@Override
+	public int reviewModifyAction(SitterVO vo) {
+		System.out.println("dao ==> reviewModifyAction");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.reviewModifyAction(vo);
+	}
+
+	// 고객 - 나의 리뷰 내역 삭제처리
+	@Override
+	public int reviewDeleteAction(int SG_CD) {
+		System.out.println("dao ==> reviewDeleteAction");
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		return dao.reviewDeleteAction(SG_CD);
+	}
+	
 	//요금표 리스트
 	@Override
 	public ArrayList<PetVO> getPriceList() {
@@ -421,6 +475,8 @@ public class SitterDAOImpl implements SitterDAO{
 		
 		return dao.updatePay(SQ_CD);
 	}
+
+
 
 
 }

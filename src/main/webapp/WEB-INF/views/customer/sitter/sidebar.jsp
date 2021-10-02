@@ -49,12 +49,12 @@ $(function(){ // document ready
 					</tr>
 					
 					<tr>
-						<td><a href="/tpj/sitter/MysitterSerList">나의 펫시터 이용 내역</a></td>
+						<td><a href="/tpj/sitter/MysitterSerList">이용 내역</a></td>
 					</tr>
 					
-<!-- 					<tr>
-						<td><a href="/tpj/sitter/sitterPreview">후기 미리보기</a></td>
-					</tr> -->
+					<tr>
+						<td><a href="/tpj/sitter/MyreviewList">나의 리뷰 관리</a></td>
+					</tr>	
 					
 					<tr>
 						<td><a href="/tpj/sitter/feeInfo">요금안내</a></td>

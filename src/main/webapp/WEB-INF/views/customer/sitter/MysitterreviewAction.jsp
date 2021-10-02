@@ -12,7 +12,7 @@
 	<c:if test="${insertCnt != 0}">
 		<script type="text/javascript">
 			alert("후기가 작성되었습니다.");
-			window.location="${st}sitter";
+			window.location="${st}MysitterSerList";
 		</script>
 	</c:if>
 	

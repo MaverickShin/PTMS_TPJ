@@ -34,6 +34,9 @@ public interface SitterDAO {
 	// 고객 - 시터찾기 상세 페이지  <완료>
 	public SitterVO detailSitter(int sit_id);
 	
+	// 고객 - 시터찾기 상세페이지 - 시터일정 가져오기
+	public List<String> sitterSchedule(int sit_id);
+	
 	// 고객 - 시터찾기 상세페이지 - 리뷰 갯수
 	public int sitreviwCnt(int sit_id);
 	
@@ -128,6 +131,22 @@ public interface SitterDAO {
 	
 	// 고객 - 후기작성 (시터 후기 테이블에 INSERT)
 	public int ReviewWrite(SitterVO vo);
+	
+	// 고객 - 나의 리뷰내역 리스트 수
+	public int getMyreviewList(String CUST_ID);
+	
+	// 고객 - 나의 리뷰내역 리스트
+	public List<SitterVO> MyreviewList(Map<String, Object> map);
+	
+	// 고객 - 나의 리뷰내역 수정페이지
+	public List<SitterVO> reviewModifypg(int SG_CD);
+	
+	// 고객 - 나의 리뷰내역 수정 처리
+	public int reviewModifyAction(SitterVO vo);
+	
+	// 고객 - 나의 리뷰 내역 삭제처리
+	public int reviewDeleteAction(int SG_CD);
+	
 	
 	// 고객 - 시터후기테이블 갯수
 	//public int getreviewCnt();
