@@ -42,29 +42,51 @@ table tr {
 	border-spacing: 1px;
 	border: 3px solid #ccc;
 }
+
+.big td {
+	width: 500px;
+	height: 300px;
+	color: black !important;
+}
+
+.contenst {
+	text-align:center;
+}
+
+.contents img {
+	width: 200px;
+	height: 200px;
+	display: block;
+	margin-left: auto;
+	margin-right:auto;
+}
+
+.contents a {
+	display: block;
+	color: black;
+	font-size: 18px;
+	font-weight: bolder;
+	margin-top: 20px;
+}
+
+.contents a:hover {
+	font-size: 22px;
+	font-weight: bold;
+}
+
 </style>
 </head>
 
 <body>
 	<table class=big border="1">
-		<thead>
-			<tr class="title">
-				<th colspan="3">반려동물 관련 지식 정보</th>
-			</tr>
-		</thead>
 		<tbody>
 
-			<!-- 제목 불러오는 공간 추가 - 21.09.23 -->
+		<!-- 제목 불러오는 공간 추가 - 21.09.23 -->
+		<c:forEach var = "i" items="${list}">
 			<tr>
-				<td>${title}</td>
 				<td>${i}</td>
 			</tr>
-
-<%-- 			<c:forEach var="i" items="${list}">
-				<tr>
-					<td>${i}</td>
-				</tr>
-			</c:forEach> --%>
+		</c:forEach>
 		</tbody>
 	</table>
 </body>

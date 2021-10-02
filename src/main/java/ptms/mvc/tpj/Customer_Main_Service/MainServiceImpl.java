@@ -221,21 +221,95 @@ public class MainServiceImpl implements MainService {
 	// 펫 목록
 	@Override
 	public void petList(HttpServletRequest req, Model model) {
-		int cnt = 0; // 글 갯수
 
 		String CUST_ID = (String) req.getSession().getAttribute("cust_id");
+		
+		// 페이징
+		int pageSize = 5; 		// 한 페이지당 출력할 글 갯수
+		int pageBlock = 3;		// 한 페이지당 페이지 갯수
+		
+		int cnt = 0;			// 글 갯수
+		int start = 0;			// 현재 페이지 시작 글 번호
+		int end = 0;			// 현재 페이지 마지막 글 번호
+		int number = 0;			// 출력용 글 번호
+		String pageNum = "";	// 페이지 번호
+		int currentPage = 0;	// 현재 페이지
+		
+		int pageCount = 0;		// 페이지 갯수
+		int startPage = 0;		// 시작 페이지
+		int endPage = 0;		// 마지막 페이지
+		
+		// 배송지 갯수 조회
 		cnt = dao.getPetCnt(CUST_ID);
+		System.out.println("cnt => " + cnt);
+		
+		pageNum = req.getParameter("pageNum");
+		
+		if(pageNum == null) {
+			pageNum = "1";	// 첫 페이지를 1페이지로 지정
+		}
+		
+		currentPage = Integer.parseInt(pageNum);
+		System.out.println("currentPage : " + currentPage);
+		
+		// 페이지 갯수
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0); // 페이지 갯수 + 나머지가 있으면 1페이지 추가
+
+		// 현재페이지 시작 글번호(페이지별)
+		// start = (currentPage -1) * pageSize + 1;
+		// 1 = (1 - 1) * 5 + 1
+		start = (currentPage -1) * pageSize + 1;
+		
+		// 현재페이지 시작 글번호(페이지별)
+		// end = start + pageSize - 1;
+		// 5 = 1 + 5 - 1;
+		end = start + pageSize - 1;
+		
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
+		
+		// 출력용 글 번호 
+		// 30 = 30 - (1-1) * 5; // 1 페이지
+		// number = cnt - (currentPage - 1) * pageSize;
+		number = cnt - (currentPage - 1) * pageSize;
+		
+		System.out.println("number : " + number);
+		System.out.println("pageSize : " + pageSize);
+		
+		// 시작 페이지
+		// 1 = (1 / 3) * 3 + 1;
+		// startPage = (currentPage / pageBlock) * pageBlock + 1;
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		System.out.println("startPage : " + startPage);
+		
+		// 마지막 페이지
+		// 3 = 1 + 3 - 1
+		endPage = startPage + pageBlock - 1;
+		if(endPage > pageCount) endPage = pageCount;
+		
 		System.out.println("cnt : " + cnt);
 
-		List<PetVO> dtos = new ArrayList<PetVO>();
+		List<PetVO> vo = new ArrayList<PetVO>();
 
 		if (cnt > 0) {
-			dtos = dao.getPetList(CUST_ID);
-			System.out.println("dtos : " + dtos);
+			vo = dao.getPetList(CUST_ID);
+			System.out.println("vo : " + vo.size());
 		}
 
-		model.addAttribute("dtos", dtos); // 상품 게시글 목록
-		model.addAttribute("cnt", cnt); // 상품 게시글 갯수
+		req.setAttribute("pageNum", pageNum); // 페이지 번호
+		req.setAttribute("number", number); // 출력용 글번호
+		req.setAttribute("cnt", cnt); // 
+		req.setAttribute("vo", vo);   //
+		
+		if(cnt > 0) {
+			req.setAttribute("startPage", startPage);		// 시작 페이지
+			req.setAttribute("endPage", endPage);			// 마지막 페이지
+			req.setAttribute("pageBlock", pageBlock);		// 한 블럭당 페이지 갯수
+			req.setAttribute("pageCount", pageCount);		// 페이지 갯수
+			req.setAttribute("currentPage", currentPage);	// 현재페이지
+			req.setAttribute("s", "MyPetList");
+		}
 
 	}
 
@@ -406,47 +480,7 @@ public class MainServiceImpl implements MainService {
 	// 반려동물 지식정보 크롤링 - 21.09.23 창훈 추가
 	@Override
 	public void SenseCrawling(HttpServletRequest req, Model model) {
-		// Jsoup를 이용해서 반려동물 지식정보 크롤링
-		String url = "https://myanimals.co.kr/breeds/";
-		Document doc = null;
-
-		// for문을 돌면서 뉴스 제목들을 가져오기 위한 list
-		List<String> list = new ArrayList<String>();
-
-		try {
-			// Jsoup url 연결
-			doc = Jsoup.connect(url).get();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		// 주요 뉴스로 나오는 태그를 찾아서 가져오도록 한다. <section class="section-body">
-		Elements element = doc.select("div.more-posts__list mt--x-big jsx-2532604687");
-
-		// 1. 헤더 부분의 제목을 가져온다.
-		// String title = element.select("img").text();
-		Elements title = doc.select("[href]");
-
-		System.out.println("==================");
-		System.out.println(title);
-		System.out.println("==================");
-
-//		for(Element el : element.select("div.view-cont")) { // 하위 뉴스 기사들을 for문을 돌면서 출력
-//			System.out.println(el.text());
-//			
-//			list.add(el.text());
-//		}
-
-		for (Element link : title) {
-			list.add(link.attr("abs:href"));
-		}
-
-		model.addAttribute("title", title);
-		model.addAttribute("list", list);
-
-		System.out.println("==================");
-
+		
 	}
 
 	// 반려동물 영양정보 크롤링 - 21.09.23 창훈 추가
@@ -468,32 +502,18 @@ public class MainServiceImpl implements MainService {
 		}
 
 		// 주요 뉴스로 나오는 태그를 찾아서 가져오도록 한다. <section class="section-body">
-		Elements element = doc.select("div.caption");
 
 		// 1. 헤더 부분의 제목을 가져온다.
 		// String title = element.select("span.title").text();
 		Elements title = doc.select("[href]");
-
-		System.out.println("==================");
-		System.out.println(title);
-		// System.out.println(links);
-		System.out.println("==================");
-
-//		for(Element el : element.select("p")) { // 하위 뉴스 기사들을 for문을 돌면서 출력
-//			System.out.println(el.text());
-//			
-//			list.add(el.text());
-//		}
 
 		for (Element link : title) {
 			list.add(link.attr("abs:href"));
 		}
 
 		model.addAttribute("title", title);
-		// model.addAttribute(links);
 		model.addAttribute("list", list);
 
-		System.out.println("==================");
 
 	}
 
@@ -637,12 +657,11 @@ public class MainServiceImpl implements MainService {
 	 * }
 	 */
 
+	// 뉴스레이터 - 김선영
 	@Override
 	public void Newsletter(HttpServletRequest req, Model model) {
-		// Jsoup으로 호텔 정보 크롤링
 		// 크롤링할 url 지정
 		String url = "https://www.google.com/search?q=%EB%B0%98%EB%A0%A4%EB%8F%99%EB%AC%BC&source=lnms&tbm=nws&sa=X&ved=2ahUKEwiSpO2nuZzzAhXFc94KHfcPCHoQ_AUoAnoECAEQBA&biw=1482&bih=936&dpr=1";
-//	      String url="https://search.naver.com/search.naver?where=nexearch&sm=top_sug.pre&fbm=1&acr=1&acq=%EC%9C%A0%EA%B8%B0%EB%8F%99%EB%AC%BC&qdt=0&ie=utf8&query=%EC%9C%A0%EA%B8%B0%EB%8F%99%EB%AC%BC%EB%B3%B4%ED%98%B8%EC%84%BC%ED%84%B0";
 
 		// Document에는 페이지의 전체 소스가 저장된다.
 		Document doc = null;
@@ -658,63 +677,20 @@ public class MainServiceImpl implements MainService {
 			e.printStackTrace();
 		}
 
-		// select를 이용하여 원하는 태그를 선택한다. <div class="search-container__csa">
-		// 원하는 값들이 들어있는 '전체'덩어리를 가져온다.
-//	      Elements element = doc.select("div#BODYCON");
 		Elements element = doc.select("div.GyAeWb");
 		Elements element1 = element.select("div.v7W49e");
 		Elements element2 = element1.select("g-card.ftSUBd");
 
-		// element에 들어있는 세부정보 찾기 - 호텔 이름
 		Elements detailele = element2.select("a.WlydOe");
 
-//	      Elements txt = detailele.select("span.txt");
-		// element에 들어있는 세부정보 찾기 - 이미지
-//	      Elements detailele2 = element.select("a.sr_item_photo_link");
-//	      Elements detailele2 = element.select("a.[href]");
-//	      System.out.println("detailele2 : "+detailele2);
-
-		// Iterator를 이용하여 하나씩 값을 가져온다.
-		// 전체 덩어리에서 필요한 부분만 선택하여 가져올 수 있다.
-//	      Elements item = detailele.select("a[href]");
-//	      Elements item = detailele.select("span.sr-hotel__name");
-//	      Elements href = detailele.select("a[href]");
-//	      Iterator<Element> img = detailele2.select("img").iterator();
+		System.out.println(detailele);
 
 		for (Element link : detailele) {
 			list.add(link.attr("abs:href" + "\n"));
 		}
 
-//	      for(Element t : txt) {
-//	         System.out.println(t.text());
-//	      }
-
-//	      Elements element = doc.select("div.api_cs_wrap");
-//	      System.out.println("element : "+element);
-//	      Elements element1 = element.select("div.animal_lst div");
-//	      System.out.println("element1 : "+element1);
-//	      Elements element2 = element1.select("ul.first_list");
-//	      System.out.println("element2 : "+element2);
-//	      Elements element3 = element2.select("string.info_tit");
-//	      System.out.println("element3 : "+element3);
-////	      Elements element4 = element2.select("dl.info_add");
-////	      System.out.println("element4 : "+element4);
-//	      
-//	      // element에 들어있는 세부정보 찾기 - 호텔 이름
-//	      Elements detailele = element3.select("");
-//	      Elements detailele1 = element2.select("dl.info_add");
-//	      System.out.println("detailele : "+detailele);
-//	      System.out.println("detailele1 : "+detailele1);
-//	      System.out.println("=========================================");
-//	      
-//	      for(Element link : detailele) {
-//	         System.out.println(link.text());
-//	         list.add(link.attr("abs:href"+"\n"));
-//	      }
 
 		model.addAttribute("item", detailele);
-//	      model.addAttribute("item1",detailele1);
-//	      model.addAttribute("href",txt);
 		model.addAttribute("list", list);
 
 	}

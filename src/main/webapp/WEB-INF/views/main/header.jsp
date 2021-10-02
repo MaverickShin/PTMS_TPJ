@@ -104,7 +104,12 @@
 					</li>
 					<li class="nav-item"><a href="/tpj/cust/board" class="nav-link">게시판</a></li>
 					<li class="nav-item"><a href="/tpj/cust/gps" class="nav-link">마이 펫 찾기</a></li>
-					<li class="nav-item"><a href="/tpj/cust/matchingMain" class="nav-link">매칭서비스</a></li>
+					<c:if test="${sessionScope.cust_id == null}">
+						<li class="nav-item"><a class="nav-link" onclick = "if(confirm('로그인 후 이용가능합니다. 로그인 하시겠습니까?')) window.location = '/tpj/cust/login';">매칭서비스</a></li>
+					</c:if>
+					<c:if test="${sessionScope.cust_id != null}">
+						<li class="nav-item"><a href="/tpj/cust/matchingMain" class="nav-link">매칭서비스</a></li>
+					</c:if>
 					<li class="nav-item"><a href="/tpj/cust/location" class="nav-link">위치안내</a></li>
 					<li class="nav-item"><a href="/tpj/cust/subscribe" class="nav-link">정기구독</a></li>
 				</ul>

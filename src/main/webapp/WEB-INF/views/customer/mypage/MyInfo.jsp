@@ -17,17 +17,19 @@
 	min-width: 160px;
 	box-shadow: 10px 8px 16px 0px rgba(0,0,0,0.2);
 	z-index: 1;
-	font-size: 12px;
+	font-size: 16px;
 	position: absolute;
 	left: -15px;
 	top: 80px;
 }
+
 .hide a {
 	color: white;
   	padding: 12px 16px;
   	text-decoration: none;
   	display: block;
   	text-align: left;
+  	font-size: 16px;
 }
 
 .hide a:hover {
@@ -49,6 +51,14 @@
 	display: block;
 	padding: 2rem 0rem; 
 }	
+
+.contact-wrap label {
+	font-size: 18px !important;
+}
+
+.contact-wrap input {
+	font-size: 16px !important;
+}
 </style>
 </head>
 <body>
@@ -77,7 +87,7 @@
 				<h2 class="heading-section">반려인/반려동물 관리</h2>
 			</div>
 		</div>
-		<div class="row justify-content-center">
+		<div class="row justify-content-center" style = "font-family: 'Do Hyeon', sans-serif;">
 			<div class="col-md-12">
 				<div class="wrapper">
 					<nav class="div_nav">

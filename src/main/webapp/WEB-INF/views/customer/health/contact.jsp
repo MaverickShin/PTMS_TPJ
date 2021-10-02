@@ -6,7 +6,15 @@
 <head>
 <meta charset="utf-8">
 <title>건강관리 - 건강정보 등</title>
-
+<script type="text/javascript">
+function showImage(){ 
+	var imgNum=Math.round(Math.random()*3); 
+	var td = $(".big td");
+	td.hide();
+	td[imgNum].style.display = 'block';
+	setTimeout(showImage,3000); 
+}
+</script> 
 <style>
 .section01_img>a>img {
 	width: 100%;
@@ -50,10 +58,63 @@
 	text-align: center;
 	padding-bottom: 40px;
 }
+
+.big {
+	width: 250px;
+	height: 250px;
+	align: center;
+	margin-top: 20px;
+	margin: auto;
+}
+
+.big td {
+	width: 250px;
+	height: 250px;
+	color: black !important;
+}
+
+.contents {
+	text-align:center;
+	height: 250px;
+	border-collapse: collapse;
+  	border-radius: 20px;
+  	border-style: hidden;
+  	box-shadow: 0 0 0 3px #2C3E50;
+}
+
+.contents:hover {
+	background-color: #2C3E50;
+	cursor: pointer;
+}
+
+.contents:hover a {
+	color: white;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.contents img {
+	width: 150px;
+	height: 150px;
+	display: block;
+	margin-left: auto;
+	margin-right:auto;
+	padding-top : 20px;
+}
+
+.contents a {
+	display: block;
+	color: black;
+	font-size: 18px;
+	font-weight: bolder;
+	margin-top: 30px;
+	text-align:center;
+	margin-bottom: 20px;
+}
 </style>
 
 </head>
-<body>
+<body onload = "showImage();">
 	<%@ include file="../../main/header.jsp"%>
 
 	<section class="hero-wrap hero-wrap-2" style="background-image: url('${path}images/bg_2.jpg');" data-stellar-background-ratio="0.5">
@@ -104,9 +165,8 @@
 							<div class="col-sm-6 section01_img" style="text-align: center">
 							
 								<!-- SYMPTOM => symptom 소문자로 수정 - 21.09.23-->
-								<a href="/tpj/cust/symptom"><img src="${imgPath}bg_3.jpg"
-									width="250px"></a>
 							</div>
+							
 							<div class="col-sm-6 section01_txt">
 								<h3>◀ 질병정보</h3>
 								<p>국내 반려견들을 가장 많이 괴롭히는 질병은 피부병으로 나타났습니다. 그 중에서도 피부염과 습진이
@@ -126,10 +186,18 @@
 									효율적으로 복용 관리할 수 있도록 최적화된 종합 펫케어 솔루션을 목표로 한다. 서비스는 10대부터 60대까지
 									누구나 언제 어디서든 쉽게 관리할 수 있도록 성분정보를 확인할 수 있다.</p>
 							</div>
-							<div class="col-sm-6 section02_img" style="text-align: center">
-								
-								<!-- SENSE => sense 소문자로 수정 - 21.09.23 -->
-								<a href="/tpj/cust/sense"><img src="${imgPath}gallery-6.jpg" width="250px"></a>
+							<div class="col-sm-6 section02_img" style="align-items: center">
+								<table class=big>
+									<tbody>
+							
+									<!-- 제목 불러오는 공간 추가 - 21.09.23 -->
+									<c:forEach var = "i" items="${list}">
+										<tr>
+											<td>${i}</td>
+										</tr>
+									</c:forEach>
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>
@@ -137,7 +205,7 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-sm-6 section03_img" style="text-align: center">
-								<a href="/tpj/cust/nutrient"><img src="${imgPath}gallery-5.jpg" width="250px"></a>
+								<%@ include file="../../news/Nutrient_Info.jsp"%>
 							</div>
 							<div class="col-sm-6 section03_txt">
 								<h3>◀ 영양정보</h3>

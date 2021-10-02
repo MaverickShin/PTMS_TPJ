@@ -20,9 +20,9 @@
             		<span class="flaticon-blind"></span>
               </div>
               <div class="media-body p-3">
-                <h3 class="heading">Pet Sitting</h3>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right.</p>
-                <a href="/tpj/sitter/sitter" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
+                <h3 class="heading">펫 훈련사</h3>
+                <p><br><br><br>배변? 분리불안? 반려동물의 행동이 걱정되시나요?<br>PTMS의 훈련사를 만나 반려동물과의 시간을 더 유익하게 만들어가세요!</p>
+                <a href="/tpj/trainer/trainerSearch" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
               </div>
             </div>      
           </div>
@@ -31,11 +31,10 @@
               <div class="icon d-flex align-items-center justify-content-center">
             		<span class="flaticon-dog-eating"></span>
               </div>
-              <div class="media-body p-3.
-              .">
-                <h3 class="heading">Pet Training</h3>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right.</p>
-                <a href="/tpj/trainer/trainerSearch" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
+              <div class="media-body p-3">
+                <h3 class="heading">펫 시터</h3>
+                <p><br><br><br>출장, 여행으로 집에 혼자있는 반려동물이 걱정되시나요?<br>이젠 PTMS의 시터에게 맡기세요!</p>
+                <a href="/tpj/sitter/sitter" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
               </div>
             </div>    
           </div>

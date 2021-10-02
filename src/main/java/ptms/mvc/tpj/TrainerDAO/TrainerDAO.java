@@ -134,6 +134,21 @@ public interface TrainerDAO {
 	// 고객 - 카카오페이 결제 완료 후 요청 테이블 상태 업데이트
 	public int updatePay(int TQ_CD);
 	
+	// 훈련사 일정 가져오기
+	public List<String> getTrainerCalendar(int TA_CD);
+	
+	// 아이디별 후기 갯수
+	public int getIDreviewCnt(String id);
+	
+	// 아이디별 훈련사 후기 정보
+	public List<TrainerVO> getIDreviewInfo(Map<String, Object> map);
+	
+	// 훈련사 후기 수정할 정보 가져오기
+	public TrainerVO ModifyInfo(int TG_CD);
+	
+	// 훈련사 후기 수정 처리
+	public int modifyReviewAction(TrainerVO vo);
+	
 	/*
 	 * // 후기 미리보기 평점순 훈련사 정렬 건수 public int trainingGradeCnt();
 	 * 

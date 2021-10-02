@@ -192,19 +192,31 @@ public class TrainerServiceImpl implements TrainerService{
 		int TA_CD = Integer.parseInt(req.getParameter("TA_CD"));
 		System.out.println("TA_CD : " + TA_CD);
 		
+		// 회원의 마이펫 마릿수 가져오기
 		int selectCnt = dao.getPetCount(id);
 		System.out.println("selectCnt  :" + selectCnt);
 		
+		// 회원의 마이펫이 있으면 펫의 정보 가져오기
 		if(selectCnt > 0) {
 			List<TrainerVO> petInfo = dao.getPetInfo(id);
 			model.addAttribute("petInfo", petInfo);
 		}
 
+		// 훈련사 정보 가져오기
 		TrainerVO vo = dao.trainerInfo(TA_CD);
 		
+		// 훈련사의 일정 가져오기
+		List<String> calendar = new ArrayList<String>();
+		calendar = dao.getTrainerCalendar(TA_CD);
+		for(int i = 0; i <= calendar.size() - 1; i++) {
+			System.out.println("calendar : " + calendar.get(i));
+		}
+		
+		// 훈련사의 후기 갯수 가져오기
 		int reviewCnt = dao.reviewCnt(TA_CD);
 		System.out.println("reviewCnt : " + reviewCnt);
 		
+		// 훈련사의 후기가 있으면 후기 정보 가져오기
 		if(reviewCnt > 0) {
 			List<TrainerVO> reviewInfo = dao.getReviewInfo(TA_CD);
 			model.addAttribute("reviewInfo", reviewInfo);
@@ -216,6 +228,7 @@ public class TrainerServiceImpl implements TrainerService{
 		model.addAttribute("selectCnt", selectCnt);
 		model.addAttribute("TQ_LOC", TQ_LOC);
 		model.addAttribute("TA_CD", TA_CD);
+		model.addAttribute("calendar", calendar);
 	}
 
 	// 훈련사 정보 수정 화면
@@ -899,7 +912,7 @@ public class TrainerServiceImpl implements TrainerService{
 		
 		List<TrainerRequestVO> vo = null;
 		
-		List<String> rc = new ArrayList<String>();
+		List<Integer> rc = new ArrayList<Integer>();
 		
 		if(cnt > 0) {
 			map.put("start", start);
@@ -923,8 +936,7 @@ public class TrainerServiceImpl implements TrainerService{
 				
 				System.out.println("result : " + result);
 				
-				
-				rc.add(Integer.toString(result));
+				rc.add(result);
 			}
 		
 			
@@ -956,8 +968,10 @@ public class TrainerServiceImpl implements TrainerService{
 		System.out.println("TQ_CD : " + TQ_CD);
 		vo.setTQ_CD(TQ_CD);
 		
-		float TG_GRADE = Float.valueOf(req.getParameter("TG_GRADE"));
-		vo.setTG_GRADE(TG_GRADE);
+		String TG_GRADE = req.getParameter("TG_GRADE");
+		
+		float tg = Float.parseFloat(TG_GRADE);
+		vo.setTG_GRADE(tg);
 		
 		String TG_CON = req.getParameter("TG_CON");
 		vo.setTG_CON(TG_CON);
@@ -1128,5 +1142,101 @@ public class TrainerServiceImpl implements TrainerService{
 		
 		model.addAttribute("updateCnt", updateCnt);
 		
+	}
+
+	@Override
+	public void getReviewInfo(HttpServletRequest req, Model model) {
+		//페이징
+		int pageSize = 12;	//한 페이지당 출력할 글 갯수
+		int pageBlock = 3;  //한 블럭당 페이지 갯수
+		
+		int cnt = 0;		//글갯수
+		int start = 0;		//현재 페이지 시작 글번호
+		int end = 0;		//현재 페이지 마지막 글번호
+		int number = 0;		//출력용 글번호
+		String pageNum = "";//페이지번호
+		int currentPage = 0;//현재 페이지
+		
+		int pageCount = 0;  //페이지 갯수
+		int startPage = 0;	//시작페이지
+		int endPage = 0;	//마지막 페이지
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		String id = (String)req.getSession().getAttribute("cust_id");
+		cnt = dao.getIDreviewCnt(id);
+		
+		pageNum = req.getParameter("pageNum");
+		
+		if(pageNum == null) {
+			pageNum = "1"; // 첫 페이지를 1페이지로 지정
+		}
+		currentPage = Integer.parseInt(pageNum);
+		System.out.println("currentPage : " + currentPage);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1:0);
+		start = (currentPage -1) * pageSize + 1;
+		end = start + pageSize - 1;
+		number = cnt - (currentPage - 1) * pageSize;
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		
+		System.out.println("startPage : " + startPage);
+		endPage = startPage + pageBlock - 1;
+		if(endPage > pageCount) endPage = pageCount;
+		System.out.println("endPage : " + endPage);
+		System.out.println("result : " + pageCount);
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
+		
+		List<TrainerVO> vo = null;
+		if(cnt > 0) {
+			map.put("start", start);
+			map.put("end", end);
+			map.put("id", id);
+			
+			vo = dao.getIDreviewInfo(map);
+			model.addAttribute("startPage", startPage);	// 시작페이지
+			model.addAttribute("endPage", endPage);		// 마지막페이지
+			model.addAttribute("pageBlock", pageBlock);	// 한 블럭당 페이지 갯수
+			model.addAttribute("pageCount", pageCount);	// 페이지 갯수
+			model.addAttribute("currentPage", currentPage); // 현재페이지
+		}
+		
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("dto", vo);
+		model.addAttribute("pageNum", pageNum); // 페이지 번호
+		model.addAttribute("number", number); // 출력용 글번호
+	}
+
+	@Override
+	public void modifyReview(HttpServletRequest req, Model model) {
+		int TG_CD = Integer.parseInt(req.getParameter("TG_CD"));
+		System.out.println("TG_CD : " + TG_CD);
+		
+		TrainerVO vo = dao.ModifyInfo(TG_CD);
+		
+		model.addAttribute("dto", vo);
+	}
+
+	@Override
+	public void modifyReviewAction(HttpServletRequest req, Model model) {
+		int TG_CD = Integer.parseInt(req.getParameter("TG_CD"));
+		System.out.println("TG_CD : " + TG_CD);
+		
+		TrainerVO vo = new TrainerVO();
+		String TG_GRADE = req.getParameter("TG_GRADE");
+		
+		float tg = Float.parseFloat(TG_GRADE);
+		
+		System.out.println("tg : " + tg);
+		
+		vo.setTG_GRADE(tg);
+		vo.setTG_CON(req.getParameter("TG_CON"));
+		vo.setTG_IMG(req.getParameter("TG_IMG"));
+		vo.setTG_CD(TG_CD);
+		
+		int updateCnt = dao.modifyReviewAction(vo);
+		
+		model.addAttribute("updateCnt", updateCnt);
 	}
 }

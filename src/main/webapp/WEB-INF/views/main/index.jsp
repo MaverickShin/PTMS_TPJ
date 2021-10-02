@@ -122,88 +122,30 @@ function showImage(){
     <section class="ftco-section bg-light ftco-no-pt ftco-intro">
     	<div class="container">
     		<div class="row">
-          <div class="col-md-4 d-flex align-self-stretch px-4 ftco-animate">
+          <div class="col-md-6 d-flex align-self-stretch px-4 ftco-animate" >
             <div class="d-block services active text-center">
               <div class="icon d-flex align-items-center justify-content-center">
             		<span class="flaticon-blind"></span>
               </div>
-              <div class="media-body">
-                <h3 class="heading">Dog Walking</h3>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right.</p>
+              <div class="media-body p-3">
+                <h3 class="heading">펫 훈련사</h3>
+                <p><br><br><br>배변? 분리불안? 반려동물의 행동이 걱정되시나요?<br>PTMS의 훈련사를 만나 반려동물과의 시간을 더 유익하게 만들어가세요!</p>
                 <a href="#" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
               </div>
             </div>      
           </div>
-          <div class="col-md-4 d-flex align-self-stretch px-4 ftco-animate">
+          <div class="col-md-6 d-flex align-self-stretch px-4 ftco-animate">
             <div class="d-block services text-center">
               <div class="icon d-flex align-items-center justify-content-center">
             		<span class="flaticon-dog-eating"></span>
               </div>
-              <div class="media-body">
-                <h3 class="heading">Pet Daycare</h3>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right.</p>
+              <div class="media-body p-3">
+                <h3 class="heading">펫 시터</h3>
+                <p><br><br><br>출장, 여행으로 집에 혼자있는 반려동물이 걱정되시나요?<br>이젠 PTMS의 시터에게 맡기세요!</p>
                 <a href="#" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
               </div>
-            </div>    
-          </div>
-          <div class="col-md-4 d-flex align-self-stretch px-4 ftco-animate">
-            <div class="d-block services text-center">
-              <div class="icon d-flex align-items-center justify-content-center">
-            		<span class="flaticon-grooming"></span>
-              </div>
-              <div class="media-body">
-                <h3 class="heading">Pet Grooming</h3>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right.</p>
-                <a href="#" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
-              </div>
-            </div>      
-          </div>
-        </div>
-    	</div>
-    </section>
-
-    <section class="ftco-section ftco-no-pt ftco-no-pb">
-    	<div class="container">
-    		<div class="row d-flex no-gutters">
-    			<div class="col-md-5 d-flex">
-    				<div class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-center mb-4 mb-sm-0" style="background-image:url(${imgPath}about-1.jpg);">
-    				</div>
-    			</div>
-    			<div class="col-md-7 pl-md-5 py-md-5">
-    				<div class="heading-section pt-md-5">
-	            <h2 class="mb-4">Why Choose Us?</h2>
-    				</div>
-    				<div class="row">
-	    				<div class="col-md-6 services-2 w-100 d-flex">
-	    					<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-stethoscope"></span></div>
-	    					<div class="text pl-3">
-	    						<h4>Care Advices</h4>
-	    						<p>Far far away, behind the word mountains, far from the countries.</p>
-	    					</div>
-	    				</div>
-	    				<div class="col-md-6 services-2 w-100 d-flex">
-	    					<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-customer-service"></span></div>
-	    					<div class="text pl-3">
-	    						<h4>Customer Supports</h4>
-	    						<p>Far far away, behind the word mountains, far from the countries.</p>
-	    					</div>
-	    				</div>
-	    				<div class="col-md-6 services-2 w-100 d-flex">
-	    					<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-emergency-call"></span></div>
-	    					<div class="text pl-3">
-	    						<h4>Emergency Services</h4>
-	    						<p>Far far away, behind the word mountains, far from the countries.</p>
-	    					</div>
-	    				</div>
-	    				<div class="col-md-6 services-2 w-100 d-flex">
-	    					<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-veterinarian"></span></div>
-	    					<div class="text pl-3">
-	    						<h4>Veterinary Help</h4>
-	    						<p>Far far away, behind the word mountains, far from the countries.</p>
-	    					</div>
-	    				</div>
-	    			</div>
-	        </div>
+            </div>  
+            </div>  
         </div>
     	</div>
     </section>

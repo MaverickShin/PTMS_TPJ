@@ -6,24 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <script type="text/javascript">
-function matchingChk() {
+function matchingChks() {
 
-		var gsize = "";
+		var chk = $("input:checkbox[name='PK_CD']");
 
-		$("input[name=PK_CD]:checked").each(function() {
-
-			if (gsize == "") {
-
-				gsize = $(this).val();
-
-			} else {
-
-				gsize = gsize + "," + $(this).val();
-
+		var bool = false;
+		
+		for (var i = 0; i < chk.length; i++) {
+			
+			if(chk[i].checked) {
+				bool = true;
 			}
-
-		});
-
+		}
+		
 		if (!document.matchingChk.START_DAY.value) {
 			alert("서비스 시작일을 지정해 주세요.");
 			document.matchingChk.START_DAY.focus();
@@ -32,11 +27,12 @@ function matchingChk() {
 			alert("서비스 종료일을 지정해 주세요.");
 			document.matchingChk.END_DAY.focus();
 			return false;
-		} else if (!gsize) {
+		} else if (bool == false) {
 			alert("한마리 이상의 반려동물을 선택하셔야 합니다.");
 			return false;
 		}
-	}
+		
+}
 </script>
 
 <style>
@@ -82,7 +78,7 @@ body {
 	</section>
 
 	<form action="requestSitting" class="search-form" name="matchingChk"
-		method="post" onsubmit="return matchingChk();">
+		method="post" onsubmit="return matchingChks();">
 		<input type="hidden" name="${_csrf.parameterName}"
 			value="${_csrf.token}"> <input type="hidden" name="SV_AREA"
 			value="${SV_AREA}"> <input type="hidden" name="SIT_ID"
@@ -112,7 +108,7 @@ body {
 											<p class="chk_p1">
 												<label class="chk_label1" for="pet_li_${lst.index}">
 													<input type="checkbox" id="pet_li_${lst.index}"
-													class="sel_chk1" name="PK_CD" value="${li.PK_CD}"
+													class="sel_chk1 " name="PK_CD" value="${li.PK_CD}"
 													<c:if test = "${i == li.PK_CD}">
 															checked
 														</c:if>>
@@ -263,6 +259,8 @@ body {
 							<img src="${imgPath}${dto.SIT_IMG}" alt="" class="img-fluid">
 						</p>
 					</div>
+
+
 
 					<!-- 펫시터 일정 표시만 -->
 					<div id='calendar' style="margin-bottom: 50px;"></div>

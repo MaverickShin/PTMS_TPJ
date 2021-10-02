@@ -42,7 +42,7 @@ public class AdminServiceImpl implements AdminService{
 		
 		System.out.println("펫 코드 및 요금 등록 : " + insertCnt);
 		
-		req.setAttribute("insertCnt", insertCnt);
+		model.addAttribute("insertCnt", insertCnt);
 		
 	}
 
@@ -53,7 +53,7 @@ public class AdminServiceImpl implements AdminService{
 	    ArrayList<PetVO> dtos = null;
 	    	
 	    dtos = enrollDao.getpetCodeFee();
-	    req.setAttribute("dtos", dtos); //게시글 목록   
+	    model.addAttribute("dtos", dtos); //게시글 목록   
 	}
 
 	//펫 코드 및 요금 수정 페이지	
@@ -65,8 +65,8 @@ public class AdminServiceImpl implements AdminService{
 		System.out.println("펫 종류코드" + PK_CD);
 		
 		PetVO vo = enrollDao.UpdatePetCodeFeeList(PK_CD);
-		
-		req.setAttribute("dtos", vo);
+		System.out.println(vo.getPK_CD());
+		model.addAttribute("dtos", vo);
 	}
 	
 	//펫 코드 및 요금 수정
@@ -93,15 +93,19 @@ public class AdminServiceImpl implements AdminService{
 			System.out.println("요금표 수정 updateCnt : " + updateCnt);
 		}
 		
-		req.setAttribute("PK_CD", PK_CD);
-		req.setAttribute("updateCnt" , updateCnt);
+		model.addAttribute("PK_CD", PK_CD);
+		model.addAttribute("updateCnt" , updateCnt);
 	}
-
+	
 	//펫 코드 및 요금 삭제
 	@Override
 	public void petCodeFeeDeleteAction(HttpServletRequest req, Model model) {
 		System.out.println("service ==> petCodeFeeDeleteAction()");
 		
+		int PK_CD = Integer.parseInt(req.getParameter("PK_CD"));
+		int deleteCnt = enrollDao.DeletePetCodeFee(PK_CD);
+		
+		model.addAttribute("deleteCnt", deleteCnt);
 	}
 
 }

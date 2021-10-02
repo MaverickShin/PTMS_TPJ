@@ -26,6 +26,20 @@
 			}
 		}
 	}
+	
+	function requestTrChk() {
+		if(!document.requestTrainerForm.START_DAY.value) {
+			alert("훈련받을 날짜를 선택하세요.");
+			document.requestTrainerForm.START_DAY.focus();
+			return false;
+		} else if(!document.requestTrainerForm.TQ_AMT.value) {
+			alert("훈련유형을 선택하세요.");
+			return false;
+		} else if(!document.requestTrainerForm.PET_NM.value) {
+			alert("훈련받을 마이펫을 선택하세요.");
+			return false;
+		}
+	}
 
 </script>
 <style>
@@ -95,7 +109,7 @@
     				</c:if>
     			</div>
 	              
-	              <form action="requestTraining" method="post">
+	              <form action="requestTraining" method="post" name="requestTrainerForm" onsubmit="return requestTrChk();">
 	              <input type="hidden" value="${TA_CD}" name="TA_CD">
 	              <input type="hidden" value="${TQ_LOC}" name="TQ_LOC">
 	              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">

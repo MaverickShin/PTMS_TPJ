@@ -24,6 +24,33 @@
 	      result.style.display = "block"
 	   }
 	}
+	
+	function applyChks(){
+		
+		if (!document.applyform.SV_AREA.value) {
+			alert("서비스 가능지역 입력은 필수 입니다.");
+			return false;
+		}else if (!document.applyform.WK_START.value) {
+			alert("서비스 시작일 입력은 필수 입니다.");
+			document.applyform.WK_START.focus();
+			return false;
+		}else if (!document.applyform.WK_END.value) {
+			alert("서비스 종료일 입력은 필수 입니다.");
+			document.applyform.WK_END.focus();
+			return false;
+		}else if (!document.applyform.SIT_TITLE.value) {
+			alert("소개글을 입력해 주세요.");
+			document.applyform.SIT_TITLE.focus();
+			return false;
+		}else if (!document.applyform.SIT_APPEAL.value) {
+			alert("소개글을 입력해 주세요.");
+			document.applyform.SIT_APPEAL.focus();
+			return false;
+		}
+		
+	}
+	
+	
 </script>
 <title>Insert title here</title>
 </head>
@@ -44,7 +71,7 @@
    		<%@ include file = "sidebar.jsp" %>
       
       <section style = "width:900px; margin-left:auto; margin-right:auto; margin-top:30px;" class = "sections">
-         <form name="applyform" action="applySitteAction" method="post">
+         <form name="applyform" action="applySitteAction" method="post" onsubmit="return applyChks();">
                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                <div class="row no-gutters" >
                   <div class="col-md-7" style ="max-width: 100% !important; flex:0 0 100% !important">
@@ -129,7 +156,8 @@
                               <div class="col-md-12" style="text-align:center; font-size: 16px; border-top: 1px solid #00bd56; border-bottom:1px solid #00bd56; margin-top: 30px; padding-top:30px; padding-bottom: 30px;">
                                     <label class="label" for="SIT_TITLE" style = "font-size: 20px !important;">소개글</label>
                                     <input type="text" class="form-control" name="SIT_TITLE" id="SIT_TITLE" placeholder="소개글 제목">
-                                    <textarea rows="5px" cols="79%" name="SIT_APPEAL" id="SIT_APPEAL" placeholder=" 소개글 본문" style = "outline:none; border:1px solid gray"></textarea>
+                                    <textarea rows="5px" cols="79%" name="SIT_APPEAL" id="SIT_APPEAL" placeholder=" 소개글 본문" style = "outline:none; border:1px solid gray"
+                                    minlength="10" maxlength="50"></textarea>
                                  </div>
                                  
                               <div class="col-md-12" style = "margin-top: 30px; border-bottom:1px solid #00bd56; margin-bottom: 30px;">
