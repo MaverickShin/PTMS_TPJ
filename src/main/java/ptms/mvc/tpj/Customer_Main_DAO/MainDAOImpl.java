@@ -215,4 +215,11 @@ public class MainDAOImpl implements MainDAO {
 		return dao.insertPayhistory(map);
 	}
 
+	// 구독 결제 - 프리미엄
+	@Override
+	public int updateSubscribe(Map<String, Object> map) {
+		MainDAO dao = data.getMapper(MainDAO.class);
+		return dao.updateSubscribe(map);
+	}
+
 }

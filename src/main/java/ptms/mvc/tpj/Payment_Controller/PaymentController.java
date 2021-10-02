@@ -9,6 +9,10 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,11 +70,15 @@ public class PaymentController {
 			page = "/tpj/trainer/trainerSearch";
 			paykind = 2;
 		} else if(item_name.equals("프리미엄 결제")) {
-			url = "/tpj/cust/paySuccess";
+			url = "/tpj/pay/subscribe";
 			paykind = 3;
+			primarykey = cust_id;
+			page = "/tpj/cust/main";
 		} else if(item_name.equals("비지니스 결제")) {
-			url = "/tpj/cust/paySuccess";
+			url = "/tpj/pay/subscribe";
 			paykind = 4;
+			primarykey = cust_id;
+			page = "/tpj/cust/main";
 		}
 		
 		model.addAttribute("item_name", item_name);
@@ -185,27 +193,50 @@ public class PaymentController {
 		return "{\"result\":\"NO\"}";
 	}
 	
-	// 결제 성공시 - 결제 정보 처리
-	@RequestMapping("approval")
-	public String approval(HttpServletRequest req, Model model){
+	// 결제 - 프리미엄 구독
+	@RequestMapping("subscribe")
+	@ResponseBody
+	public int premiumPay(HttpServletRequest req, Model model) {
 		
-		String imp_uid = req.getParameter("imp_uid");
-		String merchant_uid = req.getParameter("merchant_uid");
+		String primarykey = req.getParameter("primarykey");
+		String item_name = req.getParameter("item_name");
 		
-		System.out.println("uid : " + imp_uid);
-		System.out.println("merchant_uid : " + merchant_uid);
+		Date date = new Date();
 		
-		return imp_uid;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		
+		String today = sdf.format(date);
+		        
+		Calendar cal = Calendar.getInstance();
+		
+		cal.add(Calendar.MONTH, +1);
+		Date currentTime=cal.getTime();
+		
+		String release = sdf.format(currentTime);
+		
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("cust_id", primarykey);
+		map.put("today", today);
+		map.put("release", release);
+		
+		if(item_name.equals("프리미엄 결제")) map.put("AUTHOR", "ROLE_PREMIUM");
+		else if (item_name.equals("비지니스 결제")) map.put("AUTHOR", "ROLE_BUSINESS");
+		
+		return dao.updateSubscribe(map);
 	}
 	
-	 @RequestMapping(value = "paySuccess", method = RequestMethod.GET )
-	 @ResponseBody
-	 public int paySuccess(HttpServletRequest req, Model model) {
+	
+	// 결제 성공시 - 결제 이력 테이블 insert
+	@RequestMapping(value = "paySuccess", method = RequestMethod.GET )
+	@ResponseBody
+	public int paySuccess(HttpServletRequest req, Model model) {
 		   
 		   String paykind = req.getParameter("kind");
 		   int price = Integer.parseInt(req.getParameter("price"));
 		   String id = req.getParameter("id");
-		   float fee = (float) (price * 0.5);
+		   float fee = (float) (price * 5) / 100;
 		   
 		   System.out.println("paykind : " + paykind);
 		   System.out.println("price : " + price);
@@ -221,5 +252,5 @@ public class PaymentController {
 		   int result = dao.insertPayhistory(map);
 		   
 		   return result;
-	 }
+	}
 }

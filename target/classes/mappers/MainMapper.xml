@@ -131,4 +131,14 @@
 		VALUES (BY_CD_SEQ.nextval, #{CUST_ID}, #{PAYKIND_CD}, #{BY_SUM}, #{BY_FEES}, sysdate)
 	</insert>
 	
+	<!-- 구독 결제 업데이트 -->
+	<update id="updateSubscribe" parameterType="java.util.Map">
+		UPDATE CUSTOMER_TB
+		SET
+			START_DT = TO_DATE(#{today}, 'YYYY/MM/DD'),
+			END_DT = TO_DATE(#{release}, 'YYYY/MM/DD'),
+			AUTHOR = #{AUTHOR}
+		WHERE CUST_ID = #{cust_id}
+	</update>
+	
 </mapper>
