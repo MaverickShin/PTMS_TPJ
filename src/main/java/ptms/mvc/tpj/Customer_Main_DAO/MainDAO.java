@@ -88,5 +88,10 @@ public interface MainDAO {
 	
 	// 구독 업데이트 처리
 	public int updateSubscribe(Map<String, Object> map); 
+	
+	
+	//10.03 작성자 임지영
+	//고객 - 시터등록 안되어 있을시 시터프로필 수정 접근 금지
+	public int sitterSigninChk(String CUST_ID);
 
 }

@@ -107,7 +107,6 @@ public class SitterServiceImpl implements SitterService {
 
 		System.out.println("vo : " + vo);
 		System.out.println("SIT_ST : " + vo.getSIT_ST());
-		model.addAttribute("dto", vo);
 	}
 
 	// 시터 프로필 화면 수정 처리
@@ -197,6 +196,10 @@ public class SitterServiceImpl implements SitterService {
 
 		// 정보를 담을 sitterVO생성
 		SitterVO vo = new SitterVO();
+		
+		String CUST_ID = (String) req.getSession().getAttribute("cust_id");
+		vo.setCUST_ID(CUST_ID);
+		System.out.println("제발아이디"+ vo.getCUST_ID());
 
 		String SV_AREA = req.getParameter("SV_AREA");
 		vo.setSV_AREA(SV_AREA); // 서비스 가능 지역
@@ -211,7 +214,7 @@ public class SitterServiceImpl implements SitterService {
 
 		String SV1_NO = req.getParameter("SV1_NO"); // 미용서비스
 		String SV2_NO = req.getParameter("SV2_NO"); // 놀이서비스
-		String SV3_NO = req.getParameter("SV3_NO"); // 산책서비스
+		String SV3_NO = req.getParameter("SV3_NO"); // 산책서서비스
 
 		// 요금 조회
 		String[] pk_cd = req.getParameterValues("pk_cd");

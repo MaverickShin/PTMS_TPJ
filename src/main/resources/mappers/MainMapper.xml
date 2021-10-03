@@ -141,4 +141,11 @@
 		WHERE CUST_ID = #{cust_id}
 	</update>
 	
+	<!-- 시터등록 안되어 있을시 시터프로필 수정 접근 금지 -->
+	<select id="sitterSigninChk" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM SITTERS_TB s
+		WHERE CUST_ID = #{CUST_ID}
+	</select>	
+	
 </mapper>

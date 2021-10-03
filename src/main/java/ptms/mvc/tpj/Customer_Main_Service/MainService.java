@@ -62,4 +62,7 @@ public interface MainService {
 	// 뉴스레이터 크롤링 - 21.09.26 선영
 	public void Newsletter(HttpServletRequest req, Model model);
 	
+	
+	// 반려동물 인기검색어 크롤링 - 21.10.03 임지영
+	public void petIssue(HttpServletRequest req, Model model);
 }

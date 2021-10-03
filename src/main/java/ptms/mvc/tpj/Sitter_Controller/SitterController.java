@@ -98,10 +98,10 @@ public class SitterController {
       
 		 sitterSer.sitterSignInChk(req, model);
 		 return "customer/sitter/applySitter";
-	 } 		
+	 } 		 
 	 
 	 //펫시터 등록 처리
-	 @RequestMapping("applySitteAction")
+	 @RequestMapping("applySitteAction") 
 	 public String applySitteAction(HttpServletRequest req, Model model) throws ParseException {
 		 log.info("url ==> applySitter");
 		 

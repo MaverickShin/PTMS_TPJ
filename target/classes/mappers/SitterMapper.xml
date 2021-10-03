@@ -79,10 +79,11 @@
 	<select id="getSitterCnt" parameterType="ptms.mvc.tpj.CustVO.SitterVO" resultType="int">
 		SELECT COUNT(*)
 		FROM (SELECT s.SIT_ID 
-	          FROM SITTERS_TB s, SITTER_SERVICE_TB ser
+			FROM SITTERS_TB s, SITTER_SERVICE_TB ser
 	          WHERE s.SIT_ID = ser.SIT_ID
 	          AND ser.SV_AREA LIKE '%'||#{SV_AREA}||'%'
 	          AND s.SIT_ST = 1
+	          AND #{CUST_ID} NOT IN s.CUST_ID
 	          INTERSECT
 	    SELECT s.SIT_ID 
 	          FROM SITTERS_TB s, SITTER_SERVICE_TB ser
@@ -100,37 +101,43 @@
 			 )
 	</select>	
 	
-	<!-- 펫시터 찾기 - 리스트 출력  -->
+	<!-- 펫시터 찾기 - 리스트 출력  
+		조건1. 시터의 활동상태 : 활동중
+		조건2. 지역
+		조건3. 시터활동 날짜
+		조건4. 가능한 서비스 
+	-->
 	<select id="activityList" parameterType="ptms.mvc.tpj.CustVO.SitterVO" resultType="ptms.mvc.tpj.CustVO.SitterVO">
 	  <![CDATA[
-	  	 SELECT *
-	  	 FROM
-	  	 (SELECT SIT_ID, SIT_TITLE, SIT_APPEAL, SIT_IMG, CUST_NM, SIT_DT, ROWNUM rNUM
-	  	 	FROM(
-			SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM, s.SIT_DT
-		          FROM SITTERS_TB s, SITTER_SERVICE_TB ser, CUSTOMER_TB c
-		          WHERE s.SIT_ID = ser.SIT_ID
-		          AND s.CUST_ID = c.CUST_ID
-		          AND ser.SV_AREA LIKE '%'||#{SV_AREA}||'%'
-		          AND s.SIT_ST = 1
-		          INTERSECT
-			SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM, s.SIT_DT
-		          FROM SITTERS_TB s, SITTER_SERVICE_TB ser, CUSTOMER_TB c
-		          WHERE s.SIT_ID = ser.SIT_ID
-		          AND s.CUST_ID = c.CUST_ID
-		          AND #{WK_START} between ser.WK_START AND ser.WK_END
-		          AND #{WK_END} between ser.WK_START AND ser.WK_END
-		          INTERSECT
-			SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM, s.SIT_DT
-		          FROM SITTERS_TB s, SITTER_SERVICE_TB ser, CUSTOMER_TB c
-		          WHERE s.SIT_ID = ser.SIT_ID
-		          AND s.CUST_ID = c.CUST_ID
-		          AND ser.SV1_NO >= #{SV1_NO}
-		          AND ser.SV2_NO >= #{SV2_NO}
-				  AND ser.SV3_NO >= #{SV3_NO}
-				  AND ser.SV4_NO >= #{SV4_NO})	
-				)
-			 where rNUM >= #{start} and rNUM <= #{end}
+		SELECT *
+	         FROM
+	         (SELECT SIT_ID, SIT_TITLE, SIT_APPEAL, SIT_IMG, CUST_NM, SIT_DT, ROWNUM rNUM
+	            FROM(
+	         SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM, s.SIT_DT
+	                FROM SITTERS_TB s, SITTER_SERVICE_TB ser, CUSTOMER_TB c
+	                WHERE s.SIT_ID = ser.SIT_ID
+	                AND s.CUST_ID = c.CUST_ID
+	                AND ser.SV_AREA LIKE '%'||#{SV_AREA}||'%'
+	                AND s.SIT_ST = 1
+	                AND s.CUST_ID NOT IN #{CUST_ID}
+	                INTERSECT
+	         SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM, s.SIT_DT
+	                FROM SITTERS_TB s, SITTER_SERVICE_TB ser, CUSTOMER_TB c
+	                WHERE s.SIT_ID = ser.SIT_ID
+	                AND s.CUST_ID = c.CUST_ID
+	                AND #{WK_START} between ser.WK_START AND ser.WK_END
+	                AND #{WK_END} between ser.WK_START AND ser.WK_END
+	                INTERSECT
+	         SELECT s.SIT_ID, s.SIT_TITLE, s.SIT_APPEAL, s.SIT_IMG, c.CUST_NM, s.SIT_DT
+	                FROM SITTERS_TB s, SITTER_SERVICE_TB ser, CUSTOMER_TB c
+	                WHERE s.SIT_ID = ser.SIT_ID
+	                AND s.CUST_ID = c.CUST_ID
+	                AND ser.SV1_NO >= #{SV1_NO}
+	                AND ser.SV2_NO >= #{SV2_NO}
+	              	AND ser.SV3_NO >= #{SV3_NO}
+	             	AND ser.SV4_NO >= #{SV4_NO})   
+	            )
+          where rNUM >= #{start} and rNUM <= #{end}
 	   ]]>		  	  
 	</select>
 	

@@ -126,14 +126,20 @@ public class MainServiceImpl implements MainService {
 
 		System.out.println("회원id : " + id);
 		System.out.println("회원pwd : " + cust_pwd);
+		
+		
 
 		// 회원수정 인증 처리
 		String encoderpwd = Session.selectOne("ptms.mvc.tpj.Customer_Main_DAO.MainDAO.pwdSearch", id);
 		System.out.println("passordEncoder : " + passordEncoder.matches(cust_pwd, encoderpwd));
 
+		String CUST_ID = (String) req.getSession().getAttribute("cust_id");
 		// 상세정보 조회
 		CustomerVO vo = new CustomerVO();
 		int selectCnt = 0;
+		
+		//고객 - 시터등록 안되어 있을시 시터프로필 수정 접근 금지
+		int signchkCnt = dao.sitterSigninChk(CUST_ID);
 		if (passordEncoder.matches(cust_pwd, encoderpwd)) {
 			vo = dao.selectCustomer(id);
 
@@ -142,6 +148,7 @@ public class MainServiceImpl implements MainService {
 			selectCnt = 1;
 		}
 
+		model.addAttribute("signchkCnt", signchkCnt);
 		model.addAttribute("selectCnt", selectCnt);
 		model.addAttribute("CustomerVO", vo);
 		System.out.println("회원정보 encoderpwd : " + encoderpwd);
@@ -242,6 +249,7 @@ public class MainServiceImpl implements MainService {
 		// 배송지 갯수 조회
 		cnt = dao.getPetCnt(CUST_ID);
 		System.out.println("cnt => " + cnt);
+		int signchkCnt = dao.sitterSigninChk(CUST_ID);
 		
 		pageNum = req.getParameter("pageNum");
 		
@@ -310,6 +318,7 @@ public class MainServiceImpl implements MainService {
 			req.setAttribute("currentPage", currentPage);	// 현재페이지
 			req.setAttribute("s", "MyPetList");
 		}
+		model.addAttribute("signchkCnt", signchkCnt);
 
 	}
 
@@ -683,8 +692,6 @@ public class MainServiceImpl implements MainService {
 
 		Elements detailele = element2.select("a.WlydOe");
 
-		System.out.println(detailele);
-
 		for (Element link : detailele) {
 			list.add(link.attr("abs:href" + "\n"));
 		}
@@ -693,6 +700,44 @@ public class MainServiceImpl implements MainService {
 		model.addAttribute("item", detailele);
 		model.addAttribute("list", list);
 
+	}
+
+	/*
+	 * 이름: 임지영
+	 * 날짜 : 21.10.03
+	 * 내용 : 크롤링 - 반려동물 인기검색어
+	 */
+	@Override
+	public void petIssue(HttpServletRequest req, Model model) {
+		// 크롤링할 url 지정
+				String url = "https://search.naver.com/search.naver?query=%EB%8F%84%EB%8F%84%ED%95%B4%EC%8B%9D%EA%B8%B0&ie=utf8&sm=tab_shk";
+
+				// Document에는 페이지의 전체 소스가 저장된다.
+				Document doc = null;
+
+				// 호텔 정보를 담을 list바구니
+				List<String> list = new ArrayList<String>();
+
+				try {
+					// url 연결
+					doc = Jsoup.connect(url).get();
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				Elements element = doc.select("div.popular_rank_wrap");
+				Elements element1 = element.select("div.keyword_box");
+				//Elements element2 = element1.select("g-card.ftSUBd");
+
+				Elements detailele = element1.select("[href]");
+
+				for (Element link : detailele) {
+					String a = "<a href = '" + link.attr("abs:href") + "'>" +link.text() +"</a>";
+					list.add(a);
+				}
+
+				model.addAttribute("list2", list);
 	}
 
 }

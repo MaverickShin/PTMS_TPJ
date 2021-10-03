@@ -67,6 +67,9 @@ public class MainController {
 	public String main(HttpServletRequest req, Model model) {
 		
 		service.Newsletter(req, model); 
+		
+		//service.petIssue(req, model);
+		
 		return "main/index";
 	}
 	
@@ -77,7 +80,7 @@ public class MainController {
 		int cnt = service.confirmId(req, model);
 		
 		return cnt;
-	}
+	} 
 	
 	// 회원가입 페이지 이동
 	@RequestMapping("join")
@@ -151,6 +154,7 @@ public class MainController {
 	public String MyInfo(HttpServletRequest req, Model model) {
 		log.info("컨트롤러 - 반려인/펫 관리 - 내정보 관리");
 		
+		
 		// 회원정보 인증 및 상세 페이지
 		service.custDetail(req, model);
 		
@@ -193,6 +197,9 @@ public class MainController {
 	public String MyPet(HttpServletRequest req, Model model) {
 		log.info("컨트롤러 - 반려인/펫 관리 - MyPet");
 		
+		String CUST_ID = (String) req.getSession().getAttribute("cust_id");
+		int signchkCnt = dao.sitterSigninChk(CUST_ID);
+		model.addAttribute("signchkCnt", signchkCnt);
 		return "customer/mypage/MyPet";
 	}
 	
@@ -547,11 +554,16 @@ public class MainController {
    
    // 반려인/펫 관리 - 결제내역
    @RequestMapping("buyList")
-   public String buyList() {
+   public String buyList(HttpServletRequest req, Model model) {
       log.info("컨트롤러 - 반려인/펫 관리 - buyList");
       // 서비스에서 결제내역 정보 가져오기
       
-      return "customer/mypage/buyList";
+      //고객 - 시터등록 안되어 있을시 시터프로필 수정 접근 금지
+        String CUST_ID = (String) req.getSession().getAttribute("cust_id");
+		int signchkCnt = dao.sitterSigninChk(CUST_ID);
+        model.addAttribute("signchkCnt", signchkCnt);
+    
+        return "customer/mypage/buyList";
    }
    
    @RequestMapping("test")
