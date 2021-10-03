@@ -10,7 +10,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 	$(document).ready(function() {
-
+			
 		$("#sitaccept_button").click(function() { //수락
 
 			$.ajax({
@@ -64,6 +64,25 @@
 				cache : false,
 				success : function(result) {
 					$(".result_div").html(result);
+				},
+				error : function(request, status, error) {
+					alert("에러!");
+				}
+			});
+		});
+		
+		$(".pageMove").click(function() { //요청수락대기
+
+			var urls = $(".pageMove").attr("href");
+			
+			console.log("요깅");
+		
+			$.ajax({
+				type : "get",
+				url : urls,
+				cache : false,
+				success : function(result) {
+					$('body').html(result);
 				},
 				error : function(request, status, error) {
 					alert("에러!");
@@ -177,7 +196,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	
 	<c:if test="${doubleChk == 0}">
 		<script type="text/javascript">
 			alert("펫시터 등록 후 이용가능한 페이지 입니다.가입을  통해 펫시터로 활동해 보세요.");
@@ -232,21 +251,8 @@
 							style="width: 700px; margin-left: auto; margin-right: auto; margin-top: 30px;">
 							<div class="col-md-12">
 								<h3></h3>
-								<c:if test="${st == 0}">
-									<p>아직 들어온 의뢰가 없습니다. 일정 조정으로 매칭률을 높여보세요!</p>
-								</c:if>
-
-								<c:if test="${st == 1}">
-									<p>수락한 의뢰가 없습니다. 첫 펫시팅을 도전해 보세요!</p>
-								</c:if>
-
-								<c:if test="${st == 2}">
-									<p>거절한 의뢰가 없습니다. 일등 펫시터 님이시군요~!</p>
-								</c:if>
-
-								<c:if test="${st == 3}">
-									<p>아직 완료된 내역이 없습니다. 일정 조정으로 매칭률을 높여보세요!</p>
-								</c:if>
+								
+								<p>아직 들어온 의뢰가 없습니다. 일정 조정으로 매칭률을 높여보세요!</p>
 
 							</div>
 						</div>
@@ -281,7 +287,7 @@
 								<div class="col-md-12" align="center">
 									<div class="block-27">
 										<ul>
-											<li><a href="${s}">&lt;&lt;</a>
+											<li><a href="${s}" class= "pageMove">&lt;&lt;</a>
 											<li><a href="${s}?pageNum=${startPage - pageBlock}">&lt;</a></li>
 
 											<c:forEach var="i" begin="${startPage}" end="${endPage}">

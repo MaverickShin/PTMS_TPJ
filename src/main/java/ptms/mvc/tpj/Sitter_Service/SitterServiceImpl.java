@@ -527,9 +527,11 @@ public class SitterServiceImpl implements SitterService {
 			model.addAttribute("currentPage", currentPage); // 현재페이지
 		}
 
+		int st = 1;
+		
 		model.addAttribute("s", "sitterAcceptList");
 		model.addAttribute("cnt", cnt);
-		model.addAttribute("st", 1);
+		model.addAttribute("st", st);
 		model.addAttribute("CUST_ID", CUST_ID);
 		model.addAttribute("list", list);
 
@@ -703,11 +705,13 @@ public class SitterServiceImpl implements SitterService {
 			model.addAttribute("pageCount", pageCount); // 페이지 갯수
 			model.addAttribute("currentPage", currentPage); // 현재페이지
 		}
+		
+		int st = 2;
 
 		model.addAttribute("s", "sitterRefuseList");
 		model.addAttribute("cnt", cnt);
 		model.addAttribute("CUST_ID", CUST_ID);
-		model.addAttribute("st", 2);
+		model.addAttribute("st", st);
 		model.addAttribute("list", list);
 
 		model.addAttribute("pageNum", pageNum); // 페이지 번호

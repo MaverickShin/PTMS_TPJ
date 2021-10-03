@@ -8,10 +8,16 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
+	function convenience_view() {
+		var imgNum5=Math.round(Math.random()*3); 
+		var td5 = $(".tdsss");
+		td5.hide();
+		td5[imgNum5].style.display = 'block';
+		setTimeout(convenience_view,3000); 
+	}
+
 </script>
-
 <style>
-
 .bigs {
 	width: 250px;
 	height: 250px;
@@ -31,7 +37,7 @@
 	height: 270px;
 }
 
-.tds a{
+.tdsss a{
 	display:block;
 	position:relative;
 	color: #2C3E50;
@@ -42,7 +48,7 @@
 	text-align: center;
 }
 
-.tds a:hover {
+.tdsss a:hover {
 	font-size: 18px;
 	font-weight: bold;
 }
@@ -53,16 +59,15 @@
 	top: 300px;
 	width: 100%;
 }
-
 </style>
 </head>
 
-<body>
+<body onload = "convenience_view();">
 	<table class= "bigs">
 		<tbody>
-			<c:forEach var = "i" items="${title}">
+			<c:forEach var = "i" items="${list}">
 				<tr> 
-					<td class= "tds">
+					<td class= "tdsss">
 						${i}	
 					</td>
 				</tr>

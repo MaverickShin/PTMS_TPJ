@@ -2,9 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../../setting.jsp"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="utf-8">
+<meta name = "_csrf_header" content="${_csrf.headerName}">
+<meta name = "_csrf" content = "${_csrf.token}">
 <title>건강관리 - 건강정보 등</title>
 <script type="text/javascript">
 function showImage(){ 
@@ -14,7 +16,74 @@ function showImage(){
 	td[imgNum].style.display = 'block';
 	setTimeout(showImage,3000); 
 }
+
+function nutrient_view() {
+	var imgNum2=Math.round(Math.random()*3); 
+	var td1 = $(".tds");
+	td1.hide();
+	td1[imgNum2].style.display = 'block';
+	setTimeout(nutrient_view,3000); 
+	
+}
+
+function symptom_view() {
+	var imgNum3=Math.round(Math.random()*3); 
+	var td2 = $(".tdss");
+	td2.hide();
+	td2[imgNum3].style.display = 'block';
+	setTimeout(symptom_view,3000); 
+	
+}
 </script> 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+//아이디 유효성 검사(1 = 중복 / 0 != 중복)
+$(document).ready(function(){
+		$.ajax({
+			type: "get",
+			url: "/tpj/cust/nutrient",
+			cache: false,
+			contentType: "application/json; charset=utf-8",
+			beforeSend : function(jqXHR, settings)
+			{
+				var token = $("meta[name='_csrf_header']").attr("content");
+				var header = $("meta[name='_csrf']").attr("content");
+				console.log(token);
+				console.log(header);
+				jqXHR.setRequestHeader(header, token);
+		},
+		success: function(cnt) {
+			$(".nutrient").html(cnt);
+			nutrient_view();
+		},
+		error : function(request, status, error) {
+			console.log("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : "+ error);
+		}
+		});
+		
+		$.ajax({
+			type: "get",
+			url: "/tpj/cust/symptom",
+			cache: false,
+			contentType: "application/json; charset=utf-8",
+			beforeSend : function(jqXHR, settings)
+			{
+				var token = $("meta[name='_csrf_header']").attr("content");
+				var header = $("meta[name='_csrf']").attr("content");
+				console.log(token);
+				console.log(header);
+				jqXHR.setRequestHeader(header, token);
+		},
+		success: function(cnt) {
+			$(".symptom").html(cnt);
+			symptom_view();
+		},
+		error : function(request, status, error) {
+			console.log("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : "+ error);
+		}
+		});
+});
+</script>
 <style>
 .section01_img>a>img {
 	width: 100%;
@@ -111,6 +180,12 @@ function showImage(){
 	text-align:center;
 	margin-bottom: 20px;
 }
+
+.contents a span {
+	display:block;
+	padding-top:30px;
+	padding-bottom:10px;	
+}
 </style>
 
 </head>
@@ -164,7 +239,7 @@ function showImage(){
 						<div class="row">
 							<div class="col-sm-6 section01_img" style="text-align: center">
 							
-								<!-- SYMPTOM => symptom 소문자로 수정 - 21.09.23-->
+								<div class= "symptom"></div>
 							</div>
 							
 							<div class="col-sm-6 section01_txt">
@@ -205,7 +280,8 @@ function showImage(){
 					<div class="container">
 						<div class="row">
 							<div class="col-sm-6 section03_img" style="text-align: center">
-								<%@ include file="../../news/Nutrient_Info.jsp"%>
+								<div class = "nutrient"  onchange= "nutrient_view();"></div>
+							
 							</div>
 							<div class="col-sm-6 section03_txt">
 								<h3>◀ 영양정보</h3>

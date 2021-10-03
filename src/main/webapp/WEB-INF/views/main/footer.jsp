@@ -5,10 +5,35 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name = "_csrf_header" content="${_csrf.headerName}">
+<meta name = "_csrf" content = "${_csrf.token}">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!--  <script>
+//아이디 유효성 검사(1 = 중복 / 0 != 중복)
+$(document).ready(function(){
+	$.ajax({
+		type: "get",
+		url: "/tpj/cust/hospitalInfo",
+		cache: false,
+		contentType: "application/json; charset=utf-8",
+		beforeSend : function(jqXHR, settings)
+		{
+			var token = $("meta[name='_csrf_header']").attr("content");
+			var header = $("meta[name='_csrf']").attr("content");
+			jqXHR.setRequestHeader(header, token);
+	},
+	success: function(cnt) {
+		$(".text").html(cnt);
+	},
+	error : function(request, status, error) {
+		console.log("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : "+ error);
+	}
+	});
+});
+</script>-->
 </head>
 <body>
-
     <footer class="footer">
 			<div class="container">
 				<div class="row">
@@ -24,29 +49,14 @@
 					<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
 						<h2 class="footer-heading">Latest News</h2>
 						<div class="block-21 mb-4 d-flex">
-              <a class="img mr-4 rounded" style="background-image: url(${path}images/image_1.jpg);"></a>
-              <div class="text">
-                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                <div class="meta">
-                  <div><a href="#"><span class="icon-calendar"></span> April 7, 2020</a></div>
-                  <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                  <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                </div>
-              </div>
-            </div>
-            <div class="block-21 mb-4 d-flex">
-              <a class="img mr-4 rounded" style="background-image: url(${path}images/image_2.jpg);"></a>
-              <div class="text">
-                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                <div class="meta">
-                  <div><a href="#"><span class="icon-calendar"></span> April 7, 2020</a></div>
-                  <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                  <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                </div>
-              </div>
-            </div>
-					</div>
-					<div class="col-md-6 col-lg-3 pl-lg-5 mb-4 mb-md-0">
+			              	<div class="text">
+			                <div class="meta">
+			                </div>
+			             	</div>
+		            	</div>
+				</div>
+				
+			  <div class="col-md-6 col-lg-3 pl-lg-5 mb-4 mb-md-0">
 						<h2 class="footer-heading">Quick Links</h2>
 						<ul class="list-unstyled">
               <li><a href="#" class="py-2 d-block">Home</a></li>
