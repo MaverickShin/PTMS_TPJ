@@ -769,34 +769,37 @@ public class MainServiceImpl implements MainService {
 	@Override
 	public void petIssue(HttpServletRequest req, Model model) {
 		// 크롤링할 url 지정
-				String url = "https://search.naver.com/search.naver?query=%EB%8F%84%EB%8F%84%ED%95%B4%EC%8B%9D%EA%B8%B0&ie=utf8&sm=tab_shk";
+		String url = "https://search.naver.com/search.naver?query=%EB%8F%84%EB%8F%84%ED%95%B4%EC%8B%9D%EA%B8%B0&ie=utf8&sm=tab_shk";
 
-				// Document에는 페이지의 전체 소스가 저장된다.
-				Document doc = null;
+		// Document에는 페이지의 전체 소스가 저장된다.
+		Document doc = null;
 
-				// 호텔 정보를 담을 list바구니
-				List<String> list = new ArrayList<String>();
+		// 호텔 정보를 담을 list바구니
+		List<String> list = new ArrayList<String>();
 
-				try {
-					// url 연결
-					doc = Jsoup.connect(url).get();
+		try {
+			// url 연결
+			doc = Jsoup.connect(url).get();
 
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-				Elements element = doc.select("div.popular_rank_wrap");
-				Elements element1 = element.select("div.keyword_box");
-				//Elements element2 = element1.select("g-card.ftSUBd");
+		Elements element = doc.select("div.popular_rank_wrap");
+		Elements element1 = element.select("div.keyword_box");
+		//Elements element2 = element1.select("g-card.ftSUBd");
 
-				Elements detailele = element1.select("[href]");
+		Elements detailele = element1.select("[href]");
 
-				for (Element link : detailele) {
-					String a = "<a href = '" + link.attr("abs:href") + "'>" +link.text() +"</a>";
-					list.add(a);
-				}
+		for (Element link : detailele) {
+			String a = "<a href = '" + link.attr("abs:href") + "'>" +link.text() +"</a>";
+			list.add(a);
+		}
 
-				model.addAttribute("list2", list);
+		model.addAttribute("list2", list);
+		
+	}
+	
 	// 푸터 병원 정보 - 21.10.03 도빈
 	@Override
 	public void HospitalInfo(HttpServletRequest req, Model model) {
