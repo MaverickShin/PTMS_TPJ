@@ -201,7 +201,7 @@
 					onclick="request();">요청 수락대기</p>
 				<p id="accept_button" onclick="accept();">수락</p>
 				<p id="right_button" onclick="refuse();">거절</p>
-				<p id="center_button" onclick="TrainingComplete();">결제 완료</p>
+				<p id="center_button" onclick="TrainingComplete();">매칭 완료</p>
 
 			</div>
 

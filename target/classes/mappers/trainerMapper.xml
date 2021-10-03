@@ -20,50 +20,56 @@
 	<select id="trainerSelectCnt" parameterType="java.util.Map" resultType="int">
 		<if test='ADJUSTABLE == 1'>
 			select count(*)
-			from (select TA_CD
-				from TRAINER_SERVICE_TB
-				where TS_AREA LIKE '%'||#{TQ_LOC}||'%'
-				intersect
-				select TA_CD
-				from TRAINER_SERVICE_TB
-				where #{TQ_AMT} = TS1_NO
-				OR #{TQ_AMT} = TS2_NO
-				OR #{TQ_AMT} = TS3_NO
-				OR #{TQ_AMT} = TS4_NO
-				intersect
-				select TA_CD
-				from TRAINER_SERVICE_TB
-				where #{START_DAY} between START_DAY and END_DAY
-				   or #{END_DAY} between START_DAY and END_DAY
-				intersect
-				select tt.TA_CD
-				from TRAINER_SERVICE_TB ts, TRAINER_TB tt
-				where tt.TA_CD = ts.TA_CD
-				  and tt.TA_ST = 1)
+			from (select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
+		            from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
+		            where tt.TA_CD = ts.TA_CD
+		            and ct.CUST_ID = tt.CUST_ID
+		            and ts.TS_AREA LIKE '%'||#{TQ_LOC}||'%'
+		            and tt.TA_ST = 1
+		            AND #{id} NOT IN tt.CUST_ID
+		            intersect
+		            select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
+		            from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
+		            where tt.TA_CD = ts.TA_CD
+		            and ct.CUST_ID = tt.CUST_ID
+		            and #{TQ_AMT} = ts.TS1_NO
+		            OR #{TQ_AMT} = ts.TS2_NO
+		            OR #{TQ_AMT} = ts.TS3_NO
+		            OR #{TQ_AMT} = ts.TS4_NO
+		            intersect
+		            select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
+		            from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
+		            where tt.TA_CD = ts.TA_CD
+		              and ct.CUST_ID = tt.CUST_ID
+		              and #{START_DAY} between ts.START_DAY and ts.END_DAY
+		              or #{END_DAY} between ts.START_DAY and ts.END_DAY)
 		</if>
 		
 		<if test='ADJUSTABLE != 1'>
 			select count(*)
-			from (select TA_CD
-				from TRAINER_SERVICE_TB
-				where TS_AREA LIKE '%'||#{TQ_LOC}||'%'
-				intersect
-				select TA_CD
-				from TRAINER_SERVICE_TB
-				where #{TQ_AMT} = TS1_NO
-				OR #{TQ_AMT} = TS2_NO
-				OR #{TQ_AMT} = TS3_NO
-				OR #{TQ_AMT} = TS4_NO
-				intersect
-				select TA_CD
-				from TRAINER_SERVICE_TB
-				where #{START_DAY} between START_DAY and END_DAY
-				  and #{END_DAY} between START_DAY and END_DAY
-				intersect
-				select tt.TA_CD
-				from TRAINER_SERVICE_TB ts, TRAINER_TB tt
-				where tt.TA_CD = ts.TA_CD
-				  and tt.TA_ST = 1)
+			from (select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
+		            from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
+		            where tt.TA_CD = ts.TA_CD
+		            and ct.CUST_ID = tt.CUST_ID
+		            and ts.TS_AREA LIKE '%'||#{TQ_LOC}||'%'
+		            and tt.TA_ST = 1
+		            AND #{id} NOT IN tt.CUST_ID
+		            intersect
+		            select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
+		            from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
+		            where tt.TA_CD = ts.TA_CD
+		            and ct.CUST_ID = tt.CUST_ID
+		            and #{TQ_AMT} = ts.TS1_NO
+		            OR #{TQ_AMT} = ts.TS2_NO
+		            OR #{TQ_AMT} = ts.TS3_NO
+		            OR #{TQ_AMT} = ts.TS4_NO
+		            intersect
+		            select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
+		            from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
+		            where tt.TA_CD = ts.TA_CD
+		              and ct.CUST_ID = tt.CUST_ID
+		              and #{START_DAY} between ts.START_DAY and ts.END_DAY
+		              or #{END_DAY} between ts.START_DAY and ts.END_DAY)
 		</if>
 	</select>
 	
@@ -80,6 +86,7 @@
 			            and ct.CUST_ID = tt.CUST_ID
 			            and ts.TS_AREA LIKE '%'||#{TQ_LOC}||'%'
 			            and tt.TA_ST = 1
+			            AND #{id} NOT IN tt.CUST_ID
 			            intersect
 			            select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
 			            from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
@@ -112,6 +119,7 @@
 			            and ct.CUST_ID = tt.CUST_ID
 			            and ts.TS_AREA LIKE '%'||#{TQ_LOC}||'%'
 			            and tt.TA_ST = 1
+			            AND #{id} NOT IN tt.CUST_ID
 			            intersect
 			            select ts.*, tt.TA_TITLE, tt.TA_APPEAL, tt.TA_IMG, ct.CUST_NM
 			            from TRAINER_SERVICE_TB ts, TRAINER_TB tt, CUSTOMER_TB ct
@@ -129,7 +137,7 @@
 			              and #{START_DAY} between ts.START_DAY and ts.END_DAY
 			              and #{END_DAY} between ts.START_DAY and ts.END_DAY)
 			              )
-			where rNUM >= 1 and rNUM <= 12
+			where rNUM >= #{start} and rNUM <= #{end}
 			]]>
 		</if>
 	</select>
@@ -214,14 +222,13 @@
 	<select id="TraineeList" resultType="ptms.mvc.tpj.CustVO.TrainerRequestVO">
 		<![CDATA[
 		select * from
-		        (select tq_cd, cust_id, ta_cd, pet_nm, tq_amt, tq_loc, tq_st, start_day, end_day, tq_fee, tq_dt, pet_con, rownum rNum
-		        from(select distinct tr.*, pt.PET_CON
-			        from TRAINER_REQUEST_TB tr, TRAINER_TB tt, PET_TB pt
-			        where tt.TA_CD = tr.TA_CD
-			        and pt.CUST_ID = tr.CUST_ID
-			        and tt.CUST_ID = #{id}
-			        and tr.TQ_ST = 0
-			        order by TQ_DT))
+		        (select tq_cd, cust_id, ta_cd, pet_nm, tq_amt, tq_loc, tq_st, start_day, end_day, tq_fee, tq_dt, rownum rNum
+		        from(select distinct tr.*
+		            from TRAINER_REQUEST_TB tr, TRAINER_TB tt
+		            where tt.TA_CD = tr.TA_CD
+		            and tt.CUST_ID = #{id}
+		            and tr.TQ_ST = 0
+		            order by TQ_DT))
 		where rNum >= #{start} and rNum <= #{end}
 		]]>
 	</select>
@@ -250,10 +257,9 @@
 		<![CDATA[
 		select * from
 		        (select cu.*, rownum rNum
-		         from (select distinct tr.*, pt.PET_CON
-		                from TRAINER_REQUEST_TB tr, TRAINER_TB tt, PET_TB pt
+		         from (select distinct tr.*
+		                from TRAINER_REQUEST_TB tr, TRAINER_TB tt
 		                where tt.TA_CD = tr.TA_CD
-		                and pt.CUST_ID = tr.CUST_ID
 		                and tt.CUST_ID = #{id}
 		                and tr.TQ_ST = 1
 		                order by TQ_DT) cu)
@@ -275,10 +281,9 @@
 		<![CDATA[
 		select * from
 		        (select cu.*, rownum rNum
-		         from (select distinct tr.*, pt.PET_CON
-		                from TRAINER_REQUEST_TB tr, TRAINER_TB tt, PET_TB pt
+		         from (select distinct tr.*
+		                from TRAINER_REQUEST_TB tr, TRAINER_TB tt
 		                where tt.TA_CD = tr.TA_CD
-		                and pt.CUST_ID = tr.CUST_ID
 		                and tt.CUST_ID = #{id}
 		                and tr.TQ_ST = 2
 		                order by TQ_DT) cu)
@@ -300,14 +305,13 @@
 		<![CDATA[
 		select * from
 		        (select cu.*, rownum rNum
-		         from (select distinct tr.*, pt.PET_CON
-		                from TRAINER_REQUEST_TB tr, TRAINER_TB tt, PET_TB pt
+		         from (select distinct tr.*
+		                from TRAINER_REQUEST_TB tr, TRAINER_TB tt
 		                where tt.TA_CD = tr.TA_CD
-		                and pt.CUST_ID = tr.CUST_ID
 		                and tt.CUST_ID = #{id}
 		                and tr.TQ_ST = 4
 		                order by TQ_DT) cu)
-		where rNum >= #{start} and rNum <= #{end}
+		where rNum >= #{start} and rNum <= ${end}
 		]]>
 	</select>
 	
@@ -328,8 +332,9 @@
 		                from TRAINER_REQUEST_TB tr, TRAINER_TB tt, CUSTOMER_TB ct
 		                where tr.TA_CD = tt.TA_CD
 		                and tt.CUST_ID = ct.CUST_ID
-		                and ct.CUST_ID = #{id}
-		                and TQ_ST = 0) cu)
+		                and tr.CUST_ID = #{id}
+		                and tr.TQ_ST = 0) cu
+		        )
 		where rNum >= #{start} and rNum <= #{end}
 		]]>
 	</select>
@@ -353,13 +358,12 @@
 		<![CDATA[
 		select * from
 		        (select distinct cu.*, rownum rNum
-		        from (select distinct tr.*, ct.cust_nm
-		                from TRAINER_REQUEST_TB tr, TRAINER_TB tt, CUSTOMER_TB ct
+		        from (select distinct tr.*
+		                from TRAINER_REQUEST_TB tr, TRAINER_TB tt
 		                where tr.TA_CD = tt.TA_CD
-		                and tt.CUST_ID = ct.CUST_ID
-		                and ct.CUST_ID = #{id}
-		                and TQ_ST = 1
-		                or TQ_ST = 3) cu)
+		                and tt.CUST_ID = #{id}
+		                and tr.TQ_ST = 1
+		                or tr.TQ_ST = 3) cu)
 		where rNum >= #{start} and rNum <= #{end}
 		]]>
 	</select>
@@ -381,7 +385,7 @@
 		                from TRAINER_REQUEST_TB tr, TRAINER_TB tt, CUSTOMER_TB ct
 		                where tr.TA_CD = tt.TA_CD
 		                and tt.CUST_ID = ct.CUST_ID
-		                and ct.CUST_ID = #{id}
+		                and tr.CUST_ID = #{id}
 		                and TQ_ST = 2) cu)
 		where rNum >= #{start} and rNum <= #{end}
 		]]>
@@ -404,8 +408,8 @@
 		                from TRAINER_REQUEST_TB tr, TRAINER_TB tt, CUSTOMER_TB ct
 		                where tr.TA_CD = tt.TA_CD
 		                and tt.CUST_ID = ct.CUST_ID
-		                and ct.CUST_ID = #{id}
-		                and TQ_ST = 4) cu)
+		                and tr.CUST_ID = #{id}
+		                and tr.TQ_ST = 4) cu)
 		where rNum >= #{start} and rNum <= #{end}
 		]]>
 	</select>

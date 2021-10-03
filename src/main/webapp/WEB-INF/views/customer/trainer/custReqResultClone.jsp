@@ -25,7 +25,7 @@
 			      <div class="desc" style="background-color:#dfe3eb; padding:20px;">
 			        <h6>훈련받을 펫 : ${dtos.PET_NM}</h6>&nbsp;<h6>훈련사 : ${dtos.CUST_NM}</h6>
 			        
-			        <p>훈련일 : ${dtos.START_DAY}<br>훈련종류 : ${dtos.TQ_AMT}</p>
+			        <p>훈련일 : ${dtos.START_DAY}<br>훈련종류 : ${dtos.TQ_AMT}${reviewCheckCnt[status.index]}</p>
 			        
 			        <c:if test ="${dtos.TQ_ST == 0}">
 			        	<input type="button" value="요청취소" class="btn btn-primary" onclick="window.location='cancelRequestTraining?TQ_CD=${dtos.TQ_CD}'">
