@@ -71,11 +71,11 @@
 			});
 		});
 		
-		$(".pageMove").click(function() { //요청수락대기
+		$(".pageMove").click(function() {
 
 			var urls = $(".pageMove").attr("href");
 			
-			console.log("요깅");
+			alert("요깅 : " + urls);
 		
 			$.ajax({
 				type : "get",
@@ -293,17 +293,17 @@
 											<c:forEach var="i" begin="${startPage}" end="${endPage}">
 												<c:if test="${i == currentPage}">
 													<li class="active"><span><a
-															href="${s}?pageNum=${i}">${i}</a></span></li>
+															href="${s}?pageNum=${i}" class= "pageMove">${i}</a></span></li>
 												</c:if>
 
 												<c:if test="${i != currentPage}">
-													<li><span><a href="${s}?pageNum=${i}">${i}</a></span></li>
+													<li><span><a href="${s}?pageNum=${i}" class= "pageMove">${i}</a></span></li>
 												</c:if>
 
 											</c:forEach>
 
-											<li><a href="${s}?pageNum=${startPage + pageBlock}">&gt;</a></li>
-											<li><a href="${s}?pageNum=${pageCount}">&gt;&gt;</a></li>
+											<li><a href="${s}?pageNum=${startPage + pageBlock}" class= "pageMove">&gt;</a></li>
+											<li><a href="${s}?pageNum=${pageCount}" class= "pageMove">&gt;&gt;</a></li>
 										</ul>
 									</div>
 								</div>

@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body onload = "console.log('클론입니당');">
 
 	<div class="container">
 
@@ -73,33 +73,31 @@
 				</c:forEach>
 			</div>
 
-			<div class="row">
-				<div class="col-md-12" align="center">
-					<div class="block-27">
-						<ul>
-							<li><a href="${s}">&lt;&lt;</a>
-							<li><a href="${s}?pageNum=${startPage - pageBlock}">&lt;</a></li>
-
-							<c:forEach var="i" begin="${startPage}" end="${endPage}">
-								<c:if test="${i == currentPage}">
-									<li class="active"><span><a
-											href="${s}?pageNum=${i}">${i}</a></span></li>
-								</c:if>
-
-								<c:if test="${i != currentPage}">
-									<li><span><a href="${s}?pageNum=${i}">${i}</a></span></li>
-								</c:if>
-
-							</c:forEach>
-
-							<li><a href="${s}?pageNum=${startPage + pageBlock}">&gt;</a></li>
-							<li><a href="${s}?pageNum=${pageCount}">&gt;&gt;</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
+			<div class = "row">
+                 <div class="col-md-12" align="center">
+                    <div class="block-27">
+                         <ul>
+                           <li><a class ="pageMoves" onclick="pageMove('');" >&lt;&lt;</a>
+                           <li><a class ="pageMoves" onclick="pageMove(${startPage - pageBlock});">&lt;</a></li>
+                           
+                           <c:forEach var="i" begin="${startPage}" end="${endPage}">
+                          <c:if test="${i == currentPage}">
+                             <li class="active"><span><a class ="pageMoves" onclick = "pageNumbers(${i});">${i}</a></span></li>
+                          </c:if>
+  
+                          <c:if test="${i != currentPage}">
+                             <li><span><a class ="pageMoves" onclick = "pageNumbers(${i});">${i}</a></span></li>
+                          </c:if>
+                          
+                       </c:forEach> 
+                           
+                           <li><a class ="pageMoves" onclick = "pageMove(${startPage + pageBlock});">&gt;</a></li>
+                           <li><a class ="pageMoves" onclick = "pageMove(${pageCount});">&gt;&gt;</a></li>
+                         </ul>
+                    </div>
+                 </div>
+              </div>
 		</c:if>
-
 	</div>
 </body>
 </html>
