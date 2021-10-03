@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import ptms.mvc.tpj.CustVO.CalendarVO;
 import ptms.mvc.tpj.CustVO.CustomerVO;
 import ptms.mvc.tpj.CustVO.PetVO;
+import ptms.mvc.tpj.Sitter_DAO.SitterDAO;
 
 @Repository
 public class MainDAOImpl implements MainDAO {
@@ -221,5 +222,15 @@ public class MainDAOImpl implements MainDAO {
 		MainDAO dao = data.getMapper(MainDAO.class);
 		return dao.updateSubscribe(map);
 	}
+	
+	//10.03 작성자 임지영
+	//고객 - 시터등록 안되어 있을시 시터프로필 수정 접근 금지
+	@Override
+	public int sitterSigninChk(String CUST_ID) {
+		System.out.println("dao ==> sitterSigninChk");
+		
+		MainDAO dao = data.getMapper(MainDAO.class);
+		return dao.sitterSigninChk(CUST_ID);
+	}	
 
 }

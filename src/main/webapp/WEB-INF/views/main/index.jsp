@@ -28,7 +28,7 @@ function showImage(){
 		padding-top: 50px;
 		padding-bottom: 50px;
 	}
-
+	
 	.vJOb1e {
 		display: none;
 	}
@@ -67,7 +67,7 @@ function showImage(){
 		border-left: none;
 		border-right: none;
 	}
-	
+
 	.FAkayc  {
 		display: none;
 	}
@@ -111,7 +111,7 @@ function showImage(){
 	  	</df-messenger>
 	
 	<section class = "news">
-		<%@ include file="../news/newsletter.jsp"%>
+		<%@ include file="../news/newsletter.jsp"%> 
 	</section>
 
     <!-- END nav -->

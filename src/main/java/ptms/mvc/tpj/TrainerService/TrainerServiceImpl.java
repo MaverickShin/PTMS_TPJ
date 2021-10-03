@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 
 import ptms.mvc.tpj.CustVO.TrainerRequestVO;
 import ptms.mvc.tpj.CustVO.TrainerVO;
+import ptms.mvc.tpj.Customer_Main_DAO.MainDAOImpl;
 import ptms.mvc.tpj.TrainerDAO.TrainerDAOImpl;
 
 @Service
@@ -23,6 +24,9 @@ public class TrainerServiceImpl implements TrainerService{
 
 	@Autowired
 	TrainerDAOImpl dao;
+	
+	@Autowired
+	MainDAOImpl maindao;
 	
 	//훈련사 등록
 	@Override
@@ -236,7 +240,12 @@ public class TrainerServiceImpl implements TrainerService{
 	public void updateTrainer(HttpServletRequest req, Model model) {
 		String CUST_ID = (String)req.getSession().getAttribute("cust_id");
 		TrainerVO vo = dao.TrainerDetail(CUST_ID);
+		
+		//지영추가 - 시터등록확인cnt
+		int signchkCnt = maindao.sitterSigninChk(CUST_ID);
 		System.out.println("TA_ST : "+ vo.getTA_ST());
+		
+		model.addAttribute("signchkCnt", signchkCnt);
 		model.addAttribute("dto",vo);
 		
 	}
