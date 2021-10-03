@@ -838,14 +838,9 @@ public class SitterServiceImpl implements SitterService {
 		if (currentPage % pageBlock == 0)
 			startPage -= pageBlock;
 
-		System.out.println("startPage : " + startPage);
 		endPage = startPage + pageBlock - 1;
 		if (endPage > pageCount)
 			endPage = pageCount;
-		System.out.println("endPage : " + endPage);
-		System.out.println("result : " + pageCount);
-		System.out.println("start : " + start);
-		System.out.println("end : " + end);
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<SitterVO> list = null;
@@ -866,6 +861,7 @@ public class SitterServiceImpl implements SitterService {
 		model.addAttribute("cnt", cnt);
 		model.addAttribute("list", list);
 
+		System.out.println("pageNum : " + pageNum);
 		model.addAttribute("pageNum", pageNum); // 페이지 번호
 		model.addAttribute("number", number); // 출력용 글번호
 	}
