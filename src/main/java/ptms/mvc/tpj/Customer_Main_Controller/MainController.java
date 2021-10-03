@@ -350,15 +350,13 @@ public class MainController {
 		
 		Elements title = element2.select("a[href]");
 		
-		System.out.println("img : " + images);
-		
 		for (Element link : title) {
 			
 			String urls = link.attr("abs:href");
 			
 			String con = link.text();
 			
-			String sum = "<a href = '" + urls + "'>" + con + "</a>";
+			String sum = "<a href = '" + urls + "' target='_blank'><span>" + con + "</span>";
 			
 			list.add(sum);
 			
@@ -377,9 +375,8 @@ public class MainController {
 
 		for (int i = 0; i < list.size(); i++) {
 			for (int j = 0; j < list2.size(); j++) {
-				String sum = "<div class = 'contents'>"+list2.get(j)+list.get(j)+"</div>";
+				String sum = "<div class = 'contents'>"+list.get(j)+list2.get(j)+"</a></div>";
 				
-				System.out.println("sum : " + sum);
 				list3.add(sum);
 			}
 		}
@@ -402,7 +399,7 @@ public class MainController {
 	   
 	   service.SymptomCrawling(req, model);
 	   
-	   return "customer/health/Symptom_Info_View";
+	   return "news/Symptom_Info";
    }
 
    // 반려동물 지식정보 크롤링 추가 - 21.09.23.
@@ -415,21 +412,32 @@ public class MainController {
    }
 
    // 반려동물 영양정보 크롤링 추가 - 21.09.24.
-   @RequestMapping("nutrient")
+   @RequestMapping(value = "nutrient", method = RequestMethod.GET)
    public String nutrient(HttpServletRequest req, Model model) {
 	   
 	   service.NutrientCrawling(req, model);  
 	   
-	   return "customer/health/Nutrient_Info_View";
+	   return "news/Nutrient_Info";
    }
    
-// *************** 제휴정보 크롤링 테스트용 **************** - 진수 21.09.25
+   // *************** 진수 크롤링  **************** 
+   
    @RequestMapping("CrawlingTest")
    public String CrawlingTest(HttpServletRequest req, Model model) {
 	   service.AffiliateCrwaling(req, model);
 	   return "customer/calendar/CrawlingTest";
    }
-// *********************************************************
+   
+   // 편의 정보- 진수 21.09.25
+   @RequestMapping("convenience")
+   public String convenience(HttpServletRequest req, Model model) {
+	   
+	   service.Convenience_Info(req, model);
+	   
+	   return "news/Convenience_Info";
+   }
+   
+   // *************** 진수 크롤링 - 끝 -  **************** 
    
    // 구독 페이지
    @RequestMapping("subscribe")
@@ -566,9 +574,13 @@ public class MainController {
         return "customer/mypage/buyList";
    }
    
-   @RequestMapping("test")
-   public String test() {
-	  return "customer/payment/test";
-   }
    
+   // 푸터 하단 병원정보 - 21.10.03 도빈
+   @RequestMapping("hospitalInfo")
+   public String hospitalInfo(HttpServletRequest req, Model model) {
+	   
+	   service.HospitalInfo(req, model);
+	   
+	   return "news/Convenience_Info";
+   }
 }

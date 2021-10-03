@@ -37,16 +37,18 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler{
 		String grade = sqlSession.selectOne("ptms.mvc.tpj.Customer_Main_DAO.MainDAO.gradeCheck", authentication.getName());
 		int gradeCnt = 0;
 		
-		if(grade.equals("ROLE_FREE")) {
+		if(grade.equals("ROLE_FREE") || grade.equals("ROLE_BUSINESS") || grade.equals("ROLE_PREMIUM")) {
 			gradeCnt = 1;
 		}else {
 			gradeCnt = 0;
 		}
 		
-		request.setAttribute("msg", msg);
 		request.getSession().setAttribute("cust_id", authentication.getName());
 		request.getSession().setAttribute("cust_nm", vo.getName());
 		request.getSession().setAttribute("grade", gradeCnt);
+		
+		System.out.println("grade" + gradeCnt);
+		
 		
 		// 메인화면으로 이동
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/main/index.jsp");

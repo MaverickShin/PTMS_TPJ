@@ -42,7 +42,6 @@ public class UserLoginFailureHandler implements AuthenticationFailureHandler{
 		
 		// 아이디가 존재 할 때
 		if(cnt!=0) {
-			
 			// 비번 확인
 			String pwd = sqlSession.selectOne("ptms.mvc.tpj.Customer_Main_DAO.MainDAO.pwdSearch",strid);
 			System.out.println(strPwd);

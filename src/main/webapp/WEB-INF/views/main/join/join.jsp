@@ -30,6 +30,8 @@ $(document).ready(function(){
 				{
 					var token = $("meta[name='_csrf_header']").attr("content");
 					var header = $("meta[name='_csrf']").attr("content");
+					console.log(token);
+					console.log(header);
 					jqXHR.setRequestHeader(header, token);
 			},
 			success: function(cnt) {

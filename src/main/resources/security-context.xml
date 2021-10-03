@@ -127,7 +127,7 @@
 		
 		
 		<!-- 로그인한 사용자 영역 -->
-		<security:intercept-url pattern="/sitter/**" access="hasAnyRole('ROLE_FREE')"/> 
+		<security:intercept-url pattern="/sitter/**" access="hasAnyRole('ROLE_FREE', 'ROLE_BUSINESS', 'ROLE_PREMIUM')"/> 
 		
 		<!-- iframe -->
       	<security:headers>

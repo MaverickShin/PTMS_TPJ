@@ -6,6 +6,29 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+	$(document).ready(function() {
+
+		$(".pageMove").click(function() { //요청수락대기
+		
+			var urls = $(".pageMove").attr("href");
+			
+			$.ajax({
+				type : "get",
+				url : urls,
+				cache : false,
+				success : function(result) {
+					$(body).html(result);
+				},
+				error : function(request, status, error) {
+					alert("에러!");
+				}
+			});
+		});
+	});
+</script>
+
 </head>
 <body>
 

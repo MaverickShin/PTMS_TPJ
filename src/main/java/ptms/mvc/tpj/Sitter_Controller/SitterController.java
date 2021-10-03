@@ -194,14 +194,6 @@ public class SitterController {
 		 sitterSer.MatchingFinishList(req, model);
 		 return "customer/sitter/requestForSitterClone";
 	 }
-	 
-	 @RequestMapping("sitterserPayFinish2")
-	 public String sitterserPayFinish2(HttpServletRequest req, Model model) {
-		 log.info("url ==> sitterserPayFinish");
-		 
-		 sitterSer.MatchingFinishList(req, model);
-		 return "customer/sitter/requestForSitterClone2";
-	 }	
 
 	 /*
 	  * 날짜 : 21.09.25

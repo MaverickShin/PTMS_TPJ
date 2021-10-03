@@ -53,16 +53,22 @@ public interface MainService {
 	// 제휴정보 크롤링 테스트용 - 진수 21.09.25
 	public void AffiliateCrwaling(HttpServletRequest req, Model model);
 	
+	// 편의정보 크롤링 - 진수21.09.25
+	public void Convenience_Info(HttpServletRequest req, Model model);
+	
 	/*
 	 * // 일정 추가 public void addEvent(HttpServletRequest req, Model model);
 	 * 
 	 * // 일정 삭제 public void deleteEvent(HttpServletRequest req, Model model);
 	 */
-
+	
 	// 뉴스레이터 크롤링 - 21.09.26 선영
 	public void Newsletter(HttpServletRequest req, Model model);
 	
 	
 	// 반려동물 인기검색어 크롤링 - 21.10.03 임지영
 	public void petIssue(HttpServletRequest req, Model model);
+	// 메인 하단 병원 정보 - 21.10.03 도빈
+	public void HospitalInfo(HttpServletRequest req, Model model);
+	
 }

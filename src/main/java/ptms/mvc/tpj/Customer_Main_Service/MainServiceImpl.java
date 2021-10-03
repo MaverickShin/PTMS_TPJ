@@ -449,7 +449,7 @@ public class MainServiceImpl implements MainService {
 	public void SymptomCrawling(HttpServletRequest req, Model model) {
 
 		// Jsoup를 이용해서 반려동물 질병정보 크롤링
-		String url = "http://www.pethealth.kr/news/articleList.html?sc_sub_section_code=S2N27&view_type=sm";
+		String url = "http://petnu.com/bbs_list.php?tb=board_dog_note";
 		Document doc = null;
 
 		// for문을 돌면서 뉴스 제목들을 가져오기 위한 list
@@ -464,26 +464,54 @@ public class MainServiceImpl implements MainService {
 		}
 
 		// 주요 뉴스로 나오는 태그를 찾아서 가져오도록 한다. <section class="section-body">
-		Elements element = doc.select("section.section-body");
+		Elements element = doc.select("table");
+		Elements element1 = element.select("b");
+		
 
-		// 1. 헤더 부분의 제목을 가져온다.
-		// String title = element.select("h3.titles").text();
-		Elements title = doc.select("a[href]");
-
-		System.out.println(title);
-
-//		for(Element el : element.select("h4")) { // 하위 뉴스 기사들을 for문을 돌면서 출력
-//			
-//			list.add(el.text());  
-//		}
-
-		for (Element link : title) {
-			list.add(link.attr("abs:href"));
+		for (Element link : element1) {
+			
+			
+			String con = "";
+			String sum = "";	
+			String href = "";
+			String garbage = "";
+			
+			
+		    if(link.text().equals("") || link.text().equals("회사소개") || link.text().equals("회원이용약관") || link.text().equals("개인정보취급방침")) {
+		    	garbage = link.select("a[href]").attr("abs:href");
+		    }
+		    else {
+		    	con = link.text();
+		    	href = link.select("a[href]").attr("abs:href");
+		    	sum = "<div class='symptomss'> <a href = '" + href + "' target='_blank'><span>" + con + "</span><img src = '";
+		    }
+		    
+		    if(!sum.equals("")) list.add(sum);
 		}
+		
+		Elements element2 = element1.select("a img");
 
-		model.addAttribute("title", title);
-		model.addAttribute("list", list);
-
+		List<String> list2 = new ArrayList<String>();
+		
+		for (Element link : element2) {
+		
+			String img = link.getElementsByAttribute("src").attr("abs:src");
+		
+			String sum = img + "'></a></div>";
+		
+			list2.add(sum);
+		}
+		
+		List<String> list3 = new ArrayList<String>();
+		
+		for (int i = 0; i < list.size(); i++) {
+			for (int j = 0; j < list2.size(); j++) {
+				String sum = list.get(j) + list2.get(j);
+				list3.add(sum);
+			}
+		}
+		
+		model.addAttribute("list", list3);
 	}
 
 	// 반려동물 지식정보 크롤링 - 21.09.23 창훈 추가
@@ -514,26 +542,53 @@ public class MainServiceImpl implements MainService {
 
 		// 1. 헤더 부분의 제목을 가져온다.
 		// String title = element.select("span.title").text();
-		Elements title = doc.select("[href]");
-
-		for (Element link : title) {
-			list.add(link.attr("abs:href"));
+		Elements element = doc.select(".thumb-bg");
+		
+		for (Element link : element) {
+			
+			String img = "";
+					
+			if(link.getElementsByAttribute("src").attr("src") != "") img = link.getElementsByAttribute("src").attr("src");
+			
+			
+			String sum = "<img src='" + img + "'>";
+			
+			list.add(sum);
 		}
 
-		model.addAttribute("title", title);
-		model.addAttribute("list", list);
-
+		Elements title = doc.select(".title a");
+		
+		List<String> list2 = new ArrayList<String>();
+		
+		for (Element link2 : title) {
+			
+			String urls = link2.attr("abs:href");
+			
+		    String con = link2.text();
+			
+		    String sum = "<div class = 'ntcs'> <a href = '"+ urls + "' target='_blank'><span>" + con + "</span>";
+		    
+		    list2.add(sum);
+		}
+		
+		List<String> list3 = new ArrayList<String>();
+		
+		for (int i = 0; i < list.size(); i++) {
+			for (int j = 0; j < list2.size(); j++) {
+				String sum = list2.get(j) + list.get(j) + "</a></div>";
+				list3.add(sum);
+			}
+		}
+		model.addAttribute("title", list3);
 
 	}
 
-////////////////////////////////////////////////////////////////
 	// 제휴정보 크롤링 테스트용 - 진수
 	@Override
 	public void AffiliateCrwaling(HttpServletRequest req, Model model) {
 		// Jsoup으로 호텔 정보 크롤링
 		// 크롤링할 url 지정
 		String url = "https://shopping.naver.com/home/p/index.naver";
-//		String url="https://search.naver.com/search.naver?where=nexearch&sm=top_sug.pre&fbm=1&acr=1&acq=%EC%9C%A0%EA%B8%B0%EB%8F%99%EB%AC%BC&qdt=0&ie=utf8&query=%EC%9C%A0%EA%B8%B0%EB%8F%99%EB%AC%BC%EB%B3%B4%ED%98%B8%EC%84%BC%ED%84%B0";
 
 		// Document에는 페이지의 전체 소스가 저장된다.
 		Document doc = null;
@@ -551,7 +606,6 @@ public class MainServiceImpl implements MainService {
 
 		// select를 이용하여 원하는 태그를 선택한다. <div class="search-container__csa">
 		// 원하는 값들이 들어있는 '전체'덩어리를 가져온다.
-//		Elements element = doc.select("div#BODYCON");
 		Elements element = doc.select("div.section_wrap");
 		System.out.println("element : " + element);
 		Elements element1 = element.select("div.section_cell");
@@ -563,58 +617,63 @@ public class MainServiceImpl implements MainService {
 		Elements detailele = element2.select("a.link_a");
 
 		System.out.println("detailele2 : " + detailele);
-//		Elements txt = detailele.select("span.txt");
-		// element에 들어있는 세부정보 찾기 - 이미지
-//		Elements detailele2 = element.select("a.sr_item_photo_link");
-//		Elements detailele2 = element.select("a.[href]");
-//		System.out.println("detailele2 : "+detailele2);
-
-		System.out.println("=========================================");
 		// Iterator를 이용하여 하나씩 값을 가져온다.
 		// 전체 덩어리에서 필요한 부분만 선택하여 가져올 수 있다.
-//		Elements item = detailele.select("a[href]");
-//		Elements item = detailele.select("span.sr-hotel__name");
-//		Elements href = detailele.select("a[href]");
-//		Iterator<Element> img = detailele2.select("img").iterator();
 
 		for (Element link : detailele) {
 			System.out.println(link.text());
 			list.add(link.attr("abs:href" + "\n"));
 		}
 
-//		for(Element t : txt) {
-//			System.out.println(t.text());
-//		}
-
-//		Elements element = doc.select("div.api_cs_wrap");
-//		System.out.println("element : "+element);
-//		Elements element1 = element.select("div.animal_lst div");
-//		System.out.println("element1 : "+element1);
-//		Elements element2 = element1.select("ul.first_list");
-//		System.out.println("element2 : "+element2);
-//		Elements element3 = element2.select("string.info_tit");
-//		System.out.println("element3 : "+element3);
-////		Elements element4 = element2.select("dl.info_add");
-////		System.out.println("element4 : "+element4);
-//		
-//		// element에 들어있는 세부정보 찾기 - 호텔 이름
-//		Elements detailele = element3.select("");
-//		Elements detailele1 = element2.select("dl.info_add");
-//		System.out.println("detailele : "+detailele);
-//		System.out.println("detailele1 : "+detailele1);
-//		System.out.println("=========================================");
-//		
-//		for(Element link : detailele) {
-//			System.out.println(link.text());
-//			list.add(link.attr("abs:href"+"\n"));
-//		}
-
+		// element에 들어있는 세부정보 찾기 - 호텔 이름
 		model.addAttribute("item", detailele);
-//		model.addAttribute("item1",detailele1);
-//		model.addAttribute("href",txt);
 		model.addAttribute("list", list);
 
 	}
+	
+	// 편의정보 크롤링  - 진수 21.09.25
+	@Override
+	public void Convenience_Info(HttpServletRequest req, Model model) {
+
+		// Jsoup를 이용해서 반려동물 영양정보 크롤링
+		String url = "http://www.booking.com/pets/country/kr.ko.html";
+		Document doc = null;
+
+		// for문을 돌면서 뉴스 제목들을 가져오기 위한 list
+		List<String> list = new ArrayList<String>();
+
+		try {
+			// Jsoup url 연결
+			doc = Jsoup.connect(url).get();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// 주요 뉴스로 나오는 태그를 찾아서 가져오도록 한다. <section class="section-body">
+
+		// 1. 헤더 부분의 제목을 가져온다.
+		// String title = element.select("span.title").text();
+		Elements element = doc.select(".bui-spacer--largest");
+		Elements element1 = element.select(".bui-carousel__item ");
+		
+		for (Element link : element1) {
+			
+			String img = link.getElementsByAttribute("src").attr("src");
+			
+			String con = link.select("img").attr("alt");
+			
+			String href = link.select("a[href]").attr("abs:href");
+			
+			String sum = "<div class = 'ntcs'><a href = '"+ href + "' target = '_blank'><img src='" + img + "'><span>"+con+"</span></a></div>";
+			
+			list.add(sum);
+		}
+
+		model.addAttribute("list", list);
+		
+	}
+	
 
 	/*
 	 * 2021-09-22 나도웅 일정 추가
@@ -738,6 +797,64 @@ public class MainServiceImpl implements MainService {
 				}
 
 				model.addAttribute("list2", list);
+	// 푸터 병원 정보 - 21.10.03 도빈
+	@Override
+	public void HospitalInfo(HttpServletRequest req, Model model) {
+		// Jsoup를 이용해서 반려동물 질병정보 크롤링
+		String url = "http://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=%EB%8F%99%EB%AC%BC%EB%B3%91%EC%9B%90";
+		Document doc = null;
+
+		// for문을 돌면서 뉴스 제목들을 가져오기 위한 list
+		List<String> list = new ArrayList<String>();
+
+		try {
+			// Jsoup url 연결
+			doc = Jsoup.connect(url).get();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// 주요 뉴스로 나오는 태그를 찾아서 가져오도록 한다. <section class="section-body">
+		Elements element = doc.select("ul._3smbt");
+		Elements element1 = element.select(".XNxh9");
+
+		for (Element link : element1) {
+			
+			String href = link.select("a[href]").attr("abs:href");
+			
+			String img = link.getElementsByAttribute("img").attr("src");
+			
+			String sum = "<div class='hospitals'> <a href = '" + href + "' target = '_blank'> <img src = '" + img + "'>"; 
+			
+		    list.add(sum);
+		}
+		
+		Elements element2 = element.select("._3Apve");
+
+		List<String> list2 = new ArrayList<String>();
+		
+		for (Element link : element2) {
+		
+			String con = link.text();
+		
+			String sum = "<h3>"+ con + "</h3></a></div>";
+		
+			list2.add(sum);
+		}
+		
+		List<String> list3 = new ArrayList<String>();
+		
+		for (int i = 0; i < list.size(); i++) {
+			for (int j = 0; j < list2.size(); j++) {
+				String sum = list.get(j) + list2.get(j);
+				System.out.println("sum : " + sum);
+				list3.add(sum);
+			}
+		}
+		
+		model.addAttribute("list", list3);
+		
 	}
 
 }

@@ -14,21 +14,11 @@
 			style="width: 700px; margin-left: auto; margin-right: auto; margin-top: 30px;">
 			<div class="col-md-12">
 				<h3></h3>
-				<c:if test="${st == 0}">
 					<p>아직 들어온 의뢰가 없습니다. 일정 조정으로 매칭률을 높여보세요!</p>
-				</c:if>
 
-				<c:if test="${st == 1}">
 					<p>수락한 의뢰가 없습니다. 첫 펫시팅을 도전해 보세요!</p>
-				</c:if>
-
-				<c:if test="${st == 2}">
 					<p>거절한 의뢰가 없습니다. 일등 펫시터 님이시군요~!</p>
-				</c:if>
-
-				<c:if test="${st == 3}">
 					<p>아직 완료된 내역이 없습니다. 일정 조정으로 매칭률을 높여보세요!</p>
-				</c:if>
 
 			</div>
 		</div>
@@ -63,23 +53,23 @@
 				<div class="col-md-12" align="center">
 					<div class="block-27">
 						<ul>
-							<li><a href="${s}" class = "page1">&lt;&lt;</a>
-							<li><a href="${s}?pageNum=${startPage - pageBlock}" class = "page2">&lt;</a></li>
+							<li><a href="${s}" class = "pageMove">&lt;&lt;</a>
+							<li><a href="${s}?pageNum=${startPage - pageBlock}" class = "pageMove">&lt;</a></li>
 
 							<c:forEach var="i" begin="${startPage}" end="${endPage}">
 								<c:if test="${i == currentPage}">
 									<li class="active"><span><a
-											href="${s}?pageNum=${i}" class = "page3">${i}</a></span></li>
+											href="${s}?pageNum=${i}" class = "pageMove">${i}</a></span></li>
 								</c:if>
 
 								<c:if test="${i != currentPage}">
-									<li><span><a href="${s}?pageNum=${i}" class = "page4">${i}</a></span></li>
+									<li><span><a href="${s}?pageNum=${i}" class = "pageMove">${i}</a></span></li>
 								</c:if>
 
 							</c:forEach>
 
-							<li><a href="${s}?pageNum=${startPage + pageBlock} ">&gt;</a></li>
-							<li><a href="${s}?pageNum=${pageCount}">&gt;&gt;</a></li>
+							<li><a href="${s}?pageNum=${startPage + pageBlock} " class = "pageMove">&gt;</a></li>
+							<li><a href="${s}?pageNum=${pageCount}" class = "pageMove">&gt;&gt;</a></li>
 						</ul>
 					</div>
 				</div>
@@ -114,30 +104,5 @@
 			</div>
 		</c:if>
 	</c:if>
-
 </body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-	$(document).ready(function() {
-
-		$(".col-md-12 a").click(function() { //수락
-
-			var urls = '<c:out value = "${s}"/>';
-			var pageNum = '<c:out value = "${pageNum}"/>';
-			
-			$.ajax({
-				type : "get",
-				url : urls,
-				cache : false,
-				data : "pageNum=" + 
-				success : function(result) {
-					$(".result_div").html(result);
-				},
-				error : function(request, status, error) {
-					alert("에러!");
-				}
-			});
-		});
-	});
-</script>
 </html>
