@@ -130,7 +130,12 @@ function showImage(){
               <div class="media-body p-3">
                 <h3 class="heading">펫 훈련사</h3>
                 <p><br><br><br>배변? 분리불안? 반려동물의 행동이 걱정되시나요?<br>PTMS의 훈련사를 만나 반려동물과의 시간을 더 유익하게 만들어가세요!</p>
-                <a href="#" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
+                <c:if test="${sessionScope.cust_id == null}">
+                	<a class="btn-custom d-flex align-items-center justify-content-center" onclick="if(confirm('로그인 후 이용가능합니다. 로그인 하시겠습니까?')) window.location='/tpj/cust/login';"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
+                </c:if>
+                <c:if test="${sessionScope.cust_id != null}">
+                	<a href="/tpj/trainer/trainerSearch" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
+              	</c:if>
               </div>
             </div>      
           </div>
@@ -142,7 +147,12 @@ function showImage(){
               <div class="media-body p-3">
                 <h3 class="heading">펫 시터</h3>
                 <p><br><br><br>출장, 여행으로 집에 혼자있는 반려동물이 걱정되시나요?<br>이젠 PTMS의 시터에게 맡기세요!</p>
-                <a href="#" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
+                <c:if test="${sessionScope.cust_id == null}">
+                	<a class="btn-custom d-flex align-items-center justify-content-center" onclick="if(confirm('로그인 후 이용가능합니다. 로그인 하시겠습니까?')) window.location='/tpj/cust/login';"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
+                </c:if>
+                <c:if test="${sessionScope.cust_id != null}">
+                	<a href="/tpj/sitter/sitter" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
+              	</c:if>
               </div>
             </div>  
             </div>  

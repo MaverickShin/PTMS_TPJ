@@ -114,6 +114,9 @@ public class TrainerServiceImpl implements TrainerService{
 		int endPage = 0;	//마지막 페이지
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+		String id = (String)req.getSession().getAttribute("cust_id");
+		System.out.println("id : " + id);
+		map.put("id", id);
 		
 		int TQ_AMT = Integer.parseInt(req.getParameter("TQ_AMT"));
 		System.out.println("tq_amt : " + TQ_AMT);
@@ -447,7 +450,7 @@ public class TrainerServiceImpl implements TrainerService{
 		System.out.println("result : " + pageCount);
 		System.out.println("start : " + start);
 		System.out.println("end : " + end);
-		
+		System.out.println("cnt : " + cnt);
 		List<TrainerRequestVO> vo = null;
 		if(cnt > 0) {
 			map.put("start", start);
@@ -455,7 +458,7 @@ public class TrainerServiceImpl implements TrainerService{
 			map.put("id", id);
 			
 			vo = dao.TraineeList(map);
-			
+			System.out.println(vo);
 			model.addAttribute("startPage", startPage);	// 시작페이지
 			model.addAttribute("endPage", endPage);		// 마지막페이지
 			model.addAttribute("pageBlock", pageBlock);	// 한 블럭당 페이지 갯수
@@ -708,6 +711,7 @@ public class TrainerServiceImpl implements TrainerService{
 		}
 		model.addAttribute("cnt", cnt);
 		model.addAttribute("dto", vo);
+		
 		model.addAttribute("st", 0);
 		model.addAttribute("pageNum", pageNum); // 페이지 번호
 		model.addAttribute("number", number); // 출력용 글번호
@@ -921,7 +925,6 @@ public class TrainerServiceImpl implements TrainerService{
 			
 			//훈련 완료 정보를 가져옴
 			vo = dao.trainingComplete(map);
-			System.out.println(vo.get(0).getTQ_CD());
 			
 			model.addAttribute("startPage", startPage);	// 시작페이지
 			model.addAttribute("endPage", endPage);		// 마지막페이지
@@ -929,7 +932,7 @@ public class TrainerServiceImpl implements TrainerService{
 			model.addAttribute("pageCount", pageCount);	// 페이지 갯수
 			model.addAttribute("currentPage", currentPage); // 현재페이지
 			
-			for(int i = 0; i < vo.size(); i++) {
+			for(int i = 0; i < vo.size() -1; i++) {
 				int TQ_CD = vo.get(i).getTQ_CD();
 				//후기 작성 중복체크
 				int result = dao.reviewCheckCnt(TQ_CD);
@@ -1048,7 +1051,7 @@ public class TrainerServiceImpl implements TrainerService{
 		System.out.println("id : " + id);
 		
 		cnt = dao.TrainingServiceCompleteCnt(id);
-		System.out.println("cnt : " + cnt);
+		System.out.println("훈련완료cnt : " + cnt);
 		
 		pageNum = req.getParameter("pageNum");
 		

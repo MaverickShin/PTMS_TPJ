@@ -192,7 +192,7 @@ public class TrainerDAOImpl implements TrainerDAO {
 	@Override
 	public int TrainingServiceCompleteCnt(String id) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
-		int selectCnt = dao.trainingCompleteCnt(id);
+		int selectCnt = dao.TrainingServiceCompleteCnt(id);
 		return selectCnt;
 	}
 	

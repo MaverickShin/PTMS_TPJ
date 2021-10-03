@@ -35,7 +35,7 @@
 		} else if(!document.requestTrainerForm.TQ_AMT.value) {
 			alert("훈련유형을 선택하세요.");
 			return false;
-		} else if(!document.requestTrainerForm.PET_NM.value) {
+		} else if(!$("#PET_NM").is(":checked")) {
 			alert("훈련받을 마이펫을 선택하세요.");
 			return false;
 		}
@@ -109,7 +109,7 @@
     				</c:if>
     			</div>
 	              
-	              <form action="requestTraining" method="post" name="requestTrainerForm" onsubmit="return requestTrChk();">
+	              <form action="requestTraining" method="post" name="requestTrainerForm" onsubmit="return checkFee();">
 	              <input type="hidden" value="${TA_CD}" name="TA_CD">
 	              <input type="hidden" value="${TQ_LOC}" name="TQ_LOC">
 	              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
@@ -159,7 +159,7 @@
 	                
 	                <c:if test="${selectCnt != 0}">
 	                	<c:forEach var="dtos" items="${petInfo}">
-	                		<input type="checkbox" value="${dtos.PET_NM}" name="PET_NM">${dtos.PET_NM}
+	                		<input type="checkbox" value="${dtos.PET_NM}" id="PET_NM" name="PET_NM">${dtos.PET_NM}
 	                	</c:forEach>
 	                </c:if>
 	              </div>

@@ -56,10 +56,10 @@ $(function(){ // document ready
 						<td><a href="/tpj/trainer/custReqResult">요청내역 및 후기작성</a></td>
 					</tr>
 					<tr>
-						<td style = "background-color: white; color:#00bd56; font-size: 24px;"><strong>펫 훈련사</strong></td>
+						<td><a href="/tpj/trainer/getReviewInfo">내후기 보기</a></td>
 					</tr>
 					<tr>
-						<td><a href="/tpj/trainer/getReviewInfo">내후기 보기</a></td>
+						<td style = "background-color: white; color:#00bd56; font-size: 24px;"><strong>펫 훈련사</strong></td>
 					</tr>
 					
 					<tr>
