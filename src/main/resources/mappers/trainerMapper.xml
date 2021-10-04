@@ -199,8 +199,8 @@
 	<!-- 의뢰인의 펫 마릿수 가져오기 -->
 	<select id="getPetCount" parameterType="String" resultType="int">
 		select Count(*)
-		from PET_TB pt, CUSTOMER_TB ct
-		where ct.CUST_ID = #{id}
+		from PET_TB
+		where CUST_ID = #{id}
 	</select>
 	
 	<!-- 훈련 예약 - 훈련요청테이블에 등록 -->
@@ -522,4 +522,10 @@
 		set TG_GRADE = #{TG_GRADE}, TG_CON = #{TG_CON}, TG_IMG = #{TG_IMG}
 		where TG_CD = #{TG_CD}
 	</update>
+	
+	<select id="trainerChkCnt" resultType="int">
+		select count(*) 
+		from TRAINER_TB
+		where CUST_ID = #{id}
+	</select>
 </mapper>

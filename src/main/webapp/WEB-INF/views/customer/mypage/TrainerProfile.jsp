@@ -81,6 +81,12 @@ function updateCheck(){
 <body>
 	<%@ include file="../../main/header.jsp"%>
 
+	<c:if test="${trainerChkCnt != 1}">
+       	<script type="text/javascript">
+          alert("훈련사로 등록 후 이용 가능합니다.");
+          window.history.back();
+    	</script>
+    </c:if>
 	<section class="hero-wrap hero-wrap-2"
 		style="background-image: url('${path}images/bg_2.jpg');"
 		data-stellar-background-ratio="0.5">

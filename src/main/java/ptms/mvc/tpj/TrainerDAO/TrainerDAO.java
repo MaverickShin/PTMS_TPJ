@@ -149,6 +149,9 @@ public interface TrainerDAO {
 	// 훈련사 후기 수정 처리
 	public int modifyReviewAction(TrainerVO vo);
 	
+	// 훈련사로 등록되어있는지 체크
+	public int trainerChkCnt(String id);
+	
 	/*
 	 * // 후기 미리보기 평점순 훈련사 정렬 건수 public int trainingGradeCnt();
 	 * 

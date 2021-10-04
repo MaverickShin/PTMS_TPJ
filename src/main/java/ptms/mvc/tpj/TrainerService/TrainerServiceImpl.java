@@ -120,6 +120,7 @@ public class TrainerServiceImpl implements TrainerService{
 		Map<String, Object> map = new HashMap<String, Object>();
 		String id = (String)req.getSession().getAttribute("cust_id");
 		System.out.println("id : " + id);
+		
 		map.put("id", id);
 		
 		int TQ_AMT = Integer.parseInt(req.getParameter("TQ_AMT"));
@@ -201,7 +202,7 @@ public class TrainerServiceImpl implements TrainerService{
 		
 		// 회원의 마이펫 마릿수 가져오기
 		int selectCnt = dao.getPetCount(id);
-		System.out.println("selectCnt  :" + selectCnt);
+		System.out.println("마이펫있는지 체크selectCnt : " + selectCnt);
 		
 		// 회원의 마이펫이 있으면 펫의 정보 가져오기
 		if(selectCnt > 0) {
@@ -242,13 +243,15 @@ public class TrainerServiceImpl implements TrainerService{
 	@Override
 	public void updateTrainer(HttpServletRequest req, Model model) {
 		String CUST_ID = (String)req.getSession().getAttribute("cust_id");
+		String id = (String)req.getSession().getAttribute("cust_id");
+		int trainerChkCnt = dao.trainerChkCnt(id);
+		System.out.println("trainerChkCnt : " + trainerChkCnt);
+		model.addAttribute("trainerChkCnt", trainerChkCnt);
+		
 		TrainerVO vo = dao.TrainerDetail(CUST_ID);
 		
-		//지영추가 - 시터등록확인cnt
-		int signchkCnt = maindao.sitterSigninChk(CUST_ID);
 		System.out.println("TA_ST : "+ vo.getTA_ST());
 		
-		model.addAttribute("signchkCnt", signchkCnt);
 		model.addAttribute("dto",vo);
 		
 	}
@@ -435,6 +438,10 @@ public class TrainerServiceImpl implements TrainerService{
 		
 		String id = (String)req.getSession().getAttribute("cust_id");
 		System.out.println("아이디 : " + id);
+		
+		// 훈련사로 등록되어있는지 체크
+		int trainerChkCnt = dao.trainerChkCnt(id);
+		model.addAttribute("trainerChkCnt", trainerChkCnt);
 		
 		cnt = dao.TraineeListCnt(id);
 		
@@ -677,6 +684,11 @@ public class TrainerServiceImpl implements TrainerService{
 		
 		String id = (String)req.getSession().getAttribute("cust_id");
 		System.out.println("아이디 : " + id);
+		
+		// 훈련사로 등록되어있는지 체크
+		int trainerChkCnt = dao.trainerChkCnt(id);
+		System.out.println("trainerChkCnt : " + trainerChkCnt);
+		model.addAttribute("trainerChkCnt", trainerChkCnt);
 		
 		cnt = dao.custReqResultwaitCnt(id);
 		System.out.println("수락요청대기selectCnt : " + cnt);
@@ -1173,9 +1185,17 @@ public class TrainerServiceImpl implements TrainerService{
 		int startPage = 0;	//시작페이지
 		int endPage = 0;	//마지막 페이지
 		
+		
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		String id = (String)req.getSession().getAttribute("cust_id");
+		
+		// 훈련사로 등록되어있는지 체크
+		int trainerChkCnt = dao.trainerChkCnt(id);
+		model.addAttribute("trainerChkCnt", trainerChkCnt);
+		
+		// 아이디별 후기 갯수
 		cnt = dao.getIDreviewCnt(id);
 		
 		pageNum = req.getParameter("pageNum");
