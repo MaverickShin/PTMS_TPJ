@@ -239,7 +239,7 @@
 								<div class="col-md-12" style="background-color: #f5f5f5;">
 									<h5>고객 : ${li.CUST_ID}</h5>
 									&nbsp;
-									<h6>훈련받을 펫 : ${li.SQ_AMT}</h6>
+									<h6>나의 펫 : ${li.SQ_AMT}</h6>
 									<p>의뢰시작일 : ${li.START_DAY}</p>
 									<p>의뢰종료일 : ${li.END_DAY}</p>
 									<p>고객요청서비스 : ${li.REQ_SV}</p>
@@ -386,6 +386,7 @@
 					alert("에러!");
 				}
 			});
+			
 		// [>] 버튼  조건
 		}else if(param == right_one && pagecount > end) {
 			

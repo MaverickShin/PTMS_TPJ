@@ -265,7 +265,7 @@
 								<div class="col-md-12" style="background-color: #f5f5f5;">
 									<h5>고객 : ${li.CUST_ID}</h5>
 									&nbsp;
-									<h6>훈련받을 펫 : ${li.SQ_AMT}</h6>
+									<h6>서비스 요청 펫 : ${li.SQ_AMT}</h6>
 									<p>의뢰시작일 : ${li.START_DAY}</p>
 									<p>의뢰종료일 : ${li.END_DAY}</p>
 									<p>고객요청서비스 : ${li.REQ_SV}</p>
@@ -347,4 +347,162 @@
 		<%@ include file="../../main/footer.jsp"%>
 	</c:if>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	
+	var pageNum = '<c:out value="${pageNum}"/>';
+	
+	function pageMove(e) {
+		
+		var urls = '<c:out value="${s}"/>';
+		var param = e;
+		var start = '<c:out value = "${startPage}"/>';
+		var block = '<c:out value = "${pageBlock}"/>';
+		var current = '<c:out value = "${currentPage}"/>';
+		var pagecount = '<c:out value = "${pageCount}"/>';
+		var end = '<c:out value = "${endPage}"/>';
+		
+		var left_one = start - block;
+		var right_one = start + block;
+		var right_two = pagecount;
+		
+		console.log('pageNum : ' + pageNum);
+		console.log('param : ' + param);
+		console.log('start : ' + start);
+		console.log('block : ' + block);
+		console.log('current : ' + current);
+		console.log('end : ' + end);
+		console.log('left_one : ' + left_one);
+		console.log('right_one : ' + right_one);
+		console.log('right_two : ' + right_two);
+		
+		
+		// [<<] 버튼 눌렀을 때 조건
+		if(param == '' && start > block) {
+			
+			alert("<<");
+			
+			$.ajax({
+				type : "get",
+				url : urls,
+				cache : false,
+				success : function(result) {
+					$(".result_div").empty();
+					$(".result_div").append(result);
+					pageNum = 1;
+				},
+				error : function(request, status, error) {
+					alert("에러!");
+				}
+			});
+		
+		// [<] 조건
+		}else if(param == start && start > block) {
+			
+			alert("<");
+			
+			$.ajax({
+				type : "get",
+				url : urls,
+				data : "pageNum="+param,
+				cache : false,
+				success : function(result) {
+					$(".result_div").empty();
+					$(".result_div").append(result);
+					pageNum = param;
+				},
+				error : function(request, status, error) {
+					alert("에러!");
+				}
+			});
+			
+		// [>] 버튼  조건
+		}else if(param == right_one && pagecount > end) {
+			
+			$.ajax({
+				type : "get",
+				url : urls,
+				data : "pageNum="+param,
+				cache : false,
+				success : function(result) {
+					$(".result_div").empty();
+					$(".result_div").append(result);
+					pageNum = param;
+				},
+				error : function(request, status, error) {
+					alert("에러!");
+				}
+			});
+			
+		// [>>] 버튼 조건 
+		}else if(param == right_two && pagecount > end) {
+			
+			alert(">>");
+			
+			$.ajax({
+				type : "get",
+				url : urls,
+				cache : false,
+				success : function(result) {
+					$(".result_div").empty();
+					$(".result_div").append(result);
+					pageNum = param;
+				},
+				error : function(request, status, error) {
+					alert("에러!");
+				}
+			});
+		}
+		
+	}
+	
+	function pageNumbers(e) {
+		
+		alert("요깅");
+		
+		var urls = '<c:out value="${s}"/>';
+		var param = e;
+		var current = '<c:out value = "${currentPage}"/>';
+		
+		console.log('pageNum : ' + pageNum);
+		console.log('param : ' + param);
+		console.log('current : ' + current);
+		
+		if(param == current) {
+			
+			$.ajax({
+				type : "get",
+				url : urls,
+				data : "pageNum="+param,
+				cache : false,
+				success : function(result) {
+					$(".result_div").empty();
+					$(".result_div").append(result);
+					pageNum = param;
+				},
+				error : function(request, status, error) {
+					alert("에러!");
+				}
+			});
+		
+		}else {
+			
+			$.ajax({
+				type : "get",
+				url : urls,
+				data : "pageNum="+param,
+				cache : false,
+				success : function(result) {
+					$(".result_div").empty();
+					$(".result_div").append(result);
+					pageNum = param;
+				},
+				error : function(request, status, error) {
+					alert("에러!");
+				}
+			});
+		}
+		
+	}
+</script>
 </html>

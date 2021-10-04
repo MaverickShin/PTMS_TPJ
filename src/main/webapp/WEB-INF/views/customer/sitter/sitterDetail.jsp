@@ -83,6 +83,9 @@ body {
 			value="${_csrf.token}"> <input type="hidden" name="SV_AREA"
 			value="${SV_AREA}"> <input type="hidden" name="SIT_ID"
 			value="${SIT_ID}">
+		<c:forEach var="pn" items="${PET_NM}"> 
+			<input type="hidden" name="PET_NM" value="${pn}">
+		</c:forEach>	
 		<section class="ftco-section ftco-degree-bg"
 			style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; padding-top: 30px;">
 			<div class="container">
@@ -114,7 +117,7 @@ body {
 														</c:if>>
 
 													<span class="checkbox_icon"></span> <span
-													class="list_label_span2">${li.PET_NM}(${li.PK_CD})</span>
+													class="list_label_span2">${li.PET_NM}</span>
 												</label> <input type="hidden" name="PET_CD" value="${li.PET_CD}">
 											</p>
 										</c:forEach>

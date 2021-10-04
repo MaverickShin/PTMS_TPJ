@@ -57,10 +57,13 @@
 					<form action="sitterDetail" method="post" id="detail_form">
 						<div class="col-md-12" id="detail_submit">
 							<input type="hidden" name="SIT_ID" value="${dto.SIT_ID}">
-							<input type="hidden" name="SV_AREA" value="${SV_AREA}"> <input
-								type="hidden" name="total" value="${total}"> <input
-								type="hidden" name="WK_END" value="${WK_END}"> <input
-								type="hidden" name="WK_START" value="${WK_START}">
+							<input type="hidden" name="SV_AREA" value="${SV_AREA}">
+							 <input type="hidden" name="total" value="${total}"> 
+							 <input type="hidden" name="WK_END" value="${WK_END}">
+							 <input type="hidden" name="WK_START" value="${WK_START}">
+							<c:forEach var="pn" items="${PET_NM}"> 
+							 <input type="hidden" name="PET_NM" value="${pn}">
+							 </c:forEach>
 							<c:forEach var="i" items="${pet}">
 								<input type="hidden" name="pet" value="${i}">
 							</c:forEach>
