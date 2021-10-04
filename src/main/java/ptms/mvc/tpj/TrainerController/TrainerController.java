@@ -315,7 +315,7 @@ public class TrainerController {
    public String modifyTrainingReview(HttpServletRequest req, Model model) {
       log.info("url - modifyTrainingReview");
       
-      // 훈련사 정보 수정 화면
+      // 후기 수정 화면
       trainerservice.modifyReview(req, model);
       
       return "customer/trainer/modifyTrainingReview";
@@ -326,7 +326,7 @@ public class TrainerController {
    public String modifyTrainingReviewAction(HttpServletRequest req, Model model) {
       log.info("url - modifyTrainingReviewAction");
       
-      // 훈련사 정보 수정 화면
+      // 후기 수정 처리
       trainerservice.modifyReviewAction(req, model);
       
       return "customer/trainer/modifyTrainingReviewAction";

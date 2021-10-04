@@ -154,7 +154,10 @@
 		           <div class="form-group">
 	                <h3 style="font-size:18px">훈련받을 마이펫</h3>
 	                <c:if test="${selectCnt == 0}">
-	                	훈련받을 마이펫이 존재하지 않습니다.
+	                	<script type="text/javascript">
+				          alert("훈련받을 펫이 존재하지 않습니다. 등록 후 이용가능합니다.");
+				          window.history.back();
+				    	</script>
 	                </c:if>
 	                
 	                <c:if test="${selectCnt != 0}">

@@ -346,6 +346,12 @@ public class TrainerDAOImpl implements TrainerDAO {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
 		return dao.modifyReviewAction(vo);
 	}
+
+	@Override
+	public int trainerChkCnt(String id) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.trainerChkCnt(id);
+	}
 	
 	/*
 	// 평점순 훈련사 정렬 건수
