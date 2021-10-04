@@ -199,10 +199,11 @@ public class SitterServiceImpl implements SitterService {
 		
 		String CUST_ID = (String) req.getSession().getAttribute("cust_id");
 		vo.setCUST_ID(CUST_ID);
-		System.out.println("제발아이디"+ vo.getCUST_ID());
 
 		String SV_AREA = req.getParameter("SV_AREA");
 		vo.setSV_AREA(SV_AREA); // 서비스 가능 지역
+		
+		String[] PET_NM = req.getParameterValues("PET_NM");
 
 		String WK_START = req.getParameter("WK_START"); // 활동 시작 가능일
 		String WK_END = req.getParameter("WK_END"); // 활동 시작 종료일
@@ -312,6 +313,7 @@ public class SitterServiceImpl implements SitterService {
 		model.addAttribute("pet", pk_cd);
 		model.addAttribute("WK_START", WK_START);
 		model.addAttribute("WK_END", WK_END);
+		model.addAttribute("PET_NM", PET_NM);
 
 		model.addAttribute("pageNum", pageNum); // 페이지 번호
 		model.addAttribute("number", number); // 출력용 글번호
@@ -325,6 +327,7 @@ public class SitterServiceImpl implements SitterService {
 
 		String WK_START = req.getParameter("WK_START");
 		String WK_END = req.getParameter("WK_END");
+		String[] PET_NM = req.getParameterValues("PET_NM");
 		String[] sv_no = req.getParameterValues("sv_no");
 		String total = req.getParameter("total");
 		String[] pet = req.getParameterValues("pet");
@@ -332,7 +335,6 @@ public class SitterServiceImpl implements SitterService {
 		int SIT_ID = Integer.parseInt(req.getParameter("SIT_ID"));
 		String CUST_ID = (String) req.getSession().getAttribute("cust_id");
 		String SV_AREA = req.getParameter("SV_AREA");
-		System.out.println("세션CUST_ID: " + CUST_ID);
 
 		//상세페이지 리스트
 		SitterVO vo = sitterDao.detailSitter(SIT_ID);
@@ -357,6 +359,7 @@ public class SitterServiceImpl implements SitterService {
 		model.addAttribute("dto", vo);
 		model.addAttribute("SIT_ID", SIT_ID);
 		model.addAttribute("SV_AREA", SV_AREA);
+		model.addAttribute("PET_NM", PET_NM);
 		model.addAttribute("sv_no", sv_no);
 		model.addAttribute("total", total);
 		model.addAttribute("pet", pet);
@@ -557,18 +560,19 @@ public class SitterServiceImpl implements SitterService {
 		System.out.println("SQ_LOC : " + SQ_LOC);
 
 		String PET_CD[] = req.getParameterValues("PET_CD");
+		String PET_NM[] = req.getParameterValues("PET_NM");
 		String PK_CD[] = req.getParameterValues("PK_CD");
 		String result = "";
 
-		System.out.println("길이 : " + PK_CD.length);
+		System.out.println("길이 : " + PET_NM.length);
 
 		int sum = 0;
-		for (int i = 0; i < PET_CD.length; i++) {
+		for (int i = 0; i < PET_NM.length; i++) {
 
-			if (PET_CD.length == 0)
-				result += PET_CD[i];
+			if (PET_NM.length == 0)
+				result += PET_NM[i];
 			else
-				result += PET_CD[i] + "  ";
+				result += PET_NM[i] + "  ";
 		}
 
 		for (int i = 0; i < PK_CD.length; i++) {

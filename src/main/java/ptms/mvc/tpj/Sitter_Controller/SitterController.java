@@ -29,7 +29,7 @@ public class SitterController {
 	 SitterServiceImpl sitterSer;
 	 
 	 @Autowired
-	 SitterDAOImpl dao;
+	 SitterDAOImpl dao; 
 	 
 	 //(찾기 버튼 누르기 전 조건 입력)시터 찾기 페이지
 	 @RequestMapping("sitter")

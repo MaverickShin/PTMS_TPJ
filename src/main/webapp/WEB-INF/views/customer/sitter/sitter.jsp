@@ -72,11 +72,12 @@
 									<c:if test="${selectCnt > 0 }"> 
 										<div style = "display:flex; margin-top: 30px;">
 											<c:forEach var="li" items="${list}" varStatus = "st" >
+											<input type="hidden" name="PET_NM" value="${li.PET_NM}">
 												<p class = "chk_p1">
 													<label class = "chk_label1" for = "pet_li_${st.index}">
 														<input type="checkbox" id = "pet_li_${st.index}" name="pk_cd" class = "sel_chk1" value="${li.PK_CD}">
 														<span class="checkbox_icon"></span>
-														<span class = "list_label_span2" >${li.PET_NM}(${li.PK_CD})</span>
+														<span class = "list_label_span2" >${li.PET_NM}(펫종류 : ${li.PK_CD})</span>
 													</label>
 												</p>
 						        			</c:forEach>
