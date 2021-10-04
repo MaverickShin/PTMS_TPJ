@@ -71,4 +71,19 @@ public interface MainService {
 	// 메인 하단 병원 정보 - 21.10.03 도빈
 	public void HospitalInfo(HttpServletRequest req, Model model);
 	
+	// qna 문의 목록
+	public void qnaList(HttpServletRequest req, Model mdoel);
+	
+	// qna 문의 등록
+	public void qnaAdd(HttpServletRequest req, Model model);
+	
+	// qna 문의 삭제
+	public void qnaDelete(HttpServletRequest req, Model model);
+	
+	// qna 문의 수정 처리
+	public void qnaUpdate(HttpServletRequest req, Model model);
+	
+	// FAQ  목록
+	public void faqList(HttpServletRequest req, Model model);
+	
 }

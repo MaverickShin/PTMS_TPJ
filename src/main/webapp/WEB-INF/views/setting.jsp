@@ -31,6 +31,7 @@
  <script src="${path}js/main.js"></script>
   <script src="${path}js/script.js"></script>
  
+ <script src="https://kit.fontawesome.com/5d238a51aa.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
  
  <link rel="preconnect" href="https://fonts.googleapis.com">

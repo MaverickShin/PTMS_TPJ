@@ -387,7 +387,7 @@
 				}
 			});
 		// [>] 버튼  조건
-		}else if(param == right_one && pagecount > end) {
+		} else if(param == right_one && pagecount > end) {
 			
 			$.ajax({
 				type : "get",
@@ -428,7 +428,6 @@
 	
 	function pageNumbers(e) {
 		
-		alert("요깅");
 		
 		var urls = '<c:out value="${s}"/>';
 		var param = e;

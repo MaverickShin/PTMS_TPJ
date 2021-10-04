@@ -15,9 +15,9 @@
 
 			$.ajax({
 				type : "get",
-				url : "/tpj/cust/qnalist2",
+				url : "/tpj/cust/faqlist2",
 				cache : false,
-				data : "qk_cd=" + 3,
+				data : "fk_cd=" + 3,
 				success : function(result) {
 					$("#delivery").empty();
 					$("#delivery").append(result);
@@ -32,9 +32,9 @@
 
 			$.ajax({
 				type : "get",
-				url : "/tpj/cust/qnalist2",
+				url : "/tpj/cust/faqlist2",
 				cache : false,
-				data: "qk_cd=" + 2,
+				data: "fk_cd=" + 2,
 				success : function(result) {
 					$("#delivery").empty();
 					$("#delivery").append(result);
@@ -49,9 +49,9 @@
 
 			$.ajax({
 				type : "get",
-				url : "/tpj/cust/qnalist2",
+				url : "/tpj/cust/faqlist2",
 				cache : false,
-				data : "qk_cd=" + 1,
+				data : "fk_cd=" + 1,
 				success : function(result) {
 					$("#delivery").empty();
 					$("#delivery").append(result);
@@ -65,88 +65,30 @@
 	});
 </script>
 <script type="text/javascript">
-$(document).ready(function() {
-	
-	$("#order_add").click(function(e){
-	    $("#add_lay").fadeIn(1000);
-	});
-	$("#success_btn").click(function(e){
-	    
-		var title = $("#qna_title").val();
-		var content = $("#qna_content").val();
-		var kind = $("select[name='qk_id']").val();
-		
-		if(title != "" && content != "" ) {
-			
-			$.ajax({
-				type: "get",
-				url: "/tpj/cust/qnaadd",
-				cache: false,
-				data : "qna_title="+title+"&qna_content="+content+"&qk_cd="+kind,
-				contentType: "charset=utf-8",
-				beforeSend : function(jqXHR, settings)
-				{
-					var token = $("meta[name='_csrf_header']").attr("content");
-					var header = $("meta[name='_csrf']").attr("content");
-					console.log(token);
-					console.log(header);
-					jqXHR.setRequestHeader(header, token);
-			},
-			success: function(cnt) {
-				$("#delivery").html(cnt);
-			},
-			error : function(request, status, error) {
-				console.log("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : "+ error);
-			}
-			});
-			
-		    $("#add_lay").fadeOut(1000);
-			return true;
-		} else {
-			alert("필수정보를 입력 해주세요!");
-			return false;
-		}
-		
-	});	
-	
-	$("#close_btn").click(function(e){
-		
-		$("#seller_form").find('input').val('');
-		e.preventDefault();
-	    $("#add_lay").fadeOut(400);
-	    return false;
-	});
-	
-	
-});
-
-</script>
-
-<script type="text/javascript">
 	function macting() {
 
 		var lb = document.getElementById("left_button");
 		var cb = document.getElementById("center_button");
 		var rb = document.getElementById("right_button");
 
-		lb.style.backgroundColor = "#90a4ae";
-		lb.style.color = "white";
-		lb.style.border = "3px solid #455a64";
+		lb.style.backgroundColor = "white";
+		lb.style.color = "#37474f";
+		lb.style.border = "4px solid #90a4ae";
 		lb.style.borderBottom = "none";
 		lb.style.fontWeight = "bolder";
 		lb.style.fontSize = "24px";
 
-		cb.style.backgroundColor = "#f5f5f5";
-		cb.style.color = "#808080";
+		cb.style.backgroundColor = "#37474f";
+		cb.style.color = "white";
 		cb.style.border = "1px solid #bdbdbd";
-		cb.style.borderBottom = "3px solid #455a64";
+		cb.style.borderBottom = "4px solid #90a4ae";
 		cb.style.fontSize = "20px";
 		cb.style.fontWeight = "normal";
 		
-		rb.style.backgroundColor = "#f5f5f5";
-		rb.style.color = "#808080";
+		rb.style.backgroundColor = "#37474f";
+		rb.style.color = "white";
 		rb.style.border = "1px solid #bdbdbd";
-		rb.style.borderBottom = "3px solid #455a64";
+		rb.style.borderBottom = "4px solid #90a4ae";
 		rb.style.fontSize = "20px";
 		rb.style.fontWeight = "normal";
 		
@@ -157,24 +99,24 @@ $(document).ready(function() {
 		var cb = document.getElementById("center_button");
 		var rb = document.getElementById("right_button");
 
-		cb.style.backgroundColor = "#90a4ae";
-		cb.style.color = "white";
-		cb.style.border = "3px solid #455a64";
+		cb.style.backgroundColor = "white";
+		cb.style.color = "#37474f";
+		cb.style.border = "4px solid #90a4ae";
 		cb.style.borderBottom = "none";
 		cb.style.fontWeight = "bolder";
 		cb.style.fontSize = "24px";
 
-		lb.style.backgroundColor = "#f5f5f5";
-		lb.style.color = "#808080";
+		lb.style.backgroundColor = "#37474f";
+		lb.style.color = "white";
 		lb.style.border = "1px solid #bdbdbd";
-		lb.style.borderBottom = "3px solid #455a64";
+		lb.style.borderBottom = "4px solid #90a4ae";
 		lb.style.fontSize = "20px";
 		lb.style.fontWeight = "normal";
 		
-		rb.style.backgroundColor = "#f5f5f5";
-		rb.style.color = "#808080";
+		rb.style.backgroundColor = "#37474f";
+		rb.style.color = "white";
 		rb.style.border = "1px solid #bdbdbd";
-		rb.style.borderBottom = "3px solid #455a64";
+		rb.style.borderBottom = "4px solid #90a4ae";
 		rb.style.fontSize = "20px";
 		rb.style.fontWeight = "normal";
 
@@ -186,31 +128,30 @@ $(document).ready(function() {
 		var cb = document.getElementById("center_button");
 		var rb = document.getElementById("right_button");
 
-		rb.style.backgroundColor = "#90a4ae";
-		rb.style.color = "white";
-		rb.style.border = "3px solid #455a64";
+		rb.style.backgroundColor = "white";
+		rb.style.color = "#37474f";
+		rb.style.border = "4px solid #90a4ae";
 		rb.style.borderBottom = "none";
 		rb.style.fontWeight = "bolder";
 		rb.style.fontSize = "24px";
 
-		cb.style.backgroundColor = "#f5f5f5";
-		cb.style.color = "#808080";
+		cb.style.backgroundColor = "#37474f";
+		cb.style.color = "white";
 		cb.style.border = "1px solid #bdbdbd";
-		cb.style.borderBottom = "3px solid #455a64";
+		cb.style.borderBottom = "4px solid #90a4ae";
 		cb.style.fontSize = "20px";
 		cb.style.fontWeight = "normal";
 		
-		lb.style.backgroundColor = "#f5f5f5";
-		lb.style.color = "#808080";
+		lb.style.backgroundColor = "#37474f";
+		lb.style.color = "white";
 		lb.style.border = "1px solid #bdbdbd";
-		lb.style.borderBottom = "3px solid #455a64";
+		lb.style.borderBottom = "4px solid #90a4ae";
 		lb.style.fontSize = "20px";
 		lb.style.fontWeight = "normal";
 
 	}
 
 </script>
-
 <style>
 	.qna_list {
 		margin-right: auto;
@@ -239,10 +180,11 @@ $(document).ready(function() {
 		width: 300px;
 		height: 60px;
 		line-height: 60px;
-		background-color: #f5f5f5;
+		background-color: #37474f;
+		color: white;
 		border: 1px solid #bdbdbd;
 		font-size: 20px;
-		border-bottom:3px solid #455a64;
+		border-bottom:4px solid #90a4ae;
 	}
 	
 	
@@ -601,7 +543,7 @@ $(document).ready(function() {
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="col-md-9 ftco-animate pb-5" style = "line-height: 200px;">
-				<h1 class="mb-0 bread" style = "color: white; line-height: 200px;">문의 게시판</h1>
+				<h1 class="mb-0 bread" style = "color: white; line-height: 200px;">FAQ - 자주 묻는 질문</h1>
 			</div>
 		</div>
 	</section>
@@ -610,10 +552,10 @@ $(document).ready(function() {
 <div class = "qna_list_sec">
 <div class = "qna_list">
 	<div class = "qna_list_div">
-		<h4 style = "font-size: 30px; font-weight: bolder;">QnA - 문의하기</h4>
+		<h4 style = "font-size: 30px; font-weight: bolder;">FAQ - 자주 묻는 질문</h4>
 		
 		<div class = "list_tab">
-			<p id = "left_button" style = "background-color: #90a4ae; color:white; border:3px solid #455a64; border-bottom:none; font-weight:bolder; font-size: 24px;" onclick = "macting();">매칭 서비스</p>
+			<p id = "left_button" style = "background-color: white; color:#37474f; border:4px solid #90a4ae; border-bottom:none; font-weight:bolder; font-size: 24px;" onclick = "macting();">매칭 서비스</p>
 			<p id = "center_button" onclick = "uses();">이용 문의</p>
 			<p id = "right_button" onclick = "pays();">결제 관련</p>
 		</div>
@@ -628,55 +570,23 @@ $(document).ready(function() {
 									<tr>
 										<td style = "text-align:center;"><i class="fab fa-quora  fa-2x"></i></td>
 										<td class = "q_s">
-											${i.QNA_TITLE}
+											${i.FAQ_TITLE}
 										</td>
 										<td style = "text-align:center;"><i class="fas fa-chevron-down fa-2x"></i></td>
 									</tr>
 								</table>
 							</summary>
 							
-							<details>
-								<summary>
-									<div class = "a">
-										<table class = "a_table">
-											<tr>
-												<td style = "text-align:center; background-color: #eeeeee; border-right: 2px solid #e0e0e0;">문의 내용 </td>
-												<td style = "text-align:center;" class = "a_s">
-													${i.QNA_CONTENT}
-												</td>
-											</tr>
-										</table>
-									</div>
-								</summary>
-								
-								<c:if test = "${i.QNA_ANSWER != null}">
-									<div class = "m">
-										<table class = "m_table">
-											<tr>
-												<td class = "m_i" style = "width: 210px !important;"><i class="fas fa-font fa-2x"></i></td>
-												<td>${i.QNA_ANSWER}</td>
-											</tr>
-										</table>
-									</div>
-									
-								</c:if>
-								
-								<c:if test = "${i.QNA_ANSWER == null}">
-									<div class = "m">
-										<table class = "m_table">
-											<tr>
-												<td class = "m_i" style = "width: 210px !important;"><i class="fas fa-font fa-2x"></i></td>
-												<td>아직 답변이 등록 되지 않았습니다!</td>
-											</tr>
-										</table>
-									</div>
-									
-									<div class = "b">
-										<input type = "button" class = "in_buttons" id = "order_modify" value = "수정" onclick = "modify_suc(${i.QNA_CD}, '${i.QNA_TITLE}', '${i.QNA_CONTENT}', '${i.QNA_DT}', ${i.QK_CD});"> 
-										<input type = "button" class = "in_buttons" value = "삭제" onclick = "del_qna(${i.QNA_CD}, ${i.QK_CD});">
-									</div>
-								</c:if>
-							</details>
+							<div class = "a">
+								<table class = "a_table">
+									<tr>
+										<td style = "text-align:center; background-color: #eeeeee; border-right: 2px solid #e0e0e0;">문의 내용 </td>
+										<td style = "text-align:center;" class = "a_s">
+											${i.FAQ_CONTENT}
+										</td>
+									</tr>
+								</table>
+							</div>
 						</details>
 					</div>
 				</c:forEach>
@@ -712,122 +622,10 @@ $(document).ready(function() {
 			
 			<c:if test = "${cnt == 0}">
 				<div class = "q" style = "text-align:center;">
-					<p style = "font-size:30px; padding-top: 100px;">등록된 QnA가 없습니다!</p>
+					<p style = "font-size:30px; padding-top: 100px;">등록된 FAQ가 없습니다!</p>
 				</div>
 			</c:if>
 		</div>
-		
-		<!-- qna 추가 -->
-		<div id = "add_button" >
-			<div class = "buttons">
-				<button type = "button" id = "order_add" >QnA 등록</button>
-			</div>
-			<form id = "seller_form">
-			<div id="add_lay" class="add_layers">
-				<div id = "lay_top">QnA 등록</div>
-	        	<div class="lay_content">
-					<table>
-						
-						<tr>
-							<td class = "lay_td_left">QnA 유형 </td>
-							<td class = "lay_td_right">
-								<select name = "qk_id" id = "qk_id">
-									<option value = "1">매칭 서비스</option>
-									<option value = "2">이용 문의</option>
-									<option value = "3">결제 관련</option>
-								</select> 
-							</td>
-						</tr>
-						
-						
-						<tr>
-							<td class = "lay_td_left">QnA 제목 </td>
-							<td class = "lay_td_right">
-								<input type = "text" id = "qna_title" placeholder= "제목을 입력해주세요." name = "qna_title" required> 
-							</td>
-						</tr>
-						
-						<tr>
-							<td class = "lay_td_left">QnA 내용</td>
-							<td class = "lay_td_right">
-								<textarea rows = "10" cols = "50" name = "qna_content" id = "qna_content"
-									style = "width: 390px !important; height: 300px !important; text-align: left !important; outline:none;"
-									required placeholder = "내용을 입력하세요!" word-break:break-all >
-								</textarea>
-							</td>
-						</tr>
-						
-					</table>
-					
-	            	<div class="lay_button">
-	            		<button type = "submit" id = "success_btn">등록</button>
-	                	<button type = "reset" id = "close_btn">취소</button>
-	            	</div>
-       			</div>
-			</div>
-			</form>
-		</div>
-		<!-- qna 추가 끝 -->
-		
-		<div style = "padding-bottom: 100px;"></div>
-		
-		<div class = "modi_reli">
-		<!-- qna 수정 -->
-		<div id = "modify_button">
-			<form id = "modify_forms">
-			<div id="modify_lay" class="modify_layers">
-				<div id = "modi_lay_top">QnA 수정</div>
-	        	<div class="modi_lay_content">
-					<table>
-						<tr>
-							<td class = "lay_td_left">QnA 유형 </td>
-							<td class = "lay_td_right">
-								<select name = "qk_id_modi" id = "qk_id_modi" disabled>
-									<option value = "1">매칭 서비스</option>
-									<option value = "2">이용 문의</option>
-									<option value = "3">결제 관련</option>
-								</select> 
-							</td>
-						</tr>
-						
-						<tr>
-							<td class = "lay_td_left">등록일 </td>
-							<td class = "lay_td_right">
-								<input type = "date" id = "modi_qna_dt" name = "modi_qna_dt" disabled> 
-							</td>
-						</tr>
-						
-						
-						<tr>
-							<td class = "lay_td_left">QnA 제목 </td>
-							<td class = "lay_td_right">
-								<input type = "text" id = "modi_qna_title" placeholder= "제목을 입력해주세요." name = "modi_qna_title" required> 
-							</td>
-						</tr>
-						
-						<tr>
-							<td class = "lay_td_left">QnA 내용</td>
-							<td class = "lay_td_right">
-								<textarea rows = "10" cols = "50" name = "modi_qna_content" id = "modi_qna_content"
-									style = "width: 390px !important; height: 300px !important; text-align: left !important; outline:none;"
-									required placeholder = "내용을 입력하세요!" word-break:break-all >
-								</textarea>
-							</td>
-						</tr>
-						
-					</table>
-					
-	            	<div class="lay_button">
-	            		<button type = "button" id = "success_btn_modi">등록</button>
-	                	<button type = "reset" id = "close_btn_modi">취소</button>
-	            	</div>
-       			</div>
-			</div>
-			</form>
-		</div>
-		</div>
-		<!-- qna 수정 끝 -->
-		
 	</div>
 </div>
 </div>
@@ -837,11 +635,11 @@ $(document).ready(function() {
 <script type="text/javascript">
 	
 	var pageNum = '<c:out value="${pageNum}"/>';
-	var kind = '<c:out value = "${qk_cd}"/>';
+	var kind = '<c:out value = "${fk_cd}"/>';
 	
 	function pageMove(e) {
 		
-		var urls = "/tpj/cust/qnalist2";
+		var urls = "/tpj/cust/faqlist2";
 		var param = e;
 		var start = '<c:out value = "${startPage}"/>';
 		var block = '<c:out value = "${pageBlock}"/>';
@@ -873,7 +671,7 @@ $(document).ready(function() {
 				type : "get",
 				url : urls,
 				cache : false,
-				data : "qk_cd="+kind,
+				data : "fk_cd="+kind,
 				success : function(result) {
 					$("#delivery").empty();
 					$("#delivery").append(result);
@@ -892,7 +690,7 @@ $(document).ready(function() {
 			$.ajax({
 				type : "get",
 				url : urls,
-				data : "pageNum="+param+"&qk_cd="+kind,
+				data : "pageNum="+param+"&fk_cd="+kind,
 				cache : false,
 				success : function(result) {
 					$("#delivery").empty();
@@ -909,7 +707,7 @@ $(document).ready(function() {
 			$.ajax({
 				type : "get",
 				url : urls,
-				data : "pageNum="+param+"&qk_cd="+kind,
+				data : "pageNum="+param+"&fk_cd="+kind,
 				cache : false,
 				success : function(result) {
 					$("#delivery").empty();
@@ -930,7 +728,7 @@ $(document).ready(function() {
 				type : "get",
 				url : urls,
 				cache : false,
-				data : "qk_cd="+kind,
+				data : "fk_cd="+kind,
 				success : function(result) {
 					$("#delivery").empty();
 					$("#delivery").append(result);
@@ -960,7 +758,7 @@ $(document).ready(function() {
 			$.ajax({
 				type : "get",
 				url : urls,
-				data : "pageNum="+param+"&qk_cd="+kind,
+				data : "pageNum="+param+"&fk_cd="+kind,
 				cache : false,
 				success : function(result) {
 					$("#delivery").empty();
@@ -977,7 +775,7 @@ $(document).ready(function() {
 			$.ajax({
 				type : "get",
 				url : urls,
-				data : "pageNum="+param+"&qk_cd="+kind,
+				data : "pageNum="+param+"&fk_cd="+kind,
 				cache : false,
 				success : function(result) {
 					$("#delivery").empty();
@@ -990,95 +788,6 @@ $(document).ready(function() {
 			});
 		}
 		
-	}
-	
-	function modify_suc(cd, t, c, d, k) {
-		
-	    
-	    
-	    $("#modi_qna_title").val(t);
-	    $("#modi_qna_content").val(c);
-	    $("#modi_qna_dt").val(d);
-	    $("#qk_id_modi").val(k).prop("selected", true);
-
-	    $("#modify_lay").fadeIn(1000);
-		
-		$("#success_btn_modi").click(function(e){
-		    
-			var qna_cd = cd;
-			var title = $("#modi_qna_title").val();
-			var content = $("#modi_qna_content").val();
-			
-			if(title != "" && content != "" ) {
-				
-				$.ajax({
-					type: "get",
-					url: "/tpj/cust/qnaupdate",
-					cache: false,
-					data : "qna_title="+title+"&qna_content="+content+"&qna_cd="+qna_cd+"&qk_cd="+k,
-					contentType: "charset=utf-8",
-					beforeSend : function(jqXHR, settings)
-					{
-						var token = $("meta[name='_csrf_header']").attr("content");
-						var header = $("meta[name='_csrf']").attr("content");
-						console.log(token);
-						console.log(header);
-						jqXHR.setRequestHeader(header, token);
-				},
-				success: function(cnt) {
-					$("#delivery").empty();
-					$("#delivery").append(cnt);
-				},
-				error : function(request, status, error) {
-					console.log("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : "+ error);
-				}
-				});
-				
-			    $("#modify_lay").fadeOut(1000);
-				return true;
-			} else {
-				alert("필수정보를 입력 해주세요!");
-				return false;
-			}
-			
-		});	
-		
-		$("#close_btn_modi").click(function(e){
-			
-			$("#modify_forms").find('input').val('');
-			e.preventDefault();
-		    $("#modify_lay").fadeOut(400);
-		    return false;
-		});
-		
-	}
-	
-	function del_qna(e, q) {
-		
-		if(confirm('문의글을 삭제 하시겠습니까?')) {		
-			$.ajax({
-				type: "get",
-				url: "/tpj/cust/qnadelete",
-				cache: false,
-				data : "qna_cd="+e+"&qk_cd="+q,
-				contentType: "charset=utf-8",
-				beforeSend : function(jqXHR, settings)
-				{
-					var token = $("meta[name='_csrf_header']").attr("content");
-					var header = $("meta[name='_csrf']").attr("content");
-					console.log(token);
-					console.log(header);
-					jqXHR.setRequestHeader(header, token);
-			},
-			success: function(cnt) {
-				$("#delivery").html(cnt);
-			},
-			error : function(request, status, error) {
-				console.log("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : "+ error);
-			}
-			});
-		}
-
 	}
 </script>
 </html>

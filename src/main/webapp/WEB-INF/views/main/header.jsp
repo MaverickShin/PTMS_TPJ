@@ -31,6 +31,30 @@
 		background-color: white;
 	}
 	
+	.hides {
+		display:none;
+		background-color: #00bd56;
+		min-width: 160px;
+		box-shadow: 10px 8px 16px 0px rgba(0,0,0,0.2);
+		z-index: 1;
+		font-size: 12px;
+		position: absolute;
+		left: -15px;
+		top: 80px;
+	}
+	.hides a {
+		color: white;
+	  	padding: 12px 16px;
+	  	text-decoration: none;
+	  	display: block;
+	  	text-align: left;
+	}
+	
+	.hides a:hover {
+		color: #00bd56;
+		background-color: white;
+	}
+	
 	#mypages {
 		position:relative;
 		cursor: pointer;
@@ -43,6 +67,15 @@
 	#ftco-nav a{
 		font-size: 18px !important;
 		font-weight: normal !important;
+	}
+	
+	#boards {
+		position:relative;
+		cursor: pointer;
+	}
+	
+	#boards:hover .hides {
+		display: block;
 	}
 	
 </style>
@@ -102,7 +135,12 @@
 				    		<a href="/tpj/cust/contact">건강관리</a>
 						</div>
 					</li>
-					<li class="nav-item"><a href="/tpj/cust/board" class="nav-link">게시판</a></li>
+					<li class="nav-item" id = "boards"><a class="nav-link">게시판</a>
+						<div class = "hides">
+			    			<a href="/tpj/cust/qnalist">QnA</a>
+				    		<a href="/tpj/cust/faqlist">FAQ</a>
+						</div>
+					</li>
 					<li class="nav-item"><a href="/tpj/cust/gps" class="nav-link">마이 펫 찾기</a></li>
 					<c:if test="${sessionScope.cust_id == null}">
 						<li class="nav-item"><a class="nav-link" onclick = "if(confirm('로그인 후 이용가능합니다. 로그인 하시겠습니까?')) window.location = '/tpj/cust/login';">매칭서비스</a></li>

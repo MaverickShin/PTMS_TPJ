@@ -468,13 +468,83 @@ public class MainController {
       return "customer/matching/matchingMain";
    }  
    
-   @RequestMapping("board")
+   // qna 목록
+   @RequestMapping("qnalist")
 	public String board(HttpServletRequest req, Model model) {
 		log.info("qnaList => qnaList");
 		
+		service.qnaList(req, model);
 		
 		return "customer/board/qnaList";
 	}
+   
+   // qna 목록 2
+   @RequestMapping("qnalist2")
+   public String board2(HttpServletRequest req, Model model) {
+		log.info("qnaList => qnaList");
+		
+		service.qnaList(req, model);
+		
+		return "customer/board/qnaListClone";
+	}
+   
+   // qna 등록
+   @RequestMapping("qnaadd")
+   public String qnaadd(HttpServletRequest req, Model model) {
+		log.info("qnaadd => qnaadd");
+		
+		service.qnaAdd(req, model);
+		
+		service.qnaList(req, model);
+		
+		return "customer/board/qnaListClone";
+	}
+   
+   // qna 수정
+   @RequestMapping("qnaupdate")
+   public String qnaupdate(HttpServletRequest req, Model model) {
+		log.info("qnaupdate => qnaupdate");
+		
+		service.qnaUpdate(req, model);
+		
+		service.qnaList(req, model);
+		
+		return "customer/board/qnaListClone";
+	}
+   
+   // qna 삭제
+   @RequestMapping("qnadelete")
+   public String qnadelete(HttpServletRequest req, Model model) {
+		log.info("qnadelete => qnadelete");
+		
+		service.qnaDelete(req, model);
+		
+		service.qnaList(req, model);
+		
+		return "customer/board/qnaListClone";
+	}
+   
+   // faq 목록
+   @RequestMapping("faqlist")
+   public String faqlist(HttpServletRequest req, Model model) {
+		log.info("faqlist => faqlist");
+		
+		service.faqList(req, model);
+		
+		return "customer/board/faqList";
+	}
+   
+   // faq 목록2
+   @RequestMapping("faqlist2")
+   public String faqlist2(HttpServletRequest req, Model model) {
+		log.info("fqalist => fqalist");
+		
+		service.faqList(req, model);
+		
+		return "customer/board/faqListClone";
+	}
+   
+   
    
    // 반려인/펫 관리 - 훈련사 수정페이지
    @RequestMapping("TrainerProfile")

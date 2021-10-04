@@ -21,10 +21,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-
 import ptms.mvc.tpj.CustVO.CalendarVO;
 import ptms.mvc.tpj.CustVO.CustomerVO;
+import ptms.mvc.tpj.CustVO.FAQVO;
 import ptms.mvc.tpj.CustVO.PetVO;
+import ptms.mvc.tpj.CustVO.QnAVO;
 import ptms.mvc.tpj.Customer_Main_DAO.MainDAOImpl;
 
 @Service
@@ -857,6 +858,279 @@ public class MainServiceImpl implements MainService {
 		}
 		
 		model.addAttribute("list", list3);
+		
+	}
+
+	// qna 목록
+	@Override
+	public void qnaList(HttpServletRequest req, Model mdoel) {
+		
+		// 페이징
+		int pageSize = 5; 		// 한 페이지당 출력할 글 갯수
+		int pageBlock = 3;		// 한 페이지당 페이지 갯수
+		
+		int cnt = 0;			// 글 갯수
+		int start = 0;			// 현재 페이지 시작 글 번호
+		int end = 0;			// 현재 페이지 마지막 글 번호
+		int number = 0;			// 출력용 글 번호
+		String pageNum = "";	// 페이지 번호
+		int currentPage = 0;	// 현재 페이지
+		
+		int pageCount = 0;		// 페이지 갯수
+		int startPage = 0;		// 시작 페이지
+		int endPage = 0;		// 마지막 페이지
+		
+		
+		String custid = (String)req.getSession().getAttribute("cust_id");
+		// qna 갯수 조회
+		
+		Map<String, Object> map2 = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map2.put("cust_id", custid);
+		
+		String qk_cd = req.getParameter("qk_cd");
+		
+		if(qk_cd == null) {
+			qk_cd = "1";
+			int qk = Integer.parseInt(qk_cd);
+			map2.put("qk_cd", qk);
+			map.put("qk_cd", qk);
+			req.setAttribute("qk_cd", qk);
+		} else {
+			int qk = Integer.parseInt(qk_cd);
+			map2.put("qk_cd", qk);
+			map.put("qk_cd", qk);
+			req.setAttribute("qk_cd", qk);
+		}
+		
+		cnt = dao.qnaCount(map2);
+		System.out.println("cnt => " + cnt);
+		
+		pageNum = req.getParameter("pageNum");
+		
+		if(pageNum == null) {
+			pageNum = "1";	// 첫 페이지를 1페이지로 지정
+		}
+		
+		currentPage = Integer.parseInt(pageNum);
+		System.out.println("currentPage : " + currentPage);
+		
+		// 페이지 갯수
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0); // 페이지 갯수 + 나머지가 있으면 1페이지 추가
+
+		// 현재페이지 시작 글번호(페이지별)
+		// start = (currentPage -1) * pageSize + 1;
+		// 1 = (1 - 1) * 5 + 1
+		start = (currentPage -1) * pageSize + 1;
+		
+		// 현재페이지 시작 글번호(페이지별)
+		// end = start + pageSize - 1;
+		// 5 = 1 + 5 - 1;
+		end = start + pageSize - 1;
+		
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
+		
+		// 출력용 글 번호 
+		// 30 = 30 - (1-1) * 5; // 1 페이지
+		// number = cnt - (currentPage - 1) * pageSize;
+		number = cnt - (currentPage - 1) * pageSize;
+		
+		System.out.println("number : " + number);
+		System.out.println("pageSize : " + pageSize);
+		
+		// 시작 페이지
+		// 1 = (1 / 3) * 3 + 1;
+		// startPage = (currentPage / pageBlock) * pageBlock + 1;
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		System.out.println("startPage : " + startPage);
+		
+		// 마지막 페이지
+		// 3 = 1 + 3 - 1
+		endPage = startPage + pageBlock - 1;
+		if(endPage > pageCount) endPage = pageCount;
+		
+		List<QnAVO> vo = new ArrayList<QnAVO>();
+		
+		System.out.println("cust : " + custid);
+		
+		map.put("cust_id", custid);
+		map.put("start", start);
+		map.put("end", end);
+		
+		if(cnt > 0) {
+			// question 목록 조회
+			vo =  dao.qnaSearch(map);
+		}
+		
+		req.setAttribute("pageNum", pageNum); // 페이지 번호
+		req.setAttribute("number", number); // 출력용 글번호
+		req.setAttribute("cnt", cnt); // question 갯수
+		req.setAttribute("vo", vo);   // question 정보
+		
+		if(cnt > 0) {
+			req.setAttribute("startPage", startPage);		// 시작 페이지
+			req.setAttribute("endPage", endPage);			// 마지막 페이지
+			req.setAttribute("pageBlock", pageBlock);		// 한 블럭당 페이지 갯수
+			req.setAttribute("pageCount", pageCount);		// 페이지 갯수
+			req.setAttribute("currentPage", currentPage);	// 현재페이지
+		}
+		
+	}
+
+	// qna 등록
+	@Override
+	public void qnaAdd(HttpServletRequest req, Model model) {
+		
+		// qustion vo 생성
+		QnAVO vo = new QnAVO();
+		
+		String custid = (String) req.getSession().getAttribute("cust_id");
+		vo.setCUST_ID(custid);
+		vo.setQNA_TITLE(req.getParameter("qna_title"));
+		vo.setQNA_CONTENT(req.getParameter("qna_content"));
+		vo.setQK_CD(Integer.parseInt(req.getParameter("qk_cd")));
+		
+		System.out.println("con : " + vo.getQK_CD());
+		
+		// question 본문 내용 등록
+		dao.qnaAdd(vo);
+	}
+
+	
+	// qna 삭제
+	@Override
+	public void qnaDelete(HttpServletRequest req, Model model) {
+		
+		int qna_cd = Integer.parseInt(req.getParameter("qna_cd"));
+		
+		dao.deleteQna(qna_cd);
+		
+	}
+
+	
+	// qna 수정
+	@Override
+	public void qnaUpdate(HttpServletRequest req, Model model) {
+		
+		// qustion vo 생성
+		QnAVO vo = new QnAVO();
+		
+		String custid  = (String) req.getSession().getAttribute("cust_id");
+		vo.setQNA_CD(Integer.parseInt(req.getParameter("qna_cd")));
+		vo.setCUST_ID(custid);
+		vo.setQNA_TITLE(req.getParameter("qna_title"));
+		vo.setQNA_CONTENT(req.getParameter("qna_content"));
+		
+		// question 본문 내용 수정
+		dao.updateQna(vo);
+		
+	}
+
+	// faq 목록
+	@Override
+	public void faqList(HttpServletRequest req, Model model) {
+		
+		// 페이징
+		int pageSize = 5; 		// 한 페이지당 출력할 글 갯수
+		int pageBlock = 3;		// 한 페이지당 페이지 갯수
+		
+		int cnt = 0;			// 글 갯수
+		int start = 0;			// 현재 페이지 시작 글 번호
+		int end = 0;			// 현재 페이지 마지막 글 번호
+		int number = 0;			// 출력용 글 번호
+		String pageNum = "";	// 페이지 번호
+		int currentPage = 0;	// 현재 페이지
+		
+		int pageCount = 0;		// 페이지 갯수
+		int startPage = 0;		// 시작 페이지
+		int endPage = 0;		// 마지막 페이지
+		
+		
+		String fk = req.getParameter("fk_cd");
+		
+		int fk_cd;
+		
+		if(fk == null) fk_cd = 1;
+		else fk_cd = Integer.parseInt(fk);
+		
+		// qna 갯수 조회
+		cnt = dao.faqCount(fk_cd);
+		
+		System.out.println("cnt => " + cnt);
+		
+		pageNum = req.getParameter("pageNum");
+		
+		if(pageNum == null) {
+			pageNum = "1";	// 첫 페이지를 1페이지로 지정
+		}
+		
+		currentPage = Integer.parseInt(pageNum);
+		System.out.println("currentPage : " + currentPage);
+		
+		// 페이지 갯수
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0); // 페이지 갯수 + 나머지가 있으면 1페이지 추가
+
+		// 현재페이지 시작 글번호(페이지별)
+		// start = (currentPage -1) * pageSize + 1;
+		// 1 = (1 - 1) * 5 + 1
+		start = (currentPage -1) * pageSize + 1;
+		
+		// 현재페이지 시작 글번호(페이지별)
+		// end = start + pageSize - 1;
+		// 5 = 1 + 5 - 1;
+		end = start + pageSize - 1;
+		
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
+		
+		// 출력용 글 번호 
+		// 30 = 30 - (1-1) * 5; // 1 페이지
+		// number = cnt - (currentPage - 1) * pageSize;
+		number = cnt - (currentPage - 1) * pageSize;
+		
+		System.out.println("number : " + number);
+		System.out.println("pageSize : " + pageSize);
+		
+		// 시작 페이지
+		// 1 = (1 / 3) * 3 + 1;
+		// startPage = (currentPage / pageBlock) * pageBlock + 1;
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		System.out.println("startPage : " + startPage);
+		
+		// 마지막 페이지
+		// 3 = 1 + 3 - 1
+		endPage = startPage + pageBlock - 1;
+		if(endPage > pageCount) endPage = pageCount;
+		
+		List<FAQVO> vo = new ArrayList<FAQVO>();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(cnt > 0) {
+			// qna 목록 조회
+			map.put("fk_cd", fk_cd);
+			map.put("start", start);
+			map.put("end", end);
+			
+			vo = dao.faqSearch(map);
+		}
+		
+		req.setAttribute("pageNum", pageNum); // 페이지 번호
+		req.setAttribute("number", number); // 출력용 글번호
+		req.setAttribute("cnt", cnt); // qna 갯수
+		req.setAttribute("vo", vo);   // qna 정보
+		
+		if(cnt > 0) {
+			req.setAttribute("startPage", startPage);		// 시작 페이지
+			req.setAttribute("endPage", endPage);			// 마지막 페이지
+			req.setAttribute("pageBlock", pageBlock);		// 한 블럭당 페이지 갯수
+			req.setAttribute("pageCount", pageCount);		// 페이지 갯수
+			req.setAttribute("currentPage", currentPage);	// 현재페이지
+		}
 		
 	}
 

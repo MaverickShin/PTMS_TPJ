@@ -7,7 +7,9 @@ import java.util.Map;
 
 import ptms.mvc.tpj.CustVO.CalendarVO;
 import ptms.mvc.tpj.CustVO.CustomerVO;
+import ptms.mvc.tpj.CustVO.FAQVO;
 import ptms.mvc.tpj.CustVO.PetVO;
+import ptms.mvc.tpj.CustVO.QnAVO;
 
 public interface MainDAO {
 
@@ -89,6 +91,26 @@ public interface MainDAO {
 	// 구독 업데이트 처리
 	public int updateSubscribe(Map<String, Object> map); 
 	
+	// qna 목록 갯수
+	public int qnaCount(Map<String, Object> map);
+	
+	// qna 목록 조회
+	public List<QnAVO> qnaSearch(Map<String, Object> map);
+	
+	// qna 등록
+	public int qnaAdd (QnAVO vo);
+	
+	// qna 수정
+	public int updateQna(QnAVO vo);
+	
+	// qna 삭제
+	public int deleteQna(int QNA_CD);
+	
+	// faq 목록 갯수
+	public int faqCount(int faq_cd);
+	
+	// faq 목록 조회
+	public List<FAQVO> faqSearch(Map<String, Object> map);
 	
 	//10.03 작성자 임지영
 	//고객 - 시터등록 안되어 있을시 시터프로필 수정 접근 금지

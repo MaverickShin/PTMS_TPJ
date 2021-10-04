@@ -11,7 +11,9 @@ import org.springframework.stereotype.Repository;
 
 import ptms.mvc.tpj.CustVO.CalendarVO;
 import ptms.mvc.tpj.CustVO.CustomerVO;
+import ptms.mvc.tpj.CustVO.FAQVO;
 import ptms.mvc.tpj.CustVO.PetVO;
+import ptms.mvc.tpj.CustVO.QnAVO;
 import ptms.mvc.tpj.Sitter_DAO.SitterDAO;
 
 @Repository
@@ -231,6 +233,71 @@ public class MainDAOImpl implements MainDAO {
 		
 		MainDAO dao = data.getMapper(MainDAO.class);
 		return dao.sitterSigninChk(CUST_ID);
+	}
+
+	
+	// qna 갯수
+	@Override
+	public int qnaCount(Map<String, Object> map) {
+		
+		MainDAO dao = data.getMapper(MainDAO.class);
+		
+		return dao.qnaCount(map);
+	}
+
+	// qna 목록 조회
+	@Override
+	public List<QnAVO> qnaSearch(Map<String, Object> map) {
+		
+		MainDAO dao = data.getMapper(MainDAO.class);
+		
+		return dao.qnaSearch(map);
+	}
+
+	// qna 등록
+	@Override
+	public int qnaAdd(QnAVO vo) {
+		
+		MainDAO dao = data.getMapper(MainDAO.class);
+		
+		return dao.qnaAdd(vo);
+	}
+
+	// qna 수정
+	@Override
+	public int updateQna(QnAVO vo) {
+		
+		MainDAO dao = data.getMapper(MainDAO.class);
+		
+		return dao.updateQna(vo);
+	}
+
+	
+	// qna 삭제
+	@Override
+	public int deleteQna(int QNA_CD) {
+		
+		MainDAO dao = data.getMapper(MainDAO.class);
+		
+		return dao.deleteQna(QNA_CD);
+	}
+
+	// faq 목록 갯수
+	@Override
+	public int faqCount(int fk_cd) {
+		
+		MainDAO dao = data.getMapper(MainDAO.class);
+		
+		return dao.faqCount(fk_cd);
+	}
+
+	// faq 목록 조회
+	@Override
+	public List<FAQVO> faqSearch(Map<String, Object> map) {
+		
+		MainDAO dao = data.getMapper(MainDAO.class);
+		
+		return dao.faqSearch(map);
 	}	
 
 }

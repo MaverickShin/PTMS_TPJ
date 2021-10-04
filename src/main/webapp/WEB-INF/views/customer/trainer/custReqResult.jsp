@@ -197,7 +197,7 @@ function refuse() {
 		    </div>
 		
 			<div class = "result_div">
-			    <c:if test="${selectCnt == 0}">
+			    <c:if test="${cnt == 0}">
 			    	<div class="about-author d-flex p-4 bg-light">
 				      <div class="desc">
 				        <h3></h3>
