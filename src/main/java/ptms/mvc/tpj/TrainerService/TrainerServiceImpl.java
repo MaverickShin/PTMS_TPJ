@@ -248,6 +248,9 @@ public class TrainerServiceImpl implements TrainerService{
 		System.out.println("trainerChkCnt : " + trainerChkCnt);
 		model.addAttribute("trainerChkCnt", trainerChkCnt);
 		
+		int signchkCnt = maindao.sitterSigninChk(CUST_ID);
+		model.addAttribute("signchkCnt", signchkCnt);
+		
 		TrainerVO vo = dao.TrainerDetail(CUST_ID);
 		
 		System.out.println("TA_ST : "+ vo.getTA_ST());

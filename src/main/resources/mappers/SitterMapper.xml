@@ -352,11 +352,15 @@
 	  	 FROM	
 	  	  (SELECT r.*, ROWNUM rNUM
 	  	    FROM(
-			 SELECT DISTINCT *
+			 SELECT *
 				FROM SITTER_REQUEST_TB
 				WHERE CUST_ID =#{CUST_ID}
 				AND SQ_ST=1
-				OR SQ_ST=3)r
+			 UNION 
+			  SELECT *
+				FROM SITTER_REQUEST_TB
+				WHERE CUST_ID =#{CUST_ID}
+				AND SQ_ST=3)r
 			)
 			 where rNUM >= #{start} and rNUM <= #{end}
 			 ORDER BY SQ_DT DESC

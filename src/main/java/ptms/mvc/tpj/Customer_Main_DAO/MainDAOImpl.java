@@ -1,7 +1,5 @@
 package ptms.mvc.tpj.Customer_Main_DAO;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,9 +10,9 @@ import org.springframework.stereotype.Repository;
 import ptms.mvc.tpj.CustVO.CalendarVO;
 import ptms.mvc.tpj.CustVO.CustomerVO;
 import ptms.mvc.tpj.CustVO.FAQVO;
+import ptms.mvc.tpj.CustVO.PayVO;
 import ptms.mvc.tpj.CustVO.PetVO;
 import ptms.mvc.tpj.CustVO.QnAVO;
-import ptms.mvc.tpj.Sitter_DAO.SitterDAO;
 
 @Repository
 public class MainDAOImpl implements MainDAO {
@@ -298,6 +296,30 @@ public class MainDAOImpl implements MainDAO {
 		MainDAO dao = data.getMapper(MainDAO.class);
 		
 		return dao.faqSearch(map);
-	}	
+	}
+	
+	/*
+	 *  날짜 : 21.10.05
+	 *  이름 : 임지영
+	 *  내용 : 결제이력 리스트 수
+	 */
+	@Override
+	public int getpayList(String CUST_ID) {
+		MainDAO dao = data.getMapper(MainDAO.class);
+		
+		return dao.getpayList(CUST_ID);
+	}
+
+	/*
+	 *  날짜 : 21.10.05
+	 *  이름 : 임지영
+	 *  내용 : 결제이력 리스트(BUYLIST_TB)
+	 */
+	@Override
+	public List<PayVO> payList(Map<String, Object> map) {
+		MainDAO dao = data.getMapper(MainDAO.class);
+		
+		return dao.payList(map);
+	}
 
 }

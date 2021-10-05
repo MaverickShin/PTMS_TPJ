@@ -1,13 +1,12 @@
 package ptms.mvc.tpj.Customer_Main_DAO;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import ptms.mvc.tpj.CustVO.CalendarVO;
 import ptms.mvc.tpj.CustVO.CustomerVO;
 import ptms.mvc.tpj.CustVO.FAQVO;
+import ptms.mvc.tpj.CustVO.PayVO;
 import ptms.mvc.tpj.CustVO.PetVO;
 import ptms.mvc.tpj.CustVO.QnAVO;
 
@@ -115,5 +114,15 @@ public interface MainDAO {
 	//10.03 작성자 임지영
 	//고객 - 시터등록 안되어 있을시 시터프로필 수정 접근 금지
 	public int sitterSigninChk(String CUST_ID);
+	
+	//10.05 작성자 임지영
+	// 내정보 관리 - 결제내역 리스트 수
+	public int getpayList(String CUST_ID);
+	
+	//10.05  작성자 임지영
+	// 내정보 관리 - 결제내역리스트
+	public List<PayVO> payList(Map<String, Object> map);
+	
+ 
 
 }

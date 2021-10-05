@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ptms.mvc.tpj.CustVO.PayVO;
 import ptms.mvc.tpj.Customer_Main_DAO.MainDAOImpl;
 import ptms.mvc.tpj.Customer_Main_Service.MainServiceImpl;
 import ptms.mvc.tpj.Sitter_Service.SitterServiceImpl;
@@ -591,7 +592,7 @@ public class MainController {
    // 반려인/펫 관리 - 훈련사 탈퇴
    @RequestMapping("TrainerDel")
    public String TrainerDel(HttpServletRequest req, Model model) {
-	   log.info("컨트롤러 - 반려인/펫 관리 - SitterProfile");
+	   log.info("컨트롤러 - 반려인/펫 관리 - TrainerDel");
 	   
 	   TrainerService.deleteTrainer(req, model);
 	   
@@ -634,13 +635,10 @@ public class MainController {
    @RequestMapping("buyList")
    public String buyList(HttpServletRequest req, Model model) {
       log.info("컨트롤러 - 반려인/펫 관리 - buyList");
-      // 서비스에서 결제내역 정보 가져오기
       
-      //고객 - 시터등록 안되어 있을시 시터프로필 수정 접근 금지
-        String CUST_ID = (String) req.getSession().getAttribute("cust_id");
-		int signchkCnt = dao.sitterSigninChk(CUST_ID);
-        model.addAttribute("signchkCnt", signchkCnt);
-    
+      	// 결제내역 정보 가져오기
+      	service.payList(req, model);
+      
         return "customer/mypage/buyList";
    }
    
