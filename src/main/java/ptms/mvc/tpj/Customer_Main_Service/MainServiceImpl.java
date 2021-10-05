@@ -80,19 +80,6 @@ public class MainServiceImpl implements MainService {
 		vo.setCUST_PH(hp);
 
 		vo.setCUST_EM(req.getParameter("cust_em"));
-		vo.setCUST_AGE(Integer.parseInt(req.getParameter("cust_age")));
-
-		String gen = req.getParameter("cust_gen");
-
-		int gender = 0;
-
-		if (gen.equals("남자"))
-			gender = 1;
-
-		vo.setCUST_GEN(gender);
-
-		vo.setJUMIN1(Integer.parseInt(req.getParameter("jumin1")));
-		vo.setJUMIN2(Integer.parseInt(req.getParameter("jumin2")));
 
 		vo.setZIPCODE(Integer.parseInt(req.getParameter("zipcode")));
 		String address1 = req.getParameter("address1");

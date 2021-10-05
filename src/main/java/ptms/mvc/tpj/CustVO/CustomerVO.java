@@ -12,10 +12,6 @@ public class CustomerVO extends User{
    private String CUST_NM;    // 고객 이름
    private String CUST_EM;    // 고객 이메일
    private String CUST_PH;    // 고객 연락처
-   private int CUST_GEN;       // 고객 성별
-   private int JUMIN1;       // 주민번호 앞자리
-   private int JUMIN2;       // 주민번호 뒷자리
-   private int CUST_AGE;       // 고객 나이
    private Date START_DT;       // 구독 시작일
    private Date END_DT;       // 구독 종료일
    private int ZIPCODE;      // 고객 우편번호
@@ -55,30 +51,6 @@ public class CustomerVO extends User{
 	}
 	public void setCUST_PH(String cUST_PH) {
 		CUST_PH = cUST_PH;
-	}
-	public int getCUST_GEN() {
-		return CUST_GEN;
-	}
-	public void setCUST_GEN(int cUST_GEN) {
-		CUST_GEN = cUST_GEN;
-	}
-	public int getJUMIN1() {
-		return JUMIN1;
-	}
-	public void setJUMIN1(int jUMIN1) {
-		JUMIN1 = jUMIN1;
-	}
-	public int getJUMIN2() {
-		return JUMIN2;
-	}
-	public void setJUMIN2(int jUMIN2) {
-		JUMIN2 = jUMIN2;
-	}
-	public int getCUST_AGE() {
-		return CUST_AGE;
-	}
-	public void setCUST_AGE(int cUST_AGE) {
-		CUST_AGE = cUST_AGE;
 	}
 	public Date getSTART_DT() {
 		return START_DT;
