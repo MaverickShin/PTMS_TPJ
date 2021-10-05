@@ -53,10 +53,7 @@ public interface MainDAO {
 	public int updateCustomer2(CustomerVO vo);
 	
 	// 회원 탈퇴 (CUSTOMER_TB)
-	public int deleteCustomer(int ZIP_CD);
-	
-	// 회원 탈퇴 (ZIPCODES_TB)
-	public int deleteCustomer2(int ZIP_CD);
+	public int deleteCustomer(String CUST_ID);
 	
 	// 펫 목록
 	public List<PetVO> getPetList(String CUST_ID);

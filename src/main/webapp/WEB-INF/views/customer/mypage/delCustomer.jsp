@@ -16,8 +16,9 @@
 
 <c:if test="${deleteCnt != 0 }">
 	<script type="text/javascript">
-		alert("회원 탈퇴 되었습니다!!");
-		window.location='/tpj/cust/';
+		alert("회원 탈퇴 되었습니다. 고객님의 만족을 위해 최선을 다하겠습니다.");
+		session.invalidate();
+		window.location='/tpj/cust/main';
 	</script>
 </c:if>
 </body>

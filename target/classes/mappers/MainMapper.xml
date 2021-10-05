@@ -65,13 +65,8 @@
 	<!-- 3. 우편번호가 다를시 우편번호등록 사용 -->
 	
 	<!-- 회원 탈퇴 (CUSTOMER_TB) -->
-	<delete id="deleteCustomer" parameterType="int">
-		delete from CUSTOMER_TB where ZIPCODE = #{zipcode}
-	</delete>
-	
-	<!-- 회원 탈퇴 (ZIPCODES_TB) -->
-	<delete id="deleteCustomer2" parameterType="int">
-		delete from ZIPCODES_TB where ZIP_CD = #{zipcode}
+	<delete id="deleteCustomer" parameterType="String">
+		delete from CUSTOMER_TB where cust_id = #{CUST_ID}
 	</delete>
 	
 	<!-- 펫 목록 조회 -->

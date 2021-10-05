@@ -204,12 +204,11 @@ public class MainServiceImpl implements MainService {
 	// 회월 탈퇴
 	@Override
 	public void custDelete(HttpServletRequest req, Model model) {
-		int ZIP_CD = Integer.parseInt(req.getParameter("zipcode"));
-		int deleteCnt = dao.deleteCustomer2(ZIP_CD);
-		if (deleteCnt != 0) {
-			dao.deleteCustomer(ZIP_CD);
-		}
-
+		String CUST_ID = (String)req.getSession().getAttribute("cust_id");
+		int deleteCnt = dao.deleteCustomer(CUST_ID);
+		System.out.println("deleteCnt : " + deleteCnt);
+		
+		
 		model.addAttribute("deleteCnt", deleteCnt);
 	}
 

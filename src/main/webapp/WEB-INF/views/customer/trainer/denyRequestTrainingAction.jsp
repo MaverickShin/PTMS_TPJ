@@ -12,7 +12,7 @@
 	<c:if test="${updateCnt == 1}">
 		<script type="text/javascript">
 			alert("요청이 거절되었습니다.");
-			window.location="denyTrainingList";
+			window.location="requestTrainer";
 		</script>
 	</c:if>
 	

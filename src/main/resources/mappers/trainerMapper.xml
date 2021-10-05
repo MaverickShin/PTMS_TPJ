@@ -361,9 +361,14 @@
 		        from (select distinct tr.*
 		                from TRAINER_REQUEST_TB tr, TRAINER_TB tt
 		                where tr.TA_CD = tt.TA_CD
-		                and tt.CUST_ID = #{id}
+		                and tr.CUST_ID = #{id}
 		                and tr.TQ_ST = 1
-		                or tr.TQ_ST = 3) cu)
+                        union
+		                select distinct tr.*
+		                from TRAINER_REQUEST_TB tr, TRAINER_TB tt
+		                where tr.TA_CD = tt.TA_CD
+		                and tr.CUST_ID = #{id}
+		                and tr.TQ_ST = 3) cu)
 		where rNum >= #{start} and rNum <= #{end}
 		]]>
 	</select>

@@ -134,16 +134,9 @@ public class MainDAOImpl implements MainDAO {
 
 	// 회원 탈퇴 (CUSTOMER_TB)
 	@Override
-	public int deleteCustomer(int ZIP_CD) {
+	public int deleteCustomer(String CUST_ID) {
 		MainDAO dao = data.getMapper(MainDAO.class);
-		return dao.deleteCustomer(ZIP_CD);
-	}
-
-	// 회원 탈퇴 (ZIPCODES_TB)
-	@Override
-	public int deleteCustomer2(int ZIP_CD) {
-		MainDAO dao = data.getMapper(MainDAO.class);
-		return dao.deleteCustomer2(ZIP_CD);
+		return dao.deleteCustomer(CUST_ID);
 	}
 	
 	// 펫 목록

@@ -194,7 +194,7 @@
 													<div class="form-group">
 														<input type="submit" value="수정" class="btn btn-primary">
 														<input type="button" value="탈퇴하기" class="btn btn-primary"
-															onclick="if(confirm('정말 회원 탈퇴하시겠습니까?')) window.location='delCustomer?zipcode=${CustomerVO.getZIPCODE()}'">
+															onclick="if(confirm('정말 회원 탈퇴하시겠습니까?')) window.location='delCustomer'">
 													</div>
 												</div>
 											</div>
