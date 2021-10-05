@@ -196,7 +196,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
+
 	<c:if test="${doubleChk == 0}">
 		<script type="text/javascript">
 			alert("펫시터 등록 후 이용가능한 페이지 입니다.가입을  통해 펫시터로 활동해 보세요.");
@@ -244,102 +244,106 @@
 					<p id="sitcenter_button" onclick="sitterserPayFinish();">매칭 완료</p>
 				</div>
 
-				<div class="result_div">
+				<div class="result_div"
+					style="width: 100%; padding-top: 10px; padding-bottom: 10px;">
 
-					<c:if test="${cnt == 0}">
-						<div class="row" id="divs"
-							style="width: 700px; margin-left: auto; margin-right: auto; margin-top: 30px;">
-							<div class="col-md-12">
-								<h3></h3>
-								
-								<p>아직 들어온 의뢰가 없습니다. 일정 조정으로 매칭률을 높여보세요!</p>
-
-							</div>
-						</div>
-					</c:if>
-
-					<c:if test="${cnt > 0}">
-						<div class="row" id="divs"
-							style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 30px; width: 700px; margin-left: auto; margin-right: auto; margin-top: 10px;">
-							<c:forEach var="li" items="${list}">
-								<div class="col-md-12" style="background-color: #f5f5f5;">
-									<h5>고객 : ${li.CUST_ID}</h5>
-									&nbsp;
-									<h6>서비스 요청 펫 : ${li.SQ_AMT}</h6>
-									<p>의뢰시작일 : ${li.START_DAY}</p>
-									<p>의뢰종료일 : ${li.END_DAY}</p>
-									<p>고객요청서비스 : ${li.REQ_SV}</p>
-									<p>금액 : ${li.SQ_FEE} 원</p>
-									<c:if test="${li.SQ_ST == 0}">
-										<input type="button" value="수락" class="btn btn-primary"
-											style="backgrount-color: #a3cde3;"
-											onclick="window.location='sitterAccept?SQ_CD=${li.SQ_CD}'">
-										<input type="button" value="거절" class="btn btn-primary"
-											style="backgrount-color: #a3cde3;"
-											onclick="window.location='sitterRefuse?SQ_CD=${li.SQ_CD}'">
-									</c:if>
-								</div>
-							</c:forEach>
-						</div>
-
-						<c:if test="${endPage != 1}">
-							<div class="row">
-								<div class="col-md-12" align="center">
-									<div class="block-27">
-										<ul>
-											<li><a href="${s}" class= "pageMove">&lt;&lt;</a>
-											<li><a href="${s}?pageNum=${startPage - pageBlock}">&lt;</a></li>
-
-											<c:forEach var="i" begin="${startPage}" end="${endPage}">
-												<c:if test="${i == currentPage}">
-													<li class="active"><span><a
-															href="${s}?pageNum=${i}" class= "pageMove">${i}</a></span></li>
-												</c:if>
-
-												<c:if test="${i != currentPage}">
-													<li><span><a href="${s}?pageNum=${i}" class= "pageMove">${i}</a></span></li>
-												</c:if>
-
-											</c:forEach>
-
-											<li><a href="${s}?pageNum=${startPage + pageBlock}" class= "pageMove">&gt;</a></li>
-											<li><a href="${s}?pageNum=${pageCount}" class= "pageMove">&gt;&gt;</a></li>
-										</ul>
-									</div>
+					<div class="container">
+						<c:if test="${cnt == 0}">
+							<div class="row" id="divs"
+								style="width: 700px; margin-left: auto; margin-right: auto; margin-top: 30px;">
+								<div class="col-md-12">
+									<h3></h3>
+									<p>아직 들어온 의뢰가 없습니다. 일정 조정으로 매칭률을 높여보세요!</p>
 								</div>
 							</div>
 						</c:if>
 
-		<c:if test="${endPage == 1}">
-			<div class="row">
-				<div class="col-md-12" align="center">
-					<div class="col-md-12" align="center">
-					<div class="block-27">
-						<ul>
-							<li><a href="">&lt;&lt;</a></li>
-							<li><a href="">&lt;</a></li>
+						<c:if test="${cnt > 0}">
+							<div class="row" id="divs"
+								style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 30px; width: 700px; margin-left: auto; margin-right: auto; margin-top: 10px;">
+								<c:forEach var="li" items="${list}">
+									<div class="col-md-12" style="background-color: #f5f5f5;">
+										<h5>고객 : ${li.CUST_ID}</h5>
+										&nbsp;
+										<h6>서비스 요청 펫 : ${li.SQ_AMT}</h6>
+										<p>의뢰시작일 : ${li.START_DAY}</p>
+										<p>의뢰종료일 : ${li.END_DAY}</p>
+										<p>고객요청서비스 : ${li.REQ_SV}</p>
+										<p>금액 : ${li.SQ_FEE} 원</p>
+										<c:if test="${li.SQ_ST == 0}">
+											<input type="button" value="수락" class="btn btn-primary"
+												style="backgrount-color: #a3cde3;"
+												onclick="window.location='sitterAccept?SQ_CD=${li.SQ_CD}'">
+											<input type="button" value="거절" class="btn btn-primary"
+												style="backgrount-color: #a3cde3;"
+												onclick="window.location='sitterRefuse?SQ_CD=${li.SQ_CD}'">
+										</c:if>
+									</div>
+								</c:forEach>
+							</div>
 
-							<c:forEach var="i" begin="${startPage}" end="${endPage}">
-								<c:if test="${i == currentPage}">
-									<li class="active"><span><a
-											href="">${i}</a></span></li>
-								</c:if>
+							<c:if test="${endPage != 1}">
+								<div class="row">
+									<div class="col-md-12" align="center">
+										<div class="block-27">
+											<ul>
+												<li><a href="${s}" class="pageMove">&lt;&lt;</a>
+												<li><a href="${s}?pageNum=${startPage - pageBlock}">&lt;</a></li>
 
-								<c:if test="${i != currentPage}">
-									<li><span><a href="">${i}</a></span></li>
-								</c:if>
+												<c:forEach var="i" begin="${startPage}" end="${endPage}">
+													<c:if test="${i == currentPage}">
+														<li class="active"><span><a
+																href="${s}?pageNum=${i}" class="pageMove">${i}</a></span></li>
+													</c:if>
 
-							</c:forEach>
+													<c:if test="${i != currentPage}">
+														<li><span><a href="${s}?pageNum=${i}"
+																class="pageMove">${i}</a></span></li>
+													</c:if>
 
-							<li><a href="">&gt;</a></li>
-							<li><a href="">&gt;&gt;</a></li>
-						</ul>
+												</c:forEach>
+
+												<li><a href="${s}?pageNum=${startPage + pageBlock}"
+													class="pageMove">&gt;</a></li>
+												<li><a href="${s}?pageNum=${pageCount}"
+													class="pageMove">&gt;&gt;</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</c:if>
+
+
+							<c:if test="${endPage == 1}">
+								<div class="row">
+									<div class="col-md-12" align="center">
+										<div class="col-md-12" align="center">
+											<div class="block-27">
+												<ul>
+													<li><a href="">&lt;&lt;</a></li>
+													<li><a href="">&lt;</a></li>
+
+													<c:forEach var="i" begin="${startPage}" end="${endPage}">
+														<c:if test="${i == currentPage}">
+															<li class="active"><span><a href="">${i}</a></span></li>
+														</c:if>
+
+														<c:if test="${i != currentPage}">
+															<li><span><a href="">${i}</a></span></li>
+														</c:if>
+
+													</c:forEach>
+
+													<li><a href="">&gt;</a></li>
+													<li><a href="">&gt;&gt;</a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</c:if>
+						</c:if>
 					</div>
-				</div>
-				</div>
-			</div>
-		</c:if>
-					</c:if>
 				</div>
 			</section>
 		</div>
@@ -417,7 +421,7 @@
 			});
 			
 		// [>] 버튼  조건
-		}else if(param == right_one && pagecount > end) {
+		} else if(param == right_one && pagecount > end) {
 			
 			$.ajax({
 				type : "get",

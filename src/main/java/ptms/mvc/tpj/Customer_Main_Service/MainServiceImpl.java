@@ -24,6 +24,7 @@ import org.springframework.ui.Model;
 import ptms.mvc.tpj.CustVO.CalendarVO;
 import ptms.mvc.tpj.CustVO.CustomerVO;
 import ptms.mvc.tpj.CustVO.FAQVO;
+import ptms.mvc.tpj.CustVO.PayVO;
 import ptms.mvc.tpj.CustVO.PetVO;
 import ptms.mvc.tpj.CustVO.QnAVO;
 import ptms.mvc.tpj.Customer_Main_DAO.MainDAOImpl;
@@ -1118,6 +1119,84 @@ public class MainServiceImpl implements MainService {
 			req.setAttribute("currentPage", currentPage);	// 현재페이지
 		}
 		
+	}
+
+	// 21.10.05 임지영
+	// 내 정보 수정 - 결제내역
+	@Override
+	public void payList(HttpServletRequest req, Model model) {
+		System.out.println("service ==> payList");
+	
+        String CUST_ID = (String) req.getSession().getAttribute("cust_id");
+        	// 페이징
+     		int pageSize = 12; // 한 페이지당 출력할 글 갯수
+     		int pageBlock = 3; // 한 블럭당 페이지 갯수
+
+     		int cnt = 0; // 글갯수
+     		int start = 0; // 현재 페이지 시작 글번호
+     		int end = 0; // 현재 페이지 마지막 글번호
+     		int number = 0; // 출력용 글번호
+     		String pageNum = "";// 페이지번호
+     		int currentPage = 0;// 현재 페이지
+
+     		int pageCount = 0; // 페이지 갯수
+     		int startPage = 0; // 시작페이지
+     		int endPage = 0; // 마지막 페이지
+     		
+     		pageNum = req.getParameter("pageNum");
+
+    		if (pageNum == null) {
+    			pageNum = "1"; // 첫 페이지를 1페이지로 지정
+    		}
+     		
+    		currentPage = Integer.parseInt(pageNum);
+    		System.out.println("currentPage : " + currentPage);
+    		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
+    		start = (currentPage - 1) * pageSize + 1;
+    		end = start + pageSize - 1;
+    		number = cnt - (currentPage - 1) * pageSize;
+    		startPage = (currentPage / pageBlock) * pageBlock + 1;
+    		if (currentPage % pageBlock == 0)
+    			startPage -= pageBlock;
+
+    		System.out.println("startPage : " + startPage);
+    		endPage = startPage + pageBlock - 1;
+    		if (endPage > pageCount)
+    			endPage = pageCount;
+    		System.out.println("endPage : " + endPage);
+    		System.out.println("result : " + pageCount);
+    		System.out.println("start : " + start);
+    		System.out.println("end : " + end);
+    		
+        //고객 - 시터등록 안되어 있을시 시터프로필 수정 접근 금지
+        int signchkCnt = dao.sitterSigninChk(CUST_ID);
+        System.out.println("시터등록확인 signchkCnt : " + signchkCnt);
+        List<PayVO> list = null;
+        Map<String, Object> map = new HashMap<String, Object>();
+          //결제내역 건수
+          cnt = dao.getpayList(CUST_ID);
+          System.out.println("결제내역건수 cnt : " + cnt);
+          
+        if(cnt > 0) {
+			map.put("CUST_ID", CUST_ID);
+			map.put("start", start);
+			map.put("end", end);
+			
+			//결제내역
+			list = dao.payList(map);
+		 
+		 model.addAttribute("startPage", startPage); // 시작페이지
+		 model.addAttribute("endPage", endPage); // 마지막페이지
+		 model.addAttribute("pageBlock", pageBlock); // 한 블럭당 페이지 갯수
+		 model.addAttribute("pageCount", pageCount); // 페이지 갯수
+		 model.addAttribute("currentPage", currentPage); // 현재페이지
+        }
+        
+        model.addAttribute("signchkCnt", signchkCnt);
+        model.addAttribute("list", list);
+        model.addAttribute("pageNum", pageNum); // 페이지 번호
+		model.addAttribute("number", number); // 출력용 글번호
+		model.addAttribute("cnt", cnt);
 	}
 
 }

@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@include file="../../setting.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="_csrf_header" content="${_csrf.headerName}">
-<meta name="_csrf" content="${_csrf.token}"> 
+<meta name="_csrf" content="${_csrf.token}">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 	$(document).ready(function() {
@@ -278,36 +278,41 @@
 												<input type="button" name="Mysitterreview" value="후기작성"
 													onclick="window.location='Mysitterreview??SIT_ID=${li.SIT_ID}&SQ_CD=${li.SQ_CD}'">
 											</p>
-										 </c:if> 
+										</c:if>
 									</c:if>
 								</div>
 							</c:forEach>
 						</div>
 
-						<div class = "row">
-                              <div class="col-md-12" align="center">
-                                 <div class="block-27">
-                                      <ul>
-                                        <li><a class ="pageMoves" onclick="pageMove('');" >&lt;&lt;</a>
-                                        <li><a class ="pageMoves" onclick="pageMove(${startPage - pageBlock});">&lt;</a></li>
-                                        
-                                        <c:forEach var="i" begin="${startPage}" end="${endPage}">
-                                       <c:if test="${i == currentPage}">
-                                          <li class="active"><span><a class ="pageMoves" onclick = "pageNumbers(${i});">${i}</a></span></li>
-                                       </c:if>
-               
-                                       <c:if test="${i != currentPage}">
-                                          <li><span><a class ="pageMoves" onclick = "pageNumbers(${i});">${i}</a></span></li>
-                                       </c:if>
-                                       
-                                    </c:forEach> 
-                                        
-                                        <li><a class ="pageMoves" onclick = "pageMove(${startPage + pageBlock});">&gt;</a></li>
-                                        <li><a class ="pageMoves" onclick = "pageMove(${pageCount});">&gt;&gt;</a></li>
-                                      </ul>
-                                 </div>
-                              </div>
-                           </div>
+						<div class="row">
+							<div class="col-md-12" align="center">
+								<div class="block-27">
+									<ul>
+										<li><a class="pageMoves" onclick="pageMove('');">&lt;&lt;</a>
+										<li><a class="pageMoves"
+											onclick="pageMove(${startPage - pageBlock});">&lt;</a></li>
+
+										<c:forEach var="i" begin="${startPage}" end="${endPage}">
+											<c:if test="${i == currentPage}">
+												<li class="active"><span><a class="pageMoves"
+														onclick="pageNumbers(${i});">${i}</a></span></li>
+											</c:if>
+
+											<c:if test="${i != currentPage}">
+												<li><span><a class="pageMoves"
+														onclick="pageNumbers(${i});">${i}</a></span></li>
+											</c:if>
+
+										</c:forEach>
+
+										<li><a class="pageMoves"
+											onclick="pageMove(${startPage + pageBlock});">&gt;</a></li>
+										<li><a class="pageMoves"
+											onclick="pageMove(${pageCount});">&gt;&gt;</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
 					</c:if>
 				</div>
 			</div>
@@ -388,7 +393,7 @@
 			});
 			
 		// [>] 버튼  조건
-		} else if(param == right_one && pagecount > end) {
+		}else if(param == right_one && pagecount > end) {
 			
 			$.ajax({
 				type : "get",

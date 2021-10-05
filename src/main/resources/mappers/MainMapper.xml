@@ -202,4 +202,29 @@
 		]]>
 	</select>
 	
+	<!-- 결제이력 리스트 수 -->
+	<select id="getpayList" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM BUYLIST_TB
+		WHERE CUST_ID = #{CUST_ID}
+	</select>
+	
+	<!-- 결제이력 리스트(BUYLIST_TB) -->
+	<select id="payList" parameterType="java.util.Map" resultType="ptms.mvc.tpj.CustVO.PayVO">
+		<![CDATA[
+	  	 SELECT *
+	  	 FROM			
+			(SELECT r.*  ,ROWNUM rNUM
+			  FROM 
+			   (SELECT b.BY_CD, b.CUST_ID, b.PAYKIND_CD, b.BY_SUM, b.BY_ST, b.BY_DT , p.PAY_KIND
+			  	FROM BUYLIST_TB b, PAYKIND_TB p
+			  	WHERE b.PAYKIND_CD = p.PAYKIND_CD
+				AND CUST_ID = #{CUST_ID}
+				)r
+			 )	
+			 WHERE rNum >= #{start} AND rNum <= #{end}	
+			 ORDER BY BY_DT DESC
+		]]>	
+	</select>
+	
 </mapper>

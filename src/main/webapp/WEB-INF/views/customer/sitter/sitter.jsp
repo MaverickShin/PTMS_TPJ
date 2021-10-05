@@ -77,7 +77,7 @@
 													<label class = "chk_label1" for = "pet_li_${st.index}">
 														<input type="checkbox" id = "pet_li_${st.index}" name="pk_cd" class = "sel_chk1" value="${li.PK_CD}">
 														<span class="checkbox_icon"></span>
-														<span class = "list_label_span2" >${li.PET_NM}(펫종류 : ${li.PK_CD})</span>
+														<span class = "list_label_span2" >${li.PET_NM}</span>
 													</label>
 												</p>
 						        			</c:forEach>

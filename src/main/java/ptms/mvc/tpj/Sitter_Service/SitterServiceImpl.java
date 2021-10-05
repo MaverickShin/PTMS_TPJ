@@ -104,7 +104,7 @@ public class SitterServiceImpl implements SitterService {
 		System.out.println("CUST_ID : " + CUST_ID);
 
 		SitterVO vo = sitterDao.SitterDetail(CUST_ID);
-
+		
 		System.out.println("vo : " + vo);
 		System.out.println("SIT_ST : " + vo.getSIT_ST());
 	}

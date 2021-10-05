@@ -86,4 +86,7 @@ public interface MainService {
 	// FAQ  목록
 	public void faqList(HttpServletRequest req, Model model);
 	
+	// 21.10.05 임지영
+	// 내 정보 수정 - 결제내역
+	public void payList(HttpServletRequest req, Model model);
 }
