@@ -240,19 +240,6 @@ function nextJumin2(){
 									</div>
 								</div>
 								
-							    <div class="col-md-2">
-									<div class="form-group">
-   										<div class="form-field">
-       										<div class="select-wrap">
-       											<label class="label" for="cust_gen">성별</label>
-					                      		<select name="cust_gen" id="cust_gen" class="form-control">
-					                      			<option value="0">여성</option>
-					                        		<option value="1">님성</option>
-                 								</select>
-                 							</div>
-             							</div>
-   									</div>
-								</div>
 								
 								<div class="col-md-3">
 									<div class="form-group">
@@ -279,27 +266,6 @@ function nextJumin2(){
 									<div class="form-group">
 										<label class="label" for="cust_nm">이름</label>
 										<input type="text" class="form-control" name="cust_nm" id="cust_nm" placeholder="이름">
-									</div>
-								</div>
-								
-								<div class="col-md-6">
-									<div class="form-group">
-										<label class="label" for="cust_age">나이</label>
-										<input type="number" class="form-control" maxlength="3" min="1" name="cust_age" id="cust_age" placeholder="나이">
-									</div>
-								</div>
-								
-								<div class="col-md-6">
-									<div class="form-group">
-										<label class="label" for="jumin1">주민번호 앞자리</label>
-										<input type="text" class="form-control" name="jumin1" id="jumin1" maxlength="6" placeholder="주민번호 앞자리">
-									</div>
-								</div>
-								
-								<div class="col-md-6">
-									<div class="form-group">
-										<label class="label" for="jumin2">주민번호 뒷자리</label>
-										<input type="password" class="form-control" name="jumin2" id="jumin2" maxlength="7" placeholder="주민번호 뒷자리">
 									</div>
 								</div>
 								
