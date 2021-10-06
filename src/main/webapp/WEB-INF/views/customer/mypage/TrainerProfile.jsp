@@ -243,14 +243,8 @@ function updateCheck(){
 														<div class="col-md-12">
 															<div class="form-group">
 																<label class="label" for="trainingDay">훈련가능일</label><br>
-																<input type="date" class="iptags" name="START_DAY">~
-																<input type="date" class="iptags" name="END_DAY">
-																<br>
-																<fmt:formatDate value="${dto.getSTART_DAY() }"
-																	pattern="yyyy-MM-dd" />
-																&nbsp; ~ &nbsp;
-																<fmt:formatDate value="${dto.getEND_DAY() }"
-																	pattern="yyyy-MM-dd" />
+																<input type="date" class="iptags" name="START_DAY" value="${dto.getSTART_DAY()}">~
+																<input type="date" class="iptags" name="END_DAY" value="${dto.getEND_DAY()}">
 																<br> 조정가능<input type="checkbox" class="iptags"
 																	name="ADJUSTABLE" value="1">
 															</div>
