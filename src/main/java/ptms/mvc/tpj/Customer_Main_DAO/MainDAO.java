@@ -115,5 +115,8 @@ public interface MainDAO {
 	//10.03 작성자 임지영
 	//고객 - 시터등록 안되어 있을시 시터프로필 수정 접근 금지
 	public int sitterSigninChk(String CUST_ID);
+	
+	//내정보(훈련사 프로필) - 등록이 안되어 있으면 접근 불가
+	public int trainerChk(String CUST_ID);
 
 }

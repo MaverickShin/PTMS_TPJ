@@ -89,6 +89,7 @@ public class SitterServiceImpl implements SitterService {
 	@Override
 	public void deleteSitter(HttpServletRequest req, Model model) {
 		int SIT_ID = Integer.parseInt(req.getParameter("SIT_ID"));
+		System.out.println("시터 탈퇴 SIT_ID : "+req.getParameter("SIT_ID"));
 		int deleteCnt = sitterDao.deleteSitter2(SIT_ID);
 		if (deleteCnt != 0) {
 			sitterDao.deleteSitter(SIT_ID);
@@ -106,7 +107,9 @@ public class SitterServiceImpl implements SitterService {
 		SitterVO vo = sitterDao.SitterDetail(CUST_ID);
 
 		System.out.println("vo : " + vo);
-		System.out.println("SIT_ST : " + vo.getSIT_ST());
+		System.out.println("수정화면 SIT_ST : " + vo.getSIT_ST());
+		
+		model.addAttribute("dto",vo);
 	}
 
 	// 시터 프로필 화면 수정 처리
@@ -114,6 +117,8 @@ public class SitterServiceImpl implements SitterService {
 	public void updateSitterAction(HttpServletRequest req, Model model) throws ParseException {
 		SitterVO sVo = new SitterVO();
 
+		System.out.println("수정처리 SIT_ID : "+req.getParameter("SIT_ID"));
+		
 		int hiddenSIT_ID = Integer.parseInt(req.getParameter("SIT_ID"));
 		String id = (String) req.getSession().getAttribute("cust_id");
 		System.out.println("hiddenSIT_ID : " + hiddenSIT_ID);

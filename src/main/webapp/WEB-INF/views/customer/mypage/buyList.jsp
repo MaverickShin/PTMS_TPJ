@@ -36,7 +36,7 @@
 						<span class="mr-2"><a href="main">Home<i
 								class="ion-ios-arrow-forward"></i></a></span>
 					</p>
-					<h1 class="mb-0 bread">SitterProfile</h1>
+					<h1 class="mb-0 bread">결제내역</h1>
 				</div>
 			</div>
 		</div>

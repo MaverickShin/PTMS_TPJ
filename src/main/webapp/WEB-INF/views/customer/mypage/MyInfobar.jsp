@@ -24,8 +24,12 @@
 			<c:if test="${signchkCnt != 0}">
 				<li class="div_li"><a href="/tpj/cust/SitterProfile">시터 프로필</a></li>
 			</c:if>
-			<li class="div_li"><a href="/tpj/cust/TrainerProfile">훈련사
-					프로필</a></li>
+			<c:if test="${trainerChk == 0}">
+				<li class="div_li"><a onclick="if(confirm('훈련사 등록 후  이용가능합니다. 등록 하시겠습니까?')) window.location = '/tpj/trainer/applyTrainer';">훈련사 프로필</a></li>
+			</c:if>
+			<c:if test="${trainerChk != 0}">
+				<li class="div_li"><a href="/tpj/cust/TrainerProfile">훈련사 프로필</a></li>
+			</c:if>
 			<li class="div_li"><a href="/tpj/cust/buyList">결제내역</a></li>
 		</ul>
 	</nav>
