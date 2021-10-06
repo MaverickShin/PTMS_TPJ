@@ -6,13 +6,29 @@
 <head>
 <meta charset="UTF-8">
 <title>고객-로그인</title>
+<script type="text/javascript">
+function loginCheck() {
+	// 아이디 입력 확인
+	if (!document.joinInform.cust_id.value) {
+		alert("아이디를 입력하세요");
+		document.joinInform.cust_id.focus();
+		return false; // 동작 중지	
+	} 
+	
+	else if (!document.joinInform.cust_pwd.value) {// 비밀번호 확인
+		alert("비밀번호를 입력하세요");
+		document.joinInform.cust_pwd.focus();
+		return false;
+	}
+}
+</script>
 </head>
 <body>
 
 	<%@ include file="../../main/header.jsp"%>
 
 	<section style = "width:700px; margin-left:auto; margin-right:auto; margin-top:30px;">
-	<form name="joinInform" action="${cu}loginaction" method="post">
+	<form name="joinInform" action="${cu}loginaction" method="post" onsubmit="return loginCheck();">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			<div class="row no-gutters" >
 				<div class="col-md-7" style ="max-width: 100% !important; flex:0 0 100% !important">

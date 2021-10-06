@@ -136,8 +136,19 @@ public class MainServiceImpl implements MainService {
 
 			selectCnt = 1;
 		}
+		
+		//고객 - 훈련사 등록이 안되어 있으면 훈련사프로필 접근 불가
+		int trainerChk = dao.trainerChk(CUST_ID);
+		if(passordEncoder.matches(cust_pwd, encoderpwd)) {
+			vo = dao.selectCustomer(id);
+
+			vo.setCUST_PWD(cust_pwd);
+
+			selectCnt = 1;
+		}
 
 		model.addAttribute("signchkCnt", signchkCnt);
+		model.addAttribute("trainerChk", trainerChk);
 		model.addAttribute("selectCnt", selectCnt);
 		model.addAttribute("CustomerVO", vo);
 		System.out.println("회원정보 encoderpwd : " + encoderpwd);

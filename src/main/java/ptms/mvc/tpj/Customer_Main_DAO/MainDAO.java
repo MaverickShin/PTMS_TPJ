@@ -121,5 +121,7 @@ public interface MainDAO {
 	public List<PayVO> payList(Map<String, Object> map);
 	
  
+	//내정보(훈련사 프로필) - 등록이 안되어 있으면 접근 불가
+	public int trainerChk(String CUST_ID);
 
 }

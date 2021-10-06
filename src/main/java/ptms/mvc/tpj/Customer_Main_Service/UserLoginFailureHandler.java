@@ -34,8 +34,8 @@ public class UserLoginFailureHandler implements AuthenticationFailureHandler{
 			AuthenticationException exception) throws IOException, ServletException {
 	
 		System.out.println("실패 ");
-		String strid =  request.getParameter("id");
-		String strPwd = request.getParameter("pwd");
+		String strid =  request.getParameter("cust_id");
+		String strPwd = request.getParameter("cust_pwd");
 		
 		// 아이디 확인
 		int cnt = sqlSession.selectOne("ptms.mvc.tpj.Customer_Main_DAO.MainDAO.idCheck",strid);

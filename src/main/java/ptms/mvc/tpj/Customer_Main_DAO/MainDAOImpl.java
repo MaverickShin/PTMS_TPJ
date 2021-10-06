@@ -225,6 +225,15 @@ public class MainDAOImpl implements MainDAO {
 		MainDAO dao = data.getMapper(MainDAO.class);
 		return dao.sitterSigninChk(CUST_ID);
 	}
+	
+	//훈련사 등록이 안되어 있으면 훈련사프로필 접근 불가
+	@Override
+	public int trainerChk(String CUST_ID) {
+		System.out.println("dao ==> trainerChk");
+		
+		MainDAO dao = data.getMapper(MainDAO.class);
+		return dao.trainerChk(CUST_ID);
+	}
 
 	
 	// qna 갯수
@@ -235,6 +244,7 @@ public class MainDAOImpl implements MainDAO {
 		
 		return dao.qnaCount(map);
 	}
+
 
 	// qna 목록 조회
 	@Override

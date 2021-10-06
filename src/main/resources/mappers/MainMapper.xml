@@ -143,6 +143,13 @@
 		WHERE CUST_ID = #{CUST_ID}
 	</select>	
 	
+	<!-- 훈련사등록이 안되어있으면 훈련사 프로필 접근 불가 -->
+	<select id="trainerChk" parameterType="String" resultType="int">
+		select count(*)
+		from TRAINER_TB
+		where CUST_ID = #{CUST_ID}
+	</select>
+	
 	<!-- qna 목록 갯수 -->
 	<select id="qnaCount" resultType="int">
 		SELECT COUNT(*) as cnt FROM QNA_TB WHERE CUST_ID = #{cust_id} AND QK_CD = ${qk_cd}

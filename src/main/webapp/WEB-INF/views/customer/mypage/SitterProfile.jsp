@@ -188,6 +188,8 @@ function updateCheck(){
 																&nbsp; ~ &nbsp;
 																<fmt:formatDate value="${dto.getWK_END() }"
 																	pattern="yyyy-MM-dd" />
+																<input type="date" class="iptags" name="WK_START" value="${dto.getWK_START()}">
+																~ <input type="date" class="iptags" name="WK_END" value="${dto.getWK_END()}">
 															</div>
 														</div>
 
