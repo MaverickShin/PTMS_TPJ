@@ -180,14 +180,6 @@ function updateCheck(){
 														<div class="col-md-6">
 															<div class="form-group">
 																<label class="label" for="trainingDay">서비스 가능일</label> <br>
-																<input type="date" class="iptags" name="WK_START" >
-																~ <input type="date" class="iptags" name="WK_END">
-																<br>
-																<fmt:formatDate value="${dto.getWK_START() }"
-																	pattern="yyyy-MM-dd" />
-																&nbsp; ~ &nbsp;
-																<fmt:formatDate value="${dto.getWK_END() }"
-																	pattern="yyyy-MM-dd" />
 																<input type="date" class="iptags" name="WK_START" value="${dto.getWK_START()}">
 																~ <input type="date" class="iptags" name="WK_END" value="${dto.getWK_END()}">
 															</div>
