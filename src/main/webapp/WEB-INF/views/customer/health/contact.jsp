@@ -198,7 +198,7 @@ $(document).ready(function(){
         <div class="row no-gutters slider-text align-items-end">
           <div class="col-md-9 ftco-animate pb-5">
           	<p class="breadcrumbs mb-2"><span class="mr-2"><a href="contact">Trainer<i class="ion-ios-arrow-forward"></i></a></span> <span>Blog <i class="ion-ios-arrow-forward"></i></span></p>
-            <h1 class="mb-0 bread">훈련사님의 의뢰사항을 알려드립니다.</h1>
+            <h1 class="mb-0 bread">반려동물의 건강 정보를 알려드립니다.</h1>
           </div>
         </div>
       </div>

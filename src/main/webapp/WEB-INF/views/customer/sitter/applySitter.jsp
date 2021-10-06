@@ -46,6 +46,10 @@
 			alert("소개글을 입력해 주세요.");
 			document.applyform.SIT_APPEAL.focus();
 			return false;
+		}else if (!document.applyform.SIT_IMG.value) {
+			alert("프로필 사진 등록은 필수입니다.");
+			document.applyform.SIT_IMG.focus();
+			return false;
 		}
 		
 	}
