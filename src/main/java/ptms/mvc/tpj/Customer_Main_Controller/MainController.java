@@ -69,7 +69,7 @@ public class MainController {
 		
 		service.Newsletter(req, model); 
 		
-		//service.petIssue(req, model);
+		service.petIssue(req, model);
 		
 		return "main/index";
 	}

@@ -127,9 +127,9 @@
 <section class="ftco-section bg-light">
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-md-6 text-center mb-5">
+<!-- 			<div class="col-md-6 text-center mb-5">
 				<h2 class="heading-section">반려인/반려동물 관리</h2>
-			</div>
+			</div> -->
 		</div>
 		<div class="row justify-content-center">
 			<div class="col-md-12">
@@ -138,7 +138,7 @@
 					<div class="row no-gutters">
 						<div class="col-md-7">
 							<div class="contact-wrap w-100 p-md-5 p-4"  style = "font-family: 'Do Hyeon', sans-serif;">
-								<h3 class="mb-4">MyPet 등록</h3>
+								<h3 class="mb-4">반려동물 정보 등록</h3>
 								
 								<form action="MyPetInsertAction" method="POST" id="contactForm" name="contactForm" class="contactForm" onsubmit="return insertPet()" enctype="multipart/form-data">
 									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
@@ -200,8 +200,8 @@
 						
 						<div class="col-md-5 d-flex align-items-stretch">
 							<div class="info-wrap w-100 p-5 img"
-								style="background-image: url(${path}images/gallery-3.jpg);"></div>
-						</div>
+								style="background-image: url(${path}images/Mypet.jpg);"></div>
+						</div> 
 					</div>
 				</div>
 			</div>
