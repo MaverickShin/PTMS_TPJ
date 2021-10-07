@@ -11,9 +11,12 @@
 		from(
 		    SELECT st.SIT_TITLE, st.SIT_APPEAL, st.SIT_IMG, ss.SV1_NO, ss.SV2_NO, ss.SV3_NO, ss.SV4_NO
 		      FROM SITTERS_TB st, SITTER_SERVICE_TB ss
-		      WHERE st.SIT_ID=#{SIT_ID}
+		      WHERE st.SIT_ID = ss.SIT_ID
+		      AND st.SIT_ID=#{SIT_ID}
     		)
    </select>
+   
+   
    <select id="MypetCount" parameterType="String" resultType="int">
       SELECT COUNT(*)
       FROM PET_TB

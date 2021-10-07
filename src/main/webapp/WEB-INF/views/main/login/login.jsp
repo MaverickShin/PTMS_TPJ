@@ -22,6 +22,14 @@ function loginCheck() {
 	}
 }
 </script>
+<style>
+input[type="text"]:focus {
+    outline: 2px solid green;
+}
+input[type="password"]:focus{
+	outline: 2px solid green;
+}
+</style>
 </head>
 <body>
 
@@ -33,7 +41,7 @@ function loginCheck() {
 			<div class="row no-gutters" >
 				<div class="col-md-7" style ="max-width: 100% !important; flex:0 0 100% !important">
 					<div class="contact-wrap w-100 p-md-5 p-4">
-						<h3 class="mb-4">로그인</h3>
+						<h3 class="mb-4" style="text-align:center;font-weight: bold;font-family: 'Font Awesome 5 Pro;">Login</h3>
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
@@ -52,7 +60,7 @@ function loginCheck() {
 								
 								<div class="col-md-12">
 									<div class="form-group" align = "center">
-										<input type="submit" value="로그인" class="btn btn-primary" id = "join_sub">
+										<input type="submit" value="로그인" class="btn btn-primary" id = "join_sub" style="width:120px;">
 										<div class="submitting"></div>
 									</div>
 								</div>

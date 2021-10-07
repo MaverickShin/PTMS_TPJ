@@ -86,9 +86,9 @@
 	<section class="ftco-section bg-light">
 		<div class="container">
 			<div class="row justify-content-center">
-				<div class="col-md-6 text-center mb-5">
+<!-- 				<div class="col-md-6 text-center mb-5">
 					<h2 class="heading-section">반려인/반려동물 관리</h2>
-				</div>
+				</div> -->
 			</div>
 			<div class="row justify-content-center"
 				style="font-family: 'Do Hyeon', sans-serif;">

@@ -262,7 +262,7 @@
 							<div class="row" id="divs"
 								style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 30px; width: 700px; margin-left: auto; margin-right: auto; margin-top: 10px;">
 								<c:forEach var="li" items="${list}">
-									<div class="col-md-12" style="background-color: #f5f5f5;">
+									<div class="col-md-12" style="background-color: #f5f5f5;border-radius:20px; text-align:center; padding:20px 10px; margin:10px">
 										<h5>고객 : ${li.CUST_ID}</h5>
 										&nbsp;
 										<h6>서비스 요청 펫 : ${li.SQ_AMT}</h6>

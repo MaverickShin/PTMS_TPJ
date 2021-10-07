@@ -208,14 +208,14 @@ $(document).ready(function(){
 		<form action="" id="">
 			<div class="container-fluid">
 				<div>
-					<table border="1" align="center">
+					<!-- <table border="1" align="center">
 						<tr>
 							<td width="200px" align="center"><a href="/tpj/cust/contact">펫
 									건강관리</a></td>
 							<td width="200px" align="center"><a href="/tpj/cust/selfdiagnosis">자가진단 이력</a></td>
 
 						</tr>
-					</table>
+					</table> -->
 				</div>
 
 				<div class="container-fluid" style="display: inline;">

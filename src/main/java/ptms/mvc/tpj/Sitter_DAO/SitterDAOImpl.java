@@ -78,7 +78,7 @@ public class SitterDAOImpl implements SitterDAO{
 	// 고객 - 시터찾기 상세 페이지
 	@Override
 	public SitterVO detailSitter(int sit_id) {
-		System.out.println("dao ==> activityList");
+		System.out.println("dao ==> detailSitter");
 		
 		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
 		return dao.detailSitter(sit_id);

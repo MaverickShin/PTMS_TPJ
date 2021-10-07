@@ -9,7 +9,7 @@
 </head>
 <body>
 	<nav class="div_nav">
-		<ul class="div_ul">
+		<ul class="div_ul" style="font-family: 'Do Hyeon';">
 			<li class="div_li"><a href="/tpj/cust/MyInfoUser">내정보 관리</a></li>
 			<li class="div_li" id="mypages"><a class="link">MY PET</a>
 				<div class="hide">
