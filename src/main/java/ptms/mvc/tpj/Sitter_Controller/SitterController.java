@@ -34,9 +34,10 @@ public class SitterController {
 	 //(찾기 버튼 누르기 전 조건 입력)시터 찾기 페이지
 	 @RequestMapping("sitter")
 	   public String sitter(HttpServletRequest req, Model model) {
-	      log.info("url ==> sitter");
 	      
-	      String CUST_ID = (String)req.getSession().getAttribute("cust_id");
+		 log.info("url ==> sitter");
+	      
+	     String CUST_ID = (String)req.getSession().getAttribute("cust_id");
 	      
 	      int selectCnt = dao.MypetCount(CUST_ID);
 		  System.out.println("마이펫 수 selectCnt : " + selectCnt);

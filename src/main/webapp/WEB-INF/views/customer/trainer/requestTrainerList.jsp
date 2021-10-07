@@ -233,7 +233,12 @@
 									&nbsp;
 									<h6>훈련받을 펫 : ${dtos.PET_NM}</h6>
 									<p>
-										훈련일 : ${dtos.START_DAY}<br>훈련종류 : ${dtos.TQ_AMT}<br>${dtos.TQ_FEE}원</p>
+										<b>훈련일</b> <br>
+										${dtos.START_DAY}<br>
+										<b>훈련종류 </b><br>
+										${dtos.TQ_AMT}<br>
+										<fmt:formatNumber value="${dtos.TQ_FEE}" pattern="###,###,###,###" />원
+									</p>
 									<input type="button" value="수락" class="btn btn-primary"
 										onclick="window.location='acceptRequestTraining?TQ_CD=${dtos.TQ_CD}'">
 									<input type="button" value="거절" class="btn btn-primary"

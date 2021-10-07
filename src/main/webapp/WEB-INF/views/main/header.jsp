@@ -139,8 +139,13 @@
 					</li>
 					<li class="nav-item" id = "boards"><a class="nav-link">게시판</a>
 						<div class = "hides">
-			    			<a href="/tpj/cust/qnalist">QnA</a>
-				    		<a href="/tpj/cust/faqlist">FAQ</a>
+							<c:if test="${sessionScope.cust_id == null}">
+			    				<a href="/tpj/cust/faqlist">FAQ</a>
+			    			</c:if>
+			    			<c:if test="${sessionScope.cust_id != null}">
+				    			<a href="/tpj/cust/qnalist">QnA</a>
+					    		<a href="/tpj/cust/faqlist">FAQ</a>
+				    		</c:if>
 						</div>
 					</li>
 					

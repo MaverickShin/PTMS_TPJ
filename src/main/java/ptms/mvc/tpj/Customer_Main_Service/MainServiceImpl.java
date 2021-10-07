@@ -245,10 +245,11 @@ public class MainServiceImpl implements MainService {
 		int startPage = 0;		// 시작 페이지
 		int endPage = 0;		// 마지막 페이지
 		
-		// 배송지 갯수 조회
+		// 글 갯수 조회
 		cnt = dao.getPetCnt(CUST_ID);
 		System.out.println("cnt => " + cnt);
 		int signchkCnt = dao.sitterSigninChk(CUST_ID);
+		int trainerChk = dao.trainerChk(CUST_ID);
 		
 		pageNum = req.getParameter("pageNum");
 		
@@ -304,20 +305,21 @@ public class MainServiceImpl implements MainService {
 			System.out.println("vo : " + vo.size());
 		}
 
-		req.setAttribute("pageNum", pageNum); // 페이지 번호
-		req.setAttribute("number", number); // 출력용 글번호
-		req.setAttribute("cnt", cnt); // 
-		req.setAttribute("vo", vo);   //
+		model.addAttribute("pageNum", pageNum); // 페이지 번호
+		model.addAttribute("number", number); // 출력용 글번호
+		model.addAttribute("cnt", cnt); // 
+		model.addAttribute("vo", vo);   //
 		
 		if(cnt > 0) {
-			req.setAttribute("startPage", startPage);		// 시작 페이지
-			req.setAttribute("endPage", endPage);			// 마지막 페이지
-			req.setAttribute("pageBlock", pageBlock);		// 한 블럭당 페이지 갯수
-			req.setAttribute("pageCount", pageCount);		// 페이지 갯수
-			req.setAttribute("currentPage", currentPage);	// 현재페이지
-			req.setAttribute("s", "MyPetList");
+			model.addAttribute("startPage", startPage);		// 시작 페이지
+			model.addAttribute("endPage", endPage);			// 마지막 페이지
+			model.addAttribute("pageBlock", pageBlock);		// 한 블럭당 페이지 갯수
+			model.addAttribute("pageCount", pageCount);		// 페이지 갯수
+			model.addAttribute("currentPage", currentPage);	// 현재페이지
+			model.addAttribute("s", "MyPetList");
 		}
 		model.addAttribute("signchkCnt", signchkCnt);
+		model.addAttribute("trainerChk", trainerChk);
 
 	}
 
@@ -326,8 +328,9 @@ public class MainServiceImpl implements MainService {
 	public void petInAction(HttpServletRequest req, Model model) {
 
 		PetVO vo = new PetVO();
-
-		vo.setCUST_ID((String) req.getSession().getAttribute("cust_id"));
+		
+		String CUST_ID = (String) req.getSession().getAttribute("cust_id");
+		vo.setCUST_ID(CUST_ID);
 		vo.setPK_CD(Integer.parseInt(req.getParameter("PK_CD"))); // 펫 종류 코드
 		vo.setPET_NM(req.getParameter("PET_NM")); // 이름
 		vo.setPET_AGE(Integer.parseInt(req.getParameter("PET_AGE")));// 나이
@@ -335,7 +338,7 @@ public class MainServiceImpl implements MainService {
 		String PET_IMG = "/tpj/resources/upload/" + (String) req.getAttribute("fileName"); // 이미지
 		vo.setPET_IMG(PET_IMG);
 
-		System.out.println("CUST_ID " + vo.getCUST_ID());
+		System.out.println("CUST_ID " + CUST_ID);
 		System.out.println("PK_CD " + vo.getPK_CD());
 		System.out.println("PET_NM " + vo.getPET_NM());
 		System.out.println("PET_AGE " + vo.getPET_AGE());
@@ -343,8 +346,13 @@ public class MainServiceImpl implements MainService {
 		System.out.println("PET_IMG " + PET_IMG);
 
 		int insertcnt = dao.insertPet(vo);
+		int signchkCnt = dao.sitterSigninChk(CUST_ID);
+		int trainerChk = dao.trainerChk(CUST_ID);
+		
 
 		model.addAttribute("insertcnt", insertcnt);
+		model.addAttribute("signchkCnt", signchkCnt);
+		model.addAttribute("trainerChk", trainerChk);
 	}
 
 	// 펫 수정 화면
@@ -352,11 +360,17 @@ public class MainServiceImpl implements MainService {
 	public void petUpdate(HttpServletRequest req, Model model) {
 		int pageNum = Integer.parseInt(req.getParameter("pageNum"));
 		int PET_CD = Integer.parseInt(req.getParameter("PET_CD"));
-
+		String CUST_ID = (String) req.getSession().getAttribute("cust_id");
+		
 		PetVO vo = dao.PetDetail(PET_CD);
+		
+		int signchkCnt = dao.sitterSigninChk(CUST_ID);
+		int trainerChk = dao.trainerChk(CUST_ID);
 
 		model.addAttribute("dto", vo);
 		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("signchkCnt", signchkCnt);
+		model.addAttribute("trainerChk", trainerChk);
 	}
 
 	// 펫 수정 처리
@@ -1180,6 +1194,7 @@ public class MainServiceImpl implements MainService {
     		System.out.println("end : " + end);
     		
         //고객 - 시터등록 안되어 있을시 시터프로필 수정 접근 금지
+    	int trainerChk = dao.trainerChk(CUST_ID);
         int signchkCnt = dao.sitterSigninChk(CUST_ID);
         System.out.println("시터등록확인 signchkCnt : " + signchkCnt);
         List<PayVO> list = null;
@@ -1203,6 +1218,7 @@ public class MainServiceImpl implements MainService {
 		 model.addAttribute("currentPage", currentPage); // 현재페이지
         }
         
+        model.addAttribute("trainerChk", trainerChk);
         model.addAttribute("signchkCnt", signchkCnt);
         model.addAttribute("list", list);
         model.addAttribute("pageNum", pageNum); // 페이지 번호

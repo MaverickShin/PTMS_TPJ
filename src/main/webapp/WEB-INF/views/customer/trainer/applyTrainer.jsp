@@ -52,22 +52,39 @@
 	
 	function joinCheck() {
 		
-		
-		
 		var chk = $("input:checkbox[class='form-group']");
-		
 		var bool = false;
 		
-		
 		for (var i = 0; i < chk.length; i++) {
-			
 			if(chk[i].checked) {
 				bool = true;
 			}
-			
 		}
 		
-		if(bool == false) {
+		if(!document.applyform.address1.value) {
+			alert("훈련가능 지역을 입력하세요.");
+			document.applyform.address1.focus();
+			return false;
+		} else if(!document.applyform.START_DAY.value) {
+			alert("서비스 시작일을 지정하세요.");
+			document.applyform.START_DAY.focus();
+			return false;
+		} else if(!document.applyform.END_DAY.value) {
+			alert("서비스 종료일을 지정하세요.");
+			document.applyform.END_DAY.focus();
+			return false;
+		} else if(!document.applyform.TA_TITLE.value) {
+			alert("소개글 제목을 입력하세요.");
+			document.applyform.TA_TITLE.focus();
+			return false;
+		} else if(!document.applyform.TA_APPEAL.value) {
+			alert("소개글 본문을 입력하세요.");
+			document.applyform.TA_APPEAL.focus();
+			return false;
+		} else if(!document.applyform.TA_IMG.value) {
+			alert("프로필 이미지를 등록하세요.");
+			return false;
+		}else if(bool == false) {
 			alert("훈련가능 유형을 선택하세요.");
 			return false;
 			
@@ -95,28 +112,6 @@
 				$("#tr_kind4_fee4").focus();
 				return false;
 			}
-		} else if(!document.getElementById("address1").value) {
-			alert("훈련가능 지역을 입력하세요.");
-			return false;
-		} else if(!document.applyform.START_DAY.value) {
-			alert("서비스 시작일을 지정하세요.");
-			document.applyform.START_DAY.focus();
-			return false;
-		} else if(!document.applyform.END_DAY.value) {
-			alert("서비스 종료일을 지정하세요.");
-			document.applyform.END_DAY.focus();
-			return false;
-		} else if(!document.applyform.TA_TITLE.value) {
-			alert("소개글 제목을 입력하세요.");
-			document.applyform.TA_TITLE.focus();
-			return false;
-		} else if(!document.applyform.TA_APPEAL.value) {
-			alert("소개글 본문을 입력하세요.");
-			document.applyform.TA_APPEAL.focus();
-			return false;
-		} else if(!document.applyform.TA_IMG.value) {
-			alert("프로필 이미지를 등록하세요.");
-			return false;
 		}
 		
 	}
@@ -234,131 +229,132 @@ input:checked + .slider:before {
 												</div>
 											</div>
 
-											<div class="col-md-12"  style = "margin-bottom: 40px; padding-bottom: 30px; border-bottom: 1px solid #00bd56;">
-												<label class="label" for="tr_kind">훈련가능 유형</label><br>
-														<label for = "TS1_NO" style = "margin-right: 20px; cursor:pointer;">
-															<label class = "switch">
-																	<input type="checkbox" value="1" name="TS1_NO" id="TS1_NO" class="form-group"
-																	onchange="check();">
-																	<span class = "slider round"></span>
-															</label> 
-															배변훈련
-														</label>
-														
-														<label for = "TS2_NO" style = "margin-right: 20px; cursor:pointer;">
-															<label class = "switch">
-																<input type="checkbox" value="2" name="TS2_NO" id="TS2_NO"
-																class="form-group" onchange="check();">
-																<span class = "slider round"></span>
-															</label> 
-															분리불안
-														</label>
-														
-														<label for = "TS3_NO" style = "margin-right: 20px; cursor:pointer;">
-															<label class = "switch">
-																<input type="checkbox" value="3" name="TS3_NO" id="TS3_NO"
-																class="form-group" onchange="check();">
-																<span class = "slider round"></span>
-															</label> 
-															기본훈련
-														</label>
-														
-														<label for = "TS4_NO" style = "margin-right: 20px; cursor:pointer;">
-															<label class = "switch">
-																<input type="checkbox" value="4" name="TS4_NO" id="TS4_NO"
-																class="form-group" onchange="check();">
-																<span class = "slider round"></span>
-															</label>
-															짖음해결
-														</label>
-
-												<div id="tr_kind1_fee" style="display: none; margin-bottom:30px;">
-													<label>한 회차당 <span style = "color:#00bd56">배변훈련</span> 요금</label> <input type="number"
-														id="tr_kind1_fee1" name="tr_kind1_fee" min="1000" class="form-control">
-												</div>
-												<div id="tr_kind2_fee" style="display: none; margin-bottom:30px;">
-													<label>한 회차당 <span style = "color:#00bd56">분리불안</span> 요금</label> <input type="text"
-														id="tr_kind2_fee2" name="tr_kind2_fee" min="1000" class="form-control">
-												</div>
-												<div id="tr_kind3_fee" style="display: none; margin-bottom:30px;">
-													<label>한 회차당 <span style = "color:#00bd56">기본훈련</span> 요금</label> <input type="number"
-														id="tr_kind3_fee3" name="tr_kind3_fee" min="1000" class="form-control">
-												</div>
-												<div id="tr_kind4_fee" style="display: none; margin-bottom:30px;">
-													<label>한 회차당 <span style = "color:#00bd56">짖음해결</span> 요금</label> <input type="number"
-														id="tr_kind4_fee4" name="tr_kind4_fee" min="1000" class="form-control">
+											<div class="col-md-12" style = "margin-bottom:10px;">
+												<div class="form-group">
+													<label class="label" for="service_loc">훈련사 서비스 가능 지역</label> 
+													<input type="button" value="주소찾기" class="btn btn-primary"
+														onclick="addressSerch();" style = "line-height:10px; margin-left:30px; height: 35px; font-size: 14px !important;">
 												</div>
 											</div>
+			
+											<div class="col-md-6">
+												<div class="form-group" style="display: none">
+													<label class="label" for="postcode">우편번호</label> <input
+														type="text" class="form-control" name="postcode"
+														id="postcode" placeholder="우편번호" readonly>
+												</div>
+											</div>
+			
+			
+											<div class="col-md-12"  style = "border-bottom:1px solid #00bd56; margin-bottom: 40px;">
+												<div class="form-group">
+													<input
+														type="text" class="form-control" name="address1" id="address1"
+														placeholder="도로명 주소" readonly style = "margin-bottom: 40px;">
+												</div>
+											</div>
+			
+											<div class="col-md-12" style="display: none">
+												<div class="form-group">
+													<label class="label" for="address2">지번 주소</label> <input
+														type="text" class="form-control" name="address2"
+														id="address2" placeholder="지번 주소" readonly>
+												</div>
+											</div>
+			
+											<div class="col-md-12" style = "margin-top: 20px; padding-bottom:20px; border-bottom:1px solid #00bd56;">
+												<div class="form-group">
+													<label class="label" for="trainingDay">훈련가능일</label><br>
+													<input type="date" class="iptags" name="START_DAY">
+													<span style = "font-size: 20px; font-weight:bold;">&nbsp;&nbsp; ~ &nbsp;&nbsp;</span>
+													<input type="date" class="iptags" name="END_DAY"> <br>
+													<br>
+													<p class = "chk_p1"><label class="chk_label1" for="ADJUSTABLE"><span class = "list_label_span1" style = "margin-right: 30px !important;">조정가능</span><input type="checkbox" class="sel_chk1" name="ADJUSTABLE" id = "ADJUSTABLE" value="1"><span class = "checkbox_icon"></span></label></p>
+												</div>
+											</div>
+			
+			
+											<div class="col-md-12" style = "margin-top: 30px;">
+												<div class="form-group">
+													<label class="label" for="TA_TITLE">소개글 제목</label> <input
+														type="text" class="form-control" name="TA_TITLE"
+														id="TA_TITLE">
+												</div>
+											</div>
+			
+											<div class="col-md-12" style = "margin-top: 30px; border-bottom:1px solid #00bd56; margin-bottom: 30px;">
+												<div class="form-group">
+													<label class="label" for="TA_APPEAL">소개글 본문</label> <input
+														type="text" class="form-control" name="TA_APPEAL"
+														id="TA_APPEAL">
+												</div>
+											</div>
+			
+											<div class="col-md-12" style = "margin-top: 30px; border-bottom:1px solid #00bd56; margin-bottom: 30px;">
+												<div class="form-group">
+													<label class="label" for="TA_IMG">프로필 사진</label>
+													<label class="btn btn-primary" for="TA_IMG" style = "font-size: 16px !important; height:50px; font-weight:normal !important; margin-left:15px;">사진등록</label>
+													<input type="file" id="TA_IMG" name="TA_IMG" accept="image/*" class="btn btn-primary" style="display: none">
+												</div>
+											</div>
+											
 										</div>
 									</div>
 								</div>
 
-								<div class="col-md-12" style = "margin-bottom:10px;">
-									<div class="form-group">
-										<label class="label" for="service_loc">훈련사 서비스 가능 지역</label> 
-										<input type="button" value="주소찾기" class="btn btn-primary"
-											onclick="addressSerch();" style = "line-height:10px; margin-left:30px; height: 35px; font-size: 14px !important;">
+								<div class="col-md-12"  style = "margin-bottom: 40px; padding-bottom: 30px; border-bottom: 1px solid #00bd56;">
+									<label class="label" for="tr_kind">훈련가능 유형</label><br>
+									<label for = "TS1_NO" style = "margin-right: 20px; cursor:pointer;">
+										<label class = "switch">
+												<input type="checkbox" value="1" name="TS1_NO" id="TS1_NO" class="form-group"
+												onchange="check();">
+												<span class = "slider round"></span>
+										</label> 
+										배변훈련
+									</label>
+									
+									<label for = "TS2_NO" style = "margin-right: 20px; cursor:pointer;">
+										<label class = "switch">
+											<input type="checkbox" value="2" name="TS2_NO" id="TS2_NO"
+											class="form-group" onchange="check();">
+											<span class = "slider round"></span>
+										</label> 
+										분리불안
+									</label>
+									
+									<label for = "TS3_NO" style = "margin-right: 20px; cursor:pointer;">
+										<label class = "switch">
+											<input type="checkbox" value="3" name="TS3_NO" id="TS3_NO"
+											class="form-group" onchange="check();">
+											<span class = "slider round"></span>
+										</label> 
+										기본훈련
+									</label>
+									
+									<label for = "TS4_NO" style = "margin-right: 20px; cursor:pointer;">
+										<label class = "switch">
+											<input type="checkbox" value="4" name="TS4_NO" id="TS4_NO"
+											class="form-group" onchange="check();">
+											<span class = "slider round"></span>
+										</label>
+										짖음해결
+									</label>
+
+									<div id="tr_kind1_fee" style="display: none; margin-bottom:30px;">
+										<label>한 회차당 <span style = "color:#00bd56">배변훈련</span> 요금</label> <input type="number"
+											id="tr_kind1_fee1" name="tr_kind1_fee" min="1000" class="form-control">
 									</div>
-								</div>
-
-								<div class="col-md-6">
-									<div class="form-group" style="display: none">
-										<label class="label" for="postcode">우편번호</label> <input
-											type="text" class="form-control" name="postcode"
-											id="postcode" placeholder="우편번호" readonly>
+									<div id="tr_kind2_fee" style="display: none; margin-bottom:30px;">
+										<label>한 회차당 <span style = "color:#00bd56">분리불안</span> 요금</label> <input type="text"
+											id="tr_kind2_fee2" name="tr_kind2_fee" min="1000" class="form-control">
 									</div>
-								</div>
-
-
-								<div class="col-md-12"  style = "border-bottom:1px solid #00bd56; margin-bottom: 40px;">
-									<div class="form-group">
-										<input
-											type="text" class="form-control" name="address1" id="address1"
-											placeholder="도로명 주소" readonly style = "margin-bottom: 40px;">
+									<div id="tr_kind3_fee" style="display: none; margin-bottom:30px;">
+										<label>한 회차당 <span style = "color:#00bd56">기본훈련</span> 요금</label> <input type="number"
+											id="tr_kind3_fee3" name="tr_kind3_fee" min="1000" class="form-control">
 									</div>
-								</div>
-
-								<div class="col-md-12" style="display: none">
-									<div class="form-group">
-										<label class="label" for="address2">지번 주소</label> <input
-											type="text" class="form-control" name="address2"
-											id="address2" placeholder="지번 주소" readonly>
-									</div>
-								</div>
-
-								<div class="col-md-12" style = "margin-top: 20px; padding-bottom:20px; border-bottom:1px solid #00bd56;">
-									<div class="form-group">
-										<label class="label" for="trainingDay">훈련가능일</label><br>
-										<input type="date" class="iptags" name="START_DAY">
-										<span style = "font-size: 20px; font-weight:bold;">&nbsp;&nbsp; ~ &nbsp;&nbsp;</span>
-										<input type="date" class="iptags" name="END_DAY"> <br>
-										<br>
-										<p class = "chk_p1"><label class="chk_label1" for="ADJUSTABLE"><span class = "list_label_span1" style = "margin-right: 30px !important;">조정가능</span><input type="checkbox" class="sel_chk1" name="ADJUSTABLE" id = "ADJUSTABLE" value="1"><span class = "checkbox_icon"></span></label></p>
-									</div>
-								</div>
-
-
-								<div class="col-md-12" style = "margin-top: 30px;">
-									<div class="form-group">
-										<label class="label" for="TA_TITLE">소개글 제목</label> <input
-											type="text" class="form-control" name="TA_TITLE"
-											id="TA_TITLE">
-									</div>
-								</div>
-
-								<div class="col-md-12">
-									<div class="form-group">
-										<label class="label" for="TA_APPEAL">소개글 본문</label> <input
-											type="text" class="form-control" name="TA_APPEAL"
-											id="TA_APPEAL">
-									</div>
-								</div>
-
-								<div class="col-md-12" style = "margin-top: 30px; border-bottom:1px solid #00bd56; margin-bottom: 30px;">
-									<div class="form-group">
-										<label class="label" for="TA_IMG">프로필 사진</label>
-										<label class="btn btn-primary" for="TA_IMG" style = "font-size: 16px !important; height:50px; font-weight:normal !important; margin-left:15px;">사진등록</label>
-										<input type="file" id="TA_IMG" name="TA_IMG" accept="image/*" class="btn btn-primary" style="display: none">
+									<div id="tr_kind4_fee" style="display: none; margin-bottom:30px;">
+										<label>한 회차당 <span style = "color:#00bd56">짖음해결</span> 요금</label> <input type="number"
+											id="tr_kind4_fee4" name="tr_kind4_fee" min="1000" class="form-control">
 									</div>
 								</div>
 

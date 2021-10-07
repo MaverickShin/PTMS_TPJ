@@ -44,7 +44,7 @@
 				              </a>
 				              <div class="text p-4">
 				              	<div class="meta mb-2">
-				                  <div><a href="#">${dto.START_DAY}~${dto.END_DAY}</a></div>
+				                  <div><a href="#">${dto.START_DAY} ~ ${dto.END_DAY}</a></div>
 				                  <div><a href="#">${dto.CUST_NM}</a></div>
 				                  <div><a href="#" class="meta-chat"><span class="fa fa-comment"></span>3</a></div><!-- 이곳에 좋아요 갯수 또는 평점을 넣으면 좋지 않을까? -->
 				                </div>
@@ -52,49 +52,53 @@
 				              </div>
 				            </div>
 				        </div>
-				        
 			    	</c:forEach>
-					
-		    	<div class = "page_control">
-					<table>
-						<tr>
-							<th align = "center">
-								<!-- 게시글이 있으면 -->
-								<!-- 처음[◀◀]	 / 이전블록[◀]  / -->
-								<c:if test = "${startPage > pageBlock}">
-									<a href = "trainerMatchingList"> [◀◀] </a>
-									<a href = "trainerMatchingList?pageNum=${startPage - pageBlock}"> [◀] </a>
-								</c:if>
-								
-								<!-- 블록내의 페이지 번호 -->
-								<c:forEach var = "i" begin = "${startPage}" end = "${endPage}">
-									<c:if test = "${i == currentPage}">
-										<span style = "cursor: pointer;"><b>[${i}]</b></span>
-									</c:if>
-									
-									<c:if test = "${i != currentPage}">
-										<a href = "trainerMatchingList?pageNum=${i}">[${i}]</a>
-									</c:if>
-								</c:forEach>
-								
-								<!-- 다음[▶]	/  마지막[▶▶]  / -->
-								<c:if test = "${pageCount > endPage}">
-									<a href = "trainerMatchingList?pageNum=${startPage + pageBlock}">[▶]</a>
-									<a href = "trainerMatchingList?pageNum=${pageCount}">[▶▶]</a>
-								</c:if>
-							</th>
-						</tr>
-					</table>
-				</div>
 				</c:if>
-		    	
 		    	<c:if test="${cnt == 0}">
 		    		<div class="col-md-12">
 		    			매칭된 훈련사가 없습니다. 조건을 바꿔 다시 검색해보세요!
 		    		</div>
 		    	</c:if>
 		    </div>
-	    </div>	        
+		    
+		    <c:if test="${cnt > 0}">
+		    	<div class="row">	
+					<div class="col-md-12">
+				    	<div class = "page_control" align="center">
+							<table>
+								<tr>
+									<th align = "center">
+										<!-- 게시글이 있으면 -->
+										<!-- 처음[◀◀]	 / 이전블록[◀]  / -->
+										<c:if test = "${startPage > pageBlock}">
+											<a href = "trainerMatchingList"> [◀◀] </a>
+											<a href = "trainerMatchingList?pageNum=${startPage - pageBlock}"> [◀] </a>
+										</c:if>
+										
+										<!-- 블록내의 페이지 번호 -->
+										<c:forEach var = "i" begin = "${startPage}" end = "${endPage}">
+											<c:if test = "${i == currentPage}">
+												<span style = "cursor: pointer;"><b>[${i}]</b></span>
+											</c:if>
+											
+											<c:if test = "${i != currentPage}">
+												<a href = "trainerMatchingList?pageNum=${i}">[${i}]</a>
+											</c:if>
+										</c:forEach>
+										
+										<!-- 다음[▶]	/  마지막[▶▶]  / -->
+										<c:if test = "${pageCount > endPage}">
+											<a href = "trainerMatchingList?pageNum=${startPage + pageBlock}">[▶]</a>
+											<a href = "trainerMatchingList?pageNum=${pageCount}">[▶▶]</a>
+										</c:if>
+									</th>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</c:if>
+	    </div>	 
 	</div>
 	
 	<%@ include file="../../main/footer.jsp" %>

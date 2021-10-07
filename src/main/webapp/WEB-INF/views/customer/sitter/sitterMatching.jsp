@@ -35,7 +35,7 @@
 		<div class="row no-gutters slider-text align-items-end">
 			<div class="col-md-9 ftco-animate pb-5">
 				<p class="breadcrumbs mb-2">
-					<span class="mr-2"><a href="index.html">Trainer<i
+					<span class="mr-2"><a href="index.html">Sitter<i
 							class="ion-ios-arrow-forward"></i></a></span> <span>Blog <i
 						class="ion-ios-arrow-forward"></i></span>
 				</p>
