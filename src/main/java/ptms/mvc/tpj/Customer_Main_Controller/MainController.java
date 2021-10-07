@@ -323,7 +323,7 @@ public class MainController {
    @RequestMapping("contact")
    public String contact(Model model) {
 	   
-	// Jsoup를 이용해서 반려동물 지식정보 크롤링
+	    // Jsoup를 이용해서 반려동물 정보 크롤링
 		String url = "http://www.mypetgene.com/sub/sub05_05.php?boardid=board4";
 		Document doc = null;
 
@@ -338,40 +338,41 @@ public class MainController {
 			e.printStackTrace();
 		}
 
-		// 주요 뉴스로 나오는 태그를 찾아서 가져오도록 한다. <section class="section-body">
+		// 주요 뉴스로 나오는 태그를 찾아서 가져오도록 한다. 
 		Elements element = doc.select("div.board-list");
 		Elements element1 = element.select("td");
-		//Elements element2 = element1.select("")
-		// 1. 헤더 부분의 제목을 가져온다.
-		// String title = element.select("img").text();
-		
 		Elements images = element1.select("img");
-		
 		Elements element2 = element1.select("div.bbs-tit");
-		
 		Elements title = element2.select("a[href]");
 		
+		// 엘리먼트에 최종 select 변수 대입
 		for (Element link : title) {
 			
+			// a 태그의 url 절대경로를 구하여 클릭시 해당 페이지로 이동할 수 있도록 한다.  
 			String urls = link.attr("abs:href");
 			
+			// 해당 컨텐츠의 타이틀을 가져온다.
 			String con = link.text();
 			
+			// 문자열로 합성하여 태그 생성
 			String sum = "<a href = '" + urls + "' target='_blank'><span>" + con + "</span>";
 			
 			list.add(sum);
 			
 		}
 	
+		// 이미지 경로를 담을 list 생성
 		List<String> list2 = new ArrayList<String>();
 		
 		for (Element imgs : images) {
 			
+			// 이미지 절대 경로를 구한다.
 			String img = "<img src = '"+imgs.getElementsByAttribute("src").attr("abs:src")+"'>";
 			
 			list2.add(img);
 		}
 		
+		// 두 태그를 문자열을 합성 
 		List<String> list3 = new ArrayList<String>();
 
 		for (int i = 0; i < list.size(); i++) {

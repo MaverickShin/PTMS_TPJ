@@ -8,9 +8,14 @@
 	<title>편의기능</title>
 	<script src="https://kit.fontawesome.com/5d238a51aa.js" crossorigin="anonymous"></script>
 <script>
-const apiKey = "5919a06844059487fee67afcf1a1af26";
+const apiKey = "5919a06844059487fee67afcf1a1af26"; // api key 선언
+
+// api 호출
 var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Seoul"+"&appid="+apiKey+"&lang=kr";
+// 현재 날씨 이미지 url을 담을 변수
 var imgURL = "";
+
+// ajax를 이용하여 현위치 날씨 조회
 $.ajax({
     url: apiURI,
     dataType: "json",

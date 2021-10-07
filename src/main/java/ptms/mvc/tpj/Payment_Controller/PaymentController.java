@@ -193,37 +193,44 @@ public class PaymentController {
 		return "{\"result\":\"NO\"}";
 	}
 	
-	// 결제 - 프리미엄 구독
+	// 결제 - 구독 결제인 경우 고객 테이블 업데이트
 	@RequestMapping("subscribe")
 	@ResponseBody
 	public int premiumPay(HttpServletRequest req, Model model) {
 		
+		// 테이블에 update 할 PK 및 프리미엄/비지니스 item_name
 		String primarykey = req.getParameter("primarykey");
 		String item_name = req.getParameter("item_name");
 		
+		// 구독 유효기간 설정
 		Date date = new Date();
 		
+		// Date format
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		
+		// 오늘 날짜로 변환
 		String today = sdf.format(date);
 		        
 		Calendar cal = Calendar.getInstance();
 		
+		// 현재날짜로 부터 한달뒤를 계산
 		cal.add(Calendar.MONTH, +1);
 		Date currentTime=cal.getTime();
 		
 		String release = sdf.format(currentTime);
 		
-		
+		// 정보를 map에 담는다.
 		Map<String, Object> map = new HashMap<>();
 		
 		map.put("cust_id", primarykey);
 		map.put("today", today);
 		map.put("release", release);
 		
+		// item_name 구분
 		if(item_name.equals("프리미엄 결제")) map.put("AUTHOR", "ROLE_PREMIUM");
 		else if (item_name.equals("비지니스 결제")) map.put("AUTHOR", "ROLE_BUSINESS");
 		
+		// 업데이트 완료 여부 반환
 		return dao.updateSubscribe(map);
 	}
 	
@@ -233,15 +240,15 @@ public class PaymentController {
 	@ResponseBody
 	public int paySuccess(HttpServletRequest req, Model model) {
 		   
+		   // 결제 유형, 금액, 고객 id 정보 받기
 		   String paykind = req.getParameter("kind");
 		   int price = Integer.parseInt(req.getParameter("price"));
 		   String id = req.getParameter("id");
+		   
+		   // 수수료 계싼
 		   float fee = (float) (price * 5) / 100;
 		   
-		   System.out.println("paykind : " + paykind);
-		   System.out.println("price : " + price);
-		   System.out.println("id : " + id);
-		   
+		   // 결제 정보를 map에 담기
 		   Map<String, Object> map = new HashMap<>();
 		   
 		   map.put("PAYKIND_CD", paykind);
@@ -249,8 +256,7 @@ public class PaymentController {
 		   map.put("BY_SUM", price);
 		   map.put("BY_FEES", fee);
 		   
-		   int result = dao.insertPayhistory(map);
-		   
-		   return result;
+		   // 결제이력 생성 완료 여부를 반환
+		   return dao.insertPayhistory(map);
 	}
 }
