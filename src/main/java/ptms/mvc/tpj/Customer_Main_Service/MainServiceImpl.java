@@ -912,11 +912,13 @@ public class MainServiceImpl implements MainService {
 			map2.put("qk_cd", qk);
 			map.put("qk_cd", qk);
 			req.setAttribute("qk_cd", qk);
+			System.out.println("qk_cd : " + qk);
 		} else {
 			int qk = Integer.parseInt(qk_cd);
 			map2.put("qk_cd", qk);
 			map.put("qk_cd", qk);
 			req.setAttribute("qk_cd", qk);
+			System.out.println("qk_cd : " + qk);
 		}
 		
 		cnt = dao.qnaCount(map2);

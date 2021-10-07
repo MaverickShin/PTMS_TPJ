@@ -95,7 +95,7 @@ $(document).ready(function(){
 		$("#emailchk").attr("disabled", true);
 		
 		$("#result_em").keyup(function() {
-			if($("#result_em").val() >= 6) {
+			if($("#result_em").val().length >= 6) {
 				var content = $("#result_em").val();
 				
 				if(content == key) {

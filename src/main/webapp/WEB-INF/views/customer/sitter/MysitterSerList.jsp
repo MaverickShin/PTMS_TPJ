@@ -243,7 +243,7 @@
 									<p>의뢰시작일 : ${li.START_DAY}</p>
 									<p>의뢰종료일 : ${li.END_DAY}</p>
 									<p>고객요청서비스 : ${li.REQ_SV}</p>
-									<p>금액 : ${li.SQ_FEE} 원</p>
+									<p>금액 : <fmt:formatNumber value="${li.SQ_FEE}" pattern="###,###,###,###" />원</p>
 
 									<c:if test="${li.SQ_ST == 0}">
 										<p>
@@ -283,7 +283,7 @@
 								</div>
 							</c:forEach>
 						</div>
-
+						
 						<div class="row">
 							<div class="col-md-12" align="center">
 								<div class="block-27">

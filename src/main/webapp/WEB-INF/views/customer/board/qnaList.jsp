@@ -9,6 +9,8 @@
 <meta name="_csrf" content="${_csrf.token}">
 <title>Insert title here</title>
 <script type="text/javascript">
+	var qk_cd = "<c:out value = '${qk_cd}'/>";
+
 	$(document).ready(function(){
 		
 		$("#right_button").click(function() { //거절된요청
@@ -21,6 +23,7 @@
 				success : function(result) {
 					$("#delivery").empty();
 					$("#delivery").append(result);
+					qk_cd = 3;
 				},
 				error : function(request, status, error) {
 					alert("에러!");
@@ -38,6 +41,7 @@
 				success : function(result) {
 					$("#delivery").empty();
 					$("#delivery").append(result);
+					qk_cd = 2;
 				},
 				error : function(request, status, error) {
 					alert("에러!");
@@ -55,6 +59,7 @@
 				success : function(result) {
 					$("#delivery").empty();
 					$("#delivery").append(result);
+					qk_cd = 1;
 				},
 				error : function(request, status, error) {
 					alert("에러!");
@@ -846,7 +851,6 @@ details>summary::-webkit-details-marker {
 <script type="text/javascript">
 	
 	var pageNum = '<c:out value="${pageNum}"/>';
-	var kind = '<c:out value = "${qk_cd}"/>';
 	
 	function pageMove(e) {
 		
@@ -882,7 +886,7 @@ details>summary::-webkit-details-marker {
 				type : "get",
 				url : urls,
 				cache : false,
-				data : "qk_cd="+kind,
+				data : "qk_cd="+qk_cd,
 				success : function(result) {
 					$("#delivery").empty();
 					$("#delivery").append(result);
@@ -901,7 +905,7 @@ details>summary::-webkit-details-marker {
 			$.ajax({
 				type : "get",
 				url : urls,
-				data : "pageNum="+param+"&qk_cd="+kind,
+				data : "pageNum="+param+"&qk_cd="+qk_cd,
 				cache : false,
 				success : function(result) {
 					$("#delivery").empty();
@@ -918,7 +922,7 @@ details>summary::-webkit-details-marker {
 			$.ajax({
 				type : "get",
 				url : urls,
-				data : "pageNum="+param+"&qk_cd="+kind,
+				data : "pageNum="+param+"&qk_cd="+qk_cd,
 				cache : false,
 				success : function(result) {
 					$("#delivery").empty();
@@ -939,7 +943,7 @@ details>summary::-webkit-details-marker {
 				type : "get",
 				url : urls,
 				cache : false,
-				data : "qk_cd="+kind,
+				data : "qk_cd="+qk_cd,
 				success : function(result) {
 					$("#delivery").empty();
 					$("#delivery").append(result);
@@ -965,11 +969,11 @@ details>summary::-webkit-details-marker {
 		console.log('current : ' + current);
 		
 		if(param == current) {
-			
+			console.log(qk_cd);
 			$.ajax({
 				type : "get",
 				url : urls,
-				data : "pageNum="+param+"&qk_cd="+kind,
+				data : "pageNum="+param+"&qk_cd="+qk_cd,
 				cache : false,
 				success : function(result) {
 					$("#delivery").empty();
@@ -982,11 +986,11 @@ details>summary::-webkit-details-marker {
 			});
 		
 		}else {
-			
+			console.log(qk_cd);
 			$.ajax({
 				type : "get",
 				url : urls,
-				data : "pageNum="+param+"&qk_cd="+kind,
+				data : "pageNum="+param+"&qk_cd="+qk_cd,
 				cache : false,
 				success : function(result) {
 					$("#delivery").empty();

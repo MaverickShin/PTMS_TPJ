@@ -104,15 +104,14 @@ function requestTrChk() {
 		            <p>Odit voluptatibus, eveniet vel nihil cum ullam dolores laborum, quo velit commodi rerum eum quidem pariatur! Quia fuga iste tenetur, ipsa vel nisi in dolorum consequatur, veritatis porro explicabo soluta commodi libero voluptatem similique id quidem? Blanditiis voluptates aperiam non magni. Reprehenderit nobis odit inventore, quia laboriosam harum excepturi ea.</p>
 		            <p>Adipisci vero culpa, eius nobis soluta. Dolore, maxime ullam ipsam quidem, dolor distinctio similique asperiores voluptas enim, exercitationem ratione aut adipisci modi quod quibusdam iusto, voluptates beatae iure nemo itaque laborum. Consequuntur et pariatur totam fuga eligendi vero dolorum provident. Voluptatibus, veritatis. Beatae numquam nam ab voluptatibus culpa, tenetur recusandae!</p>
 		            <p>Voluptas dolores dignissimos dolorum temporibus, autem aliquam ducimus at officia adipisci quasi nemo a perspiciatis provident magni laboriosam repudiandae iure iusto commodi debitis est blanditiis alias laborum sint dolore. Dolores, iure, reprehenderit. Error provident, pariatur cupiditate soluta doloremque aut ratione. Harum voluptates mollitia illo minus praesentium, rerum ipsa debitis, inventore?</p> -->
-    			
+    				<h4 class="mb-5">후기</h4>
     				<c:if test="${reviewCnt > 0}">
 	    				<c:forEach var="dto" items="${reviewInfo}" varStatus = "st">
-			    			<h4 class="mb-5">후기</h4>
-				                  <div class="comment-body">
-				                    <h5>${dto.CUST_ID}</h5>
-				                    <div class="meta">${dto.TG_DT}</div>
-				                    <p>${dto.TG_CON}</p>
-				                  </div>
+		                	<div class="comment-body">
+			                    <h5>${dto.CUST_ID}</h5>
+			                    <div class="meta">${dto.TG_DT}</div>
+			                    <p>${dto.TG_CON}</p>
+		                 	</div>
 		              	</c:forEach>
 					</c:if>
 					<c:if test="${reviewCnt == 0}">
