@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ptms.mvc.tpj.TrainerService.TrainerServiceImpl;
 
@@ -331,5 +333,26 @@ public class TrainerController {
       
       return "customer/trainer/modifyTrainingReviewAction";
    }
+   
+   // 내후기 삭제 처리
+   @RequestMapping("deleteTrainingReview")
+   public String deleteTrainingReview(HttpServletRequest req, Model model) {
+      log.info("url - deleteTrainingReview");
+      
+      // 후기 수정 처리
+      trainerservice.deleteTrainingReview(req, model);
+      
+      return "customer/trainer/deleteTrainingReviewAction";
+   }
+   
+   
+   @RequestMapping(value = "paySuccess", method = RequestMethod.GET)
+	 @ResponseBody
+	 public int paySuccess(HttpServletRequest req, Model model) {
+		 
+		 int updateCnt = trainerservice.paySuccessUpdate(req, model);
+		 
+		 return updateCnt;
+	 }
  
 }

@@ -62,7 +62,7 @@ public interface SitterDAO {
 	public List<PetVO> petKindInfo(String cust_id);
 	
 	// 의뢰시 - 펫 별 서비스 요금 조회 : 위 의뢰자 펫 정보 조회에서 pk_cd(펫 종류 코드)를 활용
-	public int petServiceFee(int pk_cd) ;
+	public int petServiceFee(int pet_cd) ;
 	
 	// 의뢰 취소
 	public int deleteRequest(int sq_cd);
@@ -187,5 +187,7 @@ public interface SitterDAO {
 	/* 21-09-29 / 신도빈  / 결제완료 후 요청테이블 상태 업데이트 'SQ_ST : 1' */
 	// 고객 - 카카오페이 결제 완료 후 요청 테이블 상태 업데이트
 	public int updatePay(int SQ_CD);
+	
+	public String selectPetNanme(int pet_cd);
 	
 }

@@ -24,8 +24,9 @@
 		<c:if test="${cnt > 0}">
 			<div class="row" id="divs"
 				style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 30px; width: 700px; margin-left: auto; margin-right: auto; margin-top: 10px;">
+				
 				<c:forEach var="li" items="${list}" varStatus="status">
-					<div class="col-md-12" style="background-color: #f5f5f5;">
+					<div class="col-md-12" style="background-color: #f5f5f5; border-radius:20px; text-align:center; padding:20px 10px; margin:10px">
 						<h5>고객 : ${li.CUST_ID}</h5>
 						&nbsp;
 						<h6>나의 펫 : ${li.SQ_AMT}</h6>
@@ -45,6 +46,7 @@
 								<input type="button" name="payment" value="결제하기"
 									onclick="window.location='/tpj/pay/request?item_name=펫 시터 결제&price=${li.SQ_FEE}&primarykey=${li.SQ_CD}'">
 							</p>
+							
 						</c:if>
 						<c:if test="${li.SQ_ST == 3}">
 							<p>

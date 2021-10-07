@@ -185,7 +185,7 @@
 
 /* // 체크박스 인풋은 숨김처리 */
 .sel_chk1 {
-  display: none;
+  display: none; 
 }
 
 /* // 체크박스 테두리 */

@@ -103,4 +103,7 @@ public interface TrainerService {
 	
 	// 내후기 수정처리
 	public void modifyReviewAction(HttpServletRequest req, Model model);
+	
+	// 내후기 삭제처리
+	public void deleteTrainingReview(HttpServletRequest req, Model model);
 }

@@ -95,7 +95,7 @@ $(document).ready(function(){
 		$("#emailchk").attr("disabled", true);
 		
 		$("#result_em").keyup(function() {
-			if($("#result_em").val() >= 6) {
+			if($("#result_em").val().length >= 6) {
 				var content = $("#result_em").val();
 				
 				if(content == key) {
@@ -198,6 +198,17 @@ function nextJumin2(){
 }
 
 </script>
+<style>
+input[type="text"]:focus {
+    outline: 2px solid green;
+}
+input[type="password"]:focus{
+	outline: 2px solid green;
+}
+input[type="email"]:focus{
+	outline: 2px solid green;
+}
+</style>
 <title>회원가입 페이지</title>
 </head>
 <body>
@@ -211,7 +222,7 @@ function nextJumin2(){
 			<div class="row no-gutters" >
 				<div class="col-md-7" style ="max-width: 100% !important; flex:0 0 100% !important">
 					<div class="contact-wrap w-100 p-md-5 p-4">
-						<h3 class="mb-4">회원가입</h3>
+						<h3 class="mb-4" style="text-align:center;font-weight: bold;font-family: 'Font Awesome 5 Pro;">Create Account</h3>
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">

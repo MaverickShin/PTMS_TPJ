@@ -54,7 +54,7 @@ table tr td {
 	<table class=big border="1">
 		<thead>
 			<tr>
-				<th colspan="3">반려동물 관련 핫이슈</th>
+				<th colspan="3" style="text-align:center">NEWS LETTER</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -69,12 +69,6 @@ table tr td {
 				</tr>
 			</c:forEach>
 			
-
-<%-- 			<c:forEach var="i" items="${list}">
-				<tr>
-					<td>${i}</td>
-				</tr>
-			</c:forEach> --%>
 		</tbody>
 	</table>
 </body>

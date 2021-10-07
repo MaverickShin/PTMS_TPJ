@@ -6,11 +6,16 @@
 <head>
 	<meta charset="utf-8">
 	<title>편의기능</title>
-	<script src="https://kit.fontawesome.com/5d238a51aa.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/5d238a51aa.js" crossorigin="anonymous"></script>
 <script>
-const apiKey = "5919a06844059487fee67afcf1a1af26";
+const apiKey = "5919a06844059487fee67afcf1a1af26"; // api key 선언
+
+// api 호출
 var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Seoul"+"&appid="+apiKey+"&lang=kr";
+// 현재 날씨 이미지 url을 담을 변수
 var imgURL = "";
+
+// ajax를 이용하여 현위치 날씨 조회
 $.ajax({
     url: apiURI,
     dataType: "json",
@@ -146,8 +151,8 @@ $.ajax({
 <body>
 
 	<%@ include file = "../../main/header.jsp" %>
-
-	<div id = "result" style = "width:330px; height: 230px; margin-left:auto; margin-right:auto; margin-top: 50px;">
+<div style="display:flex;">
+	<div id = "result" style = "width:330px; height: 230px; margin-top: 50px;">
 		<div class = "weather">
 		
 		<table class = "weather_tb">
@@ -185,6 +190,10 @@ $.ajax({
 			</div>
 		</div>
 	</div>
+	<div>
+	<p>진수크롤링</p>
+	</div>
+</div>	
 </head>
 <div class="map_wrap">
     <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
@@ -193,7 +202,7 @@ $.ajax({
         <div class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value="키워드" id="keyword" size="15"> 
+                    키워드 : <input type="text" value="가산맛집" id="keyword" size="15"> 
                     <button type="submit">검색하기</button> 
                 </form>
             </div>
@@ -205,7 +214,7 @@ $.ajax({
 </div>
 	<%@ include file = "../../main/footer.jsp" %>
 	
-<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3f081829ec2250ecac36edcd2f27812"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3f081829ec2250ecac36edcd2f27812&libraries=services,clusterer,drawing"></script>
 <script>
 // 마커를 담을 배열입니다
 var markers = [];
@@ -424,7 +433,6 @@ function removeAllChildNods(el) {
     }
 }
 </script>
-
 <script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = { 
@@ -562,8 +570,7 @@ function removeAllChildNods(el) {
 		    console.log('마커에 dragend 이벤트가 발생했습니다!');
 		});
 
-		
-
 </script>
+
 </body>
 </html>

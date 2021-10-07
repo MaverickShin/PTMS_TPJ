@@ -12,7 +12,7 @@
 	<table class=bigs border="1">
 		<thead>
 			<tr>
-				<th colspan="3">핫이슈</th>
+				<th colspan="3" style="text-align:center">Today's Issue</th>
 			</tr>
 		</thead>
 		<tbody>
