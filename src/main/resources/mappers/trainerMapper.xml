@@ -489,7 +489,7 @@
 	
 	<!-- 고객 - 결제 완료 후 요청 테이블 상태 업데이트  -->
 	<update id="updatePay" parameterType="int">
-		UPDATE TRAINER_REQUEST_TB SET SQ_ST = 3 WHERE TQ_CD = #{TQ_CD}
+		UPDATE TRAINER_REQUEST_TB SET TQ_ST = 3 WHERE TQ_CD = #{TQ_CD}
 	</update>
 	
 	<select id="getTrainerCalendar" resultType="String">
@@ -533,4 +533,8 @@
 		from TRAINER_TB
 		where CUST_ID = #{id}
 	</select>
+	
+	<delete id="deleteReviewCnt" parameterType="int">
+		delete from TRAINER_GRADE_TB where TG_CD = #{TG_CD}
+	</delete>
 </mapper>

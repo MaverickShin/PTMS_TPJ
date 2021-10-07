@@ -209,7 +209,9 @@ function refuse() {
 				
 				<c:if test="${cnt > 0}">
 					<div class="row" id="divs" style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 30px; width: 700px; margin-left: auto; margin-right: auto; margin-top: 10px;">
+						
 						<c:forEach var="dtos" items="${dto}" varStatus="status">
+						
 							<div class="about-author d-flex p-4 bg-light" style="place-content:center;">
 						      <div class="desc" style="background-color:#dfe3eb; padding:20px;">
 						        <h6>훈련받을 펫 : ${dtos.PET_NM}</h6>&nbsp;<h6>훈련사 : ${dtos.CUST_NM}</h6>

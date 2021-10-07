@@ -800,15 +800,18 @@ public class MainServiceImpl implements MainService {
 
 		Elements element = doc.select("div.popular_rank_wrap");
 		Elements element1 = element.select("div.keyword_box");
-		//Elements element2 = element1.select("g-card.ftSUBd");
-
-		Elements detailele = element1.select("[href]");
-
+		
+//		Elements element2 = element1.select("g-card.ftSUBd");
+//		System.out.println("element2 : "+ element2);
+		
+		Elements detailele = element1.select("a.keyword[href]");
+		
 		for (Element link : detailele) {
 			String a = "<a href = '" + link.attr("abs:href") + "'>" +link.text() +"</a>";
 			list.add(a);
 		}
 
+		model.addAttribute("item1",detailele);
 		model.addAttribute("list2", list);
 		
 	}
