@@ -9,37 +9,48 @@
 <script src='${jsPath}calendar.js'></script>
 <script>
 	
-	function checkFee() {
-		var tq_amt = document.querySelectorAll('input[name="TQ_AMT"]');
-		var tq_fee = document.querySelector('input[name="TQ_FEE"]');
-		for(var i = 0; i < tq_amt.length; i++) {
-			if(tq_amt[i].checked) {
-				if(tq_amt[i].value == ${dto.TS1_NO}) {
-					tq_fee.value = ${dto.TS1_FEE};
-				} else if(tq_amt[i].value == ${dto.TS2_NO}) {
-					tq_fee.value = ${dto.TS2_FEE};
-				} else if(tq_amt[i].value == ${dto.TS3_NO}) {
-					tq_fee.value = ${dto.TS3_FEE};
-				} else {
-					tq_fee.value = ${dto.TS4_FEE};
-				}
+function checkFee() {
+	var tq_amt = document.querySelectorAll('input[name="TQ_AMT"]');
+	var tq_fee = document.querySelector('input[name="TQ_FEE"]');
+	for(var i = 0; i < tq_amt.length; i++) {
+		if(tq_amt[i].checked) {
+			if(tq_amt[i].value == ${dto.TS1_NO}) {
+				tq_fee.value = ${dto.TS1_FEE};
+			} else if(tq_amt[i].value == ${dto.TS2_NO}) {
+				tq_fee.value = ${dto.TS2_FEE};
+			} else if(tq_amt[i].value == ${dto.TS3_NO}) {
+				tq_fee.value = ${dto.TS3_FEE};
+			} else {
+				tq_fee.value = ${dto.TS4_FEE};
 			}
 		}
 	}
 	
-	function requestTrChk() {
-		if(!document.requestTrainerForm.START_DAY.value) {
-			alert("훈련받을 날짜를 선택하세요.");
-			document.requestTrainerForm.START_DAY.focus();
-			return false;
-		} else if(!document.requestTrainerForm.TQ_AMT.value) {
-			alert("훈련유형을 선택하세요.");
-			return false;
-		} else if(!$("#PET_NM").is(":checked")) {
-			alert("훈련받을 마이펫을 선택하세요.");
-			return false;
-		}
+	if(!document.requestTrainerForm.START_DAY.value){
+		alert("날짜를 선택해주세요!");
+		document.requestTrainerForm.START_DAY.focus();
+		return false;
+	} else if(!document.requestTrainerForm.TQ_AMT.value){
+		alert("원하시는 훈련을 선택해주세요!");
+		return false;
 	}
+	
+}
+
+function requestTrChk() {
+	if(!document.requestTrainerForm.START_DAY.value) {
+		alert("훈련받을 날짜를 선택하세요.");
+		document.requestTrainerForm.START_DAY.focus();
+		return false;
+	} else if(!document.requestTrainerForm.TQ_AMT.value) {
+		alert("훈련유형을 선택하세요.");
+		return false;
+	} else if(!$("#PET_NM").is(":checked")) {
+		alert("훈련받을 마이펫을 선택하세요.");
+		return false;
+	}
+}
+
 
 </script>
 <style>
@@ -171,8 +182,9 @@
 		            
 		            <div class="col-md-12">
                         <div class="form-group" align="center">
-                           <input type="submit" value="훈련 신청하기" class="btn btn-primary">
-                           <div class="submitting"></div>
+                        	<input type="submit" value="훈련 신청하기" class="btn btn-primary">
+                           
+                            <div class="submitting"></div>
                         </div>
                      </div>
 	              </div>

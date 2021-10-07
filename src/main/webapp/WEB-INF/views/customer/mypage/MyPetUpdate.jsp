@@ -6,6 +6,14 @@
 <head>
 <title>MyPet</title>
 <meta charset="utf-8">
+<script type="text/javascript">
+function updatePet(){
+	 if(!document.contactForm.PK_CD.value){
+		alert("펫 종류를 입력해주세요!");
+		return false;
+	}
+}
+</script>
 <style>
 .hide {
 	display:none;
@@ -121,7 +129,7 @@
 							<div class="contact-wrap w-100 p-md-5 p-4" style = "font-family: 'Do Hyeon', sans-serif;">
 								<h3 class="mb-4">MyPet 수정</h3>
 								
-								<form action="MyPetUpdateAction" method="POST" id="contactForm" name="contactForm" class="contactForm" enctype="multipart/form-data">
+								<form action="MyPetUpdateAction" method="POST" id="contactForm" name="contactForm" class="contactForm" onsubmit="return updatePet()" enctype="multipart/form-data">
 									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 									<s:csrfInput/>
 										<div class="row">

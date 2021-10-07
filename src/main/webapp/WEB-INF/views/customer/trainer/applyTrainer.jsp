@@ -88,25 +88,30 @@
 			alert("훈련가능 유형을 선택하세요.");
 			return false;
 			
-		} else if($("#TS1_NO").is(":checked")) {
+		}
+		
+		if($("#TS1_NO").is(":checked")) {
 			if(!$("#tr_kind1_fee1").val()) {
 				alert("훈련요금을 입력하세요.");
 				$("#tr_kind1_fee1").focus();
 				return false;
 			}
-		} else if($("#TS2_NO").is(":checked")) {
+		}
+		if($("#TS2_NO").is(":checked")) {
 			if(!$("#tr_kind2_fee2").val()) {
 				alert("훈련요금을 입력하세요.");
 				$("#tr_kind2_fee2").focus();
 				return false;
 			}
-		} else if($("#TS3_NO").is(":checked")) {
+		}
+		if($("#TS3_NO").is(":checked")) {
 			if(!$("#tr_kind3_fee3").val()) {
 				alert("훈련요금을 입력하세요.");
 				$("#tr_kind3_fee3").focus();
 				return false;
 			}
-		} else if($("#TS4_NO").is(":checked")) {
+		}
+		if($("#TS4_NO").is(":checked")) {
 			if(!$("#tr_kind4_fee4").val()) {
 				alert("훈련요금을 입력하세요.");
 				$("#tr_kind4_fee4").focus();

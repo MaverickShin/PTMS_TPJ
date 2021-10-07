@@ -110,10 +110,10 @@ function showImage(){
 	  		language-code="ko">
 	  	</df-messenger>
 	
-	<section class = "news">
+	<section class = "news" style = "display:flex;">
 		<%@ include file="../news/newsletter.jsp"%> 
 	</section>
-
+	
     <!-- END nav -->
     <div  style= "background-image: url('${path}images/bg_1.jpg'); width:100%; height: 100%;">
       
