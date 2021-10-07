@@ -429,7 +429,12 @@ function showImage(){
 		              <li><span class="fa fa-check mr-2"></span>Free Supports</li>
 		            </ul>
 
-	            	<a href="#" class="btn btn-primary d-block px-2 py-3">Get Started</a>
+    		        <c:if test="${sessionScope.cust_id == null}">
+		            	<a class="btn btn-primary d-block px-2 py-3" onclick="if(confirm('로그인 후 이용가능합니다. 로그인 하시겠습니까?')) window.location = '/tpj/cust/login';">Get Started</a>
+		            </c:if>
+		            <c:if test="${sessionScope.cust_id != null}">
+		            	<a href="#" class="btn btn-primary d-block px-2 py-3">Get Started</a>
+		            </c:if>
 	            </div>
 	          </div>
 	        </div>
@@ -447,7 +452,13 @@ function showImage(){
 		              <li><span class="fa fa-check mr-2"></span>Free Supports</li>
 		            </ul>
 
-		            <a href="#" class="btn btn-primary d-block px-2 py-3">Get Started</a>
+    		        <c:if test="${sessionScope.cust_id == null}">
+		            	<a class="btn btn-primary d-block px-2 py-3" onclick="if(confirm('로그인 후 이용가능합니다. 로그인 하시겠습니까?')) window.location = '/tpj/cust/login';">Get Started</a>
+		            </c:if>
+		            <c:if test="${sessionScope.cust_id != null}">
+		            	<a href="#" class="btn btn-primary d-block px-2 py-3">Get Started</a>
+		            </c:if>
+		            
 	            </div>
 	          </div>
 	        </div>
@@ -465,7 +476,12 @@ function showImage(){
 		              <li><span class="fa fa-check mr-2"></span>Free Supports</li>
 		            </ul>
 
-		            <a href="#" class="btn btn-primary d-block px-2 py-3">Get Started</a>
+		            <c:if test="${sessionScope.cust_id == null}">
+		            	<a class="btn btn-primary d-block px-2 py-3" onclick="if(confirm('로그인 후 이용가능합니다. 로그인 하시겠습니까?')) window.location = '/tpj/cust/login';">Get Started</a>
+		            </c:if>
+		            <c:if test="${sessionScope.cust_id != null}">
+		            	<a href="#" class="btn btn-primary d-block px-2 py-3">Get Started</a>
+		            </c:if>
 	            </div>
 	          </div>
 	        </div>
