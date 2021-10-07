@@ -53,12 +53,24 @@ function addressSerch() {
     });
 }
 
+function sitterser() {
+	
+	$('input:checkbox[name="pet_cd"]:not(:checked)').each(function(){
+		 $(this).val('0');
+		 $(this).prop("checked", true); 
+	});
+	
+		
+}
+
+
+
 // sitter/sitter(펫시터찾기)
 function sittingCheck(){
 	
 	var gSize = "";
 
-	$("input[name=pk_cd]:checked").each(function() {
+	$("input[name=pet_cd]:checked").each(function() {
 
 	if(gSize == ""){
 

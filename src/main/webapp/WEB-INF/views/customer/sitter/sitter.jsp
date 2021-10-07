@@ -7,6 +7,13 @@
 <meta charset="UTF-8">
 
 <title>Insert title here</title>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#sitterMatching").each(function(){
+			this.reset();
+		});
+	});
+</script>
 </head>
 <%@ include file="../../main/header.jsp"%>
 <body>
@@ -15,7 +22,7 @@
 		<%@ include file = "sidebar.jsp" %>
 		
 		<section style="width: 700px; margin-left: auto; margin-right: auto; margin-top: 30px;" class = "sections">
-			<form action="sitterMatching" method="post" name="sitterMatching" onsubmit="return sittingCheck();">
+			<form action="sitterMatching" id="sitterMatching" method="post" name="sitterMatching" onsubmit="return sittingCheck();">
 				<input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token}">
 				<div class="row no-gutters">
@@ -70,12 +77,11 @@
 								<div class="form-group">
 									<h2>나의 반려동물</h2>
 									<c:if test="${selectCnt > 0 }"> 
-										<div style = "display:flex; margin-top: 30px;">
+										<div style="display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid #eeeeee;">
 											<c:forEach var="li" items="${list}" varStatus = "st" >
-											<input type="hidden" name="PET_NM" value="${li.PET_NM}">
 												<p class = "chk_p1">
 													<label class = "chk_label1" for = "pet_li_${st.index}">
-														<input type="checkbox" id = "pet_li_${st.index}" name="pk_cd" class = "sel_chk1" value="${li.PK_CD}">
+														<input type="checkbox" id = "pet_li_${st.index}" name="pet_cd" class = "sel_chk1 pets" value="${li.PET_CD}">
 														<span class="checkbox_icon"></span>
 														<span class = "list_label_span2" >${li.PET_NM}</span>
 													</label>
@@ -96,7 +102,7 @@
 										<input type="button" value="마이펫 등록하기" class="btn btn-primary" style = "font-size: 20px; width: 200px" onclick="window.location='/tpj/cust/MyInfoUser'">
 									</c:if>
 									<c:if test="${selectCnt != 0}">
-										<input type="submit" value="찾기" class="btn btn-primary" style = "font-size: 20px; width: 150px">
+										<input type="submit" value="찾기" class="btn btn-primary" style = "font-size: 20px; width: 150px" onclick = "sitterser();">
 										<div class="submitting"></div>
 									</c:if>	
 								</div>

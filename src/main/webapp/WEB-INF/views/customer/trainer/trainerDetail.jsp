@@ -120,33 +120,35 @@
 	              	<div class="form-group">
 		                <div class="form-group">
 		                  <span class="fa fa-search"></span>
-		                  <input type="date" class="iptags" name="START_DAY">
+		                  <input type="date" class="iptags" name="START_DAY" value="${dto.START_DAY}">
 		                </div>
 	              	</div>
 	              	
 	              	<!-- 훈련유형 선택 및 요금안내 -->
 	              	<!-- <div class="sidebar-box ftco-animate"> -->
 		              <div class="form-group">
-		                <h3 style="font-size:18px">훈련유형 및 요금안내${TQ_LOC}</h3>
+		                <h3 style="font-size:15px"><b>훈련유형 및 요금안내</b></h3>
+		                <h4 style="font-size:14px">서비스 지역 : ${TQ_LOC}</h4>
+		                <hr>
 		                <c:if test="${dto.TS1_NO == 1}">
 		                	<label><input type="radio" value="${dto.TS1_NO}" id="TQ_AMT" class="iptags" name="TQ_AMT">배변훈련</label><br>
 		                	<input type="hidden" value="${dto.TS1_FEE}" class="iptags" name="TQ_FEE">
-		                	<label>1회차 당 배변훈련 요금 : ${dto.TS1_FEE}</label><br>
+		                	<label>1회차 당 배변훈련 요금 : <fmt:formatNumber value="${dto.TS1_FEE}" pattern="###,###,###,###" />원</label><br>
 		                </c:if>
 				        <c:if test="${dto.TS2_NO == 2}">
 				        	<label><input type="radio" value="${dto.TS2_NO}" id="TQ_AMT" class="iptags" name="TQ_AMT">분리불안</label><br>
 				        	<input type="hidden" value="${dto.TS2_FEE}" class="iptags" name="TQ_FEE">
-		                	<label>1회차 당 분리불안 요금 : ${dto.TS2_FEE}</label><br>
+		                	<label>1회차 당 분리불안 요금 : <fmt:formatNumber value="${dto.TS2_FEE}" pattern="###,###,###,###" />원</label><br>
 		                </c:if>
 				        <c:if test="${dto.TS3_NO == 3}">
 				        	<label><input type="radio" value="${dto.TS3_NO}" id="TQ_AMT" class="iptags" name="TQ_AMT">기본훈련</label><br>
 				        	<input type="hidden" value="${dto.TS3_FEE}" class="iptags" name="TQ_FEE">
-		                	<label>1회차 당 기본훈련 요금 : ${dto.TS3_FEE}</label><br>
+		                	<label>1회차 당 기본훈련 요금 : <fmt:formatNumber value="${dto.TS3_FEE}" pattern="###,###,###,###" />원</label><br>
 		                </c:if>
 				        <c:if test="${dto.TS4_NO == 4}">
 				        	<label><input type="radio" value="${dto.TS4_NO}" id="TQ_AMT" class="iptags" name="TQ_AMT">짖음해결</label><br>
 				        	<input type="hidden" value="${dto.TS4_FEE}" class="iptags" name="TQ_FEE">
-		                	<label>1회차 당 짖음해결 요금 : ${dto.TS4_FEE}</label><br>
+		                	<label>1회차 당 짖음해결 요금 : <fmt:formatNumber value="${dto.TS4_FEE}" pattern="###,###,###,###" />원</label><br>
 		                </c:if>
 		              </div>
 		           <!--  </div> -->

@@ -7,9 +7,12 @@
     
    <!-- 시터 상세 조회 페이지 -->
    <select id="detailSitter" parameterType="int" resultType="ptms.mvc.tpj.CustVO.SitterVO">
-      SELECT SIT_TITLE, SIT_APPEAL, SIT_IMG
-      FROM SITTERS_TB
-      WHERE SIT_ID=#{SIT_ID}
+      select SIT_TITLE, SIT_APPEAL, SIT_IMG, SV1_NO, SV2_NO, SV3_NO, SV4_NO
+		from(
+		    SELECT st.SIT_TITLE, st.SIT_APPEAL, st.SIT_IMG, ss.SV1_NO, ss.SV2_NO, ss.SV3_NO, ss.SV4_NO
+		      FROM SITTERS_TB st, SITTER_SERVICE_TB ss
+		      WHERE st.SIT_ID=#{SIT_ID}
+    		)
    </select>
    <select id="MypetCount" parameterType="String" resultType="int">
       SELECT COUNT(*)
@@ -304,7 +307,10 @@
 	
 	<!-- 시터 - 의뢰시 : 펫 별 서비스 요금 조회 -->
 	<select id = "petServiceFee" resultType = "int">
-		SELECT SF_FEE FROM SITTER_FEE_TB WHERE PK_CD = #{pk_cd}
+		SELECT SF_FEE 
+		FROM SITTER_FEE_TB f, PET_TB p 
+		WHERE f.pk_cd = p.pk_cd 
+		AND p.PET_CD = #{pet_cd}
 	</select>
 	
 	<!-- 고객 - 요청수락대기 리스트 수 구하기 -->
@@ -344,6 +350,7 @@
 		FROM SITTER_REQUEST_TB 
 		WHERE CUST_ID =#{CUST_ID}
 		AND SQ_ST =1
+		OR SQ_ST = 3
 	</select>
 	<!-- 고객 - 수락된 요청 리스트 -->
 	<select id="acceptReqList" parameterType="java.util.Map" resultType="ptms.mvc.tpj.CustVO.SitterVO">
@@ -496,6 +503,11 @@
 	<update id="updatePay" parameterType="int">
 		UPDATE SITTER_REQUEST_TB SET SQ_ST = 3 WHERE SQ_CD = #{SQ_CD}
 	</update>
+	
+	<!-- 고객 : 펫 시팅 시 선택한 펫 이름 조회 -->
+	<select id="selectPetNanme" resultType="String">
+		select PET_NM from pet_tb where pet_cd = #{pet_cd}
+	</select>
 	
 </mapper>    
 
