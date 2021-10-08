@@ -123,7 +123,6 @@
 		<security:intercept-url pattern="/cust/mailChkAction" access="permitAll" />
 		<security:intercept-url pattern="/cust/emailSuccess" access="permitAll" />
 		<security:intercept-url pattern="/**" access="permitAll" />
-		<security:intercept-url pattern="/sitter/**" access="permitAll" />
 		
 		
 		<!-- 로그인한 사용자 영역 -->
@@ -157,7 +156,7 @@
 			expired-url : 중복 로그인 발생시 이동할 경로 -->
 		
 			<security:concurrency-control 
-				max-sessions="2"
+				max-sessions="5"
 				expired-url="/cust/login"
 				error-if-maximum-exceeded="false" />
 				
