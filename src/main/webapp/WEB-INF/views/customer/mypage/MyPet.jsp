@@ -198,9 +198,9 @@
 							</div>
 						</div>
 						
-						<div class="col-md-5 d-flex align-items-stretch">
+						<div class="col-md-5 d-flex align-items-stretch" style = "overflow: hidden;">
 							<div class="info-wrap w-100 p-5 img"
-								style="background-image: url(${path}images/Mypet.jpg);"></div>
+								style="background-image: url(${path}images/Mypet.jpg); width: 460px; height: auto; display:block;"></div>
 						</div> 
 					</div>
 				</div>

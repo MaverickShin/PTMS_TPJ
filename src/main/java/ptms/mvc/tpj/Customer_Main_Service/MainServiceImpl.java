@@ -798,8 +798,8 @@ public class MainServiceImpl implements MainService {
 			e.printStackTrace();
 		}
 
-		Elements element = doc.select("div.popular_rank_wrap");
-		Elements element1 = element.select("div.keyword_box");
+		Elements element = doc.select(".group_related");
+		Elements element1 = element.select(".keyword_box");
 		
 //		Elements element2 = element1.select("g-card.ftSUBd");
 //		System.out.println("element2 : "+ element2);
@@ -808,6 +808,7 @@ public class MainServiceImpl implements MainService {
 		
 		for (Element link : detailele) {
 			String a = "<a href = '" + link.attr("abs:href") + "'>" +link.text() +"</a>";
+			System.out.println("a : " + a);
 			list.add(a);
 		}
 

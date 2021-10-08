@@ -22,7 +22,7 @@
 					${i}<br>
 					</td>
 				</tr>
-			</c:forEach>
+			</c:forEach> 
 		</tbody>
 	</table>
 </body>

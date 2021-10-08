@@ -80,7 +80,7 @@ function showImage(){
 		border: 1px solid white;
 		font-family: 'Do Hyeon', sans-serif;
 		border-collapse: collapse;
-		border-left:none;
+		border-left: none;
 		border-right:none;
 	}
 	
@@ -89,6 +89,7 @@ function showImage(){
 		font-weight: bold;
 		border-left:none;
 		border-right:none;
+		border-top: 1px solid white;
 	}
 	
 	.bigs td {
@@ -97,6 +98,14 @@ function showImage(){
 		color: white;
 		border-left: none;
 		border-right: none;
+		text-align: center;
+	}
+	
+	.bigs td a {
+		display: block;
+		font-size: 30px;
+		color: white;
+		margin-top: 30px;
 	}	
 
 	.FAkayc  {
@@ -128,6 +137,10 @@ function showImage(){
 	.ZE0LJd {
 		margin-top: 10px;
 	}
+	
+	.S1FAPd {
+		display: none;
+	}
 </style>
 <body onload = "showImage();">
 <%@ include file = "header.jsp" %>
@@ -140,12 +153,12 @@ function showImage(){
 	  		agent-id="0b66c0d5-09a4-4a16-aeb7-b92963e6f8ca"
 	  		language-code="ko">
 	  	</df-messenger>
-	
-	<section class = "news" style = "display:flex;">
+	<div style = "width: 100%;background-color:#2C3E50; height: 250px;">
+	<section class = "news" style = "display:flex; width : 1200px; margin-left: auto; margin-right: auto;" >
 		<%@ include file="../news/newsletter.jsp"%> 
 		<%@ include file="../news/petIssue.jsp"%> 
 	</section>
-	
+	</div>
     <!-- END nav -->
     <div  style= "background-image: url('${path}images/bg_1.jpg'); width:100%; height: 100%;">
       
