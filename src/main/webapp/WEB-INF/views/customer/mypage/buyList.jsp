@@ -111,6 +111,7 @@
 																&nbsp;
 																<p>이용 서비스 : ${li.PAY_KIND}</p>
 																<p>결제금액 : ${li.BY_SUM} 원</p>
+																<p>수수료 : ${li.BY_FEES} 원</p>
 																<p>결제일 : ${li.BY_DT}</p>
 															</div>
 														</c:forEach>
