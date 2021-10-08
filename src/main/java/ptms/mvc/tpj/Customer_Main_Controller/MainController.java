@@ -433,7 +433,6 @@ public class MainController {
    @RequestMapping("convenience")
    public String convenience(HttpServletRequest req, Model model) {
 	   
-	   service.Convenience_Info(req, model);
 	   
 	   return "news/Convenience_Info";
    }
@@ -451,7 +450,9 @@ public class MainController {
    
    // 위치안내
    @RequestMapping("location")
-   public String location() {
+   public String location(HttpServletRequest req, Model model) {
+	   
+	   service.Convenience_Info(req, model);
 	   
 	   return "customer/location/location";
    }

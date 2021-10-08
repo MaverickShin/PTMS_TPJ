@@ -5,6 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<c:if test="${selectCnt != 0}">
+	<script type="text/javascript">
+		alert("이미 훈련사로 활동중인 아이디 입니다. 내정보관리를 확인해 주세요");
+		window.history.back();
+	</script>
+</c:if>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
@@ -204,14 +210,6 @@ input:checked + .slider:before {
 
 	<div style="display: flex; flex:1; justify-content:center;">
 			<%@ include file = "sidebar.jsp" %>
-			
-			<c:if test="${selectCnt != 0}">
-				<script type="text/javascript">
-					alert("이미 훈련사로 활동중인 아이디 입니다. 내정보관리를 확인해 주세요");
-					window.location='${tr}requestTrainer';
-				</script>
-			</c:if>
-
 		<section style="width: 900px; margin-left: auto; margin-right: auto; margin-top: 30px;" class = "sections">
 			<form name="applyform" action="applyTrainerAction" method="post"
 				onsubmit="return joinCheck();">
