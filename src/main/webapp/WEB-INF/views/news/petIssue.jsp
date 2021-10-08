@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table class=bigs border="1">
+	<%-- <table class=bigs border="1">
 		<thead>
 			<tr>
 				<th colspan="3" style="text-align:center">Today's Issue</th>
@@ -24,6 +24,6 @@
 				</tr>
 			</c:forEach>
 		</tbody>
-	</table>
+	</table> --%>
 </body>
 </html>
