@@ -132,7 +132,6 @@ public class MainController {
 		return result;
 	}
 	
-	
 	// 로그인 페이지 이동
 	@RequestMapping("login")
 	public String login() {

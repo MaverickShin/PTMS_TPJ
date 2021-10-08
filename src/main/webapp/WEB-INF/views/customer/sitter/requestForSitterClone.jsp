@@ -14,7 +14,7 @@
 			style="width: 700px; margin-left: auto; margin-right: auto; margin-top: 30px;">
 			<div class="col-md-12">
 				<h3></h3>
-					<p>아직 들어온 의뢰가 없습니다. 일정 조정으로 매칭률을 높여보세요!</p>
+					<p>매칭된 서비스 내역이 존재하지 않습니다. 일정 조정으로 매칭률을 높여보세요!</p>
 			</div>
 		</div>
 	</c:if>

@@ -22,14 +22,6 @@ function loginCheck() {
 	}
 }
 </script>
-<style>
-input[type="text"]:focus {
-    outline: 2px solid green;
-}
-input[type="password"]:focus{
-	outline: 2px solid green;
-}
-</style>
 </head>
 <body>
 

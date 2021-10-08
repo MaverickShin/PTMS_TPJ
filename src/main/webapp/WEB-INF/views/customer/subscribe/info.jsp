@@ -67,20 +67,12 @@
 		              <li><span class="fa fa-check mr-2"></span>모바일 푸시 알림</li>
 		              <li><span class="fa fa-check mr-2"></span>매칭 지원 (시터, 훈련사 등록) </li>
 		            </ul>
-<<<<<<< HEAD
-		            <c:if test="${sessionScope.cust_id == null}">
-		            	<a class="btn btn-primary d-block px-2 py-3" onclick="if(confirm('로그인 후 이용가능합니다. 로그인 하시겠습니까?')) window.location = '/tpj/cust/login';">Get Started</a>
-		            </c:if>
-		            
-		            <c:if test="${sessionScope.cust_id != null}">
-		            	<a href="/tpj/pay/request?item_name=비지니스 결제&price=49900&primarykey=null" class="btn btn-primary d-block px-2 py-3">Get Started</a>
-=======
+
 		            <c:if test="${sessionScope.cust_id == null }">
 					 <a href="/tpj/cust/login" class="btn btn-primary d-block px-2 py-3" onclick="alert('로그인 후 이용가능한 서비스 입니다.\n로그인 페이지로 이동합니다.');">Get Started</a>
 		            </c:if>
 		            <c:if test="${sessionScope.cust_id != null }">
 		            <a href="/tpj/pay/request?item_name=비지니스 결제&price=49900&primarykey=null" class="btn btn-primary d-block px-2 py-3">Get Started</a>
->>>>>>> a9e9003b396165ec6eea613dc6360da68febce40
 		            </c:if>
 	            </div>
 	          </div>
