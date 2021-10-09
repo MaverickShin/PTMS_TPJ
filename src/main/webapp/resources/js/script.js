@@ -101,10 +101,11 @@ function sittingCheck(){
 		alert("서비스 종료일을 지정해 주세요.");
 		document.sitterMatching.WK_END.focus();
 		return false;
-	}else if(!gSize){
+	} else if(gSize==""){
 		alert("한마리 이상의 반려동물을 선택하셔야 합니다.");
 		return false;
 	}
+	
 	
 }
 

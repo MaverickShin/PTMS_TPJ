@@ -169,6 +169,7 @@ function updatePet(){
 											</div>
 											<div class="col-md-12" style = "margin-top: 20px; border-top:1px solid #00bd56; padding-top: 20px;">
 												<label class="label" for="PET_IMG">펫사진</label>&nbsp;&nbsp;
+												<img alt="펫 사진" src="${dto.getPET_IMG()}" width="50px" height="50px">
 												<input class="form-group" type="file" id="PET_IMG" name="PET_IMG" accept="${imgPath}*">
 											</div>
 											<div class="col-md-12" style = "padding-top: 20px; border-top:1px solid #00bd56; margin-top:20px;">

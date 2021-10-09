@@ -223,7 +223,7 @@
 	  	 FROM			
 			(SELECT r.*  ,ROWNUM rNUM
 			  FROM 
-			   (SELECT b.BY_CD, b.CUST_ID, b.PAYKIND_CD, b.BY_SUM, b.BY_ST, b.BY_DT , p.PAY_KIND
+			   (SELECT b.BY_CD, b.CUST_ID, b.PAYKIND_CD, b.BY_SUM, b.BY_FEES, b.BY_DT , p.PAY_KIND
 			  	FROM BUYLIST_TB b, PAYKIND_TB p
 			  	WHERE b.PAYKIND_CD = p.PAYKIND_CD
 				AND CUST_ID = #{CUST_ID}

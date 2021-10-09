@@ -1157,7 +1157,7 @@ public class MainServiceImpl implements MainService {
 	
         String CUST_ID = (String) req.getSession().getAttribute("cust_id");
         	// 페이징
-     		int pageSize = 12; // 한 페이지당 출력할 글 갯수
+     		int pageSize = 6; // 한 페이지당 출력할 글 갯수
      		int pageBlock = 3; // 한 블럭당 페이지 갯수
 
      		int cnt = 0; // 글갯수
@@ -1177,9 +1177,15 @@ public class MainServiceImpl implements MainService {
     			pageNum = "1"; // 첫 페이지를 1페이지로 지정
     		}
      		
+            //결제내역 건수
+            cnt = dao.getpayList(CUST_ID);
+            System.out.println("결제내역건수 cnt : " + cnt);
+    		
     		currentPage = Integer.parseInt(pageNum);
-    		System.out.println("currentPage : " + currentPage);
+    		System.out.println("결제 currentPage : " + currentPage);
     		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
+    		System.out.println("결제 pageCount : "+pageCount);
+    		
     		start = (currentPage - 1) * pageSize + 1;
     		end = start + pageSize - 1;
     		number = cnt - (currentPage - 1) * pageSize;
@@ -1187,24 +1193,23 @@ public class MainServiceImpl implements MainService {
     		if (currentPage % pageBlock == 0)
     			startPage -= pageBlock;
 
-    		System.out.println("startPage : " + startPage);
+    		System.out.println("결제 startPage : " + startPage);
     		endPage = startPage + pageBlock - 1;
     		if (endPage > pageCount)
     			endPage = pageCount;
-    		System.out.println("endPage : " + endPage);
-    		System.out.println("result : " + pageCount);
-    		System.out.println("start : " + start);
-    		System.out.println("end : " + end);
+    		System.out.println("결제 endPage : " + endPage);
+    		System.out.println("결제 result : " + pageCount);
+    		System.out.println("결제 start : " + start);
+    		System.out.println("결제 end : " + end);
     		
         //고객 - 시터등록 안되어 있을시 시터프로필 수정 접근 금지
     	int trainerChk = dao.trainerChk(CUST_ID);
         int signchkCnt = dao.sitterSigninChk(CUST_ID);
         System.out.println("시터등록확인 signchkCnt : " + signchkCnt);
+        
         List<PayVO> list = null;
         Map<String, Object> map = new HashMap<String, Object>();
-          //결제내역 건수
-          cnt = dao.getpayList(CUST_ID);
-          System.out.println("결제내역건수 cnt : " + cnt);
+
           
         if(cnt > 0) {
 			map.put("CUST_ID", CUST_ID);
