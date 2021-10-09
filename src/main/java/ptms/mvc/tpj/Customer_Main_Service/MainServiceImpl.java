@@ -620,11 +620,8 @@ public class MainServiceImpl implements MainService {
 		// select를 이용하여 원하는 태그를 선택한다. <div class="search-container__csa">
 		// 원하는 값들이 들어있는 '전체'덩어리를 가져온다.
 		Elements element = doc.select("div.section_wrap");
-		System.out.println("element : " + element);
 		Elements element1 = element.select("div.section_cell");
-		System.out.println("element1 : " + element1);
 		Elements element2 = element1.select("div.list_type ul li");
-		System.out.println("element2 : " + element2);
 
 		// element에 들어있는 세부정보 찾기 - 호텔 이름
 		Elements detailele = element2.select("a.link_a");
