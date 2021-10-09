@@ -52,7 +52,7 @@
 						style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 30px; width: 700px; margin-left: auto; margin-right: auto; margin-top: 10px;">
 						<c:forEach var="li" items="${list}">
 							<div class="col-md-12" style="background-color: #f5f5f5;">
-								<h5>나의 요청내역</h5>
+								<h5>나의 후기</h5>
 								&nbsp;
 								<p>나의 요청 서비스 : ${li.REQ_SV}</p>
 								<p>서비스 요금 : ${li.SQ_FEE}</p>
@@ -62,7 +62,7 @@
 								<p>시터이용후기 : ${li.SG_CON}</p>
 								<p>후기 등록일 : ${li.SG_DT}</p>
 
-								<p>
+								<p align="center">
 									<input type="button" name="reviewModify" value="리뷰 수정"
 										onclick="window.location='MyreviewModify?SG_CD=${li.SG_CD}'">
 									<input type="button" name="reviewDel" value="삭제"

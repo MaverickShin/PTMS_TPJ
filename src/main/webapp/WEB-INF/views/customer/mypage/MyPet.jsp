@@ -6,7 +6,26 @@
 <head>
 <title>MyPet</title>
 <meta charset="utf-8">
-
+<script type="text/javascript">
+	function insertPet(){
+		if(!document.contactForm.PET_NM.value){
+			alert("펫 이름을 입력해주세요!");
+			document.contactForm.PET_NM.focus();
+			return false;
+		}else if(!document.contactForm.PET_AGE.value){
+			alert("펫 나이를 입력해주세요!");
+			document.contactForm.PET_AGE.focus();
+			return false;
+		}else if(!document.contactForm.PK_CD.value){
+			alert("펫 종류를 입력해주세요!");
+			return false;
+		}else if(!document.contactForm.PET_IMG.value){
+			alert("펫 사진을 등록해주세요!");
+			document.contactForm.PET_IMG.focus();
+			return false;
+		}
+	}
+</script>
 <style>
 .hide {
 	display:none;
@@ -108,9 +127,9 @@
 <section class="ftco-section bg-light">
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-md-6 text-center mb-5">
+<!-- 			<div class="col-md-6 text-center mb-5">
 				<h2 class="heading-section">반려인/반려동물 관리</h2>
-			</div>
+			</div> -->
 		</div>
 		<div class="row justify-content-center">
 			<div class="col-md-12">
@@ -119,9 +138,9 @@
 					<div class="row no-gutters">
 						<div class="col-md-7">
 							<div class="contact-wrap w-100 p-md-5 p-4"  style = "font-family: 'Do Hyeon', sans-serif;">
-								<h3 class="mb-4">MyPet 등록</h3>
+								<h3 class="mb-4">반려동물 정보 등록</h3>
 								
-								<form action="MyPetInsertAction" method="POST" id="contactForm" name="contactForm" class="contactForm" enctype="multipart/form-data">
+								<form action="MyPetInsertAction" method="POST" id="contactForm" name="contactForm" class="contactForm" onsubmit="return insertPet()" enctype="multipart/form-data">
 									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 									<s:csrfInput/>
 										<div class="row">
@@ -179,10 +198,10 @@
 							</div>
 						</div>
 						
-						<div class="col-md-5 d-flex align-items-stretch">
+						<div class="col-md-5 d-flex align-items-stretch" style = "overflow: hidden;">
 							<div class="info-wrap w-100 p-5 img"
-								style="background-image: url(${path}images/gallery-3.jpg);"></div>
-						</div>
+								style="background-image: url(${path}images/Mypet.jpg); width: 460px; height: auto; display:block;"></div>
+						</div> 
 					</div>
 				</div>
 			</div>

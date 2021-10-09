@@ -312,12 +312,6 @@ public class TrainerDAOImpl implements TrainerDAO {
 	}
 
 	@Override
-	public int updatePay(int TQ_CD) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public List<String> getTrainerCalendar(int TA_CD) {
 		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
 		return dao.getTrainerCalendar(TA_CD);
@@ -353,6 +347,18 @@ public class TrainerDAOImpl implements TrainerDAO {
 		return dao.trainerChkCnt(id);
 	}
 	
+	@Override
+	public int updatePay(int TQ_CD) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.updatePay(TQ_CD);
+	}
+
+	@Override
+	public int deleteReviewCnt(int TG_CD) {
+		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
+		return dao.deleteReviewCnt(TG_CD);
+	}
+	
 	/*
 	// 평점순 훈련사 정렬 건수
 	@Override
@@ -377,11 +383,7 @@ public class TrainerDAOImpl implements TrainerDAO {
 		return selectCnt;
 	}
 
-	@Override
-	public int updatePay(int TQ_CD) {
-		TrainerDAO dao = sqlSession.getMapper(TrainerDAO.class);
-		return dao.updatePay(TQ_CD);
-	}
+	
 
 	// 후기 미리보기 후기 많은 순 훈련사 정렬
 	@Override

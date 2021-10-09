@@ -6,11 +6,16 @@
 <head>
 	<meta charset="utf-8">
 	<title>편의기능</title>
-	<script src="https://kit.fontawesome.com/5d238a51aa.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/5d238a51aa.js" crossorigin="anonymous"></script>
 <script>
-const apiKey = "5919a06844059487fee67afcf1a1af26";
+const apiKey = "5919a06844059487fee67afcf1a1af26"; // api key 선언
+
+// api 호출
 var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Seoul"+"&appid="+apiKey+"&lang=kr";
+// 현재 날씨 이미지 url을 담을 변수
 var imgURL = "";
+
+// ajax를 이용하여 현위치 날씨 조회
 $.ajax({
     url: apiURI,
     dataType: "json",
@@ -45,7 +50,7 @@ $.ajax({
 <style>
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-.map_wrap {position:relative;width:100%;height:500px;}
+.map_wrap {position:relative;width: 100%;height:720px; margin-left: auto; margin-right: auto;}
 #menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
 .bg_white {background:#fff;}
 #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
@@ -141,13 +146,42 @@ $.ajax({
 		margin:0;
 		background-color: #0277bd;
 	}
+	
+	.infos {
+		width: 600px;
+		margin:0;
+		background-color: #37474f;
+	}
+	
+	.ntcs img{
+		width : 330px !important;
+		border: 3px solid white;
+		border-radius: 30px;
+		-moz-border-radius: 30px;
+		-khtml-border-radius: 30px;
+		-webkit-border-radius: 30px;
+	}
+	.bottom_div {
+		background-color: white; 
+		height: 76px;
+	}
+	
+	.ntcs span {
+		color: white !important;
+		font-weight: bolder;
+		font-family: 'Do Hyeon', sans-serif;
+	}
 </style>
 </head>
 <body>
 
 	<%@ include file = "../../main/header.jsp" %>
 
-	<div id = "result" style = "width:330px; height: 230px; margin-left:auto; margin-right:auto; margin-top: 50px;">
+<div style="display:flex;">	
+<div>
+<div style="display:flex; flex:1; width: 600px; height:320px;justify-content: center; background-color:#37474f; ">
+	<div width = "600px" style = "border-bottom:2px solid white;">
+	<div id = "result" style = "width:330px; height: 230px; margin-top: 50px;">
 		<div class = "weather">
 		
 		<table class = "weather_tb">
@@ -185,15 +219,24 @@ $.ajax({
 			</div>
 		</div>
 	</div>
-</head>
+	</div>
+</div>	
+
+<div class = "infos">
+	<%@ include file = "../../news/Convenience_Info.jsp" %>
+</div>
+
+</div>
+
 <div class="map_wrap">
+	
     <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 
     <div id="menu_wrap" class="bg_white">
         <div class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value="키워드" id="keyword" size="15"> 
+                    키워드 : <input type="text" value="가산 동물병원" id="keyword" size="15"> 
                     <button type="submit">검색하기</button> 
                 </form>
             </div>
@@ -203,9 +246,10 @@ $.ajax({
         <div id="pagination"></div>
     </div>
 </div>
+</div>
 	<%@ include file = "../../main/footer.jsp" %>
 	
-<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3f081829ec2250ecac36edcd2f27812"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3f081829ec2250ecac36edcd2f27812&libraries=services,clusterer,drawing"></script>
 <script>
 // 마커를 담을 배열입니다
 var markers = [];
@@ -424,7 +468,6 @@ function removeAllChildNods(el) {
     }
 }
 </script>
-
 <script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = { 
@@ -562,8 +605,7 @@ function removeAllChildNods(el) {
 		    console.log('마커에 dragend 이벤트가 발생했습니다!');
 		});
 
-		
-
 </script>
+
 </body>
 </html>

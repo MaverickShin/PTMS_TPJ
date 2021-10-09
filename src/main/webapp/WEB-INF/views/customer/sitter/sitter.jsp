@@ -7,6 +7,19 @@
 <meta charset="UTF-8">
 
 <title>Insert title here</title>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#sitterMatching").each(function(){
+		this.reset();
+	});
+});
+
+function sittingCheck(){
+	if(document.sitterMatching..value){
+		
+	}
+}
+</script>
 </head>
 <%@ include file="../../main/header.jsp"%>
 <body>
@@ -15,7 +28,7 @@
 		<%@ include file = "sidebar.jsp" %>
 		
 		<section style="width: 700px; margin-left: auto; margin-right: auto; margin-top: 30px;" class = "sections">
-			<form action="sitterMatching" method="post" name="sitterMatching" onsubmit="return sittingCheck();">
+			<form action="sitterMatching" id="sitterMatching" method="post" name="sitterMatching" onsubmit="return sittingCheck();">
 				<input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token}">
 				<div class="row no-gutters">
@@ -56,7 +69,7 @@
 	                                 </div>
                                            
                                      <div class="select-wrap">
-	                                     <p class = "chk_p1"><label class = "chk_label1" for = "SV1_NO"><span class = "list_label_span1">미용 서비스</span><input type="checkbox" value="1" name="SV1_NO" class="sel_chk1" id = "SV1_NO"><span class = "checkbox_icon"></span></label></p>
+	                                     <p class = "chk_p1"><label class = "chk_label1" for = "SV1_NO"><span class = "list_label_span1">미용 서비스</span><input type="checkbox" value="1" name="SV1_NO" id = "SV1_NO" class="sel_chk1"><span class = "checkbox_icon"></span></label></p>
 	                                     <p class = "chk_p1"><label class = "chk_label1" for = "SV2_NO"><span class = "list_label_span1">놀이 서비스</span><input type="checkbox" value="2" name="SV2_NO" id = "SV2_NO" class="sel_chk1"><span class = "checkbox_icon"></span></label></p>
 	                                     <p class = "chk_p1"><label class = "chk_label1" for = "SV3_NO"><span class = "list_label_span1">산책 서비스</span><input type="checkbox" value="3" name="SV3_NO" id = "SV3_NO" class="sel_chk1"><span class = "checkbox_icon"></span></label></p>
 						 				 <p class = "chk_p1"><label class = "chk_label1" for = "SV4_NO"><span style = "margin-right: 79px;">응급처치 서비스 (필수)</span><input type="checkbox" value="4" name="SV4_NO" class="sel_chk1" id = "SV4_NO"checked onclick="return false;"><span class = "checkbox_icon"></span></label></p>
@@ -70,12 +83,11 @@
 								<div class="form-group">
 									<h2>나의 반려동물</h2>
 									<c:if test="${selectCnt > 0 }"> 
-										<div style = "display:flex; margin-top: 30px;">
+										<div style="display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid #eeeeee;">
 											<c:forEach var="li" items="${list}" varStatus = "st" >
-											<input type="hidden" name="PET_NM" value="${li.PET_NM}">
 												<p class = "chk_p1">
 													<label class = "chk_label1" for = "pet_li_${st.index}">
-														<input type="checkbox" id = "pet_li_${st.index}" name="pk_cd" class = "sel_chk1" value="${li.PK_CD}">
+														<input type="checkbox" id = "pet_li_${st.index}" name="pet_cd" class = "sel_chk1 pets" value="${li.PET_CD}">
 														<span class="checkbox_icon"></span>
 														<span class = "list_label_span2" >${li.PET_NM}</span>
 													</label>
@@ -96,7 +108,7 @@
 										<input type="button" value="마이펫 등록하기" class="btn btn-primary" style = "font-size: 20px; width: 200px" onclick="window.location='/tpj/cust/MyInfoUser'">
 									</c:if>
 									<c:if test="${selectCnt != 0}">
-										<input type="submit" value="찾기" class="btn btn-primary" style = "font-size: 20px; width: 150px">
+										<input type="submit" value="찾기" class="btn btn-primary" style = "font-size: 20px; width: 150px" onclick = "sitterser();">
 										<div class="submitting"></div>
 									</c:if>	
 								</div>

@@ -243,13 +243,11 @@ public class TrainerServiceImpl implements TrainerService{
 	@Override
 	public void updateTrainer(HttpServletRequest req, Model model) {
 		String CUST_ID = (String)req.getSession().getAttribute("cust_id");
-		String id = (String)req.getSession().getAttribute("cust_id");
-		int trainerChkCnt = dao.trainerChkCnt(id);
+		
+		int trainerChkCnt = dao.trainerChkCnt(CUST_ID);
 		System.out.println("trainerChkCnt : " + trainerChkCnt);
 		model.addAttribute("trainerChkCnt", trainerChkCnt);
 		
-		int signchkCnt = maindao.sitterSigninChk(CUST_ID);
-		model.addAttribute("signchkCnt", signchkCnt);
 		
 		TrainerVO vo = dao.TrainerDetail(CUST_ID);
 		
@@ -956,14 +954,15 @@ public class TrainerServiceImpl implements TrainerService{
 			model.addAttribute("pageCount", pageCount);	// 페이지 갯수
 			model.addAttribute("currentPage", currentPage); // 현재페이지
 			
-			for(int i = 0; i < vo.size() -1; i++) {
+			for(int i = 0; i < vo.size(); i++) {
 				int TQ_CD = vo.get(i).getTQ_CD();
 				//후기 작성 중복체크
 				int result = dao.reviewCheckCnt(TQ_CD);
 				
-				System.out.println("result : " + result);
+				System.out.println("후기result : " + result);
 				
 				rc.add(result);
+				System.out.println("rc : " + rc.get(i));
 			}
 		
 			
@@ -1048,7 +1047,7 @@ public class TrainerServiceImpl implements TrainerService{
 		System.out.println("서비스 pk : " + primarykey);
 		
 		int updateCnt = dao.updatePay(primarykey);
-		
+		System.out.println("updateCnt : "+ updateCnt);
 		return updateCnt; 
 	}
 
@@ -1273,5 +1272,17 @@ public class TrainerServiceImpl implements TrainerService{
 		int updateCnt = dao.modifyReviewAction(vo);
 		
 		model.addAttribute("updateCnt", updateCnt);
+	}
+
+	@Override
+	public void deleteTrainingReview(HttpServletRequest req, Model model) {
+		int TG_CD = Integer.parseInt(req.getParameter("TG_CD"));
+		System.out.println("TG_CD : " + TG_CD);
+		
+		int deleteReviewCnt = dao.deleteReviewCnt(TG_CD);
+		System.out.println("deleteReviewCnt : " + deleteReviewCnt);
+		
+		model.addAttribute("deleteReviewCnt", deleteReviewCnt);
+		
 	}
 }

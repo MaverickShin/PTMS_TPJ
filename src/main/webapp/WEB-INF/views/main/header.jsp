@@ -130,21 +130,36 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item" id = "mypages"><a class="nav-link">반려인/펫 관리</a>
 						<div class = "hide">
-							<c:if test = "${sessionScope.cust_id != null}">
+						
+							<c:if test="${sessionScope.cust_id == null}">
+								<a class="nav-item" onclick="if(confirm('로그인 후 이용가능합니다. 로그인 하시겠습니까?')) window.location = '/tpj/cust/login';">캘린더</a>	
+							</c:if>
+							<c:if test="${sessionScope.cust_id != null}">
 				    			<a href="/tpj/sch/calendar">캘린더</a>
-				    			<a href="/tpj/cust/MyInfoUser">내정보관리</a>
 				    		</c:if>
+				    			
+				    		<c:if test="${sessionScope.cust_id == null}">
+				    			<a class="nav-item" onclick="if(confirm('로그인 후 이용가능합니다. 로그인 하시겠습니까?')) window.location = '/tpj/cust/login';">내정보관리</a>
+				    		</c:if>
+				    		
+				    		<c:if test="${sessionScope.cust_id != null}">
+				    			<a href="/tpj/cust/MyInfoUser">내정보관리</a>
+				    		</c:if>	
 				    		<a href="/tpj/cust/contact">건강관리</a>
 						</div>
 					</li>
 					<li class="nav-item" id = "boards"><a class="nav-link">게시판</a>
 						<div class = "hides">
-			    			<a href="/tpj/cust/qnalist">QnA</a>
-				    		<a href="/tpj/cust/faqlist">FAQ</a>
+			    				<a href="/tpj/cust/faqlist">FAQ</a>
+			    				<c:if test="${sessionScope.cust_id == null}">
+			    					<a class="nav-item" onclick="if(confirm('로그인 후 이용가능합니다. 로그인 하시겠습니까?')) window.location = '/tpj/cust/login';">QnA</a>
+			    				</c:if>
+			    				<c:if test="${sessionScope.cust_id != null}">
+				    				<a href="/tpj/cust/qnalist">QnA</a>
+				    			</c:if>
 						</div>
 					</li>
 					
-					<li class="nav-item"><a href="/tpj/cust/gps" class="nav-link">마이 펫 찾기</a></li>
 					<c:if test="${sessionScope.cust_id == null}">
 						<li class="nav-item"><a class="nav-link" onclick = "if(confirm('로그인 후 이용가능합니다. 로그인 하시겠습니까?')) window.location = '/tpj/cust/login';">매칭서비스</a></li>
 					</c:if>

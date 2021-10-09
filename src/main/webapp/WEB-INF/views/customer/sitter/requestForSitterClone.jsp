@@ -14,7 +14,7 @@
 			style="width: 700px; margin-left: auto; margin-right: auto; margin-top: 30px;">
 			<div class="col-md-12">
 				<h3></h3>
-					<p>아직 들어온 의뢰가 없습니다. 일정 조정으로 매칭률을 높여보세요!</p>
+					<p>매칭된 서비스 내역이 존재하지 않습니다. 일정 조정으로 매칭률을 높여보세요!</p>
 			</div>
 		</div>
 	</c:if>
@@ -23,7 +23,7 @@
 		<div class="row" id="divs"
 			style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 30px; width: 700px; margin-left: auto; margin-right: auto; margin-top: 10px;">
 			<c:forEach var="li" items="${list}">
-				<div class="col-md-12" style="background-color: #f5f5f5;">
+				<div class="col-md-12" style="background-color: #f5f5f5;border-radius:20px; text-align:center; padding:20px 10px;margin:10px">
 					<h5>고객 : ${li.CUST_ID}</h5>
 					&nbsp;
 					<h6>서비스 요청 펫 : ${li.SQ_AMT}</h6>

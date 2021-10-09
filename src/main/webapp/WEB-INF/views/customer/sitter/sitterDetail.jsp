@@ -8,7 +8,7 @@
 <script type="text/javascript">
 function matchingChks() {
 
-		var chk = $("input:checkbox[name='PK_CD']");
+		var chk = $("input:checkbox[name='pet_cd']");
 
 		var bool = false;
 		
@@ -66,7 +66,7 @@ body {
 			<div class="row no-gutters slider-text align-items-end">
 				<div class="col-md-9 ftco-animate pb-5">
 					<p class="breadcrumbs mb-2">
-						<span class="mr-2"><a href="">Trainer<i
+						<span class="mr-2"><a href="">Sitter<i
 								class="ion-ios-arrow-forward"></i></a></span> <span>Blog <i
 							class="ion-ios-arrow-forward"></i></span>
 					</p>
@@ -83,9 +83,6 @@ body {
 			value="${_csrf.token}"> <input type="hidden" name="SV_AREA"
 			value="${SV_AREA}"> <input type="hidden" name="SIT_ID"
 			value="${SIT_ID}">
-		<c:forEach var="pn" items="${PET_NM}"> 
-			<input type="hidden" name="PET_NM" value="${pn}">
-		</c:forEach>	
 		<section class="ftco-section ftco-degree-bg"
 			style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; padding-top: 30px;">
 			<div class="container">
@@ -107,20 +104,14 @@ body {
 									<c:set var="suc" value="false" />
 
 									<c:forEach var="li" items="${list}" varStatus="lst">
-										<c:forEach var="i" items="${pet}" varStatus="st">
 											<p class="chk_p1">
 												<label class="chk_label1" for="pet_li_${lst.index}">
 													<input type="checkbox" id="pet_li_${lst.index}"
-													class="sel_chk1 " name="PK_CD" value="${li.PK_CD}"
-													<c:if test = "${i == li.PK_CD}">
-															checked
-														</c:if>>
-
+													class="sel_chk1 " name="pet_cd" value="${li.PET_CD}" ${li.chk}>
 													<span class="checkbox_icon"></span> <span
 													class="list_label_span2">${li.PET_NM}</span>
-												</label> <input type="hidden" name="PET_CD" value="${li.PET_CD}">
+												</label> 
 											</p>
-										</c:forEach>
 									</c:forEach>
 								</div>
 
@@ -229,7 +220,7 @@ body {
 									</div>
 
 									<div class="col-md-12" style="margin-top: 30px;">
-										<p>총 금액 : ${total} 원</p>
+										<p>총 금액 : <fmt:formatNumber value="${total}" pattern="###,###,###,###" />원</p>
 									</div>
 
 									<div class="col-md-12" style="margin-top: 30px;">
@@ -276,7 +267,7 @@ body {
 									제공 가능한 서비스 입니다.</label>
 							</div>
 							<div class="select-wrap">
-								<c:if test="${dto.SV1_NO == null}">
+								<c:if test="${dto.SV1_NO == 0}">
 									<p class="chk_p1">
 										<label class="chk_label1"><span
 											class="list_label_span1">미용 서비스</span><input type="checkbox"
@@ -285,7 +276,7 @@ body {
 									</p>
 								</c:if>
 
-								<c:if test="${dto.SV1_NO != null}">
+								<c:if test="${dto.SV1_NO == 1}">
 									<p class="chk_p1">
 										<label class="chk_label1"><span
 											class="list_label_span1">미용 서비스</span><input type="checkbox"
@@ -294,7 +285,7 @@ body {
 									</p>
 								</c:if>
 
-								<c:if test="${dto.SV2_NO == null}">
+								<c:if test="${dto.SV2_NO == 0}">
 									<p class="chk_p1">
 										<label class="chk_label1"><span
 											class="list_label_span1">놀이 서비스</span><input type="checkbox"
@@ -303,7 +294,7 @@ body {
 									</p>
 								</c:if>
 
-								<c:if test="${dto.SV2_NO != null}">
+								<c:if test="${dto.SV2_NO == 2}">
 									<p class="chk_p1">
 										<label class="chk_label1"><span
 											class="list_label_span1">놀이 서비스</span><input type="checkbox"
@@ -312,7 +303,7 @@ body {
 									</p>
 								</c:if>
 
-								<c:if test="${dto.SV3_NO == null}">
+								<c:if test="${dto.SV3_NO == 0}">
 									<p class="chk_p1">
 										<label class="chk_label1"><span
 											class="list_label_span1">산책 서비스</span><input type="checkbox"
@@ -321,7 +312,7 @@ body {
 									</p>
 								</c:if>
 
-								<c:if test="${dto.SV3_NO != null}">
+								<c:if test="${dto.SV3_NO == 3}">
 									<p class="chk_p1">
 										<label class="chk_label1"><span
 											class="list_label_span1">산책 서비스</span><input type="checkbox"

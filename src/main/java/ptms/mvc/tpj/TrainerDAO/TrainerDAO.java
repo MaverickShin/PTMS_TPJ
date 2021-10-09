@@ -152,6 +152,10 @@ public interface TrainerDAO {
 	// 훈련사로 등록되어있는지 체크
 	public int trainerChkCnt(String id);
 	
+	// 훈련사 후기 삭제 처리
+	public int deleteReviewCnt(int TG_CD);
+	
+	
 	/*
 	 * // 후기 미리보기 평점순 훈련사 정렬 건수 public int trainingGradeCnt();
 	 * 

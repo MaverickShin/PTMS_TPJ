@@ -16,7 +16,7 @@
 <script>
 $(function(){
     var IMP = window.IMP; // 생략가능
-    IMP.init('imp42057131'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+    IMP.init('imp42057131'); // 'IMP key 사용'
     var msg;
     var item = '<c:out value = "${item_name}"/>';
     var amount = '<c:out value = "${price}"/>';
@@ -31,12 +31,6 @@ $(function(){
     var paykind = '<c:out value = "${paykind}"/>';
     var ids = '<c:out value = "${id}"/>';
     var state = 0;
-    var token = $("meta[name='_csrf_header']").attr("content");
-	var header = $("meta[name='_csrf']").attr("content");
-	
-	console.log("token1 : " + token);
-	console.log("header1 : " + header);
-    
     IMP.request_pay({
         pg : 'kakaopay',
         pay_method : 'card',
@@ -50,21 +44,21 @@ $(function(){
         buyer_postcode : post
     }, function(rsp) {
         if ( rsp.success ) {
-            //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+            //결제 완료를 위해 jQuery ajax로 결제상태 업데이트
             $.ajax({
-                url: urls, //cross-domain error가 발생하지 않도록 주의해주세요
+                url: urls, 
                 type: 'get',
                 dataType: 'json',
                 data: {"primarykey" : pk, "item_name" : item},
-            success: function(data) {
-                //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+            	success: function(data) {
+                // 결제 상태 업데이트가 정상인 경우 결제이력 생성
                 if (data == 1) {
                     msg = '결제가 완료되었습니다.';
                     alert(msg);
                     
                     $.ajax({
                     	type: "get",
-                        url: "/tpj/pay/paySuccess", //cross-domain error가 발생하지 않도록 주의해주세요
+                        url: "/tpj/pay/paySuccess", 
                         data: {"kind" : paykind, "price" : amount, "id" : ids},
                         dataType: "json",
                     	success: function(result) {

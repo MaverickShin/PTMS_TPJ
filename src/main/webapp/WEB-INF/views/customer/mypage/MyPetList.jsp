@@ -68,9 +68,9 @@
 <section class="ftco-section bg-light">
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-md-6 text-center mb-5">
+<!-- 			<div class="col-md-6 text-center mb-5">
 				<h2 class="heading-section">반려인/반려동물 관리</h2>
-			</div>
+			</div> -->
 		</div>
 		<div class="row justify-content-center">
 			<div class="col-md-12">
@@ -78,8 +78,8 @@
 				<%@ include file="MyInfobar.jsp"%>
 					<div class="row no-gutters">
 						<div class="col-md-7" style="max-width: 100% !important; flex: 0 0 100% !important">
-							<div class="contact-wrap w-100 p-md-5 p-4">
-								<h3 class="mb-4">MyPet 목록</h3>
+							<div class="contact-wrap w-100 p-md-5 p-4" style="font-family: 'Do Hyeon', sans-serif;">
+								<h3 class="mb-4" style="text-align:center">나의 반려동물 관리</h3>
 									<div class="row">
 										<table class="col-md-12">
 											<tr align="center">

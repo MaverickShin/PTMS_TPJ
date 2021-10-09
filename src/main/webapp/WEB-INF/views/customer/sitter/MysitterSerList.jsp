@@ -236,14 +236,14 @@
 						<div class="row" id="divs"
 							style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 30px; width: 700px; margin-left: auto; margin-right: auto; margin-top: 10px;">
 							<c:forEach var="li" items="${list}" varStatus="status">
-								<div class="col-md-12" style="background-color: #f5f5f5;">
+								<div class="col-md-12" style="background-color: #f5f5f5; border-radius:20px; text-align:center; padding:20px 10px; margin:10px" >
 									<h5>고객 : ${li.CUST_ID}</h5>
 									&nbsp;
 									<h6>나의 펫 : ${li.SQ_AMT}</h6>
 									<p>의뢰시작일 : ${li.START_DAY}</p>
 									<p>의뢰종료일 : ${li.END_DAY}</p>
 									<p>고객요청서비스 : ${li.REQ_SV}</p>
-									<p>금액 : ${li.SQ_FEE} 원</p>
+									<p>금액 : <fmt:formatNumber value="${li.SQ_FEE}" pattern="###,###,###,###" />원</p>
 
 									<c:if test="${li.SQ_ST == 0}">
 										<p>
@@ -283,7 +283,7 @@
 								</div>
 							</c:forEach>
 						</div>
-
+						
 						<div class="row">
 							<div class="col-md-12" align="center">
 								<div class="block-27">

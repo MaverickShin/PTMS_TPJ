@@ -78,7 +78,7 @@ public class SitterDAOImpl implements SitterDAO{
 	// 고객 - 시터찾기 상세 페이지
 	@Override
 	public SitterVO detailSitter(int sit_id) {
-		System.out.println("dao ==> activityList");
+		System.out.println("dao ==> detailSitter");
 		
 		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
 		return dao.detailSitter(sit_id);
@@ -160,11 +160,11 @@ public class SitterDAOImpl implements SitterDAO{
 
 	// 의뢰시 - 펫 별 서비스 요금 조회 : 위 의뢰자 펫 정보 조회에서 pk_cd(펫 종류 코드)를 활용
 	@Override
-	public int petServiceFee(int pk_cd) {
+	public int petServiceFee(int pet_cd) {
 		
 		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
 		
-		return dao.petServiceFee(pk_cd);
+		return dao.petServiceFee(pet_cd);
 	}
 
 	// 의뢰 취소
@@ -474,6 +474,14 @@ public class SitterDAOImpl implements SitterDAO{
 		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
 		
 		return dao.updatePay(SQ_CD);
+	}
+
+	@Override
+	public String selectPetNanme(int pet_cd) {
+		
+		SitterDAO dao = sqlSession.getMapper(SitterDAO.class);
+		
+		return dao.selectPetNanme(pet_cd);
 	}
 
 

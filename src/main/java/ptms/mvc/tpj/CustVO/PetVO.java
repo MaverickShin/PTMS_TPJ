@@ -22,6 +22,8 @@ public class PetVO {
 	private int SF_CD;		   //서비스 요금 번호
 	private int SF_FEE;		   //서비스 요금
 	
+	private String chk;
+	
 	public int getPK_CD() {
 		return PK_CD;
 	}
@@ -117,7 +119,13 @@ public class PetVO {
 	public void setPK_KIND(String pK_KIND) {
 		PK_KIND = pK_KIND;
 	}
-	
-	
+
+	public String getChk() {
+		return chk;
+	}
+
+	public void setChk(String chk) {
+		this.chk = chk;
+	}
 	
 }
