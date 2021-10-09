@@ -3,6 +3,7 @@ package ptms.mvc.tpj.Admin_DAO;
 import java.util.ArrayList;
 import java.util.Map;
 
+import ptms.mvc.tpj.AdminVO.AdminVO;
 import ptms.mvc.tpj.CustVO.PetVO;
 
 public interface AdminDAO {
@@ -27,4 +28,17 @@ public interface AdminDAO {
 	
 	//펫 코드 및 요금 목록 삭제처리
 	public int DeletePetCodeFee(int PK_CD);
+	
+	// 관리자 등록
+	public int insertAdmin(AdminVO vo);
+	
+	// 관리자 아이디 중복확인
+	public int idChk(String mg_id);
+	
+	// 관리자 비번확인
+	public String pwdCheck(String mg_id);
+	
+	// 관리자 정보 확인
+	public AdminVO adminInfo(String mg_id);
+
 }

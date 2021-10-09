@@ -345,7 +345,7 @@ input[type="email"]:focus{
 										<div class="submitting"></div>
 									</div>
 								</div>
-							</div>
+						</div>
 					</div>
 				</div>
 			</div>

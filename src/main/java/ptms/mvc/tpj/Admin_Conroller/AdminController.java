@@ -5,10 +5,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import ptms.mvc.tpj.AdminVO.AdminVO;
+import ptms.mvc.tpj.Admin_DAO.AdminDAOImpl;
 import ptms.mvc.tpj.Admin_Service.AdminServiceImpl;
 
 @RequestMapping("/admin")
@@ -20,193 +24,61 @@ public class AdminController {
 	@Autowired
 	AdminServiceImpl enrollService;
 	
+	@Autowired
+	AdminDAOImpl dao;
 	
-	@RequestMapping({"", "main", "adminlogin"})
+	@Autowired
+	BCryptPasswordEncoder passordEncoder;
+	
+	// 관리자 로그인
+	@RequestMapping("adminlogin")
 	public String login() {
-		
 		return "admin/login/login";
 	}
 	
+	// 관리자 로그인 성공시 이동 페이지
+	@RequestMapping("loginsuccess")
+	public String success() {
+		return "admin/login/loginsuccess";
+	}
+	
+	// 관리자 등록 화면
 	@RequestMapping("adminjoin")
 	public String join() {
-		
 		return "admin/join/join";
+	}
+	
+	// 관리자 등록 처리
+	@RequestMapping("adminjoinAction")
+	public String joinAction(HttpServletRequest req, Model model) {
 		
-	}
-	
-	
-	@RequestMapping("user_managerment")
-	public String user_managerment() {
+		String id = req.getParameter("mg_id");
+		String pwd = req.getParameter("mg_pwd");
+		String kind = req.getParameter("mg_kind");
 		
-		return "admin/user/userlist";
-	}
-	
-	@RequestMapping("user_modify")
-	public String user_modify() {
-		return "admin/user/usermodify";
-	}
-	
-	@RequestMapping("community_list")
-	public String community_list() {
-		return "admin/community/community_list";
-	}
-	
-	@RequestMapping("community_detail")
-	public String community_detail() {
-		return "admin/community/community_detail";
-	}
-	
-	@RequestMapping("community_delete")
-	public String community_delete() {
-		return "admin/community/community_delete";
-	}
-	
-	@RequestMapping("qnalist")
-	public String qnalist() {
-		return "admin/qna/qnalist";
-	}
-	
-	@RequestMapping("qnamodify")
-	public String qnamodify() {
-		return "admin/qna/qnamodify";
-	}
-	
-	@RequestMapping("qnadelete")
-	public String qnadelete() {
-		return "admin/qna/qnadelete";
-	}
-	
-	@RequestMapping("qnainsert")
-	public String qnainsert() {
-		return "admin/qna/qnainsert";
-	}
-	
-	@RequestMapping("faqlist")
-	public String faqlist() {
-		return "admin/faq/faqlist";
-	}
-	
-	@RequestMapping("faqmodify")
-	public String faqmodify() {
-		return "admin/qna/qnamodify";
-	}
-	
-	@RequestMapping("faqdelete")
-	public String faqdelete() {
-		return "admin/faq/faqdelete";
-	}
-	
-	@RequestMapping("faqinsert")
-	public String faqinsert() {
-		return "admin/faq/faqinsert";
-	}
-	
-	@RequestMapping("noticelist")
-	public String noticelist() {
-		return "admin/notice/noticelist";
-	}
-	
-	@RequestMapping("noticemodify")
-	public String noticemodify() {
-		return "admin/notice/noticemodify";
-	}
-	
-	@RequestMapping("noticedelete")
-	public String  noticedelete() {
-		return "admin/notice/noticedelete";
-	}
-	
-	@RequestMapping("noticeinsert")
-	public String noticeinsert() {
-		return "admin/notice/noticeinsert";
-	}
-	
-	@RequestMapping("sattle")
-	public String sattle(HttpServletRequest req) {
+		String enc = passordEncoder.encode(pwd);
 		
-		  int dtos = 10000;
-	      int dtos2 = 20000;
-	      int dtos3 = 30000;
-	      
-	      req.setAttribute("dtos", dtos);
-	      req.setAttribute("dtos2", dtos2);
-	      req.setAttribute("dtos3", dtos3);
+		AdminVO vo = new AdminVO();
 		
-		return "admin/sattle/sattle";
+		vo.setMg_id(id);
+		vo.setMg_pwd(enc);
+		vo.setMg_kind(kind);
+		
+		int insertCnt = dao.insertAdmin(vo);
+		
+		model.addAttribute("insert", insertCnt);
+		
+		return "admin/join/joinAction";
 	}
 	
-	@RequestMapping("promotion")
-	public String promotion() {
-		return "admin/promotion/promotion";
-	}
-	
-	@RequestMapping("total")
-	public String total() {
-		return "admin/total/total";
-	}
-	
-	@RequestMapping("subscriber")
-	public String subscriber() {
-		return "admin/subscriber/subscriber";
-	}
-
-	@RequestMapping("enroll")
-	public String enroll() {
-		return "admin/sitter/enroll";
-	}
-	
-	//펫 코드 및 요금 등록 페이지
-	@RequestMapping("sitterFee")
-	public String sitterFee(HttpServletRequest req, Model model) {
-		log.info("url ==> sitterFee");
+	// 관리자 아이디 중복확인
+	@RequestMapping("adminidchk")
+	@ResponseBody
+	public int adminidchk(HttpServletRequest req, Model model) {
 		
-		return "admin/sitter/sitterFee";
-	}	
-	
-	//펫 코드 및 요금 등록
-	@RequestMapping("sitterFeeAction")
-	public String sitterFeeAction(HttpServletRequest req, Model model) {
-		log.info("url ==> sitterFeeAction");
+		String mg_id = req.getParameter("mg_id");
 		
-		enrollService.petCodeFee(req, model);
-		return "admin/sitter/sitterFeeAction";
+		return dao.idChk(mg_id);
 	}
-	
-	//펫 코드 및 요금 목록
-	@RequestMapping("sitterFeeList")
-	public String sitterFeeList(HttpServletRequest req, Model model) {
-		log.info("url ==> sitterFeeList");
-		
-		enrollService.petCodeFeeList(req, model);
-		return "admin/sitter/sitterFeeList";
-	}	 
-	
-	//펫 코드 및 요금 수정 페이지
-	@RequestMapping("sitterFeeUpdate")
-	public String petCodeFeeUpdate(HttpServletRequest req, Model model) {
-		log.info("url ==> sitterFeeUpdate");
-		
-		enrollService.petCodeFeeUpdate(req, model);
-		return "admin/sitter/sitterFeeUpdate";
-	}	
-	
-	//펫 코드 및 요금 수정 처리
-	@RequestMapping("sitterFeeUpdateAction")
-	public String petCodeFeeUpdateAction(HttpServletRequest req, Model model) {
-		log.info("url ==> sitterFeeUpdateAction");
-		
-		enrollService.petCodeFeeUpdateAction(req, model);
-		return "admin/sitter/sitterFeeUpdateAction";
-	}
-	
-	//펫 코드 및 요금 삭제
-	@RequestMapping("sitterFeeDelete")
-	public String sitterFeeDelete(HttpServletRequest req, Model model) {
-		log.info("url ==> sitterFeeDelete");
-		
-		enrollService.petCodeFeeDeleteAction(req, model);
-		return "admin/sitter/sitterFeeDelete";
-	}	
-	
 	
 }
