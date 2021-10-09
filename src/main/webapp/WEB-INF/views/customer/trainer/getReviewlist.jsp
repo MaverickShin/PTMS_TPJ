@@ -79,8 +79,10 @@
 						<div class="col-md-12" align="center">
 							<div class="block-27">
 								<ul>
-									<li><a href="${t}">&lt;&lt;</a>
-									<li><a href="${t}?pageNum=${startPage - pageBlock}">&lt;</a></li>
+									<c:if test="${startPage > pageBlock}">
+										<li><a href="${t}">&lt;&lt;</a>
+										<li><a href="${t}?pageNum=${startPage - pageBlock}">&lt;</a></li>
+									</c:if>
 
 									<c:forEach var="i" begin="${startPage}" end="${endPage}">
 										<c:if test="${i == currentPage}">
@@ -93,9 +95,10 @@
 										</c:if>
 
 									</c:forEach>
-
-									<li><a href="${t}?pageNum=${startPage + pageBlock}">&gt;</a></li>
-									<li><a href="${t}?pageNum=${pageCount}">&gt;&gt;</a></li>
+									<c:if test="${pageCount > endPage}">
+										<li><a href="${t}?pageNum=${startPage + pageBlock}">&gt;</a></li>
+										<li><a href="${t}?pageNum=${pageCount}">&gt;&gt;</a></li>
+									</c:if>
 								</ul>
 							</div>
 						</div>

@@ -108,8 +108,6 @@ $(document).ready(function(){
 								</div>
 							</div>
 						</div>
-						
-						
 					</div>
 				</div>
 			</form>

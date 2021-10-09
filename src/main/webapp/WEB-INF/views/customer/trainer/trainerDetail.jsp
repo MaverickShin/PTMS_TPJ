@@ -33,11 +33,26 @@ function checkFee() {
 	} else if(!document.requestTrainerForm.TQ_AMT.value){
 		alert("원하시는 훈련을 선택해주세요!");
 		return false;
+	} 
+	/* else if(document.getElementById("PET_NM").checked == 0){
+		alert("최소 한마리 이상 선택");
+		return false;
+	} */
+	var chk_pet = document.getElementsByName("PET_NM");
+	var chk_leng = chk_pet.length;
+	var checked = 0;
+	for(i = 0; i < chk_leng; i++){
+		if(chk_pet[i].checked == true){
+			checked += 1;
+		}
 	}
-	
+	if(checked == 0){
+		alert("훈련받을 마이펫을 선택하세요.");
+		return false;
+	}
 }
 
-function requestTrChk() {
+/* function requestTrChk() {
 	if(!document.requestTrainerForm.START_DAY.value) {
 		alert("훈련받을 날짜를 선택하세요.");
 		document.requestTrainerForm.START_DAY.focus();
@@ -49,7 +64,7 @@ function requestTrChk() {
 		alert("훈련받을 마이펫을 선택하세요.");
 		return false;
 	}
-}
+} */
 
 
 </script>
@@ -119,7 +134,7 @@ function requestTrChk() {
     				</c:if>
     			</div>
 	              
-	              <form action="requestTraining" method="post" name="requestTrainerForm" onsubmit="return checkFee();">
+				<form action="requestTraining" method="post" name="requestTrainerForm" onsubmit="return checkFee();">
 	              <input type="hidden" value="${TA_CD}" name="TA_CD">
 	              <input type="hidden" value="${TQ_LOC}" name="TQ_LOC">
 	              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
@@ -187,7 +202,7 @@ function requestTrChk() {
                         </div>
                      </div>
 	              </div>
-	              </form>
+				</form>
     		</div>
     	</div>
     </section>

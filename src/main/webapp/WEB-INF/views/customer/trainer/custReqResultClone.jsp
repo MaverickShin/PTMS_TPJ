@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="result_div" style="width: 100%; padding-top: 10px; padding-bottom: 10px;">
 	<div class="container">
 		<c:if test="${cnt == 0}">
 			<div class="row" id="divs"
@@ -68,9 +69,10 @@
 				<div class="col-md-12" align="center">
 					<div class="block-27">
 						<ul>
+							<c:if test="${startPage > pageBlock}">
 							<li><a class="pageMoves" onclick="pageMove('');">&lt;&lt;</a>
-							<li><a class="pageMoves"
-								onclick="pageMove(${startPage - pageBlock});">&lt;</a></li>
+							<li><a class="pageMoves" onclick="pageMove(${startPage - pageBlock});">&lt;</a></li>
+							</c:if>
 
 							<c:forEach var="i" begin="${startPage}" end="${endPage}">
 								<c:if test="${i == currentPage}">
@@ -84,16 +86,17 @@
 								</c:if>
 
 							</c:forEach>
-
-							<li><a class="pageMoves"
-								onclick="pageMove(${startPage + pageBlock});">&gt;</a></li>
+							<c:if test="${pageCount > endPage}">
+							<li><a class="pageMoves" onclick="pageMove(${startPage + pageBlock});">&gt;</a></li>
 							<li><a class="pageMoves" onclick="pageMove(${pageCount});">&gt;&gt;</a></li>
+							</c:if>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</c:if>
 	</div>
+</div>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
@@ -204,8 +207,6 @@
 	}
 	
 	function pageNumbers(e) {
-		
-		alert("요깅");
 		
 		var urls = '<c:out value="${t}"/>';
 		var param = e;

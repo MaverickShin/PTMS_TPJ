@@ -145,7 +145,7 @@ public class TrainerServiceImpl implements TrainerService{
 		map.put("ADJUSTABLE", ADJUSTABLE);
 		
 		cnt = dao.trainerSelectCnt(map);
-		System.out.println("cnt : " + cnt);
+		System.out.println("트레이너 목록 cnt : " + cnt);
 		
 		pageNum = req.getParameter("pageNum");
 		

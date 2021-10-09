@@ -74,11 +74,6 @@
 		<div class="result"
 			style="width: 100%; padding-top: 10px; padding-bottom: 10px;">
 			<div class="container">
-				<!-- 				<div class="row justify-content-center">
-					<div class="col-md-6 text-center mb-5">
-						<h2 class="heading-section">반려인/반려동물 관리</h2>
-					</div>
-				</div> -->
 				<div class="row justify-content-center">
 					<div class="col-md-12">
 						<div class="wrapper">
@@ -116,34 +111,34 @@
 															</div>
 														</c:forEach>
 													</div>
-
-														<div class="row">
-															<div class="col-md-12" align="center">
-																<div class="block-27">
-																	<ul>
-																		<li><a href="buyList">&lt;&lt;</a>
-																		<li><a href="buyList?pageNum=${startPage - pageBlock}">&lt;</a></li>
-																		<c:forEach var="i" begin="${startPage}"
-																			end="${endPage}">
-																			<c:if test="${i == currentPage}">
-																				<li class="active"><span><a
-																						href="buyList?pageNum=${i}">${i}</a></span></li>
-																			</c:if>
-
-																			<c:if test="${i != currentPage}">
-																				<li><span><a href="buyList?pageNum=${i}">${i}</a></span></li>
-																			</c:if>
-
-																		</c:forEach>
-
-																		<li><a
-																			href="buyList?pageNum=${startPage + pageBlock}">&gt;</a></li>
-																		<li><a href="buyList?pageNum=${pageCount}">&gt;&gt;</a></li>
-																	</ul>
-																</div>
+													<div class="row">
+														<div class="col-md-12" align="center">
+															<div class="block-27">
+																<ul>
+																	<li><a href="buyList">&lt;&lt;</a>
+																	<li><a href="buyList?pageNum=${startPage - pageBlock}">&lt;</a></li>
+																	<c:forEach var="i" begin="${startPage}" end="${endPage}">
+																		<c:if test="${i == currentPage}">
+																			<li class="active">
+																				<span><a href="buyList?pageNum=${i}">${i}</a></span>
+																			</li>
+																		</c:if>
+	
+																		<c:if test="${i != currentPage}">
+																			<li>
+																				<span><a href="buyList?pageNum=${i}">${i}</a></span>
+																			</li>
+																		</c:if>
+	
+																	</c:forEach>
+	
+																	<li><a href="buyList?pageNum=${startPage + pageBlock}">&gt;</a></li>
+																	<li><a href="buyList?pageNum=${pageCount}">&gt;&gt;</a></li>
+																</ul>
 															</div>
 														</div>
-													</c:if>
+													</div>
+												</c:if>
 											</div>
 										</div>
 									</div>
