@@ -56,4 +56,25 @@
 	</delete>
 	
 	
+	<!-- 관리자 등록 -->
+	<insert id="insertAdmin" parameterType="ptms.mvc.tpj.AdminVO.AdminVO">
+		INSERT INTO MANAGERS_TB
+		VALUES(#{mg_id}, #{mg_pwd}, #{mg_kind}, default)
+	</insert>
+	
+	<!-- 관리자 아이디 중복확인 -->
+	<select id="idChk" resultType="int">
+		SELECT COUNT(*) cnt FROM MANAGERS_TB WHERE MG_ID = #{mg_id}
+	</select>
+	
+	<!-- 관리자 비번 확인 -->
+	<select id = "pwdCheck" resultType="String">
+		SELECT MG_PWD FROM MANAGERS_TB WHERE MG_ID = #{mg_id}
+	</select>
+	
+	<!-- 관리자 정보 확인 -->
+	<select id="adminInfo" resultType="ptms.mvc.tpj.AdminVO.AdminVO">
+		SELECT * FROM MANAGERS_TB WHERE MG_ID = #{mg_id}
+	</select>
+	
 </mapper>
