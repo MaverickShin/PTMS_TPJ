@@ -198,6 +198,17 @@ function nextJumin2(){
 }
 
 </script>
+<style>
+input[type="text"]:focus {
+    outline: 2px solid green;
+}
+input[type="password"]:focus{
+	outline: 2px solid green;
+}
+input[type="email"]:focus{
+	outline: 2px solid green;
+}
+</style>
 <title>회원가입 페이지</title>
 </head>
 <body>
@@ -334,7 +345,7 @@ function nextJumin2(){
 										<div class="submitting"></div>
 									</div>
 								</div>
-							</div>
+						</div>
 					</div>
 				</div>
 			</div>

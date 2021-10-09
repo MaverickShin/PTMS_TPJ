@@ -271,11 +271,10 @@
 										<p>고객요청서비스 : ${li.REQ_SV}</p>
 										<p>금액 : <fmt:formatNumber value="${li.SQ_FEE}" pattern="###,###,###,###"/>원</p>
 										<c:if test="${li.SQ_ST == 0}">
-											<input type="button" value="수락" class="btn btn-primary"
+											<input type="button" value="수락"
 												style="backgrount-color: #a3cde3;"
 												onclick="window.location='sitterAccept?SQ_CD=${li.SQ_CD}'">
-											<input type="button" value="거절" class="btn btn-primary"
-												style="backgrount-color: #a3cde3;"
+											<input type="button" value="거절"												style="backgrount-color: #a3cde3;"
 												onclick="window.location='sitterRefuse?SQ_CD=${li.SQ_CD}'">
 										</c:if>
 									</div>

@@ -123,41 +123,8 @@
 											</c:if>
 									</table>
 								</div>
-								
-								<c:if test = "${cnt > 0}">
-									<div class = "row">
-										<div class="col-md-12" align="center">
-											<div class="block-27">
-								              <ul>
-								                <li><a href="${s}">&lt;&lt;</a>
-								                <li><a href="${s}?pageNum=${startPage - pageBlock}">&lt;</a></li>
-								                
-								                <c:forEach var="i" begin="${startPage}" end="${endPage}">
-													<c:if test="${i == currentPage}">
-														<li class="active"><span><a href="${s}?pageNum=${i}">${i}</a></span></li>
-													</c:if>
-					
-													<c:if test="${i != currentPage}">
-														<li><span><a href="${s}?pageNum=${i}">${i}</a></span></li>
-													</c:if>
-													
-												</c:forEach> 
-								                
-							                	<li><a href="${s}?pageNum=${startPage + pageBlock}">&gt;</a></li>
-							                	<li><a href="${s}?pageNum=${pageCount}">&gt;&gt;</a></li>
-								              </ul>
-											</div>
-										</div>
-									</div>
-								</c:if>
-								
 							</div>
 						</div>
-						
-						<%-- <div class="col-md-5 d-flex align-items-stretch">
-							<div class="info-wrap w-100 p-5 img"
-								style="background-image: url(${path}images/gallery-3.jpg);"></div>
-						</div> --%>
 					</div>
 				</div>
 			</div>

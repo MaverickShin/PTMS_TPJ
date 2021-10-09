@@ -277,10 +277,10 @@ function refuse() {
 							<div class="col-md-12" align="center">
 								<div class="block-27">
 									<ul>
-										<li><a class="pageMoves" onclick="pageMove('');">&lt;&lt;</a>
-										<li><a class="pageMoves"
-											onclick="pageMove(${startPage - pageBlock});">&lt;</a></li>
-
+										<c:if test="${startPage > pageBlock}">
+											<li><a class="pageMoves" onclick="pageMove('');">&lt;&lt;</a>
+											<li><a class="pageMoves" onclick="pageMove(${startPage - pageBlock});">&lt;</a></li>
+										</c:if>
 										<c:forEach var="i" begin="${startPage}" end="${endPage}">
 											<c:if test="${i == currentPage}">
 												<li class="active"><span><a class="pageMoves"
@@ -293,11 +293,10 @@ function refuse() {
 											</c:if>
 
 										</c:forEach>
-
-										<li><a class="pageMoves"
-											onclick="pageMove(${startPage + pageBlock});">&gt;</a></li>
-										<li><a class="pageMoves"
-											onclick="pageMove(${pageCount});">&gt;&gt;</a></li>
+										<c:if test="${pageCount > endPage}">
+											<li><a class="pageMoves" onclick="pageMove(${startPage + pageBlock});">&gt;</a></li>
+											<li><a class="pageMoves" onclick="pageMove(${pageCount});">&gt;&gt;</a></li>
+										</c:if>
 									</ul>
 								</div>
 							</div>
@@ -420,8 +419,6 @@ function refuse() {
 	}
 	
 	function pageNumbers(e) {
-		
-		alert("요깅");
 		
 		var urls = '<c:out value="${t}"/>';
 		var param = e;

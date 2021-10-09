@@ -14,6 +14,7 @@ public class PayVO {
 	private int BY_SUM;			// 결제 금액
 	private int BY_ST;			// 결제 상태	
 	private Date BY_DT;			// 결제일
+	private int BY_FEES;		//수수료
 	
 	
 	public int getPAYKIND_CD() {
@@ -70,6 +71,14 @@ public class PayVO {
 	
 	public void setBY_DT(Date bY_DT) {
 		BY_DT = bY_DT;
+	}
+
+	public int getBY_FEES() {
+		return BY_FEES;
+	}
+
+	public void setBY_FEES(int bY_FEES) {
+		BY_FEES = bY_FEES;
 	}
 	
 	
