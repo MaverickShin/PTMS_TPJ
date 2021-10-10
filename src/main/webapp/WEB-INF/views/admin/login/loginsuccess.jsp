@@ -6,12 +6,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script type="text/javascript">
+	window.location.href = "http://localhost:3000/";
+</script>
 <title></title>
 </head>
 <body>
-	<script type="text/javascript">
-		window.open("http://localhost:3000/");
-		window.location = "/tpj/cust/main";
-	</script>
 </body>
 </html>
