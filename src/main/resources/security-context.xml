@@ -57,8 +57,6 @@
 		</bean>
 		<!-- 일반회원 끝 -->
 		
-		
-		
 		<security:http pattern = "/admin/**" auto-config="true"  use-expressions="true" create-session="never" 
 			authentication-manager-ref="adminAuthManager">
 		
@@ -67,6 +65,7 @@
 		<security:intercept-url pattern="/admin/adminadd"  access="permitAll" />
 		<security:intercept-url pattern="/admin/adminloginaction"  access="permitAll" />
 		<security:intercept-url pattern="/admin/adminjoinAction"  access="permitAll" />
+		<security:intercept-url pattern="/admin/logout" access="permitAll" />
 		<security:intercept-url pattern="/admin/**" access="permitAll" />
 		
 		<!-- 관리자 영역 설정 -->
@@ -120,11 +119,9 @@
 		<security:intercept-url pattern="/cust/mailAction" access="permitAll" />
 		<security:intercept-url pattern="/cust/mailChkAction" access="permitAll" />
 		<security:intercept-url pattern="/cust/emailSuccess" access="permitAll" />
-		<security:intercept-url pattern="/**" access="permitAll" />
-		
 		
 		<!-- 로그인한 사용자 영역 -->
-		<security:intercept-url pattern="/sitter/**" access="hasAnyRole('ROLE_FREE', 'ROLE_BUSINESS', 'ROLE_PREMIUM')"/> 
+		<security:intercept-url pattern="/sch/**" access="hasAnyRole('ROLE_FREE', 'ROLE_BUSINESS', 'ROLE_PREMIUM')"/> 
 		
 		<!-- iframe -->
       	<security:headers>
@@ -138,7 +135,6 @@
 				authentication-success-handler-ref="userLoginSuccessHandler"
 				authentication-failure-handler-ref="userLoginFailureHandler"
 				username-parameter="cust_id" password-parameter="cust_pwd" /> 
-		
 		
 		<security:logout
 			logout-url="/cust/logout" 

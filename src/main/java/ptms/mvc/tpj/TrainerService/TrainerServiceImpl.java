@@ -322,6 +322,7 @@ public class TrainerServiceImpl implements TrainerService{
 		tVo.setTA_TITLE(req.getParameter("TA_TITLE"));
 		tVo.setTA_APPEAL(req.getParameter("TA_APPEAL"));
 		tVo.setTA_IMG(req.getParameter("TA_IMG"));
+		
 		int ADJUSTABLE = 0;
 		ADJUSTABLE = req.getParameter("ADJUSTABLE") == null ? 0 : Integer.parseInt(req.getParameter("ADJUSTABLE"));
 		tVo.setADJUSTABLE(ADJUSTABLE);
@@ -957,6 +958,9 @@ public class TrainerServiceImpl implements TrainerService{
 			for(int i = 0; i < vo.size(); i++) {
 				int TQ_CD = vo.get(i).getTQ_CD();
 				//후기 작성 중복체크
+				
+				System.out.println("tq_cd : " + TQ_CD);
+				
 				int result = dao.reviewCheckCnt(TQ_CD);
 				
 				System.out.println("후기result : " + result);

@@ -42,6 +42,12 @@ public class AdminController {
 		return "admin/login/loginsuccess";
 	}
 	
+	// 관리자 로그아웃 요청
+	@RequestMapping("logoutrequest")
+	public String logout() {
+		return "admin/login/logoutrequest";
+	}
+	
 	// 관리자 등록 화면
 	@RequestMapping("adminjoin")
 	public String join() {

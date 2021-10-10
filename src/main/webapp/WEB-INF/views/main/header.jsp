@@ -104,10 +104,7 @@
 							
 							<c:if test = "${sessionScope.cust_id != null}">
 								<a style="color:white; font-size:16px; width:80px; padding-top:8px;">${sessionScope.cust_nm} 님</a>
-								<form action = "${cu}logout" name = "logoutform" method = "post" style = "margin:0; padding:0;">
-									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-									<a href = "javascript:logoutform.submit();" style="color:white; font-size:16px; width:60px; line-height:44px; cursor:pointer;">로그아웃</a>
-								</form>
+								<a href = "/tpj/cust/logoutrequest" style="color:white; font-size:16px; width:80px; padding-top:8px;">로그아웃</a>
 							</c:if>
 						</p>
 					</div>
