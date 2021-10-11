@@ -47,7 +47,7 @@
                   <div class="col-md-6">
                      <div class="form-group">
                         <label class="label" for="SG_GRADE">평점</label> 
-                        <input type="number" class="form-control" name="SG_GRADE" id="SG_GRADE" max="5" min="0">
+                        <input type="number" class="form-control" name="SG_GRADE" id="SG_GRADE" step="0.5" max="5" min="0">
                      </div>
                   </div>
                   

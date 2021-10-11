@@ -42,63 +42,30 @@
 			</c:forEach>
 		</div>
 
-		<c:if test="${endPage != 1}">
-			<div class="row">
-				<div class="col-md-12" align="center">
-					<div class="block-27">
-						<ul>
-							<c:if test="${startPage > pageBlock}">
-							<li><a href="${s}" class = "pageMove">&lt;&lt;</a>
-							<li><a href="${s}?pageNum=${startPage - pageBlock}" class = "pageMove">&lt;</a></li>
-							</c:if>
-							<c:forEach var="i" begin="${startPage}" end="${endPage}">
-								<c:if test="${i == currentPage}">
-									<li class="active"><span><a
-											href="${s}?pageNum=${i}" class = "pageMove"></a>${i}</span></li>
-								</c:if>
+					<div class="row">
+                      <div class="col-md-12" align="center">
+                        <div class="block-27">
+                           <ul>
+                                 <li><a class="pageMoves pageArrow" onclick="pageMove('', '${s}');">&lt;&lt;</a>
+                                 <li><a class="pageMoves pageArrow" onclick="pageMove(${startPage - pageBlock}, '${s}');">&lt;</a></li>
+                              <c:forEach var="i" begin="${startPage}" end="${endPage}">
+                                 <c:if test="${i == currentPage}">
+                                    <li class="active"><span><a class="pageMoves"
+                                          onclick="pageNumbers(${i}, '${s}');">${i}</a></span></li>
+                                 </c:if>
 
-								<c:if test="${i != currentPage}">
-									<li><span><a href="${s}?pageNum=${i}" class = "pageMove"></a>${i}</span></li>
-								</c:if>
+                                 <c:if test="${i != currentPage}">
+                                    <li><span><a class="pageMoves"
+                                          onclick="pageNumbers(${i}, '${s}');">${i}</a></span></li>
+                                 </c:if>
 
-							</c:forEach>
-							<c:if test="${pageCount > endPage}">
-							<li><a href="${s}?pageNum=${startPage + pageBlock} " class = "pageMove">&gt;</a></li>
-							<li><a href="${s}?pageNum=${pageCount}" class = "pageMove">&gt;&gt;</a></li>
-							</c:if>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</c:if>
-
-		<c:if test="${endPage == 1}">
-			<div class="row">
-				<div class="col-md-12" align="center">
-					<div class="block-27">
-						<ul>
-							<li><a href="">&lt;&lt;</a></li>
-							<li><a href="">&lt;</a></li>
-
-							<c:forEach var="i" begin="${startPage}" end="${endPage}">
-								<c:if test="${i == currentPage}">
-									<li class="active"><span><a
-											href="">${i}</a></span></li>
-								</c:if>
-
-								<c:if test="${i != currentPage}">
-									<li><span><a href="">${i}</a></span></li>
-								</c:if>
-
-							</c:forEach>
-
-							<li><a href="">&gt;</a></li>
-							<li><a href="">&gt;&gt;</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</c:if>
+                              </c:forEach>
+                                 <li><a class="pageMoves pageArrow" onclick="pageMove(${startPage + pageBlock}, '${s}');">&gt;</a></li>
+                                 <li><a class="pageMoves pageArrow" onclick="pageMove(${pageCount}, '${s}');">&gt;&gt;</a></li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
 	</c:if>
 </body>
 </html>
