@@ -378,8 +378,6 @@ public class TrainerServiceImpl implements TrainerService{
 		tVo.setTS_AREA(req.getParameter("address2"));
 		tVo.setTA_TITLE(req.getParameter("TA_TITLE"));
 		tVo.setTA_APPEAL(req.getParameter("TA_APPEAL"));
-		tVo.setTA_IMG(req.getParameter("TA_IMG"));
-		
 		String TA_IMG = "/tpj/resources/upload/" + (String) req.getAttribute("fileName"); // 이미지
 		tVo.setTA_IMG(TA_IMG);
 		
