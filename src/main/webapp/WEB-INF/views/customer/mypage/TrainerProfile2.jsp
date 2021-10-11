@@ -68,12 +68,84 @@ function updateCheck(){
 <style type="text/css">
 .link {
 	display: block;
-	padding: 2rem 0rem; 
+	padding: 2rem 0rem;
 }
+
 #mypages {
-	position:relative;
+	position: relative;
 	cursor: pointer;
-	color:#00bd56;
+	color: #00bd56;
+}
+
+.row label {
+	font-size: 18px !important;
+	font-weight: normal;
+}
+
+.row input {
+	font-size: 13px !important;
+	font-weight: normal !important;
+}
+
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 50px;
+	height: 24px;
+	vertical-align: middle;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+	display: none;
+}
+
+/* The slider */
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #bdbdbd;
+	-webkit-transition: .4s;
+	transition: .4s;
+}
+
+.slider:before {
+	position: absolute;
+	content: "";
+	height: 16px;
+	width: 16px;
+	left: 4px;
+	bottom: 4px;
+	background-color: white;
+	-webkit-transition: .4s;
+	transition: .4s;
+}
+
+input:checked+.slider {
+	background-color: #00bd56;
+}
+
+input:focus+.slider {
+	box-shadow: 0 0 1px #00bd56;
+}
+
+input:checked+.slider:before {
+	-webkit-transform: translateX(26px);
+	-ms-transform: translateX(26px);
+	transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+	border-radius: 34px;
+}
+
+.slider.round:before {
+	border-radius: 50%;
 }
 </style>
 <title>훈련사 프로필 수정</title>
@@ -118,10 +190,10 @@ function updateCheck(){
 							<div class="col-md-7"
 								style="max-width: 100% !important; flex: 0 0 100% !important">
 								<div class="contact-wrap w-100 p-md-5 p-4" style="padding:0px !important; font-size:20px !important;">
-									<form action="TrainerProfileAction" name="applyform" method="post" onsubmit="return updateCheck();">
+									<form action="TrainerProfileAction" name="applyform" method="post" onsubmit="return updateCheck();" enctype="multipart/form-data">
 										<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+										<s:csrfInput/>
 										<input type ="hidden" name="TA_CD" value="${dto.getTA_CD()}">
-										
 										<div class="row no-gutters">
 											<div class="col-md-7"
 												style="max-width: 100% !important; flex: 0 0 100% !important">
@@ -132,26 +204,39 @@ function updateCheck(){
 															<div class="form-field">
 
 																<div class="col-md-12">
+																	<img alt="프로필 사진" src="${dto.getTA_IMG()}" height="100px" width="100px">
 																	<div class="form-group">
-																		<label class="label" for="service_loc">고객 아이디</label><br>
-																		${sessionScope.cust_id}
+																		<label class="label" for="service_loc">고객 아이디</label>&nbsp;${sessionScope.cust_id}
 																	</div>
 																</div>
 
-																<div class="col-md-12">
+																<div class="col-md-12"
+																	style="margin-bottom: 40px; padding-bottom: 30px; border-bottom: 1px solid #00bd56;">
 																	<label class="label" for="tr_kind">훈련가능 유형</label><br>
-																	<label><input type="checkbox" value="1" 
-																		name="TS1_NO" id="TS1_NO" class="form-group"
-																		onchange="check();">배변훈련</label>
-																	<label><input 
-																		type="checkbox" value="2" name="TS2_NO" id="TS2_NO"
-																		class="form-group" onchange="check();">분리불안</label>
-																	<label><input
-																		type="checkbox" value="3" name="TS3_NO" id="TS3_NO"
-																		class="form-group" onchange="check();">기본훈련</label>
-																	<label><input
+																	<label for="TS1_NO"
+																		style="margin-right: 20px; cursor: pointer;">
+																		<label class="switch">
+																		<input type="checkbox" value="1" name="TS1_NO" id="TS1_NO"
+																			class="form-group" onchange="check();">
+																			<span class="slider round"></span></label>배변훈련</label>
+																	<label for="TS2_NO"
+																		style="margin-right: 20px; cursor: pointer;">
+																		<label class="switch"><input type="checkbox"
+																			value="2" name="TS2_NO" id="TS2_NO"
+																			class="form-group" onchange="check();"><span
+																			class="slider round"></span></label>분리불안</label> 
+																	
+																	<label for = "TS3_NO" style = "margin-right: 20px; cursor:pointer;">
+																		<label class = "switch"><input type="checkbox" value="3"
+																		name="TS3_NO" id="TS3_NO" class="form-group"
+																		onchange="check();"><span
+																			class="slider round"></span></label>기본훈련</label> 
+																		
+																	<label for = "TS4_NO" style = "margin-right: 20px; cursor:pointer;">
+																		<label class = "switch"><input
 																		type="checkbox" value="4" name="TS4_NO" id="TS4_NO"
-																		class="form-group" onchange="check();">짖음해결</label>
+																		class="form-group" onchange="check();"><span
+																			class="slider round"></span></label>짖음해결</label>
 
 																	<div id="tr_kind1_fee" style="display: none">
 																		<label>한 회차당 배변훈련 요금</label> <input type="number"

@@ -42,7 +42,7 @@
 }
 
 .result_div {
-	background-color: #e3f2fd;
+	background-color: #DDDADA;
 }
 
 .pageMoves {
@@ -82,7 +82,6 @@
 								<div class="col-md-7"
 									style="max-width: 100% !important; flex: 0 0 100% !important">
 									<div class="contact-wrap w-100 p-md-5 p-4">
-
 										<div class="result_div"
 											style="width: 100%; padding-top: 10px; padding-bottom: 10px;">
 											<div class="container">
@@ -100,45 +99,50 @@
 													<div class="row" id="divs"
 														style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 30px; width: 700px; margin-left: auto; margin-right: auto; margin-top: 10px; font-family: 'Do Hyeon', sans-serif;">
 														<c:forEach var="li" items="${list}">
-															<div class="col-md-12"
-																style="background-color: #f5f5f5; padding: 50px 30px; text-align: center;">
-																<h5>결제코드 : ${li.BY_CD}</h5>
-																&nbsp;
-																<p>이용 서비스 : ${li.PAY_KIND}</p>
-																<p>결제금액 : ${li.BY_SUM} 원</p>
-																<p>수수료 : ${li.BY_FEES } 원</p>
-																<p>결제일 : ${li.BY_DT}</p>
+															<div class="col-md-12" style="background-color: #FFFFFF; border:solid 1px; box-shadow: 3px 3px 3px 3px #F3E0E0;
+																 border-radius: 20px; text-align: center; padding: 20px 10px; margin: 10px">
+																<h5 style="color:#DBB9B8;">결제코드 : ${li.BY_CD}</h5>
+																<p style="color:#DBB9B8;">이용 서비스 : ${li.PAY_KIND}</p>
+																<p style="color:#DBB9B8;">결제금액 : 
+																	<fmt:formatNumber value="${li.BY_SUM}"
+																	pattern="###,###,###,###" />원
+																</p>
+																<p style="color:#DBB9B8;">수수료 : 
+																	<fmt:formatNumber value="${li.BY_FEES }"
+																	pattern="###,###,###,###" />원
+																</p>
+																<p style="color:#DBB9B8;">결제일 : ${li.BY_DT}</p>
 															</div>
 														</c:forEach>
 													</div>
-													<div class="row">
-														<div class="col-md-12" align="center">
-															<div class="block-27">
-																<ul>
-																	<li><a href="buyList">&lt;&lt;</a>
-																	<li><a href="buyList?pageNum=${startPage - pageBlock}">&lt;</a></li>
-																	<c:forEach var="i" begin="${startPage}" end="${endPage}">
-																		<c:if test="${i == currentPage}">
-																			<li class="active">
-																				<span><a href="buyList?pageNum=${i}">${i}</a></span>
-																			</li>
-																		</c:if>
-	
-																		<c:if test="${i != currentPage}">
-																			<li>
-																				<span><a href="buyList?pageNum=${i}">${i}</a></span>
-																			</li>
-																		</c:if>
-	
-																	</c:forEach>
-	
-																	<li><a href="buyList?pageNum=${startPage + pageBlock}">&gt;</a></li>
-																	<li><a href="buyList?pageNum=${pageCount}">&gt;&gt;</a></li>
-																</ul>
-															</div>
-														</div>
-													</div>
 												</c:if>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12" align="center">
+												<div class="block-27">
+													<ul>
+														<li><a href="buyList">&lt;&lt;</a>
+														<li><a href="buyList?pageNum=${startPage - pageBlock}">&lt;</a></li>
+														<c:forEach var="i" begin="${startPage}" end="${endPage}">
+															<c:if test="${i == currentPage}">
+																<li class="active">
+																	<span><a href="buyList?pageNum=${i}">${i}</a></span>
+																</li>
+															</c:if>
+
+															<c:if test="${i != currentPage}">
+																<li>
+																	<span><a href="buyList?pageNum=${i}">${i}</a></span>
+																</li>
+															</c:if>
+
+														</c:forEach>
+
+														<li><a href="buyList?pageNum=${startPage + pageBlock}">&gt;</a></li>
+														<li><a href="buyList?pageNum=${pageCount}">&gt;&gt;</a></li>
+													</ul>
+												</div>
 											</div>
 										</div>
 									</div>

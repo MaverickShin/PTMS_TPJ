@@ -106,4 +106,8 @@ public interface TrainerService {
 	
 	// 내후기 삭제처리
 	public void deleteTrainingReview(HttpServletRequest req, Model model);
+	
+	// 사이드바
+	public void sidebar(HttpServletRequest req, Model model);
+	
 }

@@ -37,40 +37,91 @@ public class TrainerServiceImpl implements TrainerService{
 		vo.setCUST_ID(id);
 		vo.setTA_TITLE(req.getParameter("TA_TITLE"));
 		vo.setTA_APPEAL(req.getParameter("TA_APPEAL"));
-		vo.setTA_IMG(req.getParameter("TA_IMG"));
+		String TA_IMG = "/tpj/resources/upload/" + (String) req.getAttribute("fileName"); // 이미지
+		vo.setTA_IMG(TA_IMG);
+		System.out.println(" 훈련사 등록 TA_IMG : "+TA_IMG);
+		
 		vo.setTS_AREA(req.getParameter("address1"));
 		System.out.println(req.getParameter("address1"));
 		
 		int TS1_NO = 0;
 		TS1_NO = req.getParameter("TS1_NO") == null ? 0 : Integer.parseInt(req.getParameter("TS1_NO"));
 		vo.setTS1_NO(TS1_NO);
-		int tr_kind1_fee = 0;
-		tr_kind1_fee = req.getParameter("tr_kind1_fee") == "" ? 0 : Integer.parseInt(req.getParameter("tr_kind1_fee"));
-		vo.setTS1_FEE(tr_kind1_fee);
+		
+		//int tr_kind1_fee = 0;
+		//tr_kind1_fee = req.getParameter("tr_kind1_fee1") == null ? 0 : Integer.parseInt(req.getParameter("tr_kind1_fee1"));
+		//vo.setTS1_FEE(tr_kind1_fee);
+		String tr_kind1_fee = req.getParameter("tr_kind1_fee");
+		
+		if(tr_kind1_fee.equals(""))
+		{
+			vo.setTS1_FEE(0);
+		}
+		else {
+			vo.setTS1_FEE(Integer.parseInt(req.getParameter("tr_kind1_fee")));
+		}
+			
+		
 		System.out.println("TS1_NO : " + TS1_NO);
 		System.out.println("tr_kind1_fee : " + tr_kind1_fee);
 		
 		int TS2_NO = 0;
 		TS2_NO = req.getParameter("TS2_NO") == null ? 0 : Integer.parseInt(req.getParameter("TS2_NO"));
 		vo.setTS2_NO(TS2_NO);
-		int tr_kind2_fee = 0;
-		tr_kind2_fee = req.getParameter("tr_kind2_fee") == "" ? 0 : Integer.parseInt(req.getParameter("tr_kind2_fee"));
-		vo.setTS2_FEE(tr_kind2_fee);
+		
+		//int tr_kind2_fee = 0;
+		//tr_kind2_fee = req.getParameter("tr_kind2_fee2") == null ? 0 : Integer.parseInt(req.getParameter("tr_kind2_fee2"));
+		
+		String tr_kind2_fee = req.getParameter("tr_kind2_fee");
+		
+		if(tr_kind2_fee.equals(""))
+		{
+			vo.setTS2_FEE(0);
+		}
+		else {
+			vo.setTS2_FEE(Integer.parseInt(req.getParameter("tr_kind2_fee")));
+		}
+		
+		System.out.println("tr_kind2_fee: " + tr_kind2_fee);
+		
+		//vo.setTS2_FEE(tr_kind2_fee);
 		
 		int TS3_NO = 0;
 		TS3_NO = req.getParameter("TS3_NO") == null ? 0 : Integer.parseInt(req.getParameter("TS3_NO"));
 		vo.setTS3_NO(TS3_NO);
-		int tr_kind3_fee = 0;
-		tr_kind3_fee = req.getParameter("tr_kind3_fee") == "" ? 0 : Integer.parseInt(req.getParameter("tr_kind3_fee"));
-		vo.setTS3_FEE(tr_kind3_fee);
+		
+		
+		//int tr_kind3_fee = 0;
+		//tr_kind3_fee = req.getParameter("tr_kind3_fee") == null ? 0 : Integer.parseInt(req.getParameter("tr_kind3_fee"));
+		//vo.setTS3_FEE(tr_kind3_fee);
+		
+		String tr_kind3_fee = req.getParameter("tr_kind3_fee");
+		if(tr_kind3_fee.equals(""))
+		{
+			vo.setTS3_FEE(0);
+		}
+		else {
+			vo.setTS3_FEE(Integer.parseInt(req.getParameter("tr_kind3_fee")));
+		}
 		
 		int TS4_NO = 0;
 		TS4_NO = req.getParameter("TS4_NO") == null ? 0 : Integer.parseInt(req.getParameter("TS4_NO"));
 		vo.setTS4_NO(TS4_NO);
 		System.out.println();
-		int tr_kind4_fee = 0;
-		tr_kind4_fee = req.getParameter("tr_kind4_fee") == "" ? 0 : Integer.parseInt(req.getParameter("tr_kind4_fee"));
-		vo.setTS4_FEE(tr_kind4_fee);
+		
+		//int tr_kind4_fee = 0;
+		//tr_kind4_fee = req.getParameter("tr_kind4_fee") == null ? 0 : Integer.parseInt(req.getParameter("tr_kind4_fee"));
+		//vo.setTS4_FEE(tr_kind4_fee);
+		
+		String tr_kind4_fee = req.getParameter("tr_kind4_fee");
+		if(tr_kind4_fee.equals(""))
+		{
+			vo.setTS4_FEE(0);
+		}
+		else {
+			vo.setTS4_FEE(Integer.parseInt(req.getParameter("tr_kind4_fee")));
+		}
+		
 		System.out.println("tr_kind4_fee : " + tr_kind4_fee);
 		
 		String START_DAY = req.getParameter("START_DAY");
@@ -93,10 +144,12 @@ public class TrainerServiceImpl implements TrainerService{
 		
 		int insertCnttr = dao.insertTrainer(vo);
 		System.out.println("insertCnttr : " + insertCnttr);
+		System.out.println("이미지 등록 : "+vo.getTA_IMG());
 		if(insertCnttr == 1) {
 			int insertCntdt = dao.insertTrainerDetail(vo);
 			System.out.println("insertCntdt : " + insertCntdt);
-			model.addAttribute("insertCntdt", insertCntdt);
+			//model.addAttribute("insertCntdt", insertCntdt);
+			model.addAttribute("insertCntdt", insertCnttr);
 		}
 	}
 
@@ -243,7 +296,6 @@ public class TrainerServiceImpl implements TrainerService{
 	@Override
 	public void updateTrainer(HttpServletRequest req, Model model) {
 		String CUST_ID = (String)req.getSession().getAttribute("cust_id");
-		
 		int trainerChkCnt = dao.trainerChkCnt(CUST_ID);
 		System.out.println("trainerChkCnt : " + trainerChkCnt);
 		model.addAttribute("trainerChkCnt", trainerChkCnt);
@@ -252,7 +304,12 @@ public class TrainerServiceImpl implements TrainerService{
 		TrainerVO vo = dao.TrainerDetail(CUST_ID);
 		
 		System.out.println("TA_ST : "+ vo.getTA_ST());
+		System.out.println("이미지 수정 voTA_IMG : "+vo.getTA_IMG());
 		
+		System.out.println("훈련 체크1 : "+vo.getTS1_NO());
+		System.out.println("훈련 체크2 : "+vo.getTS2_NO());
+		System.out.println("훈련 체크3 : "+vo.getTS3_NO());
+		System.out.println("훈련 체크4 : "+vo.getTS4_NO());
 		model.addAttribute("dto",vo);
 		
 	}
@@ -321,7 +378,12 @@ public class TrainerServiceImpl implements TrainerService{
 		tVo.setTS_AREA(req.getParameter("address2"));
 		tVo.setTA_TITLE(req.getParameter("TA_TITLE"));
 		tVo.setTA_APPEAL(req.getParameter("TA_APPEAL"));
-		tVo.setTA_IMG(req.getParameter("TA_IMG"));
+		
+		String TA_IMG = "/tpj/resources/upload/" + (String) req.getAttribute("fileName"); // 이미지
+		tVo.setTA_IMG(TA_IMG);
+		
+		System.out.println("프로필 수정 TA_IMG : "+TA_IMG);
+		
 		int ADJUSTABLE = 0;
 		ADJUSTABLE = req.getParameter("ADJUSTABLE") == null ? 0 : Integer.parseInt(req.getParameter("ADJUSTABLE"));
 		tVo.setADJUSTABLE(ADJUSTABLE);
@@ -1002,8 +1064,10 @@ public class TrainerServiceImpl implements TrainerService{
 		String TG_CON = req.getParameter("TG_CON");
 		vo.setTG_CON(TG_CON);
 		
-		String TG_IMG = req.getParameter("TG_IMG");
+		
+		String TG_IMG = "/tpj/resources/upload/" + (String) req.getAttribute("fileName"); // 이미지
 		vo.setTG_IMG(TG_IMG);
+		System.out.println("후기 이미지 TG_IMG : "+TG_IMG);
 		
 		int insertCnt = dao.insertTrainingReview(vo);
 		model.addAttribute("insertCnt", insertCnt);
@@ -1155,6 +1219,9 @@ public class TrainerServiceImpl implements TrainerService{
 		int selectCnt = dao.trainerDupChk(id);
 		System.out.println("훈련사중복체크selectCnt : " + selectCnt);
 		  
+		// 훈련사로 등록되어있는지 체크
+		int trainerChkCnt = dao.trainerChkCnt(id);
+		model.addAttribute("trainerChkCnt", trainerChkCnt);
 		model.addAttribute("selectCnt", selectCnt);
 		
 	}
@@ -1266,7 +1333,11 @@ public class TrainerServiceImpl implements TrainerService{
 		
 		vo.setTG_GRADE(tg);
 		vo.setTG_CON(req.getParameter("TG_CON"));
-		vo.setTG_IMG(req.getParameter("TG_IMG"));
+		
+		String TG_IMG = "/tpj/resources/upload/" + (String) req.getAttribute("fileName"); // 이미지
+		vo.setTG_IMG(TG_IMG);
+		System.out.println("후기 이미지 TG_IMG : "+TG_IMG);
+		
 		vo.setTG_CD(TG_CD);
 		
 		int updateCnt = dao.modifyReviewAction(vo);
@@ -1285,4 +1356,14 @@ public class TrainerServiceImpl implements TrainerService{
 		model.addAttribute("deleteReviewCnt", deleteReviewCnt);
 		
 	}
+
+	// 사이드바
+	@Override
+	public void sidebar(HttpServletRequest req, Model model) {
+		String id = (String)req.getSession().getAttribute("cust_id");
+		// 훈련사로 등록되어있는지 체크
+		int trainerChkCnt = dao.trainerChkCnt(id);
+		model.addAttribute("trainerChkCnt", trainerChkCnt);
+	}
+
 }

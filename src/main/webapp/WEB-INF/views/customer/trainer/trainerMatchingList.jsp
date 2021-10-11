@@ -17,7 +17,7 @@
 </head>
 <body>
 	<%@ include file="../../main/header.jsp"%>
-
+	
 	<section class="hero-wrap hero-wrap-2"
 		style="background-image: url('${imgPath}bg_2.jpg');"
 		data-stellar-background-ratio="0.5">
@@ -39,7 +39,7 @@
 	<div style="display: flex; flex: 1; justify-content: center;">
 
 		<%@ include file="sidebar.jsp"%>
-
+		
 		<div class="container" style="margin-top: 50px;">
 			<div class="row"
 				style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;">
@@ -49,7 +49,8 @@
 							onclick="window.location = 'trainerDetail?TA_CD=${dto.TA_CD}&TQ_LOC=${TQ_LOC}'">
 							<div class="blog-entry align-self-stretch">
 								<a class="block-20 rounded"
-									style="background-image: url('${imgPath}image_1.jpg');"> </a>
+								style="background-image: url(${dto.getTA_IMG()});"> </a>
+								
 								<div class="text p-4">
 									<div class="meta mb-2">
 										<div>

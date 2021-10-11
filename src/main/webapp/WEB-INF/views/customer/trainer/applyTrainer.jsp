@@ -97,11 +97,12 @@
 		}
 		
 		if($("#TS1_NO").is(":checked")) {
-			if(!$("#tr_kind1_fee1").val()) {
+			if($("#tr_kind1_fee1").val()==0) {
 				alert("훈련요금을 입력하세요.");
 				$("#tr_kind1_fee1").focus();
 				return false;
 			}
+			
 		}
 		if($("#TS2_NO").is(":checked")) {
 			if(!$("#tr_kind2_fee2").val()) {
@@ -211,10 +212,9 @@ input:checked + .slider:before {
 	<div style="display: flex; flex:1; justify-content:center;">
 			<%@ include file = "sidebar.jsp" %>
 		<section style="width: 900px; margin-left: auto; margin-right: auto; margin-top: 30px;" class = "sections">
-			<form name="applyform" action="applyTrainerAction" method="post"
-				onsubmit="return joinCheck();">
-				<input type="hidden" name="${_csrf.parameterName}"
-					value="${_csrf.token}">
+			<form name="applyform" action="applyTrainerAction" method="post" onsubmit="return joinCheck();" enctype="multipart/form-data">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+				<s:csrfInput/>
 				<div class="row no-gutters">
 					<div class="col-md-7"
 						style="max-width: 100% !important; flex: 0 0 100% !important">
@@ -297,8 +297,8 @@ input:checked + .slider:before {
 												<div class="form-group">
 													<label class="label" for="TA_IMG">프로필 사진</label>
 													<label class="btn btn-primary" for="TA_IMG" style = "font-size: 16px !important; height:50px; font-weight:normal !important; margin-left:15px;">사진등록</label>
-													<input type="file" id="TA_IMG" name="TA_IMG" accept="image/*" class="btn btn-primary" style="display: none">
-												</div>
+													<input type="file" id="TA_IMG" name="TA_IMG" accept="${imgPath}/*" class="btn btn-primary" style="display: none">
+												</div> 
 											</div>
 											
 										</div>
@@ -348,8 +348,8 @@ input:checked + .slider:before {
 											id="tr_kind1_fee1" name="tr_kind1_fee" min="1000" class="form-control">
 									</div>
 									<div id="tr_kind2_fee" style="display: none; margin-bottom:30px;">
-										<label>한 회차당 <span style = "color:#00bd56">분리불안</span> 요금</label> <input type="text"
-											id="tr_kind2_fee2" name="tr_kind2_fee" min="1000" class="form-control">
+										<label>한 회차당 <span style = "color:#00bd56">분리불안</span> 요금</label> <input type="number"
+											id="tr_kind2_fee2" name="tr_kind2_fee" min="1000" class="form-control" >
 									</div>
 									<div id="tr_kind3_fee" style="display: none; margin-bottom:30px;">
 										<label>한 회차당 <span style = "color:#00bd56">기본훈련</span> 요금</label> <input type="number"

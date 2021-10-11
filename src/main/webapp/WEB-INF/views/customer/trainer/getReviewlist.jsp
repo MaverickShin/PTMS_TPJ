@@ -6,6 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.result_div {
+	background-color: #DDDADA;
+}
+
+</style>
 </head>
 <body>
 
@@ -36,7 +42,8 @@
 		<section
 			style="width: 800px; margin-left: auto; margin-right: auto; margin-top: 30px;"
 			class="sections">
-
+		<div class="result_div"
+				style="width: 100%; padding-top: 10px; padding-bottom: 10px;">
 			<div class="container">
 				<c:if test="${cnt == 0}">
 					<div class="row" id="divs"
@@ -52,24 +59,24 @@
 					<div class="row" id="divs"
 						style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 30px; width: 700px; margin-left: auto; margin-right: auto; margin-top: 10px;">
 						<c:forEach var="dtos" items="${dto}">
-							<div class="col-md-12" style="background-color: #f5f5f5;">
+							<div class="col-md-12" style="background-color: #FFFFFF; border:solid 1px; box-shadow: 3px 3px 3px 3px #F3E0E0;
+								 border-radius: 20px; text-align: center; padding: 20px 10px; margin: 10px">
 								<h5>나의 후기</h5>
-								<p>${dtos.TG_IMG}
-								<h6>훈련받은 펫 : ${dtos.PET_NM}</h6>
-								<p>훈련일 : ${dtos.START_DAY}</p>
-								<p>훈련종류 : ${dtos.TQ_AMT}</p>
-								<p>
+								<p><img alt="사진" src="${dtos.getTG_IMG()}" height="50px" width="50px"> </p>
+								<h6 style="color:#DBB9B8;">훈련받은 펫 : ${dtos.PET_NM}</h6>
+								<p style="color:#DBB9B8;">훈련일 : ${dtos.START_DAY}</p>
+								<p style="color:#DBB9B8;">훈련종류 : ${dtos.TQ_AMT}</p>
+								<p style="color:#DBB9B8;">
 									금액 :
 									<fmt:formatNumber value="${dtos.TQ_FEE}"
-										pattern="###,###,###,###" />
-									원
+										pattern="###,###,###,###" />원
 								</p>
-								<p>별점 : ${dtos.TG_GRADE}</p>
+								<p style="color:#DBB9B8;">별점 : ${dtos.TG_GRADE}</p>
 								<hr>
-								<p>${dtos.TG_CON}</p>
+								<p style="color:#DBB9B8;">${dtos.TG_CON}</p>
 								<p align="center">
-									<input type="button" value="후기 수정" onclick="window.open('modifyTrainingReview?TG_CD=${dtos.TG_CD}', '_blank', 'menubar=no, width=555, height=500, resizable = no, scrollbars = no, titlebar = no, location = no');">
-									<input type="button" value="후기 삭제" onclick="window.location='deleteTrainingReview?TG_CD=${dtos.TG_CD}'">
+									<input type="button" style="border-radius: 20px;" value="후기 수정" onclick="window.location'modifyTrainingReview?TG_CD=${dtos.TG_CD}', '_blank', 'menubar=no, width=555, height=500, resizable = no, scrollbars = no, titlebar = no, location = no');">
+									<input type="button" style="border-radius: 20px;" value="후기 삭제" onclick="window.location='deleteTrainingReview?TG_CD=${dtos.TG_CD}'">
 								</p>
 							</div>
 						</c:forEach>
@@ -105,6 +112,7 @@
 					</div>
 				</c:if>
 			</div>
+		</div>
 		</section>
 	</div>
 	<%@ include file="../../main/footer.jsp"%>

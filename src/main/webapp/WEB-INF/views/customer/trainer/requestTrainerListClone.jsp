@@ -23,16 +23,17 @@
 		<c:if test="${cnt > 0}">
 			<div class="row" id="divs" style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 30px; width: 700px; margin-left: auto; margin-right: auto; margin-top: 10px;">
 				<c:forEach var="dtos" items="${dto}">
-					<div class="col-md-12"
-						style="background-color: #f5f5f5; border-radius: 20px; text-align: center; padding: 20px 10px; margin: 10px">
-    					<h6>펫주인 : ${dtos.CUST_ID}</h6>
-						<h6>훈련받을 펫 : ${dtos.PET_NM}</h6>
-						<p>훈련일 : ${dtos.START_DAY}</p>
-						<p>훈련종류 : ${dtos.TQ_AMT}</p>
-						<p><fmt:formatNumber value="${dtos.TQ_FEE}" pattern="###,###,###,###" />원 </p>
+					<div class="col-md-12" 
+						style="background-color: #FFFFFF; border:solid 1px; box-shadow: 3px 3px 3px 3px #F3E0E0;
+					   border-radius: 20px; text-align: center; padding: 20px 10px; margin: 10px">
+    					<h6 style="color:#DBB9B8;">펫주인 : ${dtos.CUST_ID}</h6>
+						<h6 style="color:#DBB9B8;">훈련받을 펫 : ${dtos.PET_NM}</h6>
+						<p style="color:#DBB9B8;">훈련일 : ${dtos.START_DAY}</p>
+						<p style="color:#DBB9B8;">훈련종류 : ${dtos.TQ_AMT}</p>
+						<p style="color:#DBB9B8;"><fmt:formatNumber value="${dtos.TQ_FEE}" pattern="###,###,###,###" />원 </p>
 				        <c:if test = "${dtos.TQ_ST == 0}">
-				       	 	<input type="button" value="수락" onclick="window.location='acceptRequestTraining?TQ_CD=${dtos.TQ_CD}'">
-				        	<input type="button" value="거절" onclick="window.location='denyRequestTraining?TQ_CD=${dtos.TQ_CD}'">
+				       	 	<input type="button" value="수락" style="border-radius: 20px;" onclick="window.location='acceptRequestTraining?TQ_CD=${dtos.TQ_CD}'">
+				        	<input type="button" value="거절" style="border-radius: 20px;" onclick="window.location='denyRequestTraining?TQ_CD=${dtos.TQ_CD}'">
 				      	</c:if>
 				    </div>
 			    </c:forEach>
@@ -47,11 +48,11 @@
 	                     </c:if>
 	                     <c:forEach var="i" begin="${startPage}" end="${endPage}">
 		                    <c:if test="${i == currentPage}">
-		                       <li class="active"><span><a class ="pageMoves" onclick = "pageNumbers(${i});">${i}</a></span></li>
+		                       <li class="active"><span style="background-color:#DBB9B8;"><a class ="pageMoves" onclick = "pageNumbers(${i});">${i}</a></span></li>
 		                    </c:if>
 		
 		                    <c:if test="${i != currentPage}">
-		                       <li><span><a class ="pageMoves" onclick = "pageNumbers(${i});">${i}</a></span></li>
+		                       <li><span style="background-color:#DBB9B8;"><a class ="pageMoves" style="color:#DBB9B8;" onclick = "pageNumbers(${i});">${i}</a></span></li>
 		                    </c:if>
 		                    
 		                 </c:forEach> 

@@ -73,7 +73,7 @@
 							<div class="blog-entry align-self-stretch"
 								style="border: 1px solid #eeeeee;">
 								<a class="block-20 rounded"
-									style="background-image: url('${imgPath}daon.jpg');"> </a>
+									style="background-image: url(${dto.getSIT_IMG()});"> </a>
 								<div class="text p-4">
 									<div class="meta mb-2">
 										<div>
@@ -98,33 +98,7 @@
 					</form>
 				</c:forEach>
 
-				<div class="row">
-					<div class="col-md-12" align="center">
-						<div class="block-27">
-							<ul>
-								<li><a href="sitterMatching">&lt;&lt;</a>
-								<li><a
-									href="sitterMatching?pageNum=${startPage - pageBlock}">&lt;</a></li>
-
-								<c:forEach var="i" begin="${startPage}" end="${endPage}">
-									<c:if test="${i == currentPage}">
-										<li class="active"><span><a
-												href="sitterMatching?pageNum=${i}">${i}</a></span></li>
-									</c:if>
-
-									<c:if test="${i != currentPage}">
-										<li><span><a href="sitterMatching?pageNum=${i}">${i}</a></span></li>
-									</c:if>
-
-								</c:forEach>
-
-								<li><a
-									href="sitterMatching?pageNum=${startPage + pageBlock}">&gt;</a></li>
-								<li><a href="sitterMatching?pageNum=${pageCount}">&gt;&gt;</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
+				
 			</c:if>
 		</div>
 		
@@ -138,7 +112,33 @@
 			</c:if>
 		</div>
 
+		<div class="row">
+			<div class="col-md-12" align="center">
+				<div class="block-27">
+					<ul>
+						<li><a href="sitterMatching">&lt;&lt;</a>
+						<li><a
+							href="sitterMatching?pageNum=${startPage - pageBlock}">&lt;</a></li>
 
+						<c:forEach var="i" begin="${startPage}" end="${endPage}">
+							<c:if test="${i == currentPage}">
+								<li class="active"><span><a
+										href="sitterMatching?pageNum=${i}">${i}</a></span></li>
+							</c:if>
+
+							<c:if test="${i != currentPage}">
+								<li><span><a href="sitterMatching?pageNum=${i}">${i}</a></span></li>
+							</c:if>
+
+						</c:forEach>
+
+						<li><a
+							href="sitterMatching?pageNum=${startPage + pageBlock}">&gt;</a></li>
+						<li><a href="sitterMatching?pageNum=${pageCount}">&gt;&gt;</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
