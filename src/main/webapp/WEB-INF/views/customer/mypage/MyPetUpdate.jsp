@@ -91,6 +91,9 @@ function updatePet(){
 .col-md-12 input[type=radio]:checked + label a{
     display: inline-block;
 }
+.d-flex .info-wrap{
+background-size: 100% 100%;
+}
 </style>
 
 </head>
@@ -169,7 +172,6 @@ function updatePet(){
 											</div>
 											<div class="col-md-12" style = "margin-top: 20px; border-top:1px solid #00bd56; padding-top: 20px;">
 												<label class="label" for="PET_IMG">펫사진</label>&nbsp;&nbsp;
-												<img alt="펫 사진" src="${dto.getPET_IMG()}" width="50px" height="50px">
 												<input class="form-group" type="file" id="PET_IMG" name="PET_IMG" accept="${imgPath}*">
 											</div>
 											<div class="col-md-12" style = "padding-top: 20px; border-top:1px solid #00bd56; margin-top:20px;">
@@ -191,7 +193,7 @@ function updatePet(){
 						
 						<div class="col-md-5 d-flex align-items-stretch">
 							<div class="info-wrap w-100 p-5 img"
-								style="background-image: url(${path}images/gallery-3.jpg);"></div>
+								style="background-image: url(${dto.getPET_IMG()});"></div>
 						</div>
 					</div>
 				</div>

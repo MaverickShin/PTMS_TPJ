@@ -21,7 +21,7 @@
 	<c:if test="${updateCnt != 0}" >
 		<script type="text/javascript">
 			alert("정상적으로 수정되었습니다.");
-			window.location="/tpj/cust/";
+			window.location="/tpj/sitter/sitter";
 		</script>
 	</c:if>
 </body>

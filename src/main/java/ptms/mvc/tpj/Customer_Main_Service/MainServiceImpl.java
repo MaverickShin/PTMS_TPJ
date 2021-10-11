@@ -343,7 +343,7 @@ public class MainServiceImpl implements MainService {
 		System.out.println("PET_NM " + vo.getPET_NM());
 		System.out.println("PET_AGE " + vo.getPET_AGE());
 		System.out.println("PET_CON " + vo.getPET_CON());
-		System.out.println("PET_IMG " + PET_IMG);
+		System.out.println("펫 등록 PET_IMG " + PET_IMG);
 
 		int insertcnt = dao.insertPet(vo);
 		int signchkCnt = dao.sitterSigninChk(CUST_ID);

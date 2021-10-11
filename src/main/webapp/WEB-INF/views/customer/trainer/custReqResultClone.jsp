@@ -25,39 +25,41 @@
 				style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 30px; width: 700px; margin-left: auto; margin-right: auto; margin-top: 10px;">
 				<c:forEach var="dtos" items="${dto}" varStatus="status">
 					<div class="col-md-12"
-						style="background-color: #f5f5f5; border-radius: 20px; text-align: center; padding: 20px 10px; margin: 10px">
-						<h6>훈련받을 펫 : ${dtos.PET_NM}</h6>
-						<h6>훈련사 : ${dtos.CUST_NM}</h6>
-						<p>훈련일 : ${dtos.START_DAY}</p>
-						<p>훈련종류 : ${dtos.TQ_AMT}${reviewCheckCnt[status.index]}</p>
+						style="background-color: #FFFFFF; border:solid 1px; box-shadow: 3px 3px 3px 3px #F3E0E0;
+							   border-radius: 20px; text-align: center; padding: 20px 10px; margin: 10px">
+						<h6 style="color:#DBB9B8;">훈련받을 펫 : ${dtos.PET_NM}</h6>
+						<h6 style="color:#DBB9B8;">훈련사 : ${dtos.CUST_NM}</h6>
+						<p style="color:#DBB9B8;">훈련일 : ${dtos.START_DAY}</p>
+						<p style="color:#DBB9B8;">훈련종류 : ${dtos.TQ_AMT}${reviewCheckCnt[status.index]}</p>
+						<p style="color:#DBB9B8;">금액 : <fmt:formatNumber value="${dtos.TQ_FEE}" pattern="###,###,###,###" />원</p>
 
 						<c:if test="${dtos.TQ_ST == 0}">
 							<p>
-								<input type="button" value="요청취소"
+								<input type="button" value="요청취소" style="border-radius: 20px;"
 									onclick="window.location='cancelRequestTraining?TQ_CD=${dtos.TQ_CD}'">
 							</p>
 						</c:if>
 						<c:if test="${dtos.TQ_ST == 1}">
 							<p>
-								<input type="button" value="결제하기"
+								<input type="button" value="결제하기" style="border-radius: 20px;"
 									onclick="window.location='/tpj/pay/request?item_name=펫 훈련 결제&price=${dtos.TQ_FEE}&primarykey=${dtos.TQ_CD}'">
 							</p>
 						</c:if>
 						<c:if test="${dtos.TQ_ST == 3}">
 							<p>
-								<input type="button" value="매칭확정하기"
+								<input type="button" value="매칭확정하기" style="border-radius: 20px;"
 									onclick="window.location='updateTrainingComplete?TQ_CD=${dtos.TQ_CD}'">
 							</p>
 						</c:if>
 						<c:if test="${dtos.TQ_ST == 4}">
 							<c:if test="${reviewCheckCnt[status.index] == 1}">
 								<p>
-									<input type="button" value="후기작성완료" disabled>
+									<input type="button" value="후기작성완료" style="border-radius: 20px;" disabled>
 								</p>
 							</c:if>
 							<c:if test="${reviewCheckCnt[status.index] != 1}">
 								<p>
-									<input type="button" value="후기쓰기"
+									<input type="button" value="후기쓰기"style="border-radius: 20px;"
 										onclick="window.location='writeTrainingReview?TQ_CD=${dtos.TQ_CD}&TG_ID=${dtos.TA_CD}'">
 								</p>
 							</c:if>

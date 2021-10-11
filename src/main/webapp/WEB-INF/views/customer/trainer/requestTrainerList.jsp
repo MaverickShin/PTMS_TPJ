@@ -91,7 +91,7 @@
 	border: 1px solid #eeeeee;
 }
 .result_div {
-	background-color: #e3f2fd;
+	background-color: #DDDADA;
 }
 
 .pageMoves {
@@ -106,7 +106,7 @@
 		var rb = document.getElementById("right_button");
 		var ac = document.getElementById("accept_button");
 
-		cb.style.backgroundColor = "#a3cde3";
+		cb.style.backgroundColor = "#DDDADA";
 		cb.style.color = "white";
 
 		lb.style.backgroundColor = "#f5f5f5";
@@ -124,7 +124,7 @@
 		var rb = document.getElementById("right_button");
 		var ac = document.getElementById("accept_button");
 
-		lb.style.backgroundColor = "#a3cde3";
+		lb.style.backgroundColor = "#DDDADA";
 		lb.style.color = "white";
 
 		cb.style.backgroundColor = "#f5f5f5";
@@ -143,7 +143,7 @@
 		var rb = document.getElementById("right_button");
 		var ac = document.getElementById("accept_button");
 
-		ac.style.backgroundColor = "#a3cde3";
+		ac.style.backgroundColor = "#DDDADA";
 		ac.style.color = "white";
 
 		cb.style.backgroundColor = "#f5f5f5";
@@ -162,7 +162,7 @@
 		var rb = document.getElementById("right_button");
 		var ac = document.getElementById("accept_button");
 
-		rb.style.backgroundColor = "#a3cde3";
+		rb.style.backgroundColor = "#DDDADA";
 		rb.style.color = "white";
 
 		cb.style.backgroundColor = "#f5f5f5";
@@ -212,7 +212,7 @@
 			class="sections">
 
 			<div class="list_tab">
-				<p id="left_button" style="background-color: #a3cde3; color: white;"
+				<p id="left_button" style="background-color: #DDDADA; color: white;"
 					onclick="request();">요청 수락대기</p>
 				<p id="accept_button" onclick="accept();">수락</p>
 				<p id="right_button" onclick="refuse();">거절</p>
@@ -235,16 +235,17 @@
 					<c:if test="${cnt > 0}">
 						<div class="row" id="divs" style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 30px; width: 700px; margin-left: auto; margin-right: auto; margin-top: 10px;">
 							<c:forEach var="dtos" items="${dto}">
-									<div class="col-md-12"
-									style="background-color: #f5f5f5; border-radius: 20px; text-align: center; padding: 20px 10px; margin: 10px">
-										<h6>펫주인 : ${dtos.CUST_ID}</h6>
-										<h6>훈련받을 펫 : ${dtos.PET_NM}</h6>
-										<p>훈련일 : ${dtos.START_DAY}</p>
-										<p>훈련종류 : ${dtos.TQ_AMT}</p>
-										<p><fmt:formatNumber value="${dtos.TQ_FEE}" pattern="###,###,###,###" />원 </p>
-										<input type="button" value="수락"
+									<div class="col-md-12" 
+										style="background-color: #FFFFFF; border:solid 1px; box-shadow: 3px 3px 3px 3px #F3E0E0;
+									   border-radius: 20px; text-align: center; padding: 20px 10px; margin: 10px">
+										<h6 style="color:#DBB9B8;">펫주인 : ${dtos.CUST_ID}</h6>
+										<h6 style="color:#DBB9B8;">훈련받을 펫 : ${dtos.PET_NM}</h6>
+										<p style="color:#DBB9B8;">훈련일 : ${dtos.START_DAY}</p>
+										<p style="color:#DBB9B8;">훈련종류 : ${dtos.TQ_AMT}</p>
+										<p style="color:#DBB9B8;"><fmt:formatNumber value="${dtos.TQ_FEE}" pattern="###,###,###,###" />원 </p>
+										<input type="button" value="수락" style="border-radius: 20px;"
 											onclick="window.location='acceptRequestTraining?TQ_CD=${dtos.TQ_CD}'">
-										<input type="button" value="거절"
+										<input type="button" value="거절" style="border-radius: 20px;"
 											onclick="window.location='denyRequestTraining?TQ_CD=${dtos.TQ_CD}'">
 									</div>
 							</c:forEach>
@@ -259,13 +260,13 @@
 	                                </c:if>
 	                                <c:forEach var="i" begin="${startPage}" end="${endPage}">
 		                               <c:if test="${i == currentPage}">
-		                                  <li class="active"><span><a class ="pageMoves" onclick = "pageNumbers(${i});">${i}</a></span></li>
+		                                  <li class="active"><span style="background-color:#DBB9B8;"><a class ="pageMoves" onclick = "pageNumbers(${i});">${i}</a></span></li>
 		                               </c:if>
 		       
 		                               <c:if test="${i != currentPage}">
-		                                  <li><span><a class ="pageMoves" onclick = "pageNumbers(${i});">${i}</a></span></li>
+		                                  <li><span style="background-color:#DBB9B8;"><a class ="pageMoves" onclick = "pageNumbers(${i});">${i}</a></span></li>
 		                               </c:if>
-		                               
+		                                	
 		                            </c:forEach> 
 	                                <c:if test="${pageCount > endPage}">
 		                                <li><a class ="pageMoves" onclick = "pageMove(${startPage + pageBlock});">&gt;</a></li>

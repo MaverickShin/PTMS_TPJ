@@ -88,10 +88,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 d-flex align-items-center">
-					<p class="mb-0 phone pl-md-2">
-						<!-- <a href="#" class="mr-2"><span class="fa fa-phone mr-1"></span>
-							+00 1234 567</a> <a href="#"><span class="fa fa-paper-plane mr-1"></span>
-							youremail@email.com</a> -->
+					<p class="mb-0 phone pl-md-2" align="left">
+						<a href="${ad}" style="color:white; font-size:16px;width:70px; padding-top:8px;">Manager Home</a>
 					</p>
 				</div>
 				<div class="col-md-6 d-flex justify-content-md-end" style = "font-family:'Do Hyeon', sans-serif;">
@@ -117,7 +115,7 @@
 		id="ftco-navbar">
 		<div class="container">
 			<a class="navbar-brand" href="/tpj/cust/main"><span
-				class="flaticon-pawprint-1 mr-2"></span>Pet Management</a>
+				class="flaticon-pawprint-1 mr-2"></span>Pet Care System</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#ftco-nav" aria-controls="ftco-nav"
 				aria-expanded="false" aria-label="Toggle navigation">

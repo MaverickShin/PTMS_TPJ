@@ -1,7 +1,10 @@
 package ptms.mvc.tpj.TrainerController;
 
+import java.io.IOException;
 import java.text.ParseException;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -14,11 +17,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ptms.mvc.tpj.TrainerService.TrainerServiceImpl;
+import ptms.mvc.tpj.util.ImageUploaderHandler;
 
+@MultipartConfig(location = "D:\\Dev88\\workspace\\PTMS_TPJ\\src\\main\\webapp\\resources\\upload", fileSizeThreshold = 1024 * 1024,
+maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 @RequestMapping("/trainer")
 @Controller
 public class TrainerController {
-   
+   private static final String IMG_UPLOAD_DIR = "D:\\\\Dev88\\\\workspace\\\\PTMS_TPJ\\\\src\\\\main\\\\webapp\\\\resources\\\\upload";
+												//D:\\\\Dev88\\\\workspace\\\\플젝명\\\\WebContent\\\\upload
+
+   private ImageUploaderHandler uploader;
+	
    // private Logger log = Logger.getLogger(this.getClass());
    private static final Logger log = LoggerFactory.getLogger(TrainerController.class);
 
@@ -37,7 +47,7 @@ public class TrainerController {
    public String TrainerList(HttpServletRequest req, Model model) {
       log.info("url ==> trainerSearch");
       
-      //trainerservice.TrainerList(req, model);
+      trainerservice.sidebar(req, model);
       
       return "customer/trainer/trainerSearch";
    }
@@ -64,8 +74,29 @@ public class TrainerController {
    
    // 훈련사 지원 처리
    @RequestMapping("applyTrainerAction")
-   public String applyTrainerAction(HttpServletRequest req, Model model) throws ParseException {
+   public String applyTrainerAction(HttpServletRequest req, Model model) throws ParseException, ServletException, IOException {
       log.info("url ==> applyTrainerAction");
+      
+      String tr_kind1_fee = req.getParameter("tr_kind1_fee");
+      System.out.println("tr_kind1_fee: " + tr_kind1_fee);
+      
+      String tr_kind2_fee = req.getParameter("tr_kind2_fee");
+      System.out.println("tr_kind2_fee: " + tr_kind2_fee);
+      
+      String tr_kind3_fee = req.getParameter("tr_kind3_fee");
+      System.out.println("tr_kind3_fee: " + tr_kind3_fee);
+      
+      String tr_kind4_fee = req.getParameter("tr_kind4_fee");
+      System.out.println("tr_kind4_fee: " + tr_kind4_fee);
+      
+		// 이미지 업로드 시작
+		String contentType = req.getContentType();
+		if (contentType != null && contentType.toLowerCase().startsWith("multipart/")) {
+			uploader = new ImageUploaderHandler(); // image uploader 핸들러 호출
+			uploader.setUploadPath(IMG_UPLOAD_DIR); // img 경로
+		    uploader.imageUpload(req, model);
+		}
+		// 이미지 업로드 끝
       
       trainerservice.insertTrainer(req, model);
       
@@ -235,7 +266,7 @@ public class TrainerController {
    
    // 훈련사 후기작성 페이지
    @RequestMapping("writeTrainingReview")
-   public String writeTrainingReview(HttpServletRequest req, Model model) {
+   public String writeTrainingReview(HttpServletRequest req, Model model) throws ServletException, IOException {
       log.info("url ==> writeTrainingReview");
       
       int TG_ID = Integer.parseInt(req.getParameter("TG_ID"));
@@ -249,8 +280,17 @@ public class TrainerController {
    
    // 훈련사 후기작성 처리 - 리뷰테이블 insert
    @RequestMapping("writeTrainingReviewAction")
-   public String writeTrainingReviewAction(HttpServletRequest req, Model model) {
+   public String writeTrainingReviewAction(HttpServletRequest req, Model model) throws ServletException, IOException {
       log.info("url ==> writeTrainingReviewAction");
+      
+	// 이미지 업로드 시작
+	String contentType = req.getContentType();
+	if (contentType != null && contentType.toLowerCase().startsWith("multipart/")) {
+		uploader = new ImageUploaderHandler(); // image uploader 핸들러 호출
+		uploader.setUploadPath(IMG_UPLOAD_DIR); // img 경로
+	    uploader.imageUpload(req, model);
+	}
+	// 이미지 업로드 끝
       
       trainerservice.writeTrainingReview(req, model);
       
@@ -325,8 +365,17 @@ public class TrainerController {
    
    // 내후기 수정 처리
    @RequestMapping("modifyTrainingReviewAction")
-   public String modifyTrainingReviewAction(HttpServletRequest req, Model model) {
+   public String modifyTrainingReviewAction(HttpServletRequest req, Model model) throws ServletException, IOException {
       log.info("url - modifyTrainingReviewAction");
+      
+  	// 이미지 업로드 시작
+  	String contentType = req.getContentType();
+  	if (contentType != null && contentType.toLowerCase().startsWith("multipart/")) {
+  		uploader = new ImageUploaderHandler(); // image uploader 핸들러 호출
+  		uploader.setUploadPath(IMG_UPLOAD_DIR); // img 경로
+  	    uploader.imageUpload(req, model);
+  	}
+  	// 이미지 업로드 끝
       
       // 후기 수정 처리
       trainerservice.modifyReviewAction(req, model);

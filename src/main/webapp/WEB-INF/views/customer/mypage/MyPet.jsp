@@ -162,7 +162,7 @@
 											<div class="col-md-6">
 												<div class="form-group">
 													<label class="label" for="PET_AGE">펫나이</label> <input
-														type="text" class="form-control" name="PET_AGE" id="PET_AGE"
+														type="text" class="form-control" name="PET_AGE" id="PET_AGE" maxlength=2
 														placeholder="펫나이">
 												</div>
 											</div>
@@ -178,9 +178,10 @@
 											
 											<div class="col-md-12" style = "margin-top: 20px; border-top:1px solid #00bd56; padding-top: 20px;">
 												<label class="label" for="PET_IMG">펫사진</label>&nbsp;&nbsp;
-												 <label class="btn btn-primary" for="PET_IMG" style = "font-size: 16px !important; height:40px; font-weight:normal !important; line-height: 40px; padding: 0px; width: 80px;">사진등록</label> 
+												<label class="btn btn-primary" for="PET_IMG" style = "font-size: 16px !important; height:40px; font-weight:normal !important; line-height: 40px; padding: 0px; width: 80px;">사진등록</label> 
 												<input class="form-group" type="file" id="PET_IMG" name="PET_IMG" accept="${imgPath}*"  style="display:none">
 											</div>
+											
 											<div class="col-md-12" style = "padding-top: 20px; border-top:1px solid #00bd56; margin-top:20px;">
 												<div class="form-group">
 													<label class="label" for="PET_CON">특이사항</label> <input

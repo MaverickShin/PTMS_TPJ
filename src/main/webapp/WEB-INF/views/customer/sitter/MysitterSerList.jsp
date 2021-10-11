@@ -95,7 +95,7 @@
 }
 
 .result_div {
-	background-color: #e3f2fd;
+	background-color: #DDDADA;
 }
 
 .pageMoves {
@@ -110,7 +110,7 @@
 		var rb = document.getElementById("right_button");
 		var ac = document.getElementById("accept_button");
 
-		cb.style.backgroundColor = "#a3cde3";
+		cb.style.backgroundColor = "#DDDADA";
 		cb.style.color = "white";
 
 		lb.style.backgroundColor = "#f5f5f5";
@@ -128,7 +128,7 @@
 		var rb = document.getElementById("right_button");
 		var ac = document.getElementById("accept_button");
 
-		lb.style.backgroundColor = "#a3cde3";
+		lb.style.backgroundColor = "#DDDADA";
 		lb.style.color = "white";
 
 		cb.style.backgroundColor = "#f5f5f5";
@@ -147,7 +147,7 @@
 		var rb = document.getElementById("right_button");
 		var ac = document.getElementById("accept_button");
 
-		ac.style.backgroundColor = "#a3cde3";
+		ac.style.backgroundColor = "#DDDADA";
 		ac.style.color = "white";
 
 		cb.style.backgroundColor = "#f5f5f5";
@@ -166,7 +166,7 @@
 		var rb = document.getElementById("right_button");
 		var ab = document.getElementById("accept_button");
 
-		rb.style.backgroundColor = "#a3cde3";
+		rb.style.backgroundColor = "#DDDADA";
 		rb.style.color = "white";
 
 		cb.style.backgroundColor = "#f5f5f5";
@@ -210,7 +210,7 @@
 			class="sections">
 
 			<div class="list_tab">
-				<p id="left_button" style="background-color: #a3cde3; color: white;"
+				<p id="left_button" style="background-color: #DDDADA; color: white;"
 					onclick="request();">요청 수락대기</p>
 				<p id="accept_button" onclick="accept();">수락된 요청</p>
 				<p id="right_button" onclick="refuse();">거절된 요청</p>
@@ -227,7 +227,7 @@
 							style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 20px; width: 700px; margin-left: auto; margin-right: auto; margin-top: 10px;">
 							<div class="col-md-12">
 								<h3></h3>
-								<p>아직 요청한 펫시터 서비스가 없습니다.첫 펫시팅 서비스를 이용해 보세요!</p>
+								<p align="center">아직 요청한 펫시터 서비스가 없습니다.첫 펫시팅 서비스를 이용해 보세요!</p>
 							</div>
 						</div>
 					</c:if>
@@ -236,33 +236,34 @@
 						<div class="row" id="divs"
 							style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 30px; width: 700px; margin-left: auto; margin-right: auto; margin-top: 10px;">
 							<c:forEach var="li" items="${list}" varStatus="status">
-								<div class="col-md-12" style="background-color: #f5f5f5; border-radius:20px; text-align:center; padding:20px 10px; margin:10px" >
-									<h5>고객 : ${li.CUST_ID}</h5>
-									&nbsp;
-									<h6>나의 펫 : ${li.SQ_AMT}</h6>
-									<p>의뢰시작일 : ${li.START_DAY}</p>
-									<p>의뢰종료일 : ${li.END_DAY}</p>
-									<p>고객요청서비스 : ${li.REQ_SV}</p>
-									<p>금액 : <fmt:formatNumber value="${li.SQ_FEE}" pattern="###,###,###,###" />원</p>
+								<div class="col-md-12" 
+										style="background-color: #FFFFFF; border:solid 1px; box-shadow: 3px 3px 3px 3px #F3E0E0;
+									   border-radius: 20px; text-align: center; padding: 20px 10px; margin: 10px">
+									<h5 style="color:#DBB9B8;">고객 : ${li.CUST_ID}</h5>
+									<h6 style="color:#DBB9B8;">나의 펫 : ${li.SQ_AMT}</h6>
+									<p style="color:#DBB9B8;">의뢰시작일 : ${li.START_DAY}</p>
+									<p style="color:#DBB9B8;">의뢰종료일 : ${li.END_DAY}</p>
+									<p style="color:#DBB9B8;">고객요청서비스 : ${li.REQ_SV}</p>
+									<p style="color:#DBB9B8;">금액 : <fmt:formatNumber value="${li.SQ_FEE}" pattern="###,###,###,###" />원</p>
 
 									<c:if test="${li.SQ_ST == 0}">
 										<p>
-											<input type="button" name="reqCancleByCus" value="요청취소"
+											<input type="button" name="reqCancleByCus" value="요청취소" style="border-radius: 20px;"
 												onclick="window.location='reqsitterSerCancle?SQ_CD=${li.SQ_CD}'">
 										</p>
 									</c:if>
 									<c:if test="${li.SQ_ST == 1}">
 										<p>
-											<input type="button" name="payment" value="결제하기"
+											<input type="button" name="payment" value="결제하기" style="border-radius: 20px;"
 												onclick="window.location='/tpj/pay/request?item_name=펫 시터 결제&price=${li.SQ_FEE}&primarykey=${li.SQ_CD}'">
 										</p>
 									</c:if>
 									<c:if test="${li.SQ_ST == 3}">
 										<p>
-											<input type="button" name="payment" value="결제하기" disabled>
+											<input type="button" name="payment" value="결제하기" style="border-radius: 20px;" disabled>
 										</p>
 										<p>
-											<input type="button" name="matchingConfirm" value="매칭확정"
+											<input type="button" name="matchingConfirm" value="매칭확정" style="border-radius: 20px;"
 												onclick="window.location='matchingConfirm?SQ_CD=${li.SQ_CD}'">
 										</p>
 									</c:if>
@@ -270,12 +271,12 @@
 										<c:if test="${reviewCheckCnt[status.index] == 1}">
 											<p>
 												<input type="button" name="Mysitterreview" value="후기작성완료"
-													disabled>
+													style="border-radius: 20px;" disabled>
 											</p>
 										</c:if>
 										<c:if test="${reviewCheckCnt[status.index] != 1}">
 											<p>
-												<input type="button" name="Mysitterreview" value="후기작성"
+												<input type="button" name="Mysitterreview" value="후기작성" style="border-radius: 20px;"
 													onclick="window.location='Mysitterreview??SIT_ID=${li.SIT_ID}&SQ_CD=${li.SQ_CD}'">
 											</p>
 										</c:if>

@@ -1,9 +1,12 @@
 package ptms.mvc.tpj.Sitter_Controller;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -18,10 +21,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ptms.mvc.tpj.CustVO.PetVO;
 import ptms.mvc.tpj.Sitter_DAO.SitterDAOImpl;
 import ptms.mvc.tpj.Sitter_Service.SitterServiceImpl;
+import ptms.mvc.tpj.util.ImageUploaderHandler;
 
+@MultipartConfig(location = "D:\\Dev88\\workspace\\PTMS_TPJ\\src\\main\\webapp\\resources\\upload", fileSizeThreshold = 1024 * 1024,
+maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 @RequestMapping("/sitter")
 @Controller
 public class SitterController {
+	
+	 private static final String IMG_UPLOAD_DIR = "D:\\\\Dev88\\\\workspace\\\\PTMS_TPJ\\\\src\\\\main\\\\webapp\\\\resources\\\\upload";
+		//D:\\\\Dev88\\\\workspace\\\\플젝명\\\\WebContent\\\\upload
+
+	 private ImageUploaderHandler uploader;
 	
 	 private static final Logger log = LoggerFactory.getLogger(SitterController.class);
 
@@ -103,8 +114,17 @@ public class SitterController {
 	 
 	 //펫시터 등록 처리
 	 @RequestMapping("applySitteAction") 
-	 public String applySitteAction(HttpServletRequest req, Model model) throws ParseException {
+	 public String applySitteAction(HttpServletRequest req, Model model) throws ParseException, ServletException, IOException {
 		 log.info("url ==> applySitter");
+		 
+	  	// 이미지 업로드 시작
+	  	String contentType = req.getContentType();
+	  	if (contentType != null && contentType.toLowerCase().startsWith("multipart/")) {
+	  		uploader = new ImageUploaderHandler(); // image uploader 핸들러 호출
+	  		uploader.setUploadPath(IMG_UPLOAD_DIR); // img 경로
+	  	    uploader.imageUpload(req, model);
+	  	}
+	  	// 이미지 업로드 끝
 		 
 		 sitterSer.insertSitter(req, model);
 		 return "customer/sitter/applySitteAction";
@@ -318,8 +338,17 @@ public class SitterController {
 	  *  내용 : 고객 - 결제 완료 후 후기 작성 (테이블(SITTER_GRADE_TB)에 insert)
 	  */
 	 @RequestMapping("MysitterreviewAction")
-	 public String MysitterreviewAction(HttpServletRequest req, Model model) {
+	 public String MysitterreviewAction(HttpServletRequest req, Model model) throws ServletException, IOException {
 		 log.info("url ==> MysitterreviewAction");
+		 
+		// 이미지 업로드 시작
+		String contentType = req.getContentType();
+		if (contentType != null && contentType.toLowerCase().startsWith("multipart/")) {
+			uploader = new ImageUploaderHandler(); // image uploader 핸들러 호출
+			uploader.setUploadPath(IMG_UPLOAD_DIR); // img 경로
+		    uploader.imageUpload(req, model);
+		}
+		// 이미지 업로드 끝
 		 
 		 sitterSer.writeSitterReview(req, model);
 		 return "customer/sitter/MysitterreviewAction";
@@ -357,8 +386,17 @@ public class SitterController {
 	  * 내용 : 고객 - 나의 리뷰내역 수정 처리
 	  */
 	 @RequestMapping("MyreviewModifyAction")
-	 public String MyreviewModifyAction(HttpServletRequest req, Model model) {
+	 public String MyreviewModifyAction(HttpServletRequest req, Model model) throws ServletException, IOException {
 		 log.info("url ==> MyreviewModifyAction");
+		 
+		// 이미지 업로드 시작
+		String contentType = req.getContentType();
+		if (contentType != null && contentType.toLowerCase().startsWith("multipart/")) {
+			uploader = new ImageUploaderHandler(); // image uploader 핸들러 호출
+			uploader.setUploadPath(IMG_UPLOAD_DIR); // img 경로
+		    uploader.imageUpload(req, model);
+		}
+		// 이미지 업로드 끝
 		 
 		 sitterSer.myreviewModifyAction(req, model);
 		 return "customer/sitter/MyreviewModifyAction";

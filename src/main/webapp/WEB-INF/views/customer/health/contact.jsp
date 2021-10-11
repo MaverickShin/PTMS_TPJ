@@ -186,6 +186,11 @@ $(document).ready(function(){
 	padding-top:30px;
 	padding-bottom:10px;	
 }
+
+/* .symptom{
+	border-radius: 100%;
+    overflow: hidden;
+} */
 </style>
 
 </head>
@@ -225,7 +230,8 @@ $(document).ready(function(){
 							<tr>
 								<td rowspan="4"><img src="${imgPath}about-1.jpg"
 									width="500px" vspace=30 hspace=50></td>
-								<td><img src="${imgPath}image_4.jpg" width="500px"
+								<td>
+								<img src="${imgPath}image_4.jpg" width="500px"
 									height="300px" vspace=30>
 									<p
 										style="width: 500px; height: 20px; word-break: break-all; text-align: center;">소변검사,
@@ -239,7 +245,7 @@ $(document).ready(function(){
 						<div class="row">
 							<div class="col-sm-6 section01_img" style="text-align: center">
 							
-								<div class= "symptom"></div>
+								<div class= "symptom"></div>	
 							</div>
 							
 							<div class="col-sm-6 section01_txt">

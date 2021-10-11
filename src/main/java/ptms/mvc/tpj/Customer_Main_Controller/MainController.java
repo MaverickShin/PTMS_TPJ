@@ -550,7 +550,7 @@ public class MainController {
    
    // 반려인/펫 관리 - 훈련사 수정페이지
    @RequestMapping("TrainerProfile")
-   public String TrainerProfile(HttpServletRequest req, Model model) {
+   public String TrainerProfile(HttpServletRequest req, Model model) throws ServletException, IOException {
       log.info("컨트롤러 - 반려인/펫 관리 - TrainerProfile");
       
       // 훈련사 정보 수정 화면
@@ -561,7 +561,7 @@ public class MainController {
    
    // 반려인/펫 관리 - 훈련사 수정페이지
    @RequestMapping("TrainerProfile2")
-   public String TrainerProfile2(HttpServletRequest req, Model model) {
+   public String TrainerProfile2(HttpServletRequest req, Model model) throws ServletException, IOException {
       log.info("컨트롤러 - 반려인/펫 관리 - TrainerProfile");
       
       // 훈련사 정보 수정 화면
@@ -572,18 +572,18 @@ public class MainController {
    
    // 반려인/펫 관리 - 훈련사 수정 처리
    @RequestMapping("TrainerProfileAction")
-   public String TrainerProfileAction(HttpServletRequest req, Model model) throws ParseException {
+   public String TrainerProfileAction(HttpServletRequest req, Model model) throws ParseException, ServletException, IOException {
 	   log.info("컨트롤러 - 반려인/펫 관리 - TrainerProfileAction");
 	   
-	// 이미지 업로드 시작
-/*	String contentType = req.getContentType();
-	if (contentType != null && contentType.toLowerCase().startsWith("multipart/")) {
-		uploader = new ImageUploaderHandler(); // image uploader 핸들러 호출
-		uploader.setUploadPath(IMG_UPLOAD_DIR); // img 경로
-	    uploader.imageUpload(req, model);
-	}
-	// 이미지 업로드 끝
-*/	   
+		// 이미지 업로드 시작
+		String contentType = req.getContentType();
+		if (contentType != null && contentType.toLowerCase().startsWith("multipart/")) {
+			uploader = new ImageUploaderHandler(); // image uploader 핸들러 호출
+			uploader.setUploadPath(IMG_UPLOAD_DIR); // img 경로
+		    uploader.imageUpload(req, model);
+		}
+		// 이미지 업로드 끝
+	   
 	   // 훈련사 정보 수정 처리
 	   TrainerService.updateTrainerAction(req, model);
 	   
@@ -613,8 +613,17 @@ public class MainController {
    
    // 반려인/펫 관리 - 시터 수정 처리
    @RequestMapping("SitterProfileAction")
-   public String SitterProfileAction(HttpServletRequest req, Model model) throws ParseException {
+   public String SitterProfileAction(HttpServletRequest req, Model model) throws ParseException, ServletException, IOException {
 	   log.info("컨트롤러 - 반려인/펫 관리 - SitterProfileAction");
+	   
+		// 이미지 업로드 시작
+		String contentType = req.getContentType();
+		if (contentType != null && contentType.toLowerCase().startsWith("multipart/")) {
+			uploader = new ImageUploaderHandler(); // image uploader 핸들러 호출
+			uploader.setUploadPath(IMG_UPLOAD_DIR); // img 경로
+		    uploader.imageUpload(req, model);
+		}
+		// 이미지 업로드 끝
 	   
 	   // 시터 정보 수정 처리
 	   SitterService.updateSitterAction(req, model);

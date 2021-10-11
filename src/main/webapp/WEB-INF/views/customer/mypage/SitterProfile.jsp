@@ -31,6 +31,24 @@ function updateCheck(){
 		alert("이미지를 등록해 주세요");
 		return false;
 	}
+
+	var chk1 = document.getElementById("SV1_NO");
+	if(chk1 == 1){
+		chk1 = document.applyform.SV1_NO.checked;
+	}
+	
+	var chk2 = document.getElementById("SV2_NO");
+	if(chk2 == 2){
+		chk2 = document.applyform.SV2_NO.checked;
+	}
+	var chk3 = document.getElementById("SV3_NO");
+	if(chk3 == 3){
+		chk3 = document.applyform.SV3_NO.checked;
+	}
+	var chk4 = document.getElementById("SV4_NO");
+	if(chk4 == 4){
+		chk4 = document.applyform.SV4_NO.checked;
+	}
 }
 
 </script>
@@ -71,11 +89,6 @@ function updateCheck(){
 	<section class="ftco-section bg-light">
 		<div class="container">
 			<div class="row justify-content-center">
-<!-- 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">반려인/반려동물 관리</h2>
-				</div> -->
-			</div>
-			<div class="row justify-content-center">
 				<div class="col-md-12">
 					<div class="wrapper" style="font-family: 'Do Hyeon', sans-serif;">
 					<%@ include file="MyInfobar.jsp"%>
@@ -84,8 +97,9 @@ function updateCheck(){
 								style="max-width: 100% !important; flex: 0 0 100% !important">
 								<div class="contact-wrap w-100 p-md-5 p-4">
 									<h3 class="mb-4" style="TEXT-ALIGN-LAST:center;font-size:35px">펫시터 프로필 수정</h3>
-									<form action="SitterProfileAction" name="applyform" method="post" onsubmit="return updateCheck();">
+									<form action="SitterProfileAction" name="applyform" method="post" onsubmit="return updateCheck();" enctype="multipart/form-data">
 										<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+										<s:csrfInput/>
 										<input type="hidden" name="SIT_ID" value="${dto.getSIT_ID()}">
 										<div class="row no-gutters">
 											<div class="col-md-7"
@@ -94,8 +108,9 @@ function updateCheck(){
 													<div class="row">
 
 														<div class="col-md-12">
+															<img alt="프로필 사진" src="${dto.getSIT_IMG()}" height="100px" width="100px">
 															<div class="form-group">
-																<label class="label" for="service_loc">고객 아이디</label><br>
+																<label class="label" for="service_loc">고객 아이디</label>&nbsp;
 																${sessionScope.cust_id}
 															</div>
 														</div>
@@ -106,10 +121,109 @@ function updateCheck(){
 																	<div class="select-wrap">
 																		<label class="label" for="tr_kind">제공 가능한 서비스를 선택해 주세요</label>
 																		<br>
-																		<p class = "chk_p1"><label class = "chk_label1" for = "SV1_NO"><span class = "list_label_span1">미용 서비스</span><input type="checkbox" value="1" name="SV1_NO" class="sel_chk1" id = "SV1_NO"><span class = "checkbox_icon" ></span></label>&nbsp;
-																		 <p class = "chk_p1"><label class = "chk_label1" for = "SV2_NO"><span class = "list_label_span1">놀이 서비스</span><input type="checkbox" value="2" name="SV2_NO" id = "SV2_NO" class="sel_chk1"><span class = "checkbox_icon"></span></label></p>
-	                                    								 <p class = "chk_p1"><label class = "chk_label1" for = "SV3_NO"><span class = "list_label_span1">산책 서비스</span><input type="checkbox" value="3" name="SV3_NO" id = "SV3_NO" class="sel_chk1"><span class = "checkbox_icon"></span></label></p>
-																		<p class = "chk_p1"><label class = "chk_label1" for = "SV4_NO"><span style = "margin-right: 79px;">응급처치 서비스 <span style="color:blue;">(필수)</span></span><input type="checkbox" value="4" name="SV4_NO" class="sel_chk1" id = "SV4_NO"checked onclick="return false;"><span class = "checkbox_icon"></span></label></p>
+																		<c:if test="${dto.getSV1_NO() == 0}">
+																		<p class = "chk_p1">
+																			<label class = "chk_label1" for = "SV1_NO">
+																				<span class = "list_label_span1">미용 서비스</span>
+																				<input type="checkbox" value="1" name="SV1_NO" class="sel_chk1" id = "SV1_NO">
+																				<span class = "checkbox_icon" ></span>
+																			</label>
+																		</p>
+																		</c:if>
+																		<c:if test="${dto.getSV1_NO() == 1}">
+																		<p class = "chk_p1">
+																			<label class = "chk_label1" for = "SV1_NO">
+																				<span class = "list_label_span1">미용 서비스</span>
+																				<input type="checkbox" value="1" name="SV1_NO" class="sel_chk1" id = "SV1_NO" checked>
+																				<span class = "checkbox_icon" ></span>
+																			</label>
+																		</p>
+																		</c:if>
+																		
+																		<c:if test="${dto.getSV2_NO() == 0}">
+																		<p class = "chk_p1">
+																			<label class = "chk_label1" for = "SV2_NO">
+																				<span class = "list_label_span1">놀이 서비스</span>
+																				<input type="checkbox" value="2" name="SV2_NO" id = "SV2_NO" class="sel_chk1">
+																				<span class = "checkbox_icon"></span>
+																			</label>
+																		</p>
+																		</c:if>
+																		<c:if test="${dto.getSV2_NO() == 2}">
+																		<p class = "chk_p1">
+																			<label class = "chk_label1" for = "SV2_NO">
+																				<span class = "list_label_span1">놀이 서비스</span>
+																				<input type="checkbox" value="2" name="SV2_NO" id = "SV2_NO" class="sel_chk1" checked>
+																				<span class = "checkbox_icon"></span>
+																			</label>
+																		</p>
+																		</c:if>
+																		
+																		<c:if test="${dto.getSV3_NO() == 0}">
+																		<p class = "chk_p1">
+																			<label class = "chk_label1" for = "SV3_NO">
+			                                    								<span class = "list_label_span1">산책 서비스</span>
+			                                    								<input type="checkbox" value="3" name="SV3_NO" id = "SV3_NO" class="sel_chk1">
+			                                    								<span class = "checkbox_icon"></span>
+		                                    								</label>
+																		</p>
+																		</c:if>
+																		<c:if test="${dto.getSV3_NO() == 3}">
+																		<p class = "chk_p1">
+																			<label class = "chk_label1" for = "SV3_NO">
+			                                    								<span class = "list_label_span1">산책 서비스</span>
+			                                    								<input type="checkbox" value="3" name="SV3_NO" id = "SV3_NO" class="sel_chk1" checked>
+			                                    								<span class = "checkbox_icon"></span>
+		                                    								</label>
+																		</p>
+																		</c:if>
+																		
+																		<p class = "chk_p1">
+																			<label class = "chk_label1" for = "SV4_NO">
+																				<span style = "margin-right: 79px;">응급처치 서비스 <span style="color:blue;">(필수)</span></span>
+																				<input type="checkbox" value="4" name="SV4_NO" class="sel_chk1" id = "SV4_NO"checked onclick="return false;">
+																				<span class = "checkbox_icon"></span>
+																			</label>
+																		</p>
+																		
+																		
+																		
+																		
+																		
+																		
+																		
+																		
+																		
+																		
+																		
+																		<!-- <p class = "chk_p1">
+																			<label class = "chk_label1" for = "SV1_NO">
+																				<span class = "list_label_span1">미용 서비스</span>
+																				<input type="checkbox" value="1" name="SV1_NO" class="sel_chk1" id = "SV1_NO">
+																				<span class = "checkbox_icon" ></span>
+																			</label>
+																		</p>
+																		<p class = "chk_p1">
+																			<label class = "chk_label1" for = "SV2_NO">
+																				<span class = "list_label_span1">놀이 서비스</span>
+																				<input type="checkbox" value="2" name="SV2_NO" id = "SV2_NO" class="sel_chk1">
+																				<span class = "checkbox_icon"></span>
+																			</label>
+																		</p>
+	                                    								<p class = "chk_p1">
+		                                    								<label class = "chk_label1" for = "SV3_NO">
+			                                    								<span class = "list_label_span1">산책 서비스</span>
+			                                    								<input type="checkbox" value="3" name="SV3_NO" id = "SV3_NO" class="sel_chk1">
+			                                    								<span class = "checkbox_icon"></span>
+		                                    								</label>
+	                                    								</p>
+																		<p class = "chk_p1">
+																			<label class = "chk_label1" for = "SV4_NO">
+																				<span style = "margin-right: 79px;">응급처치 서비스 <span style="color:blue;">(필수)</span></span>
+																				<input type="checkbox" value="4" name="SV4_NO" class="sel_chk1" id = "SV4_NO"checked onclick="return false;">
+																				<span class = "checkbox_icon"></span>
+																			</label>
+																		</p>-->
 																	</div>
 																</div>
 															</div>

@@ -69,8 +69,9 @@ public class ImageUploaderHandler {
         
     	
     	for (String content : part.getHeader("content-disposition").split(";")) {
-            
+            System.out.println("for문 시작");
     		if (content.trim().startsWith("filename")) {
+    			System.out.println("filename 시작");
                 return content.substring(content.indexOf("=") + 2, content.length() - 1);
             }
         }
