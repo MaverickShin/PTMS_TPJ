@@ -70,7 +70,7 @@ public class AdminLoginFailureHandler implements AuthenticationFailureHandler{
 		}
 		
 		// 로그인 실패 처리용 클래스 이므로 무조건 로그인 화면으로 되돌아간다.
-		RequestDispatcher rd = request.getRequestDispatcher("/tpj/admin/adminlogin");
+		RequestDispatcher rd = request.getRequestDispatcher("/admin/adminlogin");
 		rd.forward(request, response);
 	}
 

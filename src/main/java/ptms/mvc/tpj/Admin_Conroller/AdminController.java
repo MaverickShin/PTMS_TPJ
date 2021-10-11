@@ -74,7 +74,7 @@ public class AdminController {
 		
 		model.addAttribute("insert", insertCnt);
 		
-		return "admin/join/joinAction";
+		return "admin/join/joinaction";
 	}
 	
 	// 관리자 아이디 중복확인
