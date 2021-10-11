@@ -243,10 +243,12 @@ public class TrainerServiceImpl implements TrainerService{
 		
 		model.addAttribute("pageNum", pageNum); // 페이지 번호
 		model.addAttribute("number", number); // 출력용 글번호
+		
 	}
 
 	@Override
 	public void TrainerInfo(HttpServletRequest req, Model model) {
+		
 		String id = (String)req.getSession().getAttribute("cust_id");
 		String TQ_LOC = req.getParameter("TQ_LOC");
 		System.out.println("tq_loc : " + TQ_LOC);
