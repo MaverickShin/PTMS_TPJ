@@ -89,9 +89,10 @@
 			<div class="row">
 				<div class="col-md-6 d-flex align-items-center">
 					<p class="mb-0 phone pl-md-2" align="left">
-						<a href="${ad}" style="color:white; font-size:16px;width:70px; padding-top:8px;">Manager Home</a>
+						<a href="${ad}adminlogin" style="color:white; font-size:16px;width:70px; padding-top:8px;">Manager Home</a>
 					</p>
 				</div>
+				
 				<div class="col-md-6 d-flex justify-content-md-end" style = "font-family:'Do Hyeon', sans-serif;">
 					<div class="social-media" style = "display:flex;">
 						<p class="mb-0 d-flex" align="center">
