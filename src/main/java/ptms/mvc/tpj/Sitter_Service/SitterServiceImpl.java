@@ -609,7 +609,7 @@ public class SitterServiceImpl implements SitterService {
 			sum += sitterDao.petServiceFee(Integer.parseInt(PET_CD[i]));
 			
 			if(PET_CD.length == 0) result += sitterDao.selectPetNanme(Integer.parseInt(PET_CD[i]));
-			else result += ", " + sitterDao.selectPetNanme(Integer.parseInt(PET_CD[i]));
+			else result += sitterDao.selectPetNanme(Integer.parseInt(PET_CD[i])) + ", ";
 		}
 
 		System.out.println("result : " + result);
@@ -642,8 +642,8 @@ public class SitterServiceImpl implements SitterService {
 			service += SV3_NO + ",";
 			//total += sum;
 		}
-		if (SV4_NO != null) {
-			service += SV4_NO;
+		if (SV4_NO == null) {
+			service += "응급처치서비스";
 			//total += sum;
 		}
 

@@ -250,32 +250,28 @@
 									</div>
 							</c:forEach>
 						</div>
-						<div class = "row">
-	                      <div class="col-md-12" align="center">
-	                         <div class="block-27">
-	                              <ul>
-	                              	<c:if test="${startPage > pageBlock}">
-		                                <li><a class ="pageMoves" onclick="pageMove('');" >&lt;&lt;</a>
-		                                <li><a class ="pageMoves" onclick="pageMove(${startPage - pageBlock});">&lt;</a></li>
-	                                </c:if>
-	                                <c:forEach var="i" begin="${startPage}" end="${endPage}">
-		                               <c:if test="${i == currentPage}">
-		                                  <li class="active"><span style="background-color:#DBB9B8;"><a class ="pageMoves" onclick = "pageNumbers(${i});">${i}</a></span></li>
-		                               </c:if>
-		       
-		                               <c:if test="${i != currentPage}">
-		                                  <li><span style="background-color:#DBB9B8;"><a class ="pageMoves" onclick = "pageNumbers(${i});">${i}</a></span></li>
-		                               </c:if>
-		                                	
-		                            </c:forEach> 
-	                                <c:if test="${pageCount > endPage}">
-		                                <li><a class ="pageMoves" onclick = "pageMove(${startPage + pageBlock});">&gt;</a></li>
-		                                <li><a class ="pageMoves" onclick = "pageMove(${pageCount});">&gt;&gt;</a></li>
-	                              	</c:if>
-	                              </ul>
-	                         </div>
-	                      </div>
-	                   </div>
+						 <div class = "row">
+	           <div class="col-md-12" align="center">
+	              <div class="block-27">
+	                   <ul>
+	                     <li><a class ="pageMoves pageArrow" onclick="pageMove('', '${t}');" >&lt;&lt;</a>
+	                     <li><a class ="pageMoves pageArrow" onclick="pageMove(${startPage - pageBlock}, '${t}');">&lt;</a></li>
+	                     <c:forEach var="i" begin="${startPage}" end="${endPage}">
+		                    <c:if test="${i == currentPage}">
+		                       <li class="active"><span style="background-color:#DBB9B8;"><a class ="pageMoves" onclick = "pageNumbers(${i}, '${t}');">${i}</a></span></li>
+		                    </c:if>
+		
+		                    <c:if test="${i != currentPage}">
+		                       <li><span style="background-color:#DBB9B8;"><a class ="pageMoves" style="color:#DBB9B8;" onclick = "pageNumbers(${i}, '${t}');">${i}</a></span></li>
+		                    </c:if>
+		                    
+		                 </c:forEach> 
+	                     <li><a class ="pageMoves pageArrow" onclick = "pageMove(${startPage + pageBlock}, '${t}');">&gt;</a></li>
+	                     <li><a class ="pageMoves pageArrow" onclick = "pageMove(${pageCount}, '${t}');">&gt;&gt;</a></li>
+	                   </ul>
+	              </div>
+	           </div>
+	       </div>
 		               
 					</c:if>
 				</div>
@@ -292,9 +288,9 @@
 	
 	var pageNum = '<c:out value="${pageNum}"/>';
 	
-	function pageMove(e) {
+	function pageMove(e, u) {
 		
-		var urls = '<c:out value="${t}"/>';
+		var urls = u;
 		var param = e;
 		var start = '<c:out value = "${startPage}"/>';
 		var block = '<c:out value = "${pageBlock}"/>';
@@ -395,9 +391,9 @@
 		
 	}
 	
-	function pageNumbers(e) {
+	function pageNumbers(e, u) {
 		
-		var urls = '<c:out value="${t}"/>';
+		var urls = u;
 		var param = e;
 		var current = '<c:out value = "${currentPage}"/>';
 		

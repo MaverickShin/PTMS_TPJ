@@ -1185,7 +1185,7 @@ public class TrainerServiceImpl implements TrainerService{
 		model.addAttribute("dto", vo);
 		model.addAttribute("pageNum", pageNum); // 페이지 번호
 		model.addAttribute("number", number); // 출력용 글번호
-		model.addAttribute("t", 4);
+		model.addAttribute("t", "TrainingServiceComplete");
 	}
 	/*
 	@Override
