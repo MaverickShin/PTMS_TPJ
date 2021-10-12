@@ -667,4 +667,23 @@ public class MainController {
    public String logout() {
 	   return "main/login/logoutrequest";
    }
+   
+   // 소변 이미지
+   @RequestMapping(value = "urineimg", method = RequestMethod.POST, consumes ={"multipart/form-data"})
+   @ResponseBody
+   public String urineimg(HttpServletRequest req, Model model) throws ServletException, IOException {
+	   
+	   String img = "/tpj/resources/upload/" + (String) req.getParameter("urine_img"); // 이미지
+	   
+	   img = new String(img.getBytes("8859_1"), "utf-8");
+	   
+	   System.out.println("img : " + img);
+	   
+	   return img;
+   }
+   
+   @RequestMapping("urinetest")
+   public String urinetest() {
+	   return "customer/urine/urine";
+   }
 }
