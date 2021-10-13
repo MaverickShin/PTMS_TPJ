@@ -26,6 +26,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import ptms.mvc.tpj.CustVO.PayVO;
 import ptms.mvc.tpj.Customer_Main_DAO.MainDAOImpl;
@@ -41,7 +43,7 @@ maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 @Controller
 public class MainController {
 	private static final long serialVersionUID = 1L;
-    private static final String IMG_UPLOAD_DIR = "C:\\\\Dev88\\\\PTMS_TPJ\\\\src\\\\main\\\\webapp\\\\resources\\\\upload";
+    private static final String IMG_UPLOAD_DIR = "C:\\\\Dev88\\\\workspace\\\\PTMS_TPJ\\\\src\\\\main\\\\webapp\\\\resources\\\\upload";
     											//D:\\\\Dev88\\\\workspace\\\\플젝명\\\\WebContent\\\\upload
 	
     private ImageUploaderHandler uploader;
@@ -673,7 +675,15 @@ public class MainController {
    @ResponseBody
    public String urineimg(HttpServletRequest req, Model model) throws ServletException, IOException {
 	   
-	   String img = "/tpj/resources/upload/" + (String) req.getParameter("urine_img"); // 이미지
+	   // 이미지 업로드 시작
+	   String contentType = req.getContentType();
+	   if (contentType != null && contentType.toLowerCase().startsWith("multipart/")) {
+			uploader = new ImageUploaderHandler(); // image uploader 핸들러 호출
+			uploader.setUploadPath(IMG_UPLOAD_DIR); // img 경로
+		    uploader.imageUpload(req, model);
+	   }
+	   
+	   String img = "/tpj/resources/upload/" + (String) req.getAttribute("fileName"); // 이미지
 	   
 	   img = new String(img.getBytes("8859_1"), "utf-8");
 	   

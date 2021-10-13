@@ -48,9 +48,9 @@
 <body>
 
 <div class = "test_img" style = "width: 600px; height: 600px;">
-	<img class = "img" src = "">
+	<img class = "img" src = "${path}img/urine/이미지없음.jpg">
 	
-	<form method="post" id="fileUploadForm">
+	<form method="post" id="fileUploadForm" enctype="multipart/form-data">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		<input type = "file" name = "urine_img" class = "upload">	
 		<input type = "button" value = "선택완료" class = "filesub">
