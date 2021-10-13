@@ -80,11 +80,5 @@ public class PayVO {
 	public void setBY_FEES(int bY_FEES) {
 		BY_FEES = bY_FEES;
 	}
-<<<<<<< HEAD
-	
-	
-=======
->>>>>>> 1fbd97bc5e615201c7adae91d95f644567e0fe0b
-	
 	
 }
