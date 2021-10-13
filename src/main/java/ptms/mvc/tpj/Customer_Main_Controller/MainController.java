@@ -696,4 +696,5 @@ public class MainController {
    public String urinetest() {
 	   return "customer/urine/urine";
    }
+   
 }
