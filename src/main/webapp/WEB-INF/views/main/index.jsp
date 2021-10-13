@@ -22,7 +22,8 @@ function showImage(){
 	tds[imgNum].style.display = 'block';
 	setTimeout(showImage,3000); 
 }
-</script>  
+
+</script>
 <style>
 	.GI74Re  {
 		display:none;
@@ -144,6 +145,12 @@ function showImage(){
 	
 	.S1FAPd {
 		display: none;
+	}
+	
+	.scrollax-performance, .scrollax-performance *, .scrollax-performance *:before, .scrollax-performance *:after {
+		pointer-events: none !important;
+		-webkit-animation-play-state: paused !important;
+		animation-play-state: paused !important;
 	}
 
 </style>
@@ -313,7 +320,6 @@ function showImage(){
 						style="background-image: url(/tpj/resources/img/NUTRIENT/반려동물.jpeg);">
 						
 						<a href="https://www.youtube.com/watch?v=RHP5OXLsfSQ"
-							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 							class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
 							<span class="fa fa-play"></span>
 						</a>
@@ -339,14 +345,14 @@ function showImage(){
 									<button href="#collapseOne"
 										class="d-flex py-3 px-4 align-items-center justify-content-between btn btn-link"
 										data-parent="#accordion" data-toggle="collapse"
-										aria-expanded="true" aria-controls="collapseOne">
+										aria-expanded="false" aria-controls="collapseOne">
 										<p class="mb-0">반려동물의 영양불균형, 알고 계신가요?</p>
 										<i class="fa" aria-hidden="true"></i>
 									</button>
 								</h2>
 							</div>
-							<div class="collapse show" id="collapseOne" role="tabpanel"
-								aria-labelledby="headingOne">
+							<div class="collapse" id="collapseOne" role="tabpanel"
+								aria-labelledby="headingOne" style>
 								<div class="card-body py-3 px-0">
 									<ol>
 										<li>영양 불균형이 오래가면, 잦은 설사나 비만, 거친 모질과 눈물자국이 심하게 질 수 있어요.</li>
@@ -366,14 +372,14 @@ function showImage(){
 									<button href="#collapseTwo"
 										class="d-flex py-3 px-4 align-items-center justify-content-between btn btn-link"
 										data-parent="#accordion" data-toggle="collapse"
-										aria-expanded="true" aria-controls="collapseTwo">
+										aria-expanded="false" aria-controls="collapseTwo">
 										<p class="mb-0">반려견 사료 선택 시 소비자 주의할 점은?</p>
 										<i class="fa" aria-hidden="true"></i>
 									</button>
 								</h2>
 							</div>
-							<div class="collapse show" id="collapseTwo" role="tabpanel"
-								aria-labelledby="headingTwo" style="">
+							<div class="collapse" id="collapseTwo" role="tabpanel"
+								aria-labelledby="headingTwo">
 								<div class="card-body py-3 px-0">
 									<ol>
 										<li>최근 반려견 사료는 수입제품 외 국내제품도 다양하게 출시돼 소비자 선택 폭이 넓어지고 있다</li>
@@ -392,7 +398,7 @@ function showImage(){
 							<div class="card-header p-0" id="headingThree" role="tab">
 								<h2 class="mb-0">
 									<button href="#collapseThree"
-										class="d-flex py-3 px-4 align-items-center justify-content-between btn btn-link collapsed"
+										class="d-flex py-3 px-4 align-items-center justify-content-between btn btn-link"
 										data-parent="#accordion" data-toggle="collapse"
 										aria-expanded="false" aria-controls="collapseThree">
 										<p class="mb-0">반려견 먹이의 수분 함량은 어떤 의미가 있을까?</p>
@@ -418,7 +424,7 @@ function showImage(){
 							<div class="card-header p-0" id="headingFour" role="tab">
 								<h2 class="mb-0">
 									<button href="#collapseFour"
-										class="d-flex py-3 px-4 align-items-center justify-content-between btn btn-link collapsed"
+										class="d-flex py-3 px-4 align-items-center justify-content-between btn btn-link"
 										data-parent="#accordion" data-toggle="collapse"
 										aria-expanded="false" aria-controls="collapseFour">
 										<p class="mb-0">반려동물 영양 직접 설계하는 '펫푸드' 자격증 취득 정보</p>
@@ -440,6 +446,7 @@ function showImage(){
 			</div>
 		</div>
 	</section>
+	
 
 	<section class="ftco-counter" id="section-counter">
     	<div class="container">
@@ -573,7 +580,7 @@ function showImage(){
 	          	<div class="img" style="background-image: url(${path}images/pricing-2.jpg);"></div>
 	            <div class="text-center p-4">
 	            	<span class="excerpt d-block">프리미엄 서비스</span>
-		            <span class="price"><sup>￦</sup> <span class="number">29900</span> <sub>/mos</sub></span>
+		            <span class="price"><sup>￦</sup> <span class="number">29,900</span> <sub>/mos</sub></span>
 		            
 		            <ul class="pricing-text mb-5">
 		              <li><span class="fa fa-check mr-2"></span>캘린더 개방/ 일정 관리</li>
@@ -595,7 +602,7 @@ function showImage(){
 	          	<div class="img" style="background-image: url(${path}images/pricing-3.jpg);"></div>
 	            <div class="text-center p-4">
 	            	<span class="excerpt d-block">비즈니스 서비스</span>
-		            <span class="price"><sup>￦</sup> <span class="number">49900</span> <sub>/mos</sub></span>
+		            <span class="price"><sup>￦</sup> <span class="number">49,900</span> <sub>/mos</sub></span>
 		            
 		            <ul class="pricing-text mb-5">
 		              <li><span class="fa fa-check mr-2"></span>캘린더 개방 / 일정관리</li>

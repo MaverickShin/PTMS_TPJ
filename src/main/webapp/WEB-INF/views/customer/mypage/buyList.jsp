@@ -99,6 +99,16 @@
 													<div class="row" id="divs"
 														style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 30px; width: 700px; margin-left: auto; margin-right: auto; margin-top: 10px; font-family: 'Do Hyeon', sans-serif;">
 														<c:forEach var="li" items="${list}">
+<<<<<<< HEAD
+															<div class="col-md-12"
+																style="background-color: #f5f5f5; padding: 50px 30px; text-align: center;">
+																<h5>결제코드 : ${li.BY_CD}</h5>
+																&nbsp;
+																<p>이용 서비스 : ${li.PAY_KIND}</p>
+																<p>결제금액 : ${li.BY_SUM} 원</p>
+																<p>수수료 : ${li.BY_FEES} 원</p>
+																<p>결제일 : ${li.BY_DT}</p>
+=======
 															<div class="col-md-12" style="background-color: #FFFFFF; border:solid 1px; box-shadow: 3px 3px 3px 3px #F3E0E0;
 																 border-radius: 20px; text-align: center; padding: 20px 10px; margin: 10px">
 																<h5 style="color:#DBB9B8;">결제코드 : ${li.BY_CD}</h5>
@@ -112,6 +122,7 @@
 																	pattern="###,###,###,###" />원
 																</p>
 																<p style="color:#DBB9B8;">결제일 : ${li.BY_DT}</p>
+>>>>>>> 1fbd97bc5e615201c7adae91d95f644567e0fe0b
 															</div>
 														</c:forEach>
 													</div>

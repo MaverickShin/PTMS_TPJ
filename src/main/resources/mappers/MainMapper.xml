@@ -223,7 +223,11 @@
 	  	 FROM			
 			(SELECT r.*  ,ROWNUM rNUM
 			  FROM 
+<<<<<<< HEAD
+			   (SELECT b.BY_CD, b.CUST_ID, b.PAYKIND_CD, b.BY_SUM, b.BY_DT, b.BY_FEES , p.PAY_KIND
+=======
 			   (SELECT b.BY_CD, b.CUST_ID, b.PAYKIND_CD, b.BY_SUM, b.BY_FEES, b.BY_DT , p.PAY_KIND
+>>>>>>> 1fbd97bc5e615201c7adae91d95f644567e0fe0b
 			  	FROM BUYLIST_TB b, PAYKIND_TB p
 			  	WHERE b.PAYKIND_CD = p.PAYKIND_CD
 				AND CUST_ID = #{CUST_ID}

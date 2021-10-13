@@ -81,5 +81,4 @@ public class PayVO {
 		BY_FEES = bY_FEES;
 	}
 	
-	
 }
