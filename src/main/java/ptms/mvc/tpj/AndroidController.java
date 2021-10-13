@@ -2,10 +2,13 @@ package ptms.mvc.tpj;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;  // 수정
 import org.slf4j.LoggerFactory;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ptms.mvc.tpj.CustVO.CustomerVO;
+import ptms.mvc.tpj.CustVO.PetVO;
 import ptms.mvc.tpj.Customer_Main_DAO.MainDAOImpl;
 import ptms.mvc.tpj.persistence.AndroidDAO;
 import ptms.mvc.tpj.vo.Member;
@@ -183,5 +187,32 @@ public class AndroidController {
 		   return "main/android_fail";
 
    }
+/*   
+   @RequestMapping(value="json.do",produces="application/json;charset=utf-8")
+   public @ResponseBody JSONObject json(){
+       // json-simple 라이브러리 추가 필요(JSON 객체 생성)
+       JSONObject jsonMain = new JSONObject(); // json 객체
+       // {변수명:값, 변수명:값}
+       // {sendData:[{변수명:값},{변수명:값},...]}
+       List<PetVO> items = bookService.bookList();
+       JSONArray jArray = new JSONArray(); // json배열
+       for(int i=0; i<items.size(); i++){
+           BookDTO dto = items.get(i);
+           JSONObject row = new JSONObject();
+           // json객체.put("변수명",값)
+           row.put("book_code", dto.getBook_code());
+           row.put("book_name", dto.getBook_name());
+           row.put("press", dto.getPress());
+           row.put("price", dto.getPrice());
+           row.put("amount", dto.getAmount());
+           // 배열에 추가
+           // json배열.add(인덱스,json객체)
+           jArray.add(i,row);
+       }
+       // json객체에 배열을 넣음
+       jsonMain.put("sendData", jArray);
+       return jsonMain;
+   }
+  */ 
 }
 
