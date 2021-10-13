@@ -37,8 +37,8 @@ $.ajax({
         var temp = resp.main.temp- 273.15;
         $("#result_img").attr("src", imgURL);
         $("#h1").append(temp.toFixed(1)
-        		+'<i class="fas fa-thermometer-quarter fa-1x" style = 
-        		+ "margin-left: 10px;"></i>');
+        		+'<i class="fas fa-thermometer-quarter fa-1x" style ='
+        		+'margin-left: 10px;></i>');
         $("#h2").append(resp.weather[0].main);
         $("#h3").append(resp.name+","+resp.sys.country);
         $("#h4").append(resp.wind.speed+'<span>m/s</span>');
