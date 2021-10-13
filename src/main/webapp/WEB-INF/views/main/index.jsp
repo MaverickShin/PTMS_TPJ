@@ -107,6 +107,10 @@ function showImage(){
 		color: white;
 		margin-top: 30px;
 	}	
+	
+	.basicList_link__1MaTN {
+		font-size : 20px !important;
+	}
 
 	.FAkayc  {
 		display: none;
@@ -206,13 +210,14 @@ function showImage(){
     	</div>
     </section>
 
-    <section class="ftco-section testimony-section" style="background-image: url('${imgPath}bg_2.jpg');">
+    <section class="ftco-section testimony-section" style="background-image: url('${imgPath}main.PNG');">
     	<div class="overlay"></div>
-      <div class="container">
+<%--       <div class="container">
         <div class="row justify-content-center pb-5 mb-3">
           <div class="col-md-7 heading-section text-center ftco-animate">
             <h2>Latest register SITTER&TRAINER </h2>
-          </div>
+          </div>현정언니 내일 생일이랭
+          
         </div>
         <div class="row ftco-animate">
           <div class="col-md-12">
@@ -295,7 +300,7 @@ function showImage(){
             </div>
           </div>
         </div>
-      </div>
+      </div> --%>
     </section>
 
     <section class="ftco-section bg-light ftco-faqs">

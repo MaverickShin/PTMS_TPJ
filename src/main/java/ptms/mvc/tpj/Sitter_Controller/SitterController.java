@@ -2,6 +2,8 @@ package ptms.mvc.tpj.Sitter_Controller;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -49,6 +51,13 @@ public class SitterController {
 		 log.info("url ==> sitter");
 	      
 	     String CUST_ID = (String)req.getSession().getAttribute("cust_id");
+	     
+	     	// WK_START  min값 설정
+			Date date = new Date();
+			// Date format
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			// 오늘 날짜로 변환
+			String today = sdf.format(date);
 	      
 	      int selectCnt = dao.MypetCount(CUST_ID);
 		  System.out.println("마이펫 수 selectCnt : " + selectCnt);
@@ -56,6 +65,7 @@ public class SitterController {
 		  
 		  model.addAttribute("selectCnt", selectCnt);
 		  model.addAttribute("list", list);
+		  model.addAttribute("today", today);
 		  
 		  System.out.println("list : " + list.size());
 		  

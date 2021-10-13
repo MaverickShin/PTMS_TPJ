@@ -12,11 +12,11 @@
 	<table class=bigs border="1">
 		<thead>
 			<tr>
-				<th colspan="3" style="text-align:center">Today's Issue</th>
+				<th colspan="3" style="text-align:center">MUST-HAVE-ITEMS</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="i" items="${list2}">
+			<c:forEach var="i" items="${item1}">
 				<tr>
 					<td>
 					${i}<br>

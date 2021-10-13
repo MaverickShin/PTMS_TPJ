@@ -43,7 +43,7 @@ maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 @Controller
 public class MainController {
 	private static final long serialVersionUID = 1L;
-    private static final String IMG_UPLOAD_DIR = "C:\\\\Dev88\\\\workspace\\\\PTMS_TPJ\\\\src\\\\main\\\\webapp\\\\resources\\\\upload";
+    private static final String IMG_UPLOAD_DIR = "C:\\\\Dev88\\\\PTMS_TPJ\\\\src\\\\main\\\\webapp\\\\resources\\\\upload";
     											//D:\\\\Dev88\\\\workspace\\\\플젝명\\\\WebContent\\\\upload
 	
     private ImageUploaderHandler uploader;
@@ -65,13 +65,13 @@ public class MainController {
 	@Autowired
 	MainDAOImpl dao;
 	 
-	// 메인페이지 이동
+	// 메인페이
 	@RequestMapping({"", "main", "Newsletter"})
 	public String main(HttpServletRequest req, Model model) {
 		
 		service.Newsletter(req, model); 
 		
-		//service.petIssue(req, model);
+		service.petIssue(req, model);  
 		
 		return "main/index";
 	}

@@ -779,7 +779,7 @@ public class MainServiceImpl implements MainService {
 	@Override
 	public void petIssue(HttpServletRequest req, Model model) {
 		// 크롤링할 url 지정
-		String url = "https://search.naver.com/search.naver?query=%EB%8F%84%EB%8F%84%ED%95%B4%EC%8B%9D%EA%B8%B0&ie=utf8&sm=tab_shk";
+		String url = "https://search.shopping.naver.com/search/all?where=all&frm=NVSCTAB&query=%EB%B0%98%EB%A0%A4%EB%8F%99%EB%AC%BC+%EB%AC%BC%ED%92%88";
 
 		// Document에는 페이지의 전체 소스가 저장된다.
 		Document doc = null;
@@ -795,19 +795,21 @@ public class MainServiceImpl implements MainService {
 			e.printStackTrace();
 		}
 
-		Elements element = doc.select(".group_related");
-		Elements element1 = element.select(".keyword_box");
+		Elements element = doc.select("div.style_container__1YjHN");
+		System.out.println("element : " + element);
+		Elements element1 = element.select("div.style_content_wrap__1PzEo");
+		System.out.println("element1 : " + element1);
+		Elements element2 = element1.select("li.basicList_item__2XT81");
+		Elements element3 = element2.select("div.basicList_title__3P9Q7");
 		
-//		Elements element2 = element1.select("g-card.ftSUBd");
-//		System.out.println("element2 : "+ element2);
+		Elements detailele = element3.select("[href]");
 		
-		Elements detailele = element1.select("a.keyword[href]");
-		
+		/*
 		for (Element link : detailele) {
 			String a = "<a href = '" + link.attr("abs:href") + "'>" +link.text() +"</a>";
 			System.out.println("a : " + a);
 			list.add(a);
-		}
+		}*/
 
 		model.addAttribute("item1",detailele);
 		model.addAttribute("list2", list);

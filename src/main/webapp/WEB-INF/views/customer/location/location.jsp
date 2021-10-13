@@ -251,7 +251,7 @@ $.ajax({
 </div>
 	<%@ include file = "../../main/footer.jsp" %>
 	
-<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d3f081829ec2250ecac36edcd2f27812&libraries=services,clusterer,drawing"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f3026b91d046d070ecd8421c332f8903&libraries=services,clusterer,drawing"></script>
 <script>
 // 마커를 담을 배열입니다
 var markers = [];
