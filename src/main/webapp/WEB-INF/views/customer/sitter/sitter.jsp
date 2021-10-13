@@ -13,12 +13,6 @@ $(document).ready(function(){
 		this.reset();
 	});
 });
-
-function sittingCheck(){
-	if(document.sitterMatching..value){
-		
-	}
-}
 </script>
 </head>
 <%@ include file="../../main/header.jsp"%>
@@ -114,8 +108,6 @@ function sittingCheck(){
 								</div>
 							</div>
 						</div>
-						
-						
 					</div>
 				</div>
 			</form>

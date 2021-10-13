@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../../setting.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,7 +68,12 @@ $(function(){ // document ready
 					</tr>
 					
 					<tr>
+						<c:if test="${trainerChkCnt == 0}">
+							<td class="div_li"><a onclick="if(confirm('훈련사 등록 후  이용가능합니다. 등록 하시겠습니까?')) window.location = '/tpj/trainer/applyTrainer';">훈련사 프로필</a></td>
+						</c:if>
+						<c:if test="${trainerChkCnt != 0}">
 						<td><a href="/tpj/cust/TrainerProfile2">훈련사 프로필 보기</a></td>
+						</c:if>
 					</tr>
 					
 					<tr>

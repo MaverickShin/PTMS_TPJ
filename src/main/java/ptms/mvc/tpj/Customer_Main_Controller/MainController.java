@@ -26,6 +26,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import ptms.mvc.tpj.CustVO.PayVO;
 import ptms.mvc.tpj.Customer_Main_DAO.MainDAOImpl;
@@ -35,7 +37,7 @@ import ptms.mvc.tpj.TrainerService.TrainerServiceImpl;
 import ptms.mvc.tpj.emailHandler.emailSender;
 import ptms.mvc.tpj.util.ImageUploaderHandler;
 
-@MultipartConfig(location = "C:\\Dev88\\workspace\\PTMS_TPJ\\src\\main\\webapp\\resources\\upload", fileSizeThreshold = 1024 * 1024,
+@MultipartConfig(location = "C:\\Dev88\\PTMS_TPJ\\src\\main\\webapp\\resources\\upload", fileSizeThreshold = 1024 * 1024,
 maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 @RequestMapping("/cust")
 @Controller
@@ -58,11 +60,11 @@ public class MainController {
 	SitterServiceImpl SitterService;
 	 
 	@Autowired
-	emailSender emailsender;
+	emailSender emailsender;  
 	
 	@Autowired
 	MainDAOImpl dao;
-	
+	 
 	// 메인페이지 이동
 	@RequestMapping({"", "main", "Newsletter"})
 	public String main(HttpServletRequest req, Model model) {
@@ -550,7 +552,7 @@ public class MainController {
    
    // 반려인/펫 관리 - 훈련사 수정페이지
    @RequestMapping("TrainerProfile")
-   public String TrainerProfile(HttpServletRequest req, Model model) {
+   public String TrainerProfile(HttpServletRequest req, Model model) throws ServletException, IOException {
       log.info("컨트롤러 - 반려인/펫 관리 - TrainerProfile");
       
       // 훈련사 정보 수정 화면
@@ -561,7 +563,7 @@ public class MainController {
    
    // 반려인/펫 관리 - 훈련사 수정페이지
    @RequestMapping("TrainerProfile2")
-   public String TrainerProfile2(HttpServletRequest req, Model model) {
+   public String TrainerProfile2(HttpServletRequest req, Model model) throws ServletException, IOException {
       log.info("컨트롤러 - 반려인/펫 관리 - TrainerProfile");
       
       // 훈련사 정보 수정 화면
@@ -572,18 +574,18 @@ public class MainController {
    
    // 반려인/펫 관리 - 훈련사 수정 처리
    @RequestMapping("TrainerProfileAction")
-   public String TrainerProfileAction(HttpServletRequest req, Model model) throws ParseException {
+   public String TrainerProfileAction(HttpServletRequest req, Model model) throws ParseException, ServletException, IOException {
 	   log.info("컨트롤러 - 반려인/펫 관리 - TrainerProfileAction");
 	   
-	// 이미지 업로드 시작
-/*	String contentType = req.getContentType();
-	if (contentType != null && contentType.toLowerCase().startsWith("multipart/")) {
-		uploader = new ImageUploaderHandler(); // image uploader 핸들러 호출
-		uploader.setUploadPath(IMG_UPLOAD_DIR); // img 경로
-	    uploader.imageUpload(req, model);
-	}
-	// 이미지 업로드 끝
-*/	   
+		// 이미지 업로드 시작
+		String contentType = req.getContentType();
+		if (contentType != null && contentType.toLowerCase().startsWith("multipart/")) {
+			uploader = new ImageUploaderHandler(); // image uploader 핸들러 호출
+			uploader.setUploadPath(IMG_UPLOAD_DIR); // img 경로
+		    uploader.imageUpload(req, model);
+		}
+		// 이미지 업로드 끝
+	   
 	   // 훈련사 정보 수정 처리
 	   TrainerService.updateTrainerAction(req, model);
 	   
@@ -613,8 +615,17 @@ public class MainController {
    
    // 반려인/펫 관리 - 시터 수정 처리
    @RequestMapping("SitterProfileAction")
-   public String SitterProfileAction(HttpServletRequest req, Model model) throws ParseException {
+   public String SitterProfileAction(HttpServletRequest req, Model model) throws ParseException, ServletException, IOException {
 	   log.info("컨트롤러 - 반려인/펫 관리 - SitterProfileAction");
+	   
+		// 이미지 업로드 시작
+		String contentType = req.getContentType();
+		if (contentType != null && contentType.toLowerCase().startsWith("multipart/")) {
+			uploader = new ImageUploaderHandler(); // image uploader 핸들러 호출
+			uploader.setUploadPath(IMG_UPLOAD_DIR); // img 경로
+		    uploader.imageUpload(req, model);
+		}
+		// 이미지 업로드 끝
 	   
 	   // 시터 정보 수정 처리
 	   SitterService.updateSitterAction(req, model);
@@ -651,5 +662,38 @@ public class MainController {
 	   service.HospitalInfo(req, model);
 	   
 	   return "news/Convenience_Info";
+   }
+   
+   // 로그아웃 요청
+   @RequestMapping("logoutrequest")
+   public String logout() {
+	   return "main/login/logoutrequest";
+   }
+   
+   // 소변 이미지
+   @RequestMapping(value = "urineimg", method = RequestMethod.POST, consumes ={"multipart/form-data"})
+   @ResponseBody
+   public String urineimg(HttpServletRequest req, Model model) throws ServletException, IOException {
+	   
+	   // 이미지 업로드 시작
+	   String contentType = req.getContentType();
+	   if (contentType != null && contentType.toLowerCase().startsWith("multipart/")) {
+			uploader = new ImageUploaderHandler(); // image uploader 핸들러 호출
+			uploader.setUploadPath(IMG_UPLOAD_DIR); // img 경로
+		    uploader.imageUpload(req, model);
+	   }
+	   
+	   String img = "/tpj/resources/upload/" + (String) req.getAttribute("fileName"); // 이미지
+	   
+	   img = new String(img.getBytes("8859_1"), "utf-8");
+	   
+	   System.out.println("img : " + img);
+	   
+	   return img;
+   }
+   
+   @RequestMapping("urinetest")
+   public String urinetest() {
+	   return "customer/urine/urine";
    }
 }

@@ -17,7 +17,7 @@
 </head>
 <body>
 	<%@ include file="../../main/header.jsp"%>
-
+	
 	<section class="hero-wrap hero-wrap-2"
 		style="background-image: url('${imgPath}bg_2.jpg');"
 		data-stellar-background-ratio="0.5">
@@ -39,7 +39,7 @@
 	<div style="display: flex; flex: 1; justify-content: center;">
 
 		<%@ include file="sidebar.jsp"%>
-
+		
 		<div class="container" style="margin-top: 50px;">
 			<div class="row"
 				style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;">
@@ -49,7 +49,8 @@
 							onclick="window.location = 'trainerDetail?TA_CD=${dto.TA_CD}&TQ_LOC=${TQ_LOC}'">
 							<div class="blog-entry align-self-stretch">
 								<a class="block-20 rounded"
-									style="background-image: url('${imgPath}image_1.jpg');"> </a>
+								style="background-image: url(${dto.getTA_IMG()});"> </a>
+								
 								<div class="text p-4">
 									<div class="meta mb-2">
 										<div>
@@ -71,39 +72,7 @@
 						</div>
 					</c:forEach>
 
-					<div class="row">
-						<div class="col-md-12">
-							<div class="page_control" align="center">
-								<table>
-									<tr>
-										<th align="center">
-											<!-- 게시글이 있으면 --> <!-- 처음[◀◀]	 / 이전블록[◀]  / --> <c:if
-												test="${startPage > pageBlock}">
-												<a href="trainerMatchingList"> [◀◀] </a>
-												<a
-													href="trainerMatchingList?pageNum=${startPage - pageBlock}">
-													[◀] </a>
-											</c:if> <!-- 블록내의 페이지 번호 --> <c:forEach var="i" begin="${startPage}"
-												end="${endPage}">
-												<c:if test="${i == currentPage}">
-													<span style="cursor: pointer;"><b>[${i}]</b></span>
-												</c:if>
-
-												<c:if test="${i != currentPage}">
-													<a href="trainerMatchingList?pageNum=${i}">[${i}]</a>
-												</c:if>
-											</c:forEach> <!-- 다음[▶]	/  마지막[▶▶]  / --> <c:if
-												test="${pageCount > endPage}">
-												<a
-													href="trainerMatchingList?pageNum=${startPage + pageBlock}">[▶]</a>
-												<a href="trainerMatchingList?pageNum=${pageCount}">[▶▶]</a>
-											</c:if>
-										</th>
-									</tr>
-								</table>
-							</div>
-						</div>
-					</div>
+					
 				</c:if>
 			</div>
 
@@ -120,6 +89,42 @@
 					</div>
 				</c:if>
 			</div>
+			
+			<!-- 페이징 -->
+			<c:if test="${cnt > 0}">
+			<div class="row">
+				<div class="col-md-12" align="center">
+					<div class="block-27">
+						<ul>
+							<c:if test="${startPage > pageBlock}">
+							<li><a href="trainerMatchingList">&lt;&lt;</a>
+							<li><a href="trainerMatchingList?pageNum=${startPage - pageBlock}">&lt;</a></li>
+							</c:if>
+							<c:forEach var="i" begin="${startPage}" end="${endPage}">
+								<c:if test="${i == currentPage}">
+									<li class="active">
+										<span><a href="trainerMatchingList?pageNum=${i}">${i}</a></span>
+									</li>
+								</c:if>
+
+								<c:if test="${i != currentPage}">
+									<li>
+										<span><a href="trainerMatchingList?pageNum=${i}">${i}</a></span>
+									</li>
+								</c:if>
+
+							</c:forEach>
+							
+							<c:if test="${pageCount > endPage}">
+							<li><a href="trainerMatchingList?pageNum=${startPage + pageBlock}">&gt;</a></li>
+							<li><a href="trainerMatchingList?pageNum=${pageCount}">&gt;&gt;</a></li>
+							</c:if>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			</c:if>
 		</div>
 	</div>
 

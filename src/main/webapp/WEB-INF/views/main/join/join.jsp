@@ -334,7 +334,7 @@ function nextJumin2(){
 										<div class="submitting"></div>
 									</div>
 								</div>
-							</div>
+						</div>
 					</div>
 				</div>
 			</div>

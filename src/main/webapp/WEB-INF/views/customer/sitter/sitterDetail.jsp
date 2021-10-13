@@ -250,7 +250,7 @@ body {
 						<h2 class="mb-3">${dto.SIT_TITLE}</h2>
 						<p>${dto.SIT_APPEAL}</p>
 						<p>
-							<img src="${imgPath}${dto.SIT_IMG}" alt="" class="img-fluid">
+							<img src="${dto.getSIT_IMG()}" alt="" class="img-fluid">
 						</p>
 					</div>
 

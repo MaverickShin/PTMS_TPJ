@@ -57,15 +57,15 @@
 		</bean>
 		<!-- 일반회원 끝 -->
 		
-		
-		
 		<security:http pattern = "/admin/**" auto-config="true"  use-expressions="true" create-session="never" 
 			authentication-manager-ref="adminAuthManager">
 		
-		<!-- 권한에 관계없이 접속 가능한 영역(guest도 접속 가능) -->
+		<!-- 권한에 관계없이 접속 가능한 영역 -->
 		<security:intercept-url pattern="/admin/adminlogin"  access="permitAll" />
 		<security:intercept-url pattern="/admin/adminadd"  access="permitAll" />
 		<security:intercept-url pattern="/admin/adminloginaction"  access="permitAll" />
+		<security:intercept-url pattern="/admin/adminjoinAction"  access="permitAll" />
+		<security:intercept-url pattern="/admin/logout" access="permitAll" />
 		<security:intercept-url pattern="/admin/**" access="permitAll" />
 		
 		<!-- 관리자 영역 설정 -->
@@ -76,7 +76,6 @@
            <security:frame-options policy="SAMEORIGIN"/>
      	</security:headers>
 		
-		
 		<security:logout 
 			logout-url="/admin/logout" 
 			logout-success-url="/admin/adminlogin"
@@ -84,12 +83,10 @@
 			delete-cookies ="true"/>
 			
 		<security:form-login login-page="/admin/adminlogin" 
-				login-processing-url="/admin/loginaction"
+				login-processing-url="/admin/adminloginaction"
 				authentication-success-handler-ref="AdminLoginSuccessHandler"
 				authentication-failure-handler-ref="AdminLoginFailureHandler"
 				username-parameter="mg_id" password-parameter="mg_pwd" />		
-				
-				
 		<security:session-management>
 		
 			<!-- 
@@ -122,12 +119,9 @@
 		<security:intercept-url pattern="/cust/mailAction" access="permitAll" />
 		<security:intercept-url pattern="/cust/mailChkAction" access="permitAll" />
 		<security:intercept-url pattern="/cust/emailSuccess" access="permitAll" />
-		<security:intercept-url pattern="/**" access="permitAll" />
-		<security:intercept-url pattern="/sitter/**" access="permitAll" />
-		
 		
 		<!-- 로그인한 사용자 영역 -->
-		<security:intercept-url pattern="/sitter/**" access="hasAnyRole('ROLE_FREE', 'ROLE_BUSINESS', 'ROLE_PREMIUM')"/> 
+		<security:intercept-url pattern="/sch/**" access="hasAnyRole('ROLE_FREE', 'ROLE_BUSINESS', 'ROLE_PREMIUM')"/> 
 		
 		<!-- iframe -->
       	<security:headers>
@@ -141,7 +135,6 @@
 				authentication-success-handler-ref="userLoginSuccessHandler"
 				authentication-failure-handler-ref="userLoginFailureHandler"
 				username-parameter="cust_id" password-parameter="cust_pwd" /> 
-		
 		
 		<security:logout
 			logout-url="/cust/logout" 
@@ -157,7 +150,7 @@
 			expired-url : 중복 로그인 발생시 이동할 경로 -->
 		
 			<security:concurrency-control 
-				max-sessions="2"
+				max-sessions="5"
 				expired-url="/cust/login"
 				error-if-maximum-exceeded="false" />
 				

@@ -91,6 +91,9 @@ function updatePet(){
 .col-md-12 input[type=radio]:checked + label a{
     display: inline-block;
 }
+.d-flex .info-wrap{
+background-size: 100% 100%;
+}
 </style>
 
 </head>
@@ -190,7 +193,7 @@ function updatePet(){
 						
 						<div class="col-md-5 d-flex align-items-stretch">
 							<div class="info-wrap w-100 p-5 img"
-								style="background-image: url(${path}images/gallery-3.jpg);"></div>
+								style="background-image: url(${dto.getPET_IMG()});"></div>
 						</div>
 					</div>
 				</div>

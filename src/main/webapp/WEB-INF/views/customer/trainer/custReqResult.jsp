@@ -91,7 +91,7 @@ $(document).ready(function(){
 }
 
 .result_div {
-	background-color: #e3f2fd;
+	background-color: #DDDADA;
 }
 
 .pageMoves {
@@ -106,7 +106,7 @@ function TrainingComplete() {
    var rb = document.getElementById("right_button");
    var ac = document.getElementById("accept_button");
    
-   cb.style.backgroundColor = "#a3cde3";
+   cb.style.backgroundColor = "#DDDADA";
    cb.style.color = "white";
    
    lb.style.backgroundColor = "#f5f5f5";
@@ -124,7 +124,7 @@ function request(){
    var rb = document.getElementById("right_button");
    var ac = document.getElementById("accept_button");
    
-   lb.style.backgroundColor = "#a3cde3";
+   lb.style.backgroundColor = "#DDDADA";
    lb.style.color = "white";
    
    cb.style.backgroundColor = "#f5f5f5";
@@ -144,7 +144,7 @@ function accept() {
    var rb = document.getElementById("right_button");
    var ac = document.getElementById("accept_button");
    
-   ac.style.backgroundColor = "#a3cde3";
+   ac.style.backgroundColor = "#DDDADA";
    ac.style.color = "white";
    
    cb.style.backgroundColor = "#f5f5f5";
@@ -163,7 +163,7 @@ function refuse() {
    var rb = document.getElementById("right_button");
    var ac = document.getElementById("accept_button");
    
-   rb.style.backgroundColor = "#a3cde3";
+   rb.style.backgroundColor = "#DDDADA";
    rb.style.color = "white";
    
    cb.style.backgroundColor = "#f5f5f5";
@@ -207,7 +207,7 @@ function refuse() {
 			class="sections">
 
 			<div class="list_tab">
-				<p id="left_button" style="background-color: #a3cde3; color: white;"
+				<p id="left_button" style="background-color: #DDDADA; color: white;"
 					onclick="request();">요청 수락대기</p>
 				<p id="accept_button" onclick="accept();">수락된 요청</p>
 				<p id="right_button" onclick="refuse();">거절된 요청</p>
@@ -231,40 +231,42 @@ function refuse() {
 						<div class="row" id="divs"
 							style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 30px; width: 700px; margin-left: auto; margin-right: auto; margin-top: 10px;">
 							<c:forEach var="dtos" items="${dto}" varStatus="status">
-								<div class="col-md-12"
-									style="background-color: #f5f5f5; border-radius: 20px; text-align: center; padding: 20px 10px; margin: 10px">
-									<h6>훈련받을 펫 : ${dtos.PET_NM}</h6>
-									<h6>훈련사 : ${dtos.CUST_NM}</h6>
-									<p>훈련일 : ${dtos.START_DAY}</p>
-									<p>훈련종류 : ${dtos.TQ_AMT}</p>
+								<div class="col-md-12" 
+									style="background-color: #FFFFFF; border:solid 1px; box-shadow: 3px 3px 3px 3px #F3E0E0;
+										   border-radius: 20px; text-align: center; padding: 20px 10px; margin: 10px">
+									<h6 style="color:#DBB9B8;">훈련받을 펫 : ${dtos.PET_NM}</h6>
+									<h6 style="color:#DBB9B8;">훈련사 : ${dtos.CUST_NM}</h6>
+									<p style="color:#DBB9B8;">훈련일 : ${dtos.START_DAY}</p>
+									<p style="color:#DBB9B8;">훈련종류 : ${dtos.TQ_AMT}</p>
+									<p style="color:#DBB9B8;">금액 : <fmt:formatNumber value="${dtos.TQ_FEE}" pattern="###,###,###,###" />원</p>
 
 									<c:if test="${dtos.TQ_ST == 0}">
 										<p>
-											<input type="button" value="요청취소"
+											<input type="button" value="요청취소" style="border-radius: 20px;"
 												onclick="window.location='cancelRequestTraining?TQ_CD=${dtos.TQ_CD}'">
 										</p>
 									</c:if>
 									<c:if test="${dtos.TQ_ST == 1}">
 										<p>
-											<input type="button" value="결제하기"
+											<input type="button" value="결제하기" style="border-radius: 20px;"
 												onclick="window.location='/tpj/pay/request?item_name=펫 훈련 결제&price=${dtos.TQ_FEE}&primarykey=${dtos.TQ_CD}'">
 										</p>
 									</c:if>
 									<c:if test="${dtos.TQ_ST == 3}">
 										<p>
-											<input type="button" value="매칭확정하기"
+											<input type="button" value="매칭확정하기" style="border-radius: 20px;"
 												onclick="window.location='updateTrainingComplete?TQ_CD=${dtos.TQ_CD}'">
 										</p>
 									</c:if>
 									<c:if test="${dtos.TQ_ST == 4}">
 										<c:if test="${reviewCheckCnt[status.index] == 1}">
 											<p>
-												<input type="button" value="후기작성완료" disabled>
+												<input type="button" value="후기작성완료" style="border-radius: 20px;" disabled>
 											</p>
 										</c:if>
 										<c:if test="${reviewCheckCnt[status.index] != 1}">
 											<p>
-												<input type="button" value="후기쓰기"
+												<input type="button" value="후기쓰기" style="border-radius: 20px;"
 													onclick="window.location='writeTrainingReview?TQ_CD=${dtos.TQ_CD}&TG_ID=${dtos.TA_CD}'">
 											</p>
 										</c:if>
@@ -277,27 +279,22 @@ function refuse() {
 							<div class="col-md-12" align="center">
 								<div class="block-27">
 									<ul>
-										<li><a class="pageMoves" onclick="pageMove('');">&lt;&lt;</a>
-										<li><a class="pageMoves"
-											onclick="pageMove(${startPage - pageBlock});">&lt;</a></li>
-
+										<li><a class="pageMoves pageArrow" onclick="pageMove('', '${t}');">&lt;&lt;</a>
+										<li><a class="pageMoves pageArrow" onclick="pageMove(${startPage - pageBlock}, '${t}');">&lt;</a></li>
 										<c:forEach var="i" begin="${startPage}" end="${endPage}">
 											<c:if test="${i == currentPage}">
 												<li class="active"><span><a class="pageMoves"
-														onclick="pageNumbers(${i});">${i}</a></span></li>
+														onclick="pageNumbers(${i}, '${t}');">${i}</a></span></li>
 											</c:if>
 
 											<c:if test="${i != currentPage}">
 												<li><span><a class="pageMoves"
-														onclick="pageNumbers(${i});">${i}</a></span></li>
+														onclick="pageNumbers(${i}, '${t}');">${i}</a></span></li>
 											</c:if>
 
 										</c:forEach>
-
-										<li><a class="pageMoves"
-											onclick="pageMove(${startPage + pageBlock});">&gt;</a></li>
-										<li><a class="pageMoves"
-											onclick="pageMove(${pageCount});">&gt;&gt;</a></li>
+										<li><a class="pageMoves pageArrow" onclick="pageMove(${startPage + pageBlock}, '${t}');">&gt;</a></li>
+										<li><a class="pageMoves pageArrow" onclick="pageMove(${pageCount}, '${t}');">&gt;&gt;</a></li>
 									</ul>
 								</div>
 							</div>
@@ -316,9 +313,9 @@ function refuse() {
 	
 	var pageNum = '<c:out value="${pageNum}"/>';
 	
-	function pageMove(e) {
+	function pageMove(e, u) {
 		
-		var urls = '<c:out value="${t}"/>';
+		var urls = u;
 		var param = e;
 		var start = '<c:out value = "${startPage}"/>';
 		var block = '<c:out value = "${pageBlock}"/>';
@@ -419,11 +416,9 @@ function refuse() {
 		
 	}
 	
-	function pageNumbers(e) {
+	function pageNumbers(e, u) {
 		
-		alert("요깅");
-		
-		var urls = '<c:out value="${t}"/>';
+		var urls = u;
 		var param = e;
 		var current = '<c:out value = "${currentPage}"/>';
 		

@@ -72,7 +72,10 @@ public class SitterServiceImpl implements SitterService {
 
 		vo.setSIT_TITLE(req.getParameter("SIT_TITLE")); // 소개글 제목
 		vo.setSIT_APPEAL(req.getParameter("SIT_APPEAL")); // 소개글 본문
-		vo.setSIT_IMG(req.getParameter("SIT_IMG")); // 프로필 사진
+		
+		String SIT_IMG = "/tpj/resources/upload/" + (String) req.getAttribute("fileName"); // 이미지
+		System.out.println("등록 이미지 SIT_IMG : "+SIT_IMG);
+		vo.setSIT_IMG(SIT_IMG); // 프로필 사진
 
 		int insertCnt = 0;
 
@@ -106,6 +109,10 @@ public class SitterServiceImpl implements SitterService {
 
 		SitterVO vo = sitterDao.SitterDetail(CUST_ID);
 		
+		System.out.println("체크1 : "+vo.getSV1_NO());
+		System.out.println("체크2 : "+vo.getSV2_NO());
+		System.out.println("체크3 : "+vo.getSV3_NO());
+		System.out.println("체크4 : "+vo.getSV4_NO());
 		System.out.println("vo : " + vo);
 		System.out.println("수정화면 SIT_ST : " + vo.getSIT_ST());
 		
@@ -169,8 +176,11 @@ public class SitterServiceImpl implements SitterService {
 
 		sVo.setSIT_TITLE(req.getParameter("SIT_TITLE"));
 		sVo.setSIT_APPEAL(req.getParameter("SIT_APPEAL"));
-		sVo.setSIT_IMG(req.getParameter("SIT_IMG"));
-
+		
+		String SIT_IMG = "/tpj/resources/upload/" + (String) req.getAttribute("fileName"); // 이미지
+		sVo.setSIT_IMG(SIT_IMG);
+		System.out.println("시터 프로필 수정 이미지 SIT_IMG : "+SIT_IMG);
+		
 		int updateCnt = sitterDao.updateSitter1(sVo);
 		System.out.println("시터 1번재 update : " + updateCnt);
 		if (updateCnt != 0) {
@@ -599,7 +609,7 @@ public class SitterServiceImpl implements SitterService {
 			sum += sitterDao.petServiceFee(Integer.parseInt(PET_CD[i]));
 			
 			if(PET_CD.length == 0) result += sitterDao.selectPetNanme(Integer.parseInt(PET_CD[i]));
-			else result += ", " + sitterDao.selectPetNanme(Integer.parseInt(PET_CD[i]));
+			else result += sitterDao.selectPetNanme(Integer.parseInt(PET_CD[i])) + ", ";
 		}
 
 		System.out.println("result : " + result);
@@ -632,8 +642,8 @@ public class SitterServiceImpl implements SitterService {
 			service += SV3_NO + ",";
 			//total += sum;
 		}
-		if (SV4_NO != null) {
-			service += SV4_NO;
+		if (SV4_NO == null) {
+			service += "응급처치서비스";
 			//total += sum;
 		}
 
@@ -1174,7 +1184,9 @@ public class SitterServiceImpl implements SitterService {
 		float SG_GRADE = Float.parseFloat(req.getParameter("SG_GRADE"));
 		vo.setSG_GRADE(SG_GRADE);
 		vo.setSG_CON(req.getParameter("SG_CON"));
-		vo.setSG_IMG(req.getParameter("SG_IMG"));
+		String SG_IMG = "/tpj/resources/upload/" + (String) req.getAttribute("fileName"); // 이미지
+		vo.setSG_IMG(SG_IMG);
+		System.out.println("후기 작성 SG_IMG : "+SG_IMG);
 
 		int insertCnt = sitterDao.ReviewWrite(vo);
 		System.out.println("후기테이블 insertCnt : " + insertCnt);
@@ -1284,7 +1296,9 @@ public class SitterServiceImpl implements SitterService {
 		float SG_GRADE = Float.valueOf(req.getParameter("SG_GRADE"));
 		vo.setSG_GRADE(SG_GRADE);
 		vo.setSG_CON(req.getParameter("SG_CON"));
-		vo.setSG_IMG(req.getParameter("SG_IMG"));
+		String SG_IMG = "/tpj/resources/upload/" + (String) req.getAttribute("fileName"); // 이미지
+		vo.setSG_IMG(SG_IMG);
+		System.out.println("수정 처리 이미지 SG_IMG : "+SG_IMG);
 		
 		int updateCnt = sitterDao.reviewModifyAction(vo);
 		System.out.println("리뷰수정처리updateCnt : " + updateCnt);

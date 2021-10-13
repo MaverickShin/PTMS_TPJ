@@ -33,11 +33,26 @@ function checkFee() {
 	} else if(!document.requestTrainerForm.TQ_AMT.value){
 		alert("원하시는 훈련을 선택해주세요!");
 		return false;
+	} 
+	/* else if(document.getElementById("PET_NM").checked == 0){
+		alert("최소 한마리 이상 선택");
+		return false;
+	} */
+	var chk_pet = document.getElementsByName("PET_NM");
+	var chk_leng = chk_pet.length;
+	var checked = 0;
+	for(i = 0; i < chk_leng; i++){
+		if(chk_pet[i].checked == true){
+			checked += 1;
+		}
 	}
-	
+	if(checked == 0){
+		alert("훈련받을 마이펫을 선택하세요.");
+		return false;
+	}
 }
 
-function requestTrChk() {
+/* function requestTrChk() {
 	if(!document.requestTrainerForm.START_DAY.value) {
 		alert("훈련받을 날짜를 선택하세요.");
 		document.requestTrainerForm.START_DAY.focus();
@@ -49,7 +64,7 @@ function requestTrChk() {
 		alert("훈련받을 마이펫을 선택하세요.");
 		return false;
 	}
-}
+} */
 
 
 </script>
@@ -85,61 +100,53 @@ function requestTrChk() {
       </div>
     </section>
     
-    <section class="ftco-section ftco-degree-bg">
+<form action="requestTraining" method="post" name="requestTrainerForm" onsubmit="return checkFee();">
+    <section class="ftco-section ftco-degree-bg"
+    		style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; padding-top: 30px;">
     	<div class="container">
     		<div class="row">
-    			<div class="col-lg-6 ftco-animate">
-    				<p>
-		              <img src="${imgPath}image_1.jpg" alt="" class="img-fluid">
-		            </p>
-		            <h2 class="mb-3">${dto.TA_TITLE}</h2>
-		            <p>${dto.TA_APPEAL}</p>
-		            <!-- <p>Molestiae cupiditate inventore animi, maxime sapiente optio, illo est nemo veritatis repellat sunt doloribus nesciunt! Minima laborum magni reiciendis qui voluptate quisquam voluptatem soluta illo eum ullam incidunt rem assumenda eveniet eaque sequi deleniti tenetur dolore amet fugit perspiciatis ipsa, odit. Nesciunt dolor minima esse vero ut ea, repudiandae suscipit!</p>
-		            <h2 class="mb-3 mt-5">#2. Creative WordPress Themes</h2>
-		            <p>Temporibus ad error suscipit exercitationem hic molestiae totam obcaecati rerum, eius aut, in. Exercitationem atque quidem tempora maiores ex architecto voluptatum aut officia doloremque. Error dolore voluptas, omnis molestias odio dignissimos culpa ex earum nisi consequatur quos odit quasi repellat qui officiis reiciendis incidunt hic non? Debitis commodi aut, adipisci.</p>
-		            <p>
-		              <img src="images/image_2.jpg" alt="" class="img-fluid">
-		            </p>
-		            <p>Quisquam esse aliquam fuga distinctio, quidem delectus veritatis reiciendis. Nihil explicabo quod, est eos ipsum. Unde aut non tenetur tempore, nisi culpa voluptate maiores officiis quis vel ab consectetur suscipit veritatis nulla quos quia aspernatur perferendis, libero sint. Error, velit, porro. Deserunt minus, quibusdam iste enim veniam, modi rem maiores.</p>
-		            <p>Odit voluptatibus, eveniet vel nihil cum ullam dolores laborum, quo velit commodi rerum eum quidem pariatur! Quia fuga iste tenetur, ipsa vel nisi in dolorum consequatur, veritatis porro explicabo soluta commodi libero voluptatem similique id quidem? Blanditiis voluptates aperiam non magni. Reprehenderit nobis odit inventore, quia laboriosam harum excepturi ea.</p>
-		            <p>Adipisci vero culpa, eius nobis soluta. Dolore, maxime ullam ipsam quidem, dolor distinctio similique asperiores voluptas enim, exercitationem ratione aut adipisci modi quod quibusdam iusto, voluptates beatae iure nemo itaque laborum. Consequuntur et pariatur totam fuga eligendi vero dolorum provident. Voluptatibus, veritatis. Beatae numquam nam ab voluptatibus culpa, tenetur recusandae!</p>
-		            <p>Voluptas dolores dignissimos dolorum temporibus, autem aliquam ducimus at officia adipisci quasi nemo a perspiciatis provident magni laboriosam repudiandae iure iusto commodi debitis est blanditiis alias laborum sint dolore. Dolores, iure, reprehenderit. Error provident, pariatur cupiditate soluta doloremque aut ratione. Harum voluptates mollitia illo minus praesentium, rerum ipsa debitis, inventore?</p> -->
-    				<h4 class="mb-5">후기</h4>
-    				<c:if test="${reviewCnt > 0}">
-	    				<c:forEach var="dto" items="${reviewInfo}" varStatus = "st">
-		                	<div class="comment-body">
-			                    <h5>${dto.CUST_ID}</h5>
-			                    <div class="meta">${dto.TG_DT}</div>
-			                    <p>${dto.TG_CON}</p>
-		                 	</div>
-		              	</c:forEach>
-					</c:if>
-					<c:if test="${reviewCnt == 0}">
-    					아직 등록된 후기가 없습니다.
-    				</c:if>
-    			</div>
-	              
-	              <form action="requestTraining" method="post" name="requestTrainerForm" onsubmit="return checkFee();">
-	              <input type="hidden" value="${TA_CD}" name="TA_CD">
-	              <input type="hidden" value="${TQ_LOC}" name="TQ_LOC">
-	              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-	              <input type="hidden" value="" name="TQ_FEE">
-	              <!-- 훈련사 일정 받아오기, 가능한 일정 선택하기 -->
-	              
-	              <div class="col-lg-6">
-	              	<div class="form-group">
+    		
+    		<div class="col-md-12"
+				style="margin-bottom: 30px; border-bottom: 2px solid #00bd56;">
+				<div class="form-group">
+					
+					<div class="list_div2" style= "border-bottom: 1px solid #eeeeee;">
+						<h5 style="padding-bottom: 20px; color: #00bd56;">훈련받을 마이펫</h5>
+						<div style="display: grid; grid-template-columns: 1fr 1fr;">
+							<c:if test="${selectCnt == 0}">
+								<script type="text/javascript">
+								alert("훈련받을 펫이 존재하지 않습니다. 등록 후 이용가능합니다.");
+								window.history.back();
+								</script>
+							</c:if>
+							
+							<c:if test="${selectCnt != 0}">
+								<c:forEach var="dtos" items="${petInfo}" varStatus="pst">
+									<p class="chk_p1">
+										<label class="chk_label1" for="PET_NM_${pst.index}">
+											<input type="checkbox" id="PET_NM_${pst.index}" 
+											class="sel_chk1 " name="PET_NM" value="${dtos.PET_NM}">	
+											<span class="checkbox_icon"></span>
+											<span class="list_label_span2">${dtos.PET_NM}</span>
+										</label>
+									</p>
+									
+								</c:forEach>
+							</c:if>
+						</div>
+					</div>
+				
+					<h5 style="padding-bottom: 20px; margin-top: 30px; color: #00bd56;">서비스 지역</h5>
+					<div class="form-group" style= "border-bottom: 1px solid #eeeeee;">
 		                <div class="form-group">
 		                  <span class="fa fa-search"></span>
 		                  <input type="date" class="iptags" name="START_DAY" value="${dto.START_DAY}">
 		                </div>
+		                <b>${TQ_LOC}</b>
 	              	</div>
-	              	
-	              	<!-- 훈련유형 선택 및 요금안내 -->
-	              	<!-- <div class="sidebar-box ftco-animate"> -->
-		              <div class="form-group">
-		                <h3 style="font-size:15px"><b>훈련유형 및 요금안내</b></h3>
-		                <h4 style="font-size:14px">서비스 지역 : ${TQ_LOC}</h4>
-		                <hr>
+					
+					<h5 style="padding-bottom: 20px; margin-top: 30px; color: #00bd56;">훈련유형 및 요금안내</h5>
+					<div style="display: grid; grid-template-columns: 1fr 1fr;">
 		                <c:if test="${dto.TS1_NO == 1}">
 		                	<label><input type="radio" value="${dto.TS1_NO}" id="TQ_AMT" class="iptags" name="TQ_AMT">배변훈련</label><br>
 		                	<input type="hidden" value="${dto.TS1_FEE}" class="iptags" name="TQ_FEE">
@@ -160,38 +167,77 @@ function requestTrChk() {
 				        	<input type="hidden" value="${dto.TS4_FEE}" class="iptags" name="TQ_FEE">
 		                	<label>1회차 당 짖음해결 요금 : <fmt:formatNumber value="${dto.TS4_FEE}" pattern="###,###,###,###" />원</label><br>
 		                </c:if>
-		              </div>
+		            </div>
+				</div>
+    		</div>
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+    			<div class="col-lg-6 ftco-animate">
+    				<p>
+		              <img src="${dto.getTA_IMG()}" alt="" class="img-fluid">
+		            </p>
+		            <h2 class="mb-3">${dto.TA_TITLE}</h2>
+		            <p>${dto.TA_APPEAL}</p>
+    				
+    			</div>
+	            
+	            <div class="col-lg-6 ftco-animate">
+				
+	              <input type="hidden" value="${TA_CD}" name="TA_CD">
+	              <input type="hidden" value="${TQ_LOC}" name="TQ_LOC">
+	              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+	              <input type="hidden" value="" name="TQ_FEE">
+	              <!-- 훈련사 일정 받아오기, 가능한 일정 선택하기 -->
+	              
+	              <div class="col-lg-6">
+	              	
+	              	
+	              	<!-- 훈련유형 선택 및 요금안내 -->
+	              	<!-- <div class="sidebar-box ftco-animate"> -->
+		              
 		           <!--  </div> -->
 		           
-		           <div class="form-group">
-	                <h3 style="font-size:18px">훈련받을 마이펫</h3>
-	                <c:if test="${selectCnt == 0}">
-	                	<script type="text/javascript">
-				          alert("훈련받을 펫이 존재하지 않습니다. 등록 후 이용가능합니다.");
-				          window.history.back();
-				    	</script>
-	                </c:if>
-	                
-	                <c:if test="${selectCnt != 0}">
-	                	<c:forEach var="dtos" items="${petInfo}">
-	                		<input type="checkbox" value="${dtos.PET_NM}" id="PET_NM" name="PET_NM">${dtos.PET_NM}
-	                	</c:forEach>
-	                </c:if>
-	              </div>
+		          
 		            
-		            <div class="col-md-12">
-                        <div class="form-group" align="center">
-                        	<input type="submit" value="훈련 신청하기" class="btn btn-primary">
-                           
-                            <div class="submitting"></div>
-                        </div>
-                     </div>
+		            <!-- <div class="col-md-12">
+                        <div class="form-group" align="center"> -->
+                        	<c:if test="${reviewCnt > 0}">
+			   					<h3 class="mb-5" class="label">후기</h3>
+			    				<c:forEach var="dto" items="${reviewInfo}" varStatus = "st">
+				                    <div class="meta"><b style="font-size:20px;">${dto.CUST_ID}</b>
+				                    	&nbsp;&nbsp;${dto.TG_DT}</div>
+				                    <p>${dto.TG_CON}</p>
+				              	</c:forEach>
+							</c:if>
+							<c:if test="${reviewCnt == 0}">
+								<h4 class="mb-5" class="label">후기</h4>
+			   					아직 등록된 후기가 없습니다.
+			   				</c:if>
+                       <!--  </div>
+                     </div> -->
 	              </div>
-	              </form>
+				
+				</div>
+				<div class="col-lg-12 sidebar pl-lg-5 ftco-animate"
+					style="margin-top: 30px; border-top: 1px solid #00bd56; padding-top: 40px;">
+					<div class="col-md-12">
+						<div class="form-group" align=center>
+							<input type="submit" value="훈련 신청하기" class="btn btn-primary"
+								style="text-align: center; padding-left: 35px; font-size: 24px !important;">
+							<div class="submitting"></div>
+						</div>
+					</div>
+				</div>
     		</div>
     	</div>
     </section>
-      
+</form>
           
 	
 	<%@ include file="../../main/footer.jsp" %>

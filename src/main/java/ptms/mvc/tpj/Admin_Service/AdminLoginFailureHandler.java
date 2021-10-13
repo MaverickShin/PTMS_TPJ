@@ -38,13 +38,13 @@ public class AdminLoginFailureHandler implements AuthenticationFailureHandler{
 		String strPwd = request.getParameter("mg_pwd");
 		
 		// 아이디 확인
-		int cnt = sqlSessions.selectOne("com.mvc.sdb.Admin_DAO.AdminMainDAO.idCheck",strId);
+		int cnt = sqlSessions.selectOne("ptms.mvc.tpj.Admin_DAO.AdminDAO.idChk",strId);
 		
 		// 아이디가 존재 할 때
 		if(cnt!=0) {
 			
 			// 비번 확인
-			String pwd = sqlSessions.selectOne("com.mvc.sdb.Admin_DAO.AdminMainDAO.pwdCheck",strId);
+			String pwd = sqlSessions.selectOne("ptms.mvc.tpj.Admin_DAO.AdminDAO.pwdCheck",strId);
 			System.out.println(strPwd);
 			System.out.println(pwd);
 			System.out.println(passwordEncoder.matches(strPwd, pwd));
@@ -70,7 +70,7 @@ public class AdminLoginFailureHandler implements AuthenticationFailureHandler{
 		}
 		
 		// 로그인 실패 처리용 클래스 이므로 무조건 로그인 화면으로 되돌아간다.
-		RequestDispatcher rd = request.getRequestDispatcher("adminlogin");
+		RequestDispatcher rd = request.getRequestDispatcher("/admin/adminlogin");
 		rd.forward(request, response);
 	}
 

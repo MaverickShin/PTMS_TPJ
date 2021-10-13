@@ -22,27 +22,33 @@
 	background-color: #f5f5f5;
 	border: 1px solid #eeeeee;
 }
+.col-md-6{
+	margin: 0 auto;
+}
 </style>
 <title>Insert title here</title>
 </head>
 <body>
 	<%@ include file="../../main/header.jsp"%>
 
-
-	<div class="row no-gutters">
-		<div class="col-md-7">
+		<div class="col-md-6" style="font-family: 'Do Hyeon', sans-serif;">
 			<div class="contact-wrap w-100 p-md-5 p-4">
-				<h3 class="mb-4">리뷰 수정</h3>
+				<h3 class="mb-4" align="center">리뷰 수정</h3>
 				<form action="MyreviewModifyAction" method="POST" id="reviewModify"
-					name="reviewModify" class="contactForm">
-					<input type="hidden" name="${_csrf.parameterName}"
-						value="${_csrf.token}">
+					name="reviewModify" class="contactForm" enctype="multipart/form-data">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+					<s:csrfInput/>
 					<div class="row">
 						<c:forEach var="li" items="${list}">
 						<input type="hidden" name="SG_CD" value="${li.SG_CD }">
+							<div class="col-md-12">
+								<label class="label">프로필</label>&nbsp;
+								<img alt="사진" src="${li.getSG_IMG()}" height="80px" width="80px">
+							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="label" for="SQ_CD">작성자</label> <input type="text"
+									<label class="label" for="SQ_CD">작성자</label> 
+									<input type="text"
 										class="form-control" name="CUST_ID" id="CUST_ID"
 										value="${li.CUST_ID}" readonly>
 								</div>
@@ -68,10 +74,10 @@
 										value="li.SG_IMG">
 								</div>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-12" align="center">
 								<div class="form-group">
 									<input type="submit" value="수정처리" class="btn btn-primary">
-									<input type="reset" value="수정취소" class="btn btn-primary">
+									<input type="reset" value="수정취소" class="btn btn-primary" onclick="window.history.back();">
 								</div>
 							</div>
 						</c:forEach>
@@ -79,11 +85,6 @@
 				</form>
 			</div>
 		</div>
-		<div class="col-md-5 d-flex align-items-stretch">
-			<div class="info-wrap w-100 p-5 img"
-				style="background-image: url(images/img.jpg);"></div>
-		</div>
-	</div>
 
 	<%@ include file="../../main/footer.jsp"%>
 </body>

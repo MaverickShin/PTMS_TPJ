@@ -49,7 +49,7 @@ $(document).ready(function(){
 
 //회원가입 페이지
 function joinInFocus(){
-	document.joinInform.cust_id.focus();
+	document.joinInform.mg_id.focus();
 }
 function joinCheck() {
 	// 아이디 입력 확인
@@ -140,76 +140,91 @@ function confirmid() {
 }
 
 </script>
-<title>회원가입 페이지</title>
+<title>관리자 등록</title>
+<style>
+	#join_sub {
+		width: 100%; 
+		background-color:#0ca678;
+		outline:none;
+		border: 1px solid #0ca678;
+		color: white;
+		font-size: 20px;
+		font-weight: bolder;
+		cursor:pointer;
+		border-radius: 20px;
+	}
+	
+	#join_sub:hover {
+		background-color: #12b886;
+	}
+	
+	#join_tag:hover a{
+		color: #707070 !important;
+		text-decoration: underline !important;
+	}
+</style>
 </head>
 <body onload="joinInFocus();">
 
-<%@ include file = "../header.jsp" %>
-
 <!-- session -->
-<section style = "width:700px; margin-left:auto; margin-right:auto; margin-top:30px;">
-	<form name="joinInform" action="${ad}adminjoinaction" method="post" onsubmit="return joinCheck();">
+<section style = "width: 500px; margin:auto; margin-top: 200px; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);">
+	<form name="joinInform" action="${ad}adminjoinAction" method="post" onsubmit="return joinCheck();">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-			<div class="row no-gutters" >
-				<div class="col-md-7" style ="max-width: 100% !important; flex:0 0 100% !important">
-					<div class="contact-wrap w-100 p-md-5 p-4">
-						<h3 class="mb-4">관리자 등록</h3>
-							<div class="row">
-								<div class="col-md-12">
-									<div class="form-group">
-										<label class="label" for="mg_id">관리자 아이디</label>
-										<input type="text" class="form-control" name="mg_id" id="mg_id" placeholder="아이디" onblur="confirmid();">
-									</div>
-								</div>
-								
-								<div class="col-md-12">
-									<div class = "id_ok" style = "display:none;">사용가능한 아이디</div>
-									<div class = "id_already" style = "display:none;">사용 불 가능한 아이디</div>
-								</div>
-								
-								<div class="col-md-6">
-									<div class="form-group">
-										<label class="label" for="mg_pwd">비밀번호</label>
-										<input type="password" class="form-control" name="mg_pwd" id="mg_pwd" placeholder="비밀번호">
-									</div>
-								</div>
-								
-								<div class="col-md-6">
-									<div class="form-group">
-										<label class="label" for="repwd">비밀번호 확인</label>
-										<input type="password" class="form-control" name="repwd" id="repwd" placeholder="비밀번호 확인">
-									</div>
-								</div>
-								
-							    <div class="col-md-12">
-									<div class="form-group">
-   										<div class="form-field">
-       										<div class="select-wrap">
-       											<label class="label" for="mg_kind">관리자 분류</label>
-					                      		<select name="mg_kind" id="mg_kind" class="form-control">
-					                      			<option value="0">경영지원팀</option>
-					                        		<option value="1">고객지원팀</option>
-					                        		<option value="2">마케팅팀</option>
-                 								</select>
-                 							</div>
-             							</div>
-   									</div>
-								</div>
-								
-								
-								<div class="col-md-12">
-									<div class="form-group" align = "center">
-										<input type="submit" value="회원가입" class="btn btn-primary" id = "join_sub">
-										<div class="submitting"></div>
-									</div>
-								</div>
-							</div>
+			<div style = "height: 70px; background-color:#0ca678;"><center style = "line-height: 70px; color: white; font-size: 40px;">Pet Care System</center></div>
+				<div class="row" style="width:400px; margin-left:auto; margin-right:auto; margin-top: 30px;">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label class="label" for="mg_id">관리자 아이디</label>
+							<input type="text" class="form-control" name="mg_id" id="mg_id" placeholder="아이디" onblur="confirmid();">
+						</div>
 					</div>
-				</div>
-			</div>
+					
+					<div class="col-md-12">
+						<div class = "id_ok" style = "display:none;">사용가능한 아이디</div>
+						<div class = "id_already" style = "display:none;">사용 불 가능한 아이디</div>
+					</div>
+					
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="label" for="mg_pwd">비밀번호</label>
+							<input type="password" class="form-control" name="mg_pwd" id="mg_pwd" placeholder="비밀번호">
+						</div>
+					</div>
+					
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="label" for="repwd">비밀번호 확인</label>
+							<input type="password" class="form-control" name="repwd" id="repwd" placeholder="비밀번호 확인">
+						</div>
+					</div>
+					
+				    <div class="col-md-12">
+						<div class="form-group">
+										<div class="form-field">
+    										<div class="select-wrap">
+    											<label class="label" for="mg_kind">관리자 분류</label>
+		                      		<select name="mg_kind" id="mg_kind" class="form-control">
+		                      			<option value="경영지원팀">경영지원팀</option>
+		                        		<option value="고객지원팀">고객지원팀</option>
+		                        		<option value="마케팅팀">마케팅팀</option>
+              								</select>
+              							</div>
+          							</div>
+									</div>
+					</div>
+					
+					
+					<div class="col-md-12">
+						<div class="form-group" align = "center">
+							<input type="submit" value="관리자 등록" class="btn btn-primary" id = "join_sub">
+							<div class="submitting"></div>
+						</div>
+					</div>
+					
+					<div style = "width:100%; text-align:right; margin-bottom: 20px;"  id = "join_tag"><a href = "/tpj/admin/adminlogin" style = "text-decoration: none; color:#9e9e9e; font-size: 16px; font-weight: bolder;">관리자 로그인</a></div>
+		</div>
 	</form>
 </section>
-<%@ include file = "../footer.jsp" %>	
 
 </body>
 </html>
