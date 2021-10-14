@@ -214,5 +214,44 @@ public class AndroidController {
        return jsonMain;
    }
   */ 
+   
+   /*// 안드로이드 수정할 펫 정보 
+   @RequestMapping(value = "modifyPetInfoAndroid")
+   @ResponseBody
+   public Map<String, Object>  modifyPetInfoAndroid(HttpServletRequest req, Model model) {
+      int PET_CD = Integer.parseInt(req.getParameter("pet_cd"));
+      Map<String, Object> map = new HashMap<String, Object>();
+      PetVO vo = dao.PetDetail(PET_CD);
+      map.put("petName", vo.getPET_NM());
+      map.put("petAge", vo.getPET_AGE());
+      map.put("petUnique", vo.getPET_CON());
+      map.put("petImg", vo.getPET_IMG());
+      
+      return map;
+   } */
+   
+   // 안드로이드 펫정보 수정처리
+   @RequestMapping(value = "ModifyPet")
+   @ResponseBody
+   public Map<String, Object> ModifyPet(HttpServletRequest req) {
+	  Map<String, Object> map = new HashMap<String, Object>();
+	  String PET_CD = req.getParameter("petCd");
+	  String PET_NM = req.getParameter("petName");
+      String PET_AGE = req.getParameter("petAge");
+      String PET_CON = req.getParameter("petUnique");
+      String PET_IMG = req.getParameter("petImg");
+      
+      map.put("PET_CD", PET_CD);
+      map.put("PET_NM", PET_NM);
+      map.put("PET_AGE", PET_AGE);
+      map.put("PET_CON", PET_CON);
+      map.put("PET_IMG", PET_IMG);
+      
+      int updateCnt = dao.andupdatePet(map);
+      
+      map.put("updateCnt", updateCnt);
+      
+      return map;
+   } 
 }
 
