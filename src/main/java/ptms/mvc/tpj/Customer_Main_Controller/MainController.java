@@ -37,7 +37,7 @@ import ptms.mvc.tpj.TrainerService.TrainerServiceImpl;
 import ptms.mvc.tpj.emailHandler.emailSender;
 import ptms.mvc.tpj.util.ImageUploaderHandler;
 
-@MultipartConfig(location = "C:\\Dev88\\PTMS_TPJ\\src\\main\\webapp\\resources\\upload", fileSizeThreshold = 1024 * 1024,
+@MultipartConfig(location = "D:\\Dev88\\PTMS_TPJ\\src\\main\\webapp\\resources\\upload", fileSizeThreshold = 1024 * 1024,
 maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 @RequestMapping("/cust")
 @Controller
@@ -69,9 +69,10 @@ public class MainController {
 	@RequestMapping({"", "main", "Newsletter"})
 	public String main(HttpServletRequest req, Model model) {
 		
-		service.Newsletter(req, model); 
+		service.Newsletter(req, model); //상단 
 		
 		service.petIssue(req, model);  
+		service.HospitalInfo(req, model);//하단
 		
 		return "main/index";
 	}
@@ -608,9 +609,9 @@ public class MainController {
    @RequestMapping("hospitalInfo")
    public String hospitalInfo(HttpServletRequest req, Model model) {
 	   
-	   service.HospitalInfo(req, model);
+	   //service.HospitalInfo(req, model);
 	   
-	   return "news/Convenience_Info";
+	   return "news/hospital";
    }
    
    // 로그아웃 요청

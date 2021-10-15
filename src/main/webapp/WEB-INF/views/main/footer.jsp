@@ -57,13 +57,10 @@ $(document).ready(function(){
 					</ul>
 				</div>
 				<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
-					<h2 class="footer-heading">Latest News</h2>
-					<div class="block-21 mb-4 d-flex">
-						<div class="text">
-							<div class="meta"></div>
-						</div>
-					</div>
+					<h2 class="footer-heading">동물병원</h2>
+					<%@ include file="../news/Convenience_Info.jsp" %>
 				</div>
+				
 				<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
 					<h2 class="footer-heading">Have a Questions?</h2>
 					<div class="block-23 mb-3">
@@ -93,13 +90,13 @@ $(document).ready(function(){
 
 
 	<!-- loader -->
-	<div id="ftco-loader" class="show fullscreen">
+	<!-- <div id="ftco-loader" class="show fullscreen">
 		<svg class="circular" width="48px" height="48px">
 			<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
 				stroke-width="4" stroke="#eeeeee" />
 			<circle class="path" cx="24" cy="24" r="22" fill="none"
 				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
-	</div>
+	</div> -->
 
 </body>
 </html>

@@ -756,17 +756,17 @@ public class MainServiceImpl implements MainService {
 
 		// 주요 뉴스로 나오는 태그를 찾아서 가져오도록 한다. <section class="section-body">
 		Elements element = doc.select("ul._3smbt");
-		Elements element1 = element.select(".XNxh9");
+		Elements element1 = element.select("div._3ZU00");
 
 		for (Element link : element1) {
 			
 			String href = link.select("a[href]").attr("abs:href");
 			
-			String img = link.getElementsByAttribute("img").attr("src");
 			
-			String sum = "<div class='hospitals'> <a href = '" + href + "' target = '_blank'> <img src = '" + img + "'>"; 
+			String sum = "<a href = '" + href + "' target = '_blank'>"; 
 			
 		    list.add(sum);
+		    System.out.println("list sum : "+ sum);
 		}
 		
 		Elements element2 = element.select("._3Apve");
@@ -777,25 +777,24 @@ public class MainServiceImpl implements MainService {
 		
 			String con = link.text();
 		
-			String sum = "<h3>"+ con + "</h3></a></div>";
+			String sum = "<span style='color:gray' font-size='15px'>"+ con + "</span></a>";
 		
 			list2.add(sum);
+			System.out.println("list2 sum : "+ sum);
 		}
 		
 		List<String> list3 = new ArrayList<String>();
 		
 		for (int i = 0; i < list.size(); i++) {
-			for (int j = 0; j < list2.size(); j++) {
-				String sum = list.get(j) + list2.get(j);
-				System.out.println("sum : " + sum);
-				list3.add(sum);
-			}
+			String sum = list.get(i) + list2.get(i);
+			System.out.println("sum : " + sum);
+			list3.add(sum);
+			System.out.println("list3 : "+list3);
 		}
 		
 		model.addAttribute("list", list3);
-		
 	}
-
+	
 	// qna 목록
 	@Override
 	public void qnaList(HttpServletRequest req, Model mdoel) {
