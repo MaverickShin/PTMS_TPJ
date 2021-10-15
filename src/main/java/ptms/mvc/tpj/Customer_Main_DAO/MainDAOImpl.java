@@ -325,4 +325,10 @@ public class MainDAOImpl implements MainDAO {
 		return dao.payList(map);
 	}
 
+	@Override
+	public int andupdatePet(Map<String, Object> map) {
+		MainDAO dao = data.getMapper(MainDAO.class);
+		return dao.andupdatePet(map);
+	}
+
 }

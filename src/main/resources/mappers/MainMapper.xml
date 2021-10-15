@@ -98,6 +98,13 @@
 		where PET_CD = #{PET_CD}
 	</update>
 	
+	<!-- 안드로이드용 펫 수정 처리 -->
+	<update id="andupdatePet" parameterType="java.util.Map">
+		update PET_TB 
+		set PK_CD = #{PK_CD}, PET_AGE = #{PET_AGE} ,PET_NM = #{PET_NM} ,PET_CON = #{PET_CON} ,PET_IMG = #{PET_IMG} 
+		where PET_CD = #{PET_CD}
+	</update>
+	
 	<!-- 펫 삭제 -->
 	<delete id="deletePet" parameterType="int">
 		delete from PET_TB where PET_CD = #{PET_CD}
