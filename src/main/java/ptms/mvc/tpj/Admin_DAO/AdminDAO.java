@@ -11,9 +11,6 @@ public interface AdminDAO {
 	//펫 코드 및 요금 등록
 	public int petCodeFee(PetVO vo);
 	
-	//펫 코드 및 요금 수 구하기
-	//public int petCodeCount();
-	
 	//펫 코드 및 요금 목록
 	public ArrayList<PetVO> getpetCodeFee();
 	

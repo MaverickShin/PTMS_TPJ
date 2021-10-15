@@ -428,35 +428,6 @@ public class MainServiceImpl implements MainService {
 		model.addAttribute("deletecnt", deletecnt);
 	}
 
-	/*
-	 * 2021-09-22 나도웅 일정 가져오기
-	 * 
-	 * @SuppressWarnings("unchecked")
-	 * 
-	 * @Override public void callCalendar(HttpServletRequest req, Model model) {
-	 * 
-	 * String id = (String) req.getSession().getAttribute("cust_id");
-	 * List<Map<String,Object>> eventList = dao.getEvents(id);
-	 * 
-	 * JSONArray jsonArray = new JSONArray(); for(Map<String,Object> map: eventList)
-	 * { jsonArray.add(convertMapToJson(map)); }
-	 * 
-	 * FileWriter file; try { file = new FileWriter(
-	 * "http://localhost:8005/tpj/webapp/WEB-INF/views/customer/calendar/data.json",
-	 * false); file.write(jsonArray.toJSONString()); file.flush(); file.close(); }
-	 * catch (IOException e) { e.printStackTrace(); } }
-	 * 
-	 * 
-	 * 2021-09-22 나도웅 일정 가져오기(부속)
-	 * 
-	 * @SuppressWarnings("unchecked") public JSONObject convertMapToJson(Map<String,
-	 * Object> map) {
-	 * 
-	 * JSONObject json = new JSONObject(); for (Map.Entry<String, Object> entry :
-	 * map.entrySet()) { String key = entry.getKey(); Object value =
-	 * entry.getValue(); json.put(key, value); } return json; }
-	 */
-
 	// 질병정보 크롤링 - 21.09.23 창훈 추가
 	@Override
 	public void SymptomCrawling(HttpServletRequest req, Model model) {
@@ -684,57 +655,6 @@ public class MainServiceImpl implements MainService {
 		
 	}
 	
-
-	/*
-	 * 2021-09-22 나도웅 일정 추가
-	 * 
-	 * @Override public void addEvent(HttpServletRequest req, Model model) { String
-	 * id = (String) req.getSession().getAttribute("cust_id");
-	 * 
-	 * String start_tm = req.getParameter("start"); String end_tm =
-	 * req.getParameter("end");
-	 * 
-	 * CalendarVO cVo = new CalendarVO();
-	 * cVo.setCK_CD(Integer.parseInt(req.getParameter("CK_CD")));
-	 * cVo.setCL_TITLE(req.getParameter("title")); cVo.setCUST_ID(id);
-	 * cVo.setCL_MEMO(req.getParameter("memo"));
-	 * 
-	 * }
-	 */
-
-	/*
-	 * 2021-09-22 나도웅 일정 가져오기
-	 * 
-	 * @Override public void deleteEvent(HttpServletRequest req, Model model) {
-	 * 
-	 * }
-	 */
-
-	// 펫정보 인증 및 상세 페이지
-	/*
-	 * @Override public void PetDetail(HttpServletRequest req, Model model) { String
-	 * id = (String)req.getSession().getAttribute("cust_id"); String cust_pwd =
-	 * req.getParameter("CUST_PWD");
-	 * 
-	 * System.out.println("회원id : "+id); System.out.println("회원pwd : "+cust_pwd);
-	 * 
-	 * // 회원수정 인증 처리 String encoderpwd =
-	 * Session.selectOne("ptms.mvc.tpj.Customer_Main_DAO.MainDAO.pwdSearch", id);
-	 * System.out.println("passordEncoder : " + passordEncoder.matches(cust_pwd,
-	 * encoderpwd));
-	 * 
-	 * // 상세정보 조회 CustomerVO vo =new CustomerVO(); int selectCnt = 0; vo =
-	 * dao.selectCustomer(id);
-	 * 
-	 * vo.setCUST_PWD(cust_pwd);
-	 * 
-	 * selectCnt = 1; model.addAttribute("selectCnt",selectCnt);
-	 * model.addAttribute("CustomerVO",vo); System.out.println("회원정보 encoderpwd : "
-	 * + encoderpwd);
-	 * 
-	 * }
-	 */
-
 	// 뉴스레이터 - 김선영
 	@Override
 	public void Newsletter(HttpServletRequest req, Model model) {

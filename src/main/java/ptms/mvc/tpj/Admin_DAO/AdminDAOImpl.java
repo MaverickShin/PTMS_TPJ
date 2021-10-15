@@ -23,17 +23,6 @@ public class AdminDAOImpl implements AdminDAO{
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		return dao.petCodeFee(vo);
 	}
-
-	/*
-	//펫 코드 및 요금 수 구하기
-	@Override
-	public int petCodeCount() {
-		System.out.println("DAO ==> petCodeCount");
-		
-		EnrollDAO dao = sqlSession.getMapper(EnrollDAO.class);
-		return dao.petCodeCount();
-	}
-	 */
 	
 	//펫 코드 및 요금 목록
 	@Override

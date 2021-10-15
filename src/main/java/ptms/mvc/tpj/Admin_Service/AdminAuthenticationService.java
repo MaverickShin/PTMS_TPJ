@@ -13,8 +13,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import ptms.mvc.tpj.AdminVO.AdminVO;
 import ptms.mvc.tpj.AdminVO.UserVO;
 
-//UserDetailsService : 스프링 프레임워크에 내장된 인터페이스
-
 //로그인 인증을 처리
 public class AdminAuthenticationService implements UserDetailsService {
 	
