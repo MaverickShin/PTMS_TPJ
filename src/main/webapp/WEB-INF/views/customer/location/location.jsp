@@ -153,10 +153,12 @@ $.ajax({
 		width: 600px;
 		margin:0;
 		background-color: #37474f;
+		min-height: 400px;
 	}
 	
 	.ntcs img{
 		width : 330px !important;
+		height: 230px !important;
 		border: 3px solid white;
 		border-radius: 30px;
 		-moz-border-radius: 30px;

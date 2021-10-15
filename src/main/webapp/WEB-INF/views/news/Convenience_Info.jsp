@@ -19,7 +19,7 @@
 
 </script>
 <style>
-/* .bigs {
+ .bigs {
 	width: 250px;
 	height: 250px;
 	align: center;
@@ -57,14 +57,15 @@
 .ntcs a span {
 	display:block;
 	position:absolute;
-	top: 300px;
+	top: 260px;
 	width: 100%;
-} */
+	height: 40px;
+} 
 </style>
 </head>
 
 <body onload = "convenience_view();">
-	<table>
+	<table style = "margin-left:auto; margin-right:auto;">
 		<c:forEach var = "i" items="${list}">
 			<tr> 
 				<td class= "tdsss">
