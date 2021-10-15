@@ -187,6 +187,39 @@ public class AndroidController {
 		   return "main/android_fail";
 
    }
+   
+// 안드로이드 펫 등록
+   @ResponseBody
+   @RequestMapping(value="pet_register", method = {RequestMethod.POST, RequestMethod.GET})
+   public int pet_register(HttpServletRequest req, Model model)
+   {
+	   System.out.println("url ==> pet_register");
+	   
+	   PetVO vo = new PetVO();
+	   String id = req.getParameter("id");	//고객아이디
+	   System.out.println("id: " + id);
+	   String PET_NM = req.getParameter("pet_name"); //펫이름
+	   System.out.println("PET_NM : "+ PET_NM);
+	   int PET_AGE = Integer.parseInt(req.getParameter("pet_age")); //펫나이
+	   System.out.println("PET_AGE :" + PET_AGE);
+	   int PK_CD = Integer.parseInt(req.getParameter("pet_kind")); //펫종류
+	   System.out.println("PK_CD : " + PK_CD);
+	   String PET_CON = req.getParameter("uniqueness"); //특이사항
+	   System.out.println("PET_CON : " + PET_CON);
+	   
+	   vo.setCUST_ID("lim");
+	   vo.setPET_NM(PET_NM);
+	   vo.setPET_AGE(PET_AGE);
+	   vo.setPK_CD(PK_CD);
+	   vo.setPET_CON(PET_CON);
+	   vo.setPET_IMG("/tpj/resources/upload/orange.jpg");
+	   
+	   //insert할 dao mapper
+	   int petInsertCnt = dao.insertPet(vo);
+	   
+	   return petInsertCnt;
+   }
+   
 /*   
    @RequestMapping(value="json.do",produces="application/json;charset=utf-8")
    public @ResponseBody JSONObject json(){
