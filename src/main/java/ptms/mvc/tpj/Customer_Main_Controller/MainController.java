@@ -610,7 +610,16 @@ public class MainController {
 	   
 	   service.HospitalInfo(req, model);
 	   
-	   return "news/hospital";
+	   return "news/Hospital";
+   }
+   
+   // 푸터 하단 병원정보 - 21.10.15 원철
+   @RequestMapping("shopInfo")
+   public String shopInfo(HttpServletRequest req, Model model) {
+	   
+	   service.shopInfo(req, model);
+	   
+	   return "news/Shop";
    }
    
    // 로그아웃 요청

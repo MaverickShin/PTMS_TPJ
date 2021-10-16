@@ -51,8 +51,10 @@ function showImage(){
       border: 1px solid white;
       font-family: 'Do Hyeon', sans-serif;
       border-collapse: collapse;
+      border-spacing: 0;
       border-left:none;
       border-right:none;
+      border-bottom:none;
    }
    
    .big th {
@@ -80,8 +82,10 @@ function showImage(){
       border: 1px solid white;
       font-family: 'Do Hyeon', sans-serif;
       border-collapse: collapse;
+      border-spacing: 0;
       border-left: none;
       border-right:none;
+      border-bottom: none;
    }
    
    .bigs th {
@@ -103,10 +107,14 @@ function showImage(){
    
    .bigs td a {
       display: block;
-      font-size: 30px;
       color: white;
       margin-top: 30px;
+      font-size: 24px;
    }   
+   
+   .bigs tr {
+   	  border:none;
+   }
 
    .FAkayc  {
       display: none;
@@ -206,96 +214,8 @@ function showImage(){
        </div>
     </section>
 
-    <section class="ftco-section testimony-section" style="background-image: url('${imgPath}bg_2.jpg');">
+    <section class="ftco-section testimony-section" style="background-image: url('${imgPath}bg_2.jpg'); height: 400px;">
        <div class="overlay"></div>
-      <div class="container">
-        <div class="row justify-content-center pb-5 mb-3">
-          <div class="col-md-7 heading-section text-center ftco-animate">
-            <h2>Latest register SITTER&TRAINER </h2>
-          </div>
-        </div>
-        <div class="row ftco-animate">
-          <div class="col-md-12">
-            <div class="carousel-testimony owl-carousel ftco-owl">
-              <div class="item">
-                <div class="testimony-wrap py-4">
-                   <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
-                  <div class="text">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <div class="d-flex align-items-center">
-                       <div class="user-img" style="background-image: url(${imgPath}person_1.jpg)"></div>
-                       <div class="pl-3">
-                          <p class="name">Roger Scott</p>
-                          <span class="position">Marketing Manager</span>
-                        </div>
-                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap py-4">
-                   <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
-                  <div class="text">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <div class="d-flex align-items-center">
-                       <div class="user-img" style="background-image: url(${imgPath}person_2.jpg)"></div>
-                       <div class="pl-3">
-                          <p class="name">Roger Scott</p>
-                          <span class="position">Marketing Manager</span>
-                        </div>
-                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap py-4">
-                   <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
-                  <div class="text">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <div class="d-flex align-items-center">
-                       <div class="user-img" style="background-image: url(${imgPath}person_3.jpg)"></div>
-                       <div class="pl-3">
-                          <p class="name">Roger Scott</p>
-                          <span class="position">Marketing Manager</span>
-                        </div>
-                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap py-4">
-                   <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
-                  <div class="text">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <div class="d-flex align-items-center">
-                       <div class="user-img" style="background-image: url(${imgPath}person_1.jpg)"></div>
-                       <div class="pl-3">
-                          <p class="name">Roger Scott</p>
-                          <span class="position">Marketing Manager</span>
-                        </div>
-                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap py-4">
-                   <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
-                  <div class="text">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <div class="d-flex align-items-center">
-                       <div class="user-img" style="background-image: url(${imgPath}person_2.jpg)"></div>
-                       <div class="pl-3">
-                          <p class="name">Roger Scott</p>
-                          <span class="position">Marketing Manager</span>
-                        </div>
-                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
     <section class="ftco-section bg-light ftco-faqs">
@@ -307,11 +227,12 @@ function showImage(){
                   class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-center mb-4 mb-sm-0"
                   style="background-image: url(/tpj/resources/img/NUTRIENT/반려동물.jpeg);">
                   
-                  <a href="https://www.youtube.com/watch?v=RHP5OXLsfSQ"
+                   <!-- <a href="https://www.youtube.com/embed/RHP5OXLsfSQ"
                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                      class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
                      <span class="fa fa-play"></span>
-                  </a>
+                  </a>  -->
+                  <iframe width="560" height="450" src="https://www.youtube.com/embed/RHP5OXLsfSQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                </div>
                <div class="d-flex mt-3">
                   <div class="img img-2 mr-md-2"
@@ -347,8 +268,7 @@ function showImage(){
                               <li>영양 불균형이 오래가면, 잦은 설사나 비만, 거친 모질과 눈물자국이 심하게 질 수 있어요.</li>
                               <li>영양이 필요한 노령견, 임신견에게도 영양 불균형은 흔히 나타납니다.</li>
                               <li>면역력이 부족한 반려동물은 다양한 질환에 걸리기 쉽기 때문에 꾸준한 관리가 필요합니다.</li>
-                              <li>유아기, 임신기, 회복기 등 시기에 따라, 상황에 따라 필요한 영양소를 적절하게 공급해 줄
-                                 필요가 있어요.</li>
+                              <li>유아기, 임신기, 회복기 등 시기에 따라, 상황에 따라 필요한 영양소를 적절하게 공급해 줄 필요가 있어요.</li>
                               <li>올바른 영양 공급이 이루어 진다면 가족과 오랜 기간을 함께 지낼 수 있어요</li>
                            </ol>
                         </div>

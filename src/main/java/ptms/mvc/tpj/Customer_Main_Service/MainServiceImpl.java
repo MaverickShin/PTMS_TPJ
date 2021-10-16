@@ -716,20 +716,12 @@ public class MainServiceImpl implements MainService {
 		}
 
 		Elements element = doc.select("div.style_container__1YjHN");
-		System.out.println("element : " + element);
 		Elements element1 = element.select("div.style_content_wrap__1PzEo");
-		System.out.println("element1 : " + element1);
 		Elements element2 = element1.select("li.basicList_item__2XT81");
 		Elements element3 = element2.select("div.basicList_title__3P9Q7");
 		
 		Elements detailele = element3.select("[href]");
 		
-		/*
-		for (Element link : detailele) {
-			String a = "<a href = '" + link.attr("abs:href") + "'>" +link.text() +"</a>";
-			System.out.println("a : " + a);
-			list.add(a);
-		}*/
 
 		model.addAttribute("item1",detailele);
 		model.addAttribute("list2", list);
@@ -756,17 +748,15 @@ public class MainServiceImpl implements MainService {
 
 		// 주요 뉴스로 나오는 태그를 찾아서 가져오도록 한다. <section class="section-body">
 		Elements element = doc.select("ul._3smbt");
-		Elements element1 = element.select("div._3ZU00");
+		Elements element1 = element.select("div.XNxh9");
 
 		for (Element link : element1) {
 			
 			String href = link.select("a[href]").attr("abs:href");
 			
-			
 			String sum = "<a href = '" + href + "' target = '_blank'>"; 
 			
 		    list.add(sum);
-		    System.out.println("list sum : "+ sum);
 		}
 		
 		Elements element2 = element.select("._3Apve");
@@ -777,22 +767,72 @@ public class MainServiceImpl implements MainService {
 		
 			String con = link.text();
 		
-			String sum = "<span style='color:gray' font-size='15px'>"+ con + "</span></a>";
+			String sum = "<span>"+ con + "</span></a>";
 		
 			list2.add(sum);
-			System.out.println("list2 sum : "+ sum);
 		}
 		
 		List<String> list3 = new ArrayList<String>();
 		
 		for (int i = 0; i < list.size(); i++) {
 			String sum = list.get(i) + list2.get(i);
-			System.out.println("sum : " + sum);
 			list3.add(sum);
-			System.out.println("hospital list3 : "+list3);
 		}
 		
-		model.addAttribute("hospital", list3);
+		req.setAttribute("hospital", list3);
+	}
+	
+	@Override
+	public void shopInfo(HttpServletRequest req, Model model) {
+		// Jsoup를 이용해서 반려동물 정보 크롤링
+		String url = "https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&query=%EC%95%A0%EA%B2%AC+%EB%AF%B8%EC%9A%A9%EC%83%B5&oquery=%EC%95%A0%EC%99%84%EB%8F%99%EB%AC%BC+%EB%AF%B8%EC%9A%A9%EC%8B%A4&tqi=hTWQWwp0YidssOdDwhKssssstVN-419215";
+		Document doc = null;
+
+		// for문을 돌면서 뉴스 제목들을 가져오기 위한 list
+		List<String> list = new ArrayList<String>();
+
+		try {
+			// Jsoup url 연결
+			doc = Jsoup.connect(url).get();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// 주요 뉴스로 나오는 태그를 찾아서 가져오도록 한다. <section class="section-body">
+		Elements element = doc.select("ul._3smbt");
+		Elements element1 = element.select("div.XNxh9");
+
+		for (Element link : element1) {
+			
+			String href = link.select("a[href]").attr("abs:href");
+			
+			String sum = "<a href = '" + href + "' target = '_blank'>"; 
+			
+		    list.add(sum);
+		}
+		
+		Elements element2 = element.select("._3Apve");
+
+		List<String> list2 = new ArrayList<String>();
+		
+		for (Element link : element2) {
+		
+			String con = link.text();
+		
+			String sum = "<span>"+ con + "</span></a>";
+		
+			list2.add(sum);
+		}
+		
+		List<String> list3 = new ArrayList<String>();
+		
+		for (int i = 0; i < list.size(); i++) {
+			String sum = list.get(i) + list2.get(i);
+			list3.add(sum);
+		}
+		
+		req.setAttribute("shop", list3);
 	}
 	
 	// qna 목록

@@ -111,6 +111,7 @@
 		조건3. 시터활동 날짜
 		조건4. 가능한 서비스 
 	-->
+	
 	<select id="activityList" parameterType="ptms.mvc.tpj.CustVO.SitterVO" resultType="ptms.mvc.tpj.CustVO.SitterVO">
 	  <![CDATA[
 		SELECT *

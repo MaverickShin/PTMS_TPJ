@@ -9,7 +9,7 @@
 </head>
 <body>
 <table>
-	<c:forEach var = "i" items="${hospital}">
+	<c:forEach var = "i" items="${shop}">
 		<tr> 
 			<td class = "hos_tb">
 				${i}<br>
