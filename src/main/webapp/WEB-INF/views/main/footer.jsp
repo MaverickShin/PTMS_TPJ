@@ -57,8 +57,8 @@ $(document).ready(function(){
 					</ul>
 				</div>
 				<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
-					<h2 class="footer-heading">동물병원</h2>
-					<%@ include file="../news/Convenience_Info.jsp" %>
+					<h2 class="footer-heading">Hospital</h2>
+					<%@ include file="../news/Hospital.jsp" %>
 				</div>
 				
 				<div class="col-md-6 col-lg-3 mb-4 mb-md-0">

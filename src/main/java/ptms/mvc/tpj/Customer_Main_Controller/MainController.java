@@ -72,7 +72,6 @@ public class MainController {
 		service.Newsletter(req, model); //상단 
 		
 		service.petIssue(req, model);  
-		service.HospitalInfo(req, model);//하단
 		
 		return "main/index";
 	}
@@ -609,7 +608,7 @@ public class MainController {
    @RequestMapping("hospitalInfo")
    public String hospitalInfo(HttpServletRequest req, Model model) {
 	   
-	   //service.HospitalInfo(req, model);
+	   service.HospitalInfo(req, model);
 	   
 	   return "news/hospital";
    }
