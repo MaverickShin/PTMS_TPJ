@@ -789,10 +789,10 @@ public class MainServiceImpl implements MainService {
 			String sum = list.get(i) + list2.get(i);
 			System.out.println("sum : " + sum);
 			list3.add(sum);
-			System.out.println("list3 : "+list3);
+			System.out.println("hospital list3 : "+list3);
 		}
 		
-		model.addAttribute("list", list3);
+		model.addAttribute("hospital", list3);
 	}
 	
 	// qna 목록

@@ -1,6 +1,7 @@
 package ptms.mvc.tpj;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -186,6 +187,35 @@ public class AndroidController {
 	   else
 		   return "main/android_fail";
 
+   }
+   
+   //안드로이드 목록
+   @ResponseBody
+   @RequestMapping(value="pet_list", method = {RequestMethod.POST, RequestMethod.GET})
+   public JSONObject pet_list(HttpServletRequest req, Model model) {
+	    System.out.println("url ==> pet_list");
+	    
+	    List<PetVO> vo = new ArrayList<PetVO>();
+		vo = dao.getPetList("lim");
+		System.out.println("펫 정보 : "+vo);
+
+		JSONArray list = new JSONArray();
+		if(vo != null) {
+			for(PetVO p : vo) {
+				JSONObject json = new JSONObject();
+				json.put("PET_NM", p.getPET_NM());
+				json.put("PET_AGE", p.getPET_AGE());
+				json.put("PK_KIND", p.getPK_KIND());
+				json.put("PET_CON", p.getPET_CON());
+				json.put("PET_IMG", p.getPET_IMG());
+				
+				list.add(json);
+			}
+			System.out.println("json lsit :"+list.toJSONString());
+		}
+		JSONObject json2 = new JSONObject();
+		json2.put("list", list);
+		return json2;
    }
    
 // 안드로이드 펫 등록
