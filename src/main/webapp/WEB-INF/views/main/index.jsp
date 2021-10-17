@@ -416,7 +416,7 @@ function showImage(){
                 <div class="img" style="background-image: url(${path}images/pricing-2.jpg);"></div>
                <div class="text-center p-4">
                   <span class="excerpt d-block">프리미엄 서비스</span>
-                  <span class="price"><sup>￦</sup> <span class="number">29900</span> <sub>/mos</sub></span>
+                  <span class="price"><sup>￦</sup> <span class="number">29,900</span> <sub>/mos</sub></span>
                   
                   <ul class="pricing-text mb-5">
                     <li><span class="fa fa-check mr-2"></span>캘린더 개방/ 일정 관리</li>
@@ -438,7 +438,7 @@ function showImage(){
                 <div class="img" style="background-image: url(${path}images/pricing-3.jpg);"></div>
                <div class="text-center p-4">
                   <span class="excerpt d-block">비즈니스 서비스</span>
-                  <span class="price"><sup>￦</sup> <span class="number">49900</span> <sub>/mos</sub></span>
+                  <span class="price"><sup>￦</sup> <span class="number">49,900</span> <sub>/mos</sub></span>
                   
                   <ul class="pricing-text mb-5">
                     <li><span class="fa fa-check mr-2"></span>캘린더 개방 / 일정관리</li>
