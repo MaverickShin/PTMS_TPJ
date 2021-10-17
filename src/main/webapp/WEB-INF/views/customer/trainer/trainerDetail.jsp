@@ -115,8 +115,8 @@ function checkFee() {
 						<div style="display: grid; grid-template-columns: 1fr 1fr;">
 							<c:if test="${selectCnt == 0}">
 								<script type="text/javascript">
-								alert("훈련받을 펫이 존재하지 않습니다. 등록 후 이용가능합니다.");
-								window.history.back();
+									alert("훈련받을 펫이 존재하지 않습니다. 등록 후 이용가능합니다.");
+									window.history.back();
 								</script>
 							</c:if>
 							
