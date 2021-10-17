@@ -9,6 +9,47 @@
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
+	
+function check2() {
+	
+	var chk1 = document.applyform.TS1_NO.checked;
+	var chk2 = document.applyform.TS2_NO.checked;
+	var chk3 = document.applyform.TS3_NO.checked;
+	var chk4 = document.applyform.TS4_NO.checked;
+
+	var result1 = document.getElementById("tr_kind1_fee");
+	var result2 = document.getElementById("tr_kind2_fee");
+	var result3 = document.getElementById("tr_kind3_fee");
+	var result4 = document.getElementById("tr_kind4_fee");
+
+	
+	if (chk1) {
+		result1.style.display = "block";
+	} else {
+		result1.style.display = "none";
+	}
+
+	if (chk2) {
+		result2.style.display = "block";
+	} else {
+		result2.style.display = "none";
+	}
+
+	if (chk3) {
+		result3.style.display = "block";
+	} else {
+		result3.style.display = "none";
+	}
+
+	if (chk4) {
+		result4.style.display = "block";
+	} else {
+		result4.style.display = "none";
+	}
+	
+}
+	
+	
 	function check() {
 
 		var chk1 = document.applyform.TS1_NO.checked;
@@ -163,7 +204,7 @@ input:checked+.slider:before {
 </style>
 <title>훈련사 프로필 수정</title>
 </head>
-<body>
+<body onload = "check2();">
 	<%@ include file="../../main/header.jsp"%>
 
 <%-- 	<c:if test="${trainerChkCnt != 1}">

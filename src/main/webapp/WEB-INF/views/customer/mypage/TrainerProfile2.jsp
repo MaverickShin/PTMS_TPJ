@@ -9,8 +9,8 @@
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-function check() {
-
+function check2() {
+	
 	var chk1 = document.applyform.TS1_NO.checked;
 	var chk2 = document.applyform.TS2_NO.checked;
 	var chk3 = document.applyform.TS3_NO.checked;
@@ -21,6 +21,7 @@ function check() {
 	var result3 = document.getElementById("tr_kind3_fee");
 	var result4 = document.getElementById("tr_kind4_fee");
 
+	
 	if (chk1) {
 		result1.style.display = "block";
 	} else {
@@ -44,6 +45,46 @@ function check() {
 	} else {
 		result4.style.display = "none";
 	}
+	
+}
+	
+function check() {
+
+	var chk1 = document.applyform.TS1_NO.checked;
+	var chk2 = document.applyform.TS2_NO.checked;
+	var chk3 = document.applyform.TS3_NO.checked;
+	var chk4 = document.applyform.TS4_NO.checked;
+
+	var result1 = document.getElementById("tr_kind1_fee");
+	var result2 = document.getElementById("tr_kind2_fee");
+	var result3 = document.getElementById("tr_kind3_fee");
+	var result4 = document.getElementById("tr_kind4_fee");
+
+	
+	if (chk1) {
+		result1.style.display = "block";
+	} else {
+		result1.style.display = "none";
+	}
+
+	if (chk2) {
+		result2.style.display = "block";
+	} else {
+		result2.style.display = "none";
+	}
+
+	if (chk3) {
+		result3.style.display = "block";
+	} else {
+		result3.style.display = "none";
+	}
+
+	if (chk4) {
+		result4.style.display = "block";
+	} else {
+		result4.style.display = "none";
+	}
+	
 
 	/* if(document.getElementById("tr_kind1").checked) {
 		document.getElementById("input_check_hidden1").disabled = true;
@@ -150,7 +191,7 @@ input:checked+.slider:before {
 </style>
 <title>훈련사 프로필 수정</title>
 </head>
-<body>
+<body onload = "check2()">
 	<c:if test="${trainerChkCnt != 1}">
        	<script type="text/javascript">
           alert("훈련사로 등록 후 이용 가능합니다.");
@@ -213,30 +254,76 @@ input:checked+.slider:before {
 																<div class="col-md-12"
 																	style="margin-bottom: 40px; padding-bottom: 30px; border-bottom: 1px solid #00bd56;">
 																	<label class="label" for="tr_kind">훈련가능 유형</label><br>
+																	
+																	<c:if test="${dto.getTS1_NO() == 1}">
 																	<label for="TS1_NO"
 																		style="margin-right: 20px; cursor: pointer;">
 																		<label class="switch">
 																		<input type="checkbox" value="1" name="TS1_NO" id="TS1_NO"
-																			class="form-group" onchange="check();">
+																			class="form-group" onchange="check('e');" checked>
 																			<span class="slider round"></span></label>배변훈련</label>
-																	<label for="TS2_NO"
+																	</c:if>
+																	
+																	<c:if test = "${dto.getTS1_NO() == 0}">
+																		<label for="TS1_NO"
+																			style="margin-right: 20px; cursor: pointer;">
+																			<label class="switch">
+																			<input type="checkbox" value="1" name="TS1_NO" id="TS1_NO"
+																				class="form-group" onchange="check();">
+																				<span class="slider round"></span></label>배변훈련</label>
+																	</c:if>
+																	
+																	
+																	<c:if test = "${dto.getTS2_NO() == 2}">
+																		<label for="TS2_NO"
+																		style="margin-right: 20px; cursor: pointer;">
+																		<label class="switch"><input type="checkbox"
+																			value="2" name="TS2_NO" id="TS2_NO"
+																			class="form-group" onchange="check('e');" checked><span
+																			class="slider round"></span></label>분리불안</label> 
+																	</c:if>
+																	
+																	<c:if test = "${dto.getTS2_NO() == 0}">
+																		<label for="TS2_NO"
 																		style="margin-right: 20px; cursor: pointer;">
 																		<label class="switch"><input type="checkbox"
 																			value="2" name="TS2_NO" id="TS2_NO"
 																			class="form-group" onchange="check();"><span
 																			class="slider round"></span></label>분리불안</label> 
+																	</c:if>
 																	
+																	<c:if test = "${dto.getTS3_NO() == 3}">
+																	<label for = "TS3_NO" style = "margin-right: 20px; cursor:pointer;">
+																		<label class = "switch"><input type="checkbox" value="3"
+																		name="TS3_NO" id="TS3_NO" class="form-group"
+																		onchange="check('e');" checked><span
+																			class="slider round"></span></label>기본훈련</label> 
+																	</c:if>
+																	
+																	<c:if test = "${dto.getTS3_NO() == 0}">
 																	<label for = "TS3_NO" style = "margin-right: 20px; cursor:pointer;">
 																		<label class = "switch"><input type="checkbox" value="3"
 																		name="TS3_NO" id="TS3_NO" class="form-group"
 																		onchange="check();"><span
 																			class="slider round"></span></label>기본훈련</label> 
-																		
+																	</c:if>
+																	
+																	<c:if test = "${dto.getTS4_NO() == 4}">
+																	<label for = "TS4_NO" style = "margin-right: 20px; cursor:pointer;">
+																		<label class = "switch"><input
+																		type="checkbox" value="4" name="TS4_NO" id="TS4_NO"
+																		class="form-group" onchange="check('e');" checked><span
+																			class="slider round"></span></label>짖음해결</label>
+																	</c:if>
+																	
+																	<c:if test = "${dto.getTS4_NO() == 0}">
 																	<label for = "TS4_NO" style = "margin-right: 20px; cursor:pointer;">
 																		<label class = "switch"><input
 																		type="checkbox" value="4" name="TS4_NO" id="TS4_NO"
 																		class="form-group" onchange="check();"><span
 																			class="slider round"></span></label>짖음해결</label>
+																	</c:if>
+				
 
 																	<div id="tr_kind1_fee" style="display: none">
 																		<label>한 회차당 배변훈련 요금</label> <input type="number"
