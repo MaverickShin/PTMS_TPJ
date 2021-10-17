@@ -28,7 +28,7 @@
 				<c:forEach var="li" items="${list}" varStatus="status">
 					<div class="col-md-12"
 						style="background-color: #FFFFFF; border: solid 1px; box-shadow: 3px 3px 3px 3px #F3E0E0; border-radius: 20px; text-align: center; padding: 20px 10px; margin: 10px">
-						<h5 style="color: #DBB9B8;">고객 : ${li.CUST_ID}</h5>
+						<h5 style="color: #DBB9B8;">시터ID : ${li.CUST_ID}</h5>
 						<h6 style="color: #DBB9B8;">나의 펫 : ${li.SQ_AMT}</h6>
 						<p style="color: #DBB9B8;">의뢰시작일 : ${li.START_DAY}</p>
 						<p style="color: #DBB9B8;">의뢰종료일 : ${li.END_DAY}</p>
