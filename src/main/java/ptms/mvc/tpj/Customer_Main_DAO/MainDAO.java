@@ -125,6 +125,9 @@ public interface MainDAO {
 	public int trainerChk(String CUST_ID);
 	
 	// 안드로이드용 펫정보 수정처리
-	public int andupdatePet(Map<String, Object> map);
+	public int andupdatePet(PetVO vo);
+	
+	// 안드로이드용 펫삭제처리
+	public int anddeletePet(Map<String, Object> map);
 
 }
