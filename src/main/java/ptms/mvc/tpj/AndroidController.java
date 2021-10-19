@@ -238,7 +238,7 @@ public class AndroidController {
 	   String PET_CON = req.getParameter("uniqueness"); //특이사항
 	   System.out.println("PET_CON : " + PET_CON);
 	   
-	   vo.setCUST_ID("lim");
+	   vo.setCUST_ID(id);
 	   vo.setPET_NM(PET_NM);
 	   vo.setPET_AGE(PET_AGE);
 	   vo.setPK_CD(PK_CD);
