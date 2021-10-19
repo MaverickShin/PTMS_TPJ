@@ -326,9 +326,15 @@ public class MainDAOImpl implements MainDAO {
 	}
 
 	@Override
-	public int andupdatePet(Map<String, Object> map) {
+	public int andupdatePet(PetVO vo) {
 		MainDAO dao = data.getMapper(MainDAO.class);
-		return dao.andupdatePet(map);
+		return dao.andupdatePet(vo);
+	}
+
+	@Override
+	public int anddeletePet(Map<String, Object> map) {
+		MainDAO dao = data.getMapper(MainDAO.class);
+		return dao.anddeletePet(map);
 	}
 
 }

@@ -196,7 +196,7 @@ public class AndroidController {
 	    System.out.println("url ==> pet_list");
 	    
 	    List<PetVO> vo = new ArrayList<PetVO>();
-		vo = dao.getPetList("lim");
+	    vo = dao.getPetList(req.getParameter("l_id"));
 		System.out.println("펫 정보 : "+vo);
 
 		JSONArray list = new JSONArray();
@@ -208,6 +208,7 @@ public class AndroidController {
 				json.put("PK_KIND", p.getPK_KIND());
 				json.put("PET_CON", p.getPET_CON());
 				json.put("PET_IMG", p.getPET_IMG());
+				json.put("PET_CD", p.getPET_CD());
 				
 				list.add(json);
 			}
@@ -237,7 +238,7 @@ public class AndroidController {
 	   String PET_CON = req.getParameter("uniqueness"); //특이사항
 	   System.out.println("PET_CON : " + PET_CON);
 	   
-	   vo.setCUST_ID("lim");
+	   vo.setCUST_ID(id);
 	   vo.setPET_NM(PET_NM);
 	   vo.setPET_AGE(PET_AGE);
 	   vo.setPK_CD(PK_CD);
@@ -294,27 +295,38 @@ public class AndroidController {
    } */
    
    // 안드로이드 펫정보 수정처리
-   @RequestMapping(value = "ModifyPet")
    @ResponseBody
-   public Map<String, Object> ModifyPet(HttpServletRequest req) {
-	  Map<String, Object> map = new HashMap<String, Object>();
-	  String PET_CD = req.getParameter("petCd");
-	  String PET_NM = req.getParameter("petName");
-      String PET_AGE = req.getParameter("petAge");
+   @RequestMapping(value="ModifyPet", method = {RequestMethod.POST, RequestMethod.GET})
+   public int ModifyPet(HttpServletRequest req) {
+     PetVO vo = new PetVO();
+     
+     int PET_CD = Integer.parseInt(req.getParameter("petCd"));
+     String PET_NM = req.getParameter("petName");
+     System.out.println("petName : " + PET_NM);
+      int PET_AGE = Integer.parseInt(req.getParameter("petAge"));
       String PET_CON = req.getParameter("petUnique");
-      String PET_IMG = req.getParameter("petImg");
       
-      map.put("PET_CD", PET_CD);
-      map.put("PET_NM", PET_NM);
-      map.put("PET_AGE", PET_AGE);
-      map.put("PET_CON", PET_CON);
-      map.put("PET_IMG", PET_IMG);
+      vo.setPET_CD(PET_CD);
+      vo.setPET_NM(PET_NM);
+      vo.setPET_AGE(PET_AGE);
+      vo.setPET_CON(PET_CON);
       
-      int updateCnt = dao.andupdatePet(map);
+      int updateCnt = dao.andupdatePet(vo);
       
-      map.put("updateCnt", updateCnt);
-      
-      return map;
-   } 
+      return updateCnt;
+   }
+   
+   // 안드로이드 펫정보 삭제처리
+   @RequestMapping(value = "DeletePet")
+   @ResponseBody
+   public int DeletePet(HttpServletRequest req) {
+	   Map<String, Object> map = new HashMap<String, Object>();
+	  int PET_CD = Integer.parseInt(req.getParameter("petCd"));
+	  map.put("PET_CD", PET_CD);
+	  System.out.println("PET_CD : " + PET_CD);
+	  
+	  int deleteCnt = dao.anddeletePet(map);
+	  return deleteCnt;
+   }
 }
 

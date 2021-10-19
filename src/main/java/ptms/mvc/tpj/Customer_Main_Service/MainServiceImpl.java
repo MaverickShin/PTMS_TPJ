@@ -1032,6 +1032,10 @@ public class MainServiceImpl implements MainService {
 		if(fk == null) fk_cd = 1;
 		else fk_cd = Integer.parseInt(fk);
 		
+		System.out.println("fk :" + fk_cd);
+		
+		model.addAttribute("fk_cd", fk_cd);
+		
 		// qna 갯수 조회
 		cnt = dao.faqCount(fk_cd);
 		

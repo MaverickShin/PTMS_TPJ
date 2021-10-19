@@ -99,9 +99,9 @@
 	</update>
 	
 	<!-- 안드로이드용 펫 수정 처리 -->
-	<update id="andupdatePet" parameterType="java.util.Map">
+	<update id="andupdatePet" parameterType="ptms.mvc.tpj.CustVO.PetVO">
 		update PET_TB 
-		set PK_CD = #{PK_CD}, PET_AGE = #{PET_AGE} ,PET_NM = #{PET_NM} ,PET_CON = #{PET_CON} ,PET_IMG = #{PET_IMG} 
+		set PET_AGE = #{PET_AGE} ,PET_NM = #{PET_NM} ,PET_CON = #{PET_CON}
 		where PET_CD = #{PET_CD}
 	</update>
 	
@@ -109,6 +109,11 @@
 	<delete id="deletePet" parameterType="int">
 		delete from PET_TB where PET_CD = #{PET_CD}
 	</delete>
+	
+	<!-- 안드로이드 펫삭제 -->
+   <delete id="anddeletePet" parameterType="java.util.Map">
+      delete from PET_TB where PET_CD = #{PET_CD}
+   </delete>
 	
 	<!-- 등록된 펫 갯수 -->
 	<select id="getPetCnt" resultType="int">
