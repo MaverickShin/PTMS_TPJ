@@ -9,6 +9,9 @@
 <meta name = "_csrf" content = "${_csrf.token}">
 <title>Insert title here</title>
 <script type="text/javascript">
+
+	var kind = '<c:out value = "${fk_cd}"/>';
+
 	$(document).ready(function(){
 		
 		$("#right_button").click(function() { //거절된요청
@@ -21,6 +24,7 @@
 				success : function(result) {
 					$("#delivery").empty();
 					$("#delivery").append(result);
+					kind = 3;
 				},
 				error : function(request, status, error) {
 					alert("에러!");
@@ -34,10 +38,11 @@
 				type : "get",
 				url : "/tpj/cust/faqlist2",
 				cache : false,
-				data: "fk_cd=" + 2,
+				data: "fk_cd="+2,
 				success : function(result) {
 					$("#delivery").empty();
 					$("#delivery").append(result);
+					kind = 2;
 				},
 				error : function(request, status, error) {
 					alert("에러!");
@@ -55,6 +60,7 @@
 				success : function(result) {
 					$("#delivery").empty();
 					$("#delivery").append(result);
+					kind = 1;
 				},
 				error : function(request, status, error) {
 					alert("에러!");
@@ -635,7 +641,6 @@
 <script type="text/javascript">
 	
 	var pageNum = '<c:out value="${pageNum}"/>';
-	var kind = '<c:out value = "${fk_cd}"/>';
 	
 	function pageMove(e) {
 		
@@ -745,13 +750,14 @@
 	function pageNumbers(e) {
 		
 		
-		var urls = "/tpj/cust/qnalist2";
+		var urls = "/tpj/cust/faqlist2";
 		var param = e;
 		var current = '<c:out value = "${currentPage}"/>';
 		
 		console.log('pageNum : ' + pageNum);
 		console.log('param : ' + param);
 		console.log('current : ' + current);
+		console.log('kind : ' + kind);
 		
 		if(param == current) {
 			
