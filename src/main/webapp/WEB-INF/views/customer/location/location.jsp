@@ -4,47 +4,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>편의기능</title>
+<meta charset="utf-8">
+<title>편의기능</title>
 <script src="https://kit.fontawesome.com/5d238a51aa.js" crossorigin="anonymous"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeyCWy9cb29W-8NXf6oaAdVKYhyjEsnss"></script>
 <script>
 const apiKey = "36bc56138ca449539cc708f20e85fa65"; // api key 선언
 
-// api 호출
-var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Seoul"+"&appid="+apiKey+"&lang=kr";
-// 현재 날씨 이미지 url을 담을 변수
-var imgURL = "";
-
-// ajax를 이용하여 현위치 날씨 조회
-$.ajax({
-    url: apiURI,
-    dataType: "json",
-    type: "GET",
-    async: "false",
-    success: function(resp) {
-        console.log(resp);
-        console.log("현재온도 : "+ (resp.main.temp- 273.15) );
-        console.log("현재습도 : "+ resp.main.humidity);
-        console.log("날씨 : "+ resp.weather[0].main );
-        console.log("상세날씨설명 : "+ resp.weather[0].description );
-        console.log("날씨 이미지 : "+ resp.weather[0].icon );
-        console.log("바람   : "+ resp.wind.speed );
-        console.log("나라   : "+ resp.sys.country );
-        console.log("도시이름  : "+ resp.name );
-        console.log("구름  : "+ (resp.clouds.all) +"%" );   
-        imgURL = "http://openweathermap.org/img/w/" + resp.weather[0].icon + ".png";
-        
-        var temp = resp.main.temp- 273.15;
-        $("#result_img").attr("src", imgURL);
-        $("#h1").append(temp.toFixed(1)
-        		+'<i class="fas fa-thermometer-quarter fa-1x" style ='
-        		+'margin-left: 10px;></i>');
-        $("#h2").append(resp.weather[0].main);
-        $("#h3").append(resp.name+","+resp.sys.country);
-        $("#h4").append(resp.wind.speed+'<span>m/s</span>');
-        $("#h5").append(resp.main.humidity+'<span>%</span>');
-        $("#h6").append(resp.clouds.all+'<span>%</span>');
-    }
+navigator.geolocation.getCurrentPosition(function(pos) {
+	var latitude = pos.coords.latitude;
+	var longitude = pos.coords.longitude;
+    var apiURI = 'http://api.openweathermap.org/data/2.5/weather?lat='+latitude+'&lon='+longitude+'&appid='+apiKey;
+    
+ 	// ajax를 이용하여 현위치 날씨 조회
+    $.ajax({
+        url: apiURI,
+        dataType: "json",
+        type: "GET",
+        async: "false",
+        success: function(resp) {
+            console.log(resp);
+            console.log("현재온도 : "+ (resp.main.temp- 273.15) );
+            console.log("현재습도 : "+ resp.main.humidity);
+            console.log("날씨 : "+ resp.weather[0].main );
+            console.log("상세날씨설명 : "+ resp.weather[0].description );
+            console.log("날씨 이미지 : "+ resp.weather[0].icon );
+            console.log("바람   : "+ resp.wind.speed );
+            console.log("나라   : "+ resp.sys.country );
+            console.log("도시이름  : "+ resp.name );
+            console.log("구름  : "+ (resp.clouds.all) +"%" );   
+            var imgURL = "http://openweathermap.org/img/w/" + resp.weather[0].icon + ".png";
+            
+            var temp = resp.main.temp- 273.15;
+            $("#result_img").attr("src", imgURL);
+            $("#h1").append(temp.toFixed(1)
+            		+'<i class="fas fa-thermometer-quarter fa-1x" style ='
+            		+'margin-left: 10px;></i>');
+            $("#h2").append(resp.weather[0].main);
+            $("#h3").append('<span style = "font-size:16px;">'+resp.name+"</span>,"+resp.sys.country);
+            $("#h4").append(resp.wind.speed+'<span>m/s</span>');
+            $("#h5").append(resp.main.humidity+'<span>%</span>');
+            $("#h6").append(resp.clouds.all+'<span>%</span>');
+        }
+    });
 });
 
 </script>
